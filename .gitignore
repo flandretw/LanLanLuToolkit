@@ -14,3 +14,6 @@
 # WinUI 3 具體產出
 Generated Files/
 _pkg/
+
+/lanlanlu-toolkit/out_portable/
+/lanlanlu-toolkit/out_portable_singlefile/
