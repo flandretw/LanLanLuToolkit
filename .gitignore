@@ -11,9 +11,8 @@
 .vscode/
 *.bak
 *.tmp
-# WinUI 3 å…·é«”ç”¢å‡º
+# WinUI 3 ??·é????¢å??
 Generated Files/
 _pkg/
 
 /lanlanlu-toolkit/out_portable/
-/lanlanlu-toolkit/out_portable_singlefile/
