@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Nav_HomePage.Content" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Nav_TestToolPage.Content" xml:space="preserve">
+    <value>Test Tool</value>
+  </data>
+  <data name="AppTitle.Text" xml:space="preserve">
+    <value>lanlanlu-toolkit</value>
+  </data>
+  <data name="HomePage_Title.Text" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="TestToolPage_Title.Text" xml:space="preserve">
+    <value>Test Tool</value>
+  </data>
+  <data name="SettingsPage_Title.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SettingsPage_LanguageHeader.Text" xml:space="preserve">
+    <value>Language &amp; Region</value>
+  </data>
+  <data name="SettingsPage_LanguageComboBox.Header" xml:space="preserve">
+    <value>App Display Language</value>
+  </data>
+  <data name="Language_zh_TW.Content" xml:space="preserve">
+    <value>Traditional Chinese (Taiwan)</value>
+  </data>
+  <data name="Language_en_US.Content" xml:space="preserve">
+    <value>English (United States)</value>
+  </data>
+  <data name="SettingsPage_LanguageRestartNotice.Text" xml:space="preserve">
+    <value>※ App restart required for language changes to fully take effect.</value>
+  </data>
+  <data name="LanguageChangeDialog_Title" xml:space="preserve">
+    <value>Restart Required</value>
+  </data>
+  <data name="LanguageChangeDialog_Content" xml:space="preserve">
+    <value>The language change will take effect after restarting the app. Save the change?</value>
+  </data>
+  <data name="LanguageChangeDialog_Confirm" xml:space="preserve">
+    <value>Restart Now</value>
+  </data>
+  <data name="LanguageChangeDialog_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+</root>

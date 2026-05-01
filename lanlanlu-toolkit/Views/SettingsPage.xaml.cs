@@ -1,0 +1,109 @@
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.Globalization;
+
+namespace lanlanlu_toolkit.Views
+{
+    public sealed partial class SettingsPage : Page
+    {
+        private bool _isInitialized = false;
+
+        public SettingsPage()
+        {
+            this.InitializeComponent();
+            LoadCurrentLanguage();
+            _isInitialized = true;
+        }
+
+        private string GetSettingsFilePath()
+        {
+            string localAppData = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
+            string appFolder = System.IO.Path.Combine(localAppData, "lanlanlu_toolkit");
+            if (!System.IO.Directory.Exists(appFolder))
+            {
+                System.IO.Directory.CreateDirectory(appFolder);
+            }
+            return System.IO.Path.Combine(appFolder, "language.txt");
+        }
+
+        private void LoadCurrentLanguage()
+        {
+            string currentLang = "zh-TW";
+            try
+            {
+                string settingsFile = GetSettingsFilePath();
+                if (System.IO.File.Exists(settingsFile))
+                {
+                    currentLang = System.IO.File.ReadAllText(settingsFile).Trim();
+                }
+                else if (!string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride))
+                {
+                    currentLang = ApplicationLanguages.PrimaryLanguageOverride;
+                }
+            }
+            catch { }
+
+
+            foreach (ComboBoxItem item in LanguageComboBox.Items)
+            {
+                if (item.Tag?.ToString() == currentLang)
+                {
+                    LanguageComboBox.SelectedItem = item;
+                    break;
+                }
+            }
+        }
+
+        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!_isInitialized) return;
+
+            if (LanguageComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                string selectedLang = selectedItem.Tag?.ToString() ?? "zh-TW";
+
+                // 讀取本地化字串（使用 Windows App SDK 的 ResourceLoader，支援打包與非打包模式）
+                Microsoft.Windows.ApplicationModel.Resources.ResourceLoader loader;
+                try
+                {
+                    loader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
+                }
+                catch
+                {
+                    loader = null!;
+                }
+
+                ContentDialog dialog = new ContentDialog
+                {
+                    Title             = loader?.GetString("LanguageChangeDialog_Title")   ?? "需要重新啟動",
+                    Content           = loader?.GetString("LanguageChangeDialog_Content") ?? "變更語言需要重新啟動應用程式才會生效。確定要儲存變更嗎？",
+                    PrimaryButtonText = loader?.GetString("LanguageChangeDialog_Confirm") ?? "確定",
+                    CloseButtonText   = loader?.GetString("LanguageChangeDialog_Cancel")  ?? "取消",
+                    XamlRoot          = this.XamlRoot
+                };
+
+                // 按「確定」：儲存設定並套用語言覆寫
+                dialog.PrimaryButtonClick += (_, _) =>
+                {
+                    try
+                    {
+                        System.IO.File.WriteAllText(GetSettingsFilePath(), selectedLang);
+                    }
+                    catch { }
+
+                    ApplicationLanguages.PrimaryLanguageOverride = selectedLang;
+                };
+
+                // 按「取消」：恢復原本的選擇
+                dialog.CloseButtonClick += (_, _) =>
+                {
+                    _isInitialized = false;
+                    LoadCurrentLanguage();
+                    _isInitialized = true;
+                };
+
+                // 顯示對話框（不需要 await）
+                _ = dialog.ShowAsync();
+            }
+        }
+    }
+}

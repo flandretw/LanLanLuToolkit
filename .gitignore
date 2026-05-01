@@ -1,0 +1,16 @@
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Tt]est[Rr]esults/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+.idea/
+.vscode/
+*.bak
+*.tmp
+# WinUI 3 具體產出
+Generated Files/
+_pkg/
