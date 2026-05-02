@@ -1,4 +1,4 @@
-param (
+﻿param (
     [Parameter(Mandatory=$false)]
     [ValidateSet("x64", "x86", "arm64")]
     [string]$Arch = "x64"

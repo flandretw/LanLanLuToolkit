@@ -1,4 +1,4 @@
-﻿[Bb]in/
+[Bb]in/
 [Oo]bj/
 [Ll]og/
 [Tt]est[Rr]esults/
@@ -16,4 +16,4 @@
 Generated Files/
 _pkg/
 
-/lanlanlu-toolkit/out_portable*/
+/out_portable*/
