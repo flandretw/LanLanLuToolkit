@@ -60,8 +60,11 @@
   <data name="SettingsPage_LanguageHeader.Text" xml:space="preserve">
     <value>Language &amp; Region</value>
   </data>
-  <data name="SettingsPage_LanguageComboBox.Header" xml:space="preserve">
+  <data name="SettingsPage_LanguageTitle.Text" xml:space="preserve">
     <value>App Display Language</value>
+  </data>
+  <data name="SettingsPage_LanguageDescription.Text" xml:space="preserve">
+    <value>Choose your preferred language. Changes will take effect after restart.</value>
   </data>
   <data name="Language_zh_TW.Content" xml:space="preserve">
     <value>Traditional Chinese (Taiwan)</value>
@@ -87,8 +90,11 @@
   <data name="SettingsPage_ThemeHeader.Text" xml:space="preserve">
     <value>Personalization</value>
   </data>
-  <data name="SettingsPage_ThemeComboBox.Header" xml:space="preserve">
+  <data name="SettingsPage_ThemeTitle.Text" xml:space="preserve">
     <value>App theme</value>
+  </data>
+  <data name="SettingsPage_ThemeDescription.Text" xml:space="preserve">
+    <value>Customize the appearance of the application.</value>
   </data>
   <data name="Theme_Default.Content" xml:space="preserve">
     <value>Use system setting</value>

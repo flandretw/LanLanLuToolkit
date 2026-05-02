@@ -8,38 +8,95 @@
     mc:Ignorable="d"
     Background="Transparent">
 
-    <Grid Padding="36">
-        <StackPanel Spacing="24">
-            <TextBlock x:Name="SettingsTitleTextBlock" x:Uid="SettingsPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
-            
-            <StackPanel Spacing="8">
-                <TextBlock x:Name="LanguageHeaderTextBlock" x:Uid="SettingsPage_LanguageHeader" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,8" />
-                <ComboBox x:Name="LanguageComboBox" 
-                          x:Uid="SettingsPage_LanguageComboBox"
-                          Width="250"
-                          SelectionChanged="LanguageComboBox_SelectionChanged">
-                    <ComboBoxItem x:Name="LangZhTwItem" Tag="zh-TW" x:Uid="Language_zh_TW" />
-                    <ComboBoxItem x:Name="LangEnUsItem" Tag="en-US" x:Uid="Language_en_US" />
-                </ComboBox>
-            </StackPanel>
+    <ScrollViewer>
+        <Grid Padding="36" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="18*" MaxWidth="1600" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-            <StackPanel Spacing="8">
-                <TextBlock x:Name="ThemeHeaderTextBlock" x:Uid="SettingsPage_ThemeHeader" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,8" />
-                <ComboBox x:Name="ThemeComboBox" 
-                          x:Uid="SettingsPage_ThemeComboBox"
-                          Width="250"
-                          SelectionChanged="ThemeComboBox_SelectionChanged">
-                    <ComboBoxItem x:Name="ThemeDefaultItem" Tag="Default" x:Uid="Theme_Default" />
-                    <ComboBoxItem x:Name="ThemeLightItem" Tag="Light" x:Uid="Theme_Light" />
-                    <ComboBoxItem x:Name="ThemeDarkItem" Tag="Dark" x:Uid="Theme_Dark" />
-                </ComboBox>
-            </StackPanel>
+            <StackPanel Grid.Column="1" Spacing="28">
+                <TextBlock x:Uid="SettingsPage_Title" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,12" />
 
-            <StackPanel Spacing="8" Margin="0,24,0,0">
-                <TextBlock x:Uid="SettingsPage_AboutHeader" FontWeight="Bold" Margin="0,0,0,8" />
-                <TextBlock x:Name="AboutInfoTextBlock" IsTextSelectionEnabled="True" />
-                <HyperlinkButton x:Uid="SettingsPage_MITLink" NavigateUri="https://github.com/flandretw/LanLanLuToolkit/blob/main/LICENSE.txt" Padding="0" />
+                <!-- Language Section -->
+                <StackPanel Spacing="12">
+                    <TextBlock x:Uid="SettingsPage_LanguageHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{ThemeResource ControlCornerRadius}">
+                        <Grid Padding="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xF2B7;" 
+                                      FontSize="20" 
+                                      Margin="0,0,16,0" 
+                                      VerticalAlignment="Center" 
+                                      Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                <TextBlock x:Uid="SettingsPage_LanguageTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                <TextBlock x:Uid="SettingsPage_LanguageDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                            <ComboBox x:Name="LanguageComboBox" 
+                                      Grid.Column="2"
+                                      Width="200"
+                                      VerticalAlignment="Center"
+                                      SelectionChanged="LanguageComboBox_SelectionChanged">
+                                <ComboBoxItem x:Name="LangZhTwItem" Tag="zh-TW" x:Uid="Language_zh_TW" />
+                                <ComboBoxItem x:Name="LangEnUsItem" Tag="en-US" x:Uid="Language_en_US" />
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+
+                <!-- Theme Section -->
+                <StackPanel Spacing="12">
+                    <TextBlock x:Uid="SettingsPage_ThemeHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{ThemeResource ControlCornerRadius}">
+                        <Grid Padding="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE790;" 
+                                      FontSize="20" 
+                                      Margin="0,0,16,0" 
+                                      VerticalAlignment="Center" 
+                                      Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                <TextBlock x:Uid="SettingsPage_ThemeTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                <TextBlock x:Uid="SettingsPage_ThemeDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                            <ComboBox x:Name="ThemeComboBox" 
+                                      Grid.Column="2"
+                                      Width="200"
+                                      VerticalAlignment="Center"
+                                      SelectionChanged="ThemeComboBox_SelectionChanged">
+                                <ComboBoxItem x:Name="ThemeDefaultItem" Tag="Default" x:Uid="Theme_Default" />
+                                <ComboBoxItem x:Name="ThemeLightItem" Tag="Light" x:Uid="Theme_Light" />
+                                <ComboBoxItem x:Name="ThemeDarkItem" Tag="Dark" x:Uid="Theme_Dark" />
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+
+                <!-- About Section -->
+                <StackPanel Spacing="12">
+                    <TextBlock x:Uid="SettingsPage_AboutHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                    <StackPanel Padding="0,4,0,0" Spacing="8">
+                        <TextBlock x:Name="AboutInfoTextBlock" IsTextSelectionEnabled="True" Style="{ThemeResource BodyTextBlockStyle}" />
+                        <HyperlinkButton x:Uid="SettingsPage_MITLink" NavigateUri="https://github.com/flandretw/LanLanLuToolkit/blob/main/LICENSE.txt" Padding="0" />
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </Page>
