@@ -1,0 +1,139 @@
+<Page
+    x:Class="lanlanlu_toolkit.Views.PerformancePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:lanlanlu_toolkit.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <ScrollViewer>
+        <Grid x:Name="RootGrid" Padding="36" HorizontalAlignment="Stretch">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="LayoutStates">
+                    <VisualState x:Name="WideState">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="1200" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Target="MonitorGrid.ColumnDefinitions[0].Width" Value="*" />
+                            <Setter Target="MonitorGrid.ColumnDefinitions[1].Width" Value="*" />
+                            <Setter Target="MonitorGrid.ColumnDefinitions[2].Width" Value="*" />
+                            <Setter Target="GPUCard.(Grid.Row)" Value="0" />
+                            <Setter Target="GPUCard.(Grid.Column)" Value="1" />
+                            <Setter Target="RAMCard.(Grid.Row)" Value="0" />
+                            <Setter Target="RAMCard.(Grid.Column)" Value="2" />
+                            <Setter Target="GPUCard.Margin" Value="12,0" />
+                            <Setter Target="RAMCard.Margin" Value="12,0,0,0" />
+                            <Setter Target="CPUCard.Margin" Value="0,0,12,0" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="NarrowState">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="0" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Target="MonitorGrid.ColumnDefinitions[0].Width" Value="*" />
+                            <Setter Target="MonitorGrid.ColumnDefinitions[1].Width" Value="0" />
+                            <Setter Target="MonitorGrid.ColumnDefinitions[2].Width" Value="0" />
+                            <Setter Target="GPUCard.(Grid.Row)" Value="1" />
+                            <Setter Target="GPUCard.(Grid.Column)" Value="0" />
+                            <Setter Target="RAMCard.(Grid.Row)" Value="2" />
+                            <Setter Target="RAMCard.(Grid.Column)" Value="0" />
+                            <Setter Target="GPUCard.Margin" Value="0,24,0,0" />
+                            <Setter Target="RAMCard.Margin" Value="0,24,0,0" />
+                            <Setter Target="CPUCard.Margin" Value="0" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
+                <TextBlock x:Uid="PerformancePage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
+
+                <Grid x:Name="MonitorGrid">
+                    <Grid.ChildrenTransitions>
+                        <TransitionCollection>
+                            <RepositionThemeTransition />
+                        </TransitionCollection>
+                    </Grid.ChildrenTransitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- CPU Card -->
+                    <Border x:Name="CPUCard" Grid.Row="0" Grid.Column="0"
+                            Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1" CornerRadius="8" Padding="24"
+                            HorizontalAlignment="Stretch">
+                        <StackPanel Spacing="16">
+                            <StackPanel>
+                                <TextBlock x:Uid="HomePage_CPU" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
+                                <TextBlock x:Name="CpuNameText" x:Uid="HomePage_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                            <local:MonitorRow x:Name="CpuUsageRow" x:Uid="HomePage_Usage" ValueSuffix="%" />
+                            <local:MonitorRow x:Name="CpuClockRow" x:Uid="HomePage_Clock" ValueSuffix=" GHz" MaxValue="6.0" />
+                            <local:MonitorRow x:Name="CpuTempRow" x:Uid="HomePage_Temp" ValueSuffix=" °C" MaxValue="100" />
+                        </StackPanel>
+                    </Border>
+
+                    <!-- GPU Card -->
+                    <Border x:Name="GPUCard" Grid.Row="0" Grid.Column="1"
+                            Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1" CornerRadius="8" Padding="24"
+                            HorizontalAlignment="Stretch">
+                        <StackPanel Spacing="16">
+                            <StackPanel>
+                                <TextBlock x:Uid="HomePage_GPU" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
+                                <TextBlock x:Name="GpuNameText" x:Uid="HomePage_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                            <local:MonitorRow x:Name="GpuUsageRow" x:Uid="HomePage_Usage" ValueSuffix="%" />
+                            <local:MonitorRow x:Name="GpuClockRow" x:Uid="HomePage_Clock" ValueSuffix=" MHz" MaxValue="3000" />
+                            <local:MonitorRow x:Name="GpuMemClockRow" x:Uid="HomePage_MemClock" ValueSuffix=" MHz" MaxValue="12000" />
+                            <local:MonitorRow x:Name="GpuTempRow" x:Uid="HomePage_Temp" ValueSuffix=" °C" MaxValue="100" />
+                        </StackPanel>
+                    </Border>
+
+                    <!-- RAM Card -->
+                    <Border x:Name="RAMCard" Grid.Row="0" Grid.Column="2"
+                            Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1" CornerRadius="8" Padding="24"
+                            HorizontalAlignment="Stretch">
+                        <StackPanel Spacing="16">
+                            <StackPanel>
+                                <TextBlock x:Uid="HomePage_RAM" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
+                                <TextBlock x:Name="RamNameText" x:Uid="HomePage_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                            <local:MonitorRow x:Name="RamUsageRow" x:Uid="HomePage_Usage" ValueSuffix="%" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8">
+                                    <TextBlock x:Uid="HomePage_Used" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    <TextBlock x:Name="RamUsedText" Text="0.0 GB" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+                                    <TextBlock x:Uid="HomePage_Available" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    <TextBlock x:Name="RamAvailableText" Text="0.0 GB" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

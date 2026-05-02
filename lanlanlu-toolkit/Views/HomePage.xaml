@@ -8,7 +8,41 @@
     mc:Ignorable="d"
     Background="Transparent">
 
-    <Grid>
-        <TextBlock x:Name="PageTitle" x:Uid="HomePage_Title" Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid Padding="36">
+        <StackPanel Spacing="32" MaxWidth="1000" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!-- Hero Section -->
+            <StackPanel Spacing="12" HorizontalAlignment="Center">
+                <Image Source="ms-appx:///Assets/Square44x44Logo.scale-100.png" Width="80" Height="80" Margin="0,0,0,12"/>
+                <TextBlock x:Uid="AppTitle" Style="{ThemeResource DisplayTextBlockStyle}" HorizontalAlignment="Center" FontWeight="Bold" />
+                <TextBlock Text="Version 1.0.0" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" />
+            </StackPanel>
+
+            <Border Background="{ThemeResource LayerFillColorDefaultBrush}" 
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
+                    BorderThickness="1" CornerRadius="12" Padding="32">
+                <StackPanel Spacing="16">
+                    <TextBlock x:Uid="HomePage_Welcome" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="SemiBold" />
+                    <TextBlock x:Uid="HomePage_Intro" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" LineHeight="24" />
+                    
+                    <MenuFlyoutSeparator Margin="0,8" />
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Spacing="8">
+                            <TextBlock Text="快速開始" FontWeight="Bold" />
+                            <HyperlinkButton Content="查看系統效能" Click="GoToPerformance_Click" />
+                            <HyperlinkButton Content="軟體設定" Click="GoToSettings_Click" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Spacing="8" HorizontalAlignment="Right">
+                            <TextBlock Text="聯絡我們" FontWeight="Bold" />
+                            <HyperlinkButton Content="GitHub 專案頁面" NavigateUri="https://github.com/flandretw/LanLanLuToolkit" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
     </Grid>
 </Page>

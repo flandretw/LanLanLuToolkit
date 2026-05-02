@@ -1,5 +1,9 @@
+using System;
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using WinRT.Interop;
 using lanlanlu_toolkit.Views;
 
 namespace lanlanlu_toolkit
@@ -10,12 +14,16 @@ namespace lanlanlu_toolkit
         {
             this.InitializeComponent();
             
+            // 恢復為最簡潔的標題列擴展方式
             this.ExtendsContentIntoTitleBar = true;
             this.SetTitleBar(AppTitleBar);
 
             // 設定應用程式視窗圖示
             var iconPath = System.IO.Path.Combine(System.AppContext.BaseDirectory, "Assets", "AppIcon.ico");
-            this.AppWindow.SetIcon(iconPath);
+            var hWnd = WindowNative.GetWindowHandle(this);
+            var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
+            var appWindow = AppWindow.GetFromWindowId(windowId);
+            appWindow.SetIcon(iconPath);
         }
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
@@ -39,6 +47,9 @@ namespace lanlanlu_toolkit
                     case "HomePage":
                         ContentFrame.Navigate(typeof(HomePage));
                         break;
+                    case "PerformancePage":
+                        ContentFrame.Navigate(typeof(PerformancePage));
+                        break;
                     case "TestToolPage":
                         ContentFrame.Navigate(typeof(TestToolPage));
                         break;
@@ -47,4 +58,3 @@ namespace lanlanlu_toolkit
         }
     }
 }
-

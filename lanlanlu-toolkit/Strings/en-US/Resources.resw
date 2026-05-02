@@ -117,4 +117,55 @@
   <data name="SettingsPage_MITLink.Content" xml:space="preserve">
     <value>MIT License</value>
   </data>
+  <data name="HomePage_CPU.Text" xml:space="preserve">
+    <value>Processor (CPU)</value>
+  </data>
+  <data name="HomePage_GPU.Text" xml:space="preserve">
+    <value>Graphics (GPU)</value>
+  </data>
+  <data name="HomePage_RAM.Text" xml:space="preserve">
+    <value>Memory (RAM)</value>
+  </data>
+  <data name="HomePage_Usage.Label" xml:space="preserve">
+    <value>Usage</value>
+  </data>
+  <data name="HomePage_Clock.Label" xml:space="preserve">
+    <value>Core Clock</value>
+  </data>
+  <data name="HomePage_MemClock.Label" xml:space="preserve">
+    <value>Memory Clock</value>
+  </data>
+  <data name="HomePage_Temp.Label" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="HomePage_Fan.Label" xml:space="preserve">
+    <value>Fan Speed</value>
+  </data>
+  <data name="HomePage_Used.Text" xml:space="preserve">
+    <value>In Use</value>
+  </data>
+  <data name="HomePage_Disk.Text" xml:space="preserve">
+    <value>Disk</value>
+  </data>
+  <data name="HomePage_ReadSpeed.Label" xml:space="preserve">
+    <value>Read Speed</value>
+  </data>
+  <data name="HomePage_WriteSpeed.Label" xml:space="preserve">
+    <value>Write Speed</value>
+  </data>
+  <data name="HomePage_Detecting.Text" xml:space="preserve">
+    <value>Detecting...</value>
+  </data>
+  <data name="Shell_Performance.Content" xml:space="preserve">
+    <value>Performance</value>
+  </data>
+  <data name="PerformancePage_Title.Text" xml:space="preserve">
+    <value>Performance Monitor</value>
+  </data>
+  <data name="HomePage_Welcome.Text" xml:space="preserve">
+    <value>Welcome to LanLanLu Toolkit</value>
+  </data>
+  <data name="HomePage_Intro.Text" xml:space="preserve">
+    <value>A modern toolkit designed for Windows 11, providing hardware monitoring, system optimization, and various practical utilities. Click the links below or use the side menu to start exploring!</value>
+  </data>
 </root>

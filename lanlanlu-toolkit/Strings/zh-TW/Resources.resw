@@ -117,4 +117,55 @@
   <data name="SettingsPage_MITLink.Content" xml:space="preserve">
     <value>MIT 軟體授權條款</value>
   </data>
+  <data name="HomePage_CPU.Text" xml:space="preserve">
+    <value>處理器 (CPU)</value>
+  </data>
+  <data name="HomePage_GPU.Text" xml:space="preserve">
+    <value>顯示卡 (GPU)</value>
+  </data>
+  <data name="HomePage_RAM.Text" xml:space="preserve">
+    <value>記憶體 (RAM)</value>
+  </data>
+  <data name="HomePage_Usage.Label" xml:space="preserve">
+    <value>使用率</value>
+  </data>
+  <data name="HomePage_Clock.Label" xml:space="preserve">
+    <value>核心時脈</value>
+  </data>
+  <data name="HomePage_MemClock.Label" xml:space="preserve">
+    <value>記憶體時脈</value>
+  </data>
+  <data name="HomePage_Temp.Label" xml:space="preserve">
+    <value>溫度</value>
+  </data>
+  <data name="HomePage_Fan.Label" xml:space="preserve">
+    <value>風扇</value>
+  </data>
+  <data name="HomePage_Used.Text" xml:space="preserve">
+    <value>使用中</value>
+  </data>
+  <data name="HomePage_Disk.Text" xml:space="preserve">
+    <value>磁碟</value>
+  </data>
+  <data name="HomePage_ReadSpeed.Label" xml:space="preserve">
+    <value>讀取速度</value>
+  </data>
+  <data name="HomePage_WriteSpeed.Label" xml:space="preserve">
+    <value>寫入速度</value>
+  </data>
+  <data name="HomePage_Detecting.Text" xml:space="preserve">
+    <value>偵測中...</value>
+  </data>
+  <data name="Shell_Performance.Content" xml:space="preserve">
+    <value>效能</value>
+  </data>
+  <data name="PerformancePage_Title.Text" xml:space="preserve">
+    <value>效能監控</value>
+  </data>
+  <data name="HomePage_Welcome.Text" xml:space="preserve">
+    <value>歡迎使用蘭蘭露工具箱</value>
+  </data>
+  <data name="HomePage_Intro.Text" xml:space="preserve">
+    <value>這是一個專為 Windows 11 設計的現代化工具箱，提供硬體監控、系統優化與各類實用小工具。點擊下方連結或側邊選單開始探索吧！</value>
+  </data>
 </root>
