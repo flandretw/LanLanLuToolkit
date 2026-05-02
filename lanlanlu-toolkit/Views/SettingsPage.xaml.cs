@@ -1,12 +1,13 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.Windows.Globalization;
+using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
 {
     public sealed partial class SettingsPage : Page
     {
         private bool _isInitialized = false;
+        private Microsoft.Windows.ApplicationModel.Resources.ResourceLoader? _resourceLoader;
 
         public SettingsPage()
         {
@@ -17,45 +18,26 @@ namespace lanlanlu_toolkit.Views
             _isInitialized = true;
         }
 
-        private string GetThemeFilePath()
+        private Microsoft.Windows.ApplicationModel.Resources.ResourceLoader GetResourceLoader()
         {
-            string localAppData = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
-            string appFolder = System.IO.Path.Combine(localAppData, "lanlanlu_toolkit");
-            if (!System.IO.Directory.Exists(appFolder))
+            if (_resourceLoader == null)
             {
-                System.IO.Directory.CreateDirectory(appFolder);
+                try
+                {
+                    _resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
+                }
+                catch
+                {
+                    // Fallback or handle appropriately
+                    _resourceLoader = null;
+                }
             }
-            return System.IO.Path.Combine(appFolder, "theme.txt");
-        }
-
-        private string GetSettingsFilePath()
-        {
-            string localAppData = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
-            string appFolder = System.IO.Path.Combine(localAppData, "lanlanlu_toolkit");
-            if (!System.IO.Directory.Exists(appFolder))
-            {
-                System.IO.Directory.CreateDirectory(appFolder);
-            }
-            return System.IO.Path.Combine(appFolder, "language.txt");
+            return _resourceLoader!;
         }
 
         private void LoadCurrentLanguage()
         {
-            string currentLang = "zh-TW";
-            try
-            {
-                string settingsFile = GetSettingsFilePath();
-                if (System.IO.File.Exists(settingsFile))
-                {
-                    currentLang = System.IO.File.ReadAllText(settingsFile).Trim();
-                }
-                else if (!string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride))
-                {
-                    currentLang = ApplicationLanguages.PrimaryLanguageOverride;
-                }
-            }
-            catch { }
-
+            string currentLang = SettingsService.GetLanguage();
 
             foreach (ComboBoxItem item in LanguageComboBox.Items)
             {
@@ -69,16 +51,7 @@ namespace lanlanlu_toolkit.Views
 
         private void LoadCurrentTheme()
         {
-            string currentTheme = "Default";
-            try
-            {
-                string settingsFile = GetThemeFilePath();
-                if (System.IO.File.Exists(settingsFile))
-                {
-                    currentTheme = System.IO.File.ReadAllText(settingsFile).Trim();
-                }
-            }
-            catch { }
+            string currentTheme = SettingsService.GetTheme();
 
             foreach (ComboBoxItem item in ThemeComboBox.Items)
             {
@@ -97,17 +70,7 @@ namespace lanlanlu_toolkit.Views
             if (LanguageComboBox.SelectedItem is ComboBoxItem selectedItem)
             {
                 string selectedLang = selectedItem.Tag?.ToString() ?? "zh-TW";
-
-                // 讀取本地化字串（使用 Windows App SDK 的 ResourceLoader，支援打包與非打包模式）
-                Microsoft.Windows.ApplicationModel.Resources.ResourceLoader loader;
-                try
-                {
-                    loader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
-                }
-                catch
-                {
-                    loader = null!;
-                }
+                var loader = GetResourceLoader();
 
                 ContentDialog dialog = new ContentDialog
                 {
@@ -121,15 +84,7 @@ namespace lanlanlu_toolkit.Views
                 // 按「確定」：儲存設定並關閉程式
                 dialog.PrimaryButtonClick += (_, _) =>
                 {
-                    try
-                    {
-                        System.IO.File.WriteAllText(GetSettingsFilePath(), selectedLang);
-                    }
-                    catch { }
-
-                    ApplicationLanguages.PrimaryLanguageOverride = selectedLang;
-
-                    // 立即關閉應用程式
+                    SettingsService.SaveLanguage(selectedLang);
                     Microsoft.UI.Xaml.Application.Current.Exit();
                 };
 
@@ -141,7 +96,7 @@ namespace lanlanlu_toolkit.Views
                     _isInitialized = true;
                 };
 
-                // 顯示對話框（不需要 await）
+                // 顯示對話框
                 _ = dialog.ShowAsync();
             }
         }
@@ -153,21 +108,11 @@ namespace lanlanlu_toolkit.Views
             if (ThemeComboBox.SelectedItem is ComboBoxItem selectedItem)
             {
                 string selectedTheme = selectedItem.Tag?.ToString() ?? "Default";
-
-                try
-                {
-                    System.IO.File.WriteAllText(GetThemeFilePath(), selectedTheme);
-                }
-                catch { }
+                SettingsService.SaveTheme(selectedTheme);
 
                 if (App.MainWindow != null && App.MainWindow.Content is FrameworkElement rootElement)
                 {
-                    rootElement.RequestedTheme = selectedTheme switch
-                    {
-                        "Light" => ElementTheme.Light,
-                        "Dark" => ElementTheme.Dark,
-                        _ => ElementTheme.Default
-                    };
+                    rootElement.RequestedTheme = SettingsService.ToElementTheme(selectedTheme);
                 }
             }
         }
@@ -178,9 +123,8 @@ namespace lanlanlu_toolkit.Views
             {
                 var assembly = System.Reflection.Assembly.GetExecutingAssembly();
                 var version = assembly.GetName().Version;
-                
-                Microsoft.Windows.ApplicationModel.Resources.ResourceLoader loader;
-                try { loader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader(); } catch { return; }
+                var loader = GetResourceLoader();
+                if (loader == null) return;
 
                 string appName = loader.GetString("SettingsPage_AppVersion/Text");
                 string copyright = loader.GetString("SettingsPage_Copyright/Text");
@@ -190,7 +134,10 @@ namespace lanlanlu_toolkit.Views
                     AboutInfoTextBlock.Text = $"{appName} {version.Major}.{version.Minor}.{version.Build}\n{copyright}";
                 }
             }
-            catch { }
+            catch (System.Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to initialize about info: {ex.Message}");
+            }
         }
     }
 }
