@@ -34,6 +34,12 @@
                     <ComboBoxItem x:Name="ThemeDarkItem" Tag="Dark" x:Uid="Theme_Dark" />
                 </ComboBox>
             </StackPanel>
+
+            <StackPanel Spacing="8" Margin="0,24,0,0">
+                <TextBlock x:Uid="SettingsPage_AboutHeader" FontWeight="Bold" Margin="0,0,0,8" />
+                <TextBlock x:Name="AboutInfoTextBlock" IsTextSelectionEnabled="True" />
+                <HyperlinkButton x:Uid="SettingsPage_MITLink" NavigateUri="https://github.com/flandretw/LanLanLuToolkit/blob/main/LICENSE.txt" Padding="0" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

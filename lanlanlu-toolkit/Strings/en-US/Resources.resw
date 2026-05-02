@@ -79,7 +79,7 @@
     <value>The language change will take effect after restarting the app. Save the change?</value>
   </data>
   <data name="LanguageChangeDialog_Confirm" xml:space="preserve">
-    <value>Restart Now</value>
+    <value>Close and Apply</value>
   </data>
   <data name="LanguageChangeDialog_Cancel" xml:space="preserve">
     <value>Cancel</value>
@@ -98,5 +98,17 @@
   </data>
   <data name="Theme_Dark.Content" xml:space="preserve">
     <value>Dark</value>
+  </data>
+  <data name="SettingsPage_AboutHeader.Text" xml:space="preserve">
+    <value>About this app</value>
+  </data>
+  <data name="SettingsPage_AppVersion.Text" xml:space="preserve">
+    <value>LanLanLu Toolkit</value>
+  </data>
+  <data name="SettingsPage_Copyright.Text" xml:space="preserve">
+    <value>© 2026 flandretw. All rights reserved.</value>
+  </data>
+  <data name="SettingsPage_MITLink.Content" xml:space="preserve">
+    <value>MIT License</value>
   </data>
 </root>

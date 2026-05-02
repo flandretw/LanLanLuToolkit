@@ -13,6 +13,7 @@ namespace lanlanlu_toolkit.Views
             this.InitializeComponent();
             LoadCurrentLanguage();
             LoadCurrentTheme();
+            InitializeAboutInfo();
             _isInitialized = true;
         }
 
@@ -117,7 +118,7 @@ namespace lanlanlu_toolkit.Views
                     XamlRoot          = this.XamlRoot
                 };
 
-                // 按「確定」：儲存設定並套用語言覆寫
+                // 按「確定」：儲存設定並關閉程式
                 dialog.PrimaryButtonClick += (_, _) =>
                 {
                     try
@@ -127,6 +128,9 @@ namespace lanlanlu_toolkit.Views
                     catch { }
 
                     ApplicationLanguages.PrimaryLanguageOverride = selectedLang;
+
+                    // 立即關閉應用程式
+                    Microsoft.UI.Xaml.Application.Current.Exit();
                 };
 
                 // 按「取消」：恢復原本的選擇
@@ -166,6 +170,27 @@ namespace lanlanlu_toolkit.Views
                     };
                 }
             }
+        }
+
+        private void InitializeAboutInfo()
+        {
+            try
+            {
+                var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                var version = assembly.GetName().Version;
+                
+                Microsoft.Windows.ApplicationModel.Resources.ResourceLoader loader;
+                try { loader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader(); } catch { return; }
+
+                string appName = loader.GetString("SettingsPage_AppVersion/Text");
+                string copyright = loader.GetString("SettingsPage_Copyright/Text");
+
+                if (version != null)
+                {
+                    AboutInfoTextBlock.Text = $"{appName} {version.Major}.{version.Minor}.{version.Build}\n{copyright}";
+                }
+            }
+            catch { }
         }
     }
 }

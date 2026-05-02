@@ -79,7 +79,7 @@
     <value>變更語言需要重新啟動應用程式才會生效。確定要儲存變更嗎？</value>
   </data>
   <data name="LanguageChangeDialog_Confirm" xml:space="preserve">
-    <value>確定</value>
+    <value>立刻關閉（需手動重新開啟）</value>
   </data>
   <data name="LanguageChangeDialog_Cancel" xml:space="preserve">
     <value>取消</value>
@@ -98,5 +98,17 @@
   </data>
   <data name="Theme_Dark.Content" xml:space="preserve">
     <value>深色</value>
+  </data>
+  <data name="SettingsPage_AboutHeader.Text" xml:space="preserve">
+    <value>關於此應用程式</value>
+  </data>
+  <data name="SettingsPage_AppVersion.Text" xml:space="preserve">
+    <value>蘭蘭露工具箱</value>
+  </data>
+  <data name="SettingsPage_Copyright.Text" xml:space="preserve">
+    <value>© 2026 flandretw 著作權所有，保留一切權利。</value>
+  </data>
+  <data name="SettingsPage_MITLink.Content" xml:space="preserve">
+    <value>MIT 軟體授權條款</value>
   </data>
 </root>
