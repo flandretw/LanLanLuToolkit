@@ -1,3 +1,4 @@
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.Globalization;
 
@@ -11,7 +12,19 @@ namespace lanlanlu_toolkit.Views
         {
             this.InitializeComponent();
             LoadCurrentLanguage();
+            LoadCurrentTheme();
             _isInitialized = true;
+        }
+
+        private string GetThemeFilePath()
+        {
+            string localAppData = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
+            string appFolder = System.IO.Path.Combine(localAppData, "lanlanlu_toolkit");
+            if (!System.IO.Directory.Exists(appFolder))
+            {
+                System.IO.Directory.CreateDirectory(appFolder);
+            }
+            return System.IO.Path.Combine(appFolder, "theme.txt");
         }
 
         private string GetSettingsFilePath()
@@ -48,6 +61,29 @@ namespace lanlanlu_toolkit.Views
                 if (item.Tag?.ToString() == currentLang)
                 {
                     LanguageComboBox.SelectedItem = item;
+                    break;
+                }
+            }
+        }
+
+        private void LoadCurrentTheme()
+        {
+            string currentTheme = "Default";
+            try
+            {
+                string settingsFile = GetThemeFilePath();
+                if (System.IO.File.Exists(settingsFile))
+                {
+                    currentTheme = System.IO.File.ReadAllText(settingsFile).Trim();
+                }
+            }
+            catch { }
+
+            foreach (ComboBoxItem item in ThemeComboBox.Items)
+            {
+                if (item.Tag?.ToString() == currentTheme)
+                {
+                    ThemeComboBox.SelectedItem = item;
                     break;
                 }
             }
@@ -103,6 +139,32 @@ namespace lanlanlu_toolkit.Views
 
                 // 顯示對話框（不需要 await）
                 _ = dialog.ShowAsync();
+            }
+        }
+
+        private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!_isInitialized) return;
+
+            if (ThemeComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                string selectedTheme = selectedItem.Tag?.ToString() ?? "Default";
+
+                try
+                {
+                    System.IO.File.WriteAllText(GetThemeFilePath(), selectedTheme);
+                }
+                catch { }
+
+                if (App.MainWindow != null && App.MainWindow.Content is FrameworkElement rootElement)
+                {
+                    rootElement.RequestedTheme = selectedTheme switch
+                    {
+                        "Light" => ElementTheme.Light,
+                        "Dark" => ElementTheme.Dark,
+                        _ => ElementTheme.Default
+                    };
+                }
             }
         }
     }

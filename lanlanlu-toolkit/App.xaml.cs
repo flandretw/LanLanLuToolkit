@@ -62,6 +62,28 @@ namespace lanlanlu_toolkit
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             MainWindow = new MainWindow();
+
+            // 套用佈景主題
+            try
+            {
+                string localAppData = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
+                string themeFile = System.IO.Path.Combine(localAppData, "lanlanlu_toolkit", "theme.txt");
+                if (System.IO.File.Exists(themeFile))
+                {
+                    string savedTheme = System.IO.File.ReadAllText(themeFile).Trim();
+                    if (MainWindow.Content is FrameworkElement rootElement)
+                    {
+                        rootElement.RequestedTheme = savedTheme switch
+                        {
+                            "Light" => ElementTheme.Light,
+                            "Dark" => ElementTheme.Dark,
+                            _ => ElementTheme.Default
+                        };
+                    }
+                }
+            }
+            catch { }
+
             MainWindow.Activate();
         }
     }

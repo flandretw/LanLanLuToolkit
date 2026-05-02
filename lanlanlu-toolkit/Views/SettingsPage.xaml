@@ -22,6 +22,18 @@
                     <ComboBoxItem x:Name="LangEnUsItem" Tag="en-US" x:Uid="Language_en_US" />
                 </ComboBox>
             </StackPanel>
+
+            <StackPanel Spacing="8">
+                <TextBlock x:Name="ThemeHeaderTextBlock" x:Uid="SettingsPage_ThemeHeader" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,8" />
+                <ComboBox x:Name="ThemeComboBox" 
+                          x:Uid="SettingsPage_ThemeComboBox"
+                          Width="250"
+                          SelectionChanged="ThemeComboBox_SelectionChanged">
+                    <ComboBoxItem x:Name="ThemeDefaultItem" Tag="Default" x:Uid="Theme_Default" />
+                    <ComboBoxItem x:Name="ThemeLightItem" Tag="Light" x:Uid="Theme_Light" />
+                    <ComboBoxItem x:Name="ThemeDarkItem" Tag="Dark" x:Uid="Theme_Dark" />
+                </ComboBox>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

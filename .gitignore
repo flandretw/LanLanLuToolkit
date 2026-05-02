@@ -1,4 +1,4 @@
-[Bb]in/
+ï»¿[Bb]in/
 [Oo]bj/
 [Ll]og/
 [Tt]est[Rr]esults/
@@ -11,8 +11,9 @@
 .vscode/
 *.bak
 *.tmp
-# WinUI 3 ??·é????¢å??
+
+# WinUI 3 å…·é«”ç”¢å‡º
 Generated Files/
 _pkg/
 
-/lanlanlu-toolkit/out_portable/
+/lanlanlu-toolkit/out_portable*/

@@ -84,4 +84,19 @@
   <data name="LanguageChangeDialog_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="SettingsPage_ThemeHeader.Text" xml:space="preserve">
+    <value>Personalization</value>
+  </data>
+  <data name="SettingsPage_ThemeComboBox.Header" xml:space="preserve">
+    <value>App theme</value>
+  </data>
+  <data name="Theme_Default.Content" xml:space="preserve">
+    <value>Use system setting</value>
+  </data>
+  <data name="Theme_Light.Content" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Theme_Dark.Content" xml:space="preserve">
+    <value>Dark</value>
+  </data>
 </root>

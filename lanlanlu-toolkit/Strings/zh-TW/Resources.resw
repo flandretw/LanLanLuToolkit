@@ -84,4 +84,19 @@
   <data name="LanguageChangeDialog_Cancel" xml:space="preserve">
     <value>取消</value>
   </data>
+  <data name="SettingsPage_ThemeHeader.Text" xml:space="preserve">
+    <value>個人化</value>
+  </data>
+  <data name="SettingsPage_ThemeComboBox.Header" xml:space="preserve">
+    <value>應用程式佈景主題</value>
+  </data>
+  <data name="Theme_Default.Content" xml:space="preserve">
+    <value>使用系統設定</value>
+  </data>
+  <data name="Theme_Light.Content" xml:space="preserve">
+    <value>淺色</value>
+  </data>
+  <data name="Theme_Dark.Content" xml:space="preserve">
+    <value>深色</value>
+  </data>
 </root>
