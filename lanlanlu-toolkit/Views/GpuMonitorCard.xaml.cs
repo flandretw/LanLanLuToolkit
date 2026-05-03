@@ -12,8 +12,9 @@ namespace lanlanlu_toolkit.Views
 
         public void Initialize(string name, int index)
         {
+            var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
             GpuNameText.Text = name;
-            GpuTitleText.Text = $"顯示卡 (GPU {index})";
+            GpuTitleText.Text = string.Format(resourceLoader.GetString("GpuMonitorCard_GpuTitle"), index);
         }
 
         public void UpdateStats(double usage, double clock, double memClock, double temp)

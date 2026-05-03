@@ -13,13 +13,13 @@
             HorizontalAlignment="Stretch">
         <StackPanel Spacing="16">
             <StackPanel>
-                <TextBlock x:Name="GpuTitleText" Text="顯示卡 (GPU)" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
-                <TextBlock x:Name="GpuNameText" Text="偵測中..." Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <TextBlock x:Name="GpuTitleText" x:Uid="GpuMonitorCard_DefaultTitle" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
+                <TextBlock x:Name="GpuNameText" x:Uid="GpuMonitorCard_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
             </StackPanel>
-            <local:MonitorRow x:Name="GpuUsageRow" Label="使用率" ValueSuffix="%" />
-            <local:MonitorRow x:Name="GpuClockRow" Label="核心時脈" ValueSuffix=" MHz" MaxValue="3000" />
-            <local:MonitorRow x:Name="GpuMemClockRow" Label="記憶體時脈" ValueSuffix=" MHz" MaxValue="12000" />
-            <local:MonitorRow x:Name="GpuTempRow" Label="溫度" ValueSuffix=" °C" MaxValue="100" />
+            <local:MonitorRow x:Name="GpuUsageRow" x:Uid="GpuMonitorCard_Usage" ValueSuffix="%" />
+            <local:MonitorRow x:Name="GpuClockRow" x:Uid="GpuMonitorCard_CoreClock" ValueSuffix=" MHz" MaxValue="3000" />
+            <local:MonitorRow x:Name="GpuMemClockRow" x:Uid="GpuMonitorCard_MemoryClock" ValueSuffix=" MHz" MaxValue="12000" />
+            <local:MonitorRow x:Name="GpuTempRow" x:Uid="GpuMonitorCard_Temperature" ValueSuffix=" °C" MaxValue="100" />
         </StackPanel>
     </Border>
 </UserControl>

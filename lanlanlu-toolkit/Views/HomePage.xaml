@@ -44,13 +44,13 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Spacing="8">
-                                <TextBlock Text="快速開始" FontWeight="Bold" />
-                                <HyperlinkButton Content="查看系統效能" Click="GoToPerformance_Click" />
-                                <HyperlinkButton Content="軟體設定" Click="GoToSettings_Click" />
+                                <TextBlock x:Uid="HomePage_QuickStart" FontWeight="Bold" />
+                                <HyperlinkButton x:Uid="HomePage_ViewPerformance" Click="GoToPerformance_Click" />
+                                <HyperlinkButton x:Uid="HomePage_AppSettings" Click="GoToSettings_Click" />
                             </StackPanel>
                             <StackPanel Grid.Column="1" Spacing="8" HorizontalAlignment="Right">
-                                <TextBlock Text="聯絡我們" FontWeight="Bold" />
-                                <HyperlinkButton Content="GitHub 專案頁面" NavigateUri="https://github.com/flandretw/LanLanLuToolkit" />
+                                <TextBlock x:Uid="HomePage_ContactUs" FontWeight="Bold" />
+                                <HyperlinkButton x:Uid="HomePage_GitHubProject" NavigateUri="https://github.com/flandretw/LanLanLuToolkit" />
                             </StackPanel>
                         </Grid>
                     </StackPanel>

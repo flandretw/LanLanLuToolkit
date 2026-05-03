@@ -279,4 +279,73 @@
   <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
     <value>在系統修復或長時間任務結束時播放提示音</value>
   </data>
+  <data name="GpuMonitorCard_GpuTitle" xml:space="preserve">
+    <value>顯示卡 (GPU {0})</value>
+  </data>
+  <data name="GpuMonitorCard_DefaultTitle.Text" xml:space="preserve">
+    <value>顯示卡 (GPU)</value>
+  </data>
+  <data name="GpuMonitorCard_Detecting.Text" xml:space="preserve">
+    <value>偵測中...</value>
+  </data>
+  <data name="GpuMonitorCard_Usage.Label" xml:space="preserve">
+    <value>使用率</value>
+  </data>
+  <data name="GpuMonitorCard_CoreClock.Label" xml:space="preserve">
+    <value>核心時脈</value>
+  </data>
+  <data name="GpuMonitorCard_MemoryClock.Label" xml:space="preserve">
+    <value>記憶體時脈</value>
+  </data>
+  <data name="GpuMonitorCard_Temperature.Label" xml:space="preserve">
+    <value>溫度</value>
+  </data>
+  <data name="HomePage_QuickStart.Text" xml:space="preserve">
+    <value>快速開始</value>
+  </data>
+  <data name="HomePage_ViewPerformance.Content" xml:space="preserve">
+    <value>查看系統效能</value>
+  </data>
+  <data name="HomePage_AppSettings.Content" xml:space="preserve">
+    <value>軟體設定</value>
+  </data>
+  <data name="HomePage_ContactUs.Text" xml:space="preserve">
+    <value>聯絡我們</value>
+  </data>
+  <data name="HomePage_GitHubProject.Content" xml:space="preserve">
+    <value>GitHub 專案頁面</value>
+  </data>
+  <data name="SystemRepairPage_HistoryHeader.Text" xml:space="preserve">
+    <value>歷程記錄</value>
+  </data>
+  <data name="SystemRepairPage_Copy.Text" xml:space="preserve">
+    <value>複製</value>
+  </data>
+  <data name="SystemRepairPage_Clear.Text" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="SystemRepairPage_WaitingPlaceholder" xml:space="preserve">
+    <value>等待指令執行...</value>
+  </data>
+  <data name="SystemRepairPage_Log_FullRepairStart" xml:space="preserve">
+    <value>=== 開始自動完整修復流程 ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_FullRepairEnd" xml:space="preserve">
+    <value>=== 自動完整修復流程結束 ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_SfcStart" xml:space="preserve">
+    <value>=== 開始系統檔案檢查流程 ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_SfcEnd" xml:space="preserve">
+    <value>=== 系統檔案檢查流程結束 ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_Executing" xml:space="preserve">
+    <value>執行中:</value>
+  </data>
+  <data name="SystemRepairPage_Log_ErrorPrefix" xml:space="preserve">
+    <value>[錯誤]</value>
+  </data>
+  <data name="SystemRepairPage_Copied" xml:space="preserve">
+    <value>已複製</value>
+  </data>
 </root>

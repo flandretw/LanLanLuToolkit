@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Windows.ApplicationModel.Resources;
+using Windows.ApplicationModel.DataTransfer;
 using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
@@ -75,18 +76,18 @@ namespace lanlanlu_toolkit.Views
             {
                 if (AutoModeComboBox.SelectedIndex == 0) // 完整修復
                 {
-                    AppendLog("\n=== 開始自動完整修復流程 ===");
+                    AppendLog("\n" + _resourceLoader.GetString("SystemRepairPage_Log_FullRepairStart"));
                     await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /CheckHealth");
                     await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /ScanHealth");
                     await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /RestoreHealth");
                     await RunCommandInternalAsync("sfc", "/scannow");
-                    AppendLog("\n=== 自動完整修復流程結束 ===");
+                    AppendLog("\n" + _resourceLoader.GetString("SystemRepairPage_Log_FullRepairEnd"));
                 }
                 else // 僅系統檔案檢查
                 {
-                    AppendLog("\n=== 開始系統檔案檢查流程 ===");
+                    AppendLog("\n" + _resourceLoader.GetString("SystemRepairPage_Log_SfcStart"));
                     await RunCommandInternalAsync("sfc", "/scannow");
-                    AppendLog("\n=== 系統檔案檢查流程結束 ===");
+                    AppendLog("\n" + _resourceLoader.GetString("SystemRepairPage_Log_SfcEnd"));
                 }
             }
             finally
@@ -142,7 +143,8 @@ namespace lanlanlu_toolkit.Views
             IsAnyProcessRunning = true;
             _allowNavigation = false;
             GlobalProgress.Visibility = Visibility.Visible;
-            AppendLog($"[{DateTime.Now:HH:mm:ss}] 執行中: {fileName} {arguments}");
+            string executingFormat = _resourceLoader.GetString("SystemRepairPage_Log_Executing");
+            AppendLog($"[{DateTime.Now:HH:mm:ss}] {executingFormat} {fileName} {arguments}");
             
             try
             {
@@ -175,7 +177,8 @@ namespace lanlanlu_toolkit.Views
                     if (e.Data != null)
                     {
                         DispatcherQueue.TryEnqueue(() => {
-                            AppendLog("[錯誤] " + e.Data);
+                            string errorPrefix = _resourceLoader.GetString("SystemRepairPage_Log_ErrorPrefix");
+                            AppendLog($"{errorPrefix} " + e.Data);
                         });
                     }
                 };
@@ -241,7 +244,7 @@ namespace lanlanlu_toolkit.Views
             var originalText = CopyBtnText.Text;
 
             CopyBtnIcon.Glyph = "\uE73E"; // CheckMark
-            CopyBtnText.Text = "已複製";
+            CopyBtnText.Text = _resourceLoader.GetString("SystemRepairPage_Copied");
             CopyLogBtn.IsEnabled = false;
 
             await Task.Delay(2000);
@@ -262,7 +265,8 @@ namespace lanlanlu_toolkit.Views
             if (string.IsNullOrEmpty(text)) return;
 
             // 如果目前還是預設提示文字，則直接取代
-            if (LogOutput.Text == "等待指令執行...")
+            string placeholder = _resourceLoader.GetString("SystemRepairPage_WaitingPlaceholder");
+            if (LogOutput.Text == placeholder)
             {
                 LogOutput.Text = text + "\n";
             }

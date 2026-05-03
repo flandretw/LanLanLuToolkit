@@ -279,4 +279,73 @@
   <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
     <value>Play a sound when system repairs or long tasks are completed</value>
   </data>
+  <data name="GpuMonitorCard_GpuTitle" xml:space="preserve">
+    <value>Graphics Card (GPU {0})</value>
+  </data>
+  <data name="GpuMonitorCard_DefaultTitle.Text" xml:space="preserve">
+    <value>Graphics Card (GPU)</value>
+  </data>
+  <data name="GpuMonitorCard_Detecting.Text" xml:space="preserve">
+    <value>Detecting...</value>
+  </data>
+  <data name="GpuMonitorCard_Usage.Label" xml:space="preserve">
+    <value>Usage</value>
+  </data>
+  <data name="GpuMonitorCard_CoreClock.Label" xml:space="preserve">
+    <value>Core Clock</value>
+  </data>
+  <data name="GpuMonitorCard_MemoryClock.Label" xml:space="preserve">
+    <value>Memory Clock</value>
+  </data>
+  <data name="GpuMonitorCard_Temperature.Label" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="HomePage_QuickStart.Text" xml:space="preserve">
+    <value>Quick Start</value>
+  </data>
+  <data name="HomePage_ViewPerformance.Content" xml:space="preserve">
+    <value>View Performance</value>
+  </data>
+  <data name="HomePage_AppSettings.Content" xml:space="preserve">
+    <value>App Settings</value>
+  </data>
+  <data name="HomePage_ContactUs.Text" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="HomePage_GitHubProject.Content" xml:space="preserve">
+    <value>GitHub Project Page</value>
+  </data>
+  <data name="SystemRepairPage_HistoryHeader.Text" xml:space="preserve">
+    <value>History Log</value>
+  </data>
+  <data name="SystemRepairPage_Copy.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="SystemRepairPage_Clear.Text" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="SystemRepairPage_WaitingPlaceholder" xml:space="preserve">
+    <value>Waiting for commands...</value>
+  </data>
+  <data name="SystemRepairPage_Log_FullRepairStart" xml:space="preserve">
+    <value>=== Starting Automatic Full Repair ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_FullRepairEnd" xml:space="preserve">
+    <value>=== Full Repair Completed ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_SfcStart" xml:space="preserve">
+    <value>=== Starting System File Check ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_SfcEnd" xml:space="preserve">
+    <value>=== System File Check Completed ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_Executing" xml:space="preserve">
+    <value>Executing:</value>
+  </data>
+  <data name="SystemRepairPage_Log_ErrorPrefix" xml:space="preserve">
+    <value>[Error]</value>
+  </data>
+  <data name="SystemRepairPage_Copied" xml:space="preserve">
+    <value>Copied</value>
+  </data>
 </root>
