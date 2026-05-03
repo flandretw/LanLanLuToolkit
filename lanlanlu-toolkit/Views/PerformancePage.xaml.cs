@@ -22,7 +22,19 @@ namespace lanlanlu_toolkit.Views
         public PerformancePage()
         {
             this.InitializeComponent();
-            InitializeAllAsync();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (!_isInitialized)
+            {
+                InitializeAllAsync();
+            }
+            else
+            {
+                SetupTimer();
+            }
         }
 
         private async void InitializeAllAsync()

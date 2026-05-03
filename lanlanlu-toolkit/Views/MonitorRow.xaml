@@ -8,19 +8,6 @@
     mc:Ignorable="d">
 
     <Grid Margin="0,6">
-        <Grid.Resources>
-            <Storyboard x:Name="BarAnimation">
-                <DoubleAnimation x:Name="BarWidthAnimation"
-                                 Storyboard.TargetName="BarFill"
-                                 Storyboard.TargetProperty="Width"
-                                 Duration="0:0:0.4">
-                    <DoubleAnimation.EasingFunction>
-                        <CircleEase EasingMode="EaseOut" />
-                    </DoubleAnimation.EasingFunction>
-                </DoubleAnimation>
-            </Storyboard>
-        </Grid.Resources>
-        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120" />
             <ColumnDefinition Width="*" />
@@ -31,18 +18,25 @@
                    Style="{ThemeResource BodyTextBlockStyle}"
                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
         
-        <!-- Custom Progress Bar -->
+        <!-- Masked Progress Bar -->
         <Grid x:Name="BarContainer" Grid.Column="1" Height="14" VerticalAlignment="Center" Margin="12,0">
             <!-- Background Track -->
             <Border Background="{ThemeResource SystemControlBackgroundBaseLowBrush}" 
                     CornerRadius="7" />
             
-            <!-- Animated Fill -->
+            <!-- Fill with Clipping Mask -->
             <Border x:Name="BarFill" 
                     Background="{ThemeResource AccentTextFillColorPrimaryBrush}" 
                     CornerRadius="7"
-                    HorizontalAlignment="Left"
-                    Width="0" />
+                    HorizontalAlignment="Stretch">
+                <Border.Clip>
+                    <RectangleGeometry x:Name="ClipMask" Rect="0,0,2000,14">
+                        <RectangleGeometry.Transform>
+                            <ScaleTransform x:Name="ClipScale" ScaleX="0" />
+                        </RectangleGeometry.Transform>
+                    </RectangleGeometry>
+                </Border.Clip>
+            </Border>
         </Grid>
 
         <TextBlock x:Name="ValueText" Grid.Column="2" 

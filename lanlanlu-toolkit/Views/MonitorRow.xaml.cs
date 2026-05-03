@@ -1,3 +1,4 @@
+using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -22,7 +23,7 @@ namespace lanlanlu_toolkit.Views
             {
                 if (d is MonitorRow row)
                 {
-                    row.UpdateBarWidth(true);
+                    row.UpdateWidthDirectly();
                     row.UpdateValueText();
                 }
             }));
@@ -34,12 +35,14 @@ namespace lanlanlu_toolkit.Views
         }
 
         public string ValueSuffix { get; set; } = string.Empty;
+        
         public double MaxValue { get; set; } = 100.0;
 
         public MonitorRow()
         {
             this.InitializeComponent();
-            this.SizeChanged += (s, e) => UpdateBarWidth(false);
+            this.Loaded += (s, e) => UpdateWidthDirectly();
+            this.SizeChanged += (s, e) => UpdateWidthDirectly();
         }
 
         public void Update(double value, string? customText = null)
@@ -50,33 +53,44 @@ namespace lanlanlu_toolkit.Views
             {
                 ValueText.Text = customText;
             }
-            // If customText is null, UpdateValueText() called by ValueProperty callback will handle it
+        }
+
+        private void UpdateWidthDirectly()
+        {
+            if (BarContainer == null || BarContainer.ActualWidth <= 0) return;
+
+            // 同步遮罩的基準寬度，確保 ScaleX=1.0 正好等於 100%
+            ClipMask.Rect = new Windows.Foundation.Rect(0, 0, BarContainer.ActualWidth, 14);
+
+            // 計算比例 (0.0 ~ 1.0)
+            double ratio = Value / MaxValue;
+            if (ratio < 0) ratio = 0;
+            if (ratio > 1) ratio = 1;
+
+            // 執行遮罩動畫
+            AnimateMask(ratio);
+        }
+
+        private void AnimateMask(double newScale)
+        {
+            var animation = new Microsoft.UI.Xaml.Media.Animation.DoubleAnimation
+            {
+                To = newScale,
+                Duration = TimeSpan.FromMilliseconds(450),
+                EasingFunction = new Microsoft.UI.Xaml.Media.Animation.CubicEase { EasingMode = Microsoft.UI.Xaml.Media.Animation.EasingMode.EaseOut }
+            };
+
+            var storyboard = new Microsoft.UI.Xaml.Media.Animation.Storyboard();
+            Microsoft.UI.Xaml.Media.Animation.Storyboard.SetTarget(animation, ClipScale);
+            Microsoft.UI.Xaml.Media.Animation.Storyboard.SetTargetProperty(animation, "ScaleX");
+            storyboard.Children.Add(animation);
+            storyboard.Begin();
         }
 
         private void UpdateValueText()
         {
             string format = (MaxValue > 500) ? "F0" : "F1";
             ValueText.Text = $"{Value.ToString(format)}{ValueSuffix}";
-        }
-
-        private void UpdateBarWidth(bool animate)
-        {
-            double ratio = Value / MaxValue;
-            if (ratio < 0) ratio = 0;
-            if (ratio > 1) ratio = 1;
-
-            double targetWidth = BarContainer.ActualWidth * ratio;
-            
-            if (animate)
-            {
-                BarWidthAnimation.To = targetWidth;
-                BarAnimation.Begin();
-            }
-            else
-            {
-                BarAnimation.Stop();
-                BarFill.Width = targetWidth;
-            }
         }
     }
 }
