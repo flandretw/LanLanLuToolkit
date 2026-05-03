@@ -62,7 +62,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE713;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <FontIcon Glyph="&#xEC7A;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                 <TextBlock x:Uid="SystemRepairPage_AdvancedMode_Title" Style="{StaticResource BodyStrongTextBlockStyle}" />
                                 <TextBlock x:Uid="SystemRepairPage_AdvancedMode_Desc" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />

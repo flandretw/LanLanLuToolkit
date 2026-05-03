@@ -39,7 +39,10 @@
                         <FontIcon Glyph="&#xE9D2;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Tag="TestToolPage" Icon="Repair" x:Uid="Nav_TestToolPage">
+                <NavigationViewItem Tag="TestToolPage" x:Uid="Nav_TestToolPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xEC7A;" />
+                    </NavigationViewItem.Icon>
                     <NavigationViewItem.MenuItems>
                         <NavigationViewItem Tag="SystemRepairPage" Icon="Repair" x:Uid="Nav_SystemRepairPage" />
                     </NavigationViewItem.MenuItems>
