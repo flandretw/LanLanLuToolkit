@@ -166,9 +166,27 @@
     <value>歡迎使用蘭蘭露工具箱</value>
   </data>
   <data name="HomePage_Intro.Text" xml:space="preserve">
-    <value>這是一個專為 Windows 11 設計的現代化工具箱，提供硬體監控、系統優化與各類實用小工具。點擊下方連結或側邊選單開始探索吧！</value>
+    <value>專為 Windows 11 設計的現代化工具箱，提供硬體監控與各類實用工具。點擊下方連結或側邊選單開始探索吧！</value>
   </data>
   <data name="PerformancePage_Loading.Text" xml:space="preserve">
     <value>正在讀取系統資訊...</value>
+  </data>
+  <data name="HomePage_Version_Format" xml:space="preserve">
+    <value>版本 {0}</value>
+  </data>
+  <data name="Greeting_LateNight" xml:space="preserve">
+    <value>晚安，早點休息吧，明天也是新的一天！</value>
+  </data>
+  <data name="Greeting_Morning" xml:space="preserve">
+    <value>早安，今天又是一個新的開始！</value>
+  </data>
+  <data name="Greeting_Afternoon" xml:space="preserve">
+    <value>午安，忙碌之餘別忘了休息一下喔！</value>
+  </data>
+  <data name="Greeting_Evening" xml:space="preserve">
+    <value>晚安，辛苦了一天，放鬆享受夜晚時光吧！</value>
+  </data>
+  <data name="HomePage_PoweredBy.Text" xml:space="preserve">
+    <value>由 flandretw 驅動</value>
   </data>
 </root>

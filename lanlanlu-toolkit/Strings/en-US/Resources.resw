@@ -171,4 +171,22 @@
   <data name="PerformancePage_Loading.Text" xml:space="preserve">
     <value>Reading system information...</value>
   </data>
+  <data name="HomePage_Version_Format" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="Greeting_LateNight" xml:space="preserve">
+    <value>Good night, get some rest for a brand new day!</value>
+  </data>
+  <data name="Greeting_Morning" xml:space="preserve">
+    <value>Good morning, a fresh start for a wonderful day!</value>
+  </data>
+  <data name="Greeting_Afternoon" xml:space="preserve">
+    <value>Good afternoon, don't forget to take a break!</value>
+  </data>
+  <data name="Greeting_Evening" xml:space="preserve">
+    <value>Good evening, time to relax and enjoy your night!</value>
+  </data>
+  <data name="HomePage_PoweredBy.Text" xml:space="preserve">
+    <value>Powered by flandretw</value>
+  </data>
 </root>
