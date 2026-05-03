@@ -271,7 +271,7 @@
     <value>修復任務已完成</value>
   </data>
   <data name="SystemRepairPage_CompletionInfoBar.Message" xml:space="preserve">
-    <value>所有的修復流程已順利結束，您可以查看日誌了解詳情。</value>
+    <value>所有的修復流程已順利結束，您可以查看歷程記錄了解詳情。</value>
   </data>
   <data name="SettingsPage_NotificationSound_Title.Text" xml:space="preserve">
     <value>任務完成提示音</value>

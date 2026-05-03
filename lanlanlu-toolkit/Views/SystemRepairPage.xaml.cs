@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Windows.ApplicationModel.Resources;
+using Windows.ApplicationModel.DataTransfer;
 using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
@@ -142,7 +143,7 @@ namespace lanlanlu_toolkit.Views
             IsAnyProcessRunning = true;
             _allowNavigation = false;
             GlobalProgress.Visibility = Visibility.Visible;
-            AppendLog($"\n>>> [{DateTime.Now:HH:mm:ss}] 執行中: {fileName} {arguments}");
+            AppendLog($"[{DateTime.Now:HH:mm:ss}] 執行中: {fileName} {arguments}");
             
             try
             {
@@ -218,11 +219,56 @@ namespace lanlanlu_toolkit.Views
             RestoreHealthBtn.IsEnabled = enabled;
             SfcBtn.IsEnabled = enabled;
             AdvancedModeToggle.IsEnabled = enabled;
+            ClearLogBtn.IsEnabled = enabled;
+            CopyLogBtn.IsEnabled = enabled;
+        }
+
+        private void ClearLogBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LogOutput.Text = string.Empty;
+            ClearLogBtn.IsEnabled = false;
+            CopyLogBtn.IsEnabled = false;
+        }
+
+        private async void CopyLogBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // 執行複製
+            var dataPackage = new DataPackage();
+            dataPackage.SetText(LogOutput.Text);
+            Clipboard.SetContent(dataPackage);
+
+            // 視覺回饋：變更為「已複製」狀態
+            var originalGlyph = CopyBtnIcon.Glyph;
+            var originalText = CopyBtnText.Text;
+
+            CopyBtnIcon.Glyph = "\uE73E"; // CheckMark
+            CopyBtnText.Text = "已複製";
+            CopyLogBtn.IsEnabled = false;
+
+            await Task.Delay(2000);
+
+            // 恢復原始狀態
+            CopyBtnIcon.Glyph = originalGlyph;
+            CopyBtnText.Text = originalText;
+            
+            // 只有在日誌不為空的情況下才恢復啟用
+            if (!string.IsNullOrEmpty(LogOutput.Text) && !_isProcessRunning)
+            {
+                CopyLogBtn.IsEnabled = true;
+            }
         }
 
         private void AppendLog(string text)
         {
-            LogOutput.Text += text + "\n";
+            // 如果目前還是預設提示文字，則直接取代
+            if (LogOutput.Text == "等待指令執行...")
+            {
+                LogOutput.Text = text + "\n";
+            }
+            else
+            {
+                LogOutput.Text += text + "\n";
+            }
             LogScrollViewer.ChangeView(null, LogScrollViewer.ScrollableHeight, null);
         }
 

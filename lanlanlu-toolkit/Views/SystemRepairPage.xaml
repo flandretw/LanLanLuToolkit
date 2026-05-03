@@ -169,16 +169,35 @@
                                 <RowDefinition Height="400" />
                             </Grid.RowDefinitions>
 
-                            <!-- Log Card Header (Added fixed spacing to prevent overlap) -->
-                            <Grid Padding="16,14" Background="{ThemeResource ControlFillColorDefaultBrush}">
+                            <!-- Log Card Header -->
+                            <Grid Padding="16,8" Background="{ThemeResource ControlFillColorDefaultBrush}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE756;" FontSize="16" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                <TextBlock Grid.Column="1" Text="執行過程日誌" Style="{StaticResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
-                                <ProgressBar x:Name="GlobalProgress" Grid.Column="2" IsIndeterminate="True" Width="100" Visibility="Collapsed" VerticalAlignment="Center" />
+                                <FontIcon Glyph="&#xE81C;" FontSize="16" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="1" Text="歷程記錄" Style="{StaticResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
+                                
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                                    <ProgressBar x:Name="GlobalProgress" IsIndeterminate="True" Width="100" Visibility="Collapsed" VerticalAlignment="Center" />
+                                    
+                                    <!-- Copy Button -->
+                                    <Button x:Name="CopyLogBtn" Click="CopyLogBtn_Click" Padding="12,5" VerticalAlignment="Center" IsEnabled="False">
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <FontIcon x:Name="CopyBtnIcon" Glyph="&#xE8C8;" FontSize="14" />
+                                            <TextBlock x:Name="CopyBtnText" Text="複製" Style="{StaticResource CaptionTextBlockStyle}" />
+                                        </StackPanel>
+                                    </Button>
+
+                                    <!-- Clear Button -->
+                                    <Button x:Name="ClearLogBtn" Click="ClearLogBtn_Click" Padding="12,5" VerticalAlignment="Center" IsEnabled="False">
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <FontIcon Glyph="&#xE74D;" FontSize="14" />
+                                            <TextBlock Text="清除" Style="{StaticResource CaptionTextBlockStyle}" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
                             </Grid>
 
                             <MenuFlyoutSeparator Grid.Row="1" Margin="0" />
