@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Windows.ApplicationModel.Resources;
-using Windows.ApplicationModel.DataTransfer;
 using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
@@ -260,6 +259,8 @@ namespace lanlanlu_toolkit.Views
 
         private void AppendLog(string text)
         {
+            if (string.IsNullOrEmpty(text)) return;
+
             // 如果目前還是預設提示文字，則直接取代
             if (LogOutput.Text == "等待指令執行...")
             {
@@ -269,6 +270,8 @@ namespace lanlanlu_toolkit.Views
             {
                 LogOutput.Text += text + "\n";
             }
+            
+            // 自動捲動到最底端
             LogScrollViewer.ChangeView(null, LogScrollViewer.ScrollableHeight, null);
         }
 
