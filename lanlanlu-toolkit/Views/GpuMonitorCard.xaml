@@ -1,0 +1,25 @@
+<UserControl
+    x:Class="lanlanlu_toolkit.Views.GpuMonitorCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:lanlanlu_toolkit.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+            BorderThickness="1" CornerRadius="8" Padding="24"
+            HorizontalAlignment="Stretch">
+        <StackPanel Spacing="16">
+            <StackPanel>
+                <TextBlock x:Name="GpuTitleText" Text="顯示卡 (GPU)" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
+                <TextBlock x:Name="GpuNameText" Text="偵測中..." Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            </StackPanel>
+            <local:MonitorRow x:Name="GpuUsageRow" Label="使用率" ValueSuffix="%" />
+            <local:MonitorRow x:Name="GpuClockRow" Label="核心時脈" ValueSuffix=" MHz" MaxValue="3000" />
+            <local:MonitorRow x:Name="GpuMemClockRow" Label="記憶體時脈" ValueSuffix=" MHz" MaxValue="12000" />
+            <local:MonitorRow x:Name="GpuTempRow" Label="溫度" ValueSuffix=" °C" MaxValue="100" />
+        </StackPanel>
+    </Border>
+</UserControl>

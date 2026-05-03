@@ -17,6 +17,7 @@ namespace lanlanlu_toolkit.Views
         private double _totalRamGb;
         private bool _isUpdating = false;
         private bool _isInitialized = false;
+        private readonly List<GpuMonitorCard> _gpuCards = new();
 
         public PerformancePage()
         {
@@ -51,7 +52,7 @@ namespace lanlanlu_toolkit.Views
                             if (!string.IsNullOrEmpty(name)) gpuNames.Add(name);
                         }
                     }
-                    string gpuDisplay = gpuNames.Count > 0 ? string.Join(" / ", gpuNames) : "Unknown GPU";
+                    gpuNames.Reverse(); // 反轉順序以匹配工作管理員的 GPU 0/1 順序
 
                     int ramSpeed = 0;
                     using (var ramSearcher = new ManagementObjectSearcher("SELECT TotalPhysicalMemory FROM Win32_ComputerSystem"))
@@ -71,8 +72,26 @@ namespace lanlanlu_toolkit.Views
                     DispatcherQueue.TryEnqueue(() =>
                     {
                         CpuNameText.Text = cpuName;
-                        GpuNameText.Text = gpuDisplay;
                         RamNameText.Text = ramDisplay;
+
+                        // Create GPU Cards
+                        GpuContainer.Children.Clear();
+                        _gpuCards.Clear();
+                        for (int i = 0; i < gpuNames.Count; i++)
+                        {
+                            var card = new GpuMonitorCard();
+                            card.Initialize(gpuNames[i], i);
+                            GpuContainer.Children.Add(card);
+                            _gpuCards.Add(card);
+                        }
+                        
+                        if (gpuNames.Count == 0)
+                        {
+                            var emptyCard = new GpuMonitorCard();
+                            emptyCard.Initialize("Unknown GPU", 0);
+                            GpuContainer.Children.Add(emptyCard);
+                            _gpuCards.Add(emptyCard);
+                        }
                         
                         _isInitialized = true;
                         SetupTimer();
@@ -147,10 +166,16 @@ namespace lanlanlu_toolkit.Views
                         if (speedGhz > 0) CpuClockRow.Update(speedGhz);
                         CpuTempRow.Update(45 + (new Random().NextDouble() * 15));
                         
-                        GpuUsageRow.Update(new Random().Next(1, 15));
-                        GpuClockRow.Update(1200 + new Random().Next(-50, 50));
-                        GpuMemClockRow.Update(7000 + new Random().Next(-10, 10));
-                        GpuTempRow.Update(40 + (new Random().NextDouble() * 10));
+                        // Update all GPU cards
+                        foreach (var card in _gpuCards)
+                        {
+                            card.UpdateStats(
+                                new Random().Next(1, 15),
+                                1200 + new Random().Next(-50, 50),
+                                7000 + new Random().Next(-10, 10),
+                                40 + (new Random().NextDouble() * 10)
+                            );
+                        }
                     });
                 }
                 catch { }

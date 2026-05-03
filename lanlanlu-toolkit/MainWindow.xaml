@@ -34,7 +34,11 @@
                         PaneDisplayMode="Auto">
             <NavigationView.MenuItems>
                 <NavigationViewItem Tag="HomePage" Icon="Home" x:Uid="Nav_HomePage" />
-                <NavigationViewItem Tag="PerformancePage" Icon="AllApps" x:Uid="Shell_Performance" />
+                <NavigationViewItem Tag="PerformancePage" x:Uid="Shell_Performance">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE9D2;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
                 <NavigationViewItem Tag="TestToolPage" Icon="Repair" x:Uid="Nav_TestToolPage" />
             </NavigationView.MenuItems>
             

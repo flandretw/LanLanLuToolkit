@@ -20,13 +20,10 @@
                             <Setter Target="MonitorGrid.ColumnDefinitions[0].Width" Value="*" />
                             <Setter Target="MonitorGrid.ColumnDefinitions[1].Width" Value="*" />
                             <Setter Target="MonitorGrid.ColumnDefinitions[2].Width" Value="*" />
-                            <Setter Target="GPUCard.(Grid.Row)" Value="0" />
-                            <Setter Target="GPUCard.(Grid.Column)" Value="1" />
+                            <Setter Target="GpuContainer.(Grid.Row)" Value="0" />
+                            <Setter Target="GpuContainer.(Grid.Column)" Value="1" />
                             <Setter Target="RAMCard.(Grid.Row)" Value="0" />
                             <Setter Target="RAMCard.(Grid.Column)" Value="2" />
-                            <Setter Target="GPUCard.Margin" Value="12,0" />
-                            <Setter Target="RAMCard.Margin" Value="12,0,0,0" />
-                            <Setter Target="CPUCard.Margin" Value="0,0,12,0" />
                         </VisualState.Setters>
                     </VisualState>
                     <VisualState x:Name="NarrowState">
@@ -37,13 +34,10 @@
                             <Setter Target="MonitorGrid.ColumnDefinitions[0].Width" Value="*" />
                             <Setter Target="MonitorGrid.ColumnDefinitions[1].Width" Value="0" />
                             <Setter Target="MonitorGrid.ColumnDefinitions[2].Width" Value="0" />
-                            <Setter Target="GPUCard.(Grid.Row)" Value="1" />
-                            <Setter Target="GPUCard.(Grid.Column)" Value="0" />
+                            <Setter Target="GpuContainer.(Grid.Row)" Value="1" />
+                            <Setter Target="GpuContainer.(Grid.Column)" Value="0" />
                             <Setter Target="RAMCard.(Grid.Row)" Value="2" />
                             <Setter Target="RAMCard.(Grid.Column)" Value="0" />
-                            <Setter Target="GPUCard.Margin" Value="0,24,0,0" />
-                            <Setter Target="RAMCard.Margin" Value="0,24,0,0" />
-                            <Setter Target="CPUCard.Margin" Value="0" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>
@@ -52,7 +46,7 @@
             <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
                 <TextBlock x:Uid="PerformancePage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
 
-                <Grid x:Name="MonitorGrid">
+                <Grid x:Name="MonitorGrid" ColumnSpacing="16" RowSpacing="16">
                     <Grid.ChildrenTransitions>
                         <TransitionCollection>
                             <RepositionThemeTransition />
@@ -86,23 +80,10 @@
                         </StackPanel>
                     </Border>
 
-                    <!-- GPU Card -->
-                    <Border x:Name="GPUCard" Grid.Row="0" Grid.Column="1"
-                            Background="{ThemeResource LayerFillColorDefaultBrush}"
-                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                            BorderThickness="1" CornerRadius="8" Padding="24"
-                            HorizontalAlignment="Stretch">
-                        <StackPanel Spacing="16">
-                            <StackPanel>
-                                <TextBlock x:Uid="HomePage_GPU" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
-                                <TextBlock x:Name="GpuNameText" x:Uid="HomePage_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                            </StackPanel>
-                            <local:MonitorRow x:Name="GpuUsageRow" x:Uid="HomePage_Usage" ValueSuffix="%" />
-                            <local:MonitorRow x:Name="GpuClockRow" x:Uid="HomePage_Clock" ValueSuffix=" MHz" MaxValue="3000" />
-                            <local:MonitorRow x:Name="GpuMemClockRow" x:Uid="HomePage_MemClock" ValueSuffix=" MHz" MaxValue="12000" />
-                            <local:MonitorRow x:Name="GpuTempRow" x:Uid="HomePage_Temp" ValueSuffix=" °C" MaxValue="100" />
-                        </StackPanel>
-                    </Border>
+                    <!-- GPUs Container -->
+                    <StackPanel x:Name="GpuContainer" Grid.Row="0" Grid.Column="1" Spacing="16" HorizontalAlignment="Stretch">
+                        <!-- GpuMonitorCard instances will be added here dynamically -->
+                    </StackPanel>
 
                     <!-- RAM Card -->
                     <Border x:Name="RAMCard" Grid.Row="0" Grid.Column="2"
