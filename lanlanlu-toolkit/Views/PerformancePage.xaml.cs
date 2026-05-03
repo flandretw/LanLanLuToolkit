@@ -101,6 +101,10 @@ namespace lanlanlu_toolkit.Views
                     _gpuCards.Add(emptyCard);
                 }
                 
+                // 隱藏載入層，顯示內容
+                LoadingOverlay.Visibility = Visibility.Collapsed;
+                ContentScrollViewer.Visibility = Visibility.Visible;
+                
                 _isInitialized = true;
                 StartMonitoring();
             });

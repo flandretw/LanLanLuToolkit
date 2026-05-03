@@ -168,4 +168,7 @@
   <data name="HomePage_Intro.Text" xml:space="preserve">
     <value>A modern toolkit designed for Windows 11, providing hardware monitoring, system optimization, and various practical utilities. Click the links below or use the side menu to start exploring!</value>
   </data>
+  <data name="PerformancePage_Loading.Text" xml:space="preserve">
+    <value>Reading system information...</value>
+  </data>
 </root>

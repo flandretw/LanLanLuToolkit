@@ -168,4 +168,7 @@
   <data name="HomePage_Intro.Text" xml:space="preserve">
     <value>這是一個專為 Windows 11 設計的現代化工具箱，提供硬體監控、系統優化與各類實用小工具。點擊下方連結或側邊選單開始探索吧！</value>
   </data>
+  <data name="PerformancePage_Loading.Text" xml:space="preserve">
+    <value>正在讀取系統資訊...</value>
+  </data>
 </root>
