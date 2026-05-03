@@ -14,6 +14,7 @@ namespace lanlanlu_toolkit.Views
             this.InitializeComponent();
             LoadCurrentLanguage();
             LoadCurrentTheme();
+            LoadNotificationSound();
             InitializeAboutInfo();
             _isInitialized = true;
         }
@@ -138,6 +139,17 @@ namespace lanlanlu_toolkit.Views
             {
                 System.Diagnostics.Debug.WriteLine($"Failed to initialize about info: {ex.Message}");
             }
+        }
+
+        private void LoadNotificationSound()
+        {
+            NotificationSoundToggle.IsOn = SettingsService.GetNotificationSound();
+        }
+
+        private void NotificationSoundToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (!_isInitialized) return;
+            SettingsService.SaveNotificationSound(NotificationSoundToggle.IsOn);
         }
     }
 }

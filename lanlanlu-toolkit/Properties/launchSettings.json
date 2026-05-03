@@ -1,10 +1,10 @@
-﻿{
-  "profiles": {
-    "lanlanlu-toolkit (Package)": {
-      "commandName": "MsixPackage"
-    },
-    "lanlanlu-toolkit (Unpackaged)": {
-      "commandName": "Project"
-    }
-  }
+{
+  "profiles": {
+    "lanlanlu-toolkit (Unpackaged)": {
+      "commandName": "Project"
+    },
+    "lanlanlu-toolkit (Package)": {
+      "commandName": "MsixPackage"
+    }
+  }
 }

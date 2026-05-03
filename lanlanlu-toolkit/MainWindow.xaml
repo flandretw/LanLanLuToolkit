@@ -39,10 +39,24 @@
                         <FontIcon Glyph="&#xE9D2;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Tag="TestToolPage" Icon="Repair" x:Uid="Nav_TestToolPage" />
+                <NavigationViewItem Tag="TestToolPage" Icon="Repair" x:Uid="Nav_TestToolPage">
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Tag="SystemRepairPage" Icon="Repair" x:Uid="Nav_SystemRepairPage" />
+                    </NavigationViewItem.MenuItems>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
             
-            <Frame x:Name="ContentFrame" />
+            <Grid>
+                <Frame x:Name="ContentFrame" />
+                <!-- Global App Notification InfoBar -->
+                <InfoBar x:Name="AppInfoBar"
+                         IsOpen="False"
+                         Severity="Informational"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Top"
+                         Margin="0,12,0,0"
+                         Canvas.ZIndex="999" />
+            </Grid>
         </NavigationView>
     </Grid>
 </Window>

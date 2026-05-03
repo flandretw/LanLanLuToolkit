@@ -5,11 +5,14 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using WinRT.Interop;
 using lanlanlu_toolkit.Views;
+using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit
 {
     public sealed partial class MainWindow : Window
     {
+        private bool _isClosingConfirmed = false;
+
         public MainWindow()
         {
             this.InitializeComponent();
@@ -24,7 +27,41 @@ namespace lanlanlu_toolkit
             var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
             var appWindow = AppWindow.GetFromWindowId(windowId);
             appWindow.SetIcon(iconPath);
+            
+            // 初始化全域通知服務
+            NotificationService.Initialize(AppInfoBar);
+
+            // 註冊視窗關閉事件以進行防呆檢查
+            appWindow.Closing += AppWindow_Closing;
         }
+
+        private async void AppWindow_Closing(AppWindow sender, AppWindowClosingEventArgs args)
+        {
+            if (SystemRepairPage.IsAnyProcessRunning && !_isClosingConfirmed)
+            {
+                // 先取消關閉事件
+                args.Cancel = true;
+
+                var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
+                var dialog = new ContentDialog
+                {
+                    Title = resourceLoader.GetString("SystemRepairPage_QuitTitle"),
+                    Content = resourceLoader.GetString("SystemRepairPage_QuitContent"),
+                    PrimaryButtonText = resourceLoader.GetString("SystemRepairPage_QuitConfirm"),
+                    CloseButtonText = resourceLoader.GetString("SystemRepairPage_QuitCancel"),
+                    XamlRoot = this.Content.XamlRoot,
+                    DefaultButton = ContentDialogButton.Close
+                };
+
+                var result = await dialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    _isClosingConfirmed = true;
+                    this.Close();
+                }
+            }
+        }
+
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
@@ -52,6 +89,9 @@ namespace lanlanlu_toolkit
                         break;
                     case "TestToolPage":
                         ContentFrame.Navigate(typeof(TestToolPage));
+                        break;
+                    case "SystemRepairPage":
+                        ContentFrame.Navigate(typeof(SystemRepairPage));
                         break;
                 }
             }

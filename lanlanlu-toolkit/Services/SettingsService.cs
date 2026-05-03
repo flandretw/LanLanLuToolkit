@@ -11,6 +11,7 @@ namespace lanlanlu_toolkit.Services
         private const string AppFolderName = "lanlanlu_toolkit";
         private const string LanguageFileName = "language.txt";
         private const string ThemeFileName = "theme.txt";
+        private const string SoundFileName = "notification_sound.txt";
 
         private static string GetAppFolder()
         {
@@ -100,6 +101,36 @@ namespace lanlanlu_toolkit.Services
                 "Dark" => ElementTheme.Dark,
                 _ => ElementTheme.Default
             };
+        }
+
+        public static bool GetNotificationSound()
+        {
+            try
+            {
+                string filePath = Path.Combine(GetAppFolder(), SoundFileName);
+                if (File.Exists(filePath))
+                {
+                    return bool.TryParse(File.ReadAllText(filePath).Trim(), out bool result) && result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to read sound setting: {ex.Message}");
+            }
+            return true; // Default to true
+        }
+
+        public static void SaveNotificationSound(bool enabled)
+        {
+            try
+            {
+                string filePath = Path.Combine(GetAppFolder(), SoundFileName);
+                File.WriteAllText(filePath, enabled.ToString());
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to save sound setting: {ex.Message}");
+            }
         }
     }
 }

@@ -57,8 +57,8 @@
   <data name="SettingsPage_Title.Text" xml:space="preserve">
     <value>設定</value>
   </data>
-  <data name="SettingsPage_LanguageHeader.Text" xml:space="preserve">
-    <value>語言與地區</value>
+  <data name="SettingsPage_AppearanceBehaviorHeader.Text" xml:space="preserve">
+    <value>外觀與行為</value>
   </data>
   <data name="SettingsPage_LanguageTitle.Text" xml:space="preserve">
     <value>應用程式顯示語言</value>
@@ -188,5 +188,95 @@
   </data>
   <data name="HomePage_PoweredBy.Text" xml:space="preserve">
     <value>由 flandretw 驅動</value>
+  </data>
+  <data name="Nav_SystemRepairPage.Content" xml:space="preserve">
+    <value>系統完整性修復</value>
+  </data>
+  <data name="SystemRepairPage_Title.Text" xml:space="preserve">
+    <value>系統完整性修復</value>
+  </data>
+  <data name="SystemRepairPage_ScanHealth_Title.Text" xml:space="preserve">
+    <value>掃描映像狀態</value>
+  </data>
+  <data name="SystemRepairPage_ScanHealth_Desc.Text" xml:space="preserve">
+    <value>深入檢查 Windows 映像是否有損毀。這像是翻閱維修紀錄，找出潛在的問題但暫不進行修復。</value>
+  </data>
+  <data name="SystemRepairPage_CheckHealth_Title.Text" xml:space="preserve">
+    <value>檢查損毀標記</value>
+  </data>
+  <data name="SystemRepairPage_CheckHealth_Desc.Text" xml:space="preserve">
+    <value>快速掃描系統是否已被標記為損毀。這是一次快速的斷層掃描，用來確認系統當前的健康狀態。</value>
+  </data>
+  <data name="SystemRepairPage_RestoreHealth_Title.Text" xml:space="preserve">
+    <value>修復系統映像</value>
+  </data>
+  <data name="SystemRepairPage_RestoreHealth_Desc.Text" xml:space="preserve">
+    <value>發現損毀時，自動從 Windows Update 下載替代檔案進行修復。這是最徹底的映像恢復方式。</value>
+  </data>
+  <data name="SystemRepairPage_SfcScannow_Title.Text" xml:space="preserve">
+    <value>系統檔案檢查</value>
+  </data>
+  <data name="SystemRepairPage_SfcScannow_Desc.Text" xml:space="preserve">
+    <value>掃描所有受保護的系統檔案並修復損毀。這是最常用的安裝修復工具，能解決多數檔案遺失問題。</value>
+  </data>
+  <data name="SystemRepairPage_RunButton.Content" xml:space="preserve">
+    <value>執行</value>
+  </data>
+  <data name="SystemRepairPage_AutoMode_Title.Text" xml:space="preserve">
+    <value>自動修復模式</value>
+  </data>
+  <data name="SystemRepairPage_AutoMode_Desc.Text" xml:space="preserve">
+    <value>自動執行完整的檢測與修復流程。推薦大多數使用者使用。</value>
+  </data>
+  <data name="SystemRepairPage_AutoMode_Default.Content" xml:space="preserve">
+    <value>完整修復 (預設)</value>
+  </data>
+  <data name="SystemRepairPage_AutoMode_SfcOnly.Content" xml:space="preserve">
+    <value>僅系統檔案檢查</value>
+  </data>
+  <data name="SystemRepairPage_AdvancedMode_Title.Text" xml:space="preserve">
+    <value>進階模式</value>
+  </data>
+  <data name="SystemRepairPage_AdvancedMode_Desc.Text" xml:space="preserve">
+    <value>手動執行特定的維護指令。建議進階使用者使用。</value>
+  </data>
+  <data name="SystemRepairPage_StartButton.Content" xml:space="preserve">
+    <value>開始執行</value>
+  </data>
+  <data name="SystemRepairPage_Running" xml:space="preserve">
+    <value>正在執行...</value>
+  </data>
+  <data name="SystemRepairPage_Completed" xml:space="preserve">
+    <value>執行完成</value>
+  </data>
+  <data name="SystemRepairPage_Error" xml:space="preserve">
+    <value>執行期間發生錯誤</value>
+  </data>
+  <data name="SystemRepairPage_AdminRequired" xml:space="preserve">
+    <value>此操作需要管理員權限。</value>
+  </data>
+  <data name="SystemRepairPage_QuitTitle" xml:space="preserve">
+    <value>操作執行中</value>
+  </data>
+  <data name="SystemRepairPage_QuitContent" xml:space="preserve">
+    <value>系統修復操作正在執行中，現在退出將會中斷程序。確定要退出嗎？</value>
+  </data>
+  <data name="SystemRepairPage_QuitConfirm" xml:space="preserve">
+    <value>確定退出</value>
+  </data>
+  <data name="SystemRepairPage_QuitCancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="SystemRepairPage_CompletionInfoBar.Title" xml:space="preserve">
+    <value>修復任務已完成</value>
+  </data>
+  <data name="SystemRepairPage_CompletionInfoBar.Message" xml:space="preserve">
+    <value>所有的修復流程已順利結束，您可以查看日誌了解詳情。</value>
+  </data>
+  <data name="SettingsPage_NotificationSound_Title.Text" xml:space="preserve">
+    <value>任務完成提示音</value>
+  </data>
+  <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
+    <value>在系統修復或長時間任務結束時播放提示音</value>
   </data>
 </root>

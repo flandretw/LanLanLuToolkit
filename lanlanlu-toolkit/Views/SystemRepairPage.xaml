@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="lanlanlu_toolkit.Views.SystemRepairPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:lanlanlu_toolkit.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    NavigationCacheMode="Required">
+
+    <Grid>
+        <!-- Tool Cards Container (Everything inside ScrollViewer) -->
+        <ScrollViewer>
+            <Grid Padding="36" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40*" MaxWidth="1800" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="1" Spacing="4">
+                    <TextBlock x:Uid="SystemRepairPage_Title" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,24" />
+                    
+                    <!-- Automatic Mode Card -->
+                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{ThemeResource ControlCornerRadius}"
+                            Margin="0,0,0,12">
+                        <Grid Padding="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE945;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                <TextBlock x:Uid="SystemRepairPage_AutoMode_Title" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                                <TextBlock x:Uid="SystemRepairPage_AutoMode_Desc" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                <ComboBox x:Name="AutoModeComboBox" Width="200" SelectedIndex="0" VerticalAlignment="Center">
+                                    <ComboBoxItem x:Uid="SystemRepairPage_AutoMode_Default" />
+                                    <ComboBoxItem x:Uid="SystemRepairPage_AutoMode_SfcOnly" />
+                                </ComboBox>
+                                <Button x:Name="AutoStartBtn" x:Uid="SystemRepairPage_StartButton" Click="RunAutoRepair_Click" Style="{StaticResource AccentButtonStyle}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!-- Advanced Mode Toggle Card -->
+                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{ThemeResource ControlCornerRadius}"
+                            Margin="0,0,0,12">
+                        <Grid Padding="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE713;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                <TextBlock x:Uid="SystemRepairPage_AdvancedMode_Title" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                                <TextBlock x:Uid="SystemRepairPage_AdvancedMode_Desc" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                            </StackPanel>
+                            <ToggleSwitch x:Name="AdvancedModeToggle" Grid.Column="2" 
+                                          Toggled="AdvancedModeToggle_Toggled" 
+                                          VerticalAlignment="Center" 
+                                          HorizontalAlignment="Right"
+                                          Header="{x:Null}"
+                                          MinWidth="0" Margin="0,0,-12,0" Padding="0"
+                                          OnContent="" OffContent="" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Advanced Tools Group -->
+                    <StackPanel x:Name="AdvancedToolsPanel" Spacing="4" Visibility="Collapsed">
+                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{ThemeResource ControlCornerRadius}">
+                            <Grid Padding="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Glyph="&#xE82D;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                    <TextBlock x:Uid="SystemRepairPage_ScanHealth_Title" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                                    <TextBlock x:Uid="SystemRepairPage_ScanHealth_Desc" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Button x:Name="ScanHealthBtn" Grid.Column="2" x:Uid="SystemRepairPage_RunButton" Click="RunScanHealth_Click" Style="{StaticResource AccentButtonStyle}" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+
+                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{ThemeResource ControlCornerRadius}">
+                            <Grid Padding="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Glyph="&#xE8A3;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                    <TextBlock x:Uid="SystemRepairPage_CheckHealth_Title" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                                    <TextBlock x:Uid="SystemRepairPage_CheckHealth_Desc" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Button x:Name="CheckHealthBtn" Grid.Column="2" x:Uid="SystemRepairPage_RunButton" Click="RunCheckHealth_Click" Style="{StaticResource AccentButtonStyle}" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+
+                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{ThemeResource ControlCornerRadius}">
+                            <Grid Padding="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Glyph="&#xE777;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                    <TextBlock x:Uid="SystemRepairPage_RestoreHealth_Title" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                                    <TextBlock x:Uid="SystemRepairPage_RestoreHealth_Desc" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Button x:Name="RestoreHealthBtn" Grid.Column="2" x:Uid="SystemRepairPage_RunButton" Click="RunRestoreHealth_Click" Style="{StaticResource AccentButtonStyle}" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+
+                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{ThemeResource ControlCornerRadius}">
+                            <Grid Padding="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Glyph="&#xE90F;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                    <TextBlock x:Uid="SystemRepairPage_SfcScannow_Title" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                                    <TextBlock x:Uid="SystemRepairPage_SfcScannow_Desc" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Button x:Name="SfcBtn" Grid.Column="2" x:Uid="SystemRepairPage_RunButton" Click="RunSfc_Click" Style="{StaticResource AccentButtonStyle}" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Modernized Log Output Card -->
+                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{ThemeResource ControlCornerRadius}"
+                            Margin="0,24,0,36">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="400" />
+                            </Grid.RowDefinitions>
+
+                            <!-- Log Card Header (Added fixed spacing to prevent overlap) -->
+                            <Grid Padding="16,14" Background="{ThemeResource ControlFillColorDefaultBrush}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Glyph="&#xE756;" FontSize="16" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="1" Text="執行過程日誌" Style="{StaticResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
+                                <ProgressBar x:Name="GlobalProgress" Grid.Column="2" IsIndeterminate="True" Width="100" Visibility="Collapsed" VerticalAlignment="Center" />
+                            </Grid>
+
+                            <MenuFlyoutSeparator Grid.Row="1" Margin="0" />
+
+                            <!-- Console Area -->
+                            <Border Grid.Row="2" Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="20">
+                                <ScrollViewer x:Name="LogScrollViewer">
+                                    <TextBlock x:Name="LogOutput" 
+                                               FontFamily="Cascadia Code, Consolas" 
+                                               FontSize="12" 
+                                               LineHeight="20"
+                                               TextWrapping="Wrap" 
+                                               Text="等待指令執行..." 
+                                               IsTextSelectionEnabled="True" 
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </ScrollViewer>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

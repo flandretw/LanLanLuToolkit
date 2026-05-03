@@ -57,8 +57,8 @@
   <data name="SettingsPage_Title.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="SettingsPage_LanguageHeader.Text" xml:space="preserve">
-    <value>Language &amp; Region</value>
+  <data name="SettingsPage_AppearanceBehaviorHeader.Text" xml:space="preserve">
+    <value>Appearance &amp; Behavior</value>
   </data>
   <data name="SettingsPage_LanguageTitle.Text" xml:space="preserve">
     <value>App Display Language</value>
@@ -188,5 +188,95 @@
   </data>
   <data name="HomePage_PoweredBy.Text" xml:space="preserve">
     <value>Powered by flandretw</value>
+  </data>
+  <data name="Nav_SystemRepairPage.Content" xml:space="preserve">
+    <value>System Integrity Repair</value>
+  </data>
+  <data name="SystemRepairPage_Title.Text" xml:space="preserve">
+    <value>System Integrity Repair</value>
+  </data>
+  <data name="SystemRepairPage_ScanHealth_Title.Text" xml:space="preserve">
+    <value>Scan Image Health (ScanHealth)</value>
+  </data>
+  <data name="SystemRepairPage_ScanHealth_Desc.Text" xml:space="preserve">
+    <value>Checks the image for corruption but does not perform repairs.</value>
+  </data>
+  <data name="SystemRepairPage_CheckHealth_Title.Text" xml:space="preserve">
+    <value>Check Image Health (CheckHealth)</value>
+  </data>
+  <data name="SystemRepairPage_CheckHealth_Desc.Text" xml:space="preserve">
+    <value>Checks whether the image has been flagged as corrupted.</value>
+  </data>
+  <data name="SystemRepairPage_RestoreHealth_Title.Text" xml:space="preserve">
+    <value>Restore System Image (RestoreHealth)</value>
+  </data>
+  <data name="SystemRepairPage_RestoreHealth_Desc.Text" xml:space="preserve">
+    <value>Scans the image and automatically performs repair operations.</value>
+  </data>
+  <data name="SystemRepairPage_SfcScannow_Title.Text" xml:space="preserve">
+    <value>System File Checker (SFC /Scannow)</value>
+  </data>
+  <data name="SystemRepairPage_SfcScannow_Desc.Text" xml:space="preserve">
+    <value>Scans all protected system files and repairs corrupted ones.</value>
+  </data>
+  <data name="SystemRepairPage_RunButton.Content" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="SystemRepairPage_AutoMode_Title.Text" xml:space="preserve">
+    <value>Automatic Repair Mode</value>
+  </data>
+  <data name="SystemRepairPage_AutoMode_Desc.Text" xml:space="preserve">
+    <value>Automatically perform full detection and repair. Recommended for most users.</value>
+  </data>
+  <data name="SystemRepairPage_AutoMode_Default.Content" xml:space="preserve">
+    <value>Full Repair (Default)</value>
+  </data>
+  <data name="SystemRepairPage_AutoMode_SfcOnly.Content" xml:space="preserve">
+    <value>System File Check Only</value>
+  </data>
+  <data name="SystemRepairPage_AdvancedMode_Title.Text" xml:space="preserve">
+    <value>Advanced Mode</value>
+  </data>
+  <data name="SystemRepairPage_AdvancedMode_Desc.Text" xml:space="preserve">
+    <value>Manually execute specific maintenance commands. Recommended for advanced users.</value>
+  </data>
+  <data name="SystemRepairPage_StartButton.Content" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="SystemRepairPage_Running" xml:space="preserve">
+    <value>Running...</value>
+  </data>
+  <data name="SystemRepairPage_Completed" xml:space="preserve">
+    <value>Execution completed</value>
+  </data>
+  <data name="SystemRepairPage_Error" xml:space="preserve">
+    <value>An error occurred during execution</value>
+  </data>
+  <data name="SystemRepairPage_AdminRequired" xml:space="preserve">
+    <value>Administrator privileges are required for this operation.</value>
+  </data>
+  <data name="SystemRepairPage_QuitTitle" xml:space="preserve">
+    <value>Operation in Progress</value>
+  </data>
+  <data name="SystemRepairPage_QuitContent" xml:space="preserve">
+    <value>A system repair operation is currently running. Quitting now will interrupt the process. Are you sure you want to quit?</value>
+  </data>
+  <data name="SystemRepairPage_QuitConfirm" xml:space="preserve">
+    <value>Confirm Quit</value>
+  </data>
+  <data name="SystemRepairPage_QuitCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SystemRepairPage_CompletionInfoBar.Title" xml:space="preserve">
+    <value>Repair Task Completed</value>
+  </data>
+  <data name="SystemRepairPage_CompletionInfoBar.Message" xml:space="preserve">
+    <value>All repair processes have ended successfully. You can check the log for details.</value>
+  </data>
+  <data name="SettingsPage_NotificationSound_Title.Text" xml:space="preserve">
+    <value>Notification Sound</value>
+  </data>
+  <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
+    <value>Play a sound when system repairs or long tasks are completed</value>
   </data>
 </root>

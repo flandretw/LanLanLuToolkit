@@ -12,16 +12,18 @@
         <Grid Padding="36" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="18*" MaxWidth="1600" />
+                <ColumnDefinition Width="40*" MaxWidth="1800" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="1" Spacing="28">
                 <TextBlock x:Uid="SettingsPage_Title" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,12" />
 
-                <!-- Language Section -->
-                <StackPanel Spacing="12">
-                    <TextBlock x:Uid="SettingsPage_LanguageHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                <!-- Appearance & Behavior Section -->
+                <StackPanel Spacing="4">
+                    <TextBlock x:Uid="SettingsPage_AppearanceBehaviorHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,8" />
+                    
+                    <!-- Language Card -->
                     <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                             BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                             BorderThickness="1"
@@ -51,11 +53,39 @@
                             </ComboBox>
                         </Grid>
                     </Border>
-                </StackPanel>
 
-                <!-- Theme Section -->
-                <StackPanel Spacing="12">
-                    <TextBlock x:Uid="SettingsPage_ThemeHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                    <!-- Notification Sound Card -->
+                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{ThemeResource ControlCornerRadius}">
+                        <Grid Padding="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE995;" 
+                                      FontSize="20" 
+                                      Margin="0,0,16,0" 
+                                      VerticalAlignment="Center" 
+                                      Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                <TextBlock x:Uid="SettingsPage_NotificationSound_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                <TextBlock x:Uid="SettingsPage_NotificationSound_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                            <ToggleSwitch x:Name="NotificationSoundToggle" 
+                                          Grid.Column="2" 
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Right"
+                                          Header="{x:Null}"
+                                          MinWidth="0" Margin="0,0,-12,0" Padding="0"
+                                          OnContent="" OffContent=""
+                                          Toggled="NotificationSoundToggle_Toggled" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Theme Card -->
                     <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                             BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                             BorderThickness="1"
@@ -80,9 +110,9 @@
                                       Width="200"
                                       VerticalAlignment="Center"
                                       SelectionChanged="ThemeComboBox_SelectionChanged">
-                                <ComboBoxItem x:Name="ThemeDefaultItem" Tag="Default" x:Uid="Theme_Default" />
-                                <ComboBoxItem x:Name="ThemeLightItem" Tag="Light" x:Uid="Theme_Light" />
-                                <ComboBoxItem x:Name="ThemeDarkItem" Tag="Dark" x:Uid="Theme_Dark" />
+                                <ComboBoxItem Tag="Default" x:Uid="Theme_Default" />
+                                <ComboBoxItem Tag="Light" x:Uid="Theme_Light" />
+                                <ComboBoxItem Tag="Dark" x:Uid="Theme_Dark" />
                             </ComboBox>
                         </Grid>
                     </Border>
