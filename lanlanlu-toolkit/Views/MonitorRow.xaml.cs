@@ -23,7 +23,7 @@ namespace lanlanlu_toolkit.Views
             {
                 if (d is MonitorRow row)
                 {
-                    row.UpdateWidthDirectly();
+                    row.RefreshVisuals();
                     row.UpdateValueText();
                 }
             }));
@@ -41,8 +41,8 @@ namespace lanlanlu_toolkit.Views
         public MonitorRow()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) => UpdateWidthDirectly();
-            this.SizeChanged += (s, e) => UpdateWidthDirectly();
+            this.Loaded += (s, e) => RefreshVisuals();
+            this.SizeChanged += (s, e) => RefreshVisuals();
         }
 
         public void Update(double value, string? customText = null)
@@ -55,19 +55,15 @@ namespace lanlanlu_toolkit.Views
             }
         }
 
-        private void UpdateWidthDirectly()
+        private void RefreshVisuals()
         {
             if (BarContainer == null || BarContainer.ActualWidth <= 0) return;
 
-            // 同步遮罩的基準寬度，確保 ScaleX=1.0 正好等於 100%
+            // 同步遮罩基準寬度
             ClipMask.Rect = new Windows.Foundation.Rect(0, 0, BarContainer.ActualWidth, 14);
 
-            // 計算比例 (0.0 ~ 1.0)
-            double ratio = Value / MaxValue;
-            if (ratio < 0) ratio = 0;
-            if (ratio > 1) ratio = 1;
-
-            // 執行遮罩動畫
+            // 計算比例並執行動畫
+            double ratio = Math.Clamp(Value / MaxValue, 0, 1);
             AnimateMask(ratio);
         }
 

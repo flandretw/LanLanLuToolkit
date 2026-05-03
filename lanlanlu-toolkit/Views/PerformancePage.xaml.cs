@@ -33,95 +33,133 @@ namespace lanlanlu_toolkit.Views
             }
             else
             {
-                SetupTimer();
+                StartMonitoring();
             }
+        }
+
+        private void StartMonitoring()
+        {
+            if (_timer == null)
+            {
+                _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+                _timer.Tick += Timer_Tick;
+            }
+            
+            if (!_timer.IsEnabled) _timer.Start();
+        }
+
+        private void StopMonitoring()
+        {
+            _timer?.Stop();
+        }
+
+        private void DisposeCounters()
+        {
+            try
+            {
+                _cpuCounter?.Dispose();
+                _cpuCounter = null;
+                _ramCounter?.Dispose();
+                _ramCounter = null;
+            }
+            catch { }
         }
 
         private async void InitializeAllAsync()
         {
-            await Task.Run(() =>
+            // 使用並行任務加速初始化
+            var cpuTask = Task.Run(() => GetCpuInfo());
+            var gpuTask = Task.Run(() => GetGpuInfo());
+            var ramTask = Task.Run(() => GetRamInfo());
+            var perfInitTask = Task.Run(() => InitPerfCounters());
+
+            await Task.WhenAll(cpuTask, gpuTask, ramTask, perfInitTask);
+
+            var (cpuName, gpuNames, ramDisplay) = (cpuTask.Result, gpuTask.Result, ramTask.Result);
+
+            DispatcherQueue.TryEnqueue(() =>
             {
-                try
+                CpuNameText.Text = cpuName;
+                RamNameText.Text = ramDisplay;
+
+                GpuContainer.Children.Clear();
+                _gpuCards.Clear();
+                
+                foreach (var name in gpuNames)
                 {
-                    _cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-                    _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
-                    _cpuCounter.NextValue();
-
-                    string cpuName = "Unknown CPU";
-                    using (var cpuSearcher = new ManagementObjectSearcher("SELECT Name FROM Win32_Processor"))
-                    using (var collection = cpuSearcher.Get())
-                    {
-                        foreach (var obj in collection) cpuName = obj["Name"]?.ToString()?.Trim() ?? cpuName;
-                    }
-
-                    List<string> gpuNames = new List<string>();
-                    using (var gpuSearcher = new ManagementObjectSearcher("SELECT Name FROM Win32_VideoController"))
-                    using (var collection = gpuSearcher.Get())
-                    {
-                        foreach (var obj in collection)
-                        {
-                            string? name = obj["Name"]?.ToString();
-                            if (!string.IsNullOrEmpty(name)) gpuNames.Add(name);
-                        }
-                    }
-                    gpuNames.Reverse(); // 反轉順序以匹配工作管理員的 GPU 0/1 順序
-
-                    int ramSpeed = 0;
-                    using (var ramSearcher = new ManagementObjectSearcher("SELECT TotalPhysicalMemory FROM Win32_ComputerSystem"))
-                    using (var collection = ramSearcher.Get())
-                    {
-                        foreach (var obj in collection)
-                            _totalRamGb = Convert.ToDouble(obj["TotalPhysicalMemory"]) / (1024 * 1024 * 1024);
-                    }
-
-                    using (var speedSearcher = new ManagementObjectSearcher("SELECT Speed FROM Win32_PhysicalMemory"))
-                    using (var collection = speedSearcher.Get())
-                    {
-                        foreach (var obj in collection) ramSpeed = Convert.ToInt32(obj["Speed"]);
-                    }
-                    string ramDisplay = $"{_totalRamGb:F0} GB" + (ramSpeed > 0 ? $" @ {ramSpeed} MHz" : "");
-
-                    DispatcherQueue.TryEnqueue(() =>
-                    {
-                        CpuNameText.Text = cpuName;
-                        RamNameText.Text = ramDisplay;
-
-                        // Create GPU Cards
-                        GpuContainer.Children.Clear();
-                        _gpuCards.Clear();
-                        for (int i = 0; i < gpuNames.Count; i++)
-                        {
-                            var card = new GpuMonitorCard();
-                            card.Initialize(gpuNames[i], i);
-                            GpuContainer.Children.Add(card);
-                            _gpuCards.Add(card);
-                        }
-                        
-                        if (gpuNames.Count == 0)
-                        {
-                            var emptyCard = new GpuMonitorCard();
-                            emptyCard.Initialize("Unknown GPU", 0);
-                            GpuContainer.Children.Add(emptyCard);
-                            _gpuCards.Add(emptyCard);
-                        }
-                        
-                        _isInitialized = true;
-                        SetupTimer();
-                    });
+                    var card = new GpuMonitorCard();
+                    card.Initialize(name, _gpuCards.Count);
+                    GpuContainer.Children.Add(card);
+                    _gpuCards.Add(card);
                 }
-                catch (Exception ex)
+                
+                if (gpuNames.Count == 0)
                 {
-                    Debug.WriteLine($"Hardware Init Error: {ex.Message}");
+                    var emptyCard = new GpuMonitorCard();
+                    emptyCard.Initialize("Unknown GPU", 0);
+                    GpuContainer.Children.Add(emptyCard);
+                    _gpuCards.Add(emptyCard);
                 }
+                
+                _isInitialized = true;
+                StartMonitoring();
             });
         }
 
-        private void SetupTimer()
+        private string GetCpuInfo()
         {
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(1);
-            _timer.Tick += Timer_Tick;
-            _timer.Start();
+            try {
+                using var searcher = new ManagementObjectSearcher("SELECT Name FROM Win32_Processor");
+                using var collection = searcher.Get();
+                foreach (var obj in collection) return obj["Name"]?.ToString()?.Trim() ?? "Unknown CPU";
+            } catch { }
+            return "Unknown CPU";
+        }
+
+        private List<string> GetGpuInfo()
+        {
+            var names = new List<string>();
+            try {
+                using var searcher = new ManagementObjectSearcher("SELECT Name FROM Win32_VideoController");
+                using var collection = searcher.Get();
+                foreach (var obj in collection) {
+                    string? name = obj["Name"]?.ToString();
+                    if (!string.IsNullOrEmpty(name)) names.Add(name);
+                }
+                names.Reverse();
+            } catch { }
+            return names;
+        }
+
+        private string GetRamInfo()
+        {
+            try {
+                double totalGb = 0;
+                int speed = 0;
+                using (var searcher = new ManagementObjectSearcher("SELECT TotalPhysicalMemory FROM Win32_ComputerSystem"))
+                using (var collection = searcher.Get())
+                foreach (var obj in collection) totalGb = Convert.ToDouble(obj["TotalPhysicalMemory"]) / (1024 * 1024 * 1024);
+
+                using (var searcher = new ManagementObjectSearcher("SELECT Speed FROM Win32_PhysicalMemory"))
+                using (var collection = searcher.Get())
+                foreach (var obj in collection) speed = Convert.ToInt32(obj["Speed"]);
+
+                _totalRamGb = totalGb;
+                return $"{totalGb:F0} GB" + (speed > 0 ? $" @ {speed} MHz" : "");
+            } catch { }
+            return "Unknown RAM";
+        }
+
+        private void InitPerfCounters()
+        {
+            try {
+                _cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+                _cpuCounter.NextValue();
+            } catch { _cpuCounter = null; }
+
+            try {
+                _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
+            } catch { _ramCounter = null; }
         }
 
         private async void Timer_Tick(object? sender, object e)
@@ -149,7 +187,7 @@ namespace lanlanlu_toolkit.Views
                 if (_ramCounter != null && _totalRamGb > 0)
                 {
                     double availableGb = _ramCounter.NextValue() / 1024.0;
-                    double usedGb = _totalRamGb - availableGb;
+                    double usedGb = Math.Max(0, _totalRamGb - availableGb);
                     double usagePercent = (usedGb / _totalRamGb) * 100.0;
 
                     RamUsageRow.Update(usagePercent);
@@ -178,7 +216,6 @@ namespace lanlanlu_toolkit.Views
                         if (speedGhz > 0) CpuClockRow.Update(speedGhz);
                         CpuTempRow.Update(45 + (new Random().NextDouble() * 15));
                         
-                        // Update all GPU cards
                         foreach (var card in _gpuCards)
                         {
                             card.UpdateStats(
@@ -196,7 +233,9 @@ namespace lanlanlu_toolkit.Views
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            _timer?.Stop();
+            StopMonitoring();
+            // 如果您沒有啟用頁面快取，建議在此 Dispose 釋放資源
+            // DisposeCounters(); 
             base.OnNavigatedFrom(e);
         }
     }
