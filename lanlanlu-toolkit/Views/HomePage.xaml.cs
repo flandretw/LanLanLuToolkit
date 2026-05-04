@@ -1,3 +1,4 @@
+using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -5,6 +6,8 @@ namespace lanlanlu_toolkit.Views
 {
     public sealed partial class HomePage : Page
     {
+        private readonly Microsoft.Windows.ApplicationModel.Resources.ResourceLoader _resources = new();
+
         public HomePage()
         {
             this.InitializeComponent();
@@ -14,35 +17,29 @@ namespace lanlanlu_toolkit.Views
 
         private void UpdateVersion()
         {
-            var loader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             var version = assembly.GetName().Version;
             
             if (version != null)
             {
-                // 格式化為 Major.Minor.Build
-                string versionStr = $"{version.Major}.{version.Minor}.{version.Build}";
-                string format = loader.GetString("HomePage_Version_Format");
+                var versionStr = $"{version.Major}.{version.Minor}.{version.Build}";
+                var format = _resources.GetString("HomePage_Version_Format");
                 VersionText.Text = string.Format(format, versionStr);
             }
         }
 
         private void UpdateGreeting()
         {
-            var loader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
-            var hour = System.DateTime.Now.Hour;
-            string resourceKey;
+            var hour = DateTime.Now.Hour;
+            string resourceKey = hour switch
+            {
+                >= 23 or < 5 => "Greeting_LateNight",
+                >= 5 and < 11 => "Greeting_Morning",
+                >= 11 and < 17 => "Greeting_Afternoon",
+                _ => "Greeting_Evening"
+            };
 
-            if (hour >= 23 || hour < 5)
-                resourceKey = "Greeting_LateNight";
-            else if (hour >= 5 && hour < 11)
-                resourceKey = "Greeting_Morning";
-            else if (hour >= 11 && hour < 17)
-                resourceKey = "Greeting_Afternoon";
-            else // 17 - 23
-                resourceKey = "Greeting_Evening";
-
-            GreetingText.Text = loader.GetString(resourceKey);
+            GreetingText.Text = _resources.GetString(resourceKey);
         }
 
         private void GoToPerformance_Click(object sender, RoutedEventArgs e)

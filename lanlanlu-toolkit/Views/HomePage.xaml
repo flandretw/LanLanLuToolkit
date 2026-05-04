@@ -10,7 +10,13 @@
 
     <ScrollViewer>
         <Grid Padding="36">
-            <StackPanel Spacing="24" MaxWidth="1000" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,24,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40*" MaxWidth="1800" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="1" Spacing="24" VerticalAlignment="Top" Margin="0,24,0,0">
                 <!-- Hero Section -->
                 <StackPanel Spacing="0" HorizontalAlignment="Center">
                     <Image Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png" 
