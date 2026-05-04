@@ -31,6 +31,18 @@ namespace lanlanlu_toolkit.Views
         public PerformancePage()
         {
             this.InitializeComponent();
+            InitializeHistory();
+        }
+
+        private void InitializeHistory()
+        {
+            _cpuHistory.Clear();
+            _ramHistory.Clear();
+            for (int i = 0; i < MaxHistory; i++)
+            {
+                _cpuHistory.Enqueue(0);
+                _ramHistory.Enqueue(0);
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -344,8 +356,13 @@ namespace lanlanlu_toolkit.Views
 
             var points = new Microsoft.UI.Xaml.Media.PointCollection();
             var i = 0;
+            // 寬度固定為 300，MaxHistory 為 60，所以每點間距約 5px
+            double step = 300.0 / (MaxHistory - 1);
+            
             foreach (var h in history) {
-                points.Add(new Windows.Foundation.Point(i, 100 - h));
+                // Y 軸高度為 160，百分比換算 (100-h)/100 * 160
+                double y = (100 - h) / 100.0 * 160.0;
+                points.Add(new Windows.Foundation.Point(i * step, y));
                 i++;
             }
             polyline.Points = points;

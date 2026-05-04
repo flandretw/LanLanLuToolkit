@@ -12,6 +12,11 @@
         <ScrollViewer x:Name="ContentScrollViewer" Visibility="Collapsed">
             <Grid x:Name="RootGrid" Padding="36" HorizontalAlignment="Stretch">
                 <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
+                    <StackPanel.ChildrenTransitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition FromVerticalOffset="24" />
+                        </TransitionCollection>
+                    </StackPanel.ChildrenTransitions>
                     <TextBlock x:Uid="PerformancePage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
 
                     <StackPanel Spacing="16">
@@ -35,7 +40,7 @@
                                     </StackPanel>
                                     <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                                         <Grid x:Name="CpuChartContainer">
-                                            <Polyline x:Name="CpuPolyline" Stroke="{ThemeResource AccentFillColorDefaultBrush}" StrokeThickness="2" VerticalAlignment="Bottom" Stretch="Fill" Points="0,1 1,0" />
+                                            <Polyline x:Name="CpuPolyline" Stroke="{ThemeResource AccentFillColorDefaultBrush}" StrokeThickness="2" VerticalAlignment="Bottom" Points="0,160 300,160" />
                                         </Grid>
                                     </Border>
                                     <local:MonitorRow x:Name="CpuUsageRow" x:Uid="HomePage_Usage" ValueSuffix="%" />
@@ -131,7 +136,7 @@
                                     </StackPanel>
                                     <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                                         <Grid x:Name="RamChartContainer">
-                                            <Polyline x:Name="RamPolyline" Stroke="{ThemeResource AccentFillColorDefaultBrush}" StrokeThickness="2" VerticalAlignment="Bottom" Stretch="Fill" Points="0,1 1,0" />
+                                            <Polyline x:Name="RamPolyline" Stroke="{ThemeResource AccentFillColorDefaultBrush}" StrokeThickness="2" VerticalAlignment="Bottom" Points="0,160 300,160" />
                                         </Grid>
                                     </Border>
                                     <local:MonitorRow x:Name="RamUsageRow" x:Uid="HomePage_Usage" ValueSuffix="%" />

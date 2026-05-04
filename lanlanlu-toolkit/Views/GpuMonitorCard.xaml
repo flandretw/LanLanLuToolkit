@@ -26,7 +26,7 @@
                 
                 <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                     <Grid x:Name="GpuChartContainer">
-                        <Polyline x:Name="GpuPolyline" Stroke="{ThemeResource AccentFillColorDefaultBrush}" StrokeThickness="2" VerticalAlignment="Bottom" Stretch="Fill" Points="0,1 1,0" />
+                        <Polyline x:Name="GpuPolyline" Stroke="{ThemeResource AccentFillColorDefaultBrush}" StrokeThickness="2" VerticalAlignment="Bottom" Points="0,160 300,160" />
                     </Grid>
                 </Border>
                 <local:MonitorRow x:Name="GpuUsageRow" x:Uid="GpuMonitorCard_Usage" ValueSuffix="%" />

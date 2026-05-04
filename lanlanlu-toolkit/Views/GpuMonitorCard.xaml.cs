@@ -10,6 +10,16 @@ namespace lanlanlu_toolkit.Views
         public GpuMonitorCard()
         {
             this.InitializeComponent();
+            InitializeHistory();
+        }
+
+        private void InitializeHistory()
+        {
+            _history.Clear();
+            for (int i = 0; i < MaxHistory; i++)
+            {
+                _history.Enqueue(0);
+            }
         }
 
         public void Initialize(string name, int index)
@@ -46,11 +56,14 @@ namespace lanlanlu_toolkit.Views
 
             var points = new Microsoft.UI.Xaml.Media.PointCollection();
             int i = 0;
+            // 寬度固定為 300，MaxHistory 為 60，所以每點間距 5px
+            double step = 300.0 / (MaxHistory - 1);
+
             foreach (var val in _history)
             {
-                // Normalize points: X from 0 to MaxHistory, Y from 0 to 100
-                // Note: In Polyline with Stretch="Fill", relative coordinates work best
-                points.Add(new Windows.Foundation.Point(i, 100 - val));
+                // Y 軸高度為 160，百分比換算 (100-val)/100 * 160
+                double y = (100 - val) / 100.0 * 160.0;
+                points.Add(new Windows.Foundation.Point(i * step, y));
                 i++;
             }
             GpuPolyline.Points = points;
