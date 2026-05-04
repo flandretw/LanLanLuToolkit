@@ -13,13 +13,7 @@
         <!-- Tool Cards Container (Everything inside ScrollViewer) -->
         <ScrollViewer>
             <Grid Padding="36" HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="40*" MaxWidth="1800" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Column="1" Spacing="4">
+                <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
                     <TextBlock x:Uid="SystemRepairPage_Title" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,24" />
                     
                     <!-- Automatic Mode Card -->

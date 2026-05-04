@@ -8,7 +8,11 @@
     mc:Ignorable="d"
     Background="Transparent">
 
-    <Grid>
-        <TextBlock x:Name="PageTitle" x:Uid="TestToolPage_Title" Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
+    <ScrollViewer>
+        <Grid Padding="36" HorizontalAlignment="Stretch">
+            <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
+                <TextBlock x:Name="PageTitle" x:Uid="TestToolPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>

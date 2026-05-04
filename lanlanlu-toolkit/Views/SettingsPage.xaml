@@ -8,16 +8,46 @@
     mc:Ignorable="d"
     Background="Transparent">
 
-    <ScrollViewer>
-        <Grid Padding="36" HorizontalAlignment="Stretch">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="40*" MaxWidth="1800" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <!-- Small Window State -->
+                <VisualState x:Name="SmallState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RootGrid.Padding" Value="12,42,12,24" />
+                        <Setter Target="LeftCol.Width" Value="0" />
+                        <Setter Target="RightCol.Width" Value="0" />
+                        <Setter Target="ContentCol.Width" Value="*" />
+                    </VisualState.Setters>
+                </VisualState>
+                <!-- Wide Window State -->
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RootGrid.Padding" Value="48,36,48,36" />
+                        <Setter Target="LeftCol.Width" Value="*" />
+                        <Setter Target="RightCol.Width" Value="*" />
+                        <Setter Target="ContentCol.Width" Value="6*" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
-            <StackPanel Grid.Column="1" Spacing="28">
-                <TextBlock x:Uid="SettingsPage_Title" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,12" />
+        <ScrollViewer>
+            <Grid x:Name="RootGrid" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="LeftCol" Width="*" />
+                    <ColumnDefinition x:Name="ContentCol" Width="6*" />
+                    <ColumnDefinition x:Name="RightCol" Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="1" Spacing="28">
+                    <TextBlock x:Uid="SettingsPage_Title" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,12" />
 
                 <!-- Appearance & Behavior Section -->
                 <StackPanel Spacing="4">
@@ -129,4 +159,5 @@
             </StackPanel>
         </Grid>
     </ScrollViewer>
+    </Grid>
 </Page>
