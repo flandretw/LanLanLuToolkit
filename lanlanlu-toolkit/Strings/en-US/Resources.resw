@@ -160,7 +160,7 @@
     <value>Performance</value>
   </data>
   <data name="PerformancePage_Title.Text" xml:space="preserve">
-    <value>Performance Monitor</value>
+    <value>Performance</value>
   </data>
   <data name="HomePage_Welcome.Text" xml:space="preserve">
     <value>Welcome to LanLanLu Toolkit</value>
@@ -277,7 +277,7 @@
     <value>Notification Sound</value>
   </data>
   <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
-    <value>Play a sound when system repairs or long tasks are completed</value>
+    <value>Play a sound when system repairs or long tasks are completed.</value>
   </data>
   <data name="GpuMonitorCard_GpuTitle" xml:space="preserve">
     <value>Graphics Card (GPU {0})</value>
@@ -347,5 +347,110 @@
   </data>
   <data name="SystemRepairPage_Copied" xml:space="preserve">
     <value>Copied</value>
+  </data>
+  
+  <!-- Performance Page Detailed Labels -->
+  <data name="PerfPage_Cpu_BaseSpeed.Text" xml:space="preserve">
+    <value>Base speed</value>
+  </data>
+  <data name="PerfPage_Cpu_Sockets.Text" xml:space="preserve">
+    <value>Sockets</value>
+  </data>
+  <data name="PerfPage_Cpu_Cores.Text" xml:space="preserve">
+    <value>Cores</value>
+  </data>
+  <data name="PerfPage_Cpu_Threads.Text" xml:space="preserve">
+    <value>Logical processors</value>
+  </data>
+  <data name="PerfPage_Cpu_Virtualization.Text" xml:space="preserve">
+    <value>Virtualization</value>
+  </data>
+  <data name="PerfPage_Cpu_L1Cache.Text" xml:space="preserve">
+    <value>L1 cache</value>
+  </data>
+  <data name="PerfPage_Cpu_L2Cache.Text" xml:space="preserve">
+    <value>L2 cache</value>
+  </data>
+  <data name="PerfPage_Cpu_L3Cache.Text" xml:space="preserve">
+    <value>L3 cache</value>
+  </data>
+  
+  <data name="PerfPage_Gpu_DedicatedMemory.Text" xml:space="preserve">
+    <value>Dedicated GPU memory</value>
+  </data>
+  <data name="PerfPage_Gpu_SharedMemory.Text" xml:space="preserve">
+    <value>Shared GPU memory</value>
+  </data>
+  <data name="PerfPage_Gpu_TotalMemory.Text" xml:space="preserve">
+    <value>GPU memory</value>
+  </data>
+  <data name="PerfPage_Gpu_DriverVersion.Text" xml:space="preserve">
+    <value>Driver version</value>
+  </data>
+  <data name="PerfPage_Gpu_DriverDate.Text" xml:space="preserve">
+    <value>Driver date</value>
+  </data>
+  <data name="PerfPage_Gpu_DirectXVersion.Text" xml:space="preserve">
+    <value>DirectX version</value>
+  </data>
+  <data name="PerfPage_Gpu_PhysicalLocation.Text" xml:space="preserve">
+    <value>Physical location</value>
+  </data>
+  <data name="PerfPage_Gpu_HardwareReserved.Text" xml:space="preserve">
+    <value>Hardware reserved memory</value>
+  </data>
+  <data name="PerfPage_Cpu_CurrentClock.Text" xml:space="preserve">
+    <value>Current speed</value>
+  </data>
+  <data name="PerfPage_Cpu_CurrentTemp.Text" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="PerfPage_Gpu_CurrentCoreClock.Text" xml:space="preserve">
+    <value>Core clock</value>
+  </data>
+  <data name="PerfPage_Gpu_CurrentMemClock.Text" xml:space="preserve">
+    <value>Memory clock</value>
+  </data>
+  <data name="PerfPage_Gpu_CurrentTemp.Text" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="PerfPage_Cpu_Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="PerfPage_Cpu_Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="PerfPage_Ram_InUse.Text" xml:space="preserve">
+    <value>In use (Compressed)</value>
+  </data>
+  <data name="PerfPage_Ram_Available.Text" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="PerfPage_Ram_Committed.Text" xml:space="preserve">
+    <value>Committed</value>
+  </data>
+  <data name="PerfPage_Ram_Cached.Text" xml:space="preserve">
+    <value>Cached</value>
+  </data>
+  <data name="PerfPage_Ram_PagedPool.Text" xml:space="preserve">
+    <value>Paged pool</value>
+  </data>
+  <data name="PerfPage_Ram_NonPagedPool.Text" xml:space="preserve">
+    <value>Non-paged pool</value>
+  </data>
+  <data name="PerfPage_Ram_Compressed.Text" xml:space="preserve">
+    <value>Compressed</value>
+  </data>
+  <data name="PerfPage_Ram_Speed.Text" xml:space="preserve">
+    <value>Speed:</value>
+  </data>
+  <data name="PerfPage_Ram_Slots.Text" xml:space="preserve">
+    <value>Slots used:</value>
+  </data>
+  <data name="PerfPage_Ram_FormFactor.Text" xml:space="preserve">
+    <value>Form factor:</value>
+  </data>
+  <data name="PerfPage_Ram_HardwareReserved.Text" xml:space="preserve">
+    <value>Hardware reserved:</value>
   </data>
 </root>

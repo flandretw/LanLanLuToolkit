@@ -47,11 +47,25 @@ namespace lanlanlu_toolkit.Views
 
         public void Update(double value, string? customText = null)
         {
-            Value = value;
-            
-            if (customText != null)
+            try
             {
-                ValueText.Text = customText;
+                // Ensure we don't update if the control is being destroyed
+                if (this.DispatcherQueue == null) return;
+                
+                Value = value;
+                
+                if (customText != null)
+                {
+                    ValueText.Text = customText;
+                }
+            }
+            catch (System.Runtime.InteropServices.COMException)
+            {
+                // Silently ignore COM exceptions during shutdown
+            }
+            catch (ObjectDisposedException)
+            {
+                // Silently ignore if object is already disposed
             }
         }
 

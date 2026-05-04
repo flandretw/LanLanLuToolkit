@@ -11,15 +11,95 @@
             BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
             BorderThickness="1" CornerRadius="8" Padding="24"
             HorizontalAlignment="Stretch">
-        <StackPanel Spacing="16">
-            <StackPanel>
-                <TextBlock x:Name="GpuTitleText" x:Uid="GpuMonitorCard_DefaultTitle" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
-                <TextBlock x:Name="GpuNameText" x:Uid="GpuMonitorCard_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        <Grid ColumnSpacing="24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Chart Area (Left) -->
+            <StackPanel Grid.Column="0" Spacing="8">
+                <StackPanel>
+                    <TextBlock x:Name="GpuTitleText" x:Uid="GpuMonitorCard_DefaultTitle" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
+                    <TextBlock x:Name="GpuNameText" x:Uid="GpuMonitorCard_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                </StackPanel>
+                
+                <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                    <Grid x:Name="GpuChartContainer">
+                        <Polyline x:Name="GpuPolyline" Stroke="{ThemeResource AccentFillColorDefaultBrush}" StrokeThickness="2" VerticalAlignment="Bottom" Stretch="Fill" Points="0,1 1,0" />
+                    </Grid>
+                </Border>
+                <local:MonitorRow x:Name="GpuUsageRow" x:Uid="GpuMonitorCard_Usage" ValueSuffix="%" />
             </StackPanel>
-            <local:MonitorRow x:Name="GpuUsageRow" x:Uid="GpuMonitorCard_Usage" ValueSuffix="%" />
-            <local:MonitorRow x:Name="GpuClockRow" x:Uid="GpuMonitorCard_CoreClock" ValueSuffix=" MHz" MaxValue="3000" />
-            <local:MonitorRow x:Name="GpuMemClockRow" x:Uid="GpuMonitorCard_MemoryClock" ValueSuffix=" MHz" MaxValue="12000" />
-            <local:MonitorRow x:Name="GpuTempRow" x:Uid="GpuMonitorCard_Temperature" ValueSuffix=" °C" MaxValue="100" />
-        </StackPanel>
+
+            <!-- Details Area (Right) -->
+            <StackPanel Grid.Column="1" Spacing="16">
+                <Grid ColumnSpacing="12" RowSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Row 0: Real-time values -->
+                    <StackPanel Grid.Row="0" Grid.Column="0">
+                        <TextBlock x:Uid="PerfPage_Gpu_CurrentCoreClock" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="GpuClockText" Text="-- MHz" FontSize="16" FontWeight="SemiBold" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="1">
+                        <TextBlock x:Uid="PerfPage_Gpu_CurrentMemClock" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="GpuMemClockText" Text="-- MHz" FontSize="16" FontWeight="SemiBold" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="2">
+                        <TextBlock x:Uid="PerfPage_Gpu_CurrentTemp" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="GpuTempText" Text="-- °C" FontSize="16" FontWeight="SemiBold" />
+                    </StackPanel>
+
+                    <!-- Row 1: Memory Stats -->
+                    <StackPanel Grid.Row="1" Grid.Column="0">
+                        <TextBlock x:Uid="PerfPage_Gpu_DedicatedMemory" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="GpuDedicatedMemText" Text="--" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="1">
+                        <TextBlock x:Uid="PerfPage_Gpu_SharedMemory" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="GpuSharedMemText" Text="--" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="2">
+                        <TextBlock x:Uid="PerfPage_Gpu_TotalMemory" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="GpuTotalMemText" Text="--" />
+                    </StackPanel>
+
+                    <!-- Row 2: Driver Info -->
+                    <StackPanel Grid.Row="2" Grid.Column="0">
+                        <TextBlock x:Uid="PerfPage_Gpu_DriverVersion" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="GpuDriverVersionText" Text="--" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="1">
+                        <TextBlock x:Uid="PerfPage_Gpu_DriverDate" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="GpuDriverDateText" Text="--" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="2">
+                        <TextBlock x:Uid="PerfPage_Gpu_DirectXVersion" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="GpuDirectXVersionText" Text="--" />
+                    </StackPanel>
+
+                    <!-- Row 3: Misc -->
+                    <StackPanel Grid.Row="3" Grid.Column="0">
+                        <TextBlock x:Uid="PerfPage_Gpu_PhysicalLocation" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="GpuPhysicalLocationText" Text="--" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Grid.Column="1">
+                        <TextBlock x:Uid="PerfPage_Gpu_HardwareReserved" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="GpuHardwareReservedText" Text="--" />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
     </Border>
 </UserControl>

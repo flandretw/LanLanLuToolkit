@@ -11,110 +11,200 @@
     <Grid>
         <ScrollViewer x:Name="ContentScrollViewer" Visibility="Collapsed">
             <Grid x:Name="RootGrid" Padding="36" HorizontalAlignment="Stretch">
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="LayoutStates">
-                        <VisualState x:Name="WideState">
-                            <VisualState.StateTriggers>
-                                <AdaptiveTrigger MinWindowWidth="1200" />
-                            </VisualState.StateTriggers>
-                            <VisualState.Setters>
-                                <Setter Target="MonitorGrid.ColumnDefinitions[0].Width" Value="*" />
-                                <Setter Target="MonitorGrid.ColumnDefinitions[1].Width" Value="*" />
-                                <Setter Target="MonitorGrid.ColumnDefinitions[2].Width" Value="*" />
-                                <Setter Target="GpuContainer.(Grid.Row)" Value="0" />
-                                <Setter Target="GpuContainer.(Grid.Column)" Value="1" />
-                                <Setter Target="RAMCard.(Grid.Row)" Value="0" />
-                                <Setter Target="RAMCard.(Grid.Column)" Value="2" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="NarrowState">
-                            <VisualState.StateTriggers>
-                                <AdaptiveTrigger MinWindowWidth="0" />
-                            </VisualState.StateTriggers>
-                            <VisualState.Setters>
-                                <Setter Target="MonitorGrid.ColumnDefinitions[0].Width" Value="*" />
-                                <Setter Target="MonitorGrid.ColumnDefinitions[1].Width" Value="0" />
-                                <Setter Target="MonitorGrid.ColumnDefinitions[2].Width" Value="0" />
-                                <Setter Target="GpuContainer.(Grid.Row)" Value="1" />
-                                <Setter Target="GpuContainer.(Grid.Column)" Value="0" />
-                                <Setter Target="RAMCard.(Grid.Row)" Value="2" />
-                                <Setter Target="RAMCard.(Grid.Column)" Value="0" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-
                 <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
                     <TextBlock x:Uid="PerformancePage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
 
-                    <Grid x:Name="MonitorGrid" ColumnSpacing="16" RowSpacing="16">
-                        <Grid.ChildrenTransitions>
-                            <TransitionCollection>
-                                <RepositionThemeTransition />
-                            </TransitionCollection>
-                        </Grid.ChildrenTransitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
+                    <StackPanel Spacing="16">
                         <!-- CPU Card -->
-                        <Border x:Name="CPUCard" Grid.Row="0" Grid.Column="0"
+                        <Border x:Name="CPUCard"
                                 Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1" CornerRadius="8" Padding="24"
                                 HorizontalAlignment="Stretch">
-                            <StackPanel Spacing="16">
-                                <StackPanel>
-                                    <TextBlock x:Uid="HomePage_CPU" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
-                                    <TextBlock x:Name="CpuNameText" x:Uid="HomePage_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            <Grid ColumnSpacing="24">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <!-- Chart Area (Left) -->
+                                <StackPanel Grid.Column="0" Spacing="8">
+                                    <StackPanel>
+                                        <TextBlock x:Uid="HomePage_CPU" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
+                                        <TextBlock x:Name="CpuNameText" x:Uid="HomePage_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    </StackPanel>
+                                    <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                                        <Grid x:Name="CpuChartContainer">
+                                            <Polyline x:Name="CpuPolyline" Stroke="{ThemeResource AccentFillColorDefaultBrush}" StrokeThickness="2" VerticalAlignment="Bottom" Stretch="Fill" Points="0,1 1,0" />
+                                        </Grid>
+                                    </Border>
+                                    <local:MonitorRow x:Name="CpuUsageRow" x:Uid="HomePage_Usage" ValueSuffix="%" />
                                 </StackPanel>
-                                <local:MonitorRow x:Name="CpuUsageRow" x:Uid="HomePage_Usage" ValueSuffix="%" />
-                                <local:MonitorRow x:Name="CpuClockRow" x:Uid="HomePage_Clock" ValueSuffix=" GHz" MaxValue="6.0" />
-                                <local:MonitorRow x:Name="CpuTempRow" x:Uid="HomePage_Temp" ValueSuffix=" °C" MaxValue="100" />
-                            </StackPanel>
+
+                                <!-- Details Area (Right) -->
+                                <StackPanel Grid.Column="1" Spacing="16">
+                                    <Grid ColumnSpacing="12" RowSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        
+                                        <!-- Row 0: Real-time values -->
+                                        <StackPanel Grid.Row="0" Grid.Column="0">
+                                            <TextBlock x:Uid="PerfPage_Cpu_CurrentClock" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="CpuClockText" Text="-- GHz" FontSize="16" FontWeight="SemiBold" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="0" Grid.Column="1">
+                                            <TextBlock x:Uid="PerfPage_Cpu_CurrentTemp" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="CpuTempText" Text="-- °C" FontSize="16" FontWeight="SemiBold" />
+                                        </StackPanel>
+
+                                        <!-- Row 1: Static Specs -->
+                                        <StackPanel Grid.Row="1" Grid.Column="0">
+                                            <TextBlock x:Uid="PerfPage_Cpu_BaseSpeed" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="CpuBaseSpeedText" Text="--" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="1" Grid.Column="1">
+                                            <TextBlock x:Uid="PerfPage_Cpu_Sockets" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="CpuSocketsText" Text="--" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="1" Grid.Column="2">
+                                            <TextBlock x:Uid="PerfPage_Cpu_Cores" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="CpuCoresText" Text="--" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="1" Grid.Column="3">
+                                            <TextBlock x:Uid="PerfPage_Cpu_Threads" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="CpuThreadsText" Text="--" />
+                                        </StackPanel>
+
+                                        <!-- Row 2: Caches and Misc -->
+                                        <StackPanel Grid.Row="2" Grid.Column="0">
+                                            <TextBlock x:Uid="PerfPage_Cpu_Virtualization" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="CpuVirtualizationText" Text="--" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="2" Grid.Column="1">
+                                            <TextBlock x:Uid="PerfPage_Cpu_L1Cache" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="CpuL1Text" Text="--" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="2" Grid.Column="2">
+                                            <TextBlock x:Uid="PerfPage_Cpu_L2Cache" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="CpuL2Text" Text="--" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="2" Grid.Column="3">
+                                            <TextBlock x:Uid="PerfPage_Cpu_L3Cache" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="CpuL3Text" Text="--" />
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
                         </Border>
 
                         <!-- GPUs Container -->
-                        <StackPanel x:Name="GpuContainer" Grid.Row="0" Grid.Column="1" Spacing="16" HorizontalAlignment="Stretch">
+                        <StackPanel x:Name="GpuContainer" Spacing="16" HorizontalAlignment="Stretch">
                             <!-- GpuMonitorCard instances will be added here dynamically -->
                         </StackPanel>
 
                         <!-- RAM Card -->
-                        <Border x:Name="RAMCard" Grid.Row="0" Grid.Column="2"
+                        <Border x:Name="RAMCard"
                                 Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1" CornerRadius="8" Padding="24"
                                 HorizontalAlignment="Stretch">
-                            <StackPanel Spacing="16">
-                                <StackPanel>
-                                    <TextBlock x:Uid="HomePage_RAM" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
-                                    <TextBlock x:Name="RamNameText" x:Uid="HomePage_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            <Grid ColumnSpacing="24">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Chart Area (Left) -->
+                                <StackPanel Grid.Column="0" Spacing="8">
+                                    <StackPanel>
+                                        <TextBlock x:Uid="HomePage_RAM" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
+                                        <TextBlock x:Name="RamNameText" x:Uid="HomePage_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    </StackPanel>
+                                    <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                                        <Grid x:Name="RamChartContainer">
+                                            <Polyline x:Name="RamPolyline" Stroke="{ThemeResource AccentFillColorDefaultBrush}" StrokeThickness="2" VerticalAlignment="Bottom" Stretch="Fill" Points="0,1 1,0" />
+                                        </Grid>
+                                    </Border>
+                                    <local:MonitorRow x:Name="RamUsageRow" x:Uid="HomePage_Usage" ValueSuffix="%" />
                                 </StackPanel>
-                                <local:MonitorRow x:Name="RamUsageRow" x:Uid="HomePage_Usage" ValueSuffix="%" />
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8">
-                                        <TextBlock x:Uid="HomePage_Used" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                        <TextBlock x:Name="RamUsedText" Text="0.0 GB" />
-                                    </StackPanel>
-                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
-                                        <TextBlock x:Uid="HomePage_Available" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                        <TextBlock x:Name="RamAvailableText" Text="0.0 GB" />
-                                    </StackPanel>
-                                </Grid>
-                            </StackPanel>
+                                <!-- Details Area (Right) -->
+                                <StackPanel Grid.Column="1" Spacing="16">
+                                    <Grid ColumnSpacing="12" RowSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        
+                                        <!-- Row 0: Capacity & Usage -->
+                                        <StackPanel Grid.Row="0" Grid.Column="0">
+                                            <TextBlock x:Uid="PerfPage_Ram_InUse" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="RamInUseText" Text="-- GB" FontSize="16" FontWeight="SemiBold" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="0" Grid.Column="1">
+                                            <TextBlock x:Uid="PerfPage_Ram_Available" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="RamAvailableText" Text="-- GB" FontSize="16" FontWeight="SemiBold" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="0" Grid.Column="2">
+                                            <TextBlock x:Uid="PerfPage_Ram_Committed" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="RamCommittedText" Text="-- / --" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="0" Grid.Column="3">
+                                            <TextBlock x:Uid="PerfPage_Ram_Cached" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="RamCachedText" Text="-- GB" />
+                                        </StackPanel>
+
+                                        <!-- Row 1: Pools & Compressed -->
+                                        <StackPanel Grid.Row="1" Grid.Column="0">
+                                            <TextBlock x:Uid="PerfPage_Ram_PagedPool" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="RamPagedPoolText" Text="-- MB" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="1" Grid.Column="1">
+                                            <TextBlock x:Uid="PerfPage_Ram_NonPagedPool" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="RamNonPagedPoolText" Text="-- MB" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="1" Grid.Column="2">
+                                            <TextBlock x:Uid="PerfPage_Ram_Compressed" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="RamCompressedText" Text="-- MB" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="1" Grid.Column="3">
+                                            <TextBlock x:Uid="PerfPage_Ram_HardwareReserved" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="RamHardwareReservedText" Text="-- MB" />
+                                        </StackPanel>
+
+                                        <!-- Row 2: Specs & Hardware -->
+                                        <StackPanel Grid.Row="2" Grid.Column="0">
+                                            <TextBlock x:Uid="PerfPage_Ram_Speed" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="RamSpeedText" Text="-- MT/s" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="2" Grid.Column="1">
+                                            <TextBlock x:Uid="PerfPage_Ram_Slots" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="RamSlotsText" Text="-- / --" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="2" Grid.Column="2">
+                                            <TextBlock x:Uid="PerfPage_Ram_FormFactor" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <TextBlock x:Name="RamFormFactorText" Text="--" />
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
                         </Border>
-                    </Grid>
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

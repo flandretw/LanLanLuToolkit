@@ -160,7 +160,7 @@
     <value>效能</value>
   </data>
   <data name="PerformancePage_Title.Text" xml:space="preserve">
-    <value>效能監控</value>
+    <value>效能</value>
   </data>
   <data name="HomePage_Welcome.Text" xml:space="preserve">
     <value>歡迎使用蘭蘭露工具箱</value>
@@ -277,7 +277,7 @@
     <value>任務完成提示音</value>
   </data>
   <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
-    <value>在系統修復或長時間任務結束時播放提示音</value>
+    <value>在系統修復或長時間任務結束時播放提示音。</value>
   </data>
   <data name="GpuMonitorCard_GpuTitle" xml:space="preserve">
     <value>顯示卡 (GPU {0})</value>
@@ -347,5 +347,110 @@
   </data>
   <data name="SystemRepairPage_Copied" xml:space="preserve">
     <value>已複製</value>
+  </data>
+  
+  <!-- Performance Page Detailed Labels -->
+  <data name="PerfPage_Cpu_BaseSpeed.Text" xml:space="preserve">
+    <value>基本速度</value>
+  </data>
+  <data name="PerfPage_Cpu_Sockets.Text" xml:space="preserve">
+    <value>插槽</value>
+  </data>
+  <data name="PerfPage_Cpu_Cores.Text" xml:space="preserve">
+    <value>核心數目</value>
+  </data>
+  <data name="PerfPage_Cpu_Threads.Text" xml:space="preserve">
+    <value>邏輯處理器</value>
+  </data>
+  <data name="PerfPage_Cpu_Virtualization.Text" xml:space="preserve">
+    <value>虛擬化</value>
+  </data>
+  <data name="PerfPage_Cpu_L1Cache.Text" xml:space="preserve">
+    <value>L1 快取</value>
+  </data>
+  <data name="PerfPage_Cpu_L2Cache.Text" xml:space="preserve">
+    <value>L2 快取</value>
+  </data>
+  <data name="PerfPage_Cpu_L3Cache.Text" xml:space="preserve">
+    <value>L3 快取</value>
+  </data>
+  
+  <data name="PerfPage_Gpu_DedicatedMemory.Text" xml:space="preserve">
+    <value>專屬 GPU 記憶體</value>
+  </data>
+  <data name="PerfPage_Gpu_SharedMemory.Text" xml:space="preserve">
+    <value>共用 GPU 記憶體</value>
+  </data>
+  <data name="PerfPage_Gpu_TotalMemory.Text" xml:space="preserve">
+    <value>GPU 記憶體</value>
+  </data>
+  <data name="PerfPage_Gpu_DriverVersion.Text" xml:space="preserve">
+    <value>驅動程式版本</value>
+  </data>
+  <data name="PerfPage_Gpu_DriverDate.Text" xml:space="preserve">
+    <value>驅動程式日期</value>
+  </data>
+  <data name="PerfPage_Gpu_DirectXVersion.Text" xml:space="preserve">
+    <value>DirectX 版本</value>
+  </data>
+  <data name="PerfPage_Gpu_PhysicalLocation.Text" xml:space="preserve">
+    <value>實體位置</value>
+  </data>
+  <data name="PerfPage_Gpu_HardwareReserved.Text" xml:space="preserve">
+    <value>硬體保留記憶體</value>
+  </data>
+  <data name="PerfPage_Cpu_CurrentClock.Text" xml:space="preserve">
+    <value>目前時脈</value>
+  </data>
+  <data name="PerfPage_Cpu_CurrentTemp.Text" xml:space="preserve">
+    <value>溫度</value>
+  </data>
+  <data name="PerfPage_Gpu_CurrentCoreClock.Text" xml:space="preserve">
+    <value>核心時脈</value>
+  </data>
+  <data name="PerfPage_Gpu_CurrentMemClock.Text" xml:space="preserve">
+    <value>記憶體時脈</value>
+  </data>
+  <data name="PerfPage_Gpu_CurrentTemp.Text" xml:space="preserve">
+    <value>溫度</value>
+  </data>
+  <data name="PerfPage_Cpu_Enabled" xml:space="preserve">
+    <value>已啟用</value>
+  </data>
+  <data name="PerfPage_Cpu_Disabled" xml:space="preserve">
+    <value>已停用</value>
+  </data>
+  <data name="PerfPage_Ram_InUse.Text" xml:space="preserve">
+    <value>使用中 (已壓縮)</value>
+  </data>
+  <data name="PerfPage_Ram_Available.Text" xml:space="preserve">
+    <value>可用的</value>
+  </data>
+  <data name="PerfPage_Ram_Committed.Text" xml:space="preserve">
+    <value>已認可</value>
+  </data>
+  <data name="PerfPage_Ram_Cached.Text" xml:space="preserve">
+    <value>已快取</value>
+  </data>
+  <data name="PerfPage_Ram_PagedPool.Text" xml:space="preserve">
+    <value>分頁集區</value>
+  </data>
+  <data name="PerfPage_Ram_NonPagedPool.Text" xml:space="preserve">
+    <value>非分頁集區</value>
+  </data>
+  <data name="PerfPage_Ram_Compressed.Text" xml:space="preserve">
+    <value>已壓縮</value>
+  </data>
+  <data name="PerfPage_Ram_Speed.Text" xml:space="preserve">
+    <value>速度:</value>
+  </data>
+  <data name="PerfPage_Ram_Slots.Text" xml:space="preserve">
+    <value>已使用插槽:</value>
+  </data>
+  <data name="PerfPage_Ram_FormFactor.Text" xml:space="preserve">
+    <value>尺寸:</value>
+  </data>
+  <data name="PerfPage_Ram_HardwareReserved.Text" xml:space="preserve">
+    <value>硬體保留:</value>
   </data>
 </root>
