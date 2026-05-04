@@ -148,7 +148,31 @@ namespace lanlanlu_toolkit.Views
             
             try
             {
-                var oemEncoding = Encoding.GetEncoding(System.Globalization.CultureInfo.CurrentCulture.TextInfo.OEMCodePage);
+                Encoding oemEncoding;
+                try
+                {
+                    // SFC 在某些 Windows 版本會強制以 Unicode (UTF-16) 輸出
+                    if (fileName.Equals("sfc", StringComparison.OrdinalIgnoreCase))
+                    {
+                        oemEncoding = Encoding.Unicode;
+                    }
+                    else
+                    {
+                        int cp = System.Globalization.CultureInfo.CurrentCulture.TextInfo.OEMCodePage;
+                        if (System.Globalization.CultureInfo.CurrentCulture.Name.Contains("TW") && (cp == 0 || cp == 65001))
+                        {
+                            oemEncoding = Encoding.GetEncoding(950);
+                        }
+                        else
+                        {
+                            oemEncoding = Encoding.GetEncoding(cp);
+                        }
+                    }
+                }
+                catch
+                {
+                    oemEncoding = Encoding.UTF8;
+                }
 
                 var startInfo = new ProcessStartInfo
                 {
@@ -262,6 +286,10 @@ namespace lanlanlu_toolkit.Views
 
         private void AppendLog(string text)
         {
+            if (string.IsNullOrEmpty(text)) return;
+
+            // 移除 Null 字元 (\0)，這會導致剪貼簿複製中斷或顯示亂碼
+            text = text.Replace("\0", string.Empty);
             if (string.IsNullOrEmpty(text)) return;
 
             // 如果目前還是預設提示文字，則直接取代
