@@ -26,6 +26,29 @@
                 
                 <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                     <Grid x:Name="GpuChartContainer">
+                        <!-- Horizontal Grid Lines -->
+                        <Rectangle Height="1" VerticalAlignment="Top" Margin="0,40,0,0" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.2" />
+                        <Rectangle Height="1" VerticalAlignment="Top" Margin="0,80,0,0" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.2" />
+                        <Rectangle Height="1" VerticalAlignment="Top" Margin="0,120,0,0" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.2" />
+
+                        <!-- Vertical Grid Lines -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Grid.Column="1" Width="1" HorizontalAlignment="Left" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.1" />
+                            <Rectangle Grid.Column="2" Width="1" HorizontalAlignment="Left" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.1" />
+                            <Rectangle Grid.Column="3" Width="1" HorizontalAlignment="Left" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.1" />
+                            <Rectangle Grid.Column="4" Width="1" HorizontalAlignment="Left" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.1" />
+                            <Rectangle Grid.Column="5" Width="1" HorizontalAlignment="Left" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.1" />
+                        </Grid>
+
+                        <Polygon x:Name="GpuPolygon" Fill="{ThemeResource AccentFillColorDefaultBrush}" Opacity="0.15" VerticalAlignment="Bottom" Points="0,160 300,160" />
                         <Polyline x:Name="GpuPolyline" Stroke="{ThemeResource AccentFillColorDefaultBrush}" StrokeThickness="2" VerticalAlignment="Bottom" Points="0,160 300,160" />
                     </Grid>
                 </Border>

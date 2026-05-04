@@ -54,19 +54,26 @@ namespace lanlanlu_toolkit.Views
             _history.Enqueue(usage);
             if (_history.Count > MaxHistory) _history.Dequeue();
 
-            var points = new Microsoft.UI.Xaml.Media.PointCollection();
+            var linePoints = new Microsoft.UI.Xaml.Media.PointCollection();
+            var fillPoints = new Microsoft.UI.Xaml.Media.PointCollection();
             int i = 0;
-            // 寬度固定為 300，MaxHistory 為 60，所以每點間距 5px
             double step = 300.0 / (MaxHistory - 1);
 
             foreach (var val in _history)
             {
-                // Y 軸高度為 160，百分比換算 (100-val)/100 * 160
                 double y = (100 - val) / 100.0 * 160.0;
-                points.Add(new Windows.Foundation.Point(i * step, y));
+                var p = new Windows.Foundation.Point(i * step, y);
+                linePoints.Add(p);
+                fillPoints.Add(p);
                 i++;
             }
-            GpuPolyline.Points = points;
+
+            // Close the polygon for fill area
+            fillPoints.Add(new Windows.Foundation.Point(300, 160));
+            fillPoints.Add(new Windows.Foundation.Point(0, 160));
+
+            GpuPolyline.Points = linePoints;
+            GpuPolygon.Points = fillPoints;
         }
 
         public void UpdateMemory(double dedicatedUsed, double dedicatedTotal, double sharedUsed, double sharedTotal)

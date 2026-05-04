@@ -331,7 +331,7 @@ namespace lanlanlu_toolkit.Views
                 if (_cpuCounter != null) {
                     var cpuUsage = _cpuCounter.NextValue();
                     CpuUsageRow.Update(cpuUsage);
-                    UpdateChart(CpuPolyline, _cpuHistory, cpuUsage);
+                    UpdateChart(CpuPolyline, CpuPolygon, _cpuHistory, cpuUsage);
                 }
 
                 if (_ramCounter != null && _totalRamGb > 0) {
@@ -340,7 +340,7 @@ namespace lanlanlu_toolkit.Views
                     var ramUsagePercent = (usedGb / _totalRamGb) * 100.0;
                     
                     RamUsageRow.Update(ramUsagePercent);
-                    UpdateChart(RamPolyline, _ramHistory, ramUsagePercent);
+                    UpdateChart(RamPolyline, RamPolygon, _ramHistory, ramUsagePercent);
 
                     // These are updated fast, others in Heavy loop
                     RamInUseText.Text = $"{usedGb:F1} GB";
@@ -349,23 +349,30 @@ namespace lanlanlu_toolkit.Views
             } catch { }
         }
 
-        private void UpdateChart(Microsoft.UI.Xaml.Shapes.Polyline polyline, Queue<double> history, double val)
+        private void UpdateChart(Microsoft.UI.Xaml.Shapes.Polyline polyline, Microsoft.UI.Xaml.Shapes.Polygon polygon, Queue<double> history, double val)
         {
             history.Enqueue(val);
             if (history.Count > MaxHistory) history.Dequeue();
 
-            var points = new Microsoft.UI.Xaml.Media.PointCollection();
+            var linePoints = new Microsoft.UI.Xaml.Media.PointCollection();
+            var fillPoints = new Microsoft.UI.Xaml.Media.PointCollection();
             var i = 0;
-            // 寬度固定為 300，MaxHistory 為 60，所以每點間距約 5px
             double step = 300.0 / (MaxHistory - 1);
             
             foreach (var h in history) {
-                // Y 軸高度為 160，百分比換算 (100-h)/100 * 160
                 double y = (100 - h) / 100.0 * 160.0;
-                points.Add(new Windows.Foundation.Point(i * step, y));
+                var p = new Windows.Foundation.Point(i * step, y);
+                linePoints.Add(p);
+                fillPoints.Add(p);
                 i++;
             }
-            polyline.Points = points;
+
+            // Close the polygon for fill area (Bottom-right then Bottom-left)
+            fillPoints.Add(new Windows.Foundation.Point(300, 160));
+            fillPoints.Add(new Windows.Foundation.Point(0, 160));
+
+            polyline.Points = linePoints;
+            polygon.Points = fillPoints;
         }
 
         private async Task UpdateHeavyStatsAsync()
