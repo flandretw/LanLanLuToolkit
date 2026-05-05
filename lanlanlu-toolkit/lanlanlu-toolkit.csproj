@@ -71,9 +71,12 @@
   </PropertyGroup>
   <!-- Publish Properties -->
   <PropertyGroup>
+    <!-- R2R 會增加檔案體積，關閉它可以縮減 EXE 大小 -->
     <PublishReadyToRun>false</PublishReadyToRun>
     <PublishTrimmed>false</PublishTrimmed>
     <PublishAot>false</PublishAot>
-    <ILLinkTrimMode>none</ILLinkTrimMode>
+    <!-- 確保不生成額外的符號檔以縮減體積 -->
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 </Project>

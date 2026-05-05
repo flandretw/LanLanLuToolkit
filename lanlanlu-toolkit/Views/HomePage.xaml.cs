@@ -1,46 +1,53 @@
 using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
 {
     public sealed partial class HomePage : Page
     {
-        private Microsoft.Windows.ApplicationModel.Resources.ResourceLoader? _resources;
-        private Microsoft.Windows.ApplicationModel.Resources.ResourceLoader AppResources => _resources ??= new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
-
         public HomePage()
         {
             this.InitializeComponent();
-            UpdateGreeting();
             UpdateVersion();
+            UpdateGreeting();
         }
 
         private void UpdateVersion()
         {
-            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            var version = assembly.GetName().Version;
-            
-            if (version != null)
+            string versionStr = "1.0.0";
+            try
             {
-                var versionStr = $"{version.Major}.{version.Minor}.{version.Build}";
-                var format = AppResources.GetString("HomePage_Version_Format");
-                VersionText.Text = string.Format(format, versionStr);
+                // 嘗試讀取封裝版本 (僅在 MSIX 封裝模式有效)
+                var version = Windows.ApplicationModel.Package.Current.Id.Version;
+                versionStr = $"{version.Major}.{version.Minor}.{version.Build}";
             }
+            catch
+            {
+                // 非封裝模式 (免安裝版)：讀取組件版本
+                var assemblyVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+                if (assemblyVersion != null)
+                {
+                    versionStr = $"{assemblyVersion.Major}.{assemblyVersion.Minor}.{assemblyVersion.Build}";
+                }
+            }
+
+            var format = LocalizationHelper.GetString("HomePage_Version_Format");
+            VersionText.Text = string.Format(format, versionStr);
         }
 
         private void UpdateGreeting()
         {
             var hour = DateTime.Now.Hour;
-            string resourceKey = hour switch
+            var resourceKey = hour switch
             {
-                >= 23 or < 5 => "Greeting_LateNight",
-                >= 5 and < 11 => "Greeting_Morning",
-                >= 11 and < 17 => "Greeting_Afternoon",
+                >= 5 and < 12 => "Greeting_Morning",
+                >= 12 and < 18 => "Greeting_Afternoon",
                 _ => "Greeting_Evening"
             };
 
-            GreetingText.Text = AppResources.GetString(resourceKey);
+            GreetingText.Text = LocalizationHelper.GetString(resourceKey);
         }
 
         private void GoToPerformance_Click(object sender, RoutedEventArgs e)

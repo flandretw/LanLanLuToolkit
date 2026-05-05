@@ -14,8 +14,6 @@ namespace lanlanlu_toolkit.Views
 {
     public sealed partial class SystemRepairPage : Page
     {
-        private ResourceLoader? _resourceLoader;
-        private ResourceLoader ResourceLoader => _resourceLoader ??= new ResourceLoader();
         private bool _isProcessRunning = false;
         private bool _allowNavigation = false;
 
@@ -35,10 +33,10 @@ namespace lanlanlu_toolkit.Views
                 e.Cancel = true;
                 var dialog = new ContentDialog
                 {
-                    Title = ResourceLoader.GetString("SystemRepairPage_QuitTitle"),
-                    Content = ResourceLoader.GetString("SystemRepairPage_QuitContent"),
-                    PrimaryButtonText = ResourceLoader.GetString("SystemRepairPage_QuitConfirm"),
-                    CloseButtonText = ResourceLoader.GetString("SystemRepairPage_QuitCancel"),
+                    Title = LocalizationHelper.GetString("SystemRepairPage_QuitTitle"),
+                    Content = LocalizationHelper.GetString("SystemRepairPage_QuitContent"),
+                    PrimaryButtonText = LocalizationHelper.GetString("SystemRepairPage_QuitConfirm"),
+                    CloseButtonText = LocalizationHelper.GetString("SystemRepairPage_QuitCancel"),
                     XamlRoot = this.XamlRoot,
                     DefaultButton = ContentDialogButton.Close
                 };
@@ -68,7 +66,7 @@ namespace lanlanlu_toolkit.Views
         {
             if (!IsAdministrator())
             {
-                AppendLog(ResourceLoader.GetString("SystemRepairPage_AdminRequired"));
+                AppendLog(LocalizationHelper.GetString("SystemRepairPage_AdminRequired"));
                 return;
             }
 
@@ -77,18 +75,18 @@ namespace lanlanlu_toolkit.Views
             {
                 if (AutoModeComboBox.SelectedIndex == 0) // 完整修復
                 {
-                    AppendLog("\n" + ResourceLoader.GetString("SystemRepairPage_Log_FullRepairStart"));
+                    AppendLog("\n" + LocalizationHelper.GetString("SystemRepairPage_Log_FullRepairStart"));
                     await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /CheckHealth");
                     await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /ScanHealth");
                     await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /RestoreHealth");
                     await RunCommandInternalAsync("sfc", "/scannow");
-                    AppendLog("\n" + ResourceLoader.GetString("SystemRepairPage_Log_FullRepairEnd"));
+                    AppendLog("\n" + LocalizationHelper.GetString("SystemRepairPage_Log_FullRepairEnd"));
                 }
                 else // 僅系統檔案檢查
                 {
-                    AppendLog("\n" + ResourceLoader.GetString("SystemRepairPage_Log_SfcStart"));
+                    AppendLog("\n" + LocalizationHelper.GetString("SystemRepairPage_Log_SfcStart"));
                     await RunCommandInternalAsync("sfc", "/scannow");
-                    AppendLog("\n" + ResourceLoader.GetString("SystemRepairPage_Log_SfcEnd"));
+                    AppendLog("\n" + LocalizationHelper.GetString("SystemRepairPage_Log_SfcEnd"));
                 }
             }
             finally
@@ -122,7 +120,7 @@ namespace lanlanlu_toolkit.Views
         {
             if (!IsAdministrator())
             {
-                AppendLog(ResourceLoader.GetString("SystemRepairPage_AdminRequired"));
+                AppendLog(LocalizationHelper.GetString("SystemRepairPage_AdminRequired"));
                 return;
             }
 
@@ -144,7 +142,7 @@ namespace lanlanlu_toolkit.Views
             IsAnyProcessRunning = true;
             _allowNavigation = false;
             GlobalProgress.Visibility = Visibility.Visible;
-            string executingFormat = ResourceLoader.GetString("SystemRepairPage_Log_Executing");
+            string executingFormat = LocalizationHelper.GetString("SystemRepairPage_Log_Executing");
             AppendLog($"[{DateTime.Now:HH:mm:ss}] {executingFormat} {fileName} {arguments}");
             
             try
@@ -202,7 +200,7 @@ namespace lanlanlu_toolkit.Views
                     if (e.Data != null)
                     {
                         DispatcherQueue.TryEnqueue(() => {
-                            string errorPrefix = ResourceLoader.GetString("SystemRepairPage_Log_ErrorPrefix");
+                            string errorPrefix = LocalizationHelper.GetString("SystemRepairPage_Log_ErrorPrefix");
                             AppendLog($"{errorPrefix} " + e.Data);
                         });
                     }
@@ -214,11 +212,11 @@ namespace lanlanlu_toolkit.Views
 
                 await process.WaitForExitAsync();
 
-                AppendLog(ResourceLoader.GetString("SystemRepairPage_Completed"));
+                AppendLog(LocalizationHelper.GetString("SystemRepairPage_Completed"));
             }
             catch (Exception ex)
             {
-                AppendLog(ResourceLoader.GetString("SystemRepairPage_Error") + ": " + ex.Message);
+                AppendLog(LocalizationHelper.GetString("SystemRepairPage_Error") + ": " + ex.Message);
             }
             finally
             {
@@ -231,8 +229,8 @@ namespace lanlanlu_toolkit.Views
         private void NotifyCompletion()
         {
             NotificationService.Show(
-                ResourceLoader.GetString("SystemRepairPage_CompletionInfoBar/Title"),
-                ResourceLoader.GetString("SystemRepairPage_CompletionInfoBar/Message"),
+                LocalizationHelper.GetString("SystemRepairPage_CompletionInfoBar/Title"),
+                LocalizationHelper.GetString("SystemRepairPage_CompletionInfoBar/Message"),
                 InfoBarSeverity.Success
             );
         }
@@ -269,7 +267,7 @@ namespace lanlanlu_toolkit.Views
             var originalText = CopyBtnText.Text;
 
             CopyBtnIcon.Glyph = "\uE73E"; // CheckMark
-            CopyBtnText.Text = ResourceLoader.GetString("SystemRepairPage_Copied");
+            CopyBtnText.Text = LocalizationHelper.GetString("SystemRepairPage_Copied");
             CopyLogBtn.IsEnabled = false;
 
             await Task.Delay(2000);
@@ -294,7 +292,7 @@ namespace lanlanlu_toolkit.Views
             if (string.IsNullOrEmpty(text)) return;
 
             // 如果目前還是預設提示文字，則直接取代
-            string placeholder = ResourceLoader.GetString("SystemRepairPage_WaitingPlaceholder");
+            string placeholder = LocalizationHelper.GetString("SystemRepairPage_WaitingPlaceholder");
             if (LogOutput.Text == placeholder)
             {
                 LogOutput.Text = text + "\n";

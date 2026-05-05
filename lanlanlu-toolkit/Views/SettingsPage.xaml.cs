@@ -7,7 +7,6 @@ namespace lanlanlu_toolkit.Views
     public sealed partial class SettingsPage : Page
     {
         private bool _isInitialized = false;
-        private Microsoft.Windows.ApplicationModel.Resources.ResourceLoader? _resourceLoader;
 
         public SettingsPage()
         {
@@ -17,23 +16,6 @@ namespace lanlanlu_toolkit.Views
             LoadNotificationSound();
             InitializeAboutInfo();
             _isInitialized = true;
-        }
-
-        private Microsoft.Windows.ApplicationModel.Resources.ResourceLoader GetResourceLoader()
-        {
-            if (_resourceLoader == null)
-            {
-                try
-                {
-                    _resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
-                }
-                catch
-                {
-                    // Fallback or handle appropriately
-                    _resourceLoader = null;
-                }
-            }
-            return _resourceLoader!;
         }
 
         private void LoadCurrentLanguage()
@@ -71,14 +53,13 @@ namespace lanlanlu_toolkit.Views
             if (LanguageComboBox.SelectedItem is ComboBoxItem selectedItem)
             {
                 string selectedLang = selectedItem.Tag?.ToString() ?? "zh-TW";
-                var loader = GetResourceLoader();
 
                 ContentDialog dialog = new ContentDialog
                 {
-                    Title             = loader?.GetString("LanguageChangeDialog_Title")   ?? "需要重新啟動",
-                    Content           = loader?.GetString("LanguageChangeDialog_Content") ?? "變更語言需要重新啟動應用程式才會生效。確定要儲存變更嗎？",
-                    PrimaryButtonText = loader?.GetString("LanguageChangeDialog_Confirm") ?? "確定",
-                    CloseButtonText   = loader?.GetString("LanguageChangeDialog_Cancel")  ?? "取消",
+                    Title             = LocalizationHelper.GetString("LanguageChangeDialog_Title")   ?? "需要重新啟動",
+                    Content           = LocalizationHelper.GetString("LanguageChangeDialog_Content") ?? "變更語言需要重新啟動應用程式才會生效。確定要儲存變更嗎？",
+                    PrimaryButtonText = LocalizationHelper.GetString("LanguageChangeDialog_Confirm") ?? "確定",
+                    CloseButtonText   = LocalizationHelper.GetString("LanguageChangeDialog_Cancel")  ?? "取消",
                     XamlRoot          = this.XamlRoot
                 };
 
@@ -124,11 +105,9 @@ namespace lanlanlu_toolkit.Views
             {
                 var assembly = System.Reflection.Assembly.GetExecutingAssembly();
                 var version = assembly.GetName().Version;
-                var loader = GetResourceLoader();
-                if (loader == null) return;
 
-                string appName = loader.GetString("SettingsPage_AppVersion/Text");
-                string copyright = loader.GetString("SettingsPage_Copyright/Text");
+                string appName = LocalizationHelper.GetString("SettingsPage_AppVersion/Text");
+                string copyright = LocalizationHelper.GetString("SettingsPage_Copyright/Text");
 
                 if (version != null)
                 {

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
 {
@@ -22,8 +23,6 @@ namespace lanlanlu_toolkit.Views
         private bool _isActive = false;
         private CancellationTokenSource? _cts;
         private readonly List<GpuMonitorCard> _gpuCards = new();
-        private Microsoft.Windows.ApplicationModel.Resources.ResourceLoader? _resources;
-        private Microsoft.Windows.ApplicationModel.Resources.ResourceLoader AppResources => _resources ??= new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
 
         private readonly Queue<double> _cpuHistory = new();
         private readonly Queue<double> _ramHistory = new();
@@ -111,7 +110,7 @@ namespace lanlanlu_toolkit.Views
                 CpuSocketsText.Text = cpuInfo.Sockets.ToString();
                 CpuCoresText.Text = cpuInfo.Cores.ToString();
                 CpuThreadsText.Text = cpuInfo.Threads.ToString();
-                CpuVirtualizationText.Text = cpuInfo.Virtualization ? AppResources.GetString("PerfPage_Cpu_Enabled") : AppResources.GetString("PerfPage_Cpu_Disabled");
+                CpuVirtualizationText.Text = cpuInfo.Virtualization ? LocalizationHelper.GetString("PerfPage_Cpu_Enabled") : LocalizationHelper.GetString("PerfPage_Cpu_Disabled");
                 CpuL1Text.Text = cpuInfo.L1Cache;
                 CpuL2Text.Text = cpuInfo.L2Cache;
                 CpuL3Text.Text = cpuInfo.L3Cache;
