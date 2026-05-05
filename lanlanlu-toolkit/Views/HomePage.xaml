@@ -38,21 +38,17 @@
                         
                         <MenuFlyoutSeparator Margin="0,8" />
                         
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Spacing="8">
+                        <StackPanel Orientation="Horizontal" Spacing="64">
+                            <StackPanel Spacing="8">
                                 <TextBlock x:Uid="HomePage_QuickStart" FontWeight="Bold" />
-                                <HyperlinkButton x:Uid="HomePage_ViewPerformance" Click="GoToPerformance_Click" />
-                                <HyperlinkButton x:Uid="HomePage_AppSettings" Click="GoToSettings_Click" />
+                                <HyperlinkButton x:Uid="HomePage_ViewPerformance" Click="GoToPerformance_Click" Padding="0" />
+                                <HyperlinkButton x:Uid="HomePage_AppSettings" Click="GoToSettings_Click" Padding="0" />
                             </StackPanel>
-                            <StackPanel Grid.Column="1" Spacing="8" HorizontalAlignment="Right">
+                            <StackPanel Spacing="8">
                                 <TextBlock x:Uid="HomePage_ContactUs" FontWeight="Bold" />
-                                <HyperlinkButton x:Uid="HomePage_GitHubProject" NavigateUri="https://github.com/flandretw/LanLanLuToolkit" />
+                                <HyperlinkButton x:Uid="HomePage_GitHubProject" NavigateUri="https://github.com/flandretw/LanLanLuToolkit" Padding="0" />
                             </StackPanel>
-                        </Grid>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
             </StackPanel>
