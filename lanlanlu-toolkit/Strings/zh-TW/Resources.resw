@@ -67,7 +67,7 @@
     <value>選擇您偏好的語言。變更將在重新啟動後生效。</value>
   </data>
   <data name="Language_zh_TW.Content" xml:space="preserve">
-    <value>繁體中文 (台灣)</value>
+    <value>中文 (台灣)</value>
   </data>
   <data name="Language_en_US.Content" xml:space="preserve">
     <value>英文 (美國)</value>

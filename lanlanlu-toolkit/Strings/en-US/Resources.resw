@@ -67,7 +67,7 @@
     <value>Choose your preferred language. Changes will take effect after restart.</value>
   </data>
   <data name="Language_zh_TW.Content" xml:space="preserve">
-    <value>Traditional Chinese (Taiwan)</value>
+    <value>Chinese (Taiwan)</value>
   </data>
   <data name="Language_en_US.Content" xml:space="preserve">
     <value>English (United States)</value>

@@ -140,9 +140,9 @@
                                       Width="200"
                                       VerticalAlignment="Center"
                                       SelectionChanged="ThemeComboBox_SelectionChanged">
-                                <ComboBoxItem Tag="Default" x:Uid="Theme_Default" />
                                 <ComboBoxItem Tag="Light" x:Uid="Theme_Light" />
                                 <ComboBoxItem Tag="Dark" x:Uid="Theme_Dark" />
+                                <ComboBoxItem Tag="Default" x:Uid="Theme_Default" />
                             </ComboBox>
                         </Grid>
                     </Border>
