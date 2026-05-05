@@ -106,7 +106,7 @@
     <value>Dark</value>
   </data>
   <data name="SettingsPage_AboutHeader.Text" xml:space="preserve">
-    <value>About this app</value>
+    <value>About </value>
   </data>
   <data name="SettingsPage_AppVersion.Text" xml:space="preserve">
     <value>LanLanLu Toolkit</value>
@@ -117,6 +117,7 @@
   <data name="SettingsPage_MITLink.Content" xml:space="preserve">
     <value>MIT License</value>
   </data>
+
   <data name="HomePage_CPU.Text" xml:space="preserve">
     <value>Processor (CPU)</value>
   </data>

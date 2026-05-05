@@ -106,7 +106,7 @@
     <value>深色</value>
   </data>
   <data name="SettingsPage_AboutHeader.Text" xml:space="preserve">
-    <value>關於此應用程式</value>
+    <value>關於</value>
   </data>
   <data name="SettingsPage_AppVersion.Text" xml:space="preserve">
     <value>蘭蘭露工具箱</value>
@@ -117,6 +117,7 @@
   <data name="SettingsPage_MITLink.Content" xml:space="preserve">
     <value>MIT 軟體授權條款</value>
   </data>
+
   <data name="HomePage_CPU.Text" xml:space="preserve">
     <value>處理器 (CPU)</value>
   </data>

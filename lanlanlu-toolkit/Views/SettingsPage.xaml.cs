@@ -109,9 +109,12 @@ namespace lanlanlu_toolkit.Views
                 string appName = LocalizationHelper.GetString("SettingsPage_AppVersion/Text");
                 string copyright = LocalizationHelper.GetString("SettingsPage_Copyright/Text");
 
+                AppNameTextBlock.Text = appName;
+                AppCopyrightTextBlock.Text = copyright;
+
                 if (version != null)
                 {
-                    AboutInfoTextBlock.Text = $"{appName} {version.Major}.{version.Minor}.{version.Build}\n{copyright}";
+                    AppVersionTextBlock.Text = $"{version.Major}.{version.Minor}.{version.Build}";
                 }
             }
             catch (System.Exception ex)
