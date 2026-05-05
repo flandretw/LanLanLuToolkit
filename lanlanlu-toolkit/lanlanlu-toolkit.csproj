@@ -9,10 +9,11 @@
     <Platforms>x86;x64;ARM64</Platforms>
     <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
     <UseWinUI>true</UseWinUI>
-    <EnableMsixTooling>false</EnableMsixTooling>
+    <EnableMsixTooling>true</EnableMsixTooling>
     <Nullable>enable</Nullable>
-    <SatelliteResourceLanguages>zh-TW;en-US</SatelliteResourceLanguages>
     <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained Condition="'$(Configuration)' == 'Release'">true</WindowsAppSDKSelfContained>
+    <AppxPackage>false</AppxPackage>
   </PropertyGroup>
 
 
@@ -70,9 +71,9 @@
   </PropertyGroup>
   <!-- Publish Properties -->
   <PropertyGroup>
-    <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
-    <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
-    <!-- WinUI 3 不支援 IL Trimming，不可開啟 PublishTrimmed -->
+    <PublishReadyToRun>false</PublishReadyToRun>
     <PublishTrimmed>false</PublishTrimmed>
+    <PublishAot>false</PublishAot>
+    <ILLinkTrimMode>none</ILLinkTrimMode>
   </PropertyGroup>
 </Project>

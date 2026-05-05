@@ -6,7 +6,8 @@ namespace lanlanlu_toolkit.Views
 {
     public sealed partial class HomePage : Page
     {
-        private readonly Microsoft.Windows.ApplicationModel.Resources.ResourceLoader _resources = new();
+        private Microsoft.Windows.ApplicationModel.Resources.ResourceLoader? _resources;
+        private Microsoft.Windows.ApplicationModel.Resources.ResourceLoader AppResources => _resources ??= new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
 
         public HomePage()
         {
@@ -23,7 +24,7 @@ namespace lanlanlu_toolkit.Views
             if (version != null)
             {
                 var versionStr = $"{version.Major}.{version.Minor}.{version.Build}";
-                var format = _resources.GetString("HomePage_Version_Format");
+                var format = AppResources.GetString("HomePage_Version_Format");
                 VersionText.Text = string.Format(format, versionStr);
             }
         }
@@ -39,7 +40,7 @@ namespace lanlanlu_toolkit.Views
                 _ => "Greeting_Evening"
             };
 
-            GreetingText.Text = _resources.GetString(resourceKey);
+            GreetingText.Text = AppResources.GetString(resourceKey);
         }
 
         private void GoToPerformance_Click(object sender, RoutedEventArgs e)

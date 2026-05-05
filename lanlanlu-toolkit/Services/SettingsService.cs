@@ -46,7 +46,24 @@ namespace lanlanlu_toolkit.Services
             {
                 Debug.WriteLine($"Failed to read language setting: {ex.Message}");
             }
-            return ApplicationLanguages.PrimaryLanguageOverride ?? "zh-TW";
+
+            // 如果沒有儲存的設定，則根據系統語言自動判定
+            return GetDefaultLanguage();
+        }
+
+        private static string GetDefaultLanguage()
+        {
+            // 獲取目前系統的 UI 語言
+            string systemLanguage = System.Globalization.CultureInfo.CurrentUICulture.Name;
+
+            // 如果是 中文 (台灣)，則判定為繁體中文 (zh-TW)
+            if (systemLanguage.Equals("zh-TW", StringComparison.OrdinalIgnoreCase))
+            {
+                return "zh-TW";
+            }
+
+            // 其餘一律判定為英文 (en-US)
+            return "en-US";
         }
 
         public static void SaveLanguage(string language)

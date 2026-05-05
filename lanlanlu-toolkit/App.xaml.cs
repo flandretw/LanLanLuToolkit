@@ -20,8 +20,16 @@ namespace lanlanlu_toolkit
         /// </summary>
         public App()
         {
-            // 在 InitializeComponent 之前讀取並套用語言設定
-            ApplicationLanguages.PrimaryLanguageOverride = Services.SettingsService.GetLanguage();
+            try
+            {
+                // 在 InitializeComponent 之前讀取並套用語言設定
+                string lang = Services.SettingsService.GetLanguage();
+                Microsoft.Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = lang;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Language initialization failed: {ex.Message}");
+            }
 
             InitializeComponent();
         }

@@ -5,7 +5,8 @@ namespace lanlanlu_toolkit.Views
 {
     public sealed partial class GpuMonitorCard : UserControl
     {
-        private readonly Microsoft.Windows.ApplicationModel.Resources.ResourceLoader _resources = new();
+        private Microsoft.Windows.ApplicationModel.Resources.ResourceLoader? _resources;
+        private Microsoft.Windows.ApplicationModel.Resources.ResourceLoader AppResources => _resources ??= new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
 
         public GpuMonitorCard()
         {
@@ -25,7 +26,7 @@ namespace lanlanlu_toolkit.Views
         public void Initialize(string name, int index)
         {
             GpuNameText.Text = name;
-            GpuTitleText.Text = string.Format(_resources.GetString("GpuMonitorCard_GpuTitle"), index);
+            GpuTitleText.Text = string.Format(AppResources.GetString("GpuMonitorCard_GpuTitle"), index);
         }
 
         public void InitializeDetails(string driverVersion, string driverDate, string directX, string location, double hardwareReserved)
