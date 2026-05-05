@@ -68,7 +68,7 @@
                                       FontSize="20" 
                                       Margin="0,0,16,0" 
                                       VerticalAlignment="Center" 
-                                      Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                 <TextBlock x:Uid="SettingsPage_LanguageTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                 <TextBlock x:Uid="SettingsPage_LanguageDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
@@ -99,7 +99,7 @@
                                       FontSize="20" 
                                       Margin="0,0,16,0" 
                                       VerticalAlignment="Center" 
-                                      Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                 <TextBlock x:Uid="SettingsPage_NotificationSound_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                 <TextBlock x:Uid="SettingsPage_NotificationSound_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
@@ -130,7 +130,7 @@
                                       FontSize="20" 
                                       Margin="0,0,16,0" 
                                       VerticalAlignment="Center" 
-                                      Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                 <TextBlock x:Uid="SettingsPage_ThemeTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                 <TextBlock x:Uid="SettingsPage_ThemeDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />

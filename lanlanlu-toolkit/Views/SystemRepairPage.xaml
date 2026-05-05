@@ -28,7 +28,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE945;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                            <FontIcon Glyph="&#xE945;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                 <TextBlock x:Uid="SystemRepairPage_AutoMode_Title" Style="{StaticResource BodyStrongTextBlockStyle}" />
                                 <TextBlock x:Uid="SystemRepairPage_AutoMode_Desc" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
@@ -83,7 +83,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE82D;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                <FontIcon Glyph="&#xE82D;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                     <TextBlock x:Uid="SystemRepairPage_ScanHealth_Title" Style="{StaticResource BodyStrongTextBlockStyle}" />
                                     <TextBlock x:Uid="SystemRepairPage_ScanHealth_Desc" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
@@ -102,7 +102,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE8A3;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                <FontIcon Glyph="&#xE8A3;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                     <TextBlock x:Uid="SystemRepairPage_CheckHealth_Title" Style="{StaticResource BodyStrongTextBlockStyle}" />
                                     <TextBlock x:Uid="SystemRepairPage_CheckHealth_Desc" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
@@ -121,7 +121,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE777;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                <FontIcon Glyph="&#xE777;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                     <TextBlock x:Uid="SystemRepairPage_RestoreHealth_Title" Style="{StaticResource BodyStrongTextBlockStyle}" />
                                     <TextBlock x:Uid="SystemRepairPage_RestoreHealth_Desc" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
@@ -140,7 +140,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE90F;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                <FontIcon Glyph="&#xE90F;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                     <TextBlock x:Uid="SystemRepairPage_SfcScannow_Title" Style="{StaticResource BodyStrongTextBlockStyle}" />
                                     <TextBlock x:Uid="SystemRepairPage_SfcScannow_Desc" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
