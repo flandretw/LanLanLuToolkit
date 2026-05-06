@@ -17,7 +17,10 @@
                             <EntranceThemeTransition FromVerticalOffset="24" />
                         </TransitionCollection>
                     </StackPanel.ChildrenTransitions>
-                    <TextBlock x:Uid="PerformancePage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
+                    <StackPanel Margin="0,0,0,32">
+                        <TextBlock x:Uid="PerformancePage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
+                        <TextBlock x:Uid="PerformancePage_Description" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    </StackPanel>
 
                     <StackPanel Spacing="16">
                         <!-- CPU Card -->

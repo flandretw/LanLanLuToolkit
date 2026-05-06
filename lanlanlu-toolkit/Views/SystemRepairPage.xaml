@@ -14,7 +14,11 @@
         <ScrollViewer>
             <Grid Padding="36" HorizontalAlignment="Stretch">
                 <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
-                    <TextBlock x:Uid="SystemRepairPage_Title" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,24" />
+                    <!-- Page Header with Subtitle (No Icon) -->
+                    <StackPanel Margin="0,0,0,32">
+                        <TextBlock x:Uid="SystemRepairPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
+                        <TextBlock x:Uid="SystemRepairPage_AutoMode_Desc" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    </StackPanel>
                     
                     <!-- Automatic Mode Card -->
                     <Border Background="{ThemeResource LayerFillColorDefaultBrush}"

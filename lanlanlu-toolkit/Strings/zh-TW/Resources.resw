@@ -163,6 +163,9 @@
   <data name="PerformancePage_Title.Text" xml:space="preserve">
     <value>效能</value>
   </data>
+  <data name="PerformancePage_Description.Text" xml:space="preserve">
+    <value>即時監控 CPU、GPU 與記憶體的使用狀態與硬體資訊。</value>
+  </data>
   <data name="HomePage_Welcome.Text" xml:space="preserve">
     <value>歡迎使用蘭蘭露工具箱</value>
   </data>

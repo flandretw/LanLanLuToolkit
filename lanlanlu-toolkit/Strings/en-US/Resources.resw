@@ -163,6 +163,9 @@
   <data name="PerformancePage_Title.Text" xml:space="preserve">
     <value>Performance</value>
   </data>
+  <data name="PerformancePage_Description.Text" xml:space="preserve">
+    <value>Monitor real-time CPU, GPU, and RAM usage and hardware information.</value>
+  </data>
   <data name="HomePage_Welcome.Text" xml:space="preserve">
     <value>Welcome to LanLanLu Toolkit</value>
   </data>
