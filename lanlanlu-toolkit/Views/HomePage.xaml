@@ -8,30 +8,50 @@
     mc:Ignorable="d"
     Background="Transparent">
 
-    <ScrollViewer>
-        <Grid Padding="36" HorizontalAlignment="Stretch">
-            <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,24,0,0">
-                <!-- Hero Section -->
-                <StackPanel Spacing="0" HorizontalAlignment="Center">
-                    <Image Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png" 
-                           Width="128" Height="128" 
-                           Stretch="Uniform"
-                           HorizontalAlignment="Center" />
-                    <TextBlock x:Uid="AppTitle" Style="{ThemeResource SubheaderTextBlockStyle}" 
-                               HorizontalAlignment="Center" FontWeight="Bold" Margin="0,8,0,0"/>
+    <ScrollViewer x:Name="MainScrollViewer">
+        <Grid x:Name="RootGrid">
+            <!-- Background Image Layer -->
+            <Grid x:Name="HeroGrid" 
+                  VerticalAlignment="Top" 
+                  Height="{x:Bind HeroHeight, Mode=OneWay}">
+                <!-- Rounded Corner Container for Image -->
+                <Border CornerRadius="8,8,0,0">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{ThemeResource HomePageHeroImage}" 
+                                    Stretch="UniformToFill" 
+                                    AlignmentY="Center">
+                            <ImageBrush.RelativeTransform>
+                                <CompositeTransform TranslateY="0.1" />
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Border.Background>
+                </Border>
+
+                <!-- Denser Lower Fade Overlay -->
+                <Rectangle VerticalAlignment="Bottom" Height="40">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="{ThemeResource HeroFadeColorTransparent}" Offset="0.0" />
+                            <GradientStop Color="{ThemeResource HeroFadeColorSemiTransparent}" Offset="0.6" />
+                            <GradientStop Color="{ThemeResource HeroFadeColor}" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <!-- Top-Left Text Overlay -->
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="36,32,0,0" Spacing="4">
+                    <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold" Foreground="{ThemeResource HeroTitleBrush}" />
                     <TextBlock x:Uid="HomePage_PoweredBy" 
                                Style="{ThemeResource BodyTextBlockStyle}" 
-                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
-                               HorizontalAlignment="Center" Margin="0,2,0,0" />
-                    <TextBlock x:Name="VersionText"
-                               Style="{ThemeResource CaptionTextBlockStyle}" 
-                               Foreground="{ThemeResource TextFillColorTertiaryBrush}" 
-                               HorizontalAlignment="Center" />
+                               Foreground="{ThemeResource HeroSubtitleBrush}" />
                 </StackPanel>
+            </Grid>
 
-                <Border Background="{ThemeResource LayerFillColorDefaultBrush}" 
+            <!-- Foreground Content Layer -->
+            <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch" Margin="{x:Bind ContentMargin, Mode=OneWay}">
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                        BorderThickness="1" CornerRadius="12" Padding="32">
+                        BorderThickness="1" CornerRadius="12" Padding="32,28">
                     <StackPanel Spacing="16">
                         <TextBlock x:Name="GreetingText" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" />
                         <TextBlock x:Uid="HomePage_Intro" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" LineHeight="24" />

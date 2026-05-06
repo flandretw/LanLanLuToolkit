@@ -1,16 +1,40 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Application
-    x:Class="lanlanlu_toolkit.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:lanlanlu_toolkit">
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                <!-- Other merged dictionaries here -->
-            </ResourceDictionary.MergedDictionaries>
-            <!-- Other app resources here -->
-        </ResourceDictionary>
-    </Application.Resources>
-</Application>
+<?xml version="1.0" encoding="utf-8"?>
+<Application
+    x:Class="lanlanlu_toolkit.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:lanlanlu_toolkit">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+            </ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <x:String x:Key="HomePageHeroImage">ms-appx:///Assets/HomePageWindows11Light.jpg</x:String>
+                    <Color x:Key="HeroFadeColor">#F3F3F3</Color>
+                    <Color x:Key="HeroFadeColorTransparent">#00F3F3F3</Color>
+                    <Color x:Key="HeroFadeColorSemiTransparent">#80F3F3F3</Color>
+                    <SolidColorBrush x:Key="HeroTitleBrush" Color="Black" />
+                    <SolidColorBrush x:Key="HeroSubtitleBrush" Color="Black" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <x:String x:Key="HomePageHeroImage">ms-appx:///Assets/HomePageWindows11Dark.jpg</x:String>
+                    <Color x:Key="HeroFadeColor">#272727</Color>
+                    <Color x:Key="HeroFadeColorTransparent">#00272727</Color>
+                    <Color x:Key="HeroFadeColorSemiTransparent">#80272727</Color>
+                    <SolidColorBrush x:Key="HeroTitleBrush" Color="White" />
+                    <SolidColorBrush x:Key="HeroSubtitleBrush" Color="White" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Default">
+                    <x:String x:Key="HomePageHeroImage">ms-appx:///Assets/HomePageWindows11Dark.jpg</x:String>
+                    <Color x:Key="HeroFadeColor">#272727</Color>
+                    <Color x:Key="HeroFadeColorTransparent">#00272727</Color>
+                    <Color x:Key="HeroFadeColorSemiTransparent">#80272727</Color>
+                    <SolidColorBrush x:Key="HeroTitleBrush" Color="White" />
+                    <SolidColorBrush x:Key="HeroSubtitleBrush" Color="White" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
