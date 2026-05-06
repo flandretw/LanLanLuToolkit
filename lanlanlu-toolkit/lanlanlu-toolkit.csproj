@@ -20,7 +20,7 @@
   <PropertyGroup>
     <Version>1.0.0</Version>
     <Authors>flandretw</Authors>
-    <Description>蘭蘭露工具箱 - WinUI 3 便攜工具</Description>
+    <Description>蘭蘭露工具箱 - WinUI 3 免安裝工具</Description>
   </PropertyGroup>
   <ItemGroup>
     <Content Update="Assets\**">
