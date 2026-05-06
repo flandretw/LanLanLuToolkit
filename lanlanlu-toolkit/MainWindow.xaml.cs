@@ -3,6 +3,7 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Windows.UI;
 using WinRT.Interop;
 using lanlanlu_toolkit.Views;
 using lanlanlu_toolkit.Services;
@@ -12,6 +13,7 @@ namespace lanlanlu_toolkit
     public sealed partial class MainWindow : Window
     {
         private bool _isClosingConfirmed = false;
+        private AppWindow _appWindow;
 
         public MainWindow()
         {
@@ -21,18 +23,50 @@ namespace lanlanlu_toolkit
             this.ExtendsContentIntoTitleBar = true;
             this.SetTitleBar(AppTitleBar);
 
-            // 設定應用程式視窗圖示
-            var iconPath = System.IO.Path.Combine(System.AppContext.BaseDirectory, "Assets", "AppIcon.ico");
+            // 取得 AppWindow
             var hWnd = WindowNative.GetWindowHandle(this);
             var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
-            var appWindow = AppWindow.GetFromWindowId(windowId);
-            appWindow.SetIcon(iconPath);
+            _appWindow = AppWindow.GetFromWindowId(windowId);
+
+            // 設定應用程式視窗圖示
+            var iconPath = System.IO.Path.Combine(System.AppContext.BaseDirectory, "Assets", "AppIcon.ico");
+            if (System.IO.File.Exists(iconPath))
+            {
+                _appWindow.SetIcon(iconPath);
+            }
             
             // 初始化全域通知服務
             NotificationService.Initialize(AppInfoBar);
 
+            // 初始化標題列顏色與主題監聽
+            if (AppWindowTitleBar.IsCustomizationSupported())
+            {
+                UpdateTitleBarColors();
+                if (this.Content is FrameworkElement rootElement)
+                {
+                    rootElement.ActualThemeChanged += (s, e) => UpdateTitleBarColors();
+                }
+            }
+
             // 註冊視窗關閉事件以進行防呆檢查
-            appWindow.Closing += AppWindow_Closing;
+            _appWindow.Closing += AppWindow_Closing;
+        }
+
+        private void UpdateTitleBarColors()
+        {
+            if (_appWindow?.TitleBar == null || !AppWindowTitleBar.IsCustomizationSupported()) return;
+
+            var titleBar = _appWindow.TitleBar;
+            titleBar.ButtonBackgroundColor = titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+
+            // 根據主題決定基礎顏色
+            var isDark = (this.Content as FrameworkElement)?.ActualTheme == ElementTheme.Dark;
+            var baseColor = isDark ? Colors.White : Colors.Black;
+            byte overlay = (byte)(isDark ? 0xFF : 0x00);
+
+            titleBar.ButtonForegroundColor = titleBar.ButtonHoverForegroundColor = titleBar.ButtonPressedForegroundColor = baseColor;
+            titleBar.ButtonHoverBackgroundColor = Color.FromArgb(0x33, overlay, overlay, overlay);
+            titleBar.ButtonPressedBackgroundColor = Color.FromArgb(0x66, overlay, overlay, overlay);
         }
 
         private async void AppWindow_Closing(AppWindow sender, AppWindowClosingEventArgs args)
