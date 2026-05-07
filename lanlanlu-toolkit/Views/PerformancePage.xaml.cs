@@ -416,7 +416,17 @@ namespace lanlanlu_toolkit.Views
                             RamCompressedText.Text = $"{compressedMb:F0} MB";
                             
                             if (speedGhz > 0) CpuClockText.Text = $"{speedGhz:F2} GHz";
-                            CpuTempText.Text = $"{(40 + (new Random().NextDouble() * 10)):F1} °C"; // Placeholder temp
+                            
+                            double cpuTempC = 40 + (new Random().NextDouble() * 10); // Placeholder temp
+                            if (SettingsService.GetTemperatureUnit() == "Fahrenheit")
+                            {
+                                double f = (cpuTempC * 9 / 5) + 32;
+                                CpuTempText.Text = string.Format(LocalizationHelper.GetString("Temperature_Fahrenheit_Format"), f);
+                            }
+                            else
+                            {
+                                CpuTempText.Text = string.Format(LocalizationHelper.GetString("Temperature_Celsius_Format"), cpuTempC);
+                            }
                             foreach (var card in _gpuCards) {
                                 card.UpdateStats(new Random().Next(1, 10), 1200, 7000, 45);
                                 // Mock memory usage (Current / Total)

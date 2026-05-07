@@ -84,37 +84,6 @@
                         </Grid>
                     </Border>
 
-                    <!-- Notification Sound Card -->
-                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                            BorderThickness="1"
-                            CornerRadius="{ThemeResource ControlCornerRadius}">
-                        <Grid Padding="16">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE995;" 
-                                      FontSize="20" 
-                                      Margin="0,0,16,0" 
-                                      VerticalAlignment="Center" 
-                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
-                                <TextBlock x:Uid="SettingsPage_NotificationSound_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                <TextBlock x:Uid="SettingsPage_NotificationSound_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                            </StackPanel>
-                            <ToggleSwitch x:Name="NotificationSoundToggle" 
-                                          Grid.Column="2" 
-                                          VerticalAlignment="Center"
-                                          HorizontalAlignment="Right"
-                                          Header="{x:Null}"
-                                          MinWidth="0" Margin="0,0,-12,0" Padding="0"
-                                          OnContent="" OffContent=""
-                                          Toggled="NotificationSoundToggle_Toggled" />
-                        </Grid>
-                    </Border>
-
                     <!-- Theme Card -->
                     <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                             BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -144,6 +113,68 @@
                                 <ComboBoxItem Tag="Dark" x:Uid="Theme_Dark" />
                                 <ComboBoxItem Tag="Default" x:Uid="Theme_Default" />
                             </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!-- Temperature Unit Card -->
+                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{ThemeResource ControlCornerRadius}">
+                        <Grid Padding="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE9CA;" 
+                                      FontSize="20" 
+                                      Margin="0,0,16,0" 
+                                      VerticalAlignment="Center" 
+                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                <TextBlock x:Uid="SettingsPage_TempUnitTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                <TextBlock x:Uid="SettingsPage_TempUnitDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                            <ComboBox x:Name="TemperatureUnitComboBox" 
+                                      Grid.Column="2"
+                                      Width="200"
+                                      VerticalAlignment="Center"
+                                      SelectionChanged="TemperatureUnitComboBox_SelectionChanged">
+                                <ComboBoxItem Tag="Celsius" x:Uid="TempUnit_Celsius" />
+                                <ComboBoxItem Tag="Fahrenheit" x:Uid="TempUnit_Fahrenheit" />
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!-- Notification Sound Card -->
+                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{ThemeResource ControlCornerRadius}">
+                        <Grid Padding="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE995;" 
+                                      FontSize="20" 
+                                      Margin="0,0,16,0" 
+                                      VerticalAlignment="Center" 
+                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                <TextBlock x:Uid="SettingsPage_NotificationSound_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                <TextBlock x:Uid="SettingsPage_NotificationSound_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                            <ToggleSwitch x:Name="NotificationSoundToggle" 
+                                          Grid.Column="2" 
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Right"
+                                          Header="{x:Null}"
+                                          MinWidth="0" Margin="0,0,-12,0" Padding="0"
+                                          OnContent="" OffContent=""
+                                          Toggled="NotificationSoundToggle_Toggled" />
                         </Grid>
                     </Border>
                 </StackPanel>

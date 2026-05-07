@@ -13,6 +13,7 @@ namespace lanlanlu_toolkit.Views
             this.InitializeComponent();
             LoadCurrentLanguage();
             LoadCurrentTheme();
+            LoadCurrentTemperatureUnit();
             LoadNotificationSound();
             InitializeAboutInfo();
             _isInitialized = true;
@@ -41,6 +42,20 @@ namespace lanlanlu_toolkit.Views
                 if (item.Tag?.ToString() == currentTheme)
                 {
                     ThemeComboBox.SelectedItem = item;
+                    break;
+                }
+            }
+        }
+
+        private void LoadCurrentTemperatureUnit()
+        {
+            string currentUnit = SettingsService.GetTemperatureUnit();
+
+            foreach (ComboBoxItem item in TemperatureUnitComboBox.Items)
+            {
+                if (item.Tag?.ToString() == currentUnit)
+                {
+                    TemperatureUnitComboBox.SelectedItem = item;
                     break;
                 }
             }
@@ -96,6 +111,17 @@ namespace lanlanlu_toolkit.Views
                 {
                     rootElement.RequestedTheme = SettingsService.ToElementTheme(selectedTheme);
                 }
+            }
+        }
+
+        private void TemperatureUnitComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!_isInitialized) return;
+
+            if (TemperatureUnitComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                string selectedUnit = selectedItem.Tag?.ToString() ?? "Celsius";
+                SettingsService.SaveTemperatureUnit(selectedUnit);
             }
         }
 

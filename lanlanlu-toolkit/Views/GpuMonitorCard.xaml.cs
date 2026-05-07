@@ -44,7 +44,17 @@ namespace lanlanlu_toolkit.Views
             GpuUsageRow.Update(usage);
             GpuClockText.Text = $"{clock:F0} MHz";
             GpuMemClockText.Text = $"{memClock:F0} MHz";
-            GpuTempText.Text = $"{temp:F1} °C";
+            
+            if (SettingsService.GetTemperatureUnit() == "Fahrenheit")
+            {
+                double f = (temp * 9 / 5) + 32;
+                GpuTempText.Text = string.Format(LocalizationHelper.GetString("Temperature_Fahrenheit_Format"), f);
+            }
+            else
+            {
+                GpuTempText.Text = string.Format(LocalizationHelper.GetString("Temperature_Celsius_Format"), temp);
+            }
+            
             UpdateChart(usage);
         }
 

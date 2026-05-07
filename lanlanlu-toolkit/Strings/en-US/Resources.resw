@@ -292,6 +292,24 @@
   <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
     <value>Play a sound when system repairs or long tasks are completed.</value>
   </data>
+  <data name="SettingsPage_TempUnitTitle.Text" xml:space="preserve">
+    <value>Temperature Unit</value>
+  </data>
+  <data name="SettingsPage_TempUnitDescription.Text" xml:space="preserve">
+    <value>Select the temperature unit used throughout the application.</value>
+  </data>
+  <data name="TempUnit_Celsius.Content" xml:space="preserve">
+    <value>Celsius (°C)</value>
+  </data>
+  <data name="TempUnit_Fahrenheit.Content" xml:space="preserve">
+    <value>Fahrenheit (°F)</value>
+  </data>
+  <data name="Temperature_Celsius_Format" xml:space="preserve">
+    <value>{0:F1}°C</value>
+  </data>
+  <data name="Temperature_Fahrenheit_Format" xml:space="preserve">
+    <value>{0:F1}°F</value>
+  </data>
   <data name="GpuMonitorCard_GpuTitle" xml:space="preserve">
     <value>Graphics Card (GPU {0})</value>
   </data>

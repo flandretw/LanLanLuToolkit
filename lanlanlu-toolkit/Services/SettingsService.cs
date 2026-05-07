@@ -12,6 +12,7 @@ namespace lanlanlu_toolkit.Services
         private const string LanguageFileName = "language.txt";
         private const string ThemeFileName = "theme.txt";
         private const string SoundFileName = "notification_sound.txt";
+        private const string TemperatureUnitFileName = "temp_unit.txt";
 
         private static string GetAppFolder()
         {
@@ -147,6 +148,36 @@ namespace lanlanlu_toolkit.Services
             catch (Exception ex)
             {
                 Debug.WriteLine($"Failed to save sound setting: {ex.Message}");
+            }
+        }
+
+        public static string GetTemperatureUnit()
+        {
+            try
+            {
+                string filePath = Path.Combine(GetAppFolder(), TemperatureUnitFileName);
+                if (File.Exists(filePath))
+                {
+                    return File.ReadAllText(filePath).Trim();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to read temperature unit setting: {ex.Message}");
+            }
+            return "Celsius"; // Default to Celsius
+        }
+
+        public static void SaveTemperatureUnit(string unit)
+        {
+            try
+            {
+                string filePath = Path.Combine(GetAppFolder(), TemperatureUnitFileName);
+                File.WriteAllText(filePath, unit);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to save temperature unit setting: {ex.Message}");
             }
         }
     }
