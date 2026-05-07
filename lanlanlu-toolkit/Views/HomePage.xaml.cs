@@ -241,10 +241,7 @@ namespace lanlanlu_toolkit.Views
             });
         }
 
-        private void HomePage_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            UpdateLayoutProportions(e.NewSize.Height);
-        }
+        private void HomePage_SizeChanged(object sender, SizeChangedEventArgs e) => UpdateLayoutProportions(e.NewSize.Height);
 
         private void UpdateLayoutProportions(double windowHeight)
         {
@@ -268,15 +265,9 @@ namespace lanlanlu_toolkit.Views
         private void GoToPerformance_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(PerformancePage));
         private void GoToSettings_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(SettingsPage));
 
-        private void ScrollLeft_Click(object sender, RoutedEventArgs e)
-        {
-            CardsScrollViewer.ChangeView(CardsScrollViewer.HorizontalOffset - 240, null, null);
-        }
+        private void ScrollLeft_Click(object sender, RoutedEventArgs e) => CardsScrollViewer.ChangeView(CardsScrollViewer.HorizontalOffset - 240, null, null);
 
-        private void ScrollRight_Click(object sender, RoutedEventArgs e)
-        {
-            CardsScrollViewer.ChangeView(CardsScrollViewer.HorizontalOffset + 240, null, null);
-        }
+        private void ScrollRight_Click(object sender, RoutedEventArgs e) => CardsScrollViewer.ChangeView(CardsScrollViewer.HorizontalOffset + 240, null, null);
 
         private void CardsScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {

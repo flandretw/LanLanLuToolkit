@@ -14,27 +14,36 @@
                 <ResourceDictionary x:Key="Light">
                     <SolidColorBrush x:Key="CardHoverOverlayBrush" Color="Black" Opacity="0.06" />
                     <SolidColorBrush x:Key="CardCopyIconBrush" Color="Black" Opacity="0.5" />
+                    <AcrylicBrush x:Key="CardAcrylicBrush" 
+                                  TintColor="White" 
+                                  TintOpacity="0.9" 
+                                  FallbackColor="White" />
                 </ResourceDictionary>
+
                 <ResourceDictionary x:Key="Dark">
                     <SolidColorBrush x:Key="CardHoverOverlayBrush" Color="White" Opacity="0.08" />
                     <SolidColorBrush x:Key="CardCopyIconBrush" Color="White" Opacity="0.6" />
+                    <AcrylicBrush x:Key="CardAcrylicBrush" 
+                                  TintColor="Black" 
+                                  TintOpacity="0.85" 
+                                  FallbackColor="Black" />
                 </ResourceDictionary>
+
                 <ResourceDictionary x:Key="Default">
                     <SolidColorBrush x:Key="CardHoverOverlayBrush" Color="White" Opacity="0.08" />
                     <SolidColorBrush x:Key="CardCopyIconBrush" Color="White" Opacity="0.6" />
+                    <AcrylicBrush x:Key="CardAcrylicBrush" 
+                                  TintColor="Black" 
+                                  TintOpacity="0.85" 
+                                  FallbackColor="Black" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
-
-            <AcrylicBrush x:Key="CardAcrylicBrush" 
-                          TintColor="{ThemeResource SystemAltHighColor}" 
-                          TintOpacity="0.6" 
-                          FallbackColor="{ThemeResource SystemAltHighColor}" />
 
             <Style x:Key="SystemInfoCardButtonStyle" TargetType="HyperlinkButton">
                 <Setter Property="Width" Value="220" />
                 <Setter Property="Height" Value="120" />
                 <Setter Property="Padding" Value="16" />
-                <Setter Property="Background" Value="{StaticResource CardAcrylicBrush}" />
+                <Setter Property="Background" Value="{ThemeResource CardAcrylicBrush}" />
                 <Setter Property="BorderBrush" Value="{ThemeResource ControlStrokeColorDefaultBrush}" />
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="CornerRadius" Value="8" />
