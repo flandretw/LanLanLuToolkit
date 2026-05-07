@@ -164,7 +164,7 @@
     <value>寫入速度</value>
   </data>
   <data name="HomePage_Detecting.Text" xml:space="preserve">
-    <value>偵測中...</value>
+    <value>偵測中……</value>
   </data>
   <data name="Shell_Performance.Content" xml:space="preserve">
     <value>效能</value>
@@ -182,7 +182,7 @@
     <value>專為 Windows 11 設計的現代化工具箱，提供硬體監控與各類實用工具。點擊下方連結或側邊選單開始探索吧！</value>
   </data>
   <data name="PerformancePage_Loading.Text" xml:space="preserve">
-    <value>正在讀取系統資訊...</value>
+    <value>正在讀取系統資訊……</value>
   </data>
   <data name="HomePage_Version_Format" xml:space="preserve">
     <value>版本 {0}</value>
@@ -242,7 +242,7 @@
     <value>自動執行完整的檢測與修復流程。推薦大多數使用者使用。</value>
   </data>
   <data name="SystemRepairPage_AutoMode_Default.Content" xml:space="preserve">
-    <value>完整修復 (預設)</value>
+    <value>完整修復（預設）</value>
   </data>
   <data name="SystemRepairPage_AutoMode_SfcOnly.Content" xml:space="preserve">
     <value>僅系統檔案檢查</value>
@@ -257,7 +257,7 @@
     <value>開始執行</value>
   </data>
   <data name="SystemRepairPage_Running" xml:space="preserve">
-    <value>正在執行...</value>
+    <value>正在執行……</value>
   </data>
   <data name="SystemRepairPage_Completed" xml:space="preserve">
     <value>執行完成</value>
@@ -284,7 +284,7 @@
     <value>修復任務已完成</value>
   </data>
   <data name="SystemRepairPage_CompletionInfoBar.Message" xml:space="preserve">
-    <value>所有的修復流程已順利結束，您可以查看歷程記錄了解詳情。</value>
+    <value>所有的修復流程已順利結束，你可以查看歷程紀錄了解詳情。</value>
   </data>
   <data name="SettingsPage_NotificationSound_Title.Text" xml:space="preserve">
     <value>任務完成提示音</value>
@@ -299,7 +299,7 @@
     <value>顯示卡 (GPU)</value>
   </data>
   <data name="GpuMonitorCard_Detecting.Text" xml:space="preserve">
-    <value>偵測中...</value>
+    <value>偵測中……</value>
   </data>
   <data name="GpuMonitorCard_Usage.Label" xml:space="preserve">
     <value>使用率</value>
@@ -329,7 +329,7 @@
     <value>GitHub 專案頁面</value>
   </data>
   <data name="SystemRepairPage_HistoryHeader.Text" xml:space="preserve">
-    <value>歷程記錄</value>
+    <value>歷程紀錄</value>
   </data>
   <data name="SystemRepairPage_Copy.Text" xml:space="preserve">
     <value>複製</value>
@@ -338,7 +338,7 @@
     <value>清除</value>
   </data>
   <data name="SystemRepairPage_WaitingPlaceholder" xml:space="preserve">
-    <value>等待指令執行...</value>
+    <value>等待指令執行……</value>
   </data>
   <data name="SystemRepairPage_Log_FullRepairStart" xml:space="preserve">
     <value>=== 開始自動完整修復流程 ===</value>
@@ -353,7 +353,7 @@
     <value>=== 系統檔案檢查流程結束 ===</value>
   </data>
   <data name="SystemRepairPage_Log_Executing" xml:space="preserve">
-    <value>執行中:</value>
+    <value>執行中：</value>
   </data>
   <data name="SystemRepairPage_Log_ErrorPrefix" xml:space="preserve">
     <value>[錯誤]</value>
@@ -434,7 +434,7 @@
     <value>已停用</value>
   </data>
   <data name="PerfPage_Ram_InUse.Text" xml:space="preserve">
-    <value>使用中 (已壓縮)</value>
+    <value>使用中（已壓縮）</value>
   </data>
   <data name="PerfPage_Ram_Available.Text" xml:space="preserve">
     <value>可用的</value>
@@ -455,15 +455,15 @@
     <value>已壓縮</value>
   </data>
   <data name="PerfPage_Ram_Speed.Text" xml:space="preserve">
-    <value>速度:</value>
+    <value>速度：</value>
   </data>
   <data name="PerfPage_Ram_Slots.Text" xml:space="preserve">
-    <value>已使用插槽:</value>
+    <value>已使用插槽：</value>
   </data>
   <data name="PerfPage_Ram_FormFactor.Text" xml:space="preserve">
-    <value>尺寸:</value>
+    <value>尺寸：</value>
   </data>
   <data name="PerfPage_Ram_HardwareReserved.Text" xml:space="preserve">
-    <value>硬體保留:</value>
+    <value>硬體保留：</value>
   </data>
 </root>
