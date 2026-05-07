@@ -127,6 +127,15 @@
   <data name="HomePage_RAM.Text" xml:space="preserve">
     <value>Memory (RAM)</value>
   </data>
+  <data name="HomePage_OS.Text" xml:space="preserve">
+    <value>OS Version</value>
+  </data>
+  <data name="HomePage_Motherboard.Text" xml:space="preserve">
+    <value>Motherboard (MB)</value>
+  </data>
+  <data name="HomePage_Storage.Text" xml:space="preserve">
+    <value>Storage</value>
+  </data>
   <data name="HomePage_Usage.Label" xml:space="preserve">
     <value>Usage</value>
   </data>

@@ -127,6 +127,15 @@
   <data name="HomePage_RAM.Text" xml:space="preserve">
     <value>記憶體 (RAM)</value>
   </data>
+  <data name="HomePage_OS.Text" xml:space="preserve">
+    <value>系統版本 (OS)</value>
+  </data>
+  <data name="HomePage_Motherboard.Text" xml:space="preserve">
+    <value>主機板 (MB)</value>
+  </data>
+  <data name="HomePage_Storage.Text" xml:space="preserve">
+    <value>儲存體 (Storage)</value>
+  </data>
   <data name="HomePage_Usage.Label" xml:space="preserve">
     <value>使用率</value>
   </data>
