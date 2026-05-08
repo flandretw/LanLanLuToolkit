@@ -243,7 +243,7 @@
                             <Grid>
                                 <StackPanel Spacing="8">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xE7F4;" FontSize="16" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
+                                        <FontIcon Glyph="&#xEEA1;" FontSize="16" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
                                         <TextBlock x:Uid="HomePage_GPU" 
                                                    Style="{ThemeResource BodyStrongTextBlockStyle}" 
                                                    FontWeight="Bold"
@@ -269,7 +269,7 @@
                             <Grid>
                                 <StackPanel Spacing="8">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xE7F3;" FontSize="16" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
+                                        <FontIcon Glyph="&#xEDA2;" FontSize="16" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
                                         <TextBlock x:Uid="HomePage_Storage" 
                                                    Style="{ThemeResource BodyStrongTextBlockStyle}" 
                                                    FontWeight="Bold"
