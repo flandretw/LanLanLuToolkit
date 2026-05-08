@@ -12,8 +12,17 @@ namespace lanlanlu_toolkit
 {
     public sealed partial class MainWindow : Window
     {
+        [System.Runtime.InteropServices.DllImport("kernel32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        private static extern IntPtr GetModuleHandle(string? lpModuleName);
+
+        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        private static extern IntPtr LoadIcon(IntPtr hInstance, IntPtr lpIconName);
+
+        [System.Runtime.InteropServices.DllImport("shell32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        private static extern IntPtr ExtractIcon(IntPtr hInst, string lpszExeFileName, int nIconIndex);
+
         private bool _isClosingConfirmed = false;
-        private AppWindow _appWindow;
+        private AppWindow? _appWindow;
 
         public MainWindow()
         {
@@ -23,17 +32,35 @@ namespace lanlanlu_toolkit
             this.ExtendsContentIntoTitleBar = true;
             this.SetTitleBar(AppTitleBar);
 
-            // 取得 AppWindow
-            var hWnd = WindowNative.GetWindowHandle(this);
-            var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
-            _appWindow = AppWindow.GetFromWindowId(windowId);
-
             // 設定應用程式視窗圖示
-            var iconPath = System.IO.Path.Combine(System.AppContext.BaseDirectory, "Assets", "AppIcon.ico");
-            if (System.IO.File.Exists(iconPath))
+            try
             {
-                _appWindow.SetIcon(iconPath);
+                var hWnd = WindowNative.GetWindowHandle(this);
+                var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
+                _appWindow = AppWindow.GetFromWindowId(windowId);
+
+                // 嘗試從本地檔案載入 (開發偵錯用)
+                var iconPath = System.IO.Path.Combine(System.AppContext.BaseDirectory, "Assets", "AppIcon.ico");
+                if (System.IO.File.Exists(iconPath))
+                {
+                    _appWindow.SetIcon(iconPath);
+                }
+                else
+                {
+                    // 單一檔案模式：從 EXE 內部的資源提取第 0 個圖示 (最穩定)
+                    string? exePath = System.Environment.ProcessPath;
+                    if (!string.IsNullOrEmpty(exePath))
+                    {
+                        var hIcon = ExtractIcon(GetModuleHandle(null), exePath, 0);
+                        if (hIcon != IntPtr.Zero && hIcon != (IntPtr)1) // 1 表示找不到
+                        {
+                            var iconId = Microsoft.UI.Win32Interop.GetIconIdFromIcon(hIcon);
+                            _appWindow.SetIcon(iconId);
+                        }
+                    }
+                }
             }
+            catch { }
             
             // 初始化全域通知服務
             NotificationService.Initialize(AppInfoBar);
@@ -49,12 +76,15 @@ namespace lanlanlu_toolkit
             }
 
             // 註冊視窗關閉事件以進行防呆檢查
-            _appWindow.Closing += AppWindow_Closing;
+            if (_appWindow != null)
+            {
+                _appWindow.Closing += AppWindow_Closing;
+            }
         }
 
         private void UpdateTitleBarColors()
         {
-            if (_appWindow?.TitleBar == null || !AppWindowTitleBar.IsCustomizationSupported()) return;
+            if (_appWindow == null || _appWindow.TitleBar == null || !AppWindowTitleBar.IsCustomizationSupported()) return;
 
             var titleBar = _appWindow.TitleBar;
             titleBar.ButtonBackgroundColor = titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
