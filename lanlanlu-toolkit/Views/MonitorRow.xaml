@@ -7,30 +7,34 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Margin="0,6">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="80" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="100" />
-        </Grid.ColumnDefinitions>
+    <Grid Margin="0,8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-        <TextBlock x:Name="LabelText" VerticalAlignment="Center" 
-                   Style="{ThemeResource BodyTextBlockStyle}"
-                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        <!-- Label and Value on Top Row -->
+        <Grid Grid.Row="0" Margin="0,0,0,4">
+            <TextBlock x:Name="LabelText" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                       Style="{ThemeResource CaptionTextBlockStyle}"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            <TextBlock x:Name="ValueText" HorizontalAlignment="Right" VerticalAlignment="Center"
+                       Style="{ThemeResource BodyStrongTextBlockStyle}" />
+        </Grid>
         
-        <!-- Masked Progress Bar -->
-        <Grid x:Name="BarContainer" Grid.Column="1" Height="14" VerticalAlignment="Center" Margin="8,0,12,0">
+        <!-- Full Width Progress Bar on Bottom Row -->
+        <Grid x:Name="BarContainer" Grid.Row="1" Height="12" VerticalAlignment="Center">
             <!-- Background Track -->
             <Border Background="{ThemeResource SystemControlBackgroundBaseLowBrush}" 
-                    CornerRadius="7" />
+                    CornerRadius="6" />
             
             <!-- Fill with Clipping Mask -->
             <Border x:Name="BarFill" 
                     Background="{ThemeResource AccentTextFillColorPrimaryBrush}" 
-                    CornerRadius="7"
+                    CornerRadius="6"
                     HorizontalAlignment="Stretch">
                 <Border.Clip>
-                    <RectangleGeometry x:Name="ClipMask" Rect="0,0,2000,14">
+                    <RectangleGeometry x:Name="ClipMask" Rect="0,0,2000,12">
                         <RectangleGeometry.Transform>
                             <ScaleTransform x:Name="ClipScale" ScaleX="0" />
                         </RectangleGeometry.Transform>
@@ -38,9 +42,5 @@
                 </Border.Clip>
             </Border>
         </Grid>
-
-        <TextBlock x:Name="ValueText" Grid.Column="2" 
-                   HorizontalAlignment="Right" VerticalAlignment="Center"
-                   Style="{ThemeResource BodyStrongTextBlockStyle}" />
     </Grid>
 </UserControl>

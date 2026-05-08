@@ -11,13 +11,13 @@
     <Grid>
         <ScrollViewer x:Name="ContentScrollViewer" Visibility="Collapsed">
             <Grid x:Name="RootGrid" Padding="36" HorizontalAlignment="Stretch">
-                <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
+                <StackPanel Spacing="16" MaxWidth="1600" HorizontalAlignment="Stretch">
                     <StackPanel.ChildrenTransitions>
                         <TransitionCollection>
                             <EntranceThemeTransition FromVerticalOffset="24" />
                         </TransitionCollection>
                     </StackPanel.ChildrenTransitions>
-                    <StackPanel Margin="0,0,0,32">
+                    <StackPanel Margin="0,0,0,8">
                         <TextBlock x:Uid="PerformancePage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
                         <TextBlock x:Uid="PerformancePage_Description" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                     </StackPanel>
@@ -38,16 +38,19 @@
                                 <!-- Chart Area (Left) -->
                                 <StackPanel Grid.Column="0" Spacing="8">
                                     <StackPanel>
-                                        <TextBlock x:Uid="HomePage_CPU" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <FontIcon Glyph="&#xEEA1;" FontSize="16" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
+                                            <TextBlock x:Uid="HomePage_CPU" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" VerticalAlignment="Center" />
+                                        </StackPanel>
                                         <TextBlock x:Name="CpuNameText" x:Uid="HomePage_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     </StackPanel>
-                                    <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                                    <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                                         <Grid x:Name="CpuChartContainer">
                                             <!-- Horizontal Grid Lines -->
                                             <Rectangle Height="1" VerticalAlignment="Top" Margin="0,40,0,0" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.2" />
                                             <Rectangle Height="1" VerticalAlignment="Top" Margin="0,80,0,0" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.2" />
                                             <Rectangle Height="1" VerticalAlignment="Top" Margin="0,120,0,0" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.2" />
-                                            
+
                                             <!-- Vertical Grid Lines -->
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -157,10 +160,13 @@
                                 <!-- Chart Area (Left) -->
                                 <StackPanel Grid.Column="0" Spacing="8">
                                     <StackPanel>
-                                        <TextBlock x:Uid="HomePage_RAM" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <FontIcon Glyph="&#xEEA0;" FontSize="16" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
+                                            <TextBlock x:Uid="HomePage_RAM" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" VerticalAlignment="Center" />
+                                        </StackPanel>
                                         <TextBlock x:Name="RamNameText" x:Uid="HomePage_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     </StackPanel>
-                                    <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                                    <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                                         <Grid x:Name="RamChartContainer">
                                             <!-- Horizontal Grid Lines -->
                                             <Rectangle Height="1" VerticalAlignment="Top" Margin="0,40,0,0" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.2" />

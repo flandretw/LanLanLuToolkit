@@ -354,22 +354,27 @@ namespace lanlanlu_toolkit.Views
             history.Enqueue(val);
             if (history.Count > MaxHistory) history.Dequeue();
 
+            double w = (polygon.Parent as FrameworkElement)?.ActualWidth ?? 300;
+            double h = (polygon.Parent as FrameworkElement)?.ActualHeight ?? 160;
+            if (w <= 0) w = 300;
+            if (h <= 0) h = 160;
+
             var linePoints = new Microsoft.UI.Xaml.Media.PointCollection();
             var fillPoints = new Microsoft.UI.Xaml.Media.PointCollection();
-            var i = 0;
-            double step = 300.0 / (MaxHistory - 1);
-            
-            foreach (var h in history) {
-                double y = (100 - h) / 100.0 * 160.0;
+            double step = w / (MaxHistory - 1);
+            var historyArray = history.ToArray();
+
+            // 1. Polyline & Polygon Base: Left to Right
+            for (int i = 0; i < historyArray.Length; i++) {
+                double y = (100 - historyArray[i]) / 100.0 * h;
                 var p = new Windows.Foundation.Point(i * step, y);
                 linePoints.Add(p);
                 fillPoints.Add(p);
-                i++;
             }
 
             // Close the polygon for fill area (Bottom-right then Bottom-left)
-            fillPoints.Add(new Windows.Foundation.Point(300, 160));
-            fillPoints.Add(new Windows.Foundation.Point(0, 160));
+            fillPoints.Add(new Windows.Foundation.Point(w, h));
+            fillPoints.Add(new Windows.Foundation.Point(0, h));
 
             polyline.Points = linePoints;
             polygon.Points = fillPoints;

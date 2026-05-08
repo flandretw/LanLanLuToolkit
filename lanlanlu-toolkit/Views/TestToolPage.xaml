@@ -10,8 +10,8 @@
 
     <ScrollViewer>
         <Grid Padding="36" HorizontalAlignment="Stretch">
-            <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
-                <TextBlock x:Name="PageTitle" x:Uid="TestToolPage_Title" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,12" />
+            <StackPanel Spacing="16" MaxWidth="1600" HorizontalAlignment="Stretch">
+                <TextBlock x:Name="PageTitle" x:Uid="TestToolPage_Title" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,8" />
 
                 <!-- GridView for Tool Cards -->
                 <GridView x:Name="ToolsGridView" 

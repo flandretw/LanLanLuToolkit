@@ -13,9 +13,9 @@
         <!-- Tool Cards Container (Everything inside ScrollViewer) -->
         <ScrollViewer>
             <Grid Padding="36" HorizontalAlignment="Stretch">
-                <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
+                <StackPanel Spacing="16" MaxWidth="1600" HorizontalAlignment="Stretch">
                     <!-- Page Header with Subtitle (No Icon) -->
-                    <StackPanel Margin="0,0,0,32">
+                    <StackPanel Margin="0,0,0,8">
                         <TextBlock x:Uid="SystemRepairPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
                         <TextBlock x:Uid="SystemRepairPage_AutoMode_Desc" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                     </StackPanel>
