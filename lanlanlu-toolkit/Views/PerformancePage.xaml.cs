@@ -28,6 +28,11 @@ namespace lanlanlu_toolkit.Views
         private readonly Queue<double> _ramHistory = new();
         private const int MaxHistory = 60;
 
+        // Static cache for hardware info to speed up subsequent loads
+        private static CpuInfo? _cachedCpuInfo;
+        private static List<GpuInfo>? _cachedGpuInfos;
+        private static RamInfo? _cachedRamInfo;
+
         public PerformancePage()
         {
             this.InitializeComponent();
@@ -56,6 +61,9 @@ namespace lanlanlu_toolkit.Views
             }
             else
             {
+                // Ensure UI is visible when restored from cache
+                LoadingOverlay.Visibility = Visibility.Collapsed;
+                ContentScrollViewer.Visibility = Visibility.Visible;
                 StartMonitoring();
             }
         }
@@ -90,17 +98,37 @@ namespace lanlanlu_toolkit.Views
 
         private async void InitializeAllAsync()
         {
-            // 使用並行任務加速初始化
-            var cpuTask = Task.Run(() => GetCpuDetails());
-            var gpuTask = Task.Run(() => GetGpuInfo());
-            var ramTask = Task.Run(() => GetRamDetails());
-            var perfInitTask = Task.Run(() => InitPerfCounters());
+            CpuInfo cpuInfo;
+            List<GpuInfo> gpuInfos;
+            RamInfo ramInfo;
 
-            await Task.WhenAll(cpuTask, gpuTask, ramTask, perfInitTask);
+            if (_cachedCpuInfo != null && _cachedGpuInfos != null && _cachedRamInfo != null)
+            {
+                cpuInfo = _cachedCpuInfo.Value;
+                gpuInfos = _cachedGpuInfos;
+                ramInfo = _cachedRamInfo.Value;
+                // Still need to init perf counters as they are instance-based
+                await Task.Run(() => InitPerfCounters());
+            }
+            else
+            {
+                // 使用並行任務加速初始化
+                var cpuTask = Task.Run(() => GetCpuDetails());
+                var gpuTask = Task.Run(() => GetGpuInfo());
+                var ramTask = Task.Run(() => GetRamDetails());
+                var perfInitTask = Task.Run(() => InitPerfCounters());
 
-            var cpuInfo = cpuTask.Result;
-            var gpuInfos = gpuTask.Result;
-            var ramInfo = ramTask.Result;
+                await Task.WhenAll(cpuTask, gpuTask, ramTask, perfInitTask);
+
+                cpuInfo = cpuTask.Result;
+                gpuInfos = gpuTask.Result;
+                ramInfo = ramTask.Result;
+
+                // Cache the results
+                _cachedCpuInfo = cpuInfo;
+                _cachedGpuInfos = gpuInfos;
+                _cachedRamInfo = ramInfo;
+            }
 
             DispatcherQueue.TryEnqueue(() =>
             {
