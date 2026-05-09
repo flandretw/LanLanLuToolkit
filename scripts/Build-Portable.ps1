@@ -1,4 +1,4 @@
-﻿param (
+param (
     [Parameter(Mandatory = $false)]
     [ValidateSet("x64", "x86", "arm64")]
     [string]$Arch = "x64"
@@ -23,6 +23,10 @@ dotnet publish "$ProjectDir\lanlanlu-toolkit.csproj" -c Release `
     -o $OutputPath
 
 if ($LASTEXITCODE -eq 0) {
+    Write-Host "清理無用的語言資料夾..." -ForegroundColor Cyan
+    $KeepDirs = @("Assets", "Microsoft.UI.Xaml", "runtimes", "zh-TW", "en-us")
+    Get-ChildItem -Path $OutputPath -Directory | Where-Object { $_.Name -notin $KeepDirs -and $_.Name -match "^[a-z]{2,3}(-[A-Za-z]+)+$" } | Remove-Item -Recurse -Force
+
     Write-Host ""
     Write-Host "封裝完成！" -ForegroundColor Green
     Write-Host "路徑: " -NoNewline

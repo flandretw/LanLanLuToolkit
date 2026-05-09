@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="Transparent">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -80,7 +80,7 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <ScrollViewer x:Name="MainScrollViewer">
+    <ScrollViewer x:Name="MainScrollViewer" IsScrollInertiaEnabled="False" ManipulationMode="System">
         <Grid x:Name="RootGrid">
             <!-- Background Image Layer -->
             <Grid x:Name="HeroGrid" 
@@ -128,8 +128,10 @@
                               HorizontalScrollBarVisibility="Hidden" 
                               HorizontalScrollMode="Enabled" 
                               VerticalScrollMode="Disabled"
+                              IsScrollInertiaEnabled="False"
+                              ManipulationMode="System"
                               ViewChanged="CardsScrollViewer_ViewChanged">
-                    <StackPanel Orientation="Horizontal" Spacing="12" Padding="36,4,36,4" CacheMode="BitmapCache">
+                    <StackPanel Orientation="Horizontal" Spacing="12" Padding="36,4,36,4">
                         
                         <!-- OS Card -->
                         <HyperlinkButton x:Name="OsCard" Style="{StaticResource SystemInfoCardButtonStyle}"

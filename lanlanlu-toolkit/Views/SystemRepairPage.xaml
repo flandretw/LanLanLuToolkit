@@ -7,11 +7,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    NavigationCacheMode="Required">
+    NavigationCacheMode="Required"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
         <!-- Tool Cards Container (Everything inside ScrollViewer) -->
-        <ScrollViewer>
+        <ScrollViewer IsScrollInertiaEnabled="False" ManipulationMode="System">
             <Grid Padding="36" HorizontalAlignment="Stretch">
                 <StackPanel Spacing="16" MaxWidth="1600" HorizontalAlignment="Stretch">
                     <!-- Page Header with Subtitle (No Icon) -->
@@ -202,7 +203,7 @@
 
                             <!-- Console Area -->
                             <Border Grid.Row="2" Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="20">
-                                <ScrollViewer x:Name="LogScrollViewer">
+                                <ScrollViewer x:Name="LogScrollViewer" IsScrollInertiaEnabled="False" ManipulationMode="System">
                                     <TextBlock x:Name="LogOutput" 
                                                FontFamily="Cascadia Code, Consolas" 
                                                FontSize="12" 
