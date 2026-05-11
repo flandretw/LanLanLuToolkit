@@ -71,21 +71,21 @@ namespace lanlanlu_toolkit.Views
 
                 ContentDialog dialog = new ContentDialog
                 {
-                    Title             = LocalizationHelper.GetString("LanguageChangeDialog_Title")   ?? "需要重新啟動",
-                    Content           = LocalizationHelper.GetString("LanguageChangeDialog_Content") ?? "變更語言需要重新啟動應用程式才會生效。確定要儲存變更嗎？",
-                    PrimaryButtonText = LocalizationHelper.GetString("LanguageChangeDialog_Confirm") ?? "確定",
-                    CloseButtonText   = LocalizationHelper.GetString("LanguageChangeDialog_Cancel")  ?? "取消",
+                    Title             = LocalizationHelper.GetString("LanguageChangeDialog_Title")   ?? "Restart Required",
+                    Content           = LocalizationHelper.GetString("LanguageChangeDialog_Content") ?? "Changing the language requires a restart to take effect. Save changes and exit?",
+                    PrimaryButtonText = LocalizationHelper.GetString("LanguageChangeDialog_Confirm") ?? "Confirm",
+                    CloseButtonText   = LocalizationHelper.GetString("LanguageChangeDialog_Cancel")  ?? "Cancel",
                     XamlRoot          = this.XamlRoot
                 };
 
-                // 按「確定」：儲存設定並關閉程式
+                // Primary button: Save settings and exit application
                 dialog.PrimaryButtonClick += (_, _) =>
                 {
                     SettingsService.SaveLanguage(selectedLang);
                     Microsoft.UI.Xaml.Application.Current.Exit();
                 };
 
-                // 按「取消」：恢復原本的選擇
+                // Close button: Restore previous selection
                 dialog.CloseButtonClick += (_, _) =>
                 {
                     _isInitialized = false;
@@ -93,7 +93,7 @@ namespace lanlanlu_toolkit.Views
                     _isInitialized = true;
                 };
 
-                // 顯示對話框
+                // Show dialog
                 _ = dialog.ShowAsync();
             }
         }

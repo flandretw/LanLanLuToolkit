@@ -22,7 +22,7 @@ namespace lanlanlu_toolkit
         {
             try
             {
-                // 在 InitializeComponent 之前讀取並套用語言設定
+                // Read and apply language settings before InitializeComponent
                 string lang = Services.SettingsService.GetLanguage();
                 Microsoft.Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = lang;
             }
@@ -42,7 +42,7 @@ namespace lanlanlu_toolkit
         {
             MainWindow = new MainWindow();
 
-            // 套用佈景主題
+            // Apply theme
             if (MainWindow.Content is FrameworkElement rootElement)
             {
                 string savedTheme = Services.SettingsService.GetTheme();

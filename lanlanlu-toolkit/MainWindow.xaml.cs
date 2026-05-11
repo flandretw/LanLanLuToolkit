@@ -28,18 +28,18 @@ namespace lanlanlu_toolkit
         {
             this.InitializeComponent();
             
-            // 恢復為最簡潔的標題列擴展方式
+            // Use the most concise way to extend the title bar
             this.ExtendsContentIntoTitleBar = true;
             this.SetTitleBar(AppTitleBar);
 
-            // 設定應用程式視窗圖示
+            // Set application window icon
             try
             {
                 var hWnd = WindowNative.GetWindowHandle(this);
                 var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
                 _appWindow = AppWindow.GetFromWindowId(windowId);
 
-                // 嘗試從本地檔案載入 (開發偵錯用)
+                // Try to load from local file (for development/debugging)
                 var iconPath = System.IO.Path.Combine(System.AppContext.BaseDirectory, "Assets", "AppIcon.ico");
                 if (System.IO.File.Exists(iconPath))
                 {
@@ -47,12 +47,12 @@ namespace lanlanlu_toolkit
                 }
                 else
                 {
-                    // 單一檔案模式：從 EXE 內部的資源提取第 0 個圖示 (最穩定)
+                    // Single file mode: Extract the 0th icon from the EXE internal resources (most stable)
                     string? exePath = System.Environment.ProcessPath;
                     if (!string.IsNullOrEmpty(exePath))
                     {
                         var hIcon = ExtractIcon(GetModuleHandle(null), exePath, 0);
-                        if (hIcon != IntPtr.Zero && hIcon != (IntPtr)1) // 1 表示找不到
+                        if (hIcon != IntPtr.Zero && hIcon != (IntPtr)1) // 1 indicates not found
                         {
                             var iconId = Microsoft.UI.Win32Interop.GetIconIdFromIcon(hIcon);
                             _appWindow.SetIcon(iconId);
@@ -62,10 +62,10 @@ namespace lanlanlu_toolkit
             }
             catch { }
             
-            // 初始化全域通知服務
+            // Initialize global notification service
             NotificationService.Initialize(AppInfoBar);
 
-            // 初始化標題列顏色與主題監聽
+            // Initialize title bar colors and theme listener
             if (AppWindowTitleBar.IsCustomizationSupported())
             {
                 UpdateTitleBarColors();
@@ -75,13 +75,13 @@ namespace lanlanlu_toolkit
                 }
             }
 
-            // 註冊視窗關閉事件以進行防呆檢查
+            // Register window closing event for safety check
             if (_appWindow != null)
             {
                 _appWindow.Closing += AppWindow_Closing;
             }
 
-            // 註冊導覽完成事件，同步左側選單狀態
+            // Register navigation completion event to sync sidebar menu state
             ContentFrame.Navigated += ContentFrame_Navigated;
         }
 
@@ -92,7 +92,7 @@ namespace lanlanlu_toolkit
             var titleBar = _appWindow.TitleBar;
             titleBar.ButtonBackgroundColor = titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
 
-            // 根據主題決定基礎顏色
+            // Determine base color based on theme
             var isDark = (this.Content as FrameworkElement)?.ActualTheme == ElementTheme.Dark;
             var baseColor = isDark ? Colors.White : Colors.Black;
             byte overlay = (byte)(isDark ? 0xFF : 0x00);
@@ -106,7 +106,7 @@ namespace lanlanlu_toolkit
         {
             if (SystemRepairPage.IsAnyProcessRunning && !_isClosingConfirmed)
             {
-                // 先取消關閉事件
+                // Cancel the closing event first
                 args.Cancel = true;
 
                 var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();

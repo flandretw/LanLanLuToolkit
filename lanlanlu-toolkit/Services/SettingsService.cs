@@ -39,7 +39,7 @@ namespace lanlanlu_toolkit.Services
                         Directory.CreateDirectory(portableFolder);
                     }
 
-                    // 權限測試
+                    // Permission test
                     string testFile = Path.Combine(portableFolder, ".write_test");
                     File.WriteAllText(testFile, "test");
                     File.Delete(testFile);
@@ -68,7 +68,7 @@ namespace lanlanlu_toolkit.Services
 
             try
             {
-                // 讀取時傳入 false，不要主動建立資料夾
+                // Pass false when reading, do not proactively create folders
                 string filePath = Path.Combine(GetAppFolder(false), SettingsFileName);
                 if (File.Exists(filePath))
                 {
@@ -93,7 +93,7 @@ namespace lanlanlu_toolkit.Services
 
             try
             {
-                // 只有存檔時才傳入 true，這時才會建立資料夾
+                // Only pass true when saving, this is when the folder will be created
                 string filePath = Path.Combine(GetAppFolder(true), SettingsFileName);
                 string json = JsonSerializer.Serialize(_currentSettings, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText(filePath, json);

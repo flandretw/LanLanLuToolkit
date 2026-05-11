@@ -13,7 +13,7 @@ namespace lanlanlu_toolkit.Services
         private const uint MB_ICONASTERISK = 0x00000040;
 
         /// <summary>
-        /// 初始化服務，與 MainWindow 的 InfoBar 綁定
+        /// Initialize service and bind to the MainWindow's InfoBar
         /// </summary>
         public static void Initialize(InfoBar infoBar)
         {
@@ -21,11 +21,11 @@ namespace lanlanlu_toolkit.Services
         }
 
         /// <summary>
-        /// 顯示全域通知
+        /// Show global notification
         /// </summary>
-        /// <param name="title">標題</param>
-        /// <param name="message">訊息內容</param>
-        /// <param name="severity">嚴重程度 (預設 Success)</param>
+        /// <param name="title">Title</param>
+        /// <param name="message">Message content</param>
+        /// <param name="severity">Severity (default Success)</param>
         public static void Show(string title, string message, InfoBarSeverity severity = InfoBarSeverity.Success)
         {
             if (_appInfoBar == null) return;
@@ -35,7 +35,7 @@ namespace lanlanlu_toolkit.Services
             _appInfoBar.Severity = severity;
             _appInfoBar.IsOpen = true;
 
-            // 檢查設定決定是否播放聲音
+            // Check settings to determine whether to play sound
             if (SettingsService.GetNotificationSound())
             {
                 try

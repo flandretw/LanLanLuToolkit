@@ -73,7 +73,7 @@ namespace lanlanlu_toolkit.Views
             SetAllButtonsEnabled(false);
             try
             {
-                if (AutoModeComboBox.SelectedIndex == 0) // 完整修復
+                if (AutoModeComboBox.SelectedIndex == 0) // Full Repair
                 {
                     AppendLog("\n" + LocalizationHelper.GetString("SystemRepairPage_Log_FullRepairStart"));
                     await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /CheckHealth");
@@ -82,7 +82,7 @@ namespace lanlanlu_toolkit.Views
                     await RunCommandInternalAsync("sfc", "/scannow");
                     AppendLog("\n" + LocalizationHelper.GetString("SystemRepairPage_Log_FullRepairEnd"));
                 }
-                else // 僅系統檔案檢查
+                else // System File Check only
                 {
                     AppendLog("\n" + LocalizationHelper.GetString("SystemRepairPage_Log_SfcStart"));
                     await RunCommandInternalAsync("sfc", "/scannow");
@@ -150,7 +150,7 @@ namespace lanlanlu_toolkit.Views
                 Encoding oemEncoding;
                 try
                 {
-                    // SFC 在某些 Windows 版本會強制以 Unicode (UTF-16) 輸出
+                    // SFC forces Unicode (UTF-16) output in some Windows versions
                     if (fileName.Equals("sfc", StringComparison.OrdinalIgnoreCase))
                     {
                         oemEncoding = Encoding.Unicode;
@@ -257,12 +257,12 @@ namespace lanlanlu_toolkit.Views
 
         private async void CopyLogBtn_Click(object sender, RoutedEventArgs e)
         {
-            // 執行複製
+            // Execute copy
             var dataPackage = new DataPackage();
             dataPackage.SetText(LogOutput.Text);
             Clipboard.SetContent(dataPackage);
 
-            // 視覺回饋：變更為「已複製」狀態
+            // Visual feedback: change to "Copied" state
             var originalGlyph = CopyBtnIcon.Glyph;
             var originalText = CopyBtnText.Text;
 
@@ -272,11 +272,11 @@ namespace lanlanlu_toolkit.Views
 
             await Task.Delay(2000);
 
-            // 恢復原始狀態
+            // Restore original state
             CopyBtnIcon.Glyph = originalGlyph;
             CopyBtnText.Text = originalText;
             
-            // 只有在日誌不為空的情況下才恢復啟用
+            // Only re-enable if log is not empty and no process is running
             if (!string.IsNullOrEmpty(LogOutput.Text) && !_isProcessRunning)
             {
                 CopyLogBtn.IsEnabled = true;
@@ -287,11 +287,11 @@ namespace lanlanlu_toolkit.Views
         {
             if (string.IsNullOrEmpty(text)) return;
 
-            // 移除 Null 字元 (\0)，這會導致剪貼簿複製中斷或顯示亂碼
+            // Remove Null characters (\0) which cause clipboard issues or garbled text
             text = text.Replace("\0", string.Empty);
             if (string.IsNullOrEmpty(text)) return;
 
-            // 如果目前還是預設提示文字，則直接取代
+            // If still showing default placeholder, replace it directly
             string placeholder = LocalizationHelper.GetString("SystemRepairPage_WaitingPlaceholder");
             if (LogOutput.Text == placeholder)
             {
@@ -302,7 +302,7 @@ namespace lanlanlu_toolkit.Views
                 LogOutput.Text += text + "\n";
             }
             
-            // 自動捲動到最底端
+            // Auto-scroll to the bottom
             LogScrollViewer.ChangeView(null, LogScrollViewer.ScrollableHeight, null);
         }
 

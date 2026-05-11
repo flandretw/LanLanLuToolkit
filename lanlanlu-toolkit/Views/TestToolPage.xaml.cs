@@ -25,7 +25,7 @@ namespace lanlanlu_toolkit.Views
 
         private void InitializeTools()
         {
-            // 在 WinUI 3 中直接使用 new ResourceLoader()
+            // Use ResourceLoader directly in WinUI 3
             var resourceLoader = new ResourceLoader();
             Tools.Add(new ToolItem
             {

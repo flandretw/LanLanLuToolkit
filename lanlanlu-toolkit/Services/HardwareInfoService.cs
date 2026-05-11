@@ -14,7 +14,7 @@ namespace lanlanlu_toolkit.Services
     }
 
     /// <summary>
-    /// 提供全域硬體資訊快取，避免重複進行耗時的 WMI 查詢。
+    /// Provides a global hardware information cache to avoid redundant and time-consuming WMI queries.
     /// </summary>
     public static class HardwareProvider
     {

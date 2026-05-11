@@ -73,10 +73,10 @@ namespace lanlanlu_toolkit.Views
         {
             if (BarContainer == null || BarContainer.ActualWidth <= 0) return;
 
-            // 同步遮罩基準寬度
+            // Sync mask base width
             ClipMask.Rect = new Windows.Foundation.Rect(0, 0, BarContainer.ActualWidth, 14);
 
-            // 計算比例並執行動畫
+            // Calculate ratio and execute animation
             double ratio = Math.Clamp(Value / MaxValue, 0, 1);
             AnimateMask(ratio);
         }

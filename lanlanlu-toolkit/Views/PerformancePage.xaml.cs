@@ -112,7 +112,7 @@ namespace lanlanlu_toolkit.Views
             }
             else
             {
-                // 使用並行任務加速初始化
+                // Use parallel tasks to accelerate initialization
                 var cpuTask = Task.Run(() => GetCpuDetails());
                 var gpuTask = Task.Run(() => GetGpuInfo());
                 var ramTask = Task.Run(() => GetRamDetails());

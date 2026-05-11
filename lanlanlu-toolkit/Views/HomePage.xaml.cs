@@ -63,7 +63,7 @@ namespace lanlanlu_toolkit.Views
 
         private async Task LoadSystemInfoAsync()
         {
-            // 優先從快取載入，實現秒開體驗
+            // Priority load from cache for instant-open experience
             if (HardwareProvider.Cache.IsPopulated)
             {
                 CpuName = HardwareProvider.Cache.CpuName ?? CpuName;
@@ -72,7 +72,7 @@ namespace lanlanlu_toolkit.Views
                 MotherboardModel = HardwareProvider.Cache.MotherboardModel ?? MotherboardModel;
                 OsVersion = HardwareProvider.Cache.OsVersion ?? OsVersion;
                 StorageInfo = HardwareProvider.Cache.StorageInfo ?? StorageInfo;
-                return; // 已有資料，無需重複偵測
+                return; // Data already exists, no need to re-detect
             }
 
             await Task.Run(() =>
@@ -139,7 +139,7 @@ namespace lanlanlu_toolkit.Views
                             }
                         }
                         
-                        // 排序：讓內建顯示卡優先（通常名稱包含 "Graphics" 或 "Intel"）
+                        // Sort: prioritize integrated graphics cards (usually contains "Graphics" or "Intel")
                         gpuList.Sort((a, b) => 
                         {
                             bool aIsIntegrated = a.Contains("Graphics") || a.Contains("Intel");
@@ -227,7 +227,7 @@ namespace lanlanlu_toolkit.Views
                         StorageInfo = storage;
                         MotherboardModel = mb;
 
-                        // 更新快取
+                        // Update cache
                         HardwareProvider.Cache.CpuName = cpu;
                         HardwareProvider.Cache.RamSize = ram;
                         HardwareProvider.Cache.GpuName = gpu;
@@ -245,7 +245,7 @@ namespace lanlanlu_toolkit.Views
 
         private void UpdateLayoutProportions(double windowHeight)
         {
-            // 視窗高度小於 800px 時佔一半，否則佔三分之一
+            // Half height if window < 800px, otherwise one-third
             HeroHeight = windowHeight < 800 ? windowHeight * 0.5 : windowHeight * 0.33;
         }
 
@@ -284,8 +284,8 @@ namespace lanlanlu_toolkit.Views
         {
             if (sender is FrameworkElement element)
             {
-                // 注意：在 WinUI 3 中，ProtectedCursor 是受保護成員，無法從外部存取。
-                // 我們透過將卡片設為具有互動性的結構來讓系統處理游標。
+                // Note: In WinUI 3, ProtectedCursor is protected and cannot be accessed externally.
+                // We handle the cursor by making the card an interactive structure.
                 string name = element.Name.Replace("Card", "");
                 if (this.FindName(name + "HoverOverlay") is Border overlay) overlay.Opacity = 1;
                 if (this.FindName(name + "CopyIcon") is FontIcon icon) icon.Opacity = 1;

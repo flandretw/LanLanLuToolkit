@@ -21,7 +21,7 @@
   <PropertyGroup>
     <Version>1.0.0</Version>
     <Authors>flandretw</Authors>
-    <Description>蘭蘭露工具箱 - WinUI 3 免安裝工具</Description>
+    <Description>LanLanLu Toolkit - A portable WinUI 3 utility box</Description>
   </PropertyGroup>
 
   <ItemGroup>
