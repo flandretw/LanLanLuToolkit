@@ -8,10 +8,10 @@ $ProjectDir = "lanlanlu-toolkit"
 $PublishProfile = "Properties\PublishProfiles\win-$Arch.pubxml"
 $OutputPath = "out_portable_$Arch"
 
-Write-Host "正在封裝 蘭蘭露工具箱 (win-$Arch portable)..." -ForegroundColor Cyan
+Write-Host "Packaging LanLanLu Toolkit (win-$Arch portable)..." -ForegroundColor Cyan
 
 if (-not (Test-Path $ProjectDir)) {
-    Write-Error "找不到專案目錄 $ProjectDir，請在專案根目錄執行此腳本。"
+    Write-Error "Cannot find project directory $ProjectDir. Please run this script in the project root directory."
     exit
 }
 
@@ -23,16 +23,16 @@ dotnet publish "$ProjectDir\lanlanlu-toolkit.csproj" -c Release `
     -o $OutputPath
 
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "清理無用的語言資料夾..." -ForegroundColor Cyan
+    Write-Host "Cleaning up unused language folders..." -ForegroundColor Cyan
     $KeepDirs = @("Assets", "Microsoft.UI.Xaml", "runtimes", "zh-TW", "en-us")
     Get-ChildItem -Path $OutputPath -Directory | Where-Object { $_.Name -notin $KeepDirs -and $_.Name -match "^[a-z]{2,3}(-[A-Za-z]+)+$" } | Remove-Item -Recurse -Force
 
     Write-Host ""
-    Write-Host "封裝完成！" -ForegroundColor Green
-    Write-Host "路徑: " -NoNewline
+    Write-Host "Packaging completed!" -ForegroundColor Green
+    Write-Host "Path: " -NoNewline
     Write-Host (Get-Item $OutputPath).FullName -ForegroundColor Yellow
 }
 else {
     Write-Host ""
-    Write-Host "封裝失敗。" -ForegroundColor Red
+    Write-Host "Packaging failed." -ForegroundColor Red
 }
