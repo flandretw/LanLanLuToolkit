@@ -80,6 +80,9 @@ namespace lanlanlu_toolkit
             {
                 _appWindow.Closing += AppWindow_Closing;
             }
+
+            // 註冊導覽完成事件，同步左側選單狀態
+            ContentFrame.Navigated += ContentFrame_Navigated;
         }
 
         private void UpdateTitleBarColors()
@@ -137,28 +140,65 @@ namespace lanlanlu_toolkit
         {
             if (args.IsSettingsInvoked)
             {
-                ContentFrame.Navigate(typeof(SettingsPage));
+                if (ContentFrame.SourcePageType != typeof(SettingsPage))
+                {
+                    ContentFrame.Navigate(typeof(SettingsPage));
+                }
             }
             else
             {
                 var tag = args.InvokedItemContainer.Tag?.ToString();
-                
-                switch (tag)
+                Type? targetType = tag switch
                 {
-                    case "HomePage":
-                        ContentFrame.Navigate(typeof(HomePage));
-                        break;
-                    case "PerformancePage":
-                        ContentFrame.Navigate(typeof(PerformancePage));
-                        break;
-                    case "TestToolPage":
-                        ContentFrame.Navigate(typeof(TestToolPage));
-                        break;
-                    case "SystemRepairPage":
-                        ContentFrame.Navigate(typeof(SystemRepairPage));
-                        break;
+                    "HomePage" => typeof(HomePage),
+                    "PerformancePage" => typeof(PerformancePage),
+                    "TestToolPage" => typeof(TestToolPage),
+                    "SystemRepairPage" => typeof(SystemRepairPage),
+                    _ => null
+                };
+
+                if (targetType != null && ContentFrame.SourcePageType != targetType)
+                {
+                    ContentFrame.Navigate(targetType);
                 }
             }
+        }
+
+        private void ContentFrame_Navigated(object sender, Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
+        {
+            if (e.SourcePageType == typeof(SettingsPage))
+            {
+                NavView.SelectedItem = (NavigationViewItem)NavView.SettingsItem;
+                return;
+            }
+
+            var tag = e.SourcePageType.Name;
+            var item = FindNavigationViewItem(NavView.MenuItems, tag);
+            if (item != null && (NavView.SelectedItem as NavigationViewItem) != item)
+            {
+                NavView.SelectedItem = item;
+            }
+        }
+
+        private NavigationViewItem? FindNavigationViewItem(System.Collections.Generic.IList<object> items, string tag)
+        {
+            foreach (var item in items)
+            {
+                if (item is NavigationViewItem navItem)
+                {
+                    if (navItem.Tag?.ToString() == tag) return navItem;
+                    if (navItem.MenuItems.Count > 0)
+                    {
+                        var childItem = FindNavigationViewItem(navItem.MenuItems, tag);
+                        if (childItem != null)
+                        {
+                            navItem.IsExpanded = true;
+                            return childItem;
+                        }
+                    }
+                }
+            }
+            return null;
         }
     }
 }
