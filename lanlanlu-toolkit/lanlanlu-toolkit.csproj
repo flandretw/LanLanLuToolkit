@@ -16,6 +16,11 @@
     <WindowsPackageType>None</WindowsPackageType>
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <AppxPackage>false</AppxPackage>
+    
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <DebuggerSupport>false</DebuggerSupport>
+    <UseSystemResourceKeys>true</UseSystemResourceKeys>
+    <NoWarn>$(NoWarn);IL2059;IL2104;IL2026</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup>

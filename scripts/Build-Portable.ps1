@@ -27,6 +27,11 @@ if ($LASTEXITCODE -eq 0) {
     $KeepDirs = @("Assets", "Microsoft.UI.Xaml", "runtimes", "zh-TW", "en-us")
     Get-ChildItem -Path $OutputPath -Directory | Where-Object { $_.Name -notin $KeepDirs -and $_.Name -match "^[a-z]{2,3}(-[A-Za-z]+)+$" } | Remove-Item -Recurse -Force
 
+    # Clean up diagnostic, debugging DLLs, and symbols to further reduce size
+    Write-Host "Cleaning up diagnostic/debugging DLLs and symbols..." -ForegroundColor Cyan
+    Get-ChildItem -Path $OutputPath -Include "Microsoft.DiaSymReader.Native.*.dll", "mscordaccore*.dll", "mscordbi.dll", "*.pdb", "*.xml" -File -Recurse | Remove-Item -Force
+
+
     Write-Host ""
     Write-Host "Packaging completed!" -ForegroundColor Green
     Write-Host "Path: " -NoNewline

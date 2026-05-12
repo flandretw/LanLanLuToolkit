@@ -15,6 +15,12 @@ namespace lanlanlu_toolkit.Services
         public string TemperatureUnit { get; set; } = "Celsius";
     }
 
+    [System.Text.Json.Serialization.JsonSerializable(typeof(AppSettings))]
+    [System.Text.Json.Serialization.JsonSourceGenerationOptions(WriteIndented = true)]
+    internal partial class AppSettingsContext : System.Text.Json.Serialization.JsonSerializerContext
+    {
+    }
+
     public static class SettingsService
     {
         private const string AppFolderName = "lanlanlu_toolkit";
@@ -73,7 +79,7 @@ namespace lanlanlu_toolkit.Services
                 if (File.Exists(filePath))
                 {
                     string json = File.ReadAllText(filePath);
-                    _currentSettings = JsonSerializer.Deserialize<AppSettings>(json);
+                    _currentSettings = JsonSerializer.Deserialize(json, AppSettingsContext.Default.AppSettings);
                 }
             }
             catch (Exception ex)
@@ -95,7 +101,7 @@ namespace lanlanlu_toolkit.Services
             {
                 // Only pass true when saving, this is when the folder will be created
                 string filePath = Path.Combine(GetAppFolder(true), SettingsFileName);
-                string json = JsonSerializer.Serialize(_currentSettings, new JsonSerializerOptions { WriteIndented = true });
+                string json = JsonSerializer.Serialize(_currentSettings, AppSettingsContext.Default.AppSettings);
                 File.WriteAllText(filePath, json);
             }
             catch (Exception ex)
