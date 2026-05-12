@@ -190,7 +190,7 @@ namespace lanlanlu_toolkit.Views
                 process.OutputDataReceived += (s, e) => {
                     if (e.Data != null)
                     {
-                        DispatcherQueue.TryEnqueue(() => {
+                        DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () => {
                             AppendLog(e.Data);
                         });
                     }
@@ -199,7 +199,7 @@ namespace lanlanlu_toolkit.Views
                 process.ErrorDataReceived += (s, e) => {
                     if (e.Data != null)
                     {
-                        DispatcherQueue.TryEnqueue(() => {
+                        DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () => {
                             string errorPrefix = LocalizationHelper.GetString("SystemRepairPage_Log_ErrorPrefix");
                             AppendLog($"{errorPrefix} " + e.Data);
                         });

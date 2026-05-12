@@ -81,7 +81,12 @@ namespace lanlanlu_toolkit.Views
 
         private void StopMonitoring()
         {
-            _timer?.Stop();
+            if (_timer != null)
+            {
+                _timer.Stop();
+                _timer.Tick -= Timer_Tick;
+                _timer = null;
+            }
         }
 
         private void DisposeCounters()
@@ -130,7 +135,7 @@ namespace lanlanlu_toolkit.Views
                 _cachedRamInfo = ramInfo;
             }
 
-            DispatcherQueue.TryEnqueue(() =>
+            DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
             {
                 // CPU UI
                 CpuNameText.Text = cpuInfo.Name;
@@ -434,7 +439,7 @@ namespace lanlanlu_toolkit.Views
                         nonPagedPoolMb = Convert.ToDouble(obj["PoolNonpagedBytes"]) / (1024.0 * 1024.0);
                     }
 
-                    DispatcherQueue.TryEnqueue(() => {
+                    DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () => {
                         try {
                             if (!_isActive || _cts?.IsCancellationRequested == true) return;
                             
@@ -478,6 +483,10 @@ namespace lanlanlu_toolkit.Views
             _cts?.Dispose();
             _cts = null;
             StopMonitoring();
+            DisposeCounters();
+            
+            // Suggest GC to clean up the discarded page instance and its UI elements
+            GC.Collect();
             base.OnNavigatedFrom(e);
         }
     }
