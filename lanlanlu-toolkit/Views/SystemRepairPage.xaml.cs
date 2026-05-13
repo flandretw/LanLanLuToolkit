@@ -54,13 +54,6 @@ namespace lanlanlu_toolkit.Views
             base.OnNavigatingFrom(e);
         }
 
-        private void AdvancedModeToggle_Toggled(object sender, RoutedEventArgs e)
-        {
-            if (AdvancedToolsPanel != null)
-            {
-                AdvancedToolsPanel.Visibility = AdvancedModeToggle.IsOn ? Visibility.Visible : Visibility.Collapsed;
-            }
-        }
 
         private async void RunAutoRepair_Click(object sender, RoutedEventArgs e)
         {
@@ -243,7 +236,7 @@ namespace lanlanlu_toolkit.Views
             CheckHealthBtn.IsEnabled = enabled;
             RestoreHealthBtn.IsEnabled = enabled;
             SfcBtn.IsEnabled = enabled;
-            AdvancedModeToggle.IsEnabled = enabled;
+            AdvancedExpander.IsEnabled = enabled;
             ClearLogBtn.IsEnabled = enabled;
             CopyLogBtn.IsEnabled = enabled;
         }
