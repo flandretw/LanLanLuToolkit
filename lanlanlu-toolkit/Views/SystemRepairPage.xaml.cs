@@ -296,6 +296,7 @@ namespace lanlanlu_toolkit.Views
             }
             
             // Auto-scroll to the bottom
+            LogScrollViewer.UpdateLayout();
             LogScrollViewer.ChangeView(null, LogScrollViewer.ScrollableHeight, null);
         }
 
