@@ -13,6 +13,8 @@ namespace lanlanlu_toolkit.Services
         public string Theme { get; set; } = "Default";
         public bool NotificationSoundEnabled { get; set; } = true;
         public string TemperatureUnit { get; set; } = "Celsius";
+        public bool DebugReportEnabled { get; set; } = false;
+        public string? DebugReportPath { get; set; } = null;
     }
 
     [System.Text.Json.Serialization.JsonSerializable(typeof(AppSettings))]
@@ -187,6 +189,54 @@ namespace lanlanlu_toolkit.Services
             if (_currentSettings != null)
             {
                 _currentSettings.TemperatureUnit = unit;
+                SaveSettings();
+            }
+        }
+
+        public static bool GetDebugReportEnabled()
+        {
+            LoadSettings();
+            return _currentSettings?.DebugReportEnabled ?? false;
+        }
+
+        public static void SaveDebugReportEnabled(bool enabled)
+        {
+            LoadSettings();
+            if (_currentSettings != null)
+            {
+                _currentSettings.DebugReportEnabled = enabled;
+                SaveSettings();
+            }
+        }
+
+        public static string GetDebugReportPath()
+        {
+            LoadSettings();
+            if (_currentSettings != null && !string.IsNullOrEmpty(_currentSettings.DebugReportPath))
+            {
+                return _currentSettings.DebugReportPath;
+            }
+
+            // Default path: Same directory as executable
+            try
+            {
+                string? exePath = Environment.ProcessPath;
+                return !string.IsNullOrEmpty(exePath) 
+                    ? Path.GetDirectoryName(Path.GetFullPath(exePath))! 
+                    : AppDomain.CurrentDomain.BaseDirectory;
+            }
+            catch
+            {
+                return AppDomain.CurrentDomain.BaseDirectory;
+            }
+        }
+
+        public static void SaveDebugReportPath(string path)
+        {
+            LoadSettings();
+            if (_currentSettings != null)
+            {
+                _currentSettings.DebugReportPath = path;
                 SaveSettings();
             }
         }

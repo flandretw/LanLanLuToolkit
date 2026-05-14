@@ -136,7 +136,9 @@ namespace lanlanlu_toolkit.Views
             _allowNavigation = false;
             GlobalProgress.Visibility = Visibility.Visible;
             string executingFormat = LocalizationHelper.GetString("SystemRepairPage_Log_Executing");
-            AppendLog($"[{DateTime.Now:HH:mm:ss}] {executingFormat} {fileName} {arguments}");
+            string logMessage = $"{executingFormat} {fileName} {arguments}";
+            AppendLog($"[{DateTime.Now:HH:mm:ss}] {logMessage}");
+            LoggingService.Log($"RepairTool: {logMessage}");
             
             try
             {
@@ -204,12 +206,14 @@ namespace lanlanlu_toolkit.Views
                 process.BeginErrorReadLine();
 
                 await process.WaitForExitAsync();
-
+                LoggingService.Log($"RepairTool: {fileName} execution finished.");
                 AppendLog(LocalizationHelper.GetString("SystemRepairPage_Completed"));
             }
             catch (Exception ex)
             {
-                AppendLog(LocalizationHelper.GetString("SystemRepairPage_Error") + ": " + ex.Message);
+                string errorMsg = LocalizationHelper.GetString("SystemRepairPage_Error") + ": " + ex.Message;
+                AppendLog(errorMsg);
+                LoggingService.Log($"RepairTool ERROR: {ex.GetType().Name} - {ex.Message}");
             }
             finally
             {

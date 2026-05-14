@@ -142,6 +142,7 @@ namespace lanlanlu_toolkit
             {
                 if (ContentFrame.SourcePageType != typeof(SettingsPage))
                 {
+                    LoggingService.Log("Navigating to SettingsPage");
                     ContentFrame.Navigate(typeof(SettingsPage));
                 }
             }
@@ -159,6 +160,7 @@ namespace lanlanlu_toolkit
 
                 if (targetType != null && ContentFrame.SourcePageType != targetType)
                 {
+                    LoggingService.Log($"Navigating to {targetType.Name}");
                     ContentFrame.Navigate(targetType);
                 }
             }

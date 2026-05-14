@@ -484,4 +484,31 @@
   <data name="PerfPage_Ram_HardwareReserved.Text" xml:space="preserve">
     <value>Hardware reserved:</value>
   </data>
+  <data name="SettingsPage_DebugReportTitle.Text" xml:space="preserve">
+    <value>Debug Report</value>
+  </data>
+  <data name="SettingsPage_DebugReportDescription.Text" xml:space="preserve">
+    <value>Records app startup, system errors, tool execution logs, and operation events to help troubleshoot issues.</value>
+  </data>
+  <data name="SettingsPage_DebugReport_StorageCardTitle.Text" xml:space="preserve">
+    <value>Storage Location</value>
+  </data>
+  <data name="SettingsPage_DebugReport_StoragePathPrefix.Text" xml:space="preserve">
+    <value>Currently saved at: </value>
+  </data>
+  <data name="SettingsPage_DebugReport_SelectFolderButton.Content" xml:space="preserve">
+    <value>Change Folder</value>
+  </data>
+  <data name="SettingsPage_DebugReport_ResetButton.Content" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="SettingsPage_DebugReport_ResetButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Reset storage path to default</value>
+  </data>
+  <data name="SettingsPage_DebugReport_DefaultPathDescription.Text" xml:space="preserve">
+    <value>Saved in the same directory as the program by default</value>
+  </data>
+  <data name="SettingsPage_DiagnosticsSectionTitle.Text" xml:space="preserve">
+    <value>Diagnostics &amp; feedback</value>
+  </data>
 </root>

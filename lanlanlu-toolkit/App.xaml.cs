@@ -40,6 +40,10 @@ namespace lanlanlu_toolkit
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            Services.LoggingService.Log("--- Application Started ---");
+            Services.LoggingService.Log($"OS: {Environment.OSVersion}");
+            Services.LoggingService.Log($"Runtime: {System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription}");
+            
             MainWindow = new MainWindow();
 
             // Apply theme

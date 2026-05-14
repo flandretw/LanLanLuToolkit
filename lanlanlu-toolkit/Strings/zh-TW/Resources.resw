@@ -484,4 +484,31 @@
   <data name="PerfPage_Ram_HardwareReserved.Text" xml:space="preserve">
     <value>硬體保留：</value>
   </data>
+  <data name="SettingsPage_DebugReportTitle.Text" xml:space="preserve">
+    <value>偵錯報告</value>
+  </data>
+  <data name="SettingsPage_DebugReportDescription.Text" xml:space="preserve">
+    <value>記錄應用程式啟動、系統錯誤、工具執行紀錄與操作事件，以協助排查問題。</value>
+  </data>
+  <data name="SettingsPage_DebugReport_StorageCardTitle.Text" xml:space="preserve">
+    <value>儲存位置</value>
+  </data>
+  <data name="SettingsPage_DebugReport_StoragePathPrefix.Text" xml:space="preserve">
+    <value>目前儲存在：</value>
+  </data>
+  <data name="SettingsPage_DebugReport_SelectFolderButton.Content" xml:space="preserve">
+    <value>變更資料夾</value>
+  </data>
+  <data name="SettingsPage_DebugReport_ResetButton.Content" xml:space="preserve">
+    <value>重設</value>
+  </data>
+  <data name="SettingsPage_DebugReport_ResetButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>將儲存路徑重設為預設值</value>
+  </data>
+  <data name="SettingsPage_DebugReport_DefaultPathDescription.Text" xml:space="preserve">
+    <value>預設儲存在應用程式所在目錄</value>
+  </data>
+  <data name="SettingsPage_DiagnosticsSectionTitle.Text" xml:space="preserve">
+    <value>診斷與意見反映</value>
+  </data>
 </root>
