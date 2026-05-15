@@ -38,7 +38,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <ScrollViewer IsScrollInertiaEnabled="False" ManipulationMode="System">
+        <ScrollViewer IsScrollInertiaEnabled="True" ManipulationMode="System">
             <Grid x:Name="RootGrid" HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition x:Name="LeftCol" Width="*" />

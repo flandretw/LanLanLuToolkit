@@ -80,7 +80,7 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <ScrollViewer x:Name="MainScrollViewer" IsScrollInertiaEnabled="False" ManipulationMode="System">
+    <ScrollViewer x:Name="MainScrollViewer" IsScrollInertiaEnabled="True" ManipulationMode="System">
         <Grid x:Name="RootGrid">
             <!-- Background Image Layer -->
             <Grid x:Name="HeroGrid" 
@@ -128,7 +128,7 @@
                               HorizontalScrollBarVisibility="Hidden" 
                               HorizontalScrollMode="Enabled" 
                               VerticalScrollMode="Disabled"
-                              IsScrollInertiaEnabled="False"
+                              IsScrollInertiaEnabled="True"
                               ManipulationMode="System"
                               ViewChanged="CardsScrollViewer_ViewChanged">
                     <StackPanel Orientation="Horizontal" Spacing="12" Padding="36,4,36,4">

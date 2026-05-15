@@ -10,7 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <ScrollViewer x:Name="ContentScrollViewer" Visibility="Collapsed" IsScrollInertiaEnabled="False" ManipulationMode="System">
+        <ScrollViewer x:Name="ContentScrollViewer" Visibility="Collapsed" IsScrollInertiaEnabled="True" ManipulationMode="System">
             <Grid x:Name="RootGrid" Padding="36" HorizontalAlignment="Stretch">
                 <StackPanel Spacing="16" MaxWidth="1600" HorizontalAlignment="Stretch">
                     <StackPanel.ChildrenTransitions>

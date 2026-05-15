@@ -12,7 +12,7 @@
 
     <Grid>
         <!-- Tool Cards Container (Everything inside ScrollViewer) -->
-        <ScrollViewer IsScrollInertiaEnabled="False" ManipulationMode="System">
+        <ScrollViewer IsScrollInertiaEnabled="True" ManipulationMode="System">
             <Grid Padding="36" HorizontalAlignment="Stretch">
                 <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
                     <!-- Page Header with Subtitle (No Icon) -->
@@ -194,7 +194,7 @@
 
                             <!-- Console Area -->
                             <Border Grid.Row="2" Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="20">
-                                <ScrollViewer x:Name="LogScrollViewer" IsScrollInertiaEnabled="False" ManipulationMode="System">
+                                <ScrollViewer x:Name="LogScrollViewer" IsScrollInertiaEnabled="True" ManipulationMode="System">
                                     <TextBlock x:Name="LogOutput" 
                                                FontFamily="Cascadia Code, Consolas" 
                                                FontSize="12" 
