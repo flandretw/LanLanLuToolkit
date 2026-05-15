@@ -64,4 +64,4 @@ A: Safer than a Masala burger made by a Microsoft employee! It's open-source, po
 ---
 
 **License & Copyright**  
-Copyright © 2026 flandretw | This project is licensed under the [MIT License](LICENSE.txt).
+Copyright © 2026 flandretw | This project is licensed under the [MIT License](LICENSE).
