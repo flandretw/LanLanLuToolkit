@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Dispatching;
 using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
@@ -135,7 +136,7 @@ namespace lanlanlu_toolkit.Views
                 _cachedRamInfo = ramInfo;
             }
 
-            DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+            DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
             {
                 // CPU UI
                 CpuNameText.Text = cpuInfo.Name;
@@ -439,7 +440,7 @@ namespace lanlanlu_toolkit.Views
                         nonPagedPoolMb = Convert.ToDouble(obj["PoolNonpagedBytes"]) / (1024.0 * 1024.0);
                     }
 
-                    DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () => {
+                    DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () => {
                         try {
                             if (!_isActive || _cts?.IsCancellationRequested == true) return;
                             

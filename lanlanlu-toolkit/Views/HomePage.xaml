@@ -85,16 +85,15 @@
             <!-- Background Image Layer -->
             <Grid x:Name="HeroGrid" 
                   VerticalAlignment="Top" 
+                  Background="{ThemeResource HeroFadeColor}"
                   Height="{x:Bind HeroHeight, Mode=OneWay}">
                 <!-- Rounded Corner Container for Image -->
                 <Border CornerRadius="8,0,0,0">
                     <Border.Background>
                         <ImageBrush ImageSource="{ThemeResource HomePageHeroImage}" 
                                     Stretch="UniformToFill" 
-                                    AlignmentY="Center">
-                            <ImageBrush.RelativeTransform>
-                                <CompositeTransform TranslateY="0.1" />
-                            </ImageBrush.RelativeTransform>
+                                    AlignmentY="Center"
+                                    Opacity="1">
                         </ImageBrush>
                     </Border.Background>
                 </Border>

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Input;
 using Windows.ApplicationModel.DataTransfer;
 using lanlanlu_toolkit.Services;
 
@@ -245,6 +244,9 @@ namespace lanlanlu_toolkit.Views
 
         private void UpdateLayoutProportions(double windowHeight)
         {
+            // Guard against invalid heights during rapid resizing or DPI changes
+            if (windowHeight <= 0) return;
+
             // Half height if window < 800px, otherwise one-third
             HeroHeight = windowHeight < 800 ? windowHeight * 0.5 : windowHeight * 0.33;
         }

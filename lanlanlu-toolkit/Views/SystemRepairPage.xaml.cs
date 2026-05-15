@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using Microsoft.Windows.ApplicationModel.Resources;
+using Microsoft.UI.Dispatching;
 using Windows.ApplicationModel.DataTransfer;
 using lanlanlu_toolkit.Services;
 
@@ -185,7 +185,7 @@ namespace lanlanlu_toolkit.Views
                 process.OutputDataReceived += (s, e) => {
                     if (e.Data != null)
                     {
-                        DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () => {
+                        DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () => {
                             AppendLog(e.Data);
                         });
                     }
@@ -194,7 +194,7 @@ namespace lanlanlu_toolkit.Views
                 process.ErrorDataReceived += (s, e) => {
                     if (e.Data != null)
                     {
-                        DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () => {
+                        DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () => {
                             string errorPrefix = LocalizationHelper.GetString("SystemRepairPage_Log_ErrorPrefix");
                             AppendLog($"{errorPrefix} " + e.Data);
                         });
