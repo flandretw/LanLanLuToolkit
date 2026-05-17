@@ -292,6 +292,12 @@
   <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
     <value>在系統修復或長時間任務結束時播放提示音。</value>
   </data>
+  <data name="SettingsPage_NotificationsTitle.Text" xml:space="preserve">
+    <value>通知</value>
+  </data>
+  <data name="SettingsPage_NotificationsDescription.Text" xml:space="preserve">
+    <value>管理應用程式的通知行為與提示方式。</value>
+  </data>
   <data name="SettingsPage_TempUnitTitle.Text" xml:space="preserve">
     <value>溫度單位</value>
   </data>

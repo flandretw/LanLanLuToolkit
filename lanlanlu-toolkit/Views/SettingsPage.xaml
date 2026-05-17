@@ -147,36 +147,58 @@
                         </Grid>
                     </Border>
 
-                    <!-- Notification Sound Card -->
-                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                            BorderThickness="1"
-                            CornerRadius="{ThemeResource ControlCornerRadius}">
-                        <Grid MinHeight="72" Padding="16,0,16,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE995;" 
-                                      FontSize="20" 
-                                      Margin="0,0,16,0" 
-                                      VerticalAlignment="Center" 
-                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
-                                <TextBlock x:Uid="SettingsPage_NotificationSound_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                <TextBlock x:Uid="SettingsPage_NotificationSound_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                            </StackPanel>
-                            <ToggleSwitch x:Name="NotificationSoundToggle" 
-                                          Grid.Column="2" 
-                                          VerticalAlignment="Center"
-                                          HorizontalAlignment="Right"
-                                          Header="{x:Null}"
-                                          MinWidth="0" Margin="0,0,-12,0" Padding="0"
-                                          OnContent="" OffContent=""
-                                          Toggled="NotificationSoundToggle_Toggled" />
-                        </Grid>
-                    </Border>
+                    <!-- Notifications Card -->
+                    <Expander HorizontalAlignment="Stretch" 
+                              HorizontalContentAlignment="Stretch"
+                              Padding="0"
+                              CornerRadius="{ThemeResource ControlCornerRadius}">
+                        <Expander.Header>
+                            <Grid HorizontalAlignment="Stretch" MinHeight="72" Padding="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Glyph="&#xEA8F;" 
+                                          FontSize="20" 
+                                          Margin="0,0,16,0" 
+                                          VerticalAlignment="Center" 
+                                          Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                    <TextBlock x:Uid="SettingsPage_NotificationsTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                    <TextBlock x:Uid="SettingsPage_NotificationsDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </StackPanel>
+                                <ToggleSwitch x:Name="NotificationsToggle" 
+                                              Grid.Column="2" 
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Right"
+                                              Header="{x:Null}"
+                                              MinWidth="0" Margin="0,0,-28,0" Padding="0"
+                                              OnContent="" OffContent=""
+                                              Toggled="NotificationsToggle_Toggled" />
+                            </Grid>
+                        </Expander.Header>
+                        <Expander.Content>
+                            <Grid Padding="52,12,16,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel VerticalAlignment="Center" Margin="0,0,16,0">
+                                    <TextBlock x:Uid="SettingsPage_NotificationSound_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                    <TextBlock x:Uid="SettingsPage_NotificationSound_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </StackPanel>
+                                <ToggleSwitch x:Name="NotificationSoundToggle" 
+                                              Grid.Column="1" 
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Right"
+                                              Header="{x:Null}"
+                                              MinWidth="0" Margin="0,0,-12,0" Padding="0"
+                                              OnContent="" OffContent=""
+                                              Toggled="NotificationSoundToggle_Toggled" />
+                            </Grid>
+                        </Expander.Content>
+                    </Expander>
                 </StackPanel>
 
                 <!-- Diagnostics & Feedback Section -->
@@ -185,6 +207,7 @@
                     <!-- Debug Report Card -->
                     <Expander HorizontalAlignment="Stretch" 
                               HorizontalContentAlignment="Stretch"
+                              Padding="0"
                               CornerRadius="{ThemeResource ControlCornerRadius}">
                         <Expander.Header>
                             <Grid HorizontalAlignment="Stretch" MinHeight="72" Padding="0">
@@ -213,7 +236,7 @@
                             </Grid>
                         </Expander.Header>
                         <Expander.Content>
-                            <Grid Padding="36,4,16,4">
+                            <Grid Padding="52,12,16,12">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />

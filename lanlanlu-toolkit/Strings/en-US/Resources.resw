@@ -292,6 +292,12 @@
   <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
     <value>Play a sound when system repairs or long tasks are completed.</value>
   </data>
+  <data name="SettingsPage_NotificationsTitle.Text" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="SettingsPage_NotificationsDescription.Text" xml:space="preserve">
+    <value>Manage how the application notifies you about task completions.</value>
+  </data>
   <data name="SettingsPage_TempUnitTitle.Text" xml:space="preserve">
     <value>Temperature Unit</value>
   </data>

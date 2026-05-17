@@ -11,6 +11,7 @@ namespace lanlanlu_toolkit.Services
     {
         public string Language { get; set; } = "en-US";
         public string Theme { get; set; } = "Default";
+        public bool NotificationsEnabled { get; set; } = true;
         public bool NotificationSoundEnabled { get; set; } = true;
         public string TemperatureUnit { get; set; } = "Celsius";
         public bool DebugReportEnabled { get; set; } = false;
@@ -159,6 +160,22 @@ namespace lanlanlu_toolkit.Services
                 "Dark" => ElementTheme.Dark,
                 _ => ElementTheme.Default
             };
+        }
+
+        public static bool GetNotificationsEnabled()
+        {
+            LoadSettings();
+            return _currentSettings?.NotificationsEnabled ?? true;
+        }
+
+        public static void SaveNotificationsEnabled(bool enabled)
+        {
+            LoadSettings();
+            if (_currentSettings != null)
+            {
+                _currentSettings.NotificationsEnabled = enabled;
+                SaveSettings();
+            }
         }
 
         public static bool GetNotificationSound()

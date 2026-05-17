@@ -28,7 +28,7 @@ namespace lanlanlu_toolkit.Services
         /// <param name="severity">Severity (default Success)</param>
         public static void Show(string title, string message, InfoBarSeverity severity = InfoBarSeverity.Success)
         {
-            if (_appInfoBar == null) return;
+            if (_appInfoBar == null || !SettingsService.GetNotificationsEnabled()) return;
 
             _appInfoBar.Title = title;
             _appInfoBar.Message = message;

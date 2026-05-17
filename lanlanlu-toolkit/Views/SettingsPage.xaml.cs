@@ -16,7 +16,7 @@ namespace lanlanlu_toolkit.Views
             LoadCurrentLanguage();
             LoadCurrentTheme();
             LoadCurrentTemperatureUnit();
-            LoadNotificationSound();
+            LoadNotificationSettings();
             LoadDebugReportSettings();
             InitializeAboutInfo();
             _isInitialized = true;
@@ -152,9 +152,19 @@ namespace lanlanlu_toolkit.Views
             }
         }
 
-        private void LoadNotificationSound()
+        private void LoadNotificationSettings()
         {
+            NotificationsToggle.IsOn = SettingsService.GetNotificationsEnabled();
             NotificationSoundToggle.IsOn = SettingsService.GetNotificationSound();
+            NotificationSoundToggle.IsEnabled = NotificationsToggle.IsOn;
+        }
+
+        private void NotificationsToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (!_isInitialized) return;
+            bool isEnabled = NotificationsToggle.IsOn;
+            SettingsService.SaveNotificationsEnabled(isEnabled);
+            NotificationSoundToggle.IsEnabled = isEnabled;
         }
 
         private void NotificationSoundToggle_Toggled(object sender, RoutedEventArgs e)

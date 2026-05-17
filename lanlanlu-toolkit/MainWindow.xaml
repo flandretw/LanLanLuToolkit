@@ -59,9 +59,10 @@
                 <InfoBar x:Name="AppInfoBar"
                          IsOpen="False"
                          Severity="Informational"
-                         HorizontalAlignment="Center"
+                         HorizontalAlignment="Right"
                          VerticalAlignment="Top"
-                         Margin="0,12,0,0"
+                         Margin="0,24,24,0"
+                         MaxWidth="500"
                          Canvas.ZIndex="999" />
             </Grid>
         </NavigationView>
