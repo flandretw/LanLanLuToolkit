@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using lanlanlu_toolkit.Services;
@@ -74,6 +75,7 @@ namespace lanlanlu_toolkit.Views
     {
         private string? _selectedFilePath;
         private string _calculatedHash = string.Empty;
+        private CancellationTokenSource? _hashCancellationTokenSource;
 
         [DllImport("user32.dll")]
         private static extern IntPtr GetActiveWindow();
@@ -180,6 +182,13 @@ namespace lanlanlu_toolkit.Views
 
         private async void CalculateBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (_hashCancellationTokenSource != null)
+            {
+                // Calculation is in progress, request cancellation!
+                _hashCancellationTokenSource.Cancel();
+                return;
+            }
+
             await RunHashCalculation();
         }
 
@@ -193,16 +202,31 @@ namespace lanlanlu_toolkit.Views
                 algorithm = selectedItem.Tag.ToString()!;
             }
 
+            // Create cancellation token
+            _hashCancellationTokenSource = new CancellationTokenSource();
+            var token = _hashCancellationTokenSource.Token;
+
             // UI feedback
             ProgressGrid.Visibility = Visibility.Visible;
-            CalculateBtn.IsEnabled = false;
+            CalculateBtn.Content = LocalizationHelper.GetString("System_Cancel") ?? "取消";
+            CalculateBtn.IsEnabled = true; // Keep enabled for cancellation!
             SelectFileBtn.IsEnabled = false;
             AlgorithmComboBox.IsEnabled = false;
-            ResultTextBox.Text = LocalizationHelper.GetString("FileHashPage_Calculating");
+            ResultTextBox.Text = LocalizationHelper.GetString("FileHashPage_Calculating") ?? "正在計算雜湊值，請稍候……";
 
             try
             {
-                _calculatedHash = await CalculateHashAsync(_selectedFilePath, algorithm);
+                _calculatedHash = await CalculateHashAsync(_selectedFilePath, algorithm, token);
+
+                if (string.IsNullOrEmpty(_calculatedHash))
+                {
+                    // Hashing was cancelled!
+                    ResultTextBox.Text = LocalizationHelper.GetString("FileHashPage_CalculationCancelled") ?? "計算已取消。";
+                    CopyBtn.IsEnabled = false;
+                    VerifyBtn.IsEnabled = false;
+                    VerifyResultInfoBar.IsOpen = false;
+                    return;
+                }
                 
                 ResultTextBox.Text = _calculatedHash;
                 CopyBtn.IsEnabled = true;
@@ -219,13 +243,15 @@ namespace lanlanlu_toolkit.Views
             finally
             {
                 ProgressGrid.Visibility = Visibility.Collapsed;
-                CalculateBtn.IsEnabled = true;
+                CalculateBtn.Content = LocalizationHelper.GetString("FileHashPage_CalculateButton/Content") ?? "重新計算";
                 SelectFileBtn.IsEnabled = true;
                 AlgorithmComboBox.IsEnabled = true;
+                _hashCancellationTokenSource?.Dispose();
+                _hashCancellationTokenSource = null;
             }
         }
 
-        private async Task<string> CalculateHashAsync(string filePath, string algorithm)
+        private async Task<string> CalculateHashAsync(string filePath, string algorithm, CancellationToken cancellationToken)
         {
             return await Task.Run(() =>
             {
@@ -240,7 +266,23 @@ namespace lanlanlu_toolkit.Views
                         _ => throw new ArgumentException("Unsupported algorithm")
                     })
                     {
-                        byte[] hashBytes = hasher.ComputeHash(stream);
+                        byte[] buffer = new byte[81920]; // 80KB buffer
+                        int bytesRead;
+
+                        while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            if (cancellationToken.IsCancellationRequested)
+                            {
+                                return string.Empty; // Return empty directly on cancellation (exception-less)
+                            }
+
+                            hasher.TransformBlock(buffer, 0, bytesRead, buffer, 0);
+                        }
+
+                        // Finalize the hashing process
+                        hasher.TransformFinalBlock(buffer, 0, 0);
+
+                        byte[] hashBytes = hasher.Hash ?? throw new InvalidOperationException("Hash computation failed");
                         var sb = new StringBuilder(hashBytes.Length * 2);
                         foreach (byte b in hashBytes)
                         {
@@ -249,7 +291,7 @@ namespace lanlanlu_toolkit.Views
                         return sb.ToString();
                     }
                 }
-            });
+            }, cancellationToken);
         }
 
         private async void AlgorithmComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

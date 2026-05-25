@@ -625,4 +625,10 @@
   <data name="System_Paste" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="System_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="FileHashPage_CalculationCancelled" xml:space="preserve">
+    <value>Calculation cancelled.</value>
+  </data>
 </root>
