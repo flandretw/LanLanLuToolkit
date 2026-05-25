@@ -1,0 +1,219 @@
+<Page
+    x:Class="lanlanlu_toolkit.Views.FileHashPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:lanlanlu_toolkit.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <ScrollViewer IsScrollInertiaEnabled="True" ManipulationMode="System">
+            <Grid Padding="36" HorizontalAlignment="Stretch">
+                <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
+                    
+                    <!-- Page Header -->
+                    <StackPanel Spacing="4" Margin="0">
+                        <TextBlock x:Name="PageHeaderTitleTextBlock" Style="{ThemeResource TitleTextBlockStyle}" />
+                        <TextBlock x:Name="PageHeaderDescTextBlock" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    </StackPanel>
+
+                    <!-- Select File Section -->
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Name="SectionSelectFileTextBlock" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
+                        
+                        <!-- Select File Card (General Card Style) -->
+                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8">
+                            <Grid Padding="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Glyph="&#xF12B;" FontSize="24" Margin="0,0,16,0" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0" Spacing="2">
+                                    <TextBlock x:Name="DragDropPromptTextBlock" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                    <TextBlock x:Name="SelectFileCardDescTextBlock" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Button x:Name="SelectFileBtn" Grid.Column="2" Click="SelectFileBtn_Click" Style="{ThemeResource AccentButtonStyle}" Width="132" Height="32" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Selected File Details Card -->
+                        <Border x:Name="FileDetailsCard"
+                                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Visibility="Collapsed">
+                            <Grid Padding="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Glyph="&#xE8A5;" FontSize="24" Margin="0,0,16,0" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
+                                <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                    <TextBlock x:Name="FileNameText" Style="{ThemeResource BodyStrongTextBlockStyle}" TextWrapping="Wrap" />
+                                    <TextBlock x:Name="FilePathText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                    <TextBlock x:Name="FileSizeText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Calculate Hash Section -->
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Name="SectionCalculateTextBlock" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
+
+                        <!-- Hash Configuration and Calculation Card -->
+                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8">
+                            <StackPanel Padding="16" Spacing="20">
+                                <!-- Algorithm Selector and Calculate Button in one sleek row -->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel VerticalAlignment="Center" Margin="0,0,16,0">
+                                        <TextBlock x:Name="AlgorithmLabel" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                        <TextBlock x:Name="AlgorithmDescLabel" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                                        <!-- Progress Indicator -->
+                                        <StackPanel x:Name="ProgressGrid" Orientation="Horizontal" Spacing="8" Visibility="Collapsed" VerticalAlignment="Center">
+                                            <ProgressRing IsActive="True" Width="16" Height="16" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="ProgressStatusText" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        </StackPanel>
+                                        
+                                        <!-- Algorithm Selection -->
+                                        <ComboBox x:Name="AlgorithmComboBox" Width="132" SelectedIndex="0" SelectionChanged="AlgorithmComboBox_SelectionChanged" VerticalAlignment="Center">
+                                            <ComboBoxItem Content="SHA-256" Tag="SHA256" />
+                                            <ComboBoxItem Content="SHA-1" Tag="SHA1" />
+                                            <ComboBoxItem Content="MD5" Tag="MD5" />
+                                            <ComboBoxItem Content="SHA-512" Tag="SHA512" />
+                                        </ComboBox>
+                                        
+                                        <!-- Recalculate Button -->
+                                        <Button x:Name="CalculateBtn" Click="CalculateBtn_Click" Width="132" Height="32" IsEnabled="False" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- Results display (Using RelativePanel - 100% stable, sleek and premium) -->
+                                <RelativePanel HorizontalAlignment="Stretch" Margin="0,8,0,0">
+                                    <Button x:Name="CopyBtn" 
+                                            RelativePanel.AlignRightWithPanel="True"
+                                            RelativePanel.AlignBottomWithPanel="True"
+                                            Click="CopyBtn_Click" 
+                                            Width="132" 
+                                            Height="32"
+                                            IsEnabled="False">
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <FontIcon Glyph="&#xE8C8;" FontSize="14" />
+                                            <TextBlock x:Name="CopyBtnText" Style="{ThemeResource CaptionTextBlockStyle}" />
+                                        </StackPanel>
+                                    </Button>
+                                    <TextBox x:Name="ResultTextBox" 
+                                             RelativePanel.AlignLeftWithPanel="True"
+                                             RelativePanel.LeftOf="CopyBtn"
+                                             Margin="0,0,12,0"
+                                             IsReadOnly="True" 
+                                             TextWrapping="Wrap" 
+                                             FontFamily="Cascadia Code, Consolas"
+                                             MinHeight="60">
+                                        <TextBox.Resources>
+                                            <ThemeResource x:Key="TextControlBackgroundReadOnly" ResourceKey="TextControlBackground" />
+                                            <ThemeResource x:Key="TextControlBorderBrushReadOnly" ResourceKey="TextControlBorderBrush" />
+                                            <ThemeResource x:Key="TextControlForegroundReadOnly" ResourceKey="TextControlForeground" />
+                                        </TextBox.Resources>
+                                        <TextBox.ContextFlyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem x:Name="ResultCopyMenu" Click="ResultCopyMenu_Click">
+                                                    <MenuFlyoutItem.Icon>
+                                                        <FontIcon Glyph="&#xE8C8;" />
+                                                    </MenuFlyoutItem.Icon>
+                                                </MenuFlyoutItem>
+                                            </MenuFlyout>
+                                        </TextBox.ContextFlyout>
+                                    </TextBox>
+                                </RelativePanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Hash Comparison/Verification Card Section -->
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Name="SectionVerifyTextBlock" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
+
+                        <!-- Hash Comparison/Verification Card -->
+                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8">
+                            <StackPanel Padding="16" Spacing="20">
+                                <StackPanel Spacing="4">
+                                    <TextBlock x:Name="CompareLabel" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                    <TextBlock x:Name="CompareDescLabel" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </StackPanel>
+
+                                <!-- Input and button (Using RelativePanel - 100% stable, sleek and premium) -->
+                                <RelativePanel HorizontalAlignment="Stretch">
+                                    <Button x:Name="VerifyBtn" 
+                                            RelativePanel.AlignRightWithPanel="True"
+                                            RelativePanel.AlignBottomWithPanel="True"
+                                            Click="VerifyBtn_Click" 
+                                            Width="132" 
+                                            Height="32"
+                                            IsEnabled="False">
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <FontIcon Glyph="&#xE77F;" FontSize="14" />
+                                            <TextBlock x:Name="VerifyBtnText" Style="{ThemeResource CaptionTextBlockStyle}" />
+                                        </StackPanel>
+                                    </Button>
+                                    <TextBox x:Name="CompareTextBox" 
+                                             RelativePanel.AlignLeftWithPanel="True"
+                                             RelativePanel.LeftOf="VerifyBtn"
+                                             Margin="0,0,12,0"
+                                             FontFamily="Cascadia Code, Consolas" 
+                                             TextChanged="CompareTextBox_TextChanged"
+                                             TextWrapping="Wrap"
+                                             MinHeight="60">
+                                        <TextBox.ContextFlyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem x:Name="CompareCutMenu" Click="CompareCutMenu_Click">
+                                                    <MenuFlyoutItem.Icon>
+                                                        <FontIcon Glyph="&#xE8C6;" />
+                                                    </MenuFlyoutItem.Icon>
+                                                </MenuFlyoutItem>
+                                                <MenuFlyoutItem x:Name="CompareCopyMenu" Click="CompareCopyMenu_Click">
+                                                    <MenuFlyoutItem.Icon>
+                                                        <FontIcon Glyph="&#xE8C8;" />
+                                                    </MenuFlyoutItem.Icon>
+                                                </MenuFlyoutItem>
+                                                <MenuFlyoutItem x:Name="ComparePasteMenu" Click="ComparePasteMenu_Click">
+                                                    <MenuFlyoutItem.Icon>
+                                                        <FontIcon Glyph="&#xE77F;" />
+                                                    </MenuFlyoutItem.Icon>
+                                                </MenuFlyoutItem>
+                                            </MenuFlyout>
+                                        </TextBox.ContextFlyout>
+                                    </TextBox>
+                                </RelativePanel>
+
+                                <!-- Verification Result Banner -->
+                                <InfoBar x:Name="VerifyResultInfoBar" IsOpen="False" IsClosable="True" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

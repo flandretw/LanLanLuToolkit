@@ -155,6 +155,8 @@ namespace lanlanlu_toolkit
                     "PerformancePage" => typeof(PerformancePage),
                     "TestToolPage" => typeof(TestToolPage),
                     "SystemRepairPage" => typeof(SystemRepairPage),
+                    "UtilityPage" => typeof(UtilityPage),
+                    "FileHashPage" => typeof(FileHashPage),
                     _ => null
                 };
 

@@ -517,4 +517,112 @@
   <data name="SettingsPage_DiagnosticsSectionTitle.Text" xml:space="preserve">
     <value>診斷與意見反映</value>
   </data>
+  <data name="Nav_UtilityPage.Content" xml:space="preserve">
+    <value>實用工具</value>
+  </data>
+  <data name="UtilityPage_Title.Text" xml:space="preserve">
+    <value>實用工具</value>
+  </data>
+  <data name="Nav_FileHashPage.Content" xml:space="preserve">
+    <value>計算檔案雜湊碼</value>
+  </data>
+  <data name="FileHashPage_Title.Text" xml:space="preserve">
+    <value>計算檔案雜湊碼</value>
+  </data>
+  <data name="FileHashPage_Desc.Text" xml:space="preserve">
+    <value>快速計算與驗證檔案的 SHA-256、SHA-1 或 MD5 雜湊值。</value>
+  </data>
+  <data name="FileHashPage_SelectFile.Content" xml:space="preserve">
+    <value>選擇檔案</value>
+  </data>
+  <data name="FileHashPage_DragDropPrompt.Text" xml:space="preserve">
+    <value>選擇要計算的檔案</value>
+  </data>
+  <data name="FileHashPage_SelectFileCardDesc.Text" xml:space="preserve">
+    <value>從您的電腦中選取一個檔案，系統會即時為您計算並比對對應的雜湊值。</value>
+  </data>
+  <data name="FileHashPage_Algorithm.Text" xml:space="preserve">
+    <value>雜湊演算法</value>
+  </data>
+  <data name="FileHashPage_Result.Header" xml:space="preserve">
+    <value>雜湊結果</value>
+  </data>
+  <data name="FileHashPage_Compare.Text" xml:space="preserve">
+    <value>對比驗證雜湊值（不區分大小寫）</value>
+  </data>
+  <data name="FileHashPage_CompareButton.Text" xml:space="preserve">
+    <value>貼上比對</value>
+  </data>
+  <data name="FileHashPage_CopyButton.Text" xml:space="preserve">
+    <value>複製結果</value>
+  </data>
+  <data name="FileHashPage_CalculateButton.Content" xml:space="preserve">
+    <value>重新計算</value>
+  </data>
+  <data name="FileHashPage_VerifySuccess" xml:space="preserve">
+    <value>雜湊值比對成功！完全一致。</value>
+  </data>
+  <data name="FileHashPage_VerifyFail" xml:space="preserve">
+    <value>雜湊值比對失敗！檔案可能已被修改或演算法不符。</value>
+  </data>
+  <data name="FileHashPage_Calculating" xml:space="preserve">
+    <value>正在計算雜湊值，請稍候……</value>
+  </data>
+  <data name="FileHashPage_SelectFileFirst" xml:space="preserve">
+    <value>請先選擇一個檔案！</value>
+  </data>
+  <data name="FileHashPage_FileSelected" xml:space="preserve">
+    <value>已選擇檔案：</value>
+  </data>
+  <data name="FileHashPage_FileSize" xml:space="preserve">
+    <value>檔案大小：</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Desc.Text" xml:space="preserve">
+    <value>SHA-256（高度安全，建議使用）、SHA-1（舊版相容）、MD5（快速驗證）、SHA-512（極高強度安全）。</value>
+  </data>
+  <data name="FileHashPage_Result.PlaceholderText" xml:space="preserve">
+    <value>選擇檔案並計算後，雜湊結果會在此處顯示……</value>
+  </data>
+  <data name="FileHashPage_Compare_Desc.Text" xml:space="preserve">
+    <value>在此貼上您預期比對的雜湊值，系統會即時進行無大小寫差異的比對驗證。</value>
+  </data>
+  <data name="FileHashPage_CompareInput.PlaceholderText" xml:space="preserve">
+    <value>輸入或貼上預期的雜湊值以進行比對……</value>
+  </data>
+  <data name="FileHashPage_DialogTitle" xml:space="preserve">
+    <value>選擇要計算雜湊值的檔案</value>
+  </data>
+  <data name="FileHashPage_Error_FileNotFound" xml:space="preserve">
+    <value>檔案不存在或無法存取！</value>
+  </data>
+  <data name="FileHashPage_VerifySuccess_Title" xml:space="preserve">
+    <value>驗證成功</value>
+  </data>
+  <data name="FileHashPage_VerifyFail_Title" xml:space="preserve">
+    <value>驗證失敗</value>
+  </data>
+  <data name="Notification_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="Notification_Error" xml:space="preserve">
+    <value>錯誤</value>
+  </data>
+  <data name="FileHashPage_Section_SelectFile" xml:space="preserve">
+    <value>選擇檔案</value>
+  </data>
+  <data name="FileHashPage_Section_Calculate" xml:space="preserve">
+    <value>計算雜湊值</value>
+  </data>
+  <data name="FileHashPage_Section_Verify" xml:space="preserve">
+    <value>比對驗證</value>
+  </data>
+  <data name="System_Cut" xml:space="preserve">
+    <value>剪下</value>
+  </data>
+  <data name="System_Copy" xml:space="preserve">
+    <value>複製</value>
+  </data>
+  <data name="System_Paste" xml:space="preserve">
+    <value>貼上</value>
+  </data>
 </root>

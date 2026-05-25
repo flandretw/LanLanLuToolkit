@@ -517,4 +517,112 @@
   <data name="SettingsPage_DiagnosticsSectionTitle.Text" xml:space="preserve">
     <value>Diagnostics &amp; feedback</value>
   </data>
+  <data name="Nav_UtilityPage.Content" xml:space="preserve">
+    <value>Utilities</value>
+  </data>
+  <data name="UtilityPage_Title.Text" xml:space="preserve">
+    <value>Utilities</value>
+  </data>
+  <data name="Nav_FileHashPage.Content" xml:space="preserve">
+    <value>Calculate File Hash</value>
+  </data>
+  <data name="FileHashPage_Title.Text" xml:space="preserve">
+    <value>Calculate File Hash</value>
+  </data>
+  <data name="FileHashPage_Desc.Text" xml:space="preserve">
+    <value>Quickly calculate and verify file SHA-256, SHA-1, or MD5 hash values.</value>
+  </data>
+  <data name="FileHashPage_SelectFile.Content" xml:space="preserve">
+    <value>Select File</value>
+  </data>
+  <data name="FileHashPage_DragDropPrompt.Text" xml:space="preserve">
+    <value>Select a file to calculate</value>
+  </data>
+  <data name="FileHashPage_SelectFileCardDesc.Text" xml:space="preserve">
+    <value>Select a file from your computer to calculate and compare its hash codes.</value>
+  </data>
+  <data name="FileHashPage_Algorithm.Text" xml:space="preserve">
+    <value>Hash Algorithm</value>
+  </data>
+  <data name="FileHashPage_Result.Header" xml:space="preserve">
+    <value>Hash Result</value>
+  </data>
+  <data name="FileHashPage_Compare.Text" xml:space="preserve">
+    <value>Compare &amp; Verify Hash (Case-insensitive)</value>
+  </data>
+  <data name="FileHashPage_CompareButton.Text" xml:space="preserve">
+    <value>Paste &amp; Verify</value>
+  </data>
+  <data name="FileHashPage_CopyButton.Text" xml:space="preserve">
+    <value>Copy Result</value>
+  </data>
+  <data name="FileHashPage_CalculateButton.Content" xml:space="preserve">
+    <value>Recalculate</value>
+  </data>
+  <data name="FileHashPage_VerifySuccess" xml:space="preserve">
+    <value>Hash verification succeeded! Perfect match.</value>
+  </data>
+  <data name="FileHashPage_VerifyFail" xml:space="preserve">
+    <value>Hash verification failed! File may be modified or algorithm mismatch.</value>
+  </data>
+  <data name="FileHashPage_Calculating" xml:space="preserve">
+    <value>Calculating hash, please wait...</value>
+  </data>
+  <data name="FileHashPage_SelectFileFirst" xml:space="preserve">
+    <value>Please select a file first!</value>
+  </data>
+  <data name="FileHashPage_FileSelected" xml:space="preserve">
+    <value>Selected file:</value>
+  </data>
+  <data name="FileHashPage_FileSize" xml:space="preserve">
+    <value>File size:</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Desc.Text" xml:space="preserve">
+    <value>SHA-256 (Highly secure, recommended), SHA-1 (Legacy compatibility), MD5 (Quick verification), SHA-512 (Ultra secure).</value>
+  </data>
+  <data name="FileHashPage_Result.PlaceholderText" xml:space="preserve">
+    <value>After selecting a file and calculating, the hash result will be displayed here...</value>
+  </data>
+  <data name="FileHashPage_Compare_Desc.Text" xml:space="preserve">
+    <value>Paste the expected hash here, and the system will verify it in real-time, ignoring case.</value>
+  </data>
+  <data name="FileHashPage_CompareInput.PlaceholderText" xml:space="preserve">
+    <value>Enter or paste the expected hash to compare...</value>
+  </data>
+  <data name="FileHashPage_DialogTitle" xml:space="preserve">
+    <value>Select a file to calculate hash</value>
+  </data>
+  <data name="FileHashPage_Error_FileNotFound" xml:space="preserve">
+    <value>File does not exist or is inaccessible!</value>
+  </data>
+  <data name="FileHashPage_VerifySuccess_Title" xml:space="preserve">
+    <value>Verification Succeeded</value>
+  </data>
+  <data name="FileHashPage_VerifyFail_Title" xml:space="preserve">
+    <value>Verification Failed</value>
+  </data>
+  <data name="Notification_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Notification_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="FileHashPage_Section_SelectFile" xml:space="preserve">
+    <value>Select File</value>
+  </data>
+  <data name="FileHashPage_Section_Calculate" xml:space="preserve">
+    <value>Calculate Hash</value>
+  </data>
+  <data name="FileHashPage_Section_Verify" xml:space="preserve">
+    <value>Verify &amp; Compare</value>
+  </data>
+  <data name="System_Cut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="System_Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="System_Paste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
 </root>

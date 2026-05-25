@@ -51,6 +51,18 @@
                         </NavigationViewItem>
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
+                <NavigationViewItem Tag="UtilityPage" x:Uid="Nav_UtilityPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE805;" />
+                    </NavigationViewItem.Icon>
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Tag="FileHashPage" x:Uid="Nav_FileHashPage">
+                            <NavigationViewItem.Icon>
+                                <FontIcon Glyph="&#xEC19;" />
+                            </NavigationViewItem.Icon>
+                        </NavigationViewItem>
+                    </NavigationViewItem.MenuItems>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
             
             <Grid>
