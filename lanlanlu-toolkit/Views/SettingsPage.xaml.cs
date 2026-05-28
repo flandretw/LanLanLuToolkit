@@ -216,7 +216,8 @@ namespace lanlanlu_toolkit.Views
                 IntPtr hwnd = GetActiveWindow();
                 
                 string initialPath = SettingsService.GetDebugReportPath();
-                string? result = dialog.Show(hwnd, initialPath);
+                string title = LocalizationHelper.GetString("SettingsPage_DebugReport_SelectFolderTitle") ?? "選擇偵錯報告儲存資料夾";
+                string? result = dialog.Show(hwnd, initialPath, title);
 
                 if (result != null)
                 {
@@ -240,49 +241,103 @@ namespace lanlanlu_toolkit.Views
         }
     }
 
-    // A wrapper for the classic Win32 SHBrowseForFolder dialog
+    // A wrapper for the modern Win32 COM IFileOpenDialog configured for folders
     internal class Win32FolderPicker
     {
-        [System.Runtime.InteropServices.DllImport("shell32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-        private static extern IntPtr SHBrowseForFolder(ref BROWSEINFO lpbi);
-
-        [System.Runtime.InteropServices.DllImport("shell32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-        private static extern bool SHGetPathFromIDList(IntPtr pidl, System.Text.StringBuilder pszPath);
-
-        [System.Runtime.InteropServices.DllImport("ole32.dll")]
-        private static extern void CoTaskMemFree(IntPtr pv);
-
-        [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-        private struct BROWSEINFO
+        [System.Runtime.InteropServices.ComImport]
+        [System.Runtime.InteropServices.Guid("DC1C5A9C-E88A-4dde-A5A1-60F82A20AEF7")]
+        private class FileOpenDialog
         {
-            public IntPtr hwndOwner;
-            public IntPtr pidlRoot;
-            public string pszDisplayName;
-            public string lpszTitle;
-            public uint ulFlags;
-            public IntPtr lpfn;
-            public IntPtr lParam;
-            public int iImage;
         }
 
-        public string? Show(IntPtr hwnd, string title)
+        [System.Runtime.InteropServices.ComImport]
+        [System.Runtime.InteropServices.Guid("d57c7288-d4ad-4768-be02-9d969532d960")]
+        [System.Runtime.InteropServices.InterfaceType(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown)]
+        private interface IFileOpenDialog
         {
-            BROWSEINFO bi = new BROWSEINFO();
-            bi.hwndOwner = hwnd;
-            bi.lpszTitle = title;
-            // BIF_RETURNONLYFSDIRS = 0x0001, BIF_NEWDIALOGSTYLE = 0x0040
-            bi.ulFlags = 0x0001 | 0x0040;
+            [System.Runtime.InteropServices.PreserveSig] 
+            int Show(IntPtr parent);
+            void SetFileTypes(uint cFileTypes, IntPtr rgFilterSpec);
+            void SetFileTypeIndex(uint iFileType);
+            void GetFileTypeIndex(out uint piFileType);
+            void Advise(IntPtr pfde, out uint pdwCookie);
+            void Unadvise(uint dwCookie);
+            void SetOptions(uint fos);
+            void GetOptions(out uint pfos);
+            void SetDefaultFolder(IShellItem psi);
+            void SetFolder(IShellItem psi);
+            void GetFolder(out IShellItem ppsi);
+            void GetCurrentSelection(out IShellItem ppsi);
+            void SetFileName([System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPWStr)] string pszName);
+            void GetFileName([System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPWStr)] out string pszName);
+            void SetTitle([System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPWStr)] string pszTitle);
+            void SetOkButtonLabel([System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPWStr)] string pszText);
+            void SetFileNameLabel([System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPWStr)] string pszLabel);
+            void GetResult(out IShellItem ppsi);
+            void AddPlace(IShellItem psi, uint fdap);
+            void SetDefaultExtension([System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPWStr)] string pszDefaultExtension);
+            void Close(int hr);
+            void SetClientGuid(ref Guid guid);
+            void ClearClientData();
+            void SetFilter(IntPtr pFilter);
+            void GetResults(out IntPtr ppenum);
+            void GetSelectedItems(out IntPtr ppsai);
+        }
 
-            IntPtr pidl = SHBrowseForFolder(ref bi);
-            if (pidl != IntPtr.Zero)
+        [System.Runtime.InteropServices.ComImport]
+        [System.Runtime.InteropServices.Guid("43826D1E-E718-42EE-BC55-A1E261C37BFE")]
+        [System.Runtime.InteropServices.InterfaceType(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown)]
+        private interface IShellItem
+        {
+            void BindToHandler(IntPtr pbc, [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPStruct)] Guid bhid, [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPStruct)] Guid riid, out IntPtr ppv);
+            void GetParent(out IShellItem ppsi);
+            void GetDisplayName(uint sigdnName, [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPWStr)] out string ppszName);
+            void GetAttributes(uint sfgaoMask, out uint psfgaoAttribs);
+            void Compare(IShellItem psi, uint hint, out int piOrder);
+        }
+
+        [System.Runtime.InteropServices.DllImport("shell32.dll", CharSet = System.Runtime.InteropServices.CharSet.Unicode, SetLastError = true)]
+        private static extern int SHCreateItemFromParsingName(
+            [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPWStr)] string pszPath,
+            IntPtr pbc,
+            [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPStruct)] Guid riid,
+            out IShellItem ppv);
+
+        private const uint FOS_PICKFOLDERS = 0x00000020;
+        private const uint FOS_FORCEFILESYSTEM = 0x00000040;
+        private const uint FOS_PATHMUSTEXIST = 0x00000800;
+
+        public string? Show(IntPtr hwnd, string? initialPath = null, string? title = null)
+        {
+            try
             {
-                System.Text.StringBuilder path = new System.Text.StringBuilder(260);
-                if (SHGetPathFromIDList(pidl, path))
+                var dialog = (IFileOpenDialog)new FileOpenDialog();
+                dialog.SetOptions(FOS_PICKFOLDERS | FOS_FORCEFILESYSTEM | FOS_PATHMUSTEXIST);
+
+                if (!string.IsNullOrEmpty(title))
                 {
-                    CoTaskMemFree(pidl);
-                    return path.ToString();
+                    dialog.SetTitle(title);
                 }
-                CoTaskMemFree(pidl);
+
+                if (!string.IsNullOrEmpty(initialPath) && System.IO.Directory.Exists(initialPath))
+                {
+                    Guid shellItemGuid = new Guid("43826D1E-E718-42EE-BC55-A1E261C37BFE");
+                    if (SHCreateItemFromParsingName(initialPath, IntPtr.Zero, shellItemGuid, out IShellItem initialFolderItem) == 0)
+                    {
+                        dialog.SetFolder(initialFolderItem);
+                    }
+                }
+
+                if (dialog.Show(hwnd) == 0) // S_OK
+                {
+                    dialog.GetResult(out IShellItem resultItem);
+                    resultItem.GetDisplayName(0x80058000, out string path); // SIGDN_FILESYSPATH = 0x80058000
+                    return path;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Win32 FolderPicker Error: {ex.Message}");
             }
             return null;
         }

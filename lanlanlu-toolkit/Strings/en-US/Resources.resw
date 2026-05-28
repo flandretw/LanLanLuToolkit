@@ -505,6 +505,9 @@
   <data name="SettingsPage_DebugReport_SelectFolderButton.Content" xml:space="preserve">
     <value>Change Folder</value>
   </data>
+  <data name="SettingsPage_DebugReport_SelectFolderTitle" xml:space="preserve">
+    <value>Select Folder for Debug Reports</value>
+  </data>
   <data name="SettingsPage_DebugReport_ResetButton.Content" xml:space="preserve">
     <value>Reset</value>
   </data>
