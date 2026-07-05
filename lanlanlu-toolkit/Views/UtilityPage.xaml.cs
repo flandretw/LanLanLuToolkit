@@ -25,6 +25,13 @@ namespace lanlanlu_toolkit.Views
                 Icon = "\uEC19",
                 Tag = "FileHashPage"
             });
+            Tools.Add(new ToolItem
+            {
+                Title = resourceLoader.GetString("Nav_FileAssociationPage/Content") ?? "檔案開啟方式管理員",
+                Description = resourceLoader.GetString("FileAssociationPage_Desc/Text") ?? "重設特定副檔名的預設開啟應用程式",
+                Icon = "\uE7B5",
+                Tag = "FileAssociationPage"
+            });
         }
 
         private void ToolButton_Click(object sender, RoutedEventArgs e)
@@ -35,6 +42,9 @@ namespace lanlanlu_toolkit.Views
                 {
                     case "FileHashPage":
                         this.Frame.Navigate(typeof(FileHashPage));
+                        break;
+                    case "FileAssociationPage":
+                        this.Frame.Navigate(typeof(FileAssociationPage));
                         break;
                 }
             }

@@ -10,207 +10,206 @@
     NavigationCacheMode="Required"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <!-- Tool Cards Container (Everything inside ScrollViewer) -->
-        <ScrollViewer IsScrollInertiaEnabled="True" ManipulationMode="System">
-            <Grid Padding="36" HorizontalAlignment="Stretch">
-                <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
-                    <!-- Page Header with Subtitle (No Icon) -->
-                    <StackPanel Spacing="4" Margin="0">
-                        <TextBlock x:Uid="SystemRepairPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
-                        <TextBlock x:Uid="SystemRepairPage_AutoMode_Desc" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+    <Grid Padding="36" MaxWidth="1600" HorizontalAlignment="Stretch" RowSpacing="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" /> <!-- Header -->
+            <RowDefinition Height="Auto" /> <!-- Options Selection -->
+            <RowDefinition Height="*" />    <!-- Log Card -->
+        </Grid.RowDefinitions>
+
+        <!-- Page Header with Subtitle (No Icon) -->
+        <StackPanel Grid.Row="0" Spacing="4" Margin="0">
+            <TextBlock x:Uid="SystemRepairPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
+            <TextBlock x:Uid="SystemRepairPage_AutoMode_Desc" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        </StackPanel>
+        
+        <!-- Mode Selection Group -->
+        <StackPanel Grid.Row="1" Spacing="4">
+            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource ControlCornerRadius}">
+                <Grid Padding="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE945;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                        <TextBlock x:Uid="SystemRepairPage_AutoMode_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                        <TextBlock x:Uid="SystemRepairPage_AutoMode_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                     </StackPanel>
                     
-                    <!-- Mode Selection Group -->
-                    <StackPanel Spacing="4">
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <ComboBox x:Name="AutoModeComboBox" Width="200" SelectedIndex="0" VerticalAlignment="Center">
+                            <ComboBoxItem x:Uid="SystemRepairPage_AutoMode_Default" />
+                            <ComboBoxItem x:Uid="SystemRepairPage_AutoMode_SfcOnly" />
+                        </ComboBox>
+                        <Button x:Name="AutoStartBtn" x:Uid="SystemRepairPage_StartButton" Click="RunAutoRepair_Click" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Advanced Mode Expander -->
+            <Expander x:Name="AdvancedExpander"
+                      HorizontalAlignment="Stretch" 
+                      HorizontalContentAlignment="Stretch"
+                      Padding="0">
+                <Expander.Resources>
+                    <SolidColorBrush x:Key="ExpanderContentBackground" Color="Transparent" />
+                    <SolidColorBrush x:Key="ExpanderContentBorderBrush" Color="Transparent" />
+                    <Thickness x:Key="ExpanderContentPadding">0</Thickness>
+                    <Thickness x:Key="ExpanderContentBorderThickness">0</Thickness>
+                </Expander.Resources>
+                <Expander.Header>
+                    <Grid Padding="0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <FontIcon Glyph="&#xEC7A;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock x:Uid="SystemRepairPage_AdvancedMode_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                            <TextBlock x:Uid="SystemRepairPage_AdvancedMode_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Grid>
+                </Expander.Header>
+                <Expander.Content>
+                    <StackPanel Spacing="1" Margin="-16,0,-16,0">
+                        <!-- Inner Cards -->
+                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{ThemeResource ControlCornerRadius}">
+                            <Grid Padding="66,16,32,16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
+                                    <TextBlock x:Uid="SystemRepairPage_ScanHealth_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                    <TextBlock x:Uid="SystemRepairPage_ScanHealth_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Button x:Name="ScanHealthBtn" Grid.Column="1" x:Uid="SystemRepairPage_RunButton" Click="RunScanHealth_Click" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+
+                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{ThemeResource ControlCornerRadius}">
+                            <Grid Padding="66,16,32,16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
+                                    <TextBlock x:Uid="SystemRepairPage_CheckHealth_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                    <TextBlock x:Uid="SystemRepairPage_CheckHealth_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Button x:Name="CheckHealthBtn" Grid.Column="1" x:Uid="SystemRepairPage_RunButton" Click="RunCheckHealth_Click" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+
+                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{ThemeResource ControlCornerRadius}">
+                            <Grid Padding="66,16,32,16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
+                                    <TextBlock x:Uid="SystemRepairPage_RestoreHealth_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                    <TextBlock x:Uid="SystemRepairPage_RestoreHealth_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Button x:Name="RestoreHealthBtn" Grid.Column="1" x:Uid="SystemRepairPage_RunButton" Click="RunRestoreHealth_Click" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+
+                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{ThemeResource ControlCornerRadius}">
+                            <Grid Padding="66,16,32,16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
+                                    <TextBlock x:Uid="SystemRepairPage_SfcScannow_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                    <TextBlock x:Uid="SystemRepairPage_SfcScannow_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Button x:Name="SfcBtn" Grid.Column="1" x:Uid="SystemRepairPage_RunButton" Click="RunSfc_Click" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Expander.Content>
+            </Expander>
+        </StackPanel>
+        
+        <!-- Modernized Log Output Card -->
+        <Border Grid.Row="2"
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="{ThemeResource ControlCornerRadius}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" /> <!-- Stretches to fill remaining space -->
+                </Grid.RowDefinitions>
+
+                <!-- Log Card Header -->
+                <Grid Padding="16,8" Background="{ThemeResource ControlFillColorDefaultBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE81C;" FontSize="16" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" x:Uid="SystemRepairPage_HistoryHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
                     
-                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                            BorderThickness="1"
-                            CornerRadius="{ThemeResource ControlCornerRadius}">
-                        <Grid Padding="16">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE945;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
-                                <TextBlock x:Uid="SystemRepairPage_AutoMode_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                <TextBlock x:Uid="SystemRepairPage_AutoMode_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                        <ProgressBar x:Name="GlobalProgress" IsIndeterminate="True" Width="100" Visibility="Collapsed" VerticalAlignment="Center" />
+                        
+                        <!-- Copy Button -->
+                        <Button x:Name="CopyLogBtn" Click="CopyLogBtn_Click" Padding="12,5" VerticalAlignment="Center" IsEnabled="False">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon x:Name="CopyBtnIcon" Glyph="&#xE8C8;" FontSize="14" />
+                                <TextBlock x:Name="CopyBtnText" x:Uid="SystemRepairPage_Copy" Style="{ThemeResource CaptionTextBlockStyle}" />
                             </StackPanel>
-                            
-                            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center" HorizontalAlignment="Right">
-                                <ComboBox x:Name="AutoModeComboBox" Width="200" SelectedIndex="0" VerticalAlignment="Center">
-                                    <ComboBoxItem x:Uid="SystemRepairPage_AutoMode_Default" />
-                                    <ComboBoxItem x:Uid="SystemRepairPage_AutoMode_SfcOnly" />
-                                </ComboBox>
-                                <Button x:Name="AutoStartBtn" x:Uid="SystemRepairPage_StartButton" Click="RunAutoRepair_Click" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center" />
+                        </Button>
+
+                        <!-- Clear Button -->
+                        <Button x:Name="ClearLogBtn" Click="ClearLogBtn_Click" Padding="12,5" VerticalAlignment="Center" IsEnabled="False">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon Glyph="&#xE74D;" FontSize="14" />
+                                <TextBlock x:Uid="SystemRepairPage_Clear" Style="{StaticResource CaptionTextBlockStyle}" />
                             </StackPanel>
-                        </Grid>
-                    </Border>
+                        </Button>
+                    </StackPanel>
+                </Grid>
 
-                    <!-- Advanced Mode Expander -->
-                    <Expander x:Name="AdvancedExpander"
-                              HorizontalAlignment="Stretch" 
-                              HorizontalContentAlignment="Stretch"
-                              Padding="0">
-                        <Expander.Resources>
-                            <SolidColorBrush x:Key="ExpanderContentBackground" Color="Transparent" />
-                            <SolidColorBrush x:Key="ExpanderContentBorderBrush" Color="Transparent" />
-                            <Thickness x:Key="ExpanderContentPadding">0</Thickness>
-                            <Thickness x:Key="ExpanderContentBorderThickness">0</Thickness>
-                        </Expander.Resources>
-                        <Expander.Header>
-                            <Grid Padding="0,16">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xEC7A;" FontSize="20" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock x:Uid="SystemRepairPage_AdvancedMode_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                    <TextBlock x:Uid="SystemRepairPage_AdvancedMode_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                                </StackPanel>
-                            </Grid>
-                        </Expander.Header>
-                        <Expander.Content>
-                            <StackPanel Spacing="1" Margin="-16,0,-16,0">
-                                <!-- Inner Cards -->
-                                <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                        BorderThickness="1"
-                                        CornerRadius="{ThemeResource ControlCornerRadius}">
-                                    <Grid Padding="66,16,32,16">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
-                                            <TextBlock x:Uid="SystemRepairPage_ScanHealth_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                            <TextBlock x:Uid="SystemRepairPage_ScanHealth_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                                        </StackPanel>
-                                        <Button x:Name="ScanHealthBtn" Grid.Column="1" x:Uid="SystemRepairPage_RunButton" Click="RunScanHealth_Click" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center" />
-                                    </Grid>
-                                </Border>
+                <MenuFlyoutSeparator Grid.Row="1" Margin="0" />
 
-                                <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                        BorderThickness="1"
-                                        CornerRadius="{ThemeResource ControlCornerRadius}">
-                                    <Grid Padding="66,16,32,16">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
-                                            <TextBlock x:Uid="SystemRepairPage_CheckHealth_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                            <TextBlock x:Uid="SystemRepairPage_CheckHealth_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                                        </StackPanel>
-                                        <Button x:Name="CheckHealthBtn" Grid.Column="1" x:Uid="SystemRepairPage_RunButton" Click="RunCheckHealth_Click" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center" />
-                                    </Grid>
-                                </Border>
-
-                                <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                        BorderThickness="1"
-                                        CornerRadius="{ThemeResource ControlCornerRadius}">
-                                    <Grid Padding="66,16,32,16">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
-                                            <TextBlock x:Uid="SystemRepairPage_RestoreHealth_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                            <TextBlock x:Uid="SystemRepairPage_RestoreHealth_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                                        </StackPanel>
-                                        <Button x:Name="RestoreHealthBtn" Grid.Column="1" x:Uid="SystemRepairPage_RunButton" Click="RunRestoreHealth_Click" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center" />
-                                    </Grid>
-                                </Border>
-
-                                <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                        BorderThickness="1"
-                                        CornerRadius="{ThemeResource ControlCornerRadius}">
-                                    <Grid Padding="66,16,32,16">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
-                                            <TextBlock x:Uid="SystemRepairPage_SfcScannow_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                            <TextBlock x:Uid="SystemRepairPage_SfcScannow_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                                        </StackPanel>
-                                        <Button x:Name="SfcBtn" Grid.Column="1" x:Uid="SystemRepairPage_RunButton" Click="RunSfc_Click" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center" />
-                                    </Grid>
-                                </Border>
-                            </StackPanel>
-                        </Expander.Content>
-                    </Expander>
-                    <!-- Modernized Log Output Card -->
-                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                            BorderThickness="1"
-                            CornerRadius="{ThemeResource ControlCornerRadius}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="250" />
-                            </Grid.RowDefinitions>
-
-                            <!-- Log Card Header -->
-                            <Grid Padding="16,8" Background="{ThemeResource ControlFillColorDefaultBrush}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE81C;" FontSize="16" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                <TextBlock Grid.Column="1" x:Uid="SystemRepairPage_HistoryHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
-                                
-                                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                                    <ProgressBar x:Name="GlobalProgress" IsIndeterminate="True" Width="100" Visibility="Collapsed" VerticalAlignment="Center" />
-                                    
-                                    <!-- Copy Button -->
-                                    <Button x:Name="CopyLogBtn" Click="CopyLogBtn_Click" Padding="12,5" VerticalAlignment="Center" IsEnabled="False">
-                                        <StackPanel Orientation="Horizontal" Spacing="8">
-                                            <FontIcon x:Name="CopyBtnIcon" Glyph="&#xE8C8;" FontSize="14" />
-                                            <TextBlock x:Name="CopyBtnText" x:Uid="SystemRepairPage_Copy" Style="{ThemeResource CaptionTextBlockStyle}" />
-                                        </StackPanel>
-                                    </Button>
-
-                                    <!-- Clear Button -->
-                                    <Button x:Name="ClearLogBtn" Click="ClearLogBtn_Click" Padding="12,5" VerticalAlignment="Center" IsEnabled="False">
-                                        <StackPanel Orientation="Horizontal" Spacing="8">
-                                            <FontIcon Glyph="&#xE74D;" FontSize="14" />
-                                            <TextBlock x:Uid="SystemRepairPage_Clear" Style="{StaticResource CaptionTextBlockStyle}" />
-                                        </StackPanel>
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-
-                            <MenuFlyoutSeparator Grid.Row="1" Margin="0" />
-
-                            <!-- Console Area -->
-                            <Border Grid.Row="2" Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="20">
-                                <ScrollViewer x:Name="LogScrollViewer" IsScrollInertiaEnabled="True" ManipulationMode="System">
-                                    <TextBlock x:Name="LogOutput" 
-                                               FontFamily="Cascadia Code, Consolas" 
-                                               FontSize="12" 
-                                               LineHeight="20"
-                                               TextWrapping="Wrap" 
-                                               x:Uid="SystemRepairPage_LogOutput"
-                                               IsTextSelectionEnabled="True" 
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                </ScrollViewer>
-                            </Border>
-                        </Grid>
-                    </Border>
-                </StackPanel>
-
-                </StackPanel>
+                <!-- Console Area -->
+                <Border Grid.Row="2" Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="20">
+                    <ScrollViewer x:Name="LogScrollViewer" IsScrollInertiaEnabled="True" ManipulationMode="System">
+                        <TextBlock x:Name="LogOutput" 
+                                   FontFamily="Cascadia Code, Consolas" 
+                                   FontSize="12" 
+                                   LineHeight="20"
+                                   TextWrapping="Wrap" 
+                                   x:Uid="SystemRepairPage_LogOutput"
+                                   IsTextSelectionEnabled="True" 
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    </ScrollViewer>
+                </Border>
             </Grid>
-        </ScrollViewer>
+        </Border>
     </Grid>
 </Page>

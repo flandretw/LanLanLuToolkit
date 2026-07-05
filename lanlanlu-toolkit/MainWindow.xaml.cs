@@ -157,6 +157,7 @@ namespace lanlanlu_toolkit
                     "SystemRepairPage" => typeof(SystemRepairPage),
                     "UtilityPage" => typeof(UtilityPage),
                     "FileHashPage" => typeof(FileHashPage),
+                    "FileAssociationPage" => typeof(FileAssociationPage),
                     _ => null
                 };
 

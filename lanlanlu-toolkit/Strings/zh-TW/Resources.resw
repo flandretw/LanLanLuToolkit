@@ -634,4 +634,10 @@
   <data name="FileHashPage_CalculationCancelled" xml:space="preserve">
     <value>已取消計算。</value>
   </data>
+  <data name="Nav_FileAssociationPage.Content" xml:space="preserve">
+    <value>檔案開啟方式管理員</value>
+  </data>
+  <data name="FileAssociationPage_Desc.Text" xml:space="preserve">
+    <value>重設或管理特定副檔名的預設開啟應用程式</value>
+  </data>
 </root>

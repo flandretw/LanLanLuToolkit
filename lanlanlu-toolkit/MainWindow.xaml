@@ -61,6 +61,11 @@
                                 <FontIcon Glyph="&#xEC19;" />
                             </NavigationViewItem.Icon>
                         </NavigationViewItem>
+                        <NavigationViewItem Tag="FileAssociationPage" x:Uid="Nav_FileAssociationPage">
+                            <NavigationViewItem.Icon>
+                                <FontIcon Glyph="&#xE7B5;" />
+                            </NavigationViewItem.Icon>
+                        </NavigationViewItem>
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
