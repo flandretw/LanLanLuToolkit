@@ -10,7 +10,7 @@
     NavigationCacheMode="Required"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Padding="36" MaxWidth="1600" HorizontalAlignment="Stretch" RowSpacing="24">
+    <Grid Padding="36" MaxWidth="1600" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RowSpacing="24">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" /> <!-- Header -->
             <RowDefinition Height="Auto" /> <!-- Options Selection -->
@@ -152,6 +152,7 @@
         
         <!-- Modernized Log Output Card -->
         <Border Grid.Row="2"
+                VerticalAlignment="Stretch"
                 Background="{ThemeResource LayerFillColorDefaultBrush}"
                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                 BorderThickness="1"
@@ -197,8 +198,8 @@
                 <MenuFlyoutSeparator Grid.Row="1" Margin="0" />
 
                 <!-- Console Area -->
-                <Border Grid.Row="2" Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="20">
-                    <ScrollViewer x:Name="LogScrollViewer" IsScrollInertiaEnabled="True" ManipulationMode="System">
+                <Border Grid.Row="2" Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="20" VerticalAlignment="Stretch">
+                    <ScrollViewer x:Name="LogScrollViewer" VerticalAlignment="Stretch" IsScrollInertiaEnabled="True" ManipulationMode="System">
                         <TextBlock x:Name="LogOutput" 
                                    FontFamily="Cascadia Code, Consolas" 
                                    FontSize="12" 

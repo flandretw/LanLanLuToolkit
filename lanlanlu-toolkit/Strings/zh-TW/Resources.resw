@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema id="root" 
+    xmlns="" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -117,7 +120,6 @@
   <data name="SettingsPage_MITLink.Content" xml:space="preserve">
     <value>MIT 軟體授權條款</value>
   </data>
-
   <data name="HomePage_CPU.Text" xml:space="preserve">
     <value>處理器 (CPU)</value>
   </data>
@@ -385,7 +387,6 @@
   <data name="SystemRepairPage_Copied" xml:space="preserve">
     <value>已複製</value>
   </data>
-  
   <!-- Performance Page Detailed Labels -->
   <data name="PerfPage_Cpu_BaseSpeed.Text" xml:space="preserve">
     <value>基本速度</value>
@@ -411,7 +412,6 @@
   <data name="PerfPage_Cpu_L3Cache.Text" xml:space="preserve">
     <value>L3 快取</value>
   </data>
-  
   <data name="PerfPage_Gpu_DedicatedMemory.Text" xml:space="preserve">
     <value>專屬 GPU 記憶體</value>
   </data>
@@ -639,5 +639,104 @@
   </data>
   <data name="FileAssociationPage_Desc.Text" xml:space="preserve">
     <value>重設或管理特定副檔名的預設開啟應用程式</value>
+  </data>
+  <data name="FileAssociationPage_ConfigTitle.Text" xml:space="preserve">
+    <value>配置檔案關聯</value>
+  </data>
+  <data name="FileAssociationPage_TargetExtTitle.Text" xml:space="preserve">
+    <value>目標檔案副檔名</value>
+  </data>
+  <data name="FileAssociationPage_TargetExtDesc.Text" xml:space="preserve">
+    <value>輸入您想要重設的檔案副檔名（例如：.pdf、.bin、.myext，會自動標準化格式）</value>
+  </data>
+  <data name="FileAssociationPage_TargetExtBox.PlaceholderText" xml:space="preserve">
+    <value>例如：pdf</value>
+  </data>
+  <data name="FileAssociationPage_SelectMethodTitle.Text" xml:space="preserve">
+    <value>選擇重設方式</value>
+  </data>
+  <data name="FileAssociationPage_Method1Title.Text" xml:space="preserve">
+    <value>方法一：呼叫系統原生開啟方式視窗（標準推薦）</value>
+  </data>
+  <data name="FileAssociationPage_Method1Desc.Text" xml:space="preserve">
+    <value>系統將彈出開啟方式選單，您可以重新選擇此副檔名的關聯程式，或者重設預設關聯。這是 Windows 原生推薦的安全標準做法。</value>
+  </data>
+  <data name="FileAssociationPage_Method1Button.Content" xml:space="preserve">
+    <value>安全引導重設</value>
+  </data>
+  <data name="FileAssociationPage_Method2Title.Text" xml:space="preserve">
+    <value>方法二：智慧定位登錄表手動重設（進階模式）</value>
+  </data>
+  <data name="FileAssociationPage_Method2Desc.Text" xml:space="preserve">
+    <value>針對進階使用者，直接開啟登錄編輯程式並智慧定位，由您親自掌握並手動重設。</value>
+  </data>
+  <data name="FileAssociationPage_Method2Content.Text" xml:space="preserve">
+    <value>直接開啟 Windows 內建的登錄編輯程式，並自動導航定位到該副檔名的關聯路徑下，方便您安全且直覺地進行手動重設與管理。</value>
+  </data>
+  <data name="FileAssociationPage_Method2Button.Content" xml:space="preserve">
+    <value>定位並手動重設</value>
+  </data>
+  <data name="FileAssociationPage_GuideTitle.Text" xml:space="preserve">
+    <value>🛠️ 登錄表手動重設操作說明：</value>
+  </data>
+  <data name="FileAssociationPage_GuideStep1.Text" xml:space="preserve">
+    <value>1. 在啟動的「登錄編輯程式」視窗中，您會發現畫面已自動展開並精確停留在目標目錄。</value>
+  </data>
+  <data name="FileAssociationPage_GuideStep2.Text" xml:space="preserve">
+    <value>2. 請在左側樹狀圖中，找到該副檔名目錄底下的「UserChoice」子資料夾。</value>
+  </data>
+  <data name="FileAssociationPage_GuideStep3.Text" xml:space="preserve">
+    <value>3. 在「UserChoice」資料夾上按滑鼠右鍵，選擇「刪除」，並在確認對話框中點選「是」。</value>
+  </data>
+  <data name="FileAssociationPage_GuideStep4.Text" xml:space="preserve">
+    <value>4. 清除後關閉登錄編輯程式即可。下次雙擊該類型檔案時，Windows 將會重新詢問預設開啟程式！</value>
+  </data>
+  <data name="FileAssociationPage_Warning_CriticalExt" xml:space="preserve">
+    <value>為了保護您的作業系統安全，此副檔名（.{0}）屬於 Windows 系統核心關鍵組件，不允許重設或修改其開啟方式，以免造成系統癱瘓或無法執行任何程式。</value>
+  </data>
+  <data name="FileAssociationPage_Warning_CriticalExtTitle" xml:space="preserve">
+    <value>🛡️ 系統安全保護</value>
+  </data>
+  <data name="FileAssociationPage_Success_DialogOpened" xml:space="preserve">
+    <value>已成功呼叫系統開啟方式對話框！請在彈出的視窗中進行設定或重設關聯。</value>
+  </data>
+  <data name="FileAssociationPage_Success_Title" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="FileAssociationPage_Error_DialogOpenFailed" xml:space="preserve">
+    <value>無法開啟開啟方式對話框: {0}</value>
+  </data>
+  <data name="FileAssociationPage_Error_Title" xml:space="preserve">
+    <value>錯誤</value>
+  </data>
+  <data name="FileAssociationPage_Info_Locating" xml:space="preserve">
+    <value>正在開啟並為您智慧定位登錄編輯程式...</value>
+  </data>
+  <data name="FileAssociationPage_Info_LocatingTitle" xml:space="preserve">
+    <value>智慧定位中</value>
+  </data>
+  <data name="FileAssociationPage_Warning_LocateFailed" xml:space="preserve">
+    <value>已開啟登錄編輯程式，但未能取得其視窗控制代碼以進行自動導航。請確認已同意系統帳戶控制 (UAC) 提示。</value>
+  </data>
+  <data name="FileAssociationPage_Warning_LocateFailedTitle" xml:space="preserve">
+    <value>無法定位</value>
+  </data>
+  <data name="FileAssociationPage_Success_RegNavigated" xml:space="preserve">
+    <value>登錄編輯程式已成功智慧定位至 `.{0}`！請參閱下方說明卡進行重設。</value>
+  </data>
+  <data name="FileAssociationPage_Success_RegNavigatedTitle" xml:space="preserve">
+    <value>導航定位成功</value>
+  </data>
+  <data name="FileAssociationPage_Warning_FallbackCopy" xml:space="preserve">
+    <value>未能定位到網址列（可能已被隱藏）。目標路徑已為您複製到剪貼簿，請在上方網址列貼上並按 Enter 進行定位！</value>
+  </data>
+  <data name="FileAssociationPage_Warning_FallbackCopyTitle" xml:space="preserve">
+    <value>請手動貼上</value>
+  </data>
+  <data name="FileAssociationPage_Error_RegLaunchFailed" xml:space="preserve">
+    <value>無法啟動登錄編輯程式: {0}。請確認已同意系統帳戶控制 (UAC) 提示。</value>
+  </data>
+  <data name="FileAssociationPage_Error_RegLaunchFailedTitle" xml:space="preserve">
+    <value>啟動失敗</value>
   </data>
 </root>

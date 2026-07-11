@@ -41,7 +41,7 @@ namespace lanlanlu_toolkit.Views
             {
                 SystemDialogBtn.IsEnabled = false;
                 RegistryNavBtn.IsEnabled = false;
-                ShowFeedback($"為了保護您的作業系統安全，此副檔名（.{ext}）屬於 Windows 系統核心關鍵組件，不允許重設或修改其開啟方式，以免造成系統癱瘓或無法執行任何程式。", InfoBarSeverity.Warning, "🛡️ 系統安全保護");
+                ShowFeedback(string.Format(LocalizationHelper.GetString("FileAssociationPage_Warning_CriticalExt"), ext), InfoBarSeverity.Warning, LocalizationHelper.GetString("FileAssociationPage_Warning_CriticalExtTitle"));
             }
             else
             {
@@ -80,12 +80,12 @@ namespace lanlanlu_toolkit.Views
 
                 Process.Start(psi);
 
-                ShowFeedback("已成功呼叫系統開啟方式對話框！請在彈出的視窗中進行設定或重設關聯。", InfoBarSeverity.Success, "成功");
+                ShowFeedback(LocalizationHelper.GetString("FileAssociationPage_Success_DialogOpened"), InfoBarSeverity.Success, LocalizationHelper.GetString("FileAssociationPage_Success_Title"));
                 LoggingService.Log($"Opened system association dialog for extension: {ext}");
             }
             catch (Exception ex)
             {
-                ShowFeedback($"無法開啟開啟方式對話框: {ex.Message}", InfoBarSeverity.Error, "錯誤");
+                ShowFeedback(string.Format(LocalizationHelper.GetString("FileAssociationPage_Error_DialogOpenFailed"), ex.Message), InfoBarSeverity.Error, LocalizationHelper.GetString("FileAssociationPage_Error_Title"));
                 LoggingService.Log($"Error launching system association dialog: {ex.Message}");
             }
         }
@@ -123,7 +123,7 @@ namespace lanlanlu_toolkit.Views
             try
             {
                 // Show visual feedback that we are launching/positioning
-                ShowFeedback("正在開啟並為您智慧定位登錄編輯程式...", InfoBarSeverity.Informational, "智慧定位中");
+                ShowFeedback(LocalizationHelper.GetString("FileAssociationPage_Info_Locating"), InfoBarSeverity.Informational, LocalizationHelper.GetString("FileAssociationPage_Info_LocatingTitle"));
 
                 Process[] processes = Process.GetProcessesByName("regedit");
                 IntPtr hwndRegedit = IntPtr.Zero;
@@ -152,7 +152,7 @@ namespace lanlanlu_toolkit.Views
 
                 if (hwndRegedit == IntPtr.Zero)
                 {
-                    ShowFeedback("已開啟登錄編輯程式，但未能取得其視窗控制代碼以進行自動導航。請確認已同意系統帳戶控制 (UAC) 提示。", InfoBarSeverity.Warning, "無法定位");
+                    ShowFeedback(LocalizationHelper.GetString("FileAssociationPage_Warning_LocateFailed"), InfoBarSeverity.Warning, LocalizationHelper.GetString("FileAssociationPage_Warning_LocateFailedTitle"));
                     return;
                 }
 
@@ -196,7 +196,7 @@ namespace lanlanlu_toolkit.Views
 
                     // Show step-by-step instructions card in UI
                     RegistryInstructionsCard.Visibility = Visibility.Visible;
-                    ShowFeedback($"登錄編輯程式已成功智慧定位至 `.{ext}`！請參閱下方說明卡進行重設。", InfoBarSeverity.Success, "導航定位成功");
+                    ShowFeedback(string.Format(LocalizationHelper.GetString("FileAssociationPage_Success_RegNavigated"), ext), InfoBarSeverity.Success, LocalizationHelper.GetString("FileAssociationPage_Success_RegNavigatedTitle"));
                     LoggingService.Log($"UI Injected Registry Editor navigation to: {targetPath}");
                 }
                 else
@@ -207,13 +207,13 @@ namespace lanlanlu_toolkit.Views
                     Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(package);
 
                     RegistryInstructionsCard.Visibility = Visibility.Visible;
-                    ShowFeedback($"未能定位到網址列（可能已被隱藏）。目標路徑已為您複製到剪貼簿，請在上方網址列貼上並按 Enter 進行定位！", InfoBarSeverity.Warning, "請手動貼上");
+                    ShowFeedback(LocalizationHelper.GetString("FileAssociationPage_Warning_FallbackCopy"), InfoBarSeverity.Warning, LocalizationHelper.GetString("FileAssociationPage_Warning_FallbackCopyTitle"));
                     LoggingService.Log($"Registry Address bar not found. Copied path: {targetPath} to clipboard.");
                 }
             }
             catch (Exception ex)
             {
-                ShowFeedback($"無法啟動登錄編輯程式: {ex.Message}。請確認已同意系統帳戶控制 (UAC) 提示。", InfoBarSeverity.Error, "啟動失敗");
+                ShowFeedback(string.Format(LocalizationHelper.GetString("FileAssociationPage_Error_RegLaunchFailed"), ex.Message), InfoBarSeverity.Error, LocalizationHelper.GetString("FileAssociationPage_Error_RegLaunchFailedTitle"));
                 LoggingService.Log($"Error launching Registry Editor UI navigation: {ex.Message}");
             }
         }

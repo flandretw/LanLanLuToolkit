@@ -21,7 +21,7 @@
 
                     <!-- Section: Association Configuration -->
                     <StackPanel Spacing="8">
-                        <TextBlock Text="配置檔案關聯" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
+                        <TextBlock x:Uid="FileAssociationPage_ConfigTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
                         
                         <!-- Input Card -->
                         <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
@@ -37,12 +37,12 @@
                                     
                                     <!-- Left input and instruction -->
                                     <StackPanel Spacing="6" VerticalAlignment="Center">
-                                        <TextBlock Text="目標檔案副檔名" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                        <TextBlock Text="輸入您想要重設的檔案副檔名（例如: .pdf、.bin、.myext，會自動標準化格式）" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                        <TextBlock x:Uid="FileAssociationPage_TargetExtTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                        <TextBlock x:Uid="FileAssociationPage_TargetExtDesc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                     </StackPanel>
                                     
                                     <!-- Right Textbox -->
-                                    <TextBox x:Name="ExtensionTextBox" Grid.Column="1" Width="200" PlaceholderText="例如: pdf" VerticalAlignment="Center" FontFamily="Cascadia Code, Consolas" TextChanged="ExtensionTextBox_TextChanged" />
+                                    <TextBox x:Name="ExtensionTextBox" Grid.Column="1" Width="200" x:Uid="FileAssociationPage_TargetExtBox" VerticalAlignment="Center" FontFamily="Cascadia Code, Consolas" TextChanged="ExtensionTextBox_TextChanged" />
                                 </Grid>
                             </StackPanel>
                         </Border>
@@ -50,7 +50,7 @@
 
                     <!-- Section: Actions -->
                     <StackPanel Spacing="16">
-                        <TextBlock Text="選擇重設方式" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
+                        <TextBlock x:Uid="FileAssociationPage_SelectMethodTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
 
                         <!-- Method 1: Safe System Dialog -->
                         <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
@@ -64,25 +64,26 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 
-                                <FontIcon Glyph="&#xE7F5;" FontSize="24" Margin="0,0,20,0" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
+                                <FontIcon Glyph="&#xE756;" FontSize="24" Margin="0,0,20,0" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
                                 
                                 <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center" Margin="0,0,20,0">
-                                    <TextBlock Text="方法一：呼叫系統原生開啟方式視窗（標準推薦）" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                    <TextBlock Text="系統將彈出開啟方式選單，您可以重新選擇此副檔名的關聯程式，或者重設預設關聯。這是 Windows 原生推薦的安全標準做法。" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                    <TextBlock x:Uid="FileAssociationPage_Method1Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                    <TextBlock x:Uid="FileAssociationPage_Method1Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                 </StackPanel>
                                 
-                                <Button x:Name="SystemDialogBtn" Grid.Column="2" Click="SystemDialogBtn_Click" Content="安全引導重設" Style="{ThemeResource AccentButtonStyle}" Width="160" Height="36" VerticalAlignment="Center" IsEnabled="False" />
+                                <Button x:Name="SystemDialogBtn" Grid.Column="2" Click="SystemDialogBtn_Click" x:Uid="FileAssociationPage_Method1Button" Style="{ThemeResource AccentButtonStyle}" Width="160" Height="36" VerticalAlignment="Center" IsEnabled="False" />
                             </Grid>
                         </Border>
 
                         <!-- Method 2: Advanced Registry Nav using Expander -->
                         <Expander x:Name="AdvancedModeExpander"
                                   HorizontalAlignment="Stretch"
+                                  HorizontalContentAlignment="Stretch"
                                   ExpandDirection="Down"
                                   IsExpanded="False"
                                   CornerRadius="8">
                             <Expander.Header>
-                                <Grid ColumnSpacing="20" HorizontalAlignment="Stretch">
+                                <Grid ColumnSpacing="20" HorizontalAlignment="Stretch" Margin="4,0,0,0" MinHeight="76">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
@@ -90,28 +91,28 @@
                                     
                                     <FontIcon Glyph="&#xEC7A;" FontSize="24" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
                                     
-                                    <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
-                                        <TextBlock Text="方法二：智慧定位登錄表手動重設（進階模式）" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                        <TextBlock Text="針對進階使用者，直接開啟登錄編輯程式並智慧定位，由您親自掌握並手動重設。" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                    <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                        <TextBlock x:Uid="FileAssociationPage_Method2Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                        <TextBlock x:Uid="FileAssociationPage_Method2Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Expander.Header>
                             
                             <Expander.Content>
                                 <StackPanel Spacing="16">
-                                    <TextBlock Text="直接開啟 Windows 內建的登錄編輯程式，並自動導航定位到該副檔名的關聯路徑下，方便您安全且直覺地進行手動重設與管理。" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                                    <TextBlock x:Uid="FileAssociationPage_Method2Content" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                     
-                                    <Button x:Name="RegistryNavBtn" Click="RegistryNavBtn_Click" Content="定位並手動重設" Style="{ThemeResource AccentButtonStyle}" Width="160" Height="36" IsEnabled="False" />
+                                    <Button x:Name="RegistryNavBtn" Click="RegistryNavBtn_Click" x:Uid="FileAssociationPage_Method2Button" Style="{ThemeResource AccentButtonStyle}" Width="160" Height="36" IsEnabled="False" />
                                     
                                     <!-- Guideline Container inside the expander -->
-                                    <Border x:Name="RegistryInstructionsCard" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8" Visibility="Collapsed" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}">
+                                    <Border x:Name="RegistryInstructionsCard" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8" Visibility="Collapsed" Background="{ThemeResource LayerFillColorDefaultBrush}">
                                         <StackPanel Padding="16" Spacing="12">
-                                            <TextBlock Text="🛠️ 登錄表手動重設操作說明：" Style="{ThemeResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
+                                            <TextBlock x:Uid="FileAssociationPage_GuideTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
                                             <StackPanel Spacing="6" Margin="12,0,0,0">
-                                                <TextBlock Text="1. 在啟動的「登錄編輯程式」視窗中，您會發現畫面已自動展開並精確停留在目標目錄。" Style="{ThemeResource CaptionTextBlockStyle}" />
-                                                <TextBlock Text="2. 請在左側樹狀圖中，找到該副檔名目錄底下的「UserChoice」子資料夾。" Style="{ThemeResource CaptionTextBlockStyle}" />
-                                                <TextBlock Text="3. 在「UserChoice」資料夾上按滑鼠右鍵，選擇「刪除」，並在確認對話框中點選「是」。" Style="{ThemeResource CaptionTextBlockStyle}" />
-                                                <TextBlock Text="4. 清除後關閉登錄編輯程式即可。下次雙擊該類型檔案時，Windows 將會重新詢問預設開啟程式！" Style="{ThemeResource CaptionTextBlockStyle}" />
+                                                <TextBlock x:Uid="FileAssociationPage_GuideStep1" Style="{ThemeResource CaptionTextBlockStyle}" />
+                                                <TextBlock x:Uid="FileAssociationPage_GuideStep2" Style="{ThemeResource CaptionTextBlockStyle}" />
+                                                <TextBlock x:Uid="FileAssociationPage_GuideStep3" Style="{ThemeResource CaptionTextBlockStyle}" />
+                                                <TextBlock x:Uid="FileAssociationPage_GuideStep4" Style="{ThemeResource CaptionTextBlockStyle}" />
                                             </StackPanel>
                                         </StackPanel>
                                     </Border>
