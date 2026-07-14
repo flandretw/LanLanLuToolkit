@@ -739,4 +739,10 @@
   <data name="FileAssociationPage_Error_RegLaunchFailedTitle" xml:space="preserve">
     <value>Launch Failed</value>
   </data>
+  <data name="FileAssociationPage_Title.Text" xml:space="preserve">
+    <value>File Association Manager</value>
+  </data>
+  <data name="System_AllFiles" xml:space="preserve">
+    <value>All Files</value>
+  </data>
 </root>

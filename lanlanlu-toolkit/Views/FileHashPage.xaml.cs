@@ -51,7 +51,8 @@ namespace lanlanlu_toolkit.Views
             var ofn = new OPENFILENAME();
             ofn.lStructSize = Marshal.SizeOf(ofn);
             ofn.hwndOwner = hwnd;
-            ofn.lpstrFilter = "所有檔案 (*.*)\0*.*\0\0";
+            string allFilesText = lanlanlu_toolkit.Services.LocalizationHelper.GetString("System_AllFiles") ?? "所有檔案";
+            ofn.lpstrFilter = $"{allFilesText} (*.*)\0*.*\0\0";
             
             ofn.lpstrFile = new string(new char[1024]);
             ofn.nMaxFile = ofn.lpstrFile.Length;
@@ -237,7 +238,7 @@ namespace lanlanlu_toolkit.Views
             }
             catch (Exception ex)
             {
-                ResultTextBox.Text = $"Error: {ex.Message}";
+                ResultTextBox.Text = $"{LocalizationHelper.GetString("Notification_Error") ?? "Error"}: {ex.Message}";
                 ShowErrorNotification(ex.Message);
             }
             finally

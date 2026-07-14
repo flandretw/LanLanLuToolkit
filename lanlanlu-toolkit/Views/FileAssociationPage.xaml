@@ -15,8 +15,8 @@
                     
                     <!-- Page Header -->
                     <StackPanel Spacing="4" Margin="0">
-                        <TextBlock x:Name="PageHeaderTitleTextBlock" Text="檔案開啟方式管理員" Style="{ThemeResource TitleTextBlockStyle}" />
-                        <TextBlock x:Name="PageHeaderDescTextBlock" Text="管理與重設特定副檔名的預設開啟應用程式，解決檔案關聯被強行綁定的痛點。" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="PageHeaderTitleTextBlock" x:Uid="FileAssociationPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
+                        <TextBlock x:Name="PageHeaderDescTextBlock" x:Uid="FileAssociationPage_Desc" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                     </StackPanel>
 
                     <!-- Section: Association Configuration -->
