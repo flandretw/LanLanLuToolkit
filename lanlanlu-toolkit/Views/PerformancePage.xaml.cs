@@ -423,7 +423,8 @@ namespace lanlanlu_toolkit.Views
                     double speedGhz = 0;
                     using (var cpuWmi = new ManagementObjectSearcher("SELECT CurrentClockSpeed FROM Win32_Processor"))
                     using (var cpuCol = cpuWmi.Get())
-                    foreach (var obj in cpuCol) speedGhz = Convert.ToDouble(obj["CurrentClockSpeed"]) / 1000.0;
+                    foreach (ManagementBaseObject obj in cpuCol) 
+                    using (obj) { speedGhz = Convert.ToDouble(obj["CurrentClockSpeed"]) / 1000.0; }
 
                     // RAM Detailed Stats
                     using var ramSearcher = new ManagementObjectSearcher("SELECT AvailableBytes, CommittedBytes, CommitLimit, CacheBytes, PoolPagedBytes, PoolNonpagedBytes FROM Win32_PerfFormattedData_PerfOS_Memory");
@@ -431,13 +432,15 @@ namespace lanlanlu_toolkit.Views
                     double availableGb = 0, committedGb = 0, committedLimitGb = 0, cachedGb = 0;
                     double pagedPoolMb = 0, nonPagedPoolMb = 0, compressedMb = 0;
                     
-                    foreach (var obj in ramCol) {
-                        availableGb = Convert.ToDouble(obj["AvailableBytes"]) / (1024.0 * 1024.0 * 1024.0);
-                        committedGb = Convert.ToDouble(obj["CommittedBytes"]) / (1024.0 * 1024.0 * 1024.0);
-                        committedLimitGb = Convert.ToDouble(obj["CommitLimit"]) / (1024.0 * 1024.0 * 1024.0);
-                        cachedGb = Convert.ToDouble(obj["CacheBytes"]) / (1024.0 * 1024.0 * 1024.0);
-                        pagedPoolMb = Convert.ToDouble(obj["PoolPagedBytes"]) / (1024.0 * 1024.0);
-                        nonPagedPoolMb = Convert.ToDouble(obj["PoolNonpagedBytes"]) / (1024.0 * 1024.0);
+                    foreach (ManagementBaseObject obj in ramCol) {
+                        using (obj) {
+                            availableGb = Convert.ToDouble(obj["AvailableBytes"]) / (1024.0 * 1024.0 * 1024.0);
+                            committedGb = Convert.ToDouble(obj["CommittedBytes"]) / (1024.0 * 1024.0 * 1024.0);
+                            committedLimitGb = Convert.ToDouble(obj["CommitLimit"]) / (1024.0 * 1024.0 * 1024.0);
+                            cachedGb = Convert.ToDouble(obj["CacheBytes"]) / (1024.0 * 1024.0 * 1024.0);
+                            pagedPoolMb = Convert.ToDouble(obj["PoolPagedBytes"]) / (1024.0 * 1024.0);
+                            nonPagedPoolMb = Convert.ToDouble(obj["PoolNonpagedBytes"]) / (1024.0 * 1024.0);
+                        }
                     }
 
                     DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () => {
