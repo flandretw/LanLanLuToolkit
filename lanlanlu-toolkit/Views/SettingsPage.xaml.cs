@@ -216,7 +216,7 @@ namespace lanlanlu_toolkit.Views
                 IntPtr hwnd = GetActiveWindow();
                 
                 string initialPath = SettingsService.GetDebugReportPath();
-                string title = LocalizationHelper.GetString("SettingsPage_DebugReport_SelectFolderTitle") ?? "選擇偵錯報告儲存資料夾";
+                string title = LocalizationHelper.GetString("SettingsPage_DebugReport_SelectFolderTitle");
                 string? result = dialog.Show(hwnd, initialPath, title);
 
                 if (result != null)

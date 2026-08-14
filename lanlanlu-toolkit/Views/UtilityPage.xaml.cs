@@ -27,8 +27,8 @@ namespace lanlanlu_toolkit.Views
             });
             Tools.Add(new ToolItem
             {
-                Title = resourceLoader.GetString("Nav_FileAssociationPage/Content") ?? "檔案開啟方式管理員",
-                Description = resourceLoader.GetString("FileAssociationPage_Desc/Text") ?? "重設特定副檔名的預設開啟應用程式",
+                Title = resourceLoader.GetString("Nav_FileAssociationPage/Content"),
+                Description = resourceLoader.GetString("FileAssociationPage_Desc/Text"),
                 Icon = "\uE7B5",
                 Tag = "FileAssociationPage"
             });

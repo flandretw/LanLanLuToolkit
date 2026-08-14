@@ -745,4 +745,343 @@
   <data name="System_AllFiles" xml:space="preserve">
     <value>所有檔案</value>
   </data>
+  <!-- ========================================================================= -->
+  <!-- Crash Report: UI Elements & Navigation                                    -->
+  <!-- ========================================================================= -->
+  <data name="Nav_CrashReportPage.Content" xml:space="preserve">
+    <value>當機與崩潰分析</value>
+  </data>
+  <data name="CrashReportPage_Title.Text" xml:space="preserve">
+    <value>當機與崩潰分析</value>
+  </data>
+  <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
+    <value>自動掃描並分析系統核心傾印 (Minidump) 與應用程式崩潰事件日誌</value>
+  </data>
+  <data name="CrashReportPage_Guide_Title.Text" xml:space="preserve">
+    <value>功能說明與排錯指引</value>
+  </data>
+  <data name="CrashReportPage_Guide_Desc1.Text" xml:space="preserve">
+    <value>• 自動分析：系統會自動擷取 C:\Windows\Minidump 核心傾印檔與 Windows 事件檢視器中的重大當機事件。</value>
+  </data>
+  <data name="CrashReportPage_Guide_Desc2.Text" xml:space="preserve">
+    <value>• 智慧排錯：點選任一事件即可解析 BugCheck 錯誤代碼、引發崩潰的可疑驅動程式模組並取得改善建議。</value>
+  </data>
+  <data name="CrashReportPage_Guide_Desc3.Text" xml:space="preserve">
+    <value>• 報告匯出：可複製個別診斷摘要，或點選「匯出診斷報告」產生 Markdown 紀錄，方便向技術社群尋求協助。</value>
+  </data>
+  <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
+    <value>總崩潰事件</value>
+  </data>
+  <data name="CrashReportPage_Card_BSOD.Text" xml:space="preserve">
+    <value>系統核心當機</value>
+  </data>
+  <data name="CrashReportPage_Card_AppCrash.Text" xml:space="preserve">
+    <value>應用程式錯誤</value>
+  </data>
+  <data name="CrashReportPage_Card_LastCrash.Text" xml:space="preserve">
+    <value>最近當機時間</value>
+  </data>
+  <data name="CrashReportPage_Filter_All.Content" xml:space="preserve">
+    <value>所有事件</value>
+  </data>
+  <data name="CrashReportPage_Filter_BSOD.Content" xml:space="preserve">
+    <value>僅系統核心當機</value>
+  </data>
+  <data name="CrashReportPage_Filter_App.Content" xml:space="preserve">
+    <value>僅應用程式崩潰</value>
+  </data>
+  <data name="CrashReportPage_SearchBox.PlaceholderText" xml:space="preserve">
+    <value>搜尋程式名稱、錯誤碼、驅動程式或模組...</value>
+  </data>
+  <data name="CrashReportPage_RefreshBtn.Text" xml:space="preserve">
+    <value>重新掃描</value>
+  </data>
+  <data name="CrashReportPage_OpenDumpFolderBtn.Text" xml:space="preserve">
+    <value>開啟 Dump 資料夾</value>
+  </data>
+  <data name="CrashReportPage_ExportBtn.Text" xml:space="preserve">
+    <value>匯出診斷報告</value>
+  </data>
+  <data name="CrashReportPage_NoCrashes_Title.Text" xml:space="preserve">
+    <value>系統非常健康！</value>
+  </data>
+  <data name="CrashReportPage_NoCrashes_Desc.Text" xml:space="preserve">
+    <value>在系統記錄中未發現任何系統核心當機或近期應用程式崩潰記錄。</value>
+  </data>
+  <data name="CrashReportPage_SelectPrompt_Title.Text" xml:space="preserve">
+    <value>請選擇左側事件</value>
+  </data>
+  <data name="CrashReportPage_SelectPrompt_Desc.Text" xml:space="preserve">
+    <value>點選左側清單中的任一當機或崩潰事件以檢視詳細診斷資訊與排錯建議。</value>
+  </data>
+  <data name="CrashReportPage_Detail_Header.Text" xml:space="preserve">
+    <value>崩潰事件詳細診斷</value>
+  </data>
+  <data name="CrashReportPage_Detail_DiagnosisHeader.Text" xml:space="preserve">
+    <value>智慧診斷與成因分析</value>
+  </data>
+  <data name="CrashReportPage_Detail_RecommendationHeader.Text" xml:space="preserve">
+    <value>排錯與改善建議</value>
+  </data>
+  <data name="CrashReportPage_Detail_TechDetailsHeader.Text" xml:space="preserve">
+    <value>技術參數資訊</value>
+  </data>
+  <data name="CrashReportPage_Detail_ErrorCode.Text" xml:space="preserve">
+    <value>錯誤代碼</value>
+  </data>
+  <data name="CrashReportPage_Detail_FaultModule.Text" xml:space="preserve">
+    <value>可疑模組/驅動</value>
+  </data>
+  <data name="CrashReportPage_Detail_SourceApp.Text" xml:space="preserve">
+    <value>錯誤來源 / 程式</value>
+  </data>
+  <data name="CrashReportPage_Detail_Params.Text" xml:space="preserve">
+    <value>崩潰參數 (Arg1~4)</value>
+  </data>
+  <data name="CrashReportPage_Detail_DumpPath.Text" xml:space="preserve">
+    <value>傾印檔案 / 路徑</value>
+  </data>
+  <data name="CrashReportPage_Detail_LocateBtn.Text" xml:space="preserve">
+    <value>開啟位置</value>
+  </data>
+  <data name="CrashReportPage_Detail_RawLogHeader.Text" xml:space="preserve">
+    <value>原始事件紀錄</value>
+  </data>
+  <data name="CrashReportPage_Detail_CopyBtn.Text" xml:space="preserve">
+    <value>複製詳細報告</value>
+  </data>
+  <data name="CrashReportPage_Detail_Copied" xml:space="preserve">
+    <value>已複製到剪貼簿</value>
+  </data>
+  <data name="CrashReportPage_ExportSuccess_Title" xml:space="preserve">
+    <value>匯出成功</value>
+  </data>
+  <data name="CrashReportPage_ExportSuccess_Msg" xml:space="preserve">
+    <value>當機診斷報告已成功儲存至檔案。</value>
+  </data>
+  <data name="CrashReportPage_DumpFolder_NotFound" xml:space="preserve">
+    <value>Minidump 資料夾不存在或尚未產生任何傾印檔案。</value>
+  </data>
+  <data name="CrashReportPage_None" xml:space="preserve">
+    <value>無紀錄</value>
+  </data>
+  <data name="CrashReportPage_Scanning.Text" xml:space="preserve">
+    <value>正在掃描事件記錄與核心傾印檔案...</value>
+  </data>
+  <data name="CrashReportPage_Badge_KernelCrash" xml:space="preserve">
+    <value>核心當機</value>
+  </data>
+  <data name="CrashReportPage_Badge_AppCrash" xml:space="preserve">
+    <value>程式錯誤</value>
+  </data>
+  <data name="CrashReportPage_Badge_AppHang" xml:space="preserve">
+    <value>程式凍結</value>
+  </data>
+  <data name="CrashReportPage_Badge_DotNetCrash" xml:space="preserve">
+    <value>.NET 錯誤</value>
+  </data>
+  <data name="CrashReportPage_Source_Kernel" xml:space="preserve">
+    <value>系統核心 (Kernel)</value>
+  </data>
+  <data name="CrashReportPage_Source_Unknown" xml:space="preserve">
+    <value>未知程式</value>
+  </data>
+  <data name="CrashReportPage_RawLog_None" xml:space="preserve">
+    <value>無其他詳細紀錄。</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- Crash Report: Export Template Strings                                     -->
+  <!-- ========================================================================= -->
+  <data name="CrashReport_Export_Title" xml:space="preserve">
+    <value># Windows 系統當機與崩潰診斷報告</value>
+  </data>
+  <data name="CrashReport_Export_GeneratedTime" xml:space="preserve">
+    <value>產生時間: {0}</value>
+  </data>
+  <data name="CrashReport_Export_Summary" xml:space="preserve">
+    <value>總事件數: {0} (系統核心當機: {1}, 應用程式錯誤: {2})</value>
+  </data>
+  <data name="CrashReport_Export_Field_Timestamp" xml:space="preserve">
+    <value>發生時間</value>
+  </data>
+  <data name="CrashReport_Export_Field_ErrorCode" xml:space="preserve">
+    <value>錯誤代碼</value>
+  </data>
+  <data name="CrashReport_Export_Field_Source" xml:space="preserve">
+    <value>錯誤來源</value>
+  </data>
+  <data name="CrashReport_Export_Field_Module" xml:space="preserve">
+    <value>可疑模組/驅動</value>
+  </data>
+  <data name="CrashReport_Export_Field_Parameters" xml:space="preserve">
+    <value>崩潰參數</value>
+  </data>
+  <data name="CrashReport_Export_Field_DumpPath" xml:space="preserve">
+    <value>傾印/檔案路徑</value>
+  </data>
+  <data name="CrashReport_Export_Field_Diagnosis" xml:space="preserve">
+    <value>診斷成因</value>
+  </data>
+  <data name="CrashReport_Export_Field_Recommendation" xml:space="preserve">
+    <value>排錯建議</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- Crash Report: BugCheck Diagnostic Knowledge Base                          -->
+  <!-- ========================================================================= -->
+  <data name="BugCheck_Unknown_Desc" xml:space="preserve">
+    <value>未知的 Windows 系統核心崩潰代碼。</value>
+  </data>
+  <data name="BugCheck_Unknown_Rec" xml:space="preserve">
+    <value>建議在搜尋引擎中查詢該錯誤代碼以取得專屬解決方案。</value>
+  </data>
+  <data name="BugCheck_0x0000000A_Desc" xml:space="preserve">
+    <value>核心試圖在過高的插斷請求層級 (IRQL) 存取可分頁記憶體。</value>
+  </data>
+  <data name="BugCheck_0x0000000A_Rec" xml:space="preserve">
+    <value>通常是由損壞或不相容的硬體驅動程式（例如網路卡、音效卡或防毒軟體驅動）引起，亦可能為記憶體損壞。建議更新相關驅動程式或執行記憶體診斷。</value>
+  </data>
+  <data name="BugCheck_0x0000001E_Desc" xml:space="preserve">
+    <value>核心模式程式產生的例外狀況未被錯誤處理常式攔截。</value>
+  </data>
+  <data name="BugCheck_0x0000001E_Rec" xml:space="preserve">
+    <value>通常與最近安裝的硬體、驅動程式或第三方防毒系統服務衝突有關。可嘗試解除安裝最近更新的驅動或軟體。</value>
+  </data>
+  <data name="BugCheck_0x0000003B_Desc" xml:space="preserve">
+    <value>在執行系統服務常式時發生了未處理的例外狀況。</value>
+  </data>
+  <data name="BugCheck_0x0000003B_Rec" xml:space="preserve">
+    <value>極高機率由顯示卡驅動程式 (如 nvlddmkm.sys/amdkmdag.sys)、系統核心檔案損毀或分頁集區損壞所引起。建議使用 DDU 乾淨重裝顯卡驅動，並執行 sfc /scannow。</value>
+  </data>
+  <data name="BugCheck_0x00000050_Desc" xml:space="preserve">
+    <value>系統引用了無效的記憶體位址（非分頁集區中的無效分頁）。</value>
+  </data>
+  <data name="BugCheck_0x00000050_Rec" xml:space="preserve">
+    <value>常見原因為實體記憶體 (RAM) 故障、主機板記憶體插槽氧化、防毒軟體核心模組衝突或 NTFS 檔案系統損毀。建議擦拭清潔金手指或執行記憶體測試。</value>
+  </data>
+  <data name="BugCheck_0x0000007E_Desc" xml:space="preserve">
+    <value>系統執行緒產生了例外狀況但未被捕捉。</value>
+  </data>
+  <data name="BugCheck_0x0000007E_Rec" xml:space="preserve">
+    <value>多半由硬體驅動程式不相容或硬碟空間不足引起。請檢視可疑模組名稱並更新該驅動程式。</value>
+  </data>
+  <data name="BugCheck_0x0000009F_Desc" xml:space="preserve">
+    <value>驅動程式處於不一致或無效的電源狀態（通常在睡眠、休眠或喚醒時發生）。</value>
+  </data>
+  <data name="BugCheck_0x0000009F_Rec" xml:space="preserve">
+    <value>通常由電源管理驅動、USB 控制器或 Wi-Fi 網卡驅動在睡眠過渡期間逾時引起。建議更新晶片組與無線網卡驅動程式。</value>
+  </data>
+  <data name="BugCheck_0x000000A0_Desc" xml:space="preserve">
+    <value>電源管理員遇到嚴重內部錯誤（通常與休眠或快速啟動檔案有關）。</value>
+  </data>
+  <data name="BugCheck_0x000000A0_Rec" xml:space="preserve">
+    <value>可能是休眠檔案 (hiberfil.sys) 損毀或儲存裝置驅動程式異常。可嘗試以管理員執行 powercfg -h off 再 powercfg -h on 重建休眠檔。</value>
+  </data>
+  <data name="BugCheck_0x000000D1_Desc" xml:space="preserve">
+    <value>驅動程式在過高的 IRQL 下嘗試存取無效的記憶體位址。</value>
+  </data>
+  <data name="BugCheck_0x000000D1_Rec" xml:space="preserve">
+    <value>最常見的系統當機代碼之一，請查看導致崩潰的驅動程式名稱（如網卡、音效卡、防毒核心等），並前往官網下載最新版本覆蓋安裝。</value>
+  </data>
+  <data name="BugCheck_0x000000EF_Desc" xml:space="preserve">
+    <value>關鍵系統處理程序（如 csrss.exe, wininit.exe）意外終止。</value>
+  </data>
+  <data name="BugCheck_0x000000EF_Rec" xml:space="preserve">
+    <value>可能為系統核心損毀、惡意軟體感染或硬碟壞軌導致系統重要元件崩潰。建議執行 DISM 與 SFC 系統修復命令。</value>
+  </data>
+  <data name="BugCheck_0x00000101_Desc" xml:space="preserve">
+    <value>次要處理器未在分配的時間間隔內收到預期的時脈插斷。</value>
+  </data>
+  <data name="BugCheck_0x00000101_Rec" xml:space="preserve">
+    <value>典型 CPU 相關問題：CPU 核心超頻不穩定、供電電壓不足、過熱降頻或主機板 BIOS 微碼問題。建議重設 BIOS 為預設設定並更新 BIOS。</value>
+  </data>
+  <data name="BugCheck_0x00000116_Desc" xml:space="preserve">
+    <value>顯示卡驅動程式無回應，且系統嘗試透過 TDR 重設復原時逾時失敗。</value>
+  </data>
+  <data name="BugCheck_0x00000116_Rec" xml:space="preserve">
+    <value>顯示卡核心當機：可能為顯卡驅動異常、顯卡過熱、顯卡供電不足或顯示卡硬體晶片老化損壞。建議使用 DDU 重裝驅動並監控顯卡溫度。</value>
+  </data>
+  <data name="BugCheck_0x00000124_Desc" xml:space="preserve">
+    <value>Windows 硬體錯誤架構 (WHEA) 偵測到無法復原的硬體錯誤。</value>
+  </data>
+  <data name="BugCheck_0x00000124_Rec" xml:space="preserve">
+    <value>極嚴重的純硬體錯誤：通常為 CPU 核心故障/電壓過低、NVMe SSD 斷開連線、RAM 損壞或 PCIe 匯流排錯誤。建議檢查硬體接點與電源供應器。</value>
+  </data>
+  <data name="BugCheck_0x00000133_Desc" xml:space="preserve">
+    <value>DPC 監視程式偵測到單一長時間執行的 DPC 或累積時間過長。</value>
+  </data>
+  <data name="BugCheck_0x00000133_Rec" xml:space="preserve">
+    <value>常見於 NVMe/SATA 固態硬碟韌體過舊、StorAHCI 驅動逾時、或 Wi-Fi/藍牙驅動程式延遲過高。建議更新 SSD 韌體與主機板驅動。</value>
+  </data>
+  <data name="BugCheck_0x00000139_Desc" xml:space="preserve">
+    <value>核心偵測到關鍵資料結構損毀（緩衝區溢位或記憶體被非法篡改）。</value>
+  </data>
+  <data name="BugCheck_0x00000139_Rec" xml:space="preserve">
+    <value>通常是驅動程式記憶體越界寫入、損壞的系統檔案或硬體記憶體位元翻轉。請檢查驅動程式與記憶體穩定度。</value>
+  </data>
+  <data name="BugCheck_0x00000154_Desc" xml:space="preserve">
+    <value>記憶體管理器儲存元件在處理分頁時發生未預期的例外狀況。</value>
+  </data>
+  <data name="BugCheck_0x00000154_Rec" xml:space="preserve">
+    <value>常見於硬碟/SSD 壞軌、SSD 突發斷電掉盤或儲存控制器驅動崩潰。強烈建議備份重要資料並檢查硬碟健康狀態 (S.M.A.R.T.)。</value>
+  </data>
+  <data name="BugCheck_0x0000001A_Desc" xml:space="preserve">
+    <value>系統發生了嚴重的記憶體管理錯誤。</value>
+  </data>
+  <data name="BugCheck_0x0000001A_Rec" xml:space="preserve">
+    <value>常見於實體記憶體故障、XMP/EXPO 超頻不穩定或虛擬記憶體分頁檔損毀。建議關閉記憶體超頻並執行 Windows 記憶體診斷工具。</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- Crash Report: Application Exception Knowledge Base                        -->
+  <!-- ========================================================================= -->
+  <data name="AppException_Unknown_Desc" xml:space="preserve">
+    <value>應用程式發生未處理的例外狀況代碼。</value>
+  </data>
+  <data name="AppException_Unknown_Rec" xml:space="preserve">
+    <value>請確認該應用程式是否已更新至最新版本。</value>
+  </data>
+  <data name="AppException_0xC0000005_Desc" xml:space="preserve">
+    <value>記憶體存取違規（程式試圖讀取或寫入未分配或受保護的記憶體位址）。</value>
+  </data>
+  <data name="AppException_0xC0000005_Rec" xml:space="preserve">
+    <value>常見原因為軟體本身的 Null 指標錯誤、記憶體溢位、不相容的外掛模組或受保護記憶體衝突。可嘗試更新該軟體或重新安裝。</value>
+  </data>
+  <data name="AppException_0xC0000409_Desc" xml:space="preserve">
+    <value>堆疊緩衝區溢位（觸發系統安全保護機制以防止記憶體破壞）。</value>
+  </data>
+  <data name="AppException_0xC0000409_Rec" xml:space="preserve">
+    <value>軟體內部出現嚴重的緩衝區溢位錯誤，通常為程式設計缺陷或模組衝突。建議向軟體開發商反映或更新版本。</value>
+  </data>
+  <data name="AppException_0xC0000374_Desc" xml:space="preserve">
+    <value>堆積記憶體損毀。</value>
+  </data>
+  <data name="AppException_0xC0000374_Rec" xml:space="preserve">
+    <value>應用程式在釋放或使用記憶體堆積時結構損壞，常見於第三方動態連結庫 (DLL) 衝突或軟體內部記憶體流失。</value>
+  </data>
+  <data name="AppException_0xC00000FD_Desc" xml:space="preserve">
+    <value>堆疊溢位（Stack Overflow）。</value>
+  </data>
+  <data name="AppException_0xC00000FD_Rec" xml:space="preserve">
+    <value>軟體內部發生了無窮迴圈或過深的遞迴呼叫，導致呼叫堆疊耗盡。</value>
+  </data>
+  <data name="AppException_0xE0434352_Desc" xml:space="preserve">
+    <value>.NET Common Language Runtime (CLR) 未處理的例外狀況。</value>
+  </data>
+  <data name="AppException_0xE0434352_Rec" xml:space="preserve">
+    <value>基於 .NET 開發的應用程式拋出例外且未被攔截。請檢查 Windows 事件記錄中的詳細呼叫堆疊 (Stack Trace) 以定位問題。</value>
+  </data>
+  <data name="AppException_Hang_Desc" xml:space="preserve">
+    <value>應用程式發生未回應 (Hang) 凍結事件。</value>
+  </data>
+  <data name="AppException_Hang_Rec" xml:space="preserve">
+    <value>可能為死結 (Deadlock)、大量 I/O 阻塞或無窮迴圈。請檢查程式負載與更新。</value>
+  </data>
+  <data name="AppException_DotNet_Desc" xml:space="preserve">
+    <value>.NET Runtime 未處理的例外狀況。</value>
+  </data>
+  <data name="AppException_DotNet_Rec" xml:space="preserve">
+    <value>請參閱詳細紀錄中的呼叫堆疊 (Stack Trace) 進行排錯。</value>
+  </data>
 </root>

@@ -44,6 +44,11 @@
                         <FontIcon Glyph="&#xEC7A;" />
                     </NavigationViewItem.Icon>
                     <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Tag="CrashReportPage" x:Uid="Nav_CrashReportPage">
+                            <NavigationViewItem.Icon>
+                                <FontIcon Glyph="&#xE7BA;" />
+                            </NavigationViewItem.Icon>
+                        </NavigationViewItem>
                         <NavigationViewItem Tag="SystemRepairPage" x:Uid="Nav_SystemRepairPage">
                             <NavigationViewItem.Icon>
                                 <FontIcon Glyph="&#xE762;" />

@@ -29,6 +29,13 @@ namespace lanlanlu_toolkit.Views
             var resourceLoader = new ResourceLoader();
             Tools.Add(new ToolItem
             {
+                Title = resourceLoader.GetString("Nav_CrashReportPage/Content"),
+                Description = resourceLoader.GetString("CrashReportPage_Subtitle/Text"),
+                Icon = "\uE7BA",
+                Tag = "CrashReportPage"
+            });
+            Tools.Add(new ToolItem
+            {
                 Title = resourceLoader.GetString("Nav_SystemRepairPage/Content"),
                 Description = resourceLoader.GetString("SystemRepairPage_AutoMode_Desc/Text"),
                 Icon = "\uE762",
@@ -42,6 +49,9 @@ namespace lanlanlu_toolkit.Views
             {
                 switch (tag)
                 {
+                    case "CrashReportPage":
+                        this.Frame.Navigate(typeof(CrashReportPage));
+                        break;
                     case "SystemRepairPage":
                         this.Frame.Navigate(typeof(SystemRepairPage));
                         break;

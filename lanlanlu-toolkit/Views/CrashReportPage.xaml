@@ -1,0 +1,544 @@
+<Page
+    x:Class="lanlanlu_toolkit.Views.CrashReportPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:lanlanlu_toolkit.Views"
+    xmlns:services="using:lanlanlu_toolkit.Services"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    NavigationCacheMode="Required"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Padding="36" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RowSpacing="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" /> <!-- Header & Actions -->
+            <RowDefinition Height="Auto" /> <!-- Guide & Instructions Expander -->
+            <RowDefinition Height="Auto" /> <!-- Stat Summary Cards -->
+            <RowDefinition Height="Auto" /> <!-- Filter & Search -->
+            <RowDefinition Height="*" />    <!-- Master-Detail Content Area -->
+        </Grid.RowDefinitions>
+
+        <!-- 1. Page Header with Action Buttons -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center">
+                <TextBlock x:Uid="CrashReportPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
+                <TextBlock x:Uid="CrashReportPage_Subtitle" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <!-- Actions -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                <Button x:Name="OpenDumpFolderBtn" Click="OpenDumpFolderBtn_Click">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <FontIcon Glyph="&#xED25;" FontSize="16" />
+                        <TextBlock x:Uid="CrashReportPage_OpenDumpFolderBtn" Style="{ThemeResource CaptionTextBlockStyle}" />
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="ExportBtn" Click="ExportBtn_Click" IsEnabled="False">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <FontIcon Glyph="&#xEDE1;" FontSize="16" />
+                        <TextBlock x:Uid="CrashReportPage_ExportBtn" Style="{ThemeResource CaptionTextBlockStyle}" />
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="RefreshBtn" Click="RefreshBtn_Click" Style="{ThemeResource AccentButtonStyle}">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <FontIcon Glyph="&#xE72C;" FontSize="16" />
+                        <TextBlock x:Uid="CrashReportPage_RefreshBtn" Style="{ThemeResource CaptionTextBlockStyle}" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- 2. Guide & Instructions Expander -->
+        <Expander Grid.Row="1"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Stretch"
+                  IsExpanded="False"
+                  CornerRadius="{ThemeResource ControlCornerRadius}">
+            <Expander.Header>
+                <Grid ColumnSpacing="16" Padding="0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE946;" FontSize="18" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" x:Uid="CrashReportPage_Guide_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel Spacing="8" Padding="12,8,12,12">
+                    <TextBlock x:Uid="CrashReportPage_Guide_Desc1" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                    <TextBlock x:Uid="CrashReportPage_Guide_Desc2" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                    <TextBlock x:Uid="CrashReportPage_Guide_Desc3" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+
+        <!-- 3. Stat Summary Cards -->
+        <Grid Grid.Row="2" ColumnSpacing="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Total Events -->
+            <Border Grid.Column="0"
+                    Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource ControlCornerRadius}"
+                    Padding="16,14">
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE9F9;" FontSize="24" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock x:Uid="CrashReportPage_Card_Total" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="TotalCountText" Text="0" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Kernel Crashes -->
+            <Border Grid.Column="1"
+                    Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource ControlCornerRadius}"
+                    Padding="16,14">
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE7BA;" FontSize="24" Foreground="#D13438" VerticalAlignment="Center" />
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock x:Uid="CrashReportPage_Card_BSOD" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="BsodCountText" Text="0" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" Foreground="#D13438" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- App Crash Events -->
+            <Border Grid.Column="2"
+                    Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource ControlCornerRadius}"
+                    Padding="16,14">
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE783;" FontSize="24" Foreground="#EA385B" VerticalAlignment="Center" />
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock x:Uid="CrashReportPage_Card_AppCrash" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="AppCrashCountText" Text="0" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Last Crash Time -->
+            <Border Grid.Column="3"
+                    Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource ControlCornerRadius}"
+                    Padding="16,14">
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE823;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock x:Uid="CrashReportPage_Card_LastCrash" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="LastCrashTimeText" Text="-" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- 4. Filter & Search Controls -->
+        <Grid Grid.Row="3" ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Type Filter ComboBox -->
+            <ComboBox x:Name="TypeFilterComboBox" SelectedIndex="0" Width="180" SelectionChanged="TypeFilterComboBox_SelectionChanged" VerticalAlignment="Center">
+                <ComboBoxItem x:Uid="CrashReportPage_Filter_All" />
+                <ComboBoxItem x:Uid="CrashReportPage_Filter_BSOD" />
+                <ComboBoxItem x:Uid="CrashReportPage_Filter_App" />
+            </ComboBox>
+
+            <!-- Search Box -->
+            <TextBox x:Name="CrashSearchBox"
+                     Grid.Column="1"
+                     x:Uid="CrashReportPage_SearchBox"
+                     TextChanged="CrashSearchBox_TextChanged"
+                     VerticalAlignment="Center">
+            </TextBox>
+
+            <!-- Event Count Indicator -->
+            <TextBlock x:Name="ShowingCountText" Grid.Column="2" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        </Grid>
+
+        <!-- 5. Master-Detail Content Area -->
+        <Grid Grid.Row="4" ColumnSpacing="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="420" MinWidth="340" MaxWidth="520" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Left: List View of Crashes -->
+            <Border Grid.Column="0"
+                    Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource ControlCornerRadius}">
+                <Grid>
+                    <!-- Loading Indicator -->
+                    <StackPanel x:Name="LoadingPanel"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Spacing="12"
+                                Visibility="Collapsed">
+                        <ProgressRing IsActive="True" Width="40" Height="40" />
+                        <TextBlock x:Uid="CrashReportPage_Scanning" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    </StackPanel>
+
+                    <!-- Empty State -->
+                    <StackPanel x:Name="EmptyPanel"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Spacing="8"
+                                Padding="24"
+                                Visibility="Collapsed">
+                        <FontIcon Glyph="&#xE9A1;" FontSize="48" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Margin="0,0,0,8" />
+                        <TextBlock x:Uid="CrashReportPage_NoCrashes_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" HorizontalAlignment="Center" />
+                        <TextBlock x:Uid="CrashReportPage_NoCrashes_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <!-- Events ListView -->
+                    <ListView x:Name="CrashListView"
+                              SelectionMode="Single"
+                              SelectionChanged="CrashListView_SelectionChanged"
+                              Padding="4,6"
+                              IsItemClickEnabled="True">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Margin" Value="4,2" />
+                                <Setter Property="Padding" Value="10,10,12,10" />
+                                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListViewItem">
+                                            <Grid x:Name="RootGrid"
+                                                  CornerRadius="{ThemeResource ControlCornerRadius}"
+                                                  Background="Transparent">
+
+                                                <!-- Item Background Card (Hover/Selected) -->
+                                                <Border x:Name="CardBackground"
+                                                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                                                        Background="{ThemeResource SubtleFillColorSecondaryBrush}"
+                                                        Opacity="0" />
+
+                                                <!-- Left Selection Indicator Strip (3x16 rounded capsule) -->
+                                                <Border x:Name="SelectionPill"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        Width="3"
+                                                        Height="16"
+                                                        CornerRadius="1.5"
+                                                        Background="{ThemeResource AccentFillColorDefaultBrush}"
+                                                        Opacity="0" />
+
+                                                <!-- Item Content Presenter -->
+                                                <ContentPresenter x:Name="ContentPresenter"
+                                                                  Content="{TemplateBinding Content}"
+                                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                  ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                                  Margin="{TemplateBinding Padding}"
+                                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroup x:Name="CommonStates">
+                                                        <VisualState x:Name="Normal" />
+
+                                                        <!-- Hovering over unselected item: Card lights up and indicator preview shows (0.5 opacity)! -->
+                                                        <VisualState x:Name="PointerOver">
+                                                            <VisualState.Setters>
+                                                                <Setter Target="CardBackground.Opacity" Value="0.75" />
+                                                                <Setter Target="SelectionPill.Opacity" Value="0.5" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+
+                                                        <VisualState x:Name="Pressed">
+                                                            <VisualState.Setters>
+                                                                <Setter Target="CardBackground.Opacity" Value="1.0" />
+                                                                <Setter Target="SelectionPill.Opacity" Value="0.7" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+
+                                                        <!-- Selected item: Solid card background and solid 1.0 opacity indicator! -->
+                                                        <VisualState x:Name="Selected">
+                                                            <VisualState.Setters>
+                                                                <Setter Target="CardBackground.Opacity" Value="1.0" />
+                                                                <Setter Target="SelectionPill.Opacity" Value="1.0" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+
+                                                        <!-- Hovering over selected item: Solid card AND solid indicator KEPT AT 1.0 OPACITY! -->
+                                                        <VisualState x:Name="PointerOverSelected">
+                                                            <VisualState.Setters>
+                                                                <Setter Target="CardBackground.Opacity" Value="1.0" />
+                                                                <Setter Target="SelectionPill.Opacity" Value="1.0" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+
+                                                        <VisualState x:Name="PressedSelected">
+                                                            <VisualState.Setters>
+                                                                <Setter Target="CardBackground.Opacity" Value="1.0" />
+                                                                <Setter Target="SelectionPill.Opacity" Value="1.0" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+
+                                                        <VisualState x:Name="SelectedUnfocused">
+                                                            <VisualState.Setters>
+                                                                <Setter Target="CardBackground.Opacity" Value="1.0" />
+                                                                <Setter Target="SelectionPill.Opacity" Value="1.0" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+
+                                                        <VisualState x:Name="PointerOverSelectedUnfocused">
+                                                            <VisualState.Setters>
+                                                                <Setter Target="CardBackground.Opacity" Value="1.0" />
+                                                                <Setter Target="SelectionPill.Opacity" Value="1.0" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+                                                    </VisualStateGroup>
+                                                </VisualStateManager.VisualStateGroups>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="services:CrashReportItem">
+                                <Grid ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Badge / Icon on Left -->
+                                    <Border Width="36" Height="36" CornerRadius="6"
+                                            Background="{ThemeResource ControlFillColorSecondaryBrush}"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                        <FontIcon Glyph="{x:Bind DisplayIcon}" FontSize="18" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                    <!-- Content on Right -->
+                                    <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <TextBlock Text="{x:Bind Title}" Style="{ThemeResource BodyStrongTextBlockStyle}" TextTrimming="CharacterEllipsis" FontWeight="SemiBold" />
+                                            <TextBlock Grid.Column="1" Text="{x:Bind DisplayBadge}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Margin="8,0,0,0" />
+                                        </Grid>
+
+                                        <Grid ColumnSpacing="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{x:Bind FaultingModule}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" />
+                                            <TextBlock Grid.Column="1" Text="{x:Bind FormattedTime}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Border>
+
+            <!-- Right: Detail Panel -->
+            <Border Grid.Column="1"
+                    Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource ControlCornerRadius}"
+                    Padding="24">
+                <Grid>
+                    <!-- Prompt when nothing selected -->
+                    <StackPanel x:Name="NoSelectionPrompt"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Spacing="8"
+                                Padding="24">
+                        <FontIcon Glyph="&#xE81C;" FontSize="48" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Margin="0,0,0,8" />
+                        <TextBlock x:Uid="CrashReportPage_SelectPrompt_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" HorizontalAlignment="Center" />
+                        <TextBlock x:Uid="CrashReportPage_SelectPrompt_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" MaxWidth="360" />
+                    </StackPanel>
+
+                    <!-- Selected Item Detail Content -->
+                    <ScrollViewer x:Name="DetailScrollViewer" Visibility="Collapsed" IsScrollInertiaEnabled="True" VerticalScrollBarVisibility="Auto">
+                        <StackPanel Spacing="20" Margin="0,0,12,0">
+                            
+                            <!-- Header Info -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Spacing="4">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <Border x:Name="DetailTypeBadge" CornerRadius="4" Padding="6,2" Background="{ThemeResource AccentFillColorDefaultBrush}">
+                                            <TextBlock x:Name="DetailTypeBadgeText" Text="Crash" Foreground="White" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="Bold" />
+                                        </Border>
+                                        <TextBlock x:Name="DetailTimestampText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <TextBlock x:Name="DetailTitleText" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                </StackPanel>
+
+                                <!-- Copy Detail Button -->
+                                <Button x:Name="CopyDetailBtn" Grid.Column="1" Click="CopyDetailBtn_Click" VerticalAlignment="Top">
+                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                        <FontIcon x:Name="CopyDetailIcon" Glyph="&#xE8C8;" FontSize="14" />
+                                        <TextBlock x:Name="CopyDetailText" x:Uid="CrashReportPage_Detail_CopyBtn" Style="{ThemeResource CaptionTextBlockStyle}" />
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+
+                            <!-- Smart Diagnosis Card -->
+                            <Border Background="{ThemeResource ControlFillColorDefaultBrush}"
+                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{ThemeResource ControlCornerRadius}"
+                                    Padding="16">
+                                <StackPanel Spacing="12">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <FontIcon Glyph="&#xE946;" FontSize="18" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
+                                        <TextBlock x:Uid="CrashReportPage_Detail_DiagnosisHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                    </StackPanel>
+                                    
+                                    <!-- Description -->
+                                    <TextBlock x:Name="DetailDescriptionText" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" />
+                                    
+                                    <MenuFlyoutSeparator Margin="-16,0,-16,0" />
+
+                                    <!-- Recommendation -->
+                                    <StackPanel Spacing="4">
+                                        <TextBlock x:Uid="CrashReportPage_Detail_RecommendationHeader" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontWeight="SemiBold" />
+                                        <TextBlock x:Name="DetailRecommendationText" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Technical Parameters Card -->
+                            <Border Background="{ThemeResource ControlFillColorDefaultBrush}"
+                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{ThemeResource ControlCornerRadius}"
+                                    Padding="16">
+                                <StackPanel Spacing="12">
+                                    <TextBlock x:Uid="CrashReportPage_Detail_TechDetailsHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+
+                                    <Grid RowSpacing="10" ColumnSpacing="16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="140" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Error Code -->
+                                        <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="CrashReportPage_Detail_ErrorCode" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        <TextBlock x:Name="DetailErrorCodeText" Grid.Row="0" Grid.Column="1" Style="{ThemeResource BodyStrongTextBlockStyle}" FontFamily="Cascadia Code, Consolas" IsTextSelectionEnabled="True" />
+
+                                        <!-- Faulting Module / Driver -->
+                                        <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="CrashReportPage_Detail_FaultModule" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        <TextBlock x:Name="DetailFaultModuleText" Grid.Row="1" Grid.Column="1" Style="{ThemeResource BodyTextBlockStyle}" FontFamily="Cascadia Code, Consolas" IsTextSelectionEnabled="True" />
+
+                                        <!-- Source / App -->
+                                        <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="CrashReportPage_Detail_SourceApp" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        <TextBlock x:Name="DetailSourceAppText" Grid.Row="2" Grid.Column="1" Style="{ThemeResource BodyTextBlockStyle}" IsTextSelectionEnabled="True" />
+
+                                        <!-- Parameters -->
+                                        <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="CrashReportPage_Detail_Params" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        <TextBlock x:Name="DetailParamsText" Grid.Row="3" Grid.Column="1" Style="{ThemeResource BodyTextBlockStyle}" FontFamily="Cascadia Code, Consolas" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+
+                                        <!-- Dump / File Path -->
+                                        <TextBlock Grid.Row="4" Grid.Column="0" x:Uid="CrashReportPage_Detail_DumpPath" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        <Grid Grid.Row="4" Grid.Column="1" ColumnSpacing="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock x:Name="DetailDumpPathText" Style="{ThemeResource BodyTextBlockStyle}" FontFamily="Cascadia Code, Consolas" TextWrapping="Wrap" IsTextSelectionEnabled="True" VerticalAlignment="Center" />
+                                            <Button x:Name="LocateDumpBtn" Grid.Column="1" Click="LocateDumpBtn_Click" Padding="8,4" VerticalAlignment="Center" Visibility="Collapsed">
+                                                <StackPanel Orientation="Horizontal" Spacing="4">
+                                                    <FontIcon Glyph="&#xED25;" FontSize="12" />
+                                                    <TextBlock x:Uid="CrashReportPage_Detail_LocateBtn" Style="{ThemeResource CaptionTextBlockStyle}" />
+                                                </StackPanel>
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Raw Event Record Card -->
+                            <Border Background="{ThemeResource ControlFillColorDefaultBrush}"
+                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{ThemeResource ControlCornerRadius}"
+                                    Padding="16">
+                                <StackPanel Spacing="8">
+                                    <TextBlock x:Uid="CrashReportPage_Detail_RawLogHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="4" Padding="12">
+                                        <TextBlock x:Name="DetailRawLogText"
+                                                   FontFamily="Cascadia Code, Consolas"
+                                                   FontSize="12"
+                                                   LineHeight="18"
+                                                   TextWrapping="Wrap"
+                                                   IsTextSelectionEnabled="True"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    </Border>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

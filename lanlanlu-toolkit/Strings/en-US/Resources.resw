@@ -745,4 +745,343 @@
   <data name="System_AllFiles" xml:space="preserve">
     <value>All Files</value>
   </data>
+  <!-- ========================================================================= -->
+  <!-- Crash Report: UI Elements & Navigation                                    -->
+  <!-- ========================================================================= -->
+  <data name="Nav_CrashReportPage.Content" xml:space="preserve">
+    <value>Crash Analysis</value>
+  </data>
+  <data name="CrashReportPage_Title.Text" xml:space="preserve">
+    <value>Crash &amp; Dump Analysis</value>
+  </data>
+  <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
+    <value>Scan and analyze system kernel minidumps and application crash event logs</value>
+  </data>
+  <data name="CrashReportPage_Guide_Title.Text" xml:space="preserve">
+    <value>Instructions &amp; Troubleshooting Guide</value>
+  </data>
+  <data name="CrashReportPage_Guide_Desc1.Text" xml:space="preserve">
+    <value>• Auto Analysis: Automatically retrieves minidumps from C:\Windows\Minidump and crash records from Windows Event Log.</value>
+  </data>
+  <data name="CrashReportPage_Guide_Desc2.Text" xml:space="preserve">
+    <value>• Smart Diagnosis: Select any event to analyze BugCheck codes, faulting driver modules, and actionable troubleshooting steps.</value>
+  </data>
+  <data name="CrashReportPage_Guide_Desc3.Text" xml:space="preserve">
+    <value>• Export &amp; Share: Copy individual summaries or click 'Export Report' to save all crash logs as a Markdown document for technical assistance.</value>
+  </data>
+  <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
+    <value>Total Crashes</value>
+  </data>
+  <data name="CrashReportPage_Card_BSOD.Text" xml:space="preserve">
+    <value>Kernel Crashes</value>
+  </data>
+  <data name="CrashReportPage_Card_AppCrash.Text" xml:space="preserve">
+    <value>Application Errors</value>
+  </data>
+  <data name="CrashReportPage_Card_LastCrash.Text" xml:space="preserve">
+    <value>Last Crash Time</value>
+  </data>
+  <data name="CrashReportPage_Filter_All.Content" xml:space="preserve">
+    <value>All Events</value>
+  </data>
+  <data name="CrashReportPage_Filter_BSOD.Content" xml:space="preserve">
+    <value>Kernel Crashes Only</value>
+  </data>
+  <data name="CrashReportPage_Filter_App.Content" xml:space="preserve">
+    <value>App Crashes Only</value>
+  </data>
+  <data name="CrashReportPage_SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Search app name, error code, driver or module...</value>
+  </data>
+  <data name="CrashReportPage_RefreshBtn.Text" xml:space="preserve">
+    <value>Rescan</value>
+  </data>
+  <data name="CrashReportPage_OpenDumpFolderBtn.Text" xml:space="preserve">
+    <value>Open Dump Folder</value>
+  </data>
+  <data name="CrashReportPage_ExportBtn.Text" xml:space="preserve">
+    <value>Export Report</value>
+  </data>
+  <data name="CrashReportPage_NoCrashes_Title.Text" xml:space="preserve">
+    <value>System is Healthy!</value>
+  </data>
+  <data name="CrashReportPage_NoCrashes_Desc.Text" xml:space="preserve">
+    <value>No system kernel crash dumps or recent application crash events were found in system logs.</value>
+  </data>
+  <data name="CrashReportPage_SelectPrompt_Title.Text" xml:space="preserve">
+    <value>Select an Event</value>
+  </data>
+  <data name="CrashReportPage_SelectPrompt_Desc.Text" xml:space="preserve">
+    <value>Click any crash event from the list on the left to view detailed diagnostic information and recommendations.</value>
+  </data>
+  <data name="CrashReportPage_Detail_Header.Text" xml:space="preserve">
+    <value>Crash Diagnostic Details</value>
+  </data>
+  <data name="CrashReportPage_Detail_DiagnosisHeader.Text" xml:space="preserve">
+    <value>Smart Diagnosis &amp; Root Cause</value>
+  </data>
+  <data name="CrashReportPage_Detail_RecommendationHeader.Text" xml:space="preserve">
+    <value>Troubleshooting &amp; Advice</value>
+  </data>
+  <data name="CrashReportPage_Detail_TechDetailsHeader.Text" xml:space="preserve">
+    <value>Technical Parameters</value>
+  </data>
+  <data name="CrashReportPage_Detail_ErrorCode.Text" xml:space="preserve">
+    <value>Error Code</value>
+  </data>
+  <data name="CrashReportPage_Detail_FaultModule.Text" xml:space="preserve">
+    <value>Faulting Module / Driver</value>
+  </data>
+  <data name="CrashReportPage_Detail_SourceApp.Text" xml:space="preserve">
+    <value>Source / Application</value>
+  </data>
+  <data name="CrashReportPage_Detail_Params.Text" xml:space="preserve">
+    <value>Parameters (Arg1~4)</value>
+  </data>
+  <data name="CrashReportPage_Detail_DumpPath.Text" xml:space="preserve">
+    <value>Dump File / Path</value>
+  </data>
+  <data name="CrashReportPage_Detail_LocateBtn.Text" xml:space="preserve">
+    <value>Locate</value>
+  </data>
+  <data name="CrashReportPage_Detail_RawLogHeader.Text" xml:space="preserve">
+    <value>Raw Event Record</value>
+  </data>
+  <data name="CrashReportPage_Detail_CopyBtn.Text" xml:space="preserve">
+    <value>Copy Details</value>
+  </data>
+  <data name="CrashReportPage_Detail_Copied" xml:space="preserve">
+    <value>Copied to clipboard</value>
+  </data>
+  <data name="CrashReportPage_ExportSuccess_Title" xml:space="preserve">
+    <value>Export Successful</value>
+  </data>
+  <data name="CrashReportPage_ExportSuccess_Msg" xml:space="preserve">
+    <value>Crash diagnostic report has been saved successfully.</value>
+  </data>
+  <data name="CrashReportPage_DumpFolder_NotFound" xml:space="preserve">
+    <value>Minidump folder does not exist or contains no dump files.</value>
+  </data>
+  <data name="CrashReportPage_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="CrashReportPage_Scanning.Text" xml:space="preserve">
+    <value>Scanning event logs and minidump files...</value>
+  </data>
+  <data name="CrashReportPage_Badge_KernelCrash" xml:space="preserve">
+    <value>Kernel Crash</value>
+  </data>
+  <data name="CrashReportPage_Badge_AppCrash" xml:space="preserve">
+    <value>App Error</value>
+  </data>
+  <data name="CrashReportPage_Badge_AppHang" xml:space="preserve">
+    <value>App Hang</value>
+  </data>
+  <data name="CrashReportPage_Badge_DotNetCrash" xml:space="preserve">
+    <value>.NET Error</value>
+  </data>
+  <data name="CrashReportPage_Source_Kernel" xml:space="preserve">
+    <value>System Kernel</value>
+  </data>
+  <data name="CrashReportPage_Source_Unknown" xml:space="preserve">
+    <value>Unknown App</value>
+  </data>
+  <data name="CrashReportPage_RawLog_None" xml:space="preserve">
+    <value>No additional raw details available.</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- Crash Report: Export Template Strings                                     -->
+  <!-- ========================================================================= -->
+  <data name="CrashReport_Export_Title" xml:space="preserve">
+    <value># Windows Crash &amp; Diagnostic Report</value>
+  </data>
+  <data name="CrashReport_Export_GeneratedTime" xml:space="preserve">
+    <value>Generated on: {0}</value>
+  </data>
+  <data name="CrashReport_Export_Summary" xml:space="preserve">
+    <value>Total Events: {0} (Kernel Crashes: {1}, App Errors: {2})</value>
+  </data>
+  <data name="CrashReport_Export_Field_Timestamp" xml:space="preserve">
+    <value>Timestamp</value>
+  </data>
+  <data name="CrashReport_Export_Field_ErrorCode" xml:space="preserve">
+    <value>Error Code</value>
+  </data>
+  <data name="CrashReport_Export_Field_Source" xml:space="preserve">
+    <value>Source / App</value>
+  </data>
+  <data name="CrashReport_Export_Field_Module" xml:space="preserve">
+    <value>Faulting Module / Driver</value>
+  </data>
+  <data name="CrashReport_Export_Field_Parameters" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="CrashReport_Export_Field_DumpPath" xml:space="preserve">
+    <value>Dump / File Path</value>
+  </data>
+  <data name="CrashReport_Export_Field_Diagnosis" xml:space="preserve">
+    <value>Diagnosis</value>
+  </data>
+  <data name="CrashReport_Export_Field_Recommendation" xml:space="preserve">
+    <value>Troubleshooting Advice</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- Crash Report: BugCheck Diagnostic Knowledge Base                          -->
+  <!-- ========================================================================= -->
+  <data name="BugCheck_Unknown_Desc" xml:space="preserve">
+    <value>Unknown Windows kernel crash code.</value>
+  </data>
+  <data name="BugCheck_Unknown_Rec" xml:space="preserve">
+    <value>Recommend searching for this crash code online for tailored resolution.</value>
+  </data>
+  <data name="BugCheck_0x0000000A_Desc" xml:space="preserve">
+    <value>Kernel attempted to access pageable memory at an elevated IRQL.</value>
+  </data>
+  <data name="BugCheck_0x0000000A_Rec" xml:space="preserve">
+    <value>Usually caused by buggy or incompatible device drivers, or faulty memory. Recommend updating suspect drivers or running Windows Memory Diagnostic.</value>
+  </data>
+  <data name="BugCheck_0x0000001E_Desc" xml:space="preserve">
+    <value>A kernel-mode program generated an exception which the error handler did not catch.</value>
+  </data>
+  <data name="BugCheck_0x0000001E_Rec" xml:space="preserve">
+    <value>Often related to newly installed hardware, faulty drivers, or conflicting system services. Try rolling back recent updates.</value>
+  </data>
+  <data name="BugCheck_0x0000003B_Desc" xml:space="preserve">
+    <value>An exception happened while executing a system service routine.</value>
+  </data>
+  <data name="BugCheck_0x0000003B_Rec" xml:space="preserve">
+    <value>Frequently caused by graphics drivers or corrupted system files. Recommend clean reinstalling GPU drivers and running sfc /scannow.</value>
+  </data>
+  <data name="BugCheck_0x00000050_Desc" xml:space="preserve">
+    <value>Invalid system memory was referenced.</value>
+  </data>
+  <data name="BugCheck_0x00000050_Rec" xml:space="preserve">
+    <value>Commonly caused by faulty RAM, damaged slots, antivirus kernel drivers, or disk file corruption. Clean RAM contacts or run memory checks.</value>
+  </data>
+  <data name="BugCheck_0x0000007E_Desc" xml:space="preserve">
+    <value>A system thread generated an exception that the error handler did not catch.</value>
+  </data>
+  <data name="BugCheck_0x0000007E_Rec" xml:space="preserve">
+    <value>Usually caused by incompatible drivers or insufficient disk space. Check the suspect module name and update its driver.</value>
+  </data>
+  <data name="BugCheck_0x0000009F_Desc" xml:space="preserve">
+    <value>A driver is in an inconsistent or invalid power state, often during sleep/wake.</value>
+  </data>
+  <data name="BugCheck_0x0000009F_Rec" xml:space="preserve">
+    <value>Often caused by power management, USB controllers, or Wi-Fi drivers failing to transition states during sleep/wake. Update chipset drivers.</value>
+  </data>
+  <data name="BugCheck_0x000000A0_Desc" xml:space="preserve">
+    <value>The power manager experienced a fatal internal error.</value>
+  </data>
+  <data name="BugCheck_0x000000A0_Rec" xml:space="preserve">
+    <value>Usually related to a corrupted hiberfil.sys file or storage driver issues. Try running powercfg -h off followed by powercfg -h on to rebuild.</value>
+  </data>
+  <data name="BugCheck_0x000000D1_Desc" xml:space="preserve">
+    <value>A driver attempted to access an invalid memory address at an elevated IRQL.</value>
+  </data>
+  <data name="BugCheck_0x000000D1_Rec" xml:space="preserve">
+    <value>One of the most common crash codes. Identify the faulting driver and install the latest official release.</value>
+  </data>
+  <data name="BugCheck_0x000000EF_Desc" xml:space="preserve">
+    <value>A critical system process terminated unexpectedly.</value>
+  </data>
+  <data name="BugCheck_0x000000EF_Rec" xml:space="preserve">
+    <value>Indicates a vital OS process died, often due to system corruption, malware, or failing disk. Run DISM and SFC repair.</value>
+  </data>
+  <data name="BugCheck_0x00000101_Desc" xml:space="preserve">
+    <value>An expected clock interrupt on a secondary processor was not received within the allocated interval.</value>
+  </data>
+  <data name="BugCheck_0x00000101_Rec" xml:space="preserve">
+    <value>Classic CPU stability issue: unstable overclock, insufficient Vcore voltage, thermal throttling, or outdated BIOS. Reset BIOS to defaults.</value>
+  </data>
+  <data name="BugCheck_0x00000116_Desc" xml:space="preserve">
+    <value>The display driver failed to respond, and the attempt to reset and recover timed out.</value>
+  </data>
+  <data name="BugCheck_0x00000116_Rec" xml:space="preserve">
+    <value>GPU hang: GPU driver crashed, overheating, inadequate power, or failing GPU hardware. Reinstall GPU drivers with DDU and monitor temperatures.</value>
+  </data>
+  <data name="BugCheck_0x00000124_Desc" xml:space="preserve">
+    <value>A fatal hardware error occurred, detected by Windows Hardware Error Architecture.</value>
+  </data>
+  <data name="BugCheck_0x00000124_Rec" xml:space="preserve">
+    <value>Fatal physical hardware fault: CPU failure/undervoltage, disconnecting NVMe SSD, bad RAM, or PCIe bus errors. Check hardware and power supply.</value>
+  </data>
+  <data name="BugCheck_0x00000133_Desc" xml:space="preserve">
+    <value>The DPC watchdog detected a prolonged DPC run time or accumulated time.</value>
+  </data>
+  <data name="BugCheck_0x00000133_Rec" xml:space="preserve">
+    <value>Frequently caused by outdated SSD firmware, storage controller driver delays, or faulty Wi-Fi drivers. Update SSD firmware and chipset drivers.</value>
+  </data>
+  <data name="BugCheck_0x00000139_Desc" xml:space="preserve">
+    <value>The kernel detected corruption of a critical data structure.</value>
+  </data>
+  <data name="BugCheck_0x00000139_Rec" xml:space="preserve">
+    <value>Driver buffer overflow, damaged system libraries, or memory bit flips. Check drivers and memory stability.</value>
+  </data>
+  <data name="BugCheck_0x00000154_Desc" xml:space="preserve">
+    <value>The memory manager store component caught an unexpected exception.</value>
+  </data>
+  <data name="BugCheck_0x00000154_Rec" xml:space="preserve">
+    <value>Often caused by a failing SSD/HDD, drive dropping off the bus, or storage controller driver crash. Immediately back up important data.</value>
+  </data>
+  <data name="BugCheck_0x0000001A_Desc" xml:space="preserve">
+    <value>A severe memory management error occurred.</value>
+  </data>
+  <data name="BugCheck_0x0000001A_Rec" xml:space="preserve">
+    <value>Commonly caused by failing RAM sticks, unstable XMP/EXPO profiles, or corrupted pagefiles. Disable RAM overclocking and test memory.</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- Crash Report: Application Exception Knowledge Base                        -->
+  <!-- ========================================================================= -->
+  <data name="AppException_Unknown_Desc" xml:space="preserve">
+    <value>Application encountered an unhandled exception code.</value>
+  </data>
+  <data name="AppException_Unknown_Rec" xml:space="preserve">
+    <value>Ensure the application is updated to its latest version.</value>
+  </data>
+  <data name="AppException_0xC0000005_Desc" xml:space="preserve">
+    <value>Memory access violation (the thread attempted to read from or write to a virtual address without proper access).</value>
+  </data>
+  <data name="AppException_0xC0000005_Rec" xml:space="preserve">
+    <value>Usually caused by software null pointer dereference, incompatible plugins, or corrupted program files. Try updating or reinstalling the app.</value>
+  </data>
+  <data name="AppException_0xC0000409_Desc" xml:space="preserve">
+    <value>Stack buffer overrun (triggered fast-fail security protection).</value>
+  </data>
+  <data name="AppException_0xC0000409_Rec" xml:space="preserve">
+    <value>Internal program bug causing stack corruption, terminating via fast-fail mechanism. Check for application updates.</value>
+  </data>
+  <data name="AppException_0xC0000374_Desc" xml:space="preserve">
+    <value>A heap corruption has been detected.</value>
+  </data>
+  <data name="AppException_0xC0000374_Rec" xml:space="preserve">
+    <value>Heap structure was corrupted by invalid memory writes or conflicting DLLs. Update related software and runtimes.</value>
+  </data>
+  <data name="AppException_0xC00000FD_Desc" xml:space="preserve">
+    <value>Stack overflow occurred.</value>
+  </data>
+  <data name="AppException_0xC00000FD_Rec" xml:space="preserve">
+    <value>Caused by infinite recursion or excessively large stack allocations within the application.</value>
+  </data>
+  <data name="AppException_0xE0434352_Desc" xml:space="preserve">
+    <value>Unhandled .NET Common Language Runtime exception.</value>
+  </data>
+  <data name="AppException_0xE0434352_Rec" xml:space="preserve">
+    <value>Unhandled exception in a .NET application. Review event log stack traces for debugging details.</value>
+  </data>
+  <data name="AppException_Hang_Desc" xml:space="preserve">
+    <value>Application stopped responding (Hang).</value>
+  </data>
+  <data name="AppException_Hang_Rec" xml:space="preserve">
+    <value>Likely caused by deadlocks, excessive I/O blocking, or infinite loops. Check application updates.</value>
+  </data>
+  <data name="AppException_DotNet_Desc" xml:space="preserve">
+    <value>Unhandled .NET Runtime Exception.</value>
+  </data>
+  <data name="AppException_DotNet_Rec" xml:space="preserve">
+    <value>Review the stack trace in the raw log for debugging.</value>
+  </data>
 </root>

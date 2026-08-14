@@ -51,7 +51,7 @@ namespace lanlanlu_toolkit.Views
             var ofn = new OPENFILENAME();
             ofn.lStructSize = Marshal.SizeOf(ofn);
             ofn.hwndOwner = hwnd;
-            string allFilesText = lanlanlu_toolkit.Services.LocalizationHelper.GetString("System_AllFiles") ?? "所有檔案";
+            string allFilesText = lanlanlu_toolkit.Services.LocalizationHelper.GetString("System_AllFiles");
             ofn.lpstrFilter = $"{allFilesText} (*.*)\0*.*\0\0";
             
             ofn.lpstrFile = new string(new char[1024]);
@@ -89,35 +89,35 @@ namespace lanlanlu_toolkit.Views
 
         private void InitializeLocalization()
         {
-            PageHeaderTitleTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Title/Text") ?? "計算檔案雜湊碼";
-            PageHeaderDescTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Desc/Text") ?? "快速計算與驗證檔案的 SHA-256、SHA-1 或 MD5 雜湊值。";
+            PageHeaderTitleTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Title/Text");
+            PageHeaderDescTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Desc/Text");
             
-            SectionSelectFileTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Section_SelectFile") ?? "選擇檔案";
-            DragDropPromptTextBlock.Text = LocalizationHelper.GetString("FileHashPage_DragDropPrompt/Text") ?? "選擇要計算的檔案";
-            SelectFileCardDescTextBlock.Text = LocalizationHelper.GetString("FileHashPage_SelectFileCardDesc/Text") ?? "從您的電腦中選取一個檔案，系統會即時為您計算並比對對應的雜湊值。";
-            SelectFileBtn.Content = LocalizationHelper.GetString("FileHashPage_SelectFile/Content") ?? "選擇檔案";
+            SectionSelectFileTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Section_SelectFile");
+            DragDropPromptTextBlock.Text = LocalizationHelper.GetString("FileHashPage_DragDropPrompt/Text");
+            SelectFileCardDescTextBlock.Text = LocalizationHelper.GetString("FileHashPage_SelectFileCardDesc/Text");
+            SelectFileBtn.Content = LocalizationHelper.GetString("FileHashPage_SelectFile/Content");
             
-            SectionCalculateTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Section_Calculate") ?? "計算雜湊值";
-            AlgorithmLabel.Text = LocalizationHelper.GetString("FileHashPage_Algorithm/Text") ?? "雜湊演算法";
-            AlgorithmDescLabel.Text = LocalizationHelper.GetString("FileHashPage_Algorithm_Desc/Text") ?? "SHA-256（高度安全，建議使用）、SHA-1（舊版相容）、MD5（快速驗證）、SHA-512（極高強度安全）。";
-            CalculateBtn.Content = LocalizationHelper.GetString("FileHashPage_CalculateButton/Content") ?? "重新計算";
-            ProgressStatusText.Text = LocalizationHelper.GetString("FileHashPage_Calculating") ?? "正在計算雜湊值，請稍候……";
+            SectionCalculateTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Section_Calculate");
+            AlgorithmLabel.Text = LocalizationHelper.GetString("FileHashPage_Algorithm/Text");
+            AlgorithmDescLabel.Text = LocalizationHelper.GetString("FileHashPage_Algorithm_Desc/Text");
+            CalculateBtn.Content = LocalizationHelper.GetString("FileHashPage_CalculateButton/Content");
+            ProgressStatusText.Text = LocalizationHelper.GetString("FileHashPage_Calculating");
             
-            ResultTextBox.Header = LocalizationHelper.GetString("FileHashPage_Result/Header") ?? "雜湊結果";
-            ResultTextBox.PlaceholderText = LocalizationHelper.GetString("FileHashPage_Result/PlaceholderText") ?? "選擇檔案並計算後，雜湊結果會在此處顯示……";
-            CopyBtnText.Text = LocalizationHelper.GetString("FileHashPage_CopyButton/Text") ?? "複製結果";
+            ResultTextBox.Header = LocalizationHelper.GetString("FileHashPage_Result/Header");
+            ResultTextBox.PlaceholderText = LocalizationHelper.GetString("FileHashPage_Result/PlaceholderText");
+            CopyBtnText.Text = LocalizationHelper.GetString("FileHashPage_CopyButton/Text");
             
-            SectionVerifyTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Section_Verify") ?? "比對驗證";
-            CompareLabel.Text = LocalizationHelper.GetString("FileHashPage_Compare/Text") ?? "對比驗證雜湊值（不區分大小寫）";
-            CompareDescLabel.Text = LocalizationHelper.GetString("FileHashPage_Compare_Desc/Text") ?? "在此貼上您預期比對的雜湊值，系統會即時進行無大小寫差異的比對驗證。";
-            CompareTextBox.PlaceholderText = LocalizationHelper.GetString("FileHashPage_CompareInput/PlaceholderText") ?? "輸入或貼上預期的雜湊值以進行比對……";
-            VerifyBtnText.Text = LocalizationHelper.GetString("FileHashPage_CompareButton/Text") ?? "比對";
+            SectionVerifyTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Section_Verify");
+            CompareLabel.Text = LocalizationHelper.GetString("FileHashPage_Compare/Text");
+            CompareDescLabel.Text = LocalizationHelper.GetString("FileHashPage_Compare_Desc/Text");
+            CompareTextBox.PlaceholderText = LocalizationHelper.GetString("FileHashPage_CompareInput/PlaceholderText");
+            VerifyBtnText.Text = LocalizationHelper.GetString("FileHashPage_CompareButton/Text");
 
             // Context Menu Localization
-            if (ResultCopyMenu != null) ResultCopyMenu.Text = LocalizationHelper.GetString("System_Copy") ?? "複製";
-            if (CompareCutMenu != null) CompareCutMenu.Text = LocalizationHelper.GetString("System_Cut") ?? "剪下";
-            if (CompareCopyMenu != null) CompareCopyMenu.Text = LocalizationHelper.GetString("System_Copy") ?? "複製";
-            if (ComparePasteMenu != null) ComparePasteMenu.Text = LocalizationHelper.GetString("System_Paste") ?? "貼上";
+            if (ResultCopyMenu != null) ResultCopyMenu.Text = LocalizationHelper.GetString("System_Copy");
+            if (CompareCutMenu != null) CompareCutMenu.Text = LocalizationHelper.GetString("System_Cut");
+            if (CompareCopyMenu != null) CompareCopyMenu.Text = LocalizationHelper.GetString("System_Copy");
+            if (ComparePasteMenu != null) ComparePasteMenu.Text = LocalizationHelper.GetString("System_Paste");
         }
 
         private async void SelectFileBtn_Click(object sender, RoutedEventArgs e)
@@ -132,7 +132,7 @@ namespace lanlanlu_toolkit.Views
                     hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
                 }
 
-                string? result = dialog.Show(hwnd, LocalizationHelper.GetString("FileHashPage_DialogTitle") ?? "選擇要計算雜湊值的檔案");
+                string? result = dialog.Show(hwnd, LocalizationHelper.GetString("FileHashPage_DialogTitle"));
                 if (!string.IsNullOrEmpty(result))
                 {
                     await ProcessSelectedFilePath(result);
@@ -153,7 +153,7 @@ namespace lanlanlu_toolkit.Views
             filePath = filePath.TrimEnd('\0').Trim();
             if (!File.Exists(filePath))
             {
-                ShowErrorNotification(LocalizationHelper.GetString("FileHashPage_Error_FileNotFound") ?? "檔案不存在或無法存取！");
+                ShowErrorNotification(LocalizationHelper.GetString("FileHashPage_Error_FileNotFound"));
                 return;
             }
 
@@ -209,11 +209,11 @@ namespace lanlanlu_toolkit.Views
 
             // UI feedback
             ProgressGrid.Visibility = Visibility.Visible;
-            CalculateBtn.Content = LocalizationHelper.GetString("System_Cancel") ?? "取消";
+            CalculateBtn.Content = LocalizationHelper.GetString("System_Cancel");
             CalculateBtn.IsEnabled = true; // Keep enabled for cancellation!
             SelectFileBtn.IsEnabled = false;
             AlgorithmComboBox.IsEnabled = false;
-            ResultTextBox.Text = LocalizationHelper.GetString("FileHashPage_Calculating") ?? "正在計算雜湊值，請稍候……";
+            ResultTextBox.Text = LocalizationHelper.GetString("FileHashPage_Calculating");
 
             try
             {
@@ -222,7 +222,7 @@ namespace lanlanlu_toolkit.Views
                 if (string.IsNullOrEmpty(_calculatedHash))
                 {
                     // Hashing was cancelled!
-                    ResultTextBox.Text = LocalizationHelper.GetString("FileHashPage_CalculationCancelled") ?? "計算已取消。";
+                    ResultTextBox.Text = LocalizationHelper.GetString("FileHashPage_CalculationCancelled");
                     CopyBtn.IsEnabled = false;
                     VerifyBtn.IsEnabled = false;
                     VerifyResultInfoBar.IsOpen = false;
@@ -238,13 +238,13 @@ namespace lanlanlu_toolkit.Views
             }
             catch (Exception ex)
             {
-                ResultTextBox.Text = $"{LocalizationHelper.GetString("Notification_Error") ?? "Error"}: {ex.Message}";
+                ResultTextBox.Text = $"{LocalizationHelper.GetString("Notification_Error")}: {ex.Message}";
                 ShowErrorNotification(ex.Message);
             }
             finally
             {
                 ProgressGrid.Visibility = Visibility.Collapsed;
-                CalculateBtn.Content = LocalizationHelper.GetString("FileHashPage_CalculateButton/Content") ?? "重新計算";
+                CalculateBtn.Content = LocalizationHelper.GetString("FileHashPage_CalculateButton/Content");
                 SelectFileBtn.IsEnabled = true;
                 AlgorithmComboBox.IsEnabled = true;
                 _hashCancellationTokenSource?.Dispose();
@@ -311,7 +311,7 @@ namespace lanlanlu_toolkit.Views
             package.SetText(_calculatedHash);
             Clipboard.SetContent(package);
 
-            NotificationService.Show(LocalizationHelper.GetString("Notification_Success") ?? "Success", LocalizationHelper.GetString("SystemRepairPage_Copied") ?? "已複製到剪貼簿", InfoBarSeverity.Success);
+            NotificationService.Show(LocalizationHelper.GetString("Notification_Success"), LocalizationHelper.GetString("SystemRepairPage_Copied"), InfoBarSeverity.Success);
         }
 
         private void CompareTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -349,14 +349,14 @@ namespace lanlanlu_toolkit.Views
             if (string.Equals(_calculatedHash, expectedHash, StringComparison.OrdinalIgnoreCase))
             {
                 VerifyResultInfoBar.Severity = InfoBarSeverity.Success;
-                VerifyResultInfoBar.Title = LocalizationHelper.GetString("FileHashPage_VerifySuccess_Title") ?? "驗證成功";
+                VerifyResultInfoBar.Title = LocalizationHelper.GetString("FileHashPage_VerifySuccess_Title");
                 VerifyResultInfoBar.Message = LocalizationHelper.GetString("FileHashPage_VerifySuccess");
                 VerifyResultInfoBar.IsOpen = true;
             }
             else
             {
                 VerifyResultInfoBar.Severity = InfoBarSeverity.Error;
-                VerifyResultInfoBar.Title = LocalizationHelper.GetString("FileHashPage_VerifyFail_Title") ?? "驗證失敗";
+                VerifyResultInfoBar.Title = LocalizationHelper.GetString("FileHashPage_VerifyFail_Title");
                 VerifyResultInfoBar.Message = LocalizationHelper.GetString("FileHashPage_VerifyFail");
                 VerifyResultInfoBar.IsOpen = true;
             }
