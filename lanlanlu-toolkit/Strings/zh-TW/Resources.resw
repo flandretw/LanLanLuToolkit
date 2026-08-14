@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
   <xsd:schema id="root" 
+    
     xmlns="" 
+    
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    
     xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -70,7 +73,7 @@
     <value>選擇您偏好的語言。變更將在重新啟動後生效。</value>
   </data>
   <data name="Language_zh_TW.Content" xml:space="preserve">
-    <value>中文 (台灣)</value>
+    <value>中文 (臺灣)</value>
   </data>
   <data name="Language_en_US.Content" xml:space="preserve">
     <value>英文 (美國)</value>
@@ -220,13 +223,13 @@
     <value>檢查損毀標記</value>
   </data>
   <data name="SystemRepairPage_CheckHealth_Desc.Text" xml:space="preserve">
-    <value>快速掃描系統是否已被標記為損毀。這是一次快速的斷層掃描，用來確認系統當前的健康狀態。</value>
+    <value>快速掃描系統是否已被標記為損毀。這是一次快速的斷層掃描，用來確認系統目前的健康狀態。</value>
   </data>
   <data name="SystemRepairPage_RestoreHealth_Title.Text" xml:space="preserve">
     <value>修復系統映像</value>
   </data>
   <data name="SystemRepairPage_RestoreHealth_Desc.Text" xml:space="preserve">
-    <value>發現損毀時，自動從 Windows Update 下載替代檔案進行修復。這是最徹底的映像恢復方式。</value>
+    <value>發現損毀時，自動從 Windows Update 下載替代檔案進行修復。這是最徹底的映像復原方式。</value>
   </data>
   <data name="SystemRepairPage_SfcScannow_Title.Text" xml:space="preserve">
     <value>系統檔案檢查</value>
@@ -692,7 +695,7 @@
     <value>4. 清除後關閉登錄編輯程式即可。下次雙擊該類型檔案時，Windows 將會重新詢問預設開啟程式！</value>
   </data>
   <data name="FileAssociationPage_Warning_CriticalExt" xml:space="preserve">
-    <value>為了保護您的作業系統安全，此副檔名（.{0}）屬於 Windows 系統核心關鍵組件，不允許重設或修改其開啟方式，以免造成系統癱瘓或無法執行任何程式。</value>
+    <value>為了保護您的作業系統安全，此副檔名（.{0}）屬於 Windows 系統核心關鍵元件，不允許重設或修改其開啟方式，以免造成系統損毀或無法執行任何程式。</value>
   </data>
   <data name="FileAssociationPage_Warning_CriticalExtTitle" xml:space="preserve">
     <value>🛡️ 系統安全保護</value>
@@ -704,7 +707,7 @@
     <value>成功</value>
   </data>
   <data name="FileAssociationPage_Error_DialogOpenFailed" xml:space="preserve">
-    <value>無法開啟開啟方式對話框: {0}</value>
+    <value>無法開啟「開啟方式」對話框：{0}</value>
   </data>
   <data name="FileAssociationPage_Error_Title" xml:space="preserve">
     <value>錯誤</value>
@@ -716,7 +719,7 @@
     <value>智慧定位中</value>
   </data>
   <data name="FileAssociationPage_Warning_LocateFailed" xml:space="preserve">
-    <value>已開啟登錄編輯程式，但未能取得其視窗控制代碼以進行自動導航。請確認已同意系統帳戶控制 (UAC) 提示。</value>
+    <value>已開啟登錄編輯程式，但未能取得其視窗控制代碼以進行自動導航。請確認已同意使用者帳戶控制 (UAC) 提示。</value>
   </data>
   <data name="FileAssociationPage_Warning_LocateFailedTitle" xml:space="preserve">
     <value>無法定位</value>
@@ -734,7 +737,7 @@
     <value>請手動貼上</value>
   </data>
   <data name="FileAssociationPage_Error_RegLaunchFailed" xml:space="preserve">
-    <value>無法啟動登錄編輯程式: {0}。請確認已同意系統帳戶控制 (UAC) 提示。</value>
+    <value>無法啟動登錄編輯程式：{0}。請確認已同意使用者帳戶控制 (UAC) 提示。</value>
   </data>
   <data name="FileAssociationPage_Error_RegLaunchFailedTitle" xml:space="preserve">
     <value>啟動失敗</value>
@@ -889,7 +892,6 @@
   <data name="CrashReportPage_RawLog_None" xml:space="preserve">
     <value>無其他詳細紀錄。</value>
   </data>
-
   <!-- ========================================================================= -->
   <!-- Crash Report: Export Template Strings                                     -->
   <!-- ========================================================================= -->
@@ -897,10 +899,10 @@
     <value># Windows 系統當機與崩潰診斷報告</value>
   </data>
   <data name="CrashReport_Export_GeneratedTime" xml:space="preserve">
-    <value>產生時間: {0}</value>
+    <value>產生時間：{0}</value>
   </data>
   <data name="CrashReport_Export_Summary" xml:space="preserve">
-    <value>總事件數: {0} (系統核心當機: {1}, 應用程式錯誤: {2})</value>
+    <value>總事件數：{0}（系統核心當機：{1}，應用程式錯誤：{2}）</value>
   </data>
   <data name="CrashReport_Export_Field_Timestamp" xml:space="preserve">
     <value>發生時間</value>
@@ -912,13 +914,13 @@
     <value>錯誤來源</value>
   </data>
   <data name="CrashReport_Export_Field_Module" xml:space="preserve">
-    <value>可疑模組/驅動</value>
+    <value>可疑模組／驅動程式</value>
   </data>
   <data name="CrashReport_Export_Field_Parameters" xml:space="preserve">
     <value>崩潰參數</value>
   </data>
   <data name="CrashReport_Export_Field_DumpPath" xml:space="preserve">
-    <value>傾印/檔案路徑</value>
+    <value>傾印／檔案路徑</value>
   </data>
   <data name="CrashReport_Export_Field_Diagnosis" xml:space="preserve">
     <value>診斷成因</value>
@@ -926,7 +928,6 @@
   <data name="CrashReport_Export_Field_Recommendation" xml:space="preserve">
     <value>排錯建議</value>
   </data>
-
   <!-- ========================================================================= -->
   <!-- Crash Report: BugCheck Diagnostic Knowledge Base                          -->
   <!-- ========================================================================= -->
@@ -952,7 +953,7 @@
     <value>在執行系統服務常式時發生了未處理的例外狀況。</value>
   </data>
   <data name="BugCheck_0x0000003B_Rec" xml:space="preserve">
-    <value>極高機率由顯示卡驅動程式 (如 nvlddmkm.sys/amdkmdag.sys)、系統核心檔案損毀或分頁集區損壞所引起。建議使用 DDU 乾淨重裝顯卡驅動，並執行 sfc /scannow。</value>
+    <value>極高機率由顯示卡驅動程式（如 nvlddmkm.sys / amdkmdag.sys）、系統核心檔案損毀或分頁集區損壞所引起。建議使用 DDU 乾淨重新安裝顯示卡驅動程式，並執行 sfc /scannow。</value>
   </data>
   <data name="BugCheck_0x00000050_Desc" xml:space="preserve">
     <value>系統引用了無效的記憶體位址（非分頁集區中的無效分頁）。</value>
@@ -970,25 +971,25 @@
     <value>驅動程式處於不一致或無效的電源狀態（通常在睡眠、休眠或喚醒時發生）。</value>
   </data>
   <data name="BugCheck_0x0000009F_Rec" xml:space="preserve">
-    <value>通常由電源管理驅動、USB 控制器或 Wi-Fi 網卡驅動在睡眠過渡期間逾時引起。建議更新晶片組與無線網卡驅動程式。</value>
+    <value>通常由電源管理驅動程式、USB 控制器或 Wi-Fi 網路卡驅動程式在睡眠過渡期間逾時引起。建議更新晶片組與無線網路卡驅動程式。</value>
   </data>
   <data name="BugCheck_0x000000A0_Desc" xml:space="preserve">
     <value>電源管理員遇到嚴重內部錯誤（通常與休眠或快速啟動檔案有關）。</value>
   </data>
   <data name="BugCheck_0x000000A0_Rec" xml:space="preserve">
-    <value>可能是休眠檔案 (hiberfil.sys) 損毀或儲存裝置驅動程式異常。可嘗試以管理員執行 powercfg -h off 再 powercfg -h on 重建休眠檔。</value>
+    <value>可能是休眠檔案 (hiberfil.sys) 損毀或儲存裝置驅動程式異常。可嘗試以管理員身分執行 powercfg -h off 再 powercfg -h on 重建休眠檔。</value>
   </data>
   <data name="BugCheck_0x000000D1_Desc" xml:space="preserve">
     <value>驅動程式在過高的 IRQL 下嘗試存取無效的記憶體位址。</value>
   </data>
   <data name="BugCheck_0x000000D1_Rec" xml:space="preserve">
-    <value>最常見的系統當機代碼之一，請查看導致崩潰的驅動程式名稱（如網卡、音效卡、防毒核心等），並前往官網下載最新版本覆蓋安裝。</value>
+    <value>最常見的系統當機代碼之一，請查看導致崩潰的驅動程式名稱（如網路卡、音效卡、防毒核心等），並前往官網下載最新版本覆蓋安裝。</value>
   </data>
   <data name="BugCheck_0x000000EF_Desc" xml:space="preserve">
     <value>關鍵系統處理程序（如 csrss.exe, wininit.exe）意外終止。</value>
   </data>
   <data name="BugCheck_0x000000EF_Rec" xml:space="preserve">
-    <value>可能為系統核心損毀、惡意軟體感染或硬碟壞軌導致系統重要元件崩潰。建議執行 DISM 與 SFC 系統修復命令。</value>
+    <value>可能為系統核心損毀、惡意軟體感染或硬碟壞軌導致系統重要元件崩潰。建議執行 DISM 與 SFC 系統修復指令。</value>
   </data>
   <data name="BugCheck_0x00000101_Desc" xml:space="preserve">
     <value>次要處理器未在分配的時間間隔內收到預期的時脈插斷。</value>
@@ -1000,7 +1001,7 @@
     <value>顯示卡驅動程式無回應，且系統嘗試透過 TDR 重設復原時逾時失敗。</value>
   </data>
   <data name="BugCheck_0x00000116_Rec" xml:space="preserve">
-    <value>顯示卡核心當機：可能為顯卡驅動異常、顯卡過熱、顯卡供電不足或顯示卡硬體晶片老化損壞。建議使用 DDU 重裝驅動並監控顯卡溫度。</value>
+    <value>顯示卡核心當機：可能為顯示卡驅動程式異常、顯示卡過熱、顯示卡供電不足或顯示卡硬體晶片老化損壞。建議使用 DDU 重新安裝驅動程式並監控顯示卡溫度。</value>
   </data>
   <data name="BugCheck_0x00000124_Desc" xml:space="preserve">
     <value>Windows 硬體錯誤架構 (WHEA) 偵測到無法復原的硬體錯誤。</value>
@@ -1012,7 +1013,7 @@
     <value>DPC 監視程式偵測到單一長時間執行的 DPC 或累積時間過長。</value>
   </data>
   <data name="BugCheck_0x00000133_Rec" xml:space="preserve">
-    <value>常見於 NVMe/SATA 固態硬碟韌體過舊、StorAHCI 驅動逾時、或 Wi-Fi/藍牙驅動程式延遲過高。建議更新 SSD 韌體與主機板驅動。</value>
+    <value>常見於 NVMe / SATA 固態硬碟韌體過舊、StorAHCI 驅動程式逾時、或 Wi-Fi / 藍牙驅動程式延遲過高。建議更新 SSD 韌體與主機板驅動程式。</value>
   </data>
   <data name="BugCheck_0x00000139_Desc" xml:space="preserve">
     <value>核心偵測到關鍵資料結構損毀（緩衝區溢位或記憶體被非法篡改）。</value>
@@ -1024,7 +1025,7 @@
     <value>記憶體管理器儲存元件在處理分頁時發生未預期的例外狀況。</value>
   </data>
   <data name="BugCheck_0x00000154_Rec" xml:space="preserve">
-    <value>常見於硬碟/SSD 壞軌、SSD 突發斷電掉盤或儲存控制器驅動崩潰。強烈建議備份重要資料並檢查硬碟健康狀態 (S.M.A.R.T.)。</value>
+    <value>常見於硬碟 / SSD 壞軌、SSD 突發斷電掉盤或儲存控制器驅動程式崩潰。強烈建議備份重要資料並檢查硬碟健康狀態 (S.M.A.R.T.)。</value>
   </data>
   <data name="BugCheck_0x0000001A_Desc" xml:space="preserve">
     <value>系統發生了嚴重的記憶體管理錯誤。</value>
@@ -1032,7 +1033,6 @@
   <data name="BugCheck_0x0000001A_Rec" xml:space="preserve">
     <value>常見於實體記憶體故障、XMP/EXPO 超頻不穩定或虛擬記憶體分頁檔損毀。建議關閉記憶體超頻並執行 Windows 記憶體診斷工具。</value>
   </data>
-
   <!-- ========================================================================= -->
   <!-- Crash Report: Application Exception Knowledge Base                        -->
   <!-- ========================================================================= -->
