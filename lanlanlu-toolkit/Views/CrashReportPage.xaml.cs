@@ -264,37 +264,6 @@ namespace lanlanlu_toolkit.Views
             catch { }
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        private struct OPENFILENAME
-        {
-            public int lStructSize;
-            public IntPtr hwndOwner;
-            public IntPtr hInstance;
-            public string lpstrFilter;
-            public string lpstrCustomFilter;
-            public int nMaxCustFilter;
-            public int nFilterIndex;
-            public string lpstrFile;
-            public int nMaxFile;
-            public string lpstrFileTitle;
-            public int nMaxFileTitle;
-            public string lpstrInitialDir;
-            public string lpstrTitle;
-            public int Flags;
-            public short nFileOffset;
-            public short nFileExtension;
-            public string lpstrDefExt;
-            public IntPtr lCustData;
-            public IntPtr lpfnHook;
-            public string lpTemplateName;
-            public IntPtr pvReserved;
-            public int dwReserved;
-            public int FlagsEx;
-        }
-
-        [DllImport("comdlg32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        private static extern bool GetSaveFileName(ref OPENFILENAME lpofn);
-
         private async void ExportBtn_Click(object sender, RoutedEventArgs e)
         {
             if (_allReports.Count == 0) return;
@@ -302,22 +271,11 @@ namespace lanlanlu_toolkit.Views
             try
             {
                 string defaultFileName = $"Crash_Report_{DateTime.Now:yyyyMMdd_HHmmss}.md";
-                string? targetFilePath = null;
+                IntPtr hwnd = App.MainWindow != null ? WindowNative.GetWindowHandle(App.MainWindow) : IntPtr.Zero;
+                string filter = "Markdown File (*.md)\0*.md\0Text File (*.txt)\0*.txt\0All Files (*.*)\0*.*\0\0";
+                string title = LocalizationHelper.GetString("CrashReportPage_ExportBtn/Text");
 
-                var ofn = new OPENFILENAME();
-                ofn.lStructSize = Marshal.SizeOf(ofn);
-                ofn.hwndOwner = App.MainWindow != null ? WindowNative.GetWindowHandle(App.MainWindow) : IntPtr.Zero;
-                ofn.lpstrFilter = "Markdown File (*.md)\0*.md\0Text File (*.txt)\0*.txt\0All Files (*.*)\0*.*\0\0";
-                ofn.lpstrFile = defaultFileName.PadRight(1024, '\0');
-                ofn.nMaxFile = 1024;
-                ofn.lpstrDefExt = "md";
-                ofn.Flags = 0x00000002 /* OFN_OVERWRITEPROMPT */ | 0x00000800 /* OFN_PATHMUSTEXIST */;
-                ofn.lpstrTitle = LocalizationHelper.GetString("CrashReportPage_ExportBtn/Text");
-
-                if (GetSaveFileName(ref ofn))
-                {
-                    targetFilePath = ofn.lpstrFile.TrimEnd('\0').Trim();
-                }
+                string? targetFilePath = Win32FilePicker.ShowSaveDialog(hwnd, title, defaultFileName, filter, "md");
 
                 if (!string.IsNullOrEmpty(targetFilePath))
                 {

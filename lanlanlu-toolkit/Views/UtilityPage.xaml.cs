@@ -1,7 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.Collections.Generic;
-using Microsoft.Windows.ApplicationModel.Resources;
+using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
 {
@@ -17,18 +17,17 @@ namespace lanlanlu_toolkit.Views
 
         private void InitializeTools()
         {
-            var resourceLoader = new ResourceLoader();
             Tools.Add(new ToolItem
             {
-                Title = resourceLoader.GetString("Nav_FileHashPage/Content"),
-                Description = resourceLoader.GetString("FileHashPage_Desc/Text"),
+                Title = LocalizationHelper.GetString("Nav_FileHashPage/Content"),
+                Description = LocalizationHelper.GetString("FileHashPage_Desc/Text"),
                 Icon = "\uEC19",
                 Tag = "FileHashPage"
             });
             Tools.Add(new ToolItem
             {
-                Title = resourceLoader.GetString("Nav_FileAssociationPage/Content"),
-                Description = resourceLoader.GetString("FileAssociationPage_Desc/Text"),
+                Title = LocalizationHelper.GetString("Nav_FileAssociationPage/Content"),
+                Description = LocalizationHelper.GetString("FileAssociationPage_Desc/Text"),
                 Icon = "\uE7B5",
                 Tag = "FileAssociationPage"
             });

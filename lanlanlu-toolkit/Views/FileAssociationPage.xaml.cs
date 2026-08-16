@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
@@ -74,7 +75,7 @@ namespace lanlanlu_toolkit.Views
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = "rundll32.exe",
-                    Arguments = $"shell32.dll,OpenAs_RunDLL {tempFilePath}",
+                    Arguments = $"shell32.dll,OpenAs_RunDLL \"{tempFilePath}\"",
                     UseShellExecute = true
                 };
 
@@ -90,19 +91,19 @@ namespace lanlanlu_toolkit.Views
             }
         }
 
-        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+        [DllImport("user32.dll", SetLastError = true)]
         private static extern IntPtr FindWindow(string lpClassName, string? lpWindowName);
 
-        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+        [DllImport("user32.dll", SetLastError = true)]
         private static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string? lpszWindow);
 
-        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, string lParam);
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [DllImport("user32.dll")]
         private static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
         private const uint WM_SETTEXT = 0x000C;

@@ -1084,4 +1084,269 @@
   <data name="AppException_DotNet_Rec" xml:space="preserve">
     <value>Review the stack trace in the raw log for debugging.</value>
   </data>
+
+  <!-- ========================================================================= -->
+  <!-- Input Tester: Navigation & UI Strings                                     -->
+  <!-- ========================================================================= -->
+  <data name="Nav_InputTesterPage.Content" xml:space="preserve">
+    <value>Input Diagnostics</value>
+  </data>
+  <data name="InputTesterPage_Title.Text" xml:space="preserve">
+    <value>Keyboard &amp; Mouse Diagnostics</value>
+  </data>
+  <data name="InputTesterPage_Subtitle.Text" xml:space="preserve">
+    <value>Test keyboard key response, N-Key Rollover (NKRO), mouse switch chatter, polling rate (Hz), and scroll wheel jitter</value>
+  </data>
+  <data name="InputTesterPage_Tab_Keyboard.Text" xml:space="preserve">
+    <value>Keyboard Test</value>
+  </data>
+  <data name="InputTesterPage_Tab_Mouse.Text" xml:space="preserve">
+    <value>Mouse Test</value>
+  </data>
+  <data name="InputTesterPage_ResetBtn.Text" xml:space="preserve">
+    <value>Reset Test</value>
+  </data>
+  <data name="InputTesterPage_SoundToggle.Header" xml:space="preserve">
+    <value>Key Sound</value>
+  </data>
+  <data name="InputTesterPage_Card_LastKey.Text" xml:space="preserve">
+    <value>Last Key Pressed</value>
+  </data>
+  <data name="InputTesterPage_Card_CurrentKeys.Text" xml:space="preserve">
+    <value>Active Keys Down</value>
+  </data>
+  <data name="InputTesterPage_Card_MaxRollover.Text" xml:space="preserve">
+    <value>Max Rollover (NKRO)</value>
+  </data>
+  <data name="InputTesterPage_Card_TotalPresses.Text" xml:space="preserve">
+    <value>Total Keystrokes</value>
+  </data>
+  <data name="InputTesterPage_Card_KeyInterval.Text" xml:space="preserve">
+    <value>Trigger Interval</value>
+  </data>
+  <data name="InputTesterPage_Key_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="InputTesterPage_Key_Units" xml:space="preserve">
+    <value>{0} Keys</value>
+  </data>
+  <data name="InputTesterPage_Key_ChatterWarning" xml:space="preserve">
+    <value>Suspected Chatter ({0} ms)</value>
+  </data>
+  <data name="InputTesterPage_FocusStatus_Focused.Text" xml:space="preserve">
+    <value>Focused (Type freely)</value>
+  </data>
+  <data name="InputTesterPage_FocusStatus_Unfocused.Text" xml:space="preserve">
+    <value>Not Focused (Click to focus)</value>
+  </data>
+  <data name="InputTesterPage_FocusHint.Text" xml:space="preserve">
+    <value>Please click this window to focus first, then type freely to inspect real-time input response and diagnostics (or click virtual keys directly).</value>
+  </data>
+  <data name="InputTesterPage_Mouse_LeftButton" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="InputTesterPage_Mouse_RightButton" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="InputTesterPage_Mouse_MiddleButton" xml:space="preserve">
+    <value>Middle</value>
+  </data>
+  <data name="InputTesterPage_Mouse_Side1Button" xml:space="preserve">
+    <value>Side 1 (Back)</value>
+  </data>
+  <data name="InputTesterPage_Mouse_Side2Button" xml:space="preserve">
+    <value>Side 2 (Forward)</value>
+  </data>
+  <data name="InputTesterPage_Mouse_WheelUp" xml:space="preserve">
+    <value>Wheel Up</value>
+  </data>
+  <data name="InputTesterPage_Mouse_WheelDown" xml:space="preserve">
+    <value>Wheel Down</value>
+  </data>
+  <data name="InputTesterPage_Mouse_ChatterTest_Title.Text" xml:space="preserve">
+    <value>Switch Chatter &amp; Double-Click Test</value>
+  </data>
+  <data name="InputTesterPage_Mouse_ChatterTest_Desc.Text" xml:space="preserve">
+    <value>Click rapidly in the zone below to test for mechanical switch chatter or double-clicking faults.</value>
+  </data>
+  <data name="InputTesterPage_Mouse_ClickArea.Text" xml:space="preserve">
+    <value>Click rapidly in this area to test for switch chatter</value>
+  </data>
+  <data name="InputTesterPage_Mouse_Threshold.Text" xml:space="preserve">
+    <value>Chatter Threshold:</value>
+  </data>
+  <data name="InputTesterPage_Mouse_NormalClicks.Text" xml:space="preserve">
+    <value>Normal Clicks:</value>
+  </data>
+  <data name="InputTesterPage_Mouse_ChatterClicks.Text" xml:space="preserve">
+    <value>Chatter Faults:</value>
+  </data>
+  <data name="InputTesterPage_Mouse_Polling_Title.Text" xml:space="preserve">
+    <value>Mouse Polling Rate (Hz)</value>
+  </data>
+  <data name="InputTesterPage_Mouse_Polling_Desc.Text" xml:space="preserve">
+    <value>Move the mouse continuously inside the area to measure real-time sensor polling frequency (Hz).</value>
+  </data>
+  <data name="InputTesterPage_Mouse_PollingArea.Text" xml:space="preserve">
+    <value>Move mouse continuously in circles or lines</value>
+  </data>
+  <data name="InputTesterPage_Mouse_CurrentHz.Text" xml:space="preserve">
+    <value>Current Hz</value>
+  </data>
+  <data name="InputTesterPage_Mouse_AvgHz.Text" xml:space="preserve">
+    <value>Average Hz</value>
+  </data>
+  <data name="InputTesterPage_Mouse_PeakHz.Text" xml:space="preserve">
+    <value>Peak Hz</value>
+  </data>
+  <data name="InputTesterPage_Mouse_Wheel_Title.Text" xml:space="preserve">
+    <value>Scroll Wheel &amp; Jitter Test</value>
+  </data>
+  <data name="InputTesterPage_Mouse_Wheel_Desc.Text" xml:space="preserve">
+    <value>Detect encoder reverse jitter, skipped steps, or scroll bounce.</value>
+  </data>
+  <data name="InputTesterPage_Mouse_WheelCount.Text" xml:space="preserve">
+    <value>Total Steps:</value>
+  </data>
+  <data name="InputTesterPage_Mouse_WheelJitterWarning" xml:space="preserve">
+    <value>Reverse Jitter Detected</value>
+  </data>
+  <data name="InputTesterPage_Mouse_WheelStatus_OK" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="InputTesterPage_Mouse_WheelStatus_Jitter" xml:space="preserve">
+    <value>Reverse Jitter</value>
+  </data>
+  <data name="InputTesterPage_Mouse_Canvas_Title.Text" xml:space="preserve">
+    <value>Sensor Polling Rate (Hz) &amp; Trajectory Canvas</value>
+  </data>
+  <data name="InputTesterPage_Mouse_Canvas_Clear.Text" xml:space="preserve">
+    <value>Clear Canvas</value>
+  </data>
+  <data name="InputTesterPage_Mouse_Canvas_Desc.Text" xml:space="preserve">
+    <value>Move or draw inside this canvas to test polling rate (Hz) and observe any angle snapping, jitter, or frame drops.</value>
+  </data>
+  <data name="InputTesterPage_Mouse_VisualTitle.Text" xml:space="preserve">
+    <value>Mouse Button Visualizer</value>
+  </data>
+  <data name="InputTesterPage_Mouse_VisualDesc.Text" xml:space="preserve">
+    <value>Press any physical mouse button or scroll wheel; the visualizer reacts in real time.</value>
+  </data>
+  <data name="InputTesterPage_Mouse_WheelHint.Text" xml:space="preserve">
+    <value>Scroll wheel over this card to measure steps and jitter</value>
+  </data>
+  <data name="InputTesterPage_Layout_100.Content" xml:space="preserve">
+    <value>100% Full Size (104 Keys)</value>
+  </data>
+  <data name="InputTesterPage_Layout_80.Content" xml:space="preserve">
+    <value>80% TKL (87 Keys)</value>
+  </data>
+  <data name="InputTesterPage_Layout_60.Content" xml:space="preserve">
+    <value>60% Compact (61 Keys)</value>
+  </data>
+  <data name="InputTesterPage_LayoutTitle_100.Text" xml:space="preserve">
+    <value>ANSI 104-Key Full-Size Virtual Keyboard</value>
+  </data>
+  <data name="InputTesterPage_LayoutTitle_80.Text" xml:space="preserve">
+    <value>ANSI 87-Key TKL Virtual Keyboard</value>
+  </data>
+  <data name="InputTesterPage_LayoutTitle_60.Text" xml:space="preserve">
+    <value>ANSI 61-Key Compact Virtual Keyboard</value>
+  </data>
+  <data name="InputTesterPage_MouseCard_LastButton.Text" xml:space="preserve">
+    <value>Last Button Pressed</value>
+  </data>
+  <data name="InputTesterPage_MouseCard_TotalClicks.Text" xml:space="preserve">
+    <value>Total Clicks</value>
+  </data>
+  <data name="InputTesterPage_MouseCard_PollingRate.Text" xml:space="preserve">
+    <value>Sensor Polling Rate</value>
+  </data>
+  <data name="InputTesterPage_MouseCard_WheelDelta.Text" xml:space="preserve">
+    <value>Scroll Wheel Steps</value>
+  </data>
+  <data name="InputTesterPage_MouseCard_Chatter.Text" xml:space="preserve">
+    <value>Switch Chatter Status</value>
+  </data>
+  <data name="InputTesterPage_MouseTile_Side1.Text" xml:space="preserve">
+    <value>Side 1 (Back)</value>
+  </data>
+  <data name="InputTesterPage_MouseTile_Side2.Text" xml:space="preserve">
+    <value>Side 2 (Forward)</value>
+  </data>
+  <data name="InputTesterPage_MouseTile_WheelDelta.Text" xml:space="preserve">
+    <value>Wheel Up / Down</value>
+  </data>
+  <data name="InputTesterPage_MouseTile_WheelStatus.Text" xml:space="preserve">
+    <value>Wheel Status</value>
+  </data>
+  <data name="InputTesterPage_Mouse_NoAction" xml:space="preserve">
+    <value>No action</value>
+  </data>
+  <data name="InputTesterPage_Mouse_CumulativeClicks" xml:space="preserve">
+    <value>Total {0} clicks</value>
+  </data>
+  <data name="InputTesterPage_Mouse_WheelScrollAction" xml:space="preserve">
+    <value>Wheel scroll (Delta: {0})</value>
+  </data>
+  <data name="InputTesterPage_Mouse_IntervalAction" xml:space="preserve">
+    <value>Interval: {0} ms</value>
+  </data>
+  <data name="InputTesterPage_Mouse_ClicksBreakdown" xml:space="preserve">
+    <value>L {0} · R {1} · M {2}</value>
+  </data>
+  <data name="InputTesterPage_Mouse_HzSummary" xml:space="preserve">
+    <value>Avg {0} Hz · Peak {1} Hz</value>
+  </data>
+  <data name="InputTesterPage_Mouse_StepsUnit" xml:space="preserve">
+    <value>{0} Steps</value>
+  </data>
+  <data name="InputTesterPage_Mouse_WheelBreakdown" xml:space="preserve">
+    <value>▲ {0} · ▼ {1} · {2}</value>
+  </data>
+  <data name="InputTesterPage_Mouse_ChatterStatus_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="InputTesterPage_Mouse_ChatterStatus_Warning" xml:space="preserve">
+    <value>Chatter Alert</value>
+  </data>
+  <data name="InputTesterPage_Mouse_ChatterCounts" xml:space="preserve">
+    <value>Normal {0} · Chatter {1}</value>
+  </data>
+  <data name="InputTesterPage_Mouse_LeftBtn_Label.Text" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="InputTesterPage_Mouse_RightBtn_Label.Text" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="InputTesterPage_Mouse_TotalClicksFormat" xml:space="preserve">
+    <value>Total Clicks: {0}</value>
+  </data>
+  <data name="InputTesterPage_Mouse_ClickCountUnit" xml:space="preserve">
+    <value>{0} Clicks</value>
+  </data>
+  <data name="InputTesterPage_Mouse_ChatterBanner.Text" xml:space="preserve">
+    <value>Suspected switch chatter detected</value>
+  </data>
+  <data name="InputTesterPage_Mouse_LastIntervalFormat" xml:space="preserve">
+    <value>Last interval: {0} ms</value>
+  </data>
+  <data name="InputTesterPage_Mouse_LastIntervalNone" xml:space="preserve">
+    <value>Last interval: - ms</value>
+  </data>
+  <data name="InputTesterPage_Card_NKRO.Text" xml:space="preserve">
+    <value>N-Key Rollover</value>
+  </data>
+  <data name="InputTesterPage_Key_TestedCountFormat" xml:space="preserve">
+    <value>{0} / {1} Keys</value>
+  </data>
+  <data name="InputTesterPage_Mouse_RealtimeChip.Text" xml:space="preserve">
+    <value>Realtime</value>
+  </data>
+  <data name="InputTesterPage_Mouse_AvgChip.Text" xml:space="preserve">
+    <value>Avg</value>
+  </data>
+  <data name="InputTesterPage_Mouse_PeakChip.Text" xml:space="preserve">
+    <value>Peak</value>
+  </data>
 </root>

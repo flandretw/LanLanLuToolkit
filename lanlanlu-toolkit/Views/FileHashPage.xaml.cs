@@ -12,66 +12,6 @@ using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
 {
-    // A wrapper for the classic Win32 OpenFileName dialog
-    internal class Win32FilePicker
-    {
-        [DllImport("comdlg32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern bool GetOpenFileName(ref OPENFILENAME ofn);
-
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        private struct OPENFILENAME
-        {
-            public int lStructSize;
-            public IntPtr hwndOwner;
-            public IntPtr hInstance;
-            public string lpstrFilter;
-            public string lpstrCustomFilter;
-            public int nMaxCustFilter;
-            public int nFilterIndex;
-            public string lpstrFile;
-            public int nMaxFile;
-            public string lpstrFileTitle;
-            public int nMaxFileTitle;
-            public string lpstrInitialDir;
-            public string lpstrTitle;
-            public int Flags;
-            public short nFileOffset;
-            public short nFileExtension;
-            public string lpstrDefExt;
-            public IntPtr lCustData;
-            public IntPtr lpfnHook;
-            public string lpTemplateName;
-            public IntPtr pvReserved;
-            public int dwReserved;
-            public int FlagsEx;
-        }
-
-        public string? Show(IntPtr hwnd, string title)
-        {
-            var ofn = new OPENFILENAME();
-            ofn.lStructSize = Marshal.SizeOf(ofn);
-            ofn.hwndOwner = hwnd;
-            string allFilesText = lanlanlu_toolkit.Services.LocalizationHelper.GetString("System_AllFiles");
-            ofn.lpstrFilter = $"{allFilesText} (*.*)\0*.*\0\0";
-            
-            ofn.lpstrFile = new string(new char[1024]);
-            ofn.nMaxFile = ofn.lpstrFile.Length;
-            
-            ofn.lpstrFileTitle = new string(new char[512]);
-            ofn.nMaxFileTitle = ofn.lpstrFileTitle.Length;
-            
-            ofn.lpstrTitle = title;
-            // OFN_PATHMUSTEXIST = 0x00000800, OFN_FILEMUSTEXIST = 0x00001000, OFN_NOCHANGEDIR = 0x00000008
-            ofn.Flags = 0x00000800 | 0x00001000 | 0x00000008;
-
-            if (GetOpenFileName(ref ofn))
-            {
-                return ofn.lpstrFile.TrimEnd('\0').Trim();
-            }
-            return null;
-        }
-    }
-
     public sealed partial class FileHashPage : Page
     {
         private string? _selectedFilePath;
@@ -124,15 +64,13 @@ namespace lanlanlu_toolkit.Views
         {
             try
             {
-                // Using robust Win32 COM File Dialog since WinRT FileOpenPicker is unstable in admin/unpackaged mode
-                var dialog = new Win32FilePicker();
                 IntPtr hwnd = GetActiveWindow();
                 if (hwnd == IntPtr.Zero && App.MainWindow != null)
                 {
                     hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
                 }
 
-                string? result = dialog.Show(hwnd, LocalizationHelper.GetString("FileHashPage_DialogTitle"));
+                string? result = Win32FilePicker.ShowOpenDialog(hwnd, LocalizationHelper.GetString("FileHashPage_DialogTitle"));
                 if (!string.IsNullOrEmpty(result))
                 {
                     await ProcessSelectedFilePath(result);

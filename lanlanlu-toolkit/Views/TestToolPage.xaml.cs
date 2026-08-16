@@ -1,18 +1,10 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.Collections.Generic;
-using Microsoft.Windows.ApplicationModel.Resources;
+using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
 {
-    public class ToolItem
-    {
-        public string Title { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-        public string Icon { get; set; } = string.Empty;
-        public string Tag { get; set; } = string.Empty;
-    }
-
     public sealed partial class TestToolPage : Page
     {
         public List<ToolItem> Tools { get; set; } = new List<ToolItem>();
@@ -25,19 +17,24 @@ namespace lanlanlu_toolkit.Views
 
         private void InitializeTools()
         {
-            // Use ResourceLoader directly in WinUI 3
-            var resourceLoader = new ResourceLoader();
             Tools.Add(new ToolItem
             {
-                Title = resourceLoader.GetString("Nav_CrashReportPage/Content"),
-                Description = resourceLoader.GetString("CrashReportPage_Subtitle/Text"),
+                Title = LocalizationHelper.GetString("Nav_InputTesterPage/Content"),
+                Description = LocalizationHelper.GetString("InputTesterPage_Subtitle/Text"),
+                Icon = "\uE765",
+                Tag = "InputTesterPage"
+            });
+            Tools.Add(new ToolItem
+            {
+                Title = LocalizationHelper.GetString("Nav_CrashReportPage/Content"),
+                Description = LocalizationHelper.GetString("CrashReportPage_Subtitle/Text"),
                 Icon = "\uE7BA",
                 Tag = "CrashReportPage"
             });
             Tools.Add(new ToolItem
             {
-                Title = resourceLoader.GetString("Nav_SystemRepairPage/Content"),
-                Description = resourceLoader.GetString("SystemRepairPage_AutoMode_Desc/Text"),
+                Title = LocalizationHelper.GetString("Nav_SystemRepairPage/Content"),
+                Description = LocalizationHelper.GetString("SystemRepairPage_AutoMode_Desc/Text"),
                 Icon = "\uE762",
                 Tag = "SystemRepairPage"
             });
@@ -49,6 +46,9 @@ namespace lanlanlu_toolkit.Views
             {
                 switch (tag)
                 {
+                    case "InputTesterPage":
+                        this.Frame.Navigate(typeof(InputTesterPage));
+                        break;
                     case "CrashReportPage":
                         this.Frame.Navigate(typeof(CrashReportPage));
                         break;

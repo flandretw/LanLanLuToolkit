@@ -44,6 +44,11 @@
                         <FontIcon Glyph="&#xEC7A;" />
                     </NavigationViewItem.Icon>
                     <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Tag="InputTesterPage" x:Uid="Nav_InputTesterPage">
+                            <NavigationViewItem.Icon>
+                                <FontIcon Glyph="&#xE765;" />
+                            </NavigationViewItem.Icon>
+                        </NavigationViewItem>
                         <NavigationViewItem Tag="CrashReportPage" x:Uid="Nav_CrashReportPage">
                             <NavigationViewItem.Icon>
                                 <FontIcon Glyph="&#xE7BA;" />

@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -12,13 +13,13 @@ namespace lanlanlu_toolkit
 {
     public sealed partial class MainWindow : Window
     {
-        [System.Runtime.InteropServices.DllImport("kernel32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr GetModuleHandle(string? lpModuleName);
 
-        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr LoadIcon(IntPtr hInstance, IntPtr lpIconName);
 
-        [System.Runtime.InteropServices.DllImport("shell32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr ExtractIcon(IntPtr hInst, string lpszExeFileName, int nIconIndex);
 
         private bool _isClosingConfirmed = false;
@@ -109,13 +110,12 @@ namespace lanlanlu_toolkit
                 // Cancel the closing event first
                 args.Cancel = true;
 
-                var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
                 var dialog = new ContentDialog
                 {
-                    Title = resourceLoader.GetString("SystemRepairPage_QuitTitle"),
-                    Content = resourceLoader.GetString("SystemRepairPage_QuitContent"),
-                    PrimaryButtonText = resourceLoader.GetString("SystemRepairPage_QuitConfirm"),
-                    CloseButtonText = resourceLoader.GetString("SystemRepairPage_QuitCancel"),
+                    Title = LocalizationHelper.GetString("SystemRepairPage_QuitTitle"),
+                    Content = LocalizationHelper.GetString("SystemRepairPage_QuitContent"),
+                    PrimaryButtonText = LocalizationHelper.GetString("SystemRepairPage_QuitConfirm"),
+                    CloseButtonText = LocalizationHelper.GetString("SystemRepairPage_QuitCancel"),
                     XamlRoot = this.Content.XamlRoot,
                     DefaultButton = ContentDialogButton.Close
                 };
@@ -154,6 +154,7 @@ namespace lanlanlu_toolkit
                     "HomePage" => typeof(HomePage),
                     "PerformancePage" => typeof(PerformancePage),
                     "TestToolPage" => typeof(TestToolPage),
+                    "InputTesterPage" => typeof(InputTesterPage),
                     "CrashReportPage" => typeof(CrashReportPage),
                     "SystemRepairPage" => typeof(SystemRepairPage),
                     "UtilityPage" => typeof(UtilityPage),
