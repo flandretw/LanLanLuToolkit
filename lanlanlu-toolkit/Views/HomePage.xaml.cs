@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media.Animation;
 using Windows.ApplicationModel.DataTransfer;
 using lanlanlu_toolkit.Services;
 
@@ -14,6 +15,7 @@ namespace lanlanlu_toolkit.Views
     public sealed partial class HomePage : Page, INotifyPropertyChanged
     {
         private double _heroHeight = 400;
+        private bool _isRefreshing = false;
         
         public double HeroHeight
         {
@@ -37,6 +39,7 @@ namespace lanlanlu_toolkit.Views
         public HomePage()
         {
             this.InitializeComponent();
+            ToolTipService.SetToolTip(RefreshHardwareBtn, LocalizationHelper.GetString("HomePage_RefreshBtn_ToolTip"));
             UpdateGreeting();
             this.SizeChanged += HomePage_SizeChanged;
             _ = LoadSystemInfoAsync();
@@ -60,10 +63,10 @@ namespace lanlanlu_toolkit.Views
         private string _storageInfo = LocalizationHelper.GetString("HomePage_Detecting");
         public string StorageInfo { get => _storageInfo; set { _storageInfo = value; OnPropertyChanged(); } }
 
-        private async Task LoadSystemInfoAsync()
+        private async Task LoadSystemInfoAsync(bool forceRefresh = false)
         {
-            // Priority load from cache for instant-open experience
-            if (HardwareProvider.Cache.IsPopulated)
+            // Priority load from cache for instant-open experience unless forced
+            if (!forceRefresh && HardwareProvider.Cache.IsPopulated)
             {
                 CpuName = HardwareProvider.Cache.CpuName ?? CpuName;
                 GpuName = HardwareProvider.Cache.GpuName ?? GpuName;
@@ -71,7 +74,7 @@ namespace lanlanlu_toolkit.Views
                 MotherboardModel = HardwareProvider.Cache.MotherboardModel ?? MotherboardModel;
                 OsVersion = HardwareProvider.Cache.OsVersion ?? OsVersion;
                 StorageInfo = HardwareProvider.Cache.StorageInfo ?? StorageInfo;
-                return; // Data already exists, no need to re-detect
+                return;
             }
 
             await Task.Run(() =>
@@ -240,35 +243,82 @@ namespace lanlanlu_toolkit.Views
             });
         }
 
+        private async void RefreshHardwareBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (_isRefreshing) return;
+            _isRefreshing = true;
+
+            var animation = new DoubleAnimation
+            {
+                From = 0,
+                To = 720,
+                Duration = TimeSpan.FromMilliseconds(800),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+            };
+
+            var storyboard = new Storyboard();
+            Storyboard.SetTarget(animation, RefreshRotate);
+            Storyboard.SetTargetProperty(animation, "Angle");
+            storyboard.Children.Add(animation);
+            storyboard.Begin();
+
+            await LoadSystemInfoAsync(forceRefresh: true);
+
+            NotificationService.Show(
+                LocalizationHelper.GetString("AppTitle/Text"),
+                LocalizationHelper.GetString("HomePage_Refresh_Success"),
+                InfoBarSeverity.Success);
+
+            _isRefreshing = false;
+        }
+
         private void HomePage_SizeChanged(object sender, SizeChangedEventArgs e) => UpdateLayoutProportions(e.NewSize.Height);
 
         private void UpdateLayoutProportions(double windowHeight)
         {
-            // Guard against invalid heights during rapid resizing or DPI changes
             if (windowHeight <= 0) return;
-
-            // Half height if window < 800px, otherwise one-third
             HeroHeight = windowHeight < 800 ? windowHeight * 0.5 : windowHeight * 0.33;
         }
 
         private void UpdateGreeting()
         {
             var hour = DateTime.Now.Hour;
-            string greetingKey = hour switch
+            string greetingKey;
+            string iconGlyph;
+
+            switch (hour)
             {
-                >= 0 and < 5 => "Greeting_LateNight",
-                >= 5 and < 12 => "Greeting_Morning",
-                >= 12 and < 18 => "Greeting_Afternoon",
-                _ => "Greeting_Evening"
-            };
+                case >= 0 and < 5:
+                    greetingKey = "Greeting_LateNight";
+                    iconGlyph = "\uE708"; // Moon / star
+                    break;
+                case >= 5 and < 12:
+                    greetingKey = "Greeting_Morning";
+                    iconGlyph = "\uE706"; // Bright sun
+                    break;
+                case >= 12 and < 18:
+                    greetingKey = "Greeting_Afternoon";
+                    iconGlyph = "\uE707"; // Sun
+                    break;
+                default:
+                    greetingKey = "Greeting_Evening";
+                    iconGlyph = "\uE708"; // Moon
+                    break;
+            }
+
             GreetingText.Text = LocalizationHelper.GetString(greetingKey);
+            GreetingIcon.Glyph = iconGlyph;
         }
 
-        private void GoToPerformance_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(PerformancePage));
+        private void FeaturePerf_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(PerformancePage));
+        private void FeatureInput_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(InputTesterPage));
+        private void FeatureRepair_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(SystemRepairPage));
+        private void FeatureCrash_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(CrashReportPage));
+        private void FeatureHash_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(FileHashPage));
+        private void FeatureAssoc_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(FileAssociationPage));
         private void GoToSettings_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(SettingsPage));
 
         private void ScrollLeft_Click(object sender, RoutedEventArgs e) => CardsScrollViewer.ChangeView(CardsScrollViewer.HorizontalOffset - 240, null, null);
-
         private void ScrollRight_Click(object sender, RoutedEventArgs e) => CardsScrollViewer.ChangeView(CardsScrollViewer.HorizontalOffset + 240, null, null);
 
         private void CardsScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
@@ -286,8 +336,6 @@ namespace lanlanlu_toolkit.Views
         {
             if (sender is FrameworkElement element)
             {
-                // Note: In WinUI 3, ProtectedCursor is protected and cannot be accessed externally.
-                // We handle the cursor by making the card an interactive structure.
                 string name = element.Name.Replace("Card", "");
                 if (this.FindName(name + "HoverOverlay") is Border overlay) overlay.Opacity = 1;
                 if (this.FindName(name + "CopyIcon") is FontIcon icon) icon.Opacity = 1;
@@ -320,6 +368,11 @@ namespace lanlanlu_toolkit.Views
                 Clipboard.SetContent(data);
 
                 icon.Glyph = "\uE8FB"; // Check icon
+                NotificationService.Show(
+                    LocalizationHelper.GetString("AppTitle/Text"),
+                    string.Format(LocalizationHelper.GetString("HomePage_Copied_Toast"), text),
+                    InfoBarSeverity.Informational);
+
                 await Task.Delay(2000);
                 icon.Glyph = "\uE8C8"; // Back to Copy icon
             }

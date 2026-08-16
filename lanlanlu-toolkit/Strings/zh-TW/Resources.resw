@@ -348,13 +348,13 @@
   <data name="HomePage_ViewPerformance.Content" xml:space="preserve">
     <value>查看系統效能</value>
   </data>
-  <data name="HomePage_AppSettings.Content" xml:space="preserve">
+  <data name="HomePage_AppSettings.Text" xml:space="preserve">
     <value>軟體設定</value>
   </data>
   <data name="HomePage_ContactUs.Text" xml:space="preserve">
     <value>聯絡我們</value>
   </data>
-  <data name="HomePage_GitHubProject.Content" xml:space="preserve">
+  <data name="HomePage_GitHubProject.Text" xml:space="preserve">
     <value>GitHub 專案頁面</value>
   </data>
   <data name="SystemRepairPage_HistoryHeader.Text" xml:space="preserve">
@@ -1348,5 +1348,71 @@
   </data>
   <data name="InputTesterPage_Mouse_PeakChip.Text" xml:space="preserve">
     <value>最高</value>
+  </data>
+  <data name="HomePage_RefreshBtn_ToolTip" xml:space="preserve">
+    <value>重新整理硬體規格</value>
+  </data>
+  <data name="HomePage_Refresh_Success" xml:space="preserve">
+    <value>已重新整理硬體規格與系統資訊</value>
+  </data>
+  <data name="HomePage_SystemStatus_Healthy.Text" xml:space="preserve">
+    <value>系統運作狀態良好</value>
+  </data>
+  <data name="HomePage_QuickActions_Title.Text" xml:space="preserve">
+    <value>快速功能總覽</value>
+  </data>
+  <data name="HomePage_Feature_Perf_Title.Text" xml:space="preserve">
+    <value>即時效能監控</value>
+  </data>
+  <data name="HomePage_Feature_Perf_Desc.Text" xml:space="preserve">
+    <value>即時查看 CPU、GPU、RAM 負載與時脈溫度</value>
+  </data>
+  <data name="HomePage_Feature_Input_Title.Text" xml:space="preserve">
+    <value>鍵盤與滑鼠診斷</value>
+  </data>
+  <data name="HomePage_Feature_Input_Desc.Text" xml:space="preserve">
+    <value>全鍵無衝測試、輪詢率、微動連點與軌跡畫布</value>
+  </data>
+  <data name="HomePage_Feature_Repair_Title.Text" xml:space="preserve">
+    <value>系統完整性修復</value>
+  </data>
+  <data name="HomePage_Feature_Repair_Desc.Text" xml:space="preserve">
+    <value>DISM 與 SFC 映像自動修復與損毀掃描</value>
+  </data>
+  <data name="HomePage_Feature_Crash_Title.Text" xml:space="preserve">
+    <value>系統當機診斷</value>
+  </data>
+  <data name="HomePage_Feature_Crash_Desc.Text" xml:space="preserve">
+    <value>藍屏 Minidump 與 Windows 錯誤事件分析</value>
+  </data>
+  <data name="HomePage_Feature_Hash_Title.Text" xml:space="preserve">
+    <value>檔案雜湊計算</value>
+  </data>
+  <data name="HomePage_Feature_Hash_Desc.Text" xml:space="preserve">
+    <value>SHA-256、MD5 快速校驗與檔案指紋比對</value>
+  </data>
+  <data name="HomePage_Feature_Assoc_Title.Text" xml:space="preserve">
+    <value>檔案關聯管理</value>
+  </data>
+  <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
+    <value>重設副檔名預設開啟程式與系統關聯修復</value>
+  </data>
+  <data name="HomePage_Copied_Toast" xml:space="preserve">
+    <value>已複製到剪貼簿：{0}</value>
+  </data>
+  <data name="ToolHub_SearchBox.PlaceholderText" xml:space="preserve">
+    <value>搜尋工具名稱或功能描述……</value>
+  </data>
+  <data name="ToolHub_Tag_Hardware.Text" xml:space="preserve">
+    <value>硬體檢測</value>
+  </data>
+  <data name="ToolHub_Tag_System.Text" xml:space="preserve">
+    <value>系統診斷</value>
+  </data>
+  <data name="ToolHub_Tag_Utility.Text" xml:space="preserve">
+    <value>檔案工具</value>
+  </data>
+  <data name="ToolHub_NoResults.Text" xml:space="preserve">
+    <value>未找到符合的工具，請嘗試不同關鍵字</value>
   </data>
 </root>

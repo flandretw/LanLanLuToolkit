@@ -6,5 +6,6 @@ namespace lanlanlu_toolkit.Views
         public string Description { get; set; } = string.Empty;
         public string Icon { get; set; } = string.Empty;
         public string Tag { get; set; } = string.Empty;
+        public string Category { get; set; } = string.Empty;
     }
 }

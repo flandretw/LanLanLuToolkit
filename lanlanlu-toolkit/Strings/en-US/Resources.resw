@@ -343,13 +343,13 @@
   <data name="HomePage_ViewPerformance.Content" xml:space="preserve">
     <value>View Performance</value>
   </data>
-  <data name="HomePage_AppSettings.Content" xml:space="preserve">
+  <data name="HomePage_AppSettings.Text" xml:space="preserve">
     <value>App Settings</value>
   </data>
   <data name="HomePage_ContactUs.Text" xml:space="preserve">
     <value>Contact Us</value>
   </data>
-  <data name="HomePage_GitHubProject.Content" xml:space="preserve">
+  <data name="HomePage_GitHubProject.Text" xml:space="preserve">
     <value>GitHub Project Page</value>
   </data>
   <data name="SystemRepairPage_HistoryHeader.Text" xml:space="preserve">
@@ -1348,5 +1348,71 @@
   </data>
   <data name="InputTesterPage_Mouse_PeakChip.Text" xml:space="preserve">
     <value>Peak</value>
+  </data>
+  <data name="HomePage_RefreshBtn_ToolTip" xml:space="preserve">
+    <value>Refresh hardware specs</value>
+  </data>
+  <data name="HomePage_Refresh_Success" xml:space="preserve">
+    <value>Hardware specs and system info refreshed</value>
+  </data>
+  <data name="HomePage_SystemStatus_Healthy.Text" xml:space="preserve">
+    <value>System running normally</value>
+  </data>
+  <data name="HomePage_QuickActions_Title.Text" xml:space="preserve">
+    <value>Quick Actions</value>
+  </data>
+  <data name="HomePage_Feature_Perf_Title.Text" xml:space="preserve">
+    <value>Real-time Performance</value>
+  </data>
+  <data name="HomePage_Feature_Perf_Desc.Text" xml:space="preserve">
+    <value>Monitor CPU, GPU, RAM usage, clocks &amp; temperature</value>
+  </data>
+  <data name="HomePage_Feature_Input_Title.Text" xml:space="preserve">
+    <value>Input Tester</value>
+  </data>
+  <data name="HomePage_Feature_Input_Desc.Text" xml:space="preserve">
+    <value>NKRO rollover, polling rate, switch chatter &amp; trajectory</value>
+  </data>
+  <data name="HomePage_Feature_Repair_Title.Text" xml:space="preserve">
+    <value>System Repair</value>
+  </data>
+  <data name="HomePage_Feature_Repair_Desc.Text" xml:space="preserve">
+    <value>Automated DISM &amp; SFC image repair and integrity scan</value>
+  </data>
+  <data name="HomePage_Feature_Crash_Title.Text" xml:space="preserve">
+    <value>Crash Report Analysis</value>
+  </data>
+  <data name="HomePage_Feature_Crash_Desc.Text" xml:space="preserve">
+    <value>BSOD Minidump &amp; Windows error event diagnosis</value>
+  </data>
+  <data name="HomePage_Feature_Hash_Title.Text" xml:space="preserve">
+    <value>File Hash Calculator</value>
+  </data>
+  <data name="HomePage_Feature_Hash_Desc.Text" xml:space="preserve">
+    <value>Fast SHA-256, MD5 checksum calculation &amp; verification</value>
+  </data>
+  <data name="HomePage_Feature_Assoc_Title.Text" xml:space="preserve">
+    <value>File Associations</value>
+  </data>
+  <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
+    <value>Reset default file extension openers and associations</value>
+  </data>
+  <data name="HomePage_Copied_Toast" xml:space="preserve">
+    <value>Copied to clipboard: {0}</value>
+  </data>
+  <data name="ToolHub_SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Search tool name or description...</value>
+  </data>
+  <data name="ToolHub_Tag_Hardware.Text" xml:space="preserve">
+    <value>Hardware</value>
+  </data>
+  <data name="ToolHub_Tag_System.Text" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="ToolHub_Tag_Utility.Text" xml:space="preserve">
+    <value>Utility</value>
+  </data>
+  <data name="ToolHub_NoResults.Text" xml:space="preserve">
+    <value>No matching tools found. Try another query.</value>
   </data>
 </root>

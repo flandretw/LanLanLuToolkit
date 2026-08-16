@@ -1,13 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using System.Collections.Generic;
 using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
 {
     public sealed partial class TestToolPage : Page
     {
-        public List<ToolItem> Tools { get; set; } = new List<ToolItem>();
+        public List<ToolItem> AllTools { get; set; } = new List<ToolItem>();
+        public ObservableCollection<ToolItem> FilteredTools { get; set; } = new ObservableCollection<ToolItem>();
 
         public TestToolPage()
         {
@@ -17,27 +21,58 @@ namespace lanlanlu_toolkit.Views
 
         private void InitializeTools()
         {
-            Tools.Add(new ToolItem
+            AllTools.Clear();
+            AllTools.Add(new ToolItem
             {
                 Title = LocalizationHelper.GetString("Nav_InputTesterPage/Content"),
                 Description = LocalizationHelper.GetString("InputTesterPage_Subtitle/Text"),
                 Icon = "\uE765",
-                Tag = "InputTesterPage"
+                Tag = "InputTesterPage",
+                Category = LocalizationHelper.GetString("ToolHub_Tag_Hardware/Text")
             });
-            Tools.Add(new ToolItem
+            AllTools.Add(new ToolItem
             {
                 Title = LocalizationHelper.GetString("Nav_CrashReportPage/Content"),
                 Description = LocalizationHelper.GetString("CrashReportPage_Subtitle/Text"),
                 Icon = "\uE7BA",
-                Tag = "CrashReportPage"
+                Tag = "CrashReportPage",
+                Category = LocalizationHelper.GetString("ToolHub_Tag_System/Text")
             });
-            Tools.Add(new ToolItem
+            AllTools.Add(new ToolItem
             {
                 Title = LocalizationHelper.GetString("Nav_SystemRepairPage/Content"),
                 Description = LocalizationHelper.GetString("SystemRepairPage_AutoMode_Desc/Text"),
                 Icon = "\uE762",
-                Tag = "SystemRepairPage"
+                Tag = "SystemRepairPage",
+                Category = LocalizationHelper.GetString("ToolHub_Tag_System/Text")
             });
+
+            ApplyFilter(string.Empty);
+        }
+
+        private void SearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            ApplyFilter(sender.Text);
+        }
+
+        private void ApplyFilter(string query)
+        {
+            FilteredTools.Clear();
+            var trimmed = query.Trim();
+
+            var matches = string.IsNullOrEmpty(trimmed)
+                ? AllTools
+                : AllTools.Where(t => t.Title.Contains(trimmed, StringComparison.OrdinalIgnoreCase) ||
+                                     t.Description.Contains(trimmed, StringComparison.OrdinalIgnoreCase) ||
+                                     t.Category.Contains(trimmed, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            foreach (var item in matches)
+            {
+                FilteredTools.Add(item);
+            }
+
+            NoResultsPanel.Visibility = FilteredTools.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            ToolsGridView.Visibility = FilteredTools.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void ToolButton_Click(object sender, RoutedEventArgs e)

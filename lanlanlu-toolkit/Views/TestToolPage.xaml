@@ -8,61 +8,149 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <ScrollViewer IsScrollInertiaEnabled="False" ManipulationMode="System">
+    <Page.Resources>
+        <Style x:Key="ToolCardButtonStyle" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="16,14" />
+            <Setter Property="Margin" Value="0,0,14,14" />
+            <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" 
+                              Background="{TemplateBinding Background}" 
+                              BorderBrush="{TemplateBinding BorderBrush}" 
+                              BorderThickness="{TemplateBinding BorderThickness}" 
+                              CornerRadius="{TemplateBinding CornerRadius}">
+                            
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ControlFillColorSecondaryBrush}" />
+                                            <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ControlFillColorTertiaryBrush}" />
+                                            <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Opacity" Value="0.6" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter Content="{TemplateBinding Content}" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Padding="{TemplateBinding Padding}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer IsScrollInertiaEnabled="True" ManipulationMode="System">
         <Grid Padding="36" HorizontalAlignment="Stretch">
-            <StackPanel Spacing="16" MaxWidth="1600" HorizontalAlignment="Stretch">
-                <TextBlock x:Name="PageTitle" x:Uid="TestToolPage_Title" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,8" />
+            <StackPanel Spacing="20" MaxWidth="1600" HorizontalAlignment="Stretch">
+                
+                <!-- Header with Title & Search Bar -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="PageTitle" x:Uid="TestToolPage_Title" 
+                               Style="{ThemeResource TitleTextBlockStyle}" 
+                               VerticalAlignment="Center" />
+
+                    <!-- Search Filter Box -->
+                    <AutoSuggestBox x:Name="SearchBox" 
+                                    x:Uid="ToolHub_SearchBox"
+                                    Grid.Column="1" 
+                                    Width="300" 
+                                    QueryIcon="Find"
+                                    TextChanged="SearchBox_TextChanged"
+                                    VerticalAlignment="Center" />
+                </Grid>
+
+                <!-- No Results Placeholder -->
+                <StackPanel x:Name="NoResultsPanel" 
+                            Spacing="12" 
+                            HorizontalAlignment="Center" 
+                            Margin="0,48,0,0" 
+                            Visibility="Collapsed">
+                    <FontIcon Glyph="&#xE721;" FontSize="40" Foreground="{ThemeResource TextFillColorTertiaryBrush}" HorizontalAlignment="Center" />
+                    <TextBlock x:Uid="ToolHub_NoResults" 
+                               Style="{ThemeResource BodyTextBlockStyle}" 
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                               HorizontalAlignment="Center" />
+                </StackPanel>
 
                 <!-- GridView for Tool Cards -->
                 <GridView x:Name="ToolsGridView" 
-                          ItemsSource="{x:Bind Tools}"
+                          ItemsSource="{x:Bind FilteredTools}"
                           SelectionMode="None" 
                           IsItemClickEnabled="False"
                           HorizontalAlignment="Stretch">
                     
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <ItemsWrapGrid Orientation="Horizontal" HorizontalAlignment="Left" MaximumRowsOrColumns="4" ItemWidth="360" ItemHeight="96" />
+                            <ItemsWrapGrid Orientation="Horizontal" HorizontalAlignment="Left" MaximumRowsOrColumns="4" ItemWidth="380" ItemHeight="104" />
                         </ItemsPanelTemplate>
                     </GridView.ItemsPanel>
 
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="local:ToolItem">
-                            <!-- Using Button as the card to get perfect hover and corner radius behavior -->
-                            <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                                    Padding="0" Margin="0,0,12,12"
-                                    BorderThickness="0"
-                                    Background="Transparent"
-                                    CornerRadius="8"
+                            <Button Style="{StaticResource ToolCardButtonStyle}"
                                     Click="ToolButton_Click"
                                     Tag="{x:Bind Tag}">
-                                <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                        BorderThickness="1"
-                                        CornerRadius="8"
-                                        Padding="24,12,12,12">
-                                    <Grid ColumnSpacing="20">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        
-                                        <!-- Left: Icon -->
-                                        <FontIcon Glyph="{x:Bind Icon}" FontSize="32" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
-                                        
-                                        <!-- Right: Text Content -->
-                                        <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                <Grid ColumnSpacing="16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Left: High-Contrast Icon -->
+                                    <FontIcon Glyph="{x:Bind Icon}" FontSize="28" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
+                                    
+                                    <!-- Middle: Text Content & Category -->
+                                    <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
                                             <TextBlock Text="{x:Bind Title}"
                                                        Style="{ThemeResource BodyStrongTextBlockStyle}" 
+                                                       FontWeight="SemiBold"
                                                        TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
-                                            <TextBlock Text="{x:Bind Description}"
-                                                       Style="{ThemeResource CaptionTextBlockStyle}" 
-                                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
-                                                       TextWrapping="Wrap" MaxLines="2" />
+                                            
+                                            <Border Background="{ThemeResource ControlAltFillColorSecondaryBrush}" CornerRadius="4" Padding="6,1" VerticalAlignment="Center">
+                                                <TextBlock Text="{x:Bind Category}" FontSize="10" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            </Border>
                                         </StackPanel>
-                                    </Grid>
-                                </Border>
+
+                                        <TextBlock Text="{x:Bind Description}"
+                                                   Style="{ThemeResource CaptionTextBlockStyle}" 
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                                                   TextWrapping="Wrap" MaxLines="2" />
+                                    </StackPanel>
+
+                                    <!-- Right: Subtle Arrow -->
+                                    <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
+                                </Grid>
                             </Button>
                         </DataTemplate>
                     </GridView.ItemTemplate>
@@ -75,7 +163,6 @@
                             <Setter Property="VerticalContentAlignment" Value="Stretch" />
                             <Setter Property="MinWidth" Value="0" />
                             <Setter Property="MinHeight" Value="0" />
-                            <!-- Disable default GridViewItem visuals -->
                             <Setter Property="Background" Value="Transparent" />
                             <Setter Property="BorderBrush" Value="Transparent" />
                         </Style>
