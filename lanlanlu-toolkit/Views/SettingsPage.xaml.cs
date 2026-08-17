@@ -232,6 +232,27 @@ namespace lanlanlu_toolkit.Views
             }
         }
 
+        private async void RescanHardwareButton_Click(object sender, RoutedEventArgs e)
+        {
+            RescanHardwareButton.IsEnabled = false;
+            try
+            {
+                await HardwareProvider.ScanSystemInfoAsync(forceRefresh: true);
+                NotificationService.Show(
+                    LocalizationHelper.GetString("HomePage_Refresh_Title"),
+                    LocalizationHelper.GetString("HomePage_Refresh_Success"),
+                    InfoBarSeverity.Success);
+            }
+            catch (Exception ex)
+            {
+                LoggingService.Log($"[SettingsPage] Hardware rescan error: {ex.Message}");
+            }
+            finally
+            {
+                RescanHardwareButton.IsEnabled = true;
+            }
+        }
+
         private void ResetDebugFolderButton_Click(object sender, RoutedEventArgs e)
         {
             // Reset to empty string so it falls back to default in SettingsService

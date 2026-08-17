@@ -1,12 +1,10 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Management;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media.Animation;
 using Windows.ApplicationModel.DataTransfer;
 using lanlanlu_toolkit.Services;
 
@@ -15,7 +13,6 @@ namespace lanlanlu_toolkit.Views
     public sealed partial class HomePage : Page, INotifyPropertyChanged
     {
         private double _heroHeight = 400;
-        private bool _isRefreshing = false;
         
         public double HeroHeight
         {
@@ -32,17 +29,48 @@ namespace lanlanlu_toolkit.Views
             }
         }
 
-        public Thickness ContentMargin => new Thickness(36, HeroHeight + 40, 36, 36);
+        public Thickness ContentMargin => new Thickness(36, HeroHeight + 86, 36, 36);
 
-        public Thickness SystemCardsMargin => new Thickness(0, HeroHeight - 100, 0, 0);
+        public Thickness SystemCardsMargin => new Thickness(0, HeroHeight - 64, 0, 0);
 
         public HomePage()
         {
             this.InitializeComponent();
-            ToolTipService.SetToolTip(RefreshHardwareBtn, LocalizationHelper.GetString("HomePage_RefreshBtn_ToolTip"));
             UpdateGreeting();
             this.SizeChanged += HomePage_SizeChanged;
-            _ = LoadSystemInfoAsync();
+            this.Loaded += HomePage_Loaded;
+            this.Unloaded += HomePage_Unloaded;
+            LoadFromCache();
+            _ = HardwareProvider.ScanSystemInfoAsync();
+        }
+
+        private void HomePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            HardwareProvider.HardwareInfoUpdated += HardwareProvider_HardwareInfoUpdated;
+            LoadFromCache();
+        }
+
+        private void HomePage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            HardwareProvider.HardwareInfoUpdated -= HardwareProvider_HardwareInfoUpdated;
+        }
+
+        private void HardwareProvider_HardwareInfoUpdated()
+        {
+            DispatcherQueue?.TryEnqueue(LoadFromCache);
+        }
+
+        private void LoadFromCache()
+        {
+            if (HardwareProvider.Cache.IsPopulated)
+            {
+                CpuName = HardwareProvider.Cache.CpuName ?? CpuName;
+                GpuName = HardwareProvider.Cache.GpuName ?? GpuName;
+                RamSize = HardwareProvider.Cache.RamSize ?? RamSize;
+                MotherboardModel = HardwareProvider.Cache.MotherboardModel ?? MotherboardModel;
+                OsVersion = HardwareProvider.Cache.OsVersion ?? OsVersion;
+                StorageInfo = HardwareProvider.Cache.StorageInfo ?? StorageInfo;
+            }
         }
 
         private string _cpuName = LocalizationHelper.GetString("HomePage_Detecting");
@@ -62,215 +90,6 @@ namespace lanlanlu_toolkit.Views
 
         private string _storageInfo = LocalizationHelper.GetString("HomePage_Detecting");
         public string StorageInfo { get => _storageInfo; set { _storageInfo = value; OnPropertyChanged(); } }
-
-        private async Task LoadSystemInfoAsync(bool forceRefresh = false)
-        {
-            // Priority load from cache for instant-open experience unless forced
-            if (!forceRefresh && HardwareProvider.Cache.IsPopulated)
-            {
-                CpuName = HardwareProvider.Cache.CpuName ?? CpuName;
-                GpuName = HardwareProvider.Cache.GpuName ?? GpuName;
-                RamSize = HardwareProvider.Cache.RamSize ?? RamSize;
-                MotherboardModel = HardwareProvider.Cache.MotherboardModel ?? MotherboardModel;
-                OsVersion = HardwareProvider.Cache.OsVersion ?? OsVersion;
-                StorageInfo = HardwareProvider.Cache.StorageInfo ?? StorageInfo;
-                return;
-            }
-
-            await Task.Run(() =>
-            {
-                try
-                {
-                    string cpu = "Unknown CPU";
-                    string ram = "Unknown RAM";
-                    string gpu = "Unknown GPU";
-                    string os = "Unknown OS";
-
-                    // CPU
-                    using (var searcher = new ManagementObjectSearcher("SELECT Name FROM Win32_Processor"))
-                    using (var collection = searcher.Get())
-                    {
-                        var cpuList = new System.Collections.Generic.List<string>();
-                        foreach (var obj in collection)
-                        {
-                            string? name = obj["Name"]?.ToString()?.Split('@')[0].Trim();
-                            if (!string.IsNullOrEmpty(name) && !cpuList.Contains(name)) cpuList.Add(name);
-                        }
-                        cpu = cpuList.Count > 0 ? string.Join("\n", cpuList) : cpu;
-                    }
-
-                    // RAM (Capacity + Slots + Speed)
-                    using (var searcher = new ManagementObjectSearcher("SELECT Capacity, Speed FROM Win32_PhysicalMemory"))
-                    using (var collection = searcher.Get())
-                    {
-                        ulong totalCapacity = 0;
-                        uint speed = 0;
-                        int stickCount = 0;
-                        foreach (var obj in collection)
-                        {
-                            totalCapacity += Convert.ToUInt64(obj["Capacity"]);
-                            uint s = Convert.ToUInt32(obj["Speed"]);
-                            if (s > speed) speed = s;
-                            stickCount++;
-                        }
-
-                        int totalSlots = stickCount;
-                        try 
-                        {
-                            using (var arraySearcher = new ManagementObjectSearcher("SELECT MemoryDevices FROM Win32_PhysicalMemoryArray"))
-                            using (var arrayCollection = arraySearcher.Get())
-                            foreach (var obj in arrayCollection) totalSlots = Convert.ToInt32(obj["MemoryDevices"]);
-                        } catch { }
-
-                        double totalGB = totalCapacity / (1024.0 * 1024.0 * 1024.0);
-                        string speedStr = speed > 0 ? $" @ {speed} MHz" : "";
-                        ram = $"{totalGB:F0} GB ({stickCount}/{totalSlots}){speedStr}";
-                    }
-
-                    // GPU
-                    using (var searcher = new ManagementObjectSearcher("SELECT Name FROM Win32_VideoController"))
-                    using (var collection = searcher.Get())
-                    {
-                        var gpuList = new System.Collections.Generic.List<string>();
-                        foreach (var obj in collection)
-                        {
-                            string? name = obj["Name"]?.ToString();
-                            if (name != null && !name.Contains("Basic Render") && !gpuList.Contains(name))
-                            {
-                                gpuList.Add(name);
-                            }
-                        }
-                        
-                        // Sort: prioritize integrated graphics cards (usually contains "Graphics" or "Intel")
-                        gpuList.Sort((a, b) => 
-                        {
-                            bool aIsIntegrated = a.Contains("Graphics") || a.Contains("Intel");
-                            bool bIsIntegrated = b.Contains("Graphics") || b.Contains("Intel");
-                            if (aIsIntegrated && !bIsIntegrated) return -1;
-                            if (!aIsIntegrated && bIsIntegrated) return 1;
-                            return 0;
-                        });
-
-                        gpu = gpuList.Count > 0 ? string.Join("\n", gpuList) : gpu;
-                    }
-
-                    // OS
-                    try
-                    {
-                        using (var searcher = new ManagementObjectSearcher("SELECT Caption, BuildNumber FROM Win32_OperatingSystem"))
-                        using (var collection = searcher.Get())
-                        foreach (var obj in collection)
-                        {
-                            string? caption = obj["Caption"]?.ToString()?.Replace("Microsoft ", "");
-                            string? build = obj["BuildNumber"]?.ToString();
-                            string displayVersion = "";
-                            string ubr = "";
-                            
-                            try 
-                            {
-                                using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
-                                {
-                                    if (key != null)
-                                    {
-                                        displayVersion = key.GetValue("DisplayVersion")?.ToString() ?? "";
-                                        ubr = key.GetValue("UBR")?.ToString() ?? "";
-                                    }
-                                }
-                            } catch { }
-
-                            string fullBuild = string.IsNullOrEmpty(ubr) ? build ?? "" : $"{build}.{ubr}";
-                            os = $"{caption} {displayVersion} ({fullBuild})".Trim().Replace("  ", " ");
-                        }
-                    }
-                    catch { }
-
-                    // Motherboard
-                    string mb = "Unknown Motherboard";
-                    try
-                    {
-                        using (var searcher = new ManagementObjectSearcher("SELECT Manufacturer, Product FROM Win32_BaseBoard"))
-                        using (var collection = searcher.Get())
-                        foreach (var obj in collection)
-                        {
-                            string manufacturer = obj["Manufacturer"]?.ToString() ?? "";
-                            string product = obj["Product"]?.ToString() ?? "";
-                            mb = $"{manufacturer} {product}".Trim();
-                            break;
-                        }
-                    }
-                    catch { }
-
-                    // Storage (Disk Drives)
-                    string storage = "Unknown Storage";
-                    try
-                    {
-                        using (var searcher = new ManagementObjectSearcher("SELECT Model, Size FROM Win32_DiskDrive"))
-                        using (var collection = searcher.Get())
-                        {
-                            var storageList = new System.Collections.Generic.List<string>();
-                            foreach (var obj in collection)
-                            {
-                                string? model = obj["Model"]?.ToString();
-                                ulong sizeBytes = Convert.ToUInt64(obj["Size"]);
-                                double sizeGB = sizeBytes / (1024.0 * 1024.0 * 1024.0);
-                                if (model != null) storageList.Add($"{model} ({sizeGB:F0} GB)");
-                            }
-                            storage = storageList.Count > 0 ? string.Join("\n", storageList) : storage;
-                        }
-                    }
-                    catch { }
-
-                    DispatcherQueue.TryEnqueue(() =>
-                    {
-                        CpuName = cpu;
-                        RamSize = ram;
-                        GpuName = gpu;
-                        OsVersion = os;
-                        StorageInfo = storage;
-                        MotherboardModel = mb;
-
-                        // Update cache
-                        HardwareProvider.Cache.CpuName = cpu;
-                        HardwareProvider.Cache.RamSize = ram;
-                        HardwareProvider.Cache.GpuName = gpu;
-                        HardwareProvider.Cache.OsVersion = os;
-                        HardwareProvider.Cache.StorageInfo = storage;
-                        HardwareProvider.Cache.MotherboardModel = mb;
-                        HardwareProvider.Cache.IsPopulated = true;
-                    });
-                }
-                catch { }
-            });
-        }
-
-        private async void RefreshHardwareBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (_isRefreshing) return;
-            _isRefreshing = true;
-
-            var animation = new DoubleAnimation
-            {
-                From = 0,
-                To = 720,
-                Duration = TimeSpan.FromMilliseconds(800),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
-            };
-
-            var storyboard = new Storyboard();
-            Storyboard.SetTarget(animation, RefreshRotate);
-            Storyboard.SetTargetProperty(animation, "Angle");
-            storyboard.Children.Add(animation);
-            storyboard.Begin();
-
-            await LoadSystemInfoAsync(forceRefresh: true);
-
-            NotificationService.Show(
-                LocalizationHelper.GetString("HomePage_Refresh_Title"),
-                LocalizationHelper.GetString("HomePage_Refresh_Success"),
-                InfoBarSeverity.Success);
-
-            _isRefreshing = false;
-        }
 
         private void HomePage_SizeChanged(object sender, SizeChangedEventArgs e) => UpdateLayoutProportions(e.NewSize.Height);
 
@@ -304,7 +123,7 @@ namespace lanlanlu_toolkit.Views
                     greetingKey = "Greeting_Evening";
                     iconGlyph = "\uE708"; // Moon
                     break;
-            }
+                }
 
             GreetingText.Text = LocalizationHelper.GetString(greetingKey);
             GreetingIcon.Glyph = iconGlyph;

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Application
     x:Class="lanlanlu_toolkit.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -15,22 +14,25 @@
                     <Color x:Key="HeroFadeColor">#FFF3F3F3</Color>
                     <Color x:Key="HeroFadeColorTransparent">#00F3F3F3</Color>
                     <Color x:Key="HeroFadeColorSemiTransparent">#80F3F3F3</Color>
+                    <Color x:Key="HeroFadeColorMid">#C8F3F3F3</Color>
                     <SolidColorBrush x:Key="HeroTitleBrush" Color="Black" />
                     <SolidColorBrush x:Key="HeroSubtitleBrush" Color="Black" />
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Dark">
                     <BitmapImage x:Key="HomePageHeroImage" UriSource="ms-appx:///Assets/HomePageWindows11Dark.jpg" />
-                    <Color x:Key="HeroFadeColor">#FF272727</Color>
-                    <Color x:Key="HeroFadeColorTransparent">#00272727</Color>
-                    <Color x:Key="HeroFadeColorSemiTransparent">#80272727</Color>
+                    <Color x:Key="HeroFadeColor">#FF202020</Color>
+                    <Color x:Key="HeroFadeColorTransparent">#00202020</Color>
+                    <Color x:Key="HeroFadeColorSemiTransparent">#80202020</Color>
+                    <Color x:Key="HeroFadeColorMid">#C8202020</Color>
                     <SolidColorBrush x:Key="HeroTitleBrush" Color="White" />
                     <SolidColorBrush x:Key="HeroSubtitleBrush" Color="White" />
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Default">
                     <BitmapImage x:Key="HomePageHeroImage" UriSource="ms-appx:///Assets/HomePageWindows11Dark.jpg" />
-                    <Color x:Key="HeroFadeColor">#FF272727</Color>
-                    <Color x:Key="HeroFadeColorTransparent">#00272727</Color>
-                    <Color x:Key="HeroFadeColorSemiTransparent">#80272727</Color>
+                    <Color x:Key="HeroFadeColor">#FF202020</Color>
+                    <Color x:Key="HeroFadeColorTransparent">#00202020</Color>
+                    <Color x:Key="HeroFadeColorSemiTransparent">#80202020</Color>
+                    <Color x:Key="HeroFadeColorMid">#C8202020</Color>
                     <SolidColorBrush x:Key="HeroTitleBrush" Color="White" />
                     <SolidColorBrush x:Key="HeroSubtitleBrush" Color="White" />
                 </ResourceDictionary>

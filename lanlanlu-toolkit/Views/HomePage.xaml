@@ -16,7 +16,7 @@
                     <SolidColorBrush x:Key="CardCopyIconBrush" Color="Black" Opacity="0.6" />
                     <AcrylicBrush x:Key="CardAcrylicBrush" 
                                   TintColor="White" 
-                                  TintOpacity="0.92" 
+                                  TintOpacity="0.90" 
                                   FallbackColor="White" />
                 </ResourceDictionary>
 
@@ -24,25 +24,25 @@
                     <SolidColorBrush x:Key="CardHoverOverlayBrush" Color="White" Opacity="0.08" />
                     <SolidColorBrush x:Key="CardCopyIconBrush" Color="White" Opacity="0.7" />
                     <AcrylicBrush x:Key="CardAcrylicBrush" 
-                                  TintColor="#1C1C1C" 
+                                  TintColor="#202020" 
                                   TintOpacity="0.88" 
-                                  FallbackColor="#1C1C1C" />
+                                  FallbackColor="#202020" />
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="Default">
                     <SolidColorBrush x:Key="CardHoverOverlayBrush" Color="White" Opacity="0.08" />
                     <SolidColorBrush x:Key="CardCopyIconBrush" Color="White" Opacity="0.7" />
                     <AcrylicBrush x:Key="CardAcrylicBrush" 
-                                  TintColor="#1C1C1C" 
+                                  TintColor="#202020" 
                                   TintOpacity="0.88" 
-                                  FallbackColor="#1C1C1C" />
+                                  FallbackColor="#202020" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
 
             <Style x:Key="SystemInfoCardButtonStyle" TargetType="HyperlinkButton">
                 <Setter Property="Width" Value="230" />
-                <Setter Property="Height" Value="124" />
-                <Setter Property="Padding" Value="16" />
+                <Setter Property="Height" Value="118" />
+                <Setter Property="Padding" Value="16,14" />
                 <Setter Property="Background" Value="{ThemeResource CardAcrylicBrush}" />
                 <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
                 <Setter Property="BorderThickness" Value="1" />
@@ -136,81 +136,45 @@
 
     <ScrollViewer x:Name="MainScrollViewer" IsScrollInertiaEnabled="True" ManipulationMode="System">
         <Grid x:Name="RootGrid">
-            <!-- Background Image Layer -->
+            <!-- Background Hero Image Layer -->
             <Grid x:Name="HeroGrid" 
                   VerticalAlignment="Top" 
                   Background="{ThemeResource HeroFadeColor}"
                   Height="{x:Bind HeroHeight, Mode=OneWay}">
-                <!-- Rounded Corner Container for Image -->
+                <!-- Rounded Corner Container for Hero Wallpaper -->
                 <Border CornerRadius="8,0,0,0">
                     <Border.Background>
                         <ImageBrush ImageSource="{ThemeResource HomePageHeroImage}" 
                                     Stretch="UniformToFill" 
-                                    AlignmentY="Center"
-                                    Opacity="1">
-                        </ImageBrush>
+                                    AlignmentY="Center" />
                     </Border.Background>
                 </Border>
 
-                <!-- Denser Lower Fade Overlay -->
-                <Rectangle VerticalAlignment="Bottom" Height="40">
+                <!-- Ultra-Smooth Lower Fade Overlay (Seamlessly dissolves into page background #202020) -->
+                <Rectangle VerticalAlignment="Bottom" Height="140">
                     <Rectangle.Fill>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                             <GradientStop Color="{ThemeResource HeroFadeColorTransparent}" Offset="0.0" />
-                            <GradientStop Color="{ThemeResource HeroFadeColorSemiTransparent}" Offset="0.6" />
+                            <GradientStop Color="{ThemeResource HeroFadeColorSemiTransparent}" Offset="0.35" />
+                            <GradientStop Color="{ThemeResource HeroFadeColorMid}" Offset="0.70" />
+                            <GradientStop Color="{ThemeResource HeroFadeColor}" Offset="0.95" />
                             <GradientStop Color="{ThemeResource HeroFadeColor}" Offset="1.0" />
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
 
-                <!-- Top-Left Text Overlay & Status Actions -->
+                <!-- Top-Left Clean Brand Text Overlay -->
                 <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="36,32,36,0">
-                    <StackPanel HorizontalAlignment="Left" Spacing="6">
-                        <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                            <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold" Foreground="{ThemeResource HeroTitleBrush}" />
-                            
-                            <!-- Refresh Hardware Button -->
-                            <Button x:Name="RefreshHardwareBtn" 
-                                    Click="RefreshHardwareBtn_Click" 
-                                    Width="32" Height="32" Padding="0" 
-                                    Background="{ThemeResource CardAcrylicBrush}" 
-                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                                    BorderThickness="1" 
-                                    CornerRadius="16"
-                                    VerticalAlignment="Center">
-                                <FontIcon x:Name="RefreshIcon" Glyph="&#xE72C;" FontSize="13" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}">
-                                    <FontIcon.RenderTransform>
-                                        <RotateTransform x:Name="RefreshRotate" CenterX="6.5" CenterY="6.5" Angle="0" />
-                                    </FontIcon.RenderTransform>
-                                </FontIcon>
-                            </Button>
-                        </StackPanel>
-                        
-                        <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                            <TextBlock x:Uid="HomePage_PoweredBy" 
-                                       Style="{ThemeResource BodyTextBlockStyle}" 
-                                       Foreground="{ThemeResource HeroSubtitleBrush}" />
-                            
-                            <!-- System Healthy Pill Badge -->
-                            <Border Background="{ThemeResource CardAcrylicBrush}" 
-                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                                    BorderThickness="1" 
-                                    CornerRadius="10" 
-                                    Padding="8,2">
-                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                    <Ellipse Width="6" Height="6" Fill="{ThemeResource SystemFillColorSuccessBrush}" />
-                                    <TextBlock x:Uid="HomePage_SystemStatus_Healthy" 
-                                               FontSize="11" 
-                                               FontWeight="SemiBold" 
-                                               Foreground="{ThemeResource HeroSubtitleBrush}" />
-                                </StackPanel>
-                            </Border>
-                        </StackPanel>
+                    <StackPanel HorizontalAlignment="Left" Spacing="4">
+                        <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold" Foreground="{ThemeResource HeroTitleBrush}" />
+                        <TextBlock x:Uid="HomePage_PoweredBy" 
+                                   Style="{ThemeResource BodyTextBlockStyle}" 
+                                   Foreground="{ThemeResource HeroSubtitleBrush}" />
                     </StackPanel>
                 </Grid>
             </Grid>
             
-            <!-- System Information Cards Layer -->
+            <!-- System Information Cards Layer (Floating Half-On Hero Strip) -->
             <Grid VerticalAlignment="Top" 
                   Margin="{x:Bind SystemCardsMargin, Mode=OneWay}"
                   HorizontalAlignment="Stretch">
@@ -419,13 +383,13 @@
                 </Button>
             </Grid>
 
-            <!-- Foreground Content Layer -->
-            <StackPanel Spacing="28" MaxWidth="1600" HorizontalAlignment="Stretch" Margin="{x:Bind ContentMargin, Mode=OneWay}">
+            <!-- Foreground Content Layer (Structured with Consistent 32px Vertical Rhythm) -->
+            <StackPanel Spacing="32" MaxWidth="1600" HorizontalAlignment="Stretch" Margin="{x:Bind ContentMargin, Mode=OneWay}">
                 
                 <!-- Welcome & Greeting Card -->
                 <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                        BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="28,24">
+                        BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="24,20">
                     <StackPanel Spacing="10">
                         <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
                             <FontIcon x:Name="GreetingIcon" Glyph="&#xE706;" FontSize="20" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
@@ -436,13 +400,13 @@
                 </Border>
 
                 <!-- Quick Action Feature Grid Section -->
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="14">
                     <TextBlock x:Uid="HomePage_QuickActions_Title" 
                                Style="{ThemeResource SubtitleTextBlockStyle}" 
                                FontWeight="SemiBold" />
 
-                    <!-- Responsive 3-Column Feature Cards Grid -->
-                    <Grid RowSpacing="14" ColumnSpacing="14">
+                    <!-- Responsive 3-Column Feature Cards Grid with 12px Gaps -->
+                    <Grid RowSpacing="12" ColumnSpacing="12">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -570,9 +534,9 @@
                 </StackPanel>
 
                 <!-- Footer Quick Links Bar -->
-                <Border Background="{ThemeResource LayerFillColorDefaultBrush}" 
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                        BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="20,16">
+                        BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="20,14">
                     <Grid>
                         <StackPanel Orientation="Horizontal" Spacing="24" VerticalAlignment="Center">
                             <HyperlinkButton Click="GoToSettings_Click" Padding="6,4">

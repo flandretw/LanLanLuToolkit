@@ -1421,4 +1421,13 @@
   <data name="HomePage_Refresh_Title" xml:space="preserve">
     <value>Hardware Specs</value>
   </data>
+  <data name="SettingsPage_RescanHardware_Title.Text" xml:space="preserve">
+    <value>Rescan Hardware Changes</value>
+  </data>
+  <data name="SettingsPage_RescanHardware_Desc.Text" xml:space="preserve">
+    <value>Clear hardware cache and re-detect CPU, GPU, RAM, motherboard, and disk specs</value>
+  </data>
+  <data name="SettingsPage_RescanHardware_ButtonText.Text" xml:space="preserve">
+    <value>Scan Now</value>
+  </data>
 </root>

@@ -1421,4 +1421,13 @@
   <data name="HomePage_Refresh_Title" xml:space="preserve">
     <value>硬體資訊</value>
   </data>
+  <data name="SettingsPage_RescanHardware_Title.Text" xml:space="preserve">
+    <value>重新掃描硬體變更</value>
+  </data>
+  <data name="SettingsPage_RescanHardware_Desc.Text" xml:space="preserve">
+    <value>清除硬體快取並重新偵測 CPU、GPU、記憶體、主機板與磁碟等系統規格</value>
+  </data>
+  <data name="SettingsPage_RescanHardware_ButtonText.Text" xml:space="preserve">
+    <value>立即掃描</value>
+  </data>
 </root>
