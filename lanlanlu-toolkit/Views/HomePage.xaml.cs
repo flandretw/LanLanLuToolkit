@@ -265,7 +265,7 @@ namespace lanlanlu_toolkit.Views
             await LoadSystemInfoAsync(forceRefresh: true);
 
             NotificationService.Show(
-                LocalizationHelper.GetString("AppTitle/Text"),
+                LocalizationHelper.GetString("HomePage_Refresh_Title"),
                 LocalizationHelper.GetString("HomePage_Refresh_Success"),
                 InfoBarSeverity.Success);
 
@@ -369,8 +369,8 @@ namespace lanlanlu_toolkit.Views
 
                 icon.Glyph = "\uE8FB"; // Check icon
                 NotificationService.Show(
-                    LocalizationHelper.GetString("AppTitle/Text"),
-                    string.Format(LocalizationHelper.GetString("HomePage_Copied_Toast"), text),
+                    LocalizationHelper.GetString("Notification_Copied"),
+                    text,
                     InfoBarSeverity.Informational);
 
                 await Task.Delay(2000);

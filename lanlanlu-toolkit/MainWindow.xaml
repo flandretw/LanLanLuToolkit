@@ -82,15 +82,24 @@
             
             <Grid>
                 <Frame x:Name="ContentFrame" />
-                <!-- Global App Notification InfoBar -->
+                
+                <!-- Global App Notification InfoBar / Toast Popup (Solid Opaque Windows 11 Floating Card) -->
                 <InfoBar x:Name="AppInfoBar"
                          IsOpen="False"
                          Severity="Informational"
                          HorizontalAlignment="Right"
                          VerticalAlignment="Top"
                          Margin="0,24,24,0"
-                         MaxWidth="500"
-                         Canvas.ZIndex="999" />
+                         MaxWidth="520"
+                         Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
+                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                         BorderThickness="1"
+                         CornerRadius="{ThemeResource ControlCornerRadius}"
+                         Canvas.ZIndex="999">
+                    <InfoBar.Shadow>
+                        <ThemeShadow />
+                    </InfoBar.Shadow>
+                </InfoBar>
             </Grid>
         </NavigationView>
     </Grid>

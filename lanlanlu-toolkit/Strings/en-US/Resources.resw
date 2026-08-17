@@ -1415,4 +1415,10 @@
   <data name="ToolHub_NoResults.Text" xml:space="preserve">
     <value>No matching tools found. Try another query.</value>
   </data>
+  <data name="Notification_Copied" xml:space="preserve">
+    <value>Copied to clipboard</value>
+  </data>
+  <data name="HomePage_Refresh_Title" xml:space="preserve">
+    <value>Hardware Specs</value>
+  </data>
 </root>
