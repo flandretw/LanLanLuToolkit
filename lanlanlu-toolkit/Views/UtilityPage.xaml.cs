@@ -67,6 +67,25 @@ namespace lanlanlu_toolkit.Views
             ToolsGridView.Visibility = FilteredTools.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
+        private void ToolsGridView_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdateGridViewLayout(e.NewSize.Width);
+        }
+
+        private void UpdateGridViewLayout(double availableWidth)
+        {
+            if (ToolsGridView.ItemsPanelRoot is ItemsWrapGrid wrapGrid && availableWidth > 0)
+            {
+                // Dynamic responsive columns:
+                // 3 columns when available width >= 780px (matching HomePage),
+                // 2 columns when width >= 500px,
+                // 1 column when narrower.
+                int columns = availableWidth >= 780 ? 3 : (availableWidth >= 500 ? 2 : 1);
+                wrapGrid.MaximumRowsOrColumns = columns;
+                wrapGrid.ItemWidth = Math.Floor(availableWidth / columns);
+            }
+        }
+
         private void ToolButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.Tag is string tag)
