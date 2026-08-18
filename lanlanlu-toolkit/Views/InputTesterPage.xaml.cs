@@ -1167,8 +1167,9 @@ namespace lanlanlu_toolkit.Views
 
             if (ModeRadioButtons.SelectedIndex == 0)
             {
-                KeyboardSection.Visibility = Visibility.Visible;
                 MouseSection.Visibility = Visibility.Collapsed;
+                KeyboardSection.Visibility = Visibility.Visible;
+                FadeInKeyboardStoryboard?.Begin();
                 KeyboardFocusArea?.Focus(FocusState.Programmatic);
                 UpdateFocusVisual(true);
             }
@@ -1176,6 +1177,7 @@ namespace lanlanlu_toolkit.Views
             {
                 KeyboardSection.Visibility = Visibility.Collapsed;
                 MouseSection.Visibility = Visibility.Visible;
+                FadeInMouseStoryboard?.Begin();
                 ReleaseAllMouseButtonVisuals();
             }
         }
