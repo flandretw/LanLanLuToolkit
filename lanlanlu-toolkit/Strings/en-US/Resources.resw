@@ -394,6 +394,24 @@
   <data name="InputTesterPage_Tab_Mouse.Text" xml:space="preserve">
     <value>Mouse Test</value>
   </data>
+  <data name="InputTesterPage_Setting_ModeTitle.Text" xml:space="preserve">
+    <value>Testing Mode</value>
+  </data>
+  <data name="InputTesterPage_Setting_ModeDesc.Text" xml:space="preserve">
+    <value>Select the input device to diagnose and test (Keyboard or Mouse).</value>
+  </data>
+  <data name="InputTesterPage_Setting_SoundTitle.Text" xml:space="preserve">
+    <value>Key Press Sound</value>
+  </data>
+  <data name="InputTesterPage_Setting_SoundDesc.Text" xml:space="preserve">
+    <value>Play sound feedback when pressing keys or clicking mouse buttons.</value>
+  </data>
+  <data name="InputTesterPage_Toggle_On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="InputTesterPage_Toggle_Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
   <data name="InputTesterPage_ResetBtn.Text" xml:space="preserve">
     <value>Reset Test</value>
   </data>

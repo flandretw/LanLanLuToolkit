@@ -400,6 +400,24 @@
   <data name="InputTesterPage_Tab_Mouse.Text" xml:space="preserve">
     <value>滑鼠檢測</value>
   </data>
+  <data name="InputTesterPage_Setting_ModeTitle.Text" xml:space="preserve">
+    <value>檢測模式</value>
+  </data>
+  <data name="InputTesterPage_Setting_ModeDesc.Text" xml:space="preserve">
+    <value>選擇要進行診斷與檢測的輸入裝置（鍵盤或滑鼠）。</value>
+  </data>
+  <data name="InputTesterPage_Setting_SoundTitle.Text" xml:space="preserve">
+    <value>按鍵音效</value>
+  </data>
+  <data name="InputTesterPage_Setting_SoundDesc.Text" xml:space="preserve">
+    <value>在按下按鍵或點擊滑鼠時播放聲音回饋。</value>
+  </data>
+  <data name="InputTesterPage_Toggle_On" xml:space="preserve">
+    <value>開啟</value>
+  </data>
+  <data name="InputTesterPage_Toggle_Off" xml:space="preserve">
+    <value>關閉</value>
+  </data>
   <data name="InputTesterPage_ResetBtn.Text" xml:space="preserve">
     <value>重設紀錄</value>
   </data>

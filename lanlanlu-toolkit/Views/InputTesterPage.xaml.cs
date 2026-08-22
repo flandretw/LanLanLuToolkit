@@ -114,6 +114,9 @@ namespace lanlanlu_toolkit.Views
             this.AddHandler(UIElement.PointerMovedEvent, _pointerMovedHandler, true);
             this.AddHandler(UIElement.PointerCanceledEvent, _pointerCanceledHandler, true);
             this.AddHandler(UIElement.PointerCaptureLostEvent, _pointerCaptureLostHandler, true);
+
+            UpdateSoundToggleStateText();
+            UpdatePageLayoutBounds(this.ActualWidth, this.ActualHeight);
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
@@ -130,7 +133,7 @@ namespace lanlanlu_toolkit.Views
 
         private void Page_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (ModeRadioButtons.SelectedIndex == 0)
+            if (ModeComboBox != null && ModeComboBox.SelectedIndex == 0)
             {
                 if (!ReferenceEquals(FocusManager.GetFocusedElement(this.XamlRoot), KeyboardFocusArea))
                 {
@@ -142,7 +145,7 @@ namespace lanlanlu_toolkit.Views
 
         private void Page_KeyUp(object sender, KeyRoutedEventArgs e)
         {
-            if (ModeRadioButtons.SelectedIndex == 0)
+            if (ModeComboBox != null && ModeComboBox.SelectedIndex == 0)
             {
                 KeyboardFocusArea_KeyUp(sender, e);
             }
@@ -218,7 +221,7 @@ namespace lanlanlu_toolkit.Views
 
             if (KeyboardViewbox != null)
             {
-                KeyboardViewbox.MaxHeight = 310;
+                KeyboardViewbox.MaxHeight = 275;
             }
 
             foreach (var testedKeyId in _testedKeys)
@@ -230,6 +233,7 @@ namespace lanlanlu_toolkit.Views
             }
 
             UpdateTestedKeysStat();
+            UpdatePageLayoutBounds(this.ActualWidth, this.ActualHeight);
         }
 
         private void UpdateTestedKeysStat()
@@ -517,6 +521,55 @@ namespace lanlanlu_toolkit.Views
         {
             KeyboardFocusArea.Focus(FocusState.Programmatic);
             UpdateFocusVisual(true);
+        }
+
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdatePageLayoutBounds(e.NewSize.Width, e.NewSize.Height);
+        }
+
+        private void RootContentGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdatePageLayoutBounds(this.ActualWidth, this.ActualHeight);
+        }
+
+        private void KeyboardFocusArea_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdatePageLayoutBounds(this.ActualWidth, this.ActualHeight);
+        }
+
+        private void UpdatePageLayoutBounds(double viewportWidth, double viewportHeight = 0)
+        {
+            if (viewportWidth <= 0) viewportWidth = this.ActualWidth;
+            if (viewportHeight <= 0) viewportHeight = this.ActualHeight;
+            if (viewportWidth <= 0) return;
+
+            if (RootContentGrid != null)
+            {
+                RootContentGrid.MaxWidth = viewportWidth;
+            }
+
+            if (KeyboardViewbox != null)
+            {
+                // Horizontal width constraint
+                double availableWidth = viewportWidth - 120;
+                if (availableWidth > 50)
+                {
+                    KeyboardViewbox.MaxWidth = availableWidth;
+                }
+
+                // Vertical height constraint to strictly prevent overflowing below
+                if (viewportHeight > 300)
+                {
+                    // Total top fixed elements (Page Padding ~36, Header ~44, Settings Cards ~92, Stats ~76, Spacings ~44, Card Header ~58) ≈ 350px
+                    double availableHeight = viewportHeight - 350;
+                    KeyboardViewbox.MaxHeight = Math.Max(160, Math.Min(275, availableHeight));
+                }
+                else
+                {
+                    KeyboardViewbox.MaxHeight = 275;
+                }
+            }
         }
 
         private void KeyboardFocusArea_GotFocus(object sender, RoutedEventArgs e)
@@ -819,11 +872,11 @@ namespace lanlanlu_toolkit.Views
 
         private void OnGlobalPointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            if (ModeRadioButtons == null || ModeRadioButtons.SelectedIndex != 1) return;
+            if (ModeComboBox == null || ModeComboBox.SelectedIndex != 1) return;
 
             if (e.OriginalSource is DependencyObject dep)
             {
-                if (IsDescendantOf<Button>(dep) || IsDescendantOf<Slider>(dep) || IsDescendantOf<ToggleSwitch>(dep) || IsDescendantOf<RadioButton>(dep))
+                if (IsDescendantOf<Button>(dep) || IsDescendantOf<Slider>(dep) || IsDescendantOf<ToggleSwitch>(dep) || IsDescendantOf<ComboBox>(dep) || IsDescendantOf<ComboBoxItem>(dep))
                 {
                     return;
                 }
@@ -835,7 +888,7 @@ namespace lanlanlu_toolkit.Views
 
         private void OnGlobalPointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            if (ModeRadioButtons == null || ModeRadioButtons.SelectedIndex != 1) return;
+            if (ModeComboBox == null || ModeComboBox.SelectedIndex != 1) return;
 
             var props = e.GetCurrentPoint(this).Properties;
             HandleMouseButtonRelease(props);
@@ -843,7 +896,7 @@ namespace lanlanlu_toolkit.Views
 
         private void OnGlobalPointerMoved(object sender, PointerRoutedEventArgs e)
         {
-            if (ModeRadioButtons == null || ModeRadioButtons.SelectedIndex != 1) return;
+            if (ModeComboBox == null || ModeComboBox.SelectedIndex != 1) return;
 
             var props = e.GetCurrentPoint(this).Properties;
             if (!props.IsLeftButtonPressed) HighlightBorder(MouseLeftBtnVisual, false);
@@ -1161,11 +1214,11 @@ namespace lanlanlu_toolkit.Views
 
         #region Top Controls & Reset
 
-        private void ModeRadioButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!_isLoaded || KeyboardSection == null || MouseSection == null) return;
 
-            if (ModeRadioButtons.SelectedIndex == 0)
+            if (ModeComboBox.SelectedIndex == 0)
             {
                 MouseSection.Visibility = Visibility.Collapsed;
                 KeyboardSection.Visibility = Visibility.Visible;
@@ -1184,7 +1237,15 @@ namespace lanlanlu_toolkit.Views
 
         private void SoundToggle_Toggled(object sender, RoutedEventArgs e)
         {
-            // Sound feedback preference toggle
+            UpdateSoundToggleStateText();
+        }
+
+        private void UpdateSoundToggleStateText()
+        {
+            if (SoundToggle == null || SoundToggleStateText == null) return;
+            SoundToggleStateText.Text = SoundToggle.IsOn
+                ? LocalizationHelper.GetString("InputTesterPage_Toggle_On")
+                : LocalizationHelper.GetString("InputTesterPage_Toggle_Off");
         }
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
