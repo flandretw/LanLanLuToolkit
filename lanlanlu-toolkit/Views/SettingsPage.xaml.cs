@@ -157,10 +157,13 @@ namespace lanlanlu_toolkit.Views
             NotificationsToggle.IsOn = SettingsService.GetNotificationsEnabled();
             NotificationSoundToggle.IsOn = SettingsService.GetNotificationSound();
             NotificationSoundToggle.IsEnabled = NotificationsToggle.IsOn;
+            UpdateNotificationsToggleText();
+            UpdateNotificationSoundToggleText();
         }
 
         private void NotificationsToggle_Toggled(object sender, RoutedEventArgs e)
         {
+            UpdateNotificationsToggleText();
             if (!_isInitialized) return;
             bool isEnabled = NotificationsToggle.IsOn;
             SettingsService.SaveNotificationsEnabled(isEnabled);
@@ -169,13 +172,31 @@ namespace lanlanlu_toolkit.Views
 
         private void NotificationSoundToggle_Toggled(object sender, RoutedEventArgs e)
         {
+            UpdateNotificationSoundToggleText();
             if (!_isInitialized) return;
             SettingsService.SaveNotificationSound(NotificationSoundToggle.IsOn);
+        }
+
+        private void UpdateNotificationsToggleText()
+        {
+            if (NotificationsToggle == null || NotificationsToggleStateText == null) return;
+            NotificationsToggleStateText.Text = NotificationsToggle.IsOn
+                ? LocalizationHelper.GetString("Common_Toggle_On")
+                : LocalizationHelper.GetString("Common_Toggle_Off");
+        }
+
+        private void UpdateNotificationSoundToggleText()
+        {
+            if (NotificationSoundToggle == null || NotificationSoundToggleStateText == null) return;
+            NotificationSoundToggleStateText.Text = NotificationSoundToggle.IsOn
+                ? LocalizationHelper.GetString("Common_Toggle_On")
+                : LocalizationHelper.GetString("Common_Toggle_Off");
         }
 
         private void LoadDebugReportSettings()
         {
             DebugReportToggle.IsOn = SettingsService.GetDebugReportEnabled();
+            UpdateDebugReportToggleText();
             UpdateDebugReportPathDisplay();
         }
 
@@ -186,8 +207,17 @@ namespace lanlanlu_toolkit.Views
             DebugReportPathTextBlock.Text = $"{prefix}{path}";
         }
 
+        private void UpdateDebugReportToggleText()
+        {
+            if (DebugReportToggle == null || DebugReportToggleStateText == null) return;
+            DebugReportToggleStateText.Text = DebugReportToggle.IsOn
+                ? LocalizationHelper.GetString("Common_Toggle_On")
+                : LocalizationHelper.GetString("Common_Toggle_Off");
+        }
+
         private void DebugReportToggle_Toggled(object sender, RoutedEventArgs e)
         {
+            UpdateDebugReportToggleText();
             if (!_isInitialized) return;
             bool isEnabled = DebugReportToggle.IsOn;
             SettingsService.SaveDebugReportEnabled(isEnabled);

@@ -1244,8 +1244,8 @@ namespace lanlanlu_toolkit.Views
         {
             if (SoundToggle == null || SoundToggleStateText == null) return;
             SoundToggleStateText.Text = SoundToggle.IsOn
-                ? LocalizationHelper.GetString("InputTesterPage_Toggle_On")
-                : LocalizationHelper.GetString("InputTesterPage_Toggle_Off");
+                ? LocalizationHelper.GetString("Common_Toggle_On")
+                : LocalizationHelper.GetString("Common_Toggle_Off");
         }
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)

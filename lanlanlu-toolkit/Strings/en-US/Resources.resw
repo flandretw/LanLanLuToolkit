@@ -46,6 +46,12 @@
   <data name="Nav_HomePage.Content" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="Common_Toggle_On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="Common_Toggle_Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
   <data name="Nav_TestToolPage.Content" xml:space="preserve">
     <value>Test Tool</value>
   </data>

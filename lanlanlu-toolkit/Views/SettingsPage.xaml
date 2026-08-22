@@ -168,14 +168,23 @@
                                     <TextBlock x:Uid="SettingsPage_NotificationsTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                     <TextBlock x:Uid="SettingsPage_NotificationsDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </StackPanel>
-                                <ToggleSwitch x:Name="NotificationsToggle" 
-                                              Grid.Column="2" 
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Right"
-                                              Header="{x:Null}"
-                                              MinWidth="0" Margin="0,0,-28,0" Padding="0"
-                                              OnContent="" OffContent=""
-                                              Toggled="NotificationsToggle_Toggled" />
+                                <StackPanel Grid.Column="2"
+                                            Orientation="Horizontal"
+                                            Spacing="8"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Right"
+                                            Margin="0,0,-28,0">
+                                    <TextBlock x:Name="NotificationsToggleStateText"
+                                               Style="{ThemeResource BodyTextBlockStyle}"
+                                               VerticalAlignment="Center" />
+                                    <ToggleSwitch x:Name="NotificationsToggle" 
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Right"
+                                                  Header="{x:Null}"
+                                                  MinWidth="0" Padding="0"
+                                                  OnContent="" OffContent=""
+                                                  Toggled="NotificationsToggle_Toggled" />
+                                </StackPanel>
                             </Grid>
                         </Expander.Header>
                         <Expander.Content>
@@ -188,14 +197,23 @@
                                     <TextBlock x:Uid="SettingsPage_NotificationSound_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                     <TextBlock x:Uid="SettingsPage_NotificationSound_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </StackPanel>
-                                <ToggleSwitch x:Name="NotificationSoundToggle" 
-                                              Grid.Column="1" 
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Right"
-                                              Header="{x:Null}"
-                                              MinWidth="0" Margin="0,0,-12,0" Padding="0"
-                                              OnContent="" OffContent=""
-                                              Toggled="NotificationSoundToggle_Toggled" />
+                                <StackPanel Grid.Column="1"
+                                            Orientation="Horizontal"
+                                            Spacing="8"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Right"
+                                            Margin="0,0,-12,0">
+                                    <TextBlock x:Name="NotificationSoundToggleStateText"
+                                               Style="{ThemeResource BodyTextBlockStyle}"
+                                               VerticalAlignment="Center" />
+                                    <ToggleSwitch x:Name="NotificationSoundToggle" 
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Right"
+                                                  Header="{x:Null}"
+                                                  MinWidth="0" Padding="0"
+                                                  OnContent="" OffContent=""
+                                                  Toggled="NotificationSoundToggle_Toggled" />
+                                </StackPanel>
                             </Grid>
                         </Expander.Content>
                     </Expander>
@@ -258,14 +276,23 @@
                                     <TextBlock x:Uid="SettingsPage_DebugReportTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                     <TextBlock x:Uid="SettingsPage_DebugReportDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </StackPanel>
-                                <ToggleSwitch x:Name="DebugReportToggle" 
-                                              Grid.Column="2" 
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Right"
-                                              Header="{x:Null}"
-                                              MinWidth="0" Margin="0,0,-28,0" Padding="0"
-                                              OnContent="" OffContent=""
-                                              Toggled="DebugReportToggle_Toggled" />
+                                <StackPanel Grid.Column="2"
+                                            Orientation="Horizontal"
+                                            Spacing="8"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Right"
+                                            Margin="0,0,-28,0">
+                                    <TextBlock x:Name="DebugReportToggleStateText"
+                                               Style="{ThemeResource BodyTextBlockStyle}"
+                                               VerticalAlignment="Center" />
+                                    <ToggleSwitch x:Name="DebugReportToggle" 
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Right"
+                                                  Header="{x:Null}"
+                                                  MinWidth="0" Padding="0"
+                                                  OnContent="" OffContent=""
+                                                  Toggled="DebugReportToggle_Toggled" />
+                                </StackPanel>
                             </Grid>
                         </Expander.Header>
                         <Expander.Content>
