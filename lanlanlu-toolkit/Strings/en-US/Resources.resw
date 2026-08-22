@@ -39,6 +39,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
+  <!-- ========================================================================= -->
+  <!-- 1. Application General & Navigation -->
+  <!-- ========================================================================= -->
   <data name="Nav_HomePage.Content" xml:space="preserve">
     <value>Home</value>
   </data>
@@ -48,76 +52,55 @@
   <data name="AppTitle.Text" xml:space="preserve">
     <value>LanLanLu Toolkit</value>
   </data>
+  <data name="Shell_Performance.Content" xml:space="preserve">
+    <value>Performance</value>
+  </data>
+  <data name="Greeting_LateNight" xml:space="preserve">
+    <value>Good night, get some rest for a brand new day!</value>
+  </data>
+  <data name="Greeting_Morning" xml:space="preserve">
+    <value>Good morning, a fresh start for a wonderful day!</value>
+  </data>
+  <data name="Greeting_Afternoon" xml:space="preserve">
+    <value>Good afternoon, don't forget to take a break!</value>
+  </data>
+  <data name="Greeting_Evening" xml:space="preserve">
+    <value>Good evening, time to relax and enjoy your night!</value>
+  </data>
+  <data name="Nav_SystemRepairPage.Content" xml:space="preserve">
+    <value>System Integrity Repair</value>
+  </data>
+  <data name="Nav_UtilityPage.Content" xml:space="preserve">
+    <value>Utilities</value>
+  </data>
+  <data name="Nav_FileHashPage.Content" xml:space="preserve">
+    <value>Calculate File Hash</value>
+  </data>
+  <data name="Notification_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Notification_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Nav_FileAssociationPage.Content" xml:space="preserve">
+    <value>File Association Manager</value>
+  </data>
+  <data name="Nav_CrashReportPage.Content" xml:space="preserve">
+    <value>Crash Analysis</value>
+  </data>
+  <data name="Nav_InputTesterPage.Content" xml:space="preserve">
+    <value>Input Diagnostics</value>
+  </data>
+  <data name="Notification_Copied" xml:space="preserve">
+    <value>Copied to clipboard</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- 2. Home Page & System Overview -->
+  <!-- ========================================================================= -->
   <data name="HomePage_Title.Text" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name="TestToolPage_Title.Text" xml:space="preserve">
-    <value>Test Tool</value>
-  </data>
-  <data name="SettingsPage_Title.Text" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="SettingsPage_AppearanceBehaviorHeader.Text" xml:space="preserve">
-    <value>Appearance &amp; Behavior</value>
-  </data>
-  <data name="SettingsPage_LanguageTitle.Text" xml:space="preserve">
-    <value>App Display Language</value>
-  </data>
-  <data name="SettingsPage_LanguageDescription.Text" xml:space="preserve">
-    <value>Choose your preferred language. Changes will take effect after restart.</value>
-  </data>
-  <data name="Language_zh_TW.Content" xml:space="preserve">
-    <value>Chinese (Taiwan)</value>
-  </data>
-  <data name="Language_en_US.Content" xml:space="preserve">
-    <value>English (United States)</value>
-  </data>
-  <data name="SettingsPage_LanguageRestartNotice.Text" xml:space="preserve">
-    <value>※ App restart required for language changes to fully take effect.</value>
-  </data>
-  <data name="LanguageChangeDialog_Title" xml:space="preserve">
-    <value>Restart Required</value>
-  </data>
-  <data name="LanguageChangeDialog_Content" xml:space="preserve">
-    <value>The language change will take effect after restarting the app. Save the change?</value>
-  </data>
-  <data name="LanguageChangeDialog_Confirm" xml:space="preserve">
-    <value>Close and Apply</value>
-  </data>
-  <data name="LanguageChangeDialog_Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="SettingsPage_ThemeHeader.Text" xml:space="preserve">
-    <value>Personalization</value>
-  </data>
-  <data name="SettingsPage_ThemeTitle.Text" xml:space="preserve">
-    <value>App theme</value>
-  </data>
-  <data name="SettingsPage_ThemeDescription.Text" xml:space="preserve">
-    <value>Customize the appearance of the application.</value>
-  </data>
-  <data name="Theme_Default.Content" xml:space="preserve">
-    <value>Use system setting</value>
-  </data>
-  <data name="Theme_Light.Content" xml:space="preserve">
-    <value>Light</value>
-  </data>
-  <data name="Theme_Dark.Content" xml:space="preserve">
-    <value>Dark</value>
-  </data>
-  <data name="SettingsPage_AboutHeader.Text" xml:space="preserve">
-    <value>About </value>
-  </data>
-  <data name="SettingsPage_AppVersion.Text" xml:space="preserve">
-    <value>LanLanLu Toolkit</value>
-  </data>
-  <data name="SettingsPage_Copyright.Text" xml:space="preserve">
-    <value>© 2026 flandretw. All rights reserved.</value>
-  </data>
-  <data name="SettingsPage_MITLink.Content" xml:space="preserve">
-    <value>MIT License</value>
-  </data>
-
   <data name="HomePage_CPU.Text" xml:space="preserve">
     <value>Processor (CPU)</value>
   </data>
@@ -166,143 +149,99 @@
   <data name="HomePage_Detecting.Text" xml:space="preserve">
     <value>Detecting...</value>
   </data>
-  <data name="Shell_Performance.Content" xml:space="preserve">
-    <value>Performance</value>
-  </data>
-  <data name="PerformancePage_Title.Text" xml:space="preserve">
-    <value>Performance</value>
-  </data>
-  <data name="PerformancePage_Description.Text" xml:space="preserve">
-    <value>Monitor real-time CPU, GPU, and RAM usage and hardware information.</value>
-  </data>
   <data name="HomePage_Welcome.Text" xml:space="preserve">
     <value>Welcome to LanLanLu Toolkit</value>
   </data>
   <data name="HomePage_Intro.Text" xml:space="preserve">
     <value>A modern toolkit designed for Windows 11, providing hardware monitoring, system optimization, and various practical utilities. Click the links below or use the side menu to start exploring!</value>
   </data>
-  <data name="PerformancePage_Loading.Text" xml:space="preserve">
-    <value>Reading system information...</value>
-  </data>
   <data name="HomePage_Version_Format" xml:space="preserve">
     <value>Version {0}</value>
-  </data>
-  <data name="Greeting_LateNight" xml:space="preserve">
-    <value>Good night, get some rest for a brand new day!</value>
-  </data>
-  <data name="Greeting_Morning" xml:space="preserve">
-    <value>Good morning, a fresh start for a wonderful day!</value>
-  </data>
-  <data name="Greeting_Afternoon" xml:space="preserve">
-    <value>Good afternoon, don't forget to take a break!</value>
-  </data>
-  <data name="Greeting_Evening" xml:space="preserve">
-    <value>Good evening, time to relax and enjoy your night!</value>
   </data>
   <data name="HomePage_PoweredBy.Text" xml:space="preserve">
     <value>Powered by flandretw</value>
   </data>
-  <data name="Nav_SystemRepairPage.Content" xml:space="preserve">
-    <value>System Integrity Repair</value>
+  <data name="HomePage_QuickStart.Text" xml:space="preserve">
+    <value>Quick Start</value>
   </data>
-  <data name="SystemRepairPage_Title.Text" xml:space="preserve">
-    <value>System Integrity Repair</value>
+  <data name="HomePage_ViewPerformance.Content" xml:space="preserve">
+    <value>View Performance</value>
   </data>
-  <data name="SystemRepairPage_ScanHealth_Title.Text" xml:space="preserve">
-    <value>Scan Image Health (ScanHealth)</value>
+  <data name="HomePage_AppSettings.Text" xml:space="preserve">
+    <value>App Settings</value>
   </data>
-  <data name="SystemRepairPage_ScanHealth_Desc.Text" xml:space="preserve">
-    <value>Checks the image for corruption but does not perform repairs.</value>
+  <data name="HomePage_ContactUs.Text" xml:space="preserve">
+    <value>Contact Us</value>
   </data>
-  <data name="SystemRepairPage_CheckHealth_Title.Text" xml:space="preserve">
-    <value>Check Image Health (CheckHealth)</value>
+  <data name="HomePage_GitHubProject.Text" xml:space="preserve">
+    <value>GitHub Project Page</value>
   </data>
-  <data name="SystemRepairPage_CheckHealth_Desc.Text" xml:space="preserve">
-    <value>Checks whether the image has been flagged as corrupted.</value>
+  <data name="HomePage_RefreshBtn_ToolTip" xml:space="preserve">
+    <value>Refresh hardware specs</value>
   </data>
-  <data name="SystemRepairPage_RestoreHealth_Title.Text" xml:space="preserve">
-    <value>Restore System Image (RestoreHealth)</value>
+  <data name="HomePage_Refresh_Success" xml:space="preserve">
+    <value>Hardware specs and system info refreshed</value>
   </data>
-  <data name="SystemRepairPage_RestoreHealth_Desc.Text" xml:space="preserve">
-    <value>Scans the image and automatically performs repair operations.</value>
+  <data name="HomePage_SystemStatus_Healthy.Text" xml:space="preserve">
+    <value>System running normally</value>
   </data>
-  <data name="SystemRepairPage_SfcScannow_Title.Text" xml:space="preserve">
-    <value>System File Checker (SFC /Scannow)</value>
+  <data name="HomePage_QuickActions_Title.Text" xml:space="preserve">
+    <value>Quick Actions</value>
   </data>
-  <data name="SystemRepairPage_SfcScannow_Desc.Text" xml:space="preserve">
-    <value>Scans all protected system files and repairs corrupted ones.</value>
+  <data name="HomePage_Feature_Perf_Title.Text" xml:space="preserve">
+    <value>Real-time Performance</value>
   </data>
-  <data name="SystemRepairPage_RunButton.Content" xml:space="preserve">
-    <value>Run</value>
+  <data name="HomePage_Feature_Perf_Desc.Text" xml:space="preserve">
+    <value>Monitor CPU, GPU, RAM usage, clocks &amp; temperature</value>
   </data>
-  <data name="SystemRepairPage_AutoMode_Title.Text" xml:space="preserve">
-    <value>Automatic Repair Mode</value>
+  <data name="HomePage_Feature_Input_Title.Text" xml:space="preserve">
+    <value>Input Tester</value>
   </data>
-  <data name="SystemRepairPage_AutoMode_Desc.Text" xml:space="preserve">
-    <value>Automatically perform full detection and repair. Recommended for most users.</value>
+  <data name="HomePage_Feature_Input_Desc.Text" xml:space="preserve">
+    <value>NKRO rollover, polling rate, switch chatter &amp; trajectory</value>
   </data>
-  <data name="SystemRepairPage_AutoMode_Default.Content" xml:space="preserve">
-    <value>Full Repair (Default)</value>
+  <data name="HomePage_Feature_Repair_Title.Text" xml:space="preserve">
+    <value>System Repair</value>
   </data>
-  <data name="SystemRepairPage_AutoMode_SfcOnly.Content" xml:space="preserve">
-    <value>System File Check Only</value>
+  <data name="HomePage_Feature_Repair_Desc.Text" xml:space="preserve">
+    <value>Automated DISM &amp; SFC image repair and integrity scan</value>
   </data>
-  <data name="SystemRepairPage_AdvancedMode_Title.Text" xml:space="preserve">
-    <value>Advanced Mode</value>
+  <data name="HomePage_Feature_Crash_Title.Text" xml:space="preserve">
+    <value>Crash Report Analysis</value>
   </data>
-  <data name="SystemRepairPage_AdvancedMode_Desc.Text" xml:space="preserve">
-    <value>Manually execute specific maintenance commands. Recommended for advanced users.</value>
+  <data name="HomePage_Feature_Crash_Desc.Text" xml:space="preserve">
+    <value>BSOD Minidump &amp; Windows error event diagnosis</value>
   </data>
-  <data name="SystemRepairPage_StartButton.Content" xml:space="preserve">
-    <value>Start</value>
+  <data name="HomePage_Feature_Hash_Title.Text" xml:space="preserve">
+    <value>File Hash Calculator</value>
   </data>
-  <data name="SystemRepairPage_Running" xml:space="preserve">
-    <value>Running...</value>
+  <data name="HomePage_Feature_Hash_Desc.Text" xml:space="preserve">
+    <value>Fast SHA-256, MD5 checksum calculation &amp; verification</value>
   </data>
-  <data name="SystemRepairPage_Completed" xml:space="preserve">
-    <value>Execution completed</value>
+  <data name="HomePage_Feature_Assoc_Title.Text" xml:space="preserve">
+    <value>File Associations</value>
   </data>
-  <data name="SystemRepairPage_Error" xml:space="preserve">
-    <value>An error occurred during execution</value>
+  <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
+    <value>Reset default file extension openers and associations</value>
   </data>
-  <data name="SystemRepairPage_AdminRequired" xml:space="preserve">
-    <value>Administrator privileges are required for this operation.</value>
+  <data name="HomePage_Copied_Toast" xml:space="preserve">
+    <value>Copied to clipboard: {0}</value>
   </data>
-  <data name="SystemRepairPage_QuitTitle" xml:space="preserve">
-    <value>Operation in Progress</value>
+  <data name="HomePage_Refresh_Title" xml:space="preserve">
+    <value>Hardware Specs</value>
   </data>
-  <data name="SystemRepairPage_QuitContent" xml:space="preserve">
-    <value>A system repair operation is currently running. Quitting now will interrupt the process. Are you sure you want to quit?</value>
+
+  <!-- ========================================================================= -->
+  <!-- 3. Performance Monitor & Hardware Diagnostics -->
+  <!-- ========================================================================= -->
+  <data name="PerformancePage_Title.Text" xml:space="preserve">
+    <value>Performance</value>
   </data>
-  <data name="SystemRepairPage_QuitConfirm" xml:space="preserve">
-    <value>Confirm Quit</value>
+  <data name="PerformancePage_Description.Text" xml:space="preserve">
+    <value>Monitor real-time CPU, GPU, and RAM usage and hardware information.</value>
   </data>
-  <data name="SystemRepairPage_QuitCancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="SystemRepairPage_CompletionInfoBar.Title" xml:space="preserve">
-    <value>Repair Task Completed</value>
-  </data>
-  <data name="SystemRepairPage_CompletionInfoBar.Message" xml:space="preserve">
-    <value>All repair processes have ended successfully. You can check the log for details.</value>
-  </data>
-  <data name="SettingsPage_NotificationSound_Title.Text" xml:space="preserve">
-    <value>Notification Sound</value>
-  </data>
-  <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
-    <value>Play a sound when system repairs or long tasks are completed.</value>
-  </data>
-  <data name="SettingsPage_NotificationsTitle.Text" xml:space="preserve">
-    <value>Notifications</value>
-  </data>
-  <data name="SettingsPage_NotificationsDescription.Text" xml:space="preserve">
-    <value>Manage how the application notifies you about task completions.</value>
-  </data>
-  <data name="SettingsPage_TempUnitTitle.Text" xml:space="preserve">
-    <value>Temperature Unit</value>
-  </data>
-  <data name="SettingsPage_TempUnitDescription.Text" xml:space="preserve">
-    <value>Select the temperature unit used throughout the application.</value>
+  <data name="PerformancePage_Loading.Text" xml:space="preserve">
+    <value>Reading system information...</value>
   </data>
   <data name="TempUnit_Celsius.Content" xml:space="preserve">
     <value>Celsius (°C)</value>
@@ -337,56 +276,6 @@
   <data name="GpuMonitorCard_Temperature.Label" xml:space="preserve">
     <value>Temperature</value>
   </data>
-  <data name="HomePage_QuickStart.Text" xml:space="preserve">
-    <value>Quick Start</value>
-  </data>
-  <data name="HomePage_ViewPerformance.Content" xml:space="preserve">
-    <value>View Performance</value>
-  </data>
-  <data name="HomePage_AppSettings.Text" xml:space="preserve">
-    <value>App Settings</value>
-  </data>
-  <data name="HomePage_ContactUs.Text" xml:space="preserve">
-    <value>Contact Us</value>
-  </data>
-  <data name="HomePage_GitHubProject.Text" xml:space="preserve">
-    <value>GitHub Project Page</value>
-  </data>
-  <data name="SystemRepairPage_HistoryHeader.Text" xml:space="preserve">
-    <value>History Log</value>
-  </data>
-  <data name="SystemRepairPage_Copy.Text" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="SystemRepairPage_Clear.Text" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="SystemRepairPage_WaitingPlaceholder" xml:space="preserve">
-    <value>Waiting for commands...</value>
-  </data>
-  <data name="SystemRepairPage_Log_FullRepairStart" xml:space="preserve">
-    <value>=== Starting Automatic Full Repair ===</value>
-  </data>
-  <data name="SystemRepairPage_Log_FullRepairEnd" xml:space="preserve">
-    <value>=== Full Repair Completed ===</value>
-  </data>
-  <data name="SystemRepairPage_Log_SfcStart" xml:space="preserve">
-    <value>=== Starting System File Check ===</value>
-  </data>
-  <data name="SystemRepairPage_Log_SfcEnd" xml:space="preserve">
-    <value>=== System File Check Completed ===</value>
-  </data>
-  <data name="SystemRepairPage_Log_Executing" xml:space="preserve">
-    <value>Executing:</value>
-  </data>
-  <data name="SystemRepairPage_Log_ErrorPrefix" xml:space="preserve">
-    <value>[Error]</value>
-  </data>
-  <data name="SystemRepairPage_Copied" xml:space="preserve">
-    <value>Copied</value>
-  </data>
-  
-  <!-- Performance Page Detailed Labels -->
   <data name="PerfPage_Cpu_BaseSpeed.Text" xml:space="preserve">
     <value>Base speed</value>
   </data>
@@ -411,7 +300,6 @@
   <data name="PerfPage_Cpu_L3Cache.Text" xml:space="preserve">
     <value>L3 cache</value>
   </data>
-  
   <data name="PerfPage_Gpu_DedicatedMemory.Text" xml:space="preserve">
     <value>Dedicated GPU memory</value>
   </data>
@@ -490,607 +378,10 @@
   <data name="PerfPage_Ram_HardwareReserved.Text" xml:space="preserve">
     <value>Hardware reserved:</value>
   </data>
-  <data name="SettingsPage_DebugReportTitle.Text" xml:space="preserve">
-    <value>Debug Report</value>
-  </data>
-  <data name="SettingsPage_DebugReportDescription.Text" xml:space="preserve">
-    <value>Records app startup, system errors, tool execution logs, and operation events to help troubleshoot issues.</value>
-  </data>
-  <data name="SettingsPage_DebugReport_StorageCardTitle.Text" xml:space="preserve">
-    <value>Storage Location</value>
-  </data>
-  <data name="SettingsPage_DebugReport_StoragePathPrefix.Text" xml:space="preserve">
-    <value>Currently saved at: </value>
-  </data>
-  <data name="SettingsPage_DebugReport_SelectFolderButton.Content" xml:space="preserve">
-    <value>Change Folder</value>
-  </data>
-  <data name="SettingsPage_DebugReport_SelectFolderTitle" xml:space="preserve">
-    <value>Select Folder for Debug Reports</value>
-  </data>
-  <data name="SettingsPage_DebugReport_ResetButton.Content" xml:space="preserve">
-    <value>Reset</value>
-  </data>
-  <data name="SettingsPage_DebugReport_ResetButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Reset storage path to default</value>
-  </data>
-  <data name="SettingsPage_DebugReport_DefaultPathDescription.Text" xml:space="preserve">
-    <value>Saved in the same directory as the program by default</value>
-  </data>
-  <data name="SettingsPage_DiagnosticsSectionTitle.Text" xml:space="preserve">
-    <value>Diagnostics &amp; feedback</value>
-  </data>
-  <data name="Nav_UtilityPage.Content" xml:space="preserve">
-    <value>Utilities</value>
-  </data>
-  <data name="UtilityPage_Title.Text" xml:space="preserve">
-    <value>Utilities</value>
-  </data>
-  <data name="Nav_FileHashPage.Content" xml:space="preserve">
-    <value>Calculate File Hash</value>
-  </data>
-  <data name="FileHashPage_Title.Text" xml:space="preserve">
-    <value>Calculate File Hash</value>
-  </data>
-  <data name="FileHashPage_Desc.Text" xml:space="preserve">
-    <value>Quickly calculate and verify file SHA-256, SHA-1, or MD5 hash values.</value>
-  </data>
-  <data name="FileHashPage_SelectFile.Content" xml:space="preserve">
-    <value>Select File</value>
-  </data>
-  <data name="FileHashPage_DragDropPrompt.Text" xml:space="preserve">
-    <value>Select a file to calculate</value>
-  </data>
-  <data name="FileHashPage_SelectFileCardDesc.Text" xml:space="preserve">
-    <value>Select a file from your computer to calculate and compare its hash codes.</value>
-  </data>
-  <data name="FileHashPage_Algorithm.Text" xml:space="preserve">
-    <value>Hash Algorithm</value>
-  </data>
-  <data name="FileHashPage_Result.Header" xml:space="preserve">
-    <value>Hash Result</value>
-  </data>
-  <data name="FileHashPage_Compare.Text" xml:space="preserve">
-    <value>Compare &amp; Verify Hash (Case-insensitive)</value>
-  </data>
-  <data name="FileHashPage_CompareButton.Text" xml:space="preserve">
-    <value>Paste &amp; Verify</value>
-  </data>
-  <data name="FileHashPage_CopyButton.Text" xml:space="preserve">
-    <value>Copy Result</value>
-  </data>
-  <data name="FileHashPage_CalculateButton.Content" xml:space="preserve">
-    <value>Recalculate</value>
-  </data>
-  <data name="FileHashPage_VerifySuccess" xml:space="preserve">
-    <value>Hash verification succeeded! Perfect match.</value>
-  </data>
-  <data name="FileHashPage_VerifyFail" xml:space="preserve">
-    <value>Hash verification failed! File may be modified or algorithm mismatch.</value>
-  </data>
-  <data name="FileHashPage_Calculating" xml:space="preserve">
-    <value>Calculating hash, please wait...</value>
-  </data>
-  <data name="FileHashPage_SelectFileFirst" xml:space="preserve">
-    <value>Please select a file first!</value>
-  </data>
-  <data name="FileHashPage_FileSelected" xml:space="preserve">
-    <value>Selected file:</value>
-  </data>
-  <data name="FileHashPage_FileSize" xml:space="preserve">
-    <value>File size:</value>
-  </data>
-  <data name="FileHashPage_Algorithm_Desc.Text" xml:space="preserve">
-    <value>SHA-256 (Highly secure, recommended), SHA-1 (Legacy compatibility), MD5 (Quick verification), SHA-512 (Ultra secure).</value>
-  </data>
-  <data name="FileHashPage_Result.PlaceholderText" xml:space="preserve">
-    <value>After selecting a file and calculating, the hash result will be displayed here...</value>
-  </data>
-  <data name="FileHashPage_Compare_Desc.Text" xml:space="preserve">
-    <value>Paste the expected hash here, and the system will verify it in real-time, ignoring case.</value>
-  </data>
-  <data name="FileHashPage_CompareInput.PlaceholderText" xml:space="preserve">
-    <value>Enter or paste the expected hash to compare...</value>
-  </data>
-  <data name="FileHashPage_DialogTitle" xml:space="preserve">
-    <value>Select a file to calculate hash</value>
-  </data>
-  <data name="FileHashPage_Error_FileNotFound" xml:space="preserve">
-    <value>File does not exist or is inaccessible!</value>
-  </data>
-  <data name="FileHashPage_VerifySuccess_Title" xml:space="preserve">
-    <value>Verification Succeeded</value>
-  </data>
-  <data name="FileHashPage_VerifyFail_Title" xml:space="preserve">
-    <value>Verification Failed</value>
-  </data>
-  <data name="Notification_Success" xml:space="preserve">
-    <value>Success</value>
-  </data>
-  <data name="Notification_Error" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="FileHashPage_Section_SelectFile" xml:space="preserve">
-    <value>Select File</value>
-  </data>
-  <data name="FileHashPage_Section_Calculate" xml:space="preserve">
-    <value>Calculate Hash</value>
-  </data>
-  <data name="FileHashPage_Section_Verify" xml:space="preserve">
-    <value>Verify &amp; Compare</value>
-  </data>
-  <data name="System_Cut" xml:space="preserve">
-    <value>Cut</value>
-  </data>
-  <data name="System_Copy" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="System_Paste" xml:space="preserve">
-    <value>Paste</value>
-  </data>
-  <data name="System_Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="FileHashPage_CalculationCancelled" xml:space="preserve">
-    <value>Calculation cancelled.</value>
-  </data>
-  <data name="Nav_FileAssociationPage.Content" xml:space="preserve">
-    <value>File Association Manager</value>
-  </data>
-  <data name="FileAssociationPage_Desc.Text" xml:space="preserve">
-    <value>Reset or manage the default application for specific file extensions</value>
-  </data>
-  <data name="FileAssociationPage_ConfigTitle.Text" xml:space="preserve">
-    <value>Configure File Association</value>
-  </data>
-  <data name="FileAssociationPage_TargetExtTitle.Text" xml:space="preserve">
-    <value>Target File Extension</value>
-  </data>
-  <data name="FileAssociationPage_TargetExtDesc.Text" xml:space="preserve">
-    <value>Enter the file extension you want to reset (e.g., .pdf, .bin, .myext, will be auto-formatted)</value>
-  </data>
-  <data name="FileAssociationPage_TargetExtBox.PlaceholderText" xml:space="preserve">
-    <value>e.g., pdf</value>
-  </data>
-  <data name="FileAssociationPage_SelectMethodTitle.Text" xml:space="preserve">
-    <value>Select Reset Method</value>
-  </data>
-  <data name="FileAssociationPage_Method1Title.Text" xml:space="preserve">
-    <value>Method 1: Call Native System Open With Dialog (Standard &amp; Recommended)</value>
-  </data>
-  <data name="FileAssociationPage_Method1Desc.Text" xml:space="preserve">
-    <value>The system will pop up the Open With menu. You can reselect the associated program for this extension or reset the default association. This is the standard, safe method recommended by Windows.</value>
-  </data>
-  <data name="FileAssociationPage_Method1Button.Content" xml:space="preserve">
-    <value>Safe Guided Reset</value>
-  </data>
-  <data name="FileAssociationPage_Method2Title.Text" xml:space="preserve">
-    <value>Method 2: Smart Registry Navigation &amp; Manual Reset (Advanced Mode)</value>
-  </data>
-  <data name="FileAssociationPage_Method2Desc.Text" xml:space="preserve">
-    <value>For advanced users. Directly open the Registry Editor and smartly navigate to the target, giving you full control to manually reset.</value>
-  </data>
-  <data name="FileAssociationPage_Method2Content.Text" xml:space="preserve">
-    <value>Directly open the built-in Windows Registry Editor and automatically navigate to the association path for the extension, allowing you to manually reset and manage it safely and intuitively.</value>
-  </data>
-  <data name="FileAssociationPage_Method2Button.Content" xml:space="preserve">
-    <value>Navigate &amp; Manually Reset</value>
-  </data>
-  <data name="FileAssociationPage_GuideTitle.Text" xml:space="preserve">
-    <value>🛠️ Registry Manual Reset Instructions:</value>
-  </data>
-  <data name="FileAssociationPage_GuideStep1.Text" xml:space="preserve">
-    <value>1. In the launched "Registry Editor" window, you will find the screen automatically expanded and precisely stopped at the target directory.</value>
-  </data>
-  <data name="FileAssociationPage_GuideStep2.Text" xml:space="preserve">
-    <value>2. In the left tree view, find the "UserChoice" subfolder under this extension's directory.</value>
-  </data>
-  <data name="FileAssociationPage_GuideStep3.Text" xml:space="preserve">
-    <value>3. Right-click on the "UserChoice" folder, select "Delete", and click "Yes" in the confirmation dialog.</value>
-  </data>
-  <data name="FileAssociationPage_GuideStep4.Text" xml:space="preserve">
-    <value>4. Close the Registry Editor after clearing. The next time you double-click this type of file, Windows will prompt for the default program again!</value>
-  </data>
-  <data name="FileAssociationPage_Warning_CriticalExt" xml:space="preserve">
-    <value>To protect your operating system security, this extension (.{0}) is a core critical Windows component and its association cannot be reset or modified to prevent system crashes or the inability to execute any programs.</value>
-  </data>
-  <data name="FileAssociationPage_Warning_CriticalExtTitle" xml:space="preserve">
-    <value>🛡️ System Security Protection</value>
-  </data>
-  <data name="FileAssociationPage_Success_DialogOpened" xml:space="preserve">
-    <value>Successfully called the system Open With dialog! Please configure or reset the association in the popped-up window.</value>
-  </data>
-  <data name="FileAssociationPage_Success_Title" xml:space="preserve">
-    <value>Success</value>
-  </data>
-  <data name="FileAssociationPage_Error_DialogOpenFailed" xml:space="preserve">
-    <value>Failed to open the Open With dialog: {0}</value>
-  </data>
-  <data name="FileAssociationPage_Error_Title" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="FileAssociationPage_Info_Locating" xml:space="preserve">
-    <value>Opening and smartly locating Registry Editor for you...</value>
-  </data>
-  <data name="FileAssociationPage_Info_LocatingTitle" xml:space="preserve">
-    <value>Smart Locating</value>
-  </data>
-  <data name="FileAssociationPage_Warning_LocateFailed" xml:space="preserve">
-    <value>Registry Editor opened, but failed to get its window handle for auto-navigation. Please ensure you approved the User Account Control (UAC) prompt.</value>
-  </data>
-  <data name="FileAssociationPage_Warning_LocateFailedTitle" xml:space="preserve">
-    <value>Failed to Locate</value>
-  </data>
-  <data name="FileAssociationPage_Success_RegNavigated" xml:space="preserve">
-    <value>Registry Editor successfully and smartly navigated to `.{0}`! Please refer to the instruction card below for resetting.</value>
-  </data>
-  <data name="FileAssociationPage_Success_RegNavigatedTitle" xml:space="preserve">
-    <value>Navigation Successful</value>
-  </data>
-  <data name="FileAssociationPage_Warning_FallbackCopy" xml:space="preserve">
-    <value>Failed to locate the address bar (it might be hidden). The target path has been copied to your clipboard, please paste it in the address bar above and press Enter to locate!</value>
-  </data>
-  <data name="FileAssociationPage_Warning_FallbackCopyTitle" xml:space="preserve">
-    <value>Please Paste Manually</value>
-  </data>
-  <data name="FileAssociationPage_Error_RegLaunchFailed" xml:space="preserve">
-    <value>Failed to launch Registry Editor: {0}. Please ensure you approved the User Account Control (UAC) prompt.</value>
-  </data>
-  <data name="FileAssociationPage_Error_RegLaunchFailedTitle" xml:space="preserve">
-    <value>Launch Failed</value>
-  </data>
-  <data name="FileAssociationPage_Title.Text" xml:space="preserve">
-    <value>File Association Manager</value>
-  </data>
-  <data name="System_AllFiles" xml:space="preserve">
-    <value>All Files</value>
-  </data>
-  <!-- ========================================================================= -->
-  <!-- Crash Report: UI Elements & Navigation                                    -->
-  <!-- ========================================================================= -->
-  <data name="Nav_CrashReportPage.Content" xml:space="preserve">
-    <value>Crash Analysis</value>
-  </data>
-  <data name="CrashReportPage_Title.Text" xml:space="preserve">
-    <value>Crash &amp; Dump Analysis</value>
-  </data>
-  <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
-    <value>Scan and analyze system kernel minidumps and application crash event logs</value>
-  </data>
-  <data name="CrashReportPage_Guide_Title.Text" xml:space="preserve">
-    <value>Instructions &amp; Troubleshooting Guide</value>
-  </data>
-  <data name="CrashReportPage_Guide_Desc1.Text" xml:space="preserve">
-    <value>• Auto Analysis: Automatically retrieves minidumps from C:\Windows\Minidump and crash records from Windows Event Log.</value>
-  </data>
-  <data name="CrashReportPage_Guide_Desc2.Text" xml:space="preserve">
-    <value>• Smart Diagnosis: Select any event to analyze BugCheck codes, faulting driver modules, and actionable troubleshooting steps.</value>
-  </data>
-  <data name="CrashReportPage_Guide_Desc3.Text" xml:space="preserve">
-    <value>• Export &amp; Share: Copy individual summaries or click 'Export Report' to save all crash logs as a Markdown document for technical assistance.</value>
-  </data>
-  <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
-    <value>Total Crashes</value>
-  </data>
-  <data name="CrashReportPage_Card_BSOD.Text" xml:space="preserve">
-    <value>Kernel Crashes</value>
-  </data>
-  <data name="CrashReportPage_Card_AppCrash.Text" xml:space="preserve">
-    <value>Application Errors</value>
-  </data>
-  <data name="CrashReportPage_Card_LastCrash.Text" xml:space="preserve">
-    <value>Last Crash Time</value>
-  </data>
-  <data name="CrashReportPage_Filter_All.Content" xml:space="preserve">
-    <value>All Events</value>
-  </data>
-  <data name="CrashReportPage_Filter_BSOD.Content" xml:space="preserve">
-    <value>Kernel Crashes Only</value>
-  </data>
-  <data name="CrashReportPage_Filter_App.Content" xml:space="preserve">
-    <value>App Crashes Only</value>
-  </data>
-  <data name="CrashReportPage_SearchBox.PlaceholderText" xml:space="preserve">
-    <value>Search app name, error code, driver or module...</value>
-  </data>
-  <data name="CrashReportPage_RefreshBtn.Text" xml:space="preserve">
-    <value>Rescan</value>
-  </data>
-  <data name="CrashReportPage_OpenDumpFolderBtn.Text" xml:space="preserve">
-    <value>Open Dump Folder</value>
-  </data>
-  <data name="CrashReportPage_ExportBtn.Text" xml:space="preserve">
-    <value>Export Report</value>
-  </data>
-  <data name="CrashReportPage_NoCrashes_Title.Text" xml:space="preserve">
-    <value>System is Healthy!</value>
-  </data>
-  <data name="CrashReportPage_NoCrashes_Desc.Text" xml:space="preserve">
-    <value>No system kernel crash dumps or recent application crash events were found in system logs.</value>
-  </data>
-  <data name="CrashReportPage_SelectPrompt_Title.Text" xml:space="preserve">
-    <value>Select an Event</value>
-  </data>
-  <data name="CrashReportPage_SelectPrompt_Desc.Text" xml:space="preserve">
-    <value>Click any crash event from the list on the left to view detailed diagnostic information and recommendations.</value>
-  </data>
-  <data name="CrashReportPage_Detail_Header.Text" xml:space="preserve">
-    <value>Crash Diagnostic Details</value>
-  </data>
-  <data name="CrashReportPage_Detail_DiagnosisHeader.Text" xml:space="preserve">
-    <value>Smart Diagnosis &amp; Root Cause</value>
-  </data>
-  <data name="CrashReportPage_Detail_RecommendationHeader.Text" xml:space="preserve">
-    <value>Troubleshooting &amp; Advice</value>
-  </data>
-  <data name="CrashReportPage_Detail_TechDetailsHeader.Text" xml:space="preserve">
-    <value>Technical Parameters</value>
-  </data>
-  <data name="CrashReportPage_Detail_ErrorCode.Text" xml:space="preserve">
-    <value>Error Code</value>
-  </data>
-  <data name="CrashReportPage_Detail_FaultModule.Text" xml:space="preserve">
-    <value>Faulting Module / Driver</value>
-  </data>
-  <data name="CrashReportPage_Detail_SourceApp.Text" xml:space="preserve">
-    <value>Source / Application</value>
-  </data>
-  <data name="CrashReportPage_Detail_Params.Text" xml:space="preserve">
-    <value>Parameters (Arg1~4)</value>
-  </data>
-  <data name="CrashReportPage_Detail_DumpPath.Text" xml:space="preserve">
-    <value>Dump File / Path</value>
-  </data>
-  <data name="CrashReportPage_Detail_LocateBtn.Text" xml:space="preserve">
-    <value>Locate</value>
-  </data>
-  <data name="CrashReportPage_Detail_RawLogHeader.Text" xml:space="preserve">
-    <value>Raw Event Record</value>
-  </data>
-  <data name="CrashReportPage_Detail_CopyBtn.Text" xml:space="preserve">
-    <value>Copy Details</value>
-  </data>
-  <data name="CrashReportPage_Detail_Copied" xml:space="preserve">
-    <value>Copied to clipboard</value>
-  </data>
-  <data name="CrashReportPage_ExportSuccess_Title" xml:space="preserve">
-    <value>Export Successful</value>
-  </data>
-  <data name="CrashReportPage_ExportSuccess_Msg" xml:space="preserve">
-    <value>Crash diagnostic report has been saved successfully.</value>
-  </data>
-  <data name="CrashReportPage_DumpFolder_NotFound" xml:space="preserve">
-    <value>Minidump folder does not exist or contains no dump files.</value>
-  </data>
-  <data name="CrashReportPage_None" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="CrashReportPage_Scanning.Text" xml:space="preserve">
-    <value>Scanning event logs and minidump files...</value>
-  </data>
-  <data name="CrashReportPage_Badge_KernelCrash" xml:space="preserve">
-    <value>Kernel Crash</value>
-  </data>
-  <data name="CrashReportPage_Badge_AppCrash" xml:space="preserve">
-    <value>App Error</value>
-  </data>
-  <data name="CrashReportPage_Badge_AppHang" xml:space="preserve">
-    <value>App Hang</value>
-  </data>
-  <data name="CrashReportPage_Badge_DotNetCrash" xml:space="preserve">
-    <value>.NET Error</value>
-  </data>
-  <data name="CrashReportPage_Source_Kernel" xml:space="preserve">
-    <value>System Kernel</value>
-  </data>
-  <data name="CrashReportPage_Source_Unknown" xml:space="preserve">
-    <value>Unknown App</value>
-  </data>
-  <data name="CrashReportPage_RawLog_None" xml:space="preserve">
-    <value>No additional raw details available.</value>
-  </data>
 
   <!-- ========================================================================= -->
-  <!-- Crash Report: Export Template Strings                                     -->
+  <!-- 4. Input Device Tester - Keyboard & Mouse -->
   <!-- ========================================================================= -->
-  <data name="CrashReport_Export_Title" xml:space="preserve">
-    <value># Windows Crash &amp; Diagnostic Report</value>
-  </data>
-  <data name="CrashReport_Export_GeneratedTime" xml:space="preserve">
-    <value>Generated on: {0}</value>
-  </data>
-  <data name="CrashReport_Export_Summary" xml:space="preserve">
-    <value>Total Events: {0} (Kernel Crashes: {1}, App Errors: {2})</value>
-  </data>
-  <data name="CrashReport_Export_Field_Timestamp" xml:space="preserve">
-    <value>Timestamp</value>
-  </data>
-  <data name="CrashReport_Export_Field_ErrorCode" xml:space="preserve">
-    <value>Error Code</value>
-  </data>
-  <data name="CrashReport_Export_Field_Source" xml:space="preserve">
-    <value>Source / App</value>
-  </data>
-  <data name="CrashReport_Export_Field_Module" xml:space="preserve">
-    <value>Faulting Module / Driver</value>
-  </data>
-  <data name="CrashReport_Export_Field_Parameters" xml:space="preserve">
-    <value>Parameters</value>
-  </data>
-  <data name="CrashReport_Export_Field_DumpPath" xml:space="preserve">
-    <value>Dump / File Path</value>
-  </data>
-  <data name="CrashReport_Export_Field_Diagnosis" xml:space="preserve">
-    <value>Diagnosis</value>
-  </data>
-  <data name="CrashReport_Export_Field_Recommendation" xml:space="preserve">
-    <value>Troubleshooting Advice</value>
-  </data>
-
-  <!-- ========================================================================= -->
-  <!-- Crash Report: BugCheck Diagnostic Knowledge Base                          -->
-  <!-- ========================================================================= -->
-  <data name="BugCheck_Unknown_Desc" xml:space="preserve">
-    <value>Unknown Windows kernel crash code.</value>
-  </data>
-  <data name="BugCheck_Unknown_Rec" xml:space="preserve">
-    <value>Recommend searching for this crash code online for tailored resolution.</value>
-  </data>
-  <data name="BugCheck_0x0000000A_Desc" xml:space="preserve">
-    <value>Kernel attempted to access pageable memory at an elevated IRQL.</value>
-  </data>
-  <data name="BugCheck_0x0000000A_Rec" xml:space="preserve">
-    <value>Usually caused by buggy or incompatible device drivers, or faulty memory. Recommend updating suspect drivers or running Windows Memory Diagnostic.</value>
-  </data>
-  <data name="BugCheck_0x0000001E_Desc" xml:space="preserve">
-    <value>A kernel-mode program generated an exception which the error handler did not catch.</value>
-  </data>
-  <data name="BugCheck_0x0000001E_Rec" xml:space="preserve">
-    <value>Often related to newly installed hardware, faulty drivers, or conflicting system services. Try rolling back recent updates.</value>
-  </data>
-  <data name="BugCheck_0x0000003B_Desc" xml:space="preserve">
-    <value>An exception happened while executing a system service routine.</value>
-  </data>
-  <data name="BugCheck_0x0000003B_Rec" xml:space="preserve">
-    <value>Frequently caused by graphics drivers or corrupted system files. Recommend clean reinstalling GPU drivers and running sfc /scannow.</value>
-  </data>
-  <data name="BugCheck_0x00000050_Desc" xml:space="preserve">
-    <value>Invalid system memory was referenced.</value>
-  </data>
-  <data name="BugCheck_0x00000050_Rec" xml:space="preserve">
-    <value>Commonly caused by faulty RAM, damaged slots, antivirus kernel drivers, or disk file corruption. Clean RAM contacts or run memory checks.</value>
-  </data>
-  <data name="BugCheck_0x0000007E_Desc" xml:space="preserve">
-    <value>A system thread generated an exception that the error handler did not catch.</value>
-  </data>
-  <data name="BugCheck_0x0000007E_Rec" xml:space="preserve">
-    <value>Usually caused by incompatible drivers or insufficient disk space. Check the suspect module name and update its driver.</value>
-  </data>
-  <data name="BugCheck_0x0000009F_Desc" xml:space="preserve">
-    <value>A driver is in an inconsistent or invalid power state, often during sleep/wake.</value>
-  </data>
-  <data name="BugCheck_0x0000009F_Rec" xml:space="preserve">
-    <value>Often caused by power management, USB controllers, or Wi-Fi drivers failing to transition states during sleep/wake. Update chipset drivers.</value>
-  </data>
-  <data name="BugCheck_0x000000A0_Desc" xml:space="preserve">
-    <value>The power manager experienced a fatal internal error.</value>
-  </data>
-  <data name="BugCheck_0x000000A0_Rec" xml:space="preserve">
-    <value>Usually related to a corrupted hiberfil.sys file or storage driver issues. Try running powercfg -h off followed by powercfg -h on to rebuild.</value>
-  </data>
-  <data name="BugCheck_0x000000D1_Desc" xml:space="preserve">
-    <value>A driver attempted to access an invalid memory address at an elevated IRQL.</value>
-  </data>
-  <data name="BugCheck_0x000000D1_Rec" xml:space="preserve">
-    <value>One of the most common crash codes. Identify the faulting driver and install the latest official release.</value>
-  </data>
-  <data name="BugCheck_0x000000EF_Desc" xml:space="preserve">
-    <value>A critical system process terminated unexpectedly.</value>
-  </data>
-  <data name="BugCheck_0x000000EF_Rec" xml:space="preserve">
-    <value>Indicates a vital OS process died, often due to system corruption, malware, or failing disk. Run DISM and SFC repair.</value>
-  </data>
-  <data name="BugCheck_0x00000101_Desc" xml:space="preserve">
-    <value>An expected clock interrupt on a secondary processor was not received within the allocated interval.</value>
-  </data>
-  <data name="BugCheck_0x00000101_Rec" xml:space="preserve">
-    <value>Classic CPU stability issue: unstable overclock, insufficient Vcore voltage, thermal throttling, or outdated BIOS. Reset BIOS to defaults.</value>
-  </data>
-  <data name="BugCheck_0x00000116_Desc" xml:space="preserve">
-    <value>The display driver failed to respond, and the attempt to reset and recover timed out.</value>
-  </data>
-  <data name="BugCheck_0x00000116_Rec" xml:space="preserve">
-    <value>GPU hang: GPU driver crashed, overheating, inadequate power, or failing GPU hardware. Reinstall GPU drivers with DDU and monitor temperatures.</value>
-  </data>
-  <data name="BugCheck_0x00000124_Desc" xml:space="preserve">
-    <value>A fatal hardware error occurred, detected by Windows Hardware Error Architecture.</value>
-  </data>
-  <data name="BugCheck_0x00000124_Rec" xml:space="preserve">
-    <value>Fatal physical hardware fault: CPU failure/undervoltage, disconnecting NVMe SSD, bad RAM, or PCIe bus errors. Check hardware and power supply.</value>
-  </data>
-  <data name="BugCheck_0x00000133_Desc" xml:space="preserve">
-    <value>The DPC watchdog detected a prolonged DPC run time or accumulated time.</value>
-  </data>
-  <data name="BugCheck_0x00000133_Rec" xml:space="preserve">
-    <value>Frequently caused by outdated SSD firmware, storage controller driver delays, or faulty Wi-Fi drivers. Update SSD firmware and chipset drivers.</value>
-  </data>
-  <data name="BugCheck_0x00000139_Desc" xml:space="preserve">
-    <value>The kernel detected corruption of a critical data structure.</value>
-  </data>
-  <data name="BugCheck_0x00000139_Rec" xml:space="preserve">
-    <value>Driver buffer overflow, damaged system libraries, or memory bit flips. Check drivers and memory stability.</value>
-  </data>
-  <data name="BugCheck_0x00000154_Desc" xml:space="preserve">
-    <value>The memory manager store component caught an unexpected exception.</value>
-  </data>
-  <data name="BugCheck_0x00000154_Rec" xml:space="preserve">
-    <value>Often caused by a failing SSD/HDD, drive dropping off the bus, or storage controller driver crash. Immediately back up important data.</value>
-  </data>
-  <data name="BugCheck_0x0000001A_Desc" xml:space="preserve">
-    <value>A severe memory management error occurred.</value>
-  </data>
-  <data name="BugCheck_0x0000001A_Rec" xml:space="preserve">
-    <value>Commonly caused by failing RAM sticks, unstable XMP/EXPO profiles, or corrupted pagefiles. Disable RAM overclocking and test memory.</value>
-  </data>
-
-  <!-- ========================================================================= -->
-  <!-- Crash Report: Application Exception Knowledge Base                        -->
-  <!-- ========================================================================= -->
-  <data name="AppException_Unknown_Desc" xml:space="preserve">
-    <value>Application encountered an unhandled exception code.</value>
-  </data>
-  <data name="AppException_Unknown_Rec" xml:space="preserve">
-    <value>Ensure the application is updated to its latest version.</value>
-  </data>
-  <data name="AppException_0xC0000005_Desc" xml:space="preserve">
-    <value>Memory access violation (the thread attempted to read from or write to a virtual address without proper access).</value>
-  </data>
-  <data name="AppException_0xC0000005_Rec" xml:space="preserve">
-    <value>Usually caused by software null pointer dereference, incompatible plugins, or corrupted program files. Try updating or reinstalling the app.</value>
-  </data>
-  <data name="AppException_0xC0000409_Desc" xml:space="preserve">
-    <value>Stack buffer overrun (triggered fast-fail security protection).</value>
-  </data>
-  <data name="AppException_0xC0000409_Rec" xml:space="preserve">
-    <value>Internal program bug causing stack corruption, terminating via fast-fail mechanism. Check for application updates.</value>
-  </data>
-  <data name="AppException_0xC0000374_Desc" xml:space="preserve">
-    <value>A heap corruption has been detected.</value>
-  </data>
-  <data name="AppException_0xC0000374_Rec" xml:space="preserve">
-    <value>Heap structure was corrupted by invalid memory writes or conflicting DLLs. Update related software and runtimes.</value>
-  </data>
-  <data name="AppException_0xC00000FD_Desc" xml:space="preserve">
-    <value>Stack overflow occurred.</value>
-  </data>
-  <data name="AppException_0xC00000FD_Rec" xml:space="preserve">
-    <value>Caused by infinite recursion or excessively large stack allocations within the application.</value>
-  </data>
-  <data name="AppException_0xE0434352_Desc" xml:space="preserve">
-    <value>Unhandled .NET Common Language Runtime exception.</value>
-  </data>
-  <data name="AppException_0xE0434352_Rec" xml:space="preserve">
-    <value>Unhandled exception in a .NET application. Review event log stack traces for debugging details.</value>
-  </data>
-  <data name="AppException_Hang_Desc" xml:space="preserve">
-    <value>Application stopped responding (Hang).</value>
-  </data>
-  <data name="AppException_Hang_Rec" xml:space="preserve">
-    <value>Likely caused by deadlocks, excessive I/O blocking, or infinite loops. Check application updates.</value>
-  </data>
-  <data name="AppException_DotNet_Desc" xml:space="preserve">
-    <value>Unhandled .NET Runtime Exception.</value>
-  </data>
-  <data name="AppException_DotNet_Rec" xml:space="preserve">
-    <value>Review the stack trace in the raw log for debugging.</value>
-  </data>
-
-  <!-- ========================================================================= -->
-  <!-- Input Tester: Navigation & UI Strings                                     -->
-  <!-- ========================================================================= -->
-  <data name="Nav_InputTesterPage.Content" xml:space="preserve">
-    <value>Input Diagnostics</value>
-  </data>
   <data name="InputTesterPage_Title.Text" xml:space="preserve">
     <value>Keyboard &amp; Mouse Diagnostics</value>
   </data>
@@ -1349,56 +640,673 @@
   <data name="InputTesterPage_Mouse_PeakChip.Text" xml:space="preserve">
     <value>Peak</value>
   </data>
-  <data name="HomePage_RefreshBtn_ToolTip" xml:space="preserve">
-    <value>Refresh hardware specs</value>
+
+  <!-- ========================================================================= -->
+  <!-- 5. System Repair & Integrity Verification -->
+  <!-- ========================================================================= -->
+  <data name="SystemRepairPage_Title.Text" xml:space="preserve">
+    <value>System Integrity Repair</value>
   </data>
-  <data name="HomePage_Refresh_Success" xml:space="preserve">
-    <value>Hardware specs and system info refreshed</value>
+  <data name="SystemRepairPage_ScanHealth_Title.Text" xml:space="preserve">
+    <value>Scan Image Health (ScanHealth)</value>
   </data>
-  <data name="HomePage_SystemStatus_Healthy.Text" xml:space="preserve">
-    <value>System running normally</value>
+  <data name="SystemRepairPage_ScanHealth_Desc.Text" xml:space="preserve">
+    <value>Checks the image for corruption but does not perform repairs.</value>
   </data>
-  <data name="HomePage_QuickActions_Title.Text" xml:space="preserve">
-    <value>Quick Actions</value>
+  <data name="SystemRepairPage_CheckHealth_Title.Text" xml:space="preserve">
+    <value>Check Image Health (CheckHealth)</value>
   </data>
-  <data name="HomePage_Feature_Perf_Title.Text" xml:space="preserve">
-    <value>Real-time Performance</value>
+  <data name="SystemRepairPage_CheckHealth_Desc.Text" xml:space="preserve">
+    <value>Checks whether the image has been flagged as corrupted.</value>
   </data>
-  <data name="HomePage_Feature_Perf_Desc.Text" xml:space="preserve">
-    <value>Monitor CPU, GPU, RAM usage, clocks &amp; temperature</value>
+  <data name="SystemRepairPage_RestoreHealth_Title.Text" xml:space="preserve">
+    <value>Restore System Image (RestoreHealth)</value>
   </data>
-  <data name="HomePage_Feature_Input_Title.Text" xml:space="preserve">
-    <value>Input Tester</value>
+  <data name="SystemRepairPage_RestoreHealth_Desc.Text" xml:space="preserve">
+    <value>Scans the image and automatically performs repair operations.</value>
   </data>
-  <data name="HomePage_Feature_Input_Desc.Text" xml:space="preserve">
-    <value>NKRO rollover, polling rate, switch chatter &amp; trajectory</value>
+  <data name="SystemRepairPage_SfcScannow_Title.Text" xml:space="preserve">
+    <value>System File Checker (SFC /Scannow)</value>
   </data>
-  <data name="HomePage_Feature_Repair_Title.Text" xml:space="preserve">
-    <value>System Repair</value>
+  <data name="SystemRepairPage_SfcScannow_Desc.Text" xml:space="preserve">
+    <value>Scans all protected system files and repairs corrupted ones.</value>
   </data>
-  <data name="HomePage_Feature_Repair_Desc.Text" xml:space="preserve">
-    <value>Automated DISM &amp; SFC image repair and integrity scan</value>
+  <data name="SystemRepairPage_RunButton.Content" xml:space="preserve">
+    <value>Run</value>
   </data>
-  <data name="HomePage_Feature_Crash_Title.Text" xml:space="preserve">
-    <value>Crash Report Analysis</value>
+  <data name="SystemRepairPage_AutoMode_Title.Text" xml:space="preserve">
+    <value>Automatic Repair Mode</value>
   </data>
-  <data name="HomePage_Feature_Crash_Desc.Text" xml:space="preserve">
-    <value>BSOD Minidump &amp; Windows error event diagnosis</value>
+  <data name="SystemRepairPage_AutoMode_Desc.Text" xml:space="preserve">
+    <value>Automatically perform full detection and repair. Recommended for most users.</value>
   </data>
-  <data name="HomePage_Feature_Hash_Title.Text" xml:space="preserve">
-    <value>File Hash Calculator</value>
+  <data name="SystemRepairPage_AutoMode_Default.Content" xml:space="preserve">
+    <value>Full Repair (Default)</value>
   </data>
-  <data name="HomePage_Feature_Hash_Desc.Text" xml:space="preserve">
-    <value>Fast SHA-256, MD5 checksum calculation &amp; verification</value>
+  <data name="SystemRepairPage_AutoMode_SfcOnly.Content" xml:space="preserve">
+    <value>System File Check Only</value>
   </data>
-  <data name="HomePage_Feature_Assoc_Title.Text" xml:space="preserve">
-    <value>File Associations</value>
+  <data name="SystemRepairPage_AdvancedMode_Title.Text" xml:space="preserve">
+    <value>Advanced Mode</value>
   </data>
-  <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
-    <value>Reset default file extension openers and associations</value>
+  <data name="SystemRepairPage_AdvancedMode_Desc.Text" xml:space="preserve">
+    <value>Manually execute specific maintenance commands. Recommended for advanced users.</value>
   </data>
-  <data name="HomePage_Copied_Toast" xml:space="preserve">
-    <value>Copied to clipboard: {0}</value>
+  <data name="SystemRepairPage_StartButton.Content" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="SystemRepairPage_Running" xml:space="preserve">
+    <value>Running...</value>
+  </data>
+  <data name="SystemRepairPage_Completed" xml:space="preserve">
+    <value>Execution completed</value>
+  </data>
+  <data name="SystemRepairPage_Error" xml:space="preserve">
+    <value>An error occurred during execution</value>
+  </data>
+  <data name="SystemRepairPage_AdminRequired" xml:space="preserve">
+    <value>Administrator privileges are required for this operation.</value>
+  </data>
+  <data name="SystemRepairPage_QuitTitle" xml:space="preserve">
+    <value>Operation in Progress</value>
+  </data>
+  <data name="SystemRepairPage_QuitContent" xml:space="preserve">
+    <value>A system repair operation is currently running. Quitting now will interrupt the process. Are you sure you want to quit?</value>
+  </data>
+  <data name="SystemRepairPage_QuitConfirm" xml:space="preserve">
+    <value>Confirm Quit</value>
+  </data>
+  <data name="SystemRepairPage_QuitCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SystemRepairPage_CompletionInfoBar.Title" xml:space="preserve">
+    <value>Repair Task Completed</value>
+  </data>
+  <data name="SystemRepairPage_CompletionInfoBar.Message" xml:space="preserve">
+    <value>All repair processes have ended successfully. You can check the log for details.</value>
+  </data>
+  <data name="SystemRepairPage_HistoryHeader.Text" xml:space="preserve">
+    <value>History Log</value>
+  </data>
+  <data name="SystemRepairPage_Copy.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="SystemRepairPage_Clear.Text" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="SystemRepairPage_WaitingPlaceholder" xml:space="preserve">
+    <value>Waiting for commands...</value>
+  </data>
+  <data name="SystemRepairPage_Log_FullRepairStart" xml:space="preserve">
+    <value>=== Starting Automatic Full Repair ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_FullRepairEnd" xml:space="preserve">
+    <value>=== Full Repair Completed ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_SfcStart" xml:space="preserve">
+    <value>=== Starting System File Check ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_SfcEnd" xml:space="preserve">
+    <value>=== System File Check Completed ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_Executing" xml:space="preserve">
+    <value>Executing:</value>
+  </data>
+  <data name="SystemRepairPage_Log_ErrorPrefix" xml:space="preserve">
+    <value>[Error]</value>
+  </data>
+  <data name="SystemRepairPage_Copied" xml:space="preserve">
+    <value>Copied</value>
+  </data>
+  <data name="System_Cut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="System_Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="System_Paste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="System_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="System_AllFiles" xml:space="preserve">
+    <value>All Files</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- 6. Crash Dump & BSOD Analysis -->
+  <!-- ========================================================================= -->
+  <data name="CrashReportPage_Title.Text" xml:space="preserve">
+    <value>Crash &amp; Dump Analysis</value>
+  </data>
+  <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
+    <value>Scan and analyze system kernel minidumps and application crash event logs</value>
+  </data>
+  <data name="CrashReportPage_Guide_Title.Text" xml:space="preserve">
+    <value>Instructions &amp; Troubleshooting Guide</value>
+  </data>
+  <data name="CrashReportPage_Guide_Desc1.Text" xml:space="preserve">
+    <value>• Auto Analysis: Automatically retrieves minidumps from C:\Windows\Minidump and crash records from Windows Event Log.</value>
+  </data>
+  <data name="CrashReportPage_Guide_Desc2.Text" xml:space="preserve">
+    <value>• Smart Diagnosis: Select any event to analyze BugCheck codes, faulting driver modules, and actionable troubleshooting steps.</value>
+  </data>
+  <data name="CrashReportPage_Guide_Desc3.Text" xml:space="preserve">
+    <value>• Export &amp; Share: Copy individual summaries or click 'Export Report' to save all crash logs as a Markdown document for technical assistance.</value>
+  </data>
+  <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
+    <value>Total Crashes</value>
+  </data>
+  <data name="CrashReportPage_Card_BSOD.Text" xml:space="preserve">
+    <value>Kernel Crashes</value>
+  </data>
+  <data name="CrashReportPage_Card_AppCrash.Text" xml:space="preserve">
+    <value>Application Errors</value>
+  </data>
+  <data name="CrashReportPage_Card_LastCrash.Text" xml:space="preserve">
+    <value>Last Crash Time</value>
+  </data>
+  <data name="CrashReportPage_Filter_All.Content" xml:space="preserve">
+    <value>All Events</value>
+  </data>
+  <data name="CrashReportPage_Filter_BSOD.Content" xml:space="preserve">
+    <value>Kernel Crashes Only</value>
+  </data>
+  <data name="CrashReportPage_Filter_App.Content" xml:space="preserve">
+    <value>App Crashes Only</value>
+  </data>
+  <data name="CrashReportPage_SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Search app name, error code, driver or module...</value>
+  </data>
+  <data name="CrashReportPage_RefreshBtn.Text" xml:space="preserve">
+    <value>Rescan</value>
+  </data>
+  <data name="CrashReportPage_OpenDumpFolderBtn.Text" xml:space="preserve">
+    <value>Open Dump Folder</value>
+  </data>
+  <data name="CrashReportPage_ExportBtn.Text" xml:space="preserve">
+    <value>Export Report</value>
+  </data>
+  <data name="CrashReportPage_NoCrashes_Title.Text" xml:space="preserve">
+    <value>System is Healthy!</value>
+  </data>
+  <data name="CrashReportPage_NoCrashes_Desc.Text" xml:space="preserve">
+    <value>No system kernel crash dumps or recent application crash events were found in system logs.</value>
+  </data>
+  <data name="CrashReportPage_SelectPrompt_Title.Text" xml:space="preserve">
+    <value>Select an Event</value>
+  </data>
+  <data name="CrashReportPage_SelectPrompt_Desc.Text" xml:space="preserve">
+    <value>Click any crash event from the list on the left to view detailed diagnostic information and recommendations.</value>
+  </data>
+  <data name="CrashReportPage_Detail_Header.Text" xml:space="preserve">
+    <value>Crash Diagnostic Details</value>
+  </data>
+  <data name="CrashReportPage_Detail_DiagnosisHeader.Text" xml:space="preserve">
+    <value>Smart Diagnosis &amp; Root Cause</value>
+  </data>
+  <data name="CrashReportPage_Detail_RecommendationHeader.Text" xml:space="preserve">
+    <value>Troubleshooting &amp; Advice</value>
+  </data>
+  <data name="CrashReportPage_Detail_TechDetailsHeader.Text" xml:space="preserve">
+    <value>Technical Parameters</value>
+  </data>
+  <data name="CrashReportPage_Detail_ErrorCode.Text" xml:space="preserve">
+    <value>Error Code</value>
+  </data>
+  <data name="CrashReportPage_Detail_FaultModule.Text" xml:space="preserve">
+    <value>Faulting Module / Driver</value>
+  </data>
+  <data name="CrashReportPage_Detail_SourceApp.Text" xml:space="preserve">
+    <value>Source / Application</value>
+  </data>
+  <data name="CrashReportPage_Detail_Params.Text" xml:space="preserve">
+    <value>Parameters (Arg1~4)</value>
+  </data>
+  <data name="CrashReportPage_Detail_DumpPath.Text" xml:space="preserve">
+    <value>Dump File / Path</value>
+  </data>
+  <data name="CrashReportPage_Detail_LocateBtn.Text" xml:space="preserve">
+    <value>Locate</value>
+  </data>
+  <data name="CrashReportPage_Detail_RawLogHeader.Text" xml:space="preserve">
+    <value>Raw Event Record</value>
+  </data>
+  <data name="CrashReportPage_Detail_CopyBtn.Text" xml:space="preserve">
+    <value>Copy Details</value>
+  </data>
+  <data name="CrashReportPage_Detail_Copied" xml:space="preserve">
+    <value>Copied to clipboard</value>
+  </data>
+  <data name="CrashReportPage_ExportSuccess_Title" xml:space="preserve">
+    <value>Export Successful</value>
+  </data>
+  <data name="CrashReportPage_ExportSuccess_Msg" xml:space="preserve">
+    <value>Crash diagnostic report has been saved successfully.</value>
+  </data>
+  <data name="CrashReportPage_DumpFolder_NotFound" xml:space="preserve">
+    <value>Minidump folder does not exist or contains no dump files.</value>
+  </data>
+  <data name="CrashReportPage_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="CrashReportPage_Scanning.Text" xml:space="preserve">
+    <value>Scanning event logs and minidump files...</value>
+  </data>
+  <data name="CrashReportPage_Badge_KernelCrash" xml:space="preserve">
+    <value>Kernel Crash</value>
+  </data>
+  <data name="CrashReportPage_Badge_AppCrash" xml:space="preserve">
+    <value>App Error</value>
+  </data>
+  <data name="CrashReportPage_Badge_AppHang" xml:space="preserve">
+    <value>App Hang</value>
+  </data>
+  <data name="CrashReportPage_Badge_DotNetCrash" xml:space="preserve">
+    <value>.NET Error</value>
+  </data>
+  <data name="CrashReportPage_Source_Kernel" xml:space="preserve">
+    <value>System Kernel</value>
+  </data>
+  <data name="CrashReportPage_Source_Unknown" xml:space="preserve">
+    <value>Unknown App</value>
+  </data>
+  <data name="CrashReportPage_RawLog_None" xml:space="preserve">
+    <value>No additional raw details available.</value>
+  </data>
+  <data name="CrashReport_Export_Title" xml:space="preserve">
+    <value># Windows Crash &amp; Diagnostic Report</value>
+  </data>
+  <data name="CrashReport_Export_GeneratedTime" xml:space="preserve">
+    <value>Generated on: {0}</value>
+  </data>
+  <data name="CrashReport_Export_Summary" xml:space="preserve">
+    <value>Total Events: {0} (Kernel Crashes: {1}, App Errors: {2})</value>
+  </data>
+  <data name="CrashReport_Export_Field_Timestamp" xml:space="preserve">
+    <value>Timestamp</value>
+  </data>
+  <data name="CrashReport_Export_Field_ErrorCode" xml:space="preserve">
+    <value>Error Code</value>
+  </data>
+  <data name="CrashReport_Export_Field_Source" xml:space="preserve">
+    <value>Source / App</value>
+  </data>
+  <data name="CrashReport_Export_Field_Module" xml:space="preserve">
+    <value>Faulting Module / Driver</value>
+  </data>
+  <data name="CrashReport_Export_Field_Parameters" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="CrashReport_Export_Field_DumpPath" xml:space="preserve">
+    <value>Dump / File Path</value>
+  </data>
+  <data name="CrashReport_Export_Field_Diagnosis" xml:space="preserve">
+    <value>Diagnosis</value>
+  </data>
+  <data name="CrashReport_Export_Field_Recommendation" xml:space="preserve">
+    <value>Troubleshooting Advice</value>
+  </data>
+  <data name="BugCheck_Unknown_Desc" xml:space="preserve">
+    <value>Unknown Windows kernel crash code.</value>
+  </data>
+  <data name="BugCheck_Unknown_Rec" xml:space="preserve">
+    <value>Recommend searching for this crash code online for tailored resolution.</value>
+  </data>
+  <data name="BugCheck_0x0000000A_Desc" xml:space="preserve">
+    <value>Kernel attempted to access pageable memory at an elevated IRQL.</value>
+  </data>
+  <data name="BugCheck_0x0000000A_Rec" xml:space="preserve">
+    <value>Usually caused by buggy or incompatible device drivers, or faulty memory. Recommend updating suspect drivers or running Windows Memory Diagnostic.</value>
+  </data>
+  <data name="BugCheck_0x0000001E_Desc" xml:space="preserve">
+    <value>A kernel-mode program generated an exception which the error handler did not catch.</value>
+  </data>
+  <data name="BugCheck_0x0000001E_Rec" xml:space="preserve">
+    <value>Often related to newly installed hardware, faulty drivers, or conflicting system services. Try rolling back recent updates.</value>
+  </data>
+  <data name="BugCheck_0x0000003B_Desc" xml:space="preserve">
+    <value>An exception happened while executing a system service routine.</value>
+  </data>
+  <data name="BugCheck_0x0000003B_Rec" xml:space="preserve">
+    <value>Frequently caused by graphics drivers or corrupted system files. Recommend clean reinstalling GPU drivers and running sfc /scannow.</value>
+  </data>
+  <data name="BugCheck_0x00000050_Desc" xml:space="preserve">
+    <value>Invalid system memory was referenced.</value>
+  </data>
+  <data name="BugCheck_0x00000050_Rec" xml:space="preserve">
+    <value>Commonly caused by faulty RAM, damaged slots, antivirus kernel drivers, or disk file corruption. Clean RAM contacts or run memory checks.</value>
+  </data>
+  <data name="BugCheck_0x0000007E_Desc" xml:space="preserve">
+    <value>A system thread generated an exception that the error handler did not catch.</value>
+  </data>
+  <data name="BugCheck_0x0000007E_Rec" xml:space="preserve">
+    <value>Usually caused by incompatible drivers or insufficient disk space. Check the suspect module name and update its driver.</value>
+  </data>
+  <data name="BugCheck_0x0000009F_Desc" xml:space="preserve">
+    <value>A driver is in an inconsistent or invalid power state, often during sleep/wake.</value>
+  </data>
+  <data name="BugCheck_0x0000009F_Rec" xml:space="preserve">
+    <value>Often caused by power management, USB controllers, or Wi-Fi drivers failing to transition states during sleep/wake. Update chipset drivers.</value>
+  </data>
+  <data name="BugCheck_0x000000A0_Desc" xml:space="preserve">
+    <value>The power manager experienced a fatal internal error.</value>
+  </data>
+  <data name="BugCheck_0x000000A0_Rec" xml:space="preserve">
+    <value>Usually related to a corrupted hiberfil.sys file or storage driver issues. Try running powercfg -h off followed by powercfg -h on to rebuild.</value>
+  </data>
+  <data name="BugCheck_0x000000D1_Desc" xml:space="preserve">
+    <value>A driver attempted to access an invalid memory address at an elevated IRQL.</value>
+  </data>
+  <data name="BugCheck_0x000000D1_Rec" xml:space="preserve">
+    <value>One of the most common crash codes. Identify the faulting driver and install the latest official release.</value>
+  </data>
+  <data name="BugCheck_0x000000EF_Desc" xml:space="preserve">
+    <value>A critical system process terminated unexpectedly.</value>
+  </data>
+  <data name="BugCheck_0x000000EF_Rec" xml:space="preserve">
+    <value>Indicates a vital OS process died, often due to system corruption, malware, or failing disk. Run DISM and SFC repair.</value>
+  </data>
+  <data name="BugCheck_0x00000101_Desc" xml:space="preserve">
+    <value>An expected clock interrupt on a secondary processor was not received within the allocated interval.</value>
+  </data>
+  <data name="BugCheck_0x00000101_Rec" xml:space="preserve">
+    <value>Classic CPU stability issue: unstable overclock, insufficient Vcore voltage, thermal throttling, or outdated BIOS. Reset BIOS to defaults.</value>
+  </data>
+  <data name="BugCheck_0x00000116_Desc" xml:space="preserve">
+    <value>The display driver failed to respond, and the attempt to reset and recover timed out.</value>
+  </data>
+  <data name="BugCheck_0x00000116_Rec" xml:space="preserve">
+    <value>GPU hang: GPU driver crashed, overheating, inadequate power, or failing GPU hardware. Reinstall GPU drivers with DDU and monitor temperatures.</value>
+  </data>
+  <data name="BugCheck_0x00000124_Desc" xml:space="preserve">
+    <value>A fatal hardware error occurred, detected by Windows Hardware Error Architecture.</value>
+  </data>
+  <data name="BugCheck_0x00000124_Rec" xml:space="preserve">
+    <value>Fatal physical hardware fault: CPU failure/undervoltage, disconnecting NVMe SSD, bad RAM, or PCIe bus errors. Check hardware and power supply.</value>
+  </data>
+  <data name="BugCheck_0x00000133_Desc" xml:space="preserve">
+    <value>The DPC watchdog detected a prolonged DPC run time or accumulated time.</value>
+  </data>
+  <data name="BugCheck_0x00000133_Rec" xml:space="preserve">
+    <value>Frequently caused by outdated SSD firmware, storage controller driver delays, or faulty Wi-Fi drivers. Update SSD firmware and chipset drivers.</value>
+  </data>
+  <data name="BugCheck_0x00000139_Desc" xml:space="preserve">
+    <value>The kernel detected corruption of a critical data structure.</value>
+  </data>
+  <data name="BugCheck_0x00000139_Rec" xml:space="preserve">
+    <value>Driver buffer overflow, damaged system libraries, or memory bit flips. Check drivers and memory stability.</value>
+  </data>
+  <data name="BugCheck_0x00000154_Desc" xml:space="preserve">
+    <value>The memory manager store component caught an unexpected exception.</value>
+  </data>
+  <data name="BugCheck_0x00000154_Rec" xml:space="preserve">
+    <value>Often caused by a failing SSD/HDD, drive dropping off the bus, or storage controller driver crash. Immediately back up important data.</value>
+  </data>
+  <data name="BugCheck_0x0000001A_Desc" xml:space="preserve">
+    <value>A severe memory management error occurred.</value>
+  </data>
+  <data name="BugCheck_0x0000001A_Rec" xml:space="preserve">
+    <value>Commonly caused by failing RAM sticks, unstable XMP/EXPO profiles, or corrupted pagefiles. Disable RAM overclocking and test memory.</value>
+  </data>
+  <data name="AppException_Unknown_Desc" xml:space="preserve">
+    <value>Application encountered an unhandled exception code.</value>
+  </data>
+  <data name="AppException_Unknown_Rec" xml:space="preserve">
+    <value>Ensure the application is updated to its latest version.</value>
+  </data>
+  <data name="AppException_0xC0000005_Desc" xml:space="preserve">
+    <value>Memory access violation (the thread attempted to read from or write to a virtual address without proper access).</value>
+  </data>
+  <data name="AppException_0xC0000005_Rec" xml:space="preserve">
+    <value>Usually caused by software null pointer dereference, incompatible plugins, or corrupted program files. Try updating or reinstalling the app.</value>
+  </data>
+  <data name="AppException_0xC0000409_Desc" xml:space="preserve">
+    <value>Stack buffer overrun (triggered fast-fail security protection).</value>
+  </data>
+  <data name="AppException_0xC0000409_Rec" xml:space="preserve">
+    <value>Internal program bug causing stack corruption, terminating via fast-fail mechanism. Check for application updates.</value>
+  </data>
+  <data name="AppException_0xC0000374_Desc" xml:space="preserve">
+    <value>A heap corruption has been detected.</value>
+  </data>
+  <data name="AppException_0xC0000374_Rec" xml:space="preserve">
+    <value>Heap structure was corrupted by invalid memory writes or conflicting DLLs. Update related software and runtimes.</value>
+  </data>
+  <data name="AppException_0xC00000FD_Desc" xml:space="preserve">
+    <value>Stack overflow occurred.</value>
+  </data>
+  <data name="AppException_0xC00000FD_Rec" xml:space="preserve">
+    <value>Caused by infinite recursion or excessively large stack allocations within the application.</value>
+  </data>
+  <data name="AppException_0xE0434352_Desc" xml:space="preserve">
+    <value>Unhandled .NET Common Language Runtime exception.</value>
+  </data>
+  <data name="AppException_0xE0434352_Rec" xml:space="preserve">
+    <value>Unhandled exception in a .NET application. Review event log stack traces for debugging details.</value>
+  </data>
+  <data name="AppException_Hang_Desc" xml:space="preserve">
+    <value>Application stopped responding (Hang).</value>
+  </data>
+  <data name="AppException_Hang_Rec" xml:space="preserve">
+    <value>Likely caused by deadlocks, excessive I/O blocking, or infinite loops. Check application updates.</value>
+  </data>
+  <data name="AppException_DotNet_Desc" xml:space="preserve">
+    <value>Unhandled .NET Runtime Exception.</value>
+  </data>
+  <data name="AppException_DotNet_Rec" xml:space="preserve">
+    <value>Review the stack trace in the raw log for debugging.</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- 7. File Hash & Checksum Calculator -->
+  <!-- ========================================================================= -->
+  <data name="FileHashPage_Title.Text" xml:space="preserve">
+    <value>Calculate File Hash</value>
+  </data>
+  <data name="FileHashPage_Desc.Text" xml:space="preserve">
+    <value>Quickly calculate and verify file SHA-256, SHA-1, or MD5 hash values.</value>
+  </data>
+  <data name="FileHashPage_SelectFile.Content" xml:space="preserve">
+    <value>Select File</value>
+  </data>
+  <data name="FileHashPage_DragDropPrompt.Text" xml:space="preserve">
+    <value>Select a file to calculate</value>
+  </data>
+  <data name="FileHashPage_SelectFileCardDesc.Text" xml:space="preserve">
+    <value>Select a file from your computer to calculate and compare its hash codes.</value>
+  </data>
+  <data name="FileHashPage_Algorithm.Text" xml:space="preserve">
+    <value>Hash Algorithm</value>
+  </data>
+  <data name="FileHashPage_Result.Header" xml:space="preserve">
+    <value>Hash Result</value>
+  </data>
+  <data name="FileHashPage_Compare.Text" xml:space="preserve">
+    <value>Compare &amp; Verify Hash (Case-insensitive)</value>
+  </data>
+  <data name="FileHashPage_CompareButton.Text" xml:space="preserve">
+    <value>Paste &amp; Verify</value>
+  </data>
+  <data name="FileHashPage_CopyButton.Text" xml:space="preserve">
+    <value>Copy Result</value>
+  </data>
+  <data name="FileHashPage_CalculateButton.Content" xml:space="preserve">
+    <value>Recalculate</value>
+  </data>
+  <data name="FileHashPage_VerifySuccess" xml:space="preserve">
+    <value>Hash verification succeeded! Perfect match.</value>
+  </data>
+  <data name="FileHashPage_VerifyFail" xml:space="preserve">
+    <value>Hash verification failed! File may be modified or algorithm mismatch.</value>
+  </data>
+  <data name="FileHashPage_Calculating" xml:space="preserve">
+    <value>Calculating hash, please wait...</value>
+  </data>
+  <data name="FileHashPage_SelectFileFirst" xml:space="preserve">
+    <value>Please select a file first!</value>
+  </data>
+  <data name="FileHashPage_FileSelected" xml:space="preserve">
+    <value>Selected file:</value>
+  </data>
+  <data name="FileHashPage_FileSize" xml:space="preserve">
+    <value>File size:</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Desc.Text" xml:space="preserve">
+    <value>SHA-256 (Highly secure, recommended), SHA-1 (Legacy compatibility), MD5 (Quick verification), SHA-512 (Ultra secure).</value>
+  </data>
+  <data name="FileHashPage_Result.PlaceholderText" xml:space="preserve">
+    <value>After selecting a file and calculating, the hash result will be displayed here...</value>
+  </data>
+  <data name="FileHashPage_Compare_Desc.Text" xml:space="preserve">
+    <value>Paste the expected hash here, and the system will verify it in real-time, ignoring case.</value>
+  </data>
+  <data name="FileHashPage_CompareInput.PlaceholderText" xml:space="preserve">
+    <value>Enter or paste the expected hash to compare...</value>
+  </data>
+  <data name="FileHashPage_DialogTitle" xml:space="preserve">
+    <value>Select a file to calculate hash</value>
+  </data>
+  <data name="FileHashPage_Error_FileNotFound" xml:space="preserve">
+    <value>File does not exist or is inaccessible!</value>
+  </data>
+  <data name="FileHashPage_VerifySuccess_Title" xml:space="preserve">
+    <value>Verification Succeeded</value>
+  </data>
+  <data name="FileHashPage_VerifyFail_Title" xml:space="preserve">
+    <value>Verification Failed</value>
+  </data>
+  <data name="FileHashPage_Section_SelectFile" xml:space="preserve">
+    <value>Select File</value>
+  </data>
+  <data name="FileHashPage_Section_Calculate" xml:space="preserve">
+    <value>Calculate Hash</value>
+  </data>
+  <data name="FileHashPage_Section_Verify" xml:space="preserve">
+    <value>Verify &amp; Compare</value>
+  </data>
+  <data name="FileHashPage_CalculationCancelled" xml:space="preserve">
+    <value>Calculation cancelled.</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- 8. File Association Fixer -->
+  <!-- ========================================================================= -->
+  <data name="FileAssociationPage_Desc.Text" xml:space="preserve">
+    <value>Reset or manage the default application for specific file extensions</value>
+  </data>
+  <data name="FileAssociationPage_ConfigTitle.Text" xml:space="preserve">
+    <value>Configure File Association</value>
+  </data>
+  <data name="FileAssociationPage_TargetExtTitle.Text" xml:space="preserve">
+    <value>Target File Extension</value>
+  </data>
+  <data name="FileAssociationPage_TargetExtDesc.Text" xml:space="preserve">
+    <value>Enter the file extension you want to reset (e.g., .pdf, .bin, .myext, will be auto-formatted)</value>
+  </data>
+  <data name="FileAssociationPage_TargetExtBox.PlaceholderText" xml:space="preserve">
+    <value>e.g., pdf</value>
+  </data>
+  <data name="FileAssociationPage_SelectMethodTitle.Text" xml:space="preserve">
+    <value>Select Reset Method</value>
+  </data>
+  <data name="FileAssociationPage_Method1Title.Text" xml:space="preserve">
+    <value>Method 1: Call Native System Open With Dialog (Standard &amp; Recommended)</value>
+  </data>
+  <data name="FileAssociationPage_Method1Desc.Text" xml:space="preserve">
+    <value>The system will pop up the Open With menu. You can reselect the associated program for this extension or reset the default association. This is the standard, safe method recommended by Windows.</value>
+  </data>
+  <data name="FileAssociationPage_Method1Button.Content" xml:space="preserve">
+    <value>Safe Guided Reset</value>
+  </data>
+  <data name="FileAssociationPage_Method2Title.Text" xml:space="preserve">
+    <value>Method 2: Smart Registry Navigation &amp; Manual Reset (Advanced Mode)</value>
+  </data>
+  <data name="FileAssociationPage_Method2Desc.Text" xml:space="preserve">
+    <value>For advanced users. Directly open the Registry Editor and smartly navigate to the target, giving you full control to manually reset.</value>
+  </data>
+  <data name="FileAssociationPage_Method2Content.Text" xml:space="preserve">
+    <value>Directly open the built-in Windows Registry Editor and automatically navigate to the association path for the extension, allowing you to manually reset and manage it safely and intuitively.</value>
+  </data>
+  <data name="FileAssociationPage_Method2Button.Content" xml:space="preserve">
+    <value>Navigate &amp; Manually Reset</value>
+  </data>
+  <data name="FileAssociationPage_GuideTitle.Text" xml:space="preserve">
+    <value>🛠️ Registry Manual Reset Instructions:</value>
+  </data>
+  <data name="FileAssociationPage_GuideStep1.Text" xml:space="preserve">
+    <value>1. In the launched "Registry Editor" window, you will find the screen automatically expanded and precisely stopped at the target directory.</value>
+  </data>
+  <data name="FileAssociationPage_GuideStep2.Text" xml:space="preserve">
+    <value>2. In the left tree view, find the "UserChoice" subfolder under this extension's directory.</value>
+  </data>
+  <data name="FileAssociationPage_GuideStep3.Text" xml:space="preserve">
+    <value>3. Right-click on the "UserChoice" folder, select "Delete", and click "Yes" in the confirmation dialog.</value>
+  </data>
+  <data name="FileAssociationPage_GuideStep4.Text" xml:space="preserve">
+    <value>4. Close the Registry Editor after clearing. The next time you double-click this type of file, Windows will prompt for the default program again!</value>
+  </data>
+  <data name="FileAssociationPage_Warning_CriticalExt" xml:space="preserve">
+    <value>To protect your operating system security, this extension (.{0}) is a core critical Windows component and its association cannot be reset or modified to prevent system crashes or the inability to execute any programs.</value>
+  </data>
+  <data name="FileAssociationPage_Warning_CriticalExtTitle" xml:space="preserve">
+    <value>🛡️ System Security Protection</value>
+  </data>
+  <data name="FileAssociationPage_Success_DialogOpened" xml:space="preserve">
+    <value>Successfully called the system Open With dialog! Please configure or reset the association in the popped-up window.</value>
+  </data>
+  <data name="FileAssociationPage_Success_Title" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="FileAssociationPage_Error_DialogOpenFailed" xml:space="preserve">
+    <value>Failed to open the Open With dialog: {0}</value>
+  </data>
+  <data name="FileAssociationPage_Error_Title" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="FileAssociationPage_Info_Locating" xml:space="preserve">
+    <value>Opening and smartly locating Registry Editor for you...</value>
+  </data>
+  <data name="FileAssociationPage_Info_LocatingTitle" xml:space="preserve">
+    <value>Smart Locating</value>
+  </data>
+  <data name="FileAssociationPage_Warning_LocateFailed" xml:space="preserve">
+    <value>Registry Editor opened, but failed to get its window handle for auto-navigation. Please ensure you approved the User Account Control (UAC) prompt.</value>
+  </data>
+  <data name="FileAssociationPage_Warning_LocateFailedTitle" xml:space="preserve">
+    <value>Failed to Locate</value>
+  </data>
+  <data name="FileAssociationPage_Success_RegNavigated" xml:space="preserve">
+    <value>Registry Editor successfully and smartly navigated to `.{0}`! Please refer to the instruction card below for resetting.</value>
+  </data>
+  <data name="FileAssociationPage_Success_RegNavigatedTitle" xml:space="preserve">
+    <value>Navigation Successful</value>
+  </data>
+  <data name="FileAssociationPage_Warning_FallbackCopy" xml:space="preserve">
+    <value>Failed to locate the address bar (it might be hidden). The target path has been copied to your clipboard, please paste it in the address bar above and press Enter to locate!</value>
+  </data>
+  <data name="FileAssociationPage_Warning_FallbackCopyTitle" xml:space="preserve">
+    <value>Please Paste Manually</value>
+  </data>
+  <data name="FileAssociationPage_Error_RegLaunchFailed" xml:space="preserve">
+    <value>Failed to launch Registry Editor: {0}. Please ensure you approved the User Account Control (UAC) prompt.</value>
+  </data>
+  <data name="FileAssociationPage_Error_RegLaunchFailedTitle" xml:space="preserve">
+    <value>Launch Failed</value>
+  </data>
+  <data name="FileAssociationPage_Title.Text" xml:space="preserve">
+    <value>File Association Manager</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- 9. Tool Hub Pages -->
+  <!-- ========================================================================= -->
+  <data name="TestToolPage_Title.Text" xml:space="preserve">
+    <value>Test Tool</value>
+  </data>
+  <data name="UtilityPage_Title.Text" xml:space="preserve">
+    <value>Utilities</value>
   </data>
   <data name="ToolHub_SearchBox.PlaceholderText" xml:space="preserve">
     <value>Search tool name or description...</value>
@@ -1415,11 +1323,120 @@
   <data name="ToolHub_NoResults.Text" xml:space="preserve">
     <value>No matching tools found. Try another query.</value>
   </data>
-  <data name="Notification_Copied" xml:space="preserve">
-    <value>Copied to clipboard</value>
+
+  <!-- ========================================================================= -->
+  <!-- 10. Settings & Preferences -->
+  <!-- ========================================================================= -->
+  <data name="SettingsPage_Title.Text" xml:space="preserve">
+    <value>Settings</value>
   </data>
-  <data name="HomePage_Refresh_Title" xml:space="preserve">
-    <value>Hardware Specs</value>
+  <data name="SettingsPage_AppearanceBehaviorHeader.Text" xml:space="preserve">
+    <value>Appearance &amp; Behavior</value>
+  </data>
+  <data name="SettingsPage_LanguageTitle.Text" xml:space="preserve">
+    <value>App Display Language</value>
+  </data>
+  <data name="SettingsPage_LanguageDescription.Text" xml:space="preserve">
+    <value>Choose your preferred language. Changes will take effect after restart.</value>
+  </data>
+  <data name="Language_zh_TW.Content" xml:space="preserve">
+    <value>Chinese (Taiwan)</value>
+  </data>
+  <data name="Language_en_US.Content" xml:space="preserve">
+    <value>English (United States)</value>
+  </data>
+  <data name="SettingsPage_LanguageRestartNotice.Text" xml:space="preserve">
+    <value>※ App restart required for language changes to fully take effect.</value>
+  </data>
+  <data name="LanguageChangeDialog_Title" xml:space="preserve">
+    <value>Restart Required</value>
+  </data>
+  <data name="LanguageChangeDialog_Content" xml:space="preserve">
+    <value>The language change will take effect after restarting the app. Save the change?</value>
+  </data>
+  <data name="LanguageChangeDialog_Confirm" xml:space="preserve">
+    <value>Close and Apply</value>
+  </data>
+  <data name="LanguageChangeDialog_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SettingsPage_ThemeHeader.Text" xml:space="preserve">
+    <value>Personalization</value>
+  </data>
+  <data name="SettingsPage_ThemeTitle.Text" xml:space="preserve">
+    <value>App theme</value>
+  </data>
+  <data name="SettingsPage_ThemeDescription.Text" xml:space="preserve">
+    <value>Customize the appearance of the application.</value>
+  </data>
+  <data name="Theme_Default.Content" xml:space="preserve">
+    <value>Use system setting</value>
+  </data>
+  <data name="Theme_Light.Content" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Theme_Dark.Content" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="SettingsPage_AboutHeader.Text" xml:space="preserve">
+    <value>About </value>
+  </data>
+  <data name="SettingsPage_AppVersion.Text" xml:space="preserve">
+    <value>LanLanLu Toolkit</value>
+  </data>
+  <data name="SettingsPage_Copyright.Text" xml:space="preserve">
+    <value>© 2026 flandretw. All rights reserved.</value>
+  </data>
+  <data name="SettingsPage_MITLink.Content" xml:space="preserve">
+    <value>MIT License</value>
+  </data>
+  <data name="SettingsPage_NotificationSound_Title.Text" xml:space="preserve">
+    <value>Notification Sound</value>
+  </data>
+  <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
+    <value>Play a sound when system repairs or long tasks are completed.</value>
+  </data>
+  <data name="SettingsPage_NotificationsTitle.Text" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="SettingsPage_NotificationsDescription.Text" xml:space="preserve">
+    <value>Manage how the application notifies you about task completions.</value>
+  </data>
+  <data name="SettingsPage_TempUnitTitle.Text" xml:space="preserve">
+    <value>Temperature Unit</value>
+  </data>
+  <data name="SettingsPage_TempUnitDescription.Text" xml:space="preserve">
+    <value>Select the temperature unit used throughout the application.</value>
+  </data>
+  <data name="SettingsPage_DebugReportTitle.Text" xml:space="preserve">
+    <value>Debug Report</value>
+  </data>
+  <data name="SettingsPage_DebugReportDescription.Text" xml:space="preserve">
+    <value>Records app startup, system errors, tool execution logs, and operation events to help troubleshoot issues.</value>
+  </data>
+  <data name="SettingsPage_DebugReport_StorageCardTitle.Text" xml:space="preserve">
+    <value>Storage Location</value>
+  </data>
+  <data name="SettingsPage_DebugReport_StoragePathPrefix.Text" xml:space="preserve">
+    <value>Currently saved at: </value>
+  </data>
+  <data name="SettingsPage_DebugReport_SelectFolderButton.Content" xml:space="preserve">
+    <value>Change Folder</value>
+  </data>
+  <data name="SettingsPage_DebugReport_SelectFolderTitle" xml:space="preserve">
+    <value>Select Folder for Debug Reports</value>
+  </data>
+  <data name="SettingsPage_DebugReport_ResetButton.Content" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="SettingsPage_DebugReport_ResetButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Reset storage path to default</value>
+  </data>
+  <data name="SettingsPage_DebugReport_DefaultPathDescription.Text" xml:space="preserve">
+    <value>Saved in the same directory as the program by default</value>
+  </data>
+  <data name="SettingsPage_DiagnosticsSectionTitle.Text" xml:space="preserve">
+    <value>Diagnostics &amp; feedback</value>
   </data>
   <data name="SettingsPage_RescanHardware_Title.Text" xml:space="preserve">
     <value>Rescan Hardware Changes</value>

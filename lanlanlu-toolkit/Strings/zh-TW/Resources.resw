@@ -45,6 +45,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
+  <!-- ========================================================================= -->
+  <!-- 1. 應用程式全域與導覽列 -->
+  <!-- ========================================================================= -->
   <data name="Nav_HomePage.Content" xml:space="preserve">
     <value>首頁</value>
   </data>
@@ -54,74 +58,54 @@
   <data name="AppTitle.Text" xml:space="preserve">
     <value>蘭蘭露工具箱</value>
   </data>
+  <data name="Shell_Performance.Content" xml:space="preserve">
+    <value>效能</value>
+  </data>
+  <data name="Greeting_LateNight" xml:space="preserve">
+    <value>晚安，早點休息吧，明天也是新的一天！</value>
+  </data>
+  <data name="Greeting_Morning" xml:space="preserve">
+    <value>早安，今天又是一個新的開始！</value>
+  </data>
+  <data name="Greeting_Afternoon" xml:space="preserve">
+    <value>午安，忙碌之餘別忘了休息一下喔！</value>
+  </data>
+  <data name="Greeting_Evening" xml:space="preserve">
+    <value>晚安，辛苦了一天，放鬆享受夜晚時光吧！</value>
+  </data>
+  <data name="Nav_SystemRepairPage.Content" xml:space="preserve">
+    <value>系統完整性修復</value>
+  </data>
+  <data name="Nav_UtilityPage.Content" xml:space="preserve">
+    <value>實用工具</value>
+  </data>
+  <data name="Nav_FileHashPage.Content" xml:space="preserve">
+    <value>計算檔案雜湊碼</value>
+  </data>
+  <data name="Notification_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="Notification_Error" xml:space="preserve">
+    <value>錯誤</value>
+  </data>
+  <data name="Nav_FileAssociationPage.Content" xml:space="preserve">
+    <value>檔案開啟方式管理員</value>
+  </data>
+  <data name="Nav_CrashReportPage.Content" xml:space="preserve">
+    <value>當機與崩潰分析</value>
+  </data>
+  <data name="Nav_InputTesterPage.Content" xml:space="preserve">
+    <value>鍵盤滑鼠檢測</value>
+  </data>
+  <data name="Notification_Copied" xml:space="preserve">
+    <value>已複製到剪貼簿</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- 2. 首頁與系統概觀 -->
+  <!-- ========================================================================= -->
   <data name="HomePage_Title.Text" xml:space="preserve">
     <value>首頁</value>
-  </data>
-  <data name="TestToolPage_Title.Text" xml:space="preserve">
-    <value>測試工具</value>
-  </data>
-  <data name="SettingsPage_Title.Text" xml:space="preserve">
-    <value>設定</value>
-  </data>
-  <data name="SettingsPage_AppearanceBehaviorHeader.Text" xml:space="preserve">
-    <value>外觀與行為</value>
-  </data>
-  <data name="SettingsPage_LanguageTitle.Text" xml:space="preserve">
-    <value>應用程式顯示語言</value>
-  </data>
-  <data name="SettingsPage_LanguageDescription.Text" xml:space="preserve">
-    <value>選擇您偏好的語言。變更將在重新啟動後生效。</value>
-  </data>
-  <data name="Language_zh_TW.Content" xml:space="preserve">
-    <value>中文 (臺灣)</value>
-  </data>
-  <data name="Language_en_US.Content" xml:space="preserve">
-    <value>英文 (美國)</value>
-  </data>
-  <data name="SettingsPage_LanguageRestartNotice.Text" xml:space="preserve">
-    <value>※ 變更語言後，需要重新啟動應用程式才會完全生效。</value>
-  </data>
-  <data name="LanguageChangeDialog_Title" xml:space="preserve">
-    <value>需要重新啟動</value>
-  </data>
-  <data name="LanguageChangeDialog_Content" xml:space="preserve">
-    <value>變更語言需要重新啟動應用程式才會生效。確定要儲存變更嗎？</value>
-  </data>
-  <data name="LanguageChangeDialog_Confirm" xml:space="preserve">
-    <value>立刻關閉（需手動重新開啟）</value>
-  </data>
-  <data name="LanguageChangeDialog_Cancel" xml:space="preserve">
-    <value>取消</value>
-  </data>
-  <data name="SettingsPage_ThemeHeader.Text" xml:space="preserve">
-    <value>個人化</value>
-  </data>
-  <data name="SettingsPage_ThemeTitle.Text" xml:space="preserve">
-    <value>應用程式佈景主題</value>
-  </data>
-  <data name="SettingsPage_ThemeDescription.Text" xml:space="preserve">
-    <value>自訂應用程式的外觀風格。</value>
-  </data>
-  <data name="Theme_Default.Content" xml:space="preserve">
-    <value>使用系統設定</value>
-  </data>
-  <data name="Theme_Light.Content" xml:space="preserve">
-    <value>淺色</value>
-  </data>
-  <data name="Theme_Dark.Content" xml:space="preserve">
-    <value>深色</value>
-  </data>
-  <data name="SettingsPage_AboutHeader.Text" xml:space="preserve">
-    <value>關於</value>
-  </data>
-  <data name="SettingsPage_AppVersion.Text" xml:space="preserve">
-    <value>蘭蘭露工具箱</value>
-  </data>
-  <data name="SettingsPage_Copyright.Text" xml:space="preserve">
-    <value>© 2026 flandretw 著作權所有，保留一切權利。</value>
-  </data>
-  <data name="SettingsPage_MITLink.Content" xml:space="preserve">
-    <value>MIT 軟體授權條款</value>
   </data>
   <data name="HomePage_CPU.Text" xml:space="preserve">
     <value>處理器 (CPU)</value>
@@ -171,143 +155,99 @@
   <data name="HomePage_Detecting.Text" xml:space="preserve">
     <value>偵測中……</value>
   </data>
-  <data name="Shell_Performance.Content" xml:space="preserve">
-    <value>效能</value>
-  </data>
-  <data name="PerformancePage_Title.Text" xml:space="preserve">
-    <value>效能</value>
-  </data>
-  <data name="PerformancePage_Description.Text" xml:space="preserve">
-    <value>即時監控 CPU、GPU 與記憶體的使用狀態與硬體資訊。</value>
-  </data>
   <data name="HomePage_Welcome.Text" xml:space="preserve">
     <value>歡迎使用蘭蘭露工具箱</value>
   </data>
   <data name="HomePage_Intro.Text" xml:space="preserve">
     <value>專為 Windows 11 設計的現代化工具箱，提供硬體監控與各類實用工具。點擊下方連結或側邊選單開始探索吧！</value>
   </data>
-  <data name="PerformancePage_Loading.Text" xml:space="preserve">
-    <value>正在讀取系統資訊……</value>
-  </data>
   <data name="HomePage_Version_Format" xml:space="preserve">
     <value>版本 {0}</value>
-  </data>
-  <data name="Greeting_LateNight" xml:space="preserve">
-    <value>晚安，早點休息吧，明天也是新的一天！</value>
-  </data>
-  <data name="Greeting_Morning" xml:space="preserve">
-    <value>早安，今天又是一個新的開始！</value>
-  </data>
-  <data name="Greeting_Afternoon" xml:space="preserve">
-    <value>午安，忙碌之餘別忘了休息一下喔！</value>
-  </data>
-  <data name="Greeting_Evening" xml:space="preserve">
-    <value>晚安，辛苦了一天，放鬆享受夜晚時光吧！</value>
   </data>
   <data name="HomePage_PoweredBy.Text" xml:space="preserve">
     <value>由 flandretw 驅動</value>
   </data>
-  <data name="Nav_SystemRepairPage.Content" xml:space="preserve">
+  <data name="HomePage_QuickStart.Text" xml:space="preserve">
+    <value>快速開始</value>
+  </data>
+  <data name="HomePage_ViewPerformance.Content" xml:space="preserve">
+    <value>查看系統效能</value>
+  </data>
+  <data name="HomePage_AppSettings.Text" xml:space="preserve">
+    <value>軟體設定</value>
+  </data>
+  <data name="HomePage_ContactUs.Text" xml:space="preserve">
+    <value>聯絡我們</value>
+  </data>
+  <data name="HomePage_GitHubProject.Text" xml:space="preserve">
+    <value>GitHub 專案頁面</value>
+  </data>
+  <data name="HomePage_RefreshBtn_ToolTip" xml:space="preserve">
+    <value>重新整理硬體規格</value>
+  </data>
+  <data name="HomePage_Refresh_Success" xml:space="preserve">
+    <value>已重新整理硬體規格與系統資訊</value>
+  </data>
+  <data name="HomePage_SystemStatus_Healthy.Text" xml:space="preserve">
+    <value>系統運作狀態良好</value>
+  </data>
+  <data name="HomePage_QuickActions_Title.Text" xml:space="preserve">
+    <value>快速功能總覽</value>
+  </data>
+  <data name="HomePage_Feature_Perf_Title.Text" xml:space="preserve">
+    <value>即時效能監控</value>
+  </data>
+  <data name="HomePage_Feature_Perf_Desc.Text" xml:space="preserve">
+    <value>即時查看 CPU、GPU、RAM 負載與時脈溫度</value>
+  </data>
+  <data name="HomePage_Feature_Input_Title.Text" xml:space="preserve">
+    <value>鍵盤與滑鼠診斷</value>
+  </data>
+  <data name="HomePage_Feature_Input_Desc.Text" xml:space="preserve">
+    <value>全鍵無衝測試、輪詢率、微動連點與軌跡畫布</value>
+  </data>
+  <data name="HomePage_Feature_Repair_Title.Text" xml:space="preserve">
     <value>系統完整性修復</value>
   </data>
-  <data name="SystemRepairPage_Title.Text" xml:space="preserve">
-    <value>系統完整性修復</value>
+  <data name="HomePage_Feature_Repair_Desc.Text" xml:space="preserve">
+    <value>DISM 與 SFC 映像自動修復與損毀掃描</value>
   </data>
-  <data name="SystemRepairPage_ScanHealth_Title.Text" xml:space="preserve">
-    <value>掃描映像狀態</value>
+  <data name="HomePage_Feature_Crash_Title.Text" xml:space="preserve">
+    <value>系統當機診斷</value>
   </data>
-  <data name="SystemRepairPage_ScanHealth_Desc.Text" xml:space="preserve">
-    <value>深入檢查 Windows 映像是否有損毀。這像是翻閱維修紀錄，找出潛在的問題但暫不進行修復。</value>
+  <data name="HomePage_Feature_Crash_Desc.Text" xml:space="preserve">
+    <value>藍屏 Minidump 與 Windows 錯誤事件分析</value>
   </data>
-  <data name="SystemRepairPage_CheckHealth_Title.Text" xml:space="preserve">
-    <value>檢查損毀標記</value>
+  <data name="HomePage_Feature_Hash_Title.Text" xml:space="preserve">
+    <value>檔案雜湊計算</value>
   </data>
-  <data name="SystemRepairPage_CheckHealth_Desc.Text" xml:space="preserve">
-    <value>快速掃描系統是否已被標記為損毀。這是一次快速的斷層掃描，用來確認系統目前的健康狀態。</value>
+  <data name="HomePage_Feature_Hash_Desc.Text" xml:space="preserve">
+    <value>SHA-256、MD5 快速校驗與檔案指紋比對</value>
   </data>
-  <data name="SystemRepairPage_RestoreHealth_Title.Text" xml:space="preserve">
-    <value>修復系統映像</value>
+  <data name="HomePage_Feature_Assoc_Title.Text" xml:space="preserve">
+    <value>檔案關聯管理</value>
   </data>
-  <data name="SystemRepairPage_RestoreHealth_Desc.Text" xml:space="preserve">
-    <value>發現損毀時，自動從 Windows Update 下載替代檔案進行修復。這是最徹底的映像復原方式。</value>
+  <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
+    <value>重設副檔名預設開啟程式與系統關聯修復</value>
   </data>
-  <data name="SystemRepairPage_SfcScannow_Title.Text" xml:space="preserve">
-    <value>系統檔案檢查</value>
+  <data name="HomePage_Copied_Toast" xml:space="preserve">
+    <value>已複製到剪貼簿：{0}</value>
   </data>
-  <data name="SystemRepairPage_SfcScannow_Desc.Text" xml:space="preserve">
-    <value>掃描所有受保護的系統檔案並修復損毀。這是最常用的安裝修復工具，能解決多數檔案遺失問題。</value>
+  <data name="HomePage_Refresh_Title" xml:space="preserve">
+    <value>硬體資訊</value>
   </data>
-  <data name="SystemRepairPage_RunButton.Content" xml:space="preserve">
-    <value>執行</value>
+
+  <!-- ========================================================================= -->
+  <!-- 3. 效能監控與硬體診斷 -->
+  <!-- ========================================================================= -->
+  <data name="PerformancePage_Title.Text" xml:space="preserve">
+    <value>效能</value>
   </data>
-  <data name="SystemRepairPage_AutoMode_Title.Text" xml:space="preserve">
-    <value>自動修復模式</value>
+  <data name="PerformancePage_Description.Text" xml:space="preserve">
+    <value>即時監控 CPU、GPU 與記憶體的使用狀態與硬體資訊。</value>
   </data>
-  <data name="SystemRepairPage_AutoMode_Desc.Text" xml:space="preserve">
-    <value>自動執行完整的檢測與修復流程。推薦大多數使用者使用。</value>
-  </data>
-  <data name="SystemRepairPage_AutoMode_Default.Content" xml:space="preserve">
-    <value>完整修復（預設）</value>
-  </data>
-  <data name="SystemRepairPage_AutoMode_SfcOnly.Content" xml:space="preserve">
-    <value>僅系統檔案檢查</value>
-  </data>
-  <data name="SystemRepairPage_AdvancedMode_Title.Text" xml:space="preserve">
-    <value>進階模式</value>
-  </data>
-  <data name="SystemRepairPage_AdvancedMode_Desc.Text" xml:space="preserve">
-    <value>手動執行特定的維護指令。建議進階使用者使用。</value>
-  </data>
-  <data name="SystemRepairPage_StartButton.Content" xml:space="preserve">
-    <value>開始執行</value>
-  </data>
-  <data name="SystemRepairPage_Running" xml:space="preserve">
-    <value>正在執行……</value>
-  </data>
-  <data name="SystemRepairPage_Completed" xml:space="preserve">
-    <value>執行完成</value>
-  </data>
-  <data name="SystemRepairPage_Error" xml:space="preserve">
-    <value>執行期間發生錯誤</value>
-  </data>
-  <data name="SystemRepairPage_AdminRequired" xml:space="preserve">
-    <value>此操作需要管理員權限。</value>
-  </data>
-  <data name="SystemRepairPage_QuitTitle" xml:space="preserve">
-    <value>操作執行中</value>
-  </data>
-  <data name="SystemRepairPage_QuitContent" xml:space="preserve">
-    <value>系統修復操作正在執行中，現在退出將會中斷程序。確定要退出嗎？</value>
-  </data>
-  <data name="SystemRepairPage_QuitConfirm" xml:space="preserve">
-    <value>確定退出</value>
-  </data>
-  <data name="SystemRepairPage_QuitCancel" xml:space="preserve">
-    <value>取消</value>
-  </data>
-  <data name="SystemRepairPage_CompletionInfoBar.Title" xml:space="preserve">
-    <value>修復任務已完成</value>
-  </data>
-  <data name="SystemRepairPage_CompletionInfoBar.Message" xml:space="preserve">
-    <value>所有的修復流程已順利結束，你可以查看歷程紀錄了解詳情。</value>
-  </data>
-  <data name="SettingsPage_NotificationSound_Title.Text" xml:space="preserve">
-    <value>任務完成提示音</value>
-  </data>
-  <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
-    <value>在系統修復或長時間任務結束時播放提示音。</value>
-  </data>
-  <data name="SettingsPage_NotificationsTitle.Text" xml:space="preserve">
-    <value>通知</value>
-  </data>
-  <data name="SettingsPage_NotificationsDescription.Text" xml:space="preserve">
-    <value>管理應用程式的通知行為與提示方式。</value>
-  </data>
-  <data name="SettingsPage_TempUnitTitle.Text" xml:space="preserve">
-    <value>溫度單位</value>
-  </data>
-  <data name="SettingsPage_TempUnitDescription.Text" xml:space="preserve">
-    <value>選擇應用程式中顯示溫度的單位。</value>
+  <data name="PerformancePage_Loading.Text" xml:space="preserve">
+    <value>正在讀取系統資訊……</value>
   </data>
   <data name="TempUnit_Celsius.Content" xml:space="preserve">
     <value>攝氏 (°C)</value>
@@ -342,55 +282,6 @@
   <data name="GpuMonitorCard_Temperature.Label" xml:space="preserve">
     <value>溫度</value>
   </data>
-  <data name="HomePage_QuickStart.Text" xml:space="preserve">
-    <value>快速開始</value>
-  </data>
-  <data name="HomePage_ViewPerformance.Content" xml:space="preserve">
-    <value>查看系統效能</value>
-  </data>
-  <data name="HomePage_AppSettings.Text" xml:space="preserve">
-    <value>軟體設定</value>
-  </data>
-  <data name="HomePage_ContactUs.Text" xml:space="preserve">
-    <value>聯絡我們</value>
-  </data>
-  <data name="HomePage_GitHubProject.Text" xml:space="preserve">
-    <value>GitHub 專案頁面</value>
-  </data>
-  <data name="SystemRepairPage_HistoryHeader.Text" xml:space="preserve">
-    <value>歷程紀錄</value>
-  </data>
-  <data name="SystemRepairPage_Copy.Text" xml:space="preserve">
-    <value>複製</value>
-  </data>
-  <data name="SystemRepairPage_Clear.Text" xml:space="preserve">
-    <value>清除</value>
-  </data>
-  <data name="SystemRepairPage_WaitingPlaceholder" xml:space="preserve">
-    <value>等待指令執行……</value>
-  </data>
-  <data name="SystemRepairPage_Log_FullRepairStart" xml:space="preserve">
-    <value>=== 開始自動完整修復流程 ===</value>
-  </data>
-  <data name="SystemRepairPage_Log_FullRepairEnd" xml:space="preserve">
-    <value>=== 自動完整修復流程結束 ===</value>
-  </data>
-  <data name="SystemRepairPage_Log_SfcStart" xml:space="preserve">
-    <value>=== 開始系統檔案檢查流程 ===</value>
-  </data>
-  <data name="SystemRepairPage_Log_SfcEnd" xml:space="preserve">
-    <value>=== 系統檔案檢查流程結束 ===</value>
-  </data>
-  <data name="SystemRepairPage_Log_Executing" xml:space="preserve">
-    <value>執行中：</value>
-  </data>
-  <data name="SystemRepairPage_Log_ErrorPrefix" xml:space="preserve">
-    <value>[錯誤]</value>
-  </data>
-  <data name="SystemRepairPage_Copied" xml:space="preserve">
-    <value>已複製</value>
-  </data>
-  <!-- Performance Page Detailed Labels -->
   <data name="PerfPage_Cpu_BaseSpeed.Text" xml:space="preserve">
     <value>基本速度</value>
   </data>
@@ -493,604 +384,10 @@
   <data name="PerfPage_Ram_HardwareReserved.Text" xml:space="preserve">
     <value>硬體保留：</value>
   </data>
-  <data name="SettingsPage_DebugReportTitle.Text" xml:space="preserve">
-    <value>偵錯報告</value>
-  </data>
-  <data name="SettingsPage_DebugReportDescription.Text" xml:space="preserve">
-    <value>記錄應用程式啟動、系統錯誤、工具執行紀錄與操作事件，以協助排查問題。</value>
-  </data>
-  <data name="SettingsPage_DebugReport_StorageCardTitle.Text" xml:space="preserve">
-    <value>儲存位置</value>
-  </data>
-  <data name="SettingsPage_DebugReport_StoragePathPrefix.Text" xml:space="preserve">
-    <value>目前儲存在：</value>
-  </data>
-  <data name="SettingsPage_DebugReport_SelectFolderButton.Content" xml:space="preserve">
-    <value>變更資料夾</value>
-  </data>
-  <data name="SettingsPage_DebugReport_SelectFolderTitle" xml:space="preserve">
-    <value>選擇偵錯報告儲存資料夾</value>
-  </data>
-  <data name="SettingsPage_DebugReport_ResetButton.Content" xml:space="preserve">
-    <value>重設</value>
-  </data>
-  <data name="SettingsPage_DebugReport_ResetButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>將儲存路徑重設為預設值</value>
-  </data>
-  <data name="SettingsPage_DebugReport_DefaultPathDescription.Text" xml:space="preserve">
-    <value>預設儲存在應用程式所在目錄</value>
-  </data>
-  <data name="SettingsPage_DiagnosticsSectionTitle.Text" xml:space="preserve">
-    <value>診斷與意見反映</value>
-  </data>
-  <data name="Nav_UtilityPage.Content" xml:space="preserve">
-    <value>實用工具</value>
-  </data>
-  <data name="UtilityPage_Title.Text" xml:space="preserve">
-    <value>實用工具</value>
-  </data>
-  <data name="Nav_FileHashPage.Content" xml:space="preserve">
-    <value>計算檔案雜湊碼</value>
-  </data>
-  <data name="FileHashPage_Title.Text" xml:space="preserve">
-    <value>計算檔案雜湊碼</value>
-  </data>
-  <data name="FileHashPage_Desc.Text" xml:space="preserve">
-    <value>快速計算與驗證檔案的 SHA-256、SHA-1 或 MD5 雜湊值。</value>
-  </data>
-  <data name="FileHashPage_SelectFile.Content" xml:space="preserve">
-    <value>選擇檔案</value>
-  </data>
-  <data name="FileHashPage_DragDropPrompt.Text" xml:space="preserve">
-    <value>選擇要計算的檔案</value>
-  </data>
-  <data name="FileHashPage_SelectFileCardDesc.Text" xml:space="preserve">
-    <value>從您的電腦中選取一個檔案，系統會即時為您計算並比對對應的雜湊值。</value>
-  </data>
-  <data name="FileHashPage_Algorithm.Text" xml:space="preserve">
-    <value>雜湊演算法</value>
-  </data>
-  <data name="FileHashPage_Result.Header" xml:space="preserve">
-    <value>雜湊結果</value>
-  </data>
-  <data name="FileHashPage_Compare.Text" xml:space="preserve">
-    <value>對比驗證雜湊值（不區分大小寫）</value>
-  </data>
-  <data name="FileHashPage_CompareButton.Text" xml:space="preserve">
-    <value>貼上比對</value>
-  </data>
-  <data name="FileHashPage_CopyButton.Text" xml:space="preserve">
-    <value>複製結果</value>
-  </data>
-  <data name="FileHashPage_CalculateButton.Content" xml:space="preserve">
-    <value>重新計算</value>
-  </data>
-  <data name="FileHashPage_VerifySuccess" xml:space="preserve">
-    <value>雜湊值比對成功！完全一致。</value>
-  </data>
-  <data name="FileHashPage_VerifyFail" xml:space="preserve">
-    <value>雜湊值比對失敗！檔案可能已被修改或演算法不符。</value>
-  </data>
-  <data name="FileHashPage_Calculating" xml:space="preserve">
-    <value>正在計算雜湊值，請稍候……</value>
-  </data>
-  <data name="FileHashPage_SelectFileFirst" xml:space="preserve">
-    <value>請先選擇一個檔案！</value>
-  </data>
-  <data name="FileHashPage_FileSelected" xml:space="preserve">
-    <value>已選擇檔案：</value>
-  </data>
-  <data name="FileHashPage_FileSize" xml:space="preserve">
-    <value>檔案大小：</value>
-  </data>
-  <data name="FileHashPage_Algorithm_Desc.Text" xml:space="preserve">
-    <value>SHA-256（高度安全，建議使用）、SHA-1（舊版相容）、MD5（快速驗證）、SHA-512（極高強度安全）。</value>
-  </data>
-  <data name="FileHashPage_Result.PlaceholderText" xml:space="preserve">
-    <value>選擇檔案並計算後，雜湊結果會在此處顯示……</value>
-  </data>
-  <data name="FileHashPage_Compare_Desc.Text" xml:space="preserve">
-    <value>在此貼上您預期比對的雜湊值，系統會即時進行無大小寫差異的比對驗證。</value>
-  </data>
-  <data name="FileHashPage_CompareInput.PlaceholderText" xml:space="preserve">
-    <value>輸入或貼上預期的雜湊值以進行比對……</value>
-  </data>
-  <data name="FileHashPage_DialogTitle" xml:space="preserve">
-    <value>選擇要計算雜湊值的檔案</value>
-  </data>
-  <data name="FileHashPage_Error_FileNotFound" xml:space="preserve">
-    <value>檔案不存在或無法存取！</value>
-  </data>
-  <data name="FileHashPage_VerifySuccess_Title" xml:space="preserve">
-    <value>驗證成功</value>
-  </data>
-  <data name="FileHashPage_VerifyFail_Title" xml:space="preserve">
-    <value>驗證失敗</value>
-  </data>
-  <data name="Notification_Success" xml:space="preserve">
-    <value>成功</value>
-  </data>
-  <data name="Notification_Error" xml:space="preserve">
-    <value>錯誤</value>
-  </data>
-  <data name="FileHashPage_Section_SelectFile" xml:space="preserve">
-    <value>選擇檔案</value>
-  </data>
-  <data name="FileHashPage_Section_Calculate" xml:space="preserve">
-    <value>計算雜湊值</value>
-  </data>
-  <data name="FileHashPage_Section_Verify" xml:space="preserve">
-    <value>比對驗證</value>
-  </data>
-  <data name="System_Cut" xml:space="preserve">
-    <value>剪下</value>
-  </data>
-  <data name="System_Copy" xml:space="preserve">
-    <value>複製</value>
-  </data>
-  <data name="System_Paste" xml:space="preserve">
-    <value>貼上</value>
-  </data>
-  <data name="System_Cancel" xml:space="preserve">
-    <value>取消</value>
-  </data>
-  <data name="FileHashPage_CalculationCancelled" xml:space="preserve">
-    <value>已取消計算。</value>
-  </data>
-  <data name="Nav_FileAssociationPage.Content" xml:space="preserve">
-    <value>檔案開啟方式管理員</value>
-  </data>
-  <data name="FileAssociationPage_Desc.Text" xml:space="preserve">
-    <value>重設或管理特定副檔名的預設開啟應用程式</value>
-  </data>
-  <data name="FileAssociationPage_ConfigTitle.Text" xml:space="preserve">
-    <value>配置檔案關聯</value>
-  </data>
-  <data name="FileAssociationPage_TargetExtTitle.Text" xml:space="preserve">
-    <value>目標檔案副檔名</value>
-  </data>
-  <data name="FileAssociationPage_TargetExtDesc.Text" xml:space="preserve">
-    <value>輸入您想要重設的檔案副檔名（例如：.pdf、.bin、.myext，會自動標準化格式）</value>
-  </data>
-  <data name="FileAssociationPage_TargetExtBox.PlaceholderText" xml:space="preserve">
-    <value>例如：pdf</value>
-  </data>
-  <data name="FileAssociationPage_SelectMethodTitle.Text" xml:space="preserve">
-    <value>選擇重設方式</value>
-  </data>
-  <data name="FileAssociationPage_Method1Title.Text" xml:space="preserve">
-    <value>方法一：呼叫系統原生開啟方式視窗（標準推薦）</value>
-  </data>
-  <data name="FileAssociationPage_Method1Desc.Text" xml:space="preserve">
-    <value>系統將彈出開啟方式選單，您可以重新選擇此副檔名的關聯程式，或者重設預設關聯。這是 Windows 原生推薦的安全標準做法。</value>
-  </data>
-  <data name="FileAssociationPage_Method1Button.Content" xml:space="preserve">
-    <value>安全引導重設</value>
-  </data>
-  <data name="FileAssociationPage_Method2Title.Text" xml:space="preserve">
-    <value>方法二：智慧定位登錄表手動重設（進階模式）</value>
-  </data>
-  <data name="FileAssociationPage_Method2Desc.Text" xml:space="preserve">
-    <value>針對進階使用者，直接開啟登錄編輯程式並智慧定位，由您親自掌握並手動重設。</value>
-  </data>
-  <data name="FileAssociationPage_Method2Content.Text" xml:space="preserve">
-    <value>直接開啟 Windows 內建的登錄編輯程式，並自動導航定位到該副檔名的關聯路徑下，方便您安全且直覺地進行手動重設與管理。</value>
-  </data>
-  <data name="FileAssociationPage_Method2Button.Content" xml:space="preserve">
-    <value>定位並手動重設</value>
-  </data>
-  <data name="FileAssociationPage_GuideTitle.Text" xml:space="preserve">
-    <value>🛠️ 登錄表手動重設操作說明：</value>
-  </data>
-  <data name="FileAssociationPage_GuideStep1.Text" xml:space="preserve">
-    <value>1. 在啟動的「登錄編輯程式」視窗中，您會發現畫面已自動展開並精確停留在目標目錄。</value>
-  </data>
-  <data name="FileAssociationPage_GuideStep2.Text" xml:space="preserve">
-    <value>2. 請在左側樹狀圖中，找到該副檔名目錄底下的「UserChoice」子資料夾。</value>
-  </data>
-  <data name="FileAssociationPage_GuideStep3.Text" xml:space="preserve">
-    <value>3. 在「UserChoice」資料夾上按滑鼠右鍵，選擇「刪除」，並在確認對話框中點選「是」。</value>
-  </data>
-  <data name="FileAssociationPage_GuideStep4.Text" xml:space="preserve">
-    <value>4. 清除後關閉登錄編輯程式即可。下次雙擊該類型檔案時，Windows 將會重新詢問預設開啟程式！</value>
-  </data>
-  <data name="FileAssociationPage_Warning_CriticalExt" xml:space="preserve">
-    <value>為了保護您的作業系統安全，此副檔名（.{0}）屬於 Windows 系統核心關鍵元件，不允許重設或修改其開啟方式，以免造成系統損毀或無法執行任何程式。</value>
-  </data>
-  <data name="FileAssociationPage_Warning_CriticalExtTitle" xml:space="preserve">
-    <value>🛡️ 系統安全保護</value>
-  </data>
-  <data name="FileAssociationPage_Success_DialogOpened" xml:space="preserve">
-    <value>已成功呼叫系統開啟方式對話框！請在彈出的視窗中進行設定或重設關聯。</value>
-  </data>
-  <data name="FileAssociationPage_Success_Title" xml:space="preserve">
-    <value>成功</value>
-  </data>
-  <data name="FileAssociationPage_Error_DialogOpenFailed" xml:space="preserve">
-    <value>無法開啟「開啟方式」對話框：{0}</value>
-  </data>
-  <data name="FileAssociationPage_Error_Title" xml:space="preserve">
-    <value>錯誤</value>
-  </data>
-  <data name="FileAssociationPage_Info_Locating" xml:space="preserve">
-    <value>正在開啟並為您智慧定位登錄編輯程式...</value>
-  </data>
-  <data name="FileAssociationPage_Info_LocatingTitle" xml:space="preserve">
-    <value>智慧定位中</value>
-  </data>
-  <data name="FileAssociationPage_Warning_LocateFailed" xml:space="preserve">
-    <value>已開啟登錄編輯程式，但未能取得其視窗控制代碼以進行自動導航。請確認已同意使用者帳戶控制 (UAC) 提示。</value>
-  </data>
-  <data name="FileAssociationPage_Warning_LocateFailedTitle" xml:space="preserve">
-    <value>無法定位</value>
-  </data>
-  <data name="FileAssociationPage_Success_RegNavigated" xml:space="preserve">
-    <value>登錄編輯程式已成功智慧定位至 `.{0}`！請參閱下方說明卡進行重設。</value>
-  </data>
-  <data name="FileAssociationPage_Success_RegNavigatedTitle" xml:space="preserve">
-    <value>導航定位成功</value>
-  </data>
-  <data name="FileAssociationPage_Warning_FallbackCopy" xml:space="preserve">
-    <value>未能定位到網址列（可能已被隱藏）。目標路徑已為您複製到剪貼簿，請在上方網址列貼上並按 Enter 進行定位！</value>
-  </data>
-  <data name="FileAssociationPage_Warning_FallbackCopyTitle" xml:space="preserve">
-    <value>請手動貼上</value>
-  </data>
-  <data name="FileAssociationPage_Error_RegLaunchFailed" xml:space="preserve">
-    <value>無法啟動登錄編輯程式：{0}。請確認已同意使用者帳戶控制 (UAC) 提示。</value>
-  </data>
-  <data name="FileAssociationPage_Error_RegLaunchFailedTitle" xml:space="preserve">
-    <value>啟動失敗</value>
-  </data>
-  <data name="FileAssociationPage_Title.Text" xml:space="preserve">
-    <value>檔案開啟方式管理員</value>
-  </data>
-  <data name="System_AllFiles" xml:space="preserve">
-    <value>所有檔案</value>
-  </data>
-  <!-- ========================================================================= -->
-  <!-- Crash Report: UI Elements & Navigation                                    -->
-  <!-- ========================================================================= -->
-  <data name="Nav_CrashReportPage.Content" xml:space="preserve">
-    <value>當機與崩潰分析</value>
-  </data>
-  <data name="CrashReportPage_Title.Text" xml:space="preserve">
-    <value>當機與崩潰分析</value>
-  </data>
-  <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
-    <value>自動掃描並分析系統核心傾印 (Minidump) 與應用程式崩潰事件日誌</value>
-  </data>
-  <data name="CrashReportPage_Guide_Title.Text" xml:space="preserve">
-    <value>功能說明與排錯指引</value>
-  </data>
-  <data name="CrashReportPage_Guide_Desc1.Text" xml:space="preserve">
-    <value>• 自動分析：系統會自動擷取 C:\Windows\Minidump 核心傾印檔與 Windows 事件檢視器中的重大當機事件。</value>
-  </data>
-  <data name="CrashReportPage_Guide_Desc2.Text" xml:space="preserve">
-    <value>• 智慧排錯：點選任一事件即可解析 BugCheck 錯誤代碼、引發崩潰的可疑驅動程式模組並取得改善建議。</value>
-  </data>
-  <data name="CrashReportPage_Guide_Desc3.Text" xml:space="preserve">
-    <value>• 報告匯出：可複製個別診斷摘要，或點選「匯出診斷報告」產生 Markdown 紀錄，方便向技術社群尋求協助。</value>
-  </data>
-  <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
-    <value>總崩潰事件</value>
-  </data>
-  <data name="CrashReportPage_Card_BSOD.Text" xml:space="preserve">
-    <value>系統核心當機</value>
-  </data>
-  <data name="CrashReportPage_Card_AppCrash.Text" xml:space="preserve">
-    <value>應用程式錯誤</value>
-  </data>
-  <data name="CrashReportPage_Card_LastCrash.Text" xml:space="preserve">
-    <value>最近當機時間</value>
-  </data>
-  <data name="CrashReportPage_Filter_All.Content" xml:space="preserve">
-    <value>所有事件</value>
-  </data>
-  <data name="CrashReportPage_Filter_BSOD.Content" xml:space="preserve">
-    <value>僅系統核心當機</value>
-  </data>
-  <data name="CrashReportPage_Filter_App.Content" xml:space="preserve">
-    <value>僅應用程式崩潰</value>
-  </data>
-  <data name="CrashReportPage_SearchBox.PlaceholderText" xml:space="preserve">
-    <value>搜尋程式名稱、錯誤碼、驅動程式或模組...</value>
-  </data>
-  <data name="CrashReportPage_RefreshBtn.Text" xml:space="preserve">
-    <value>重新掃描</value>
-  </data>
-  <data name="CrashReportPage_OpenDumpFolderBtn.Text" xml:space="preserve">
-    <value>開啟 Dump 資料夾</value>
-  </data>
-  <data name="CrashReportPage_ExportBtn.Text" xml:space="preserve">
-    <value>匯出診斷報告</value>
-  </data>
-  <data name="CrashReportPage_NoCrashes_Title.Text" xml:space="preserve">
-    <value>系統非常健康！</value>
-  </data>
-  <data name="CrashReportPage_NoCrashes_Desc.Text" xml:space="preserve">
-    <value>在系統記錄中未發現任何系統核心當機或近期應用程式崩潰記錄。</value>
-  </data>
-  <data name="CrashReportPage_SelectPrompt_Title.Text" xml:space="preserve">
-    <value>請選擇左側事件</value>
-  </data>
-  <data name="CrashReportPage_SelectPrompt_Desc.Text" xml:space="preserve">
-    <value>點選左側清單中的任一當機或崩潰事件以檢視詳細診斷資訊與排錯建議。</value>
-  </data>
-  <data name="CrashReportPage_Detail_Header.Text" xml:space="preserve">
-    <value>崩潰事件詳細診斷</value>
-  </data>
-  <data name="CrashReportPage_Detail_DiagnosisHeader.Text" xml:space="preserve">
-    <value>智慧診斷與成因分析</value>
-  </data>
-  <data name="CrashReportPage_Detail_RecommendationHeader.Text" xml:space="preserve">
-    <value>排錯與改善建議</value>
-  </data>
-  <data name="CrashReportPage_Detail_TechDetailsHeader.Text" xml:space="preserve">
-    <value>技術參數資訊</value>
-  </data>
-  <data name="CrashReportPage_Detail_ErrorCode.Text" xml:space="preserve">
-    <value>錯誤代碼</value>
-  </data>
-  <data name="CrashReportPage_Detail_FaultModule.Text" xml:space="preserve">
-    <value>可疑模組/驅動</value>
-  </data>
-  <data name="CrashReportPage_Detail_SourceApp.Text" xml:space="preserve">
-    <value>錯誤來源 / 程式</value>
-  </data>
-  <data name="CrashReportPage_Detail_Params.Text" xml:space="preserve">
-    <value>崩潰參數 (Arg1~4)</value>
-  </data>
-  <data name="CrashReportPage_Detail_DumpPath.Text" xml:space="preserve">
-    <value>傾印檔案 / 路徑</value>
-  </data>
-  <data name="CrashReportPage_Detail_LocateBtn.Text" xml:space="preserve">
-    <value>開啟位置</value>
-  </data>
-  <data name="CrashReportPage_Detail_RawLogHeader.Text" xml:space="preserve">
-    <value>原始事件紀錄</value>
-  </data>
-  <data name="CrashReportPage_Detail_CopyBtn.Text" xml:space="preserve">
-    <value>複製詳細報告</value>
-  </data>
-  <data name="CrashReportPage_Detail_Copied" xml:space="preserve">
-    <value>已複製到剪貼簿</value>
-  </data>
-  <data name="CrashReportPage_ExportSuccess_Title" xml:space="preserve">
-    <value>匯出成功</value>
-  </data>
-  <data name="CrashReportPage_ExportSuccess_Msg" xml:space="preserve">
-    <value>當機診斷報告已成功儲存至檔案。</value>
-  </data>
-  <data name="CrashReportPage_DumpFolder_NotFound" xml:space="preserve">
-    <value>Minidump 資料夾不存在或尚未產生任何傾印檔案。</value>
-  </data>
-  <data name="CrashReportPage_None" xml:space="preserve">
-    <value>無紀錄</value>
-  </data>
-  <data name="CrashReportPage_Scanning.Text" xml:space="preserve">
-    <value>正在掃描事件記錄與核心傾印檔案...</value>
-  </data>
-  <data name="CrashReportPage_Badge_KernelCrash" xml:space="preserve">
-    <value>核心當機</value>
-  </data>
-  <data name="CrashReportPage_Badge_AppCrash" xml:space="preserve">
-    <value>程式錯誤</value>
-  </data>
-  <data name="CrashReportPage_Badge_AppHang" xml:space="preserve">
-    <value>程式凍結</value>
-  </data>
-  <data name="CrashReportPage_Badge_DotNetCrash" xml:space="preserve">
-    <value>.NET 錯誤</value>
-  </data>
-  <data name="CrashReportPage_Source_Kernel" xml:space="preserve">
-    <value>系統核心 (Kernel)</value>
-  </data>
-  <data name="CrashReportPage_Source_Unknown" xml:space="preserve">
-    <value>未知程式</value>
-  </data>
-  <data name="CrashReportPage_RawLog_None" xml:space="preserve">
-    <value>無其他詳細紀錄。</value>
-  </data>
-  <!-- ========================================================================= -->
-  <!-- Crash Report: Export Template Strings                                     -->
-  <!-- ========================================================================= -->
-  <data name="CrashReport_Export_Title" xml:space="preserve">
-    <value># Windows 系統當機與崩潰診斷報告</value>
-  </data>
-  <data name="CrashReport_Export_GeneratedTime" xml:space="preserve">
-    <value>產生時間：{0}</value>
-  </data>
-  <data name="CrashReport_Export_Summary" xml:space="preserve">
-    <value>總事件數：{0}（系統核心當機：{1}，應用程式錯誤：{2}）</value>
-  </data>
-  <data name="CrashReport_Export_Field_Timestamp" xml:space="preserve">
-    <value>發生時間</value>
-  </data>
-  <data name="CrashReport_Export_Field_ErrorCode" xml:space="preserve">
-    <value>錯誤代碼</value>
-  </data>
-  <data name="CrashReport_Export_Field_Source" xml:space="preserve">
-    <value>錯誤來源</value>
-  </data>
-  <data name="CrashReport_Export_Field_Module" xml:space="preserve">
-    <value>可疑模組／驅動程式</value>
-  </data>
-  <data name="CrashReport_Export_Field_Parameters" xml:space="preserve">
-    <value>崩潰參數</value>
-  </data>
-  <data name="CrashReport_Export_Field_DumpPath" xml:space="preserve">
-    <value>傾印／檔案路徑</value>
-  </data>
-  <data name="CrashReport_Export_Field_Diagnosis" xml:space="preserve">
-    <value>診斷成因</value>
-  </data>
-  <data name="CrashReport_Export_Field_Recommendation" xml:space="preserve">
-    <value>排錯建議</value>
-  </data>
-  <!-- ========================================================================= -->
-  <!-- Crash Report: BugCheck Diagnostic Knowledge Base                          -->
-  <!-- ========================================================================= -->
-  <data name="BugCheck_Unknown_Desc" xml:space="preserve">
-    <value>未知的 Windows 系統核心崩潰代碼。</value>
-  </data>
-  <data name="BugCheck_Unknown_Rec" xml:space="preserve">
-    <value>建議在搜尋引擎中查詢該錯誤代碼以取得專屬解決方案。</value>
-  </data>
-  <data name="BugCheck_0x0000000A_Desc" xml:space="preserve">
-    <value>核心試圖在過高的插斷請求層級 (IRQL) 存取可分頁記憶體。</value>
-  </data>
-  <data name="BugCheck_0x0000000A_Rec" xml:space="preserve">
-    <value>通常是由損壞或不相容的硬體驅動程式（例如網路卡、音效卡或防毒軟體驅動）引起，亦可能為記憶體損壞。建議更新相關驅動程式或執行記憶體診斷。</value>
-  </data>
-  <data name="BugCheck_0x0000001E_Desc" xml:space="preserve">
-    <value>核心模式程式產生的例外狀況未被錯誤處理常式攔截。</value>
-  </data>
-  <data name="BugCheck_0x0000001E_Rec" xml:space="preserve">
-    <value>通常與最近安裝的硬體、驅動程式或第三方防毒系統服務衝突有關。可嘗試解除安裝最近更新的驅動或軟體。</value>
-  </data>
-  <data name="BugCheck_0x0000003B_Desc" xml:space="preserve">
-    <value>在執行系統服務常式時發生了未處理的例外狀況。</value>
-  </data>
-  <data name="BugCheck_0x0000003B_Rec" xml:space="preserve">
-    <value>極高機率由顯示卡驅動程式（如 nvlddmkm.sys / amdkmdag.sys）、系統核心檔案損毀或分頁集區損壞所引起。建議使用 DDU 乾淨重新安裝顯示卡驅動程式，並執行 sfc /scannow。</value>
-  </data>
-  <data name="BugCheck_0x00000050_Desc" xml:space="preserve">
-    <value>系統引用了無效的記憶體位址（非分頁集區中的無效分頁）。</value>
-  </data>
-  <data name="BugCheck_0x00000050_Rec" xml:space="preserve">
-    <value>常見原因為實體記憶體 (RAM) 故障、主機板記憶體插槽氧化、防毒軟體核心模組衝突或 NTFS 檔案系統損毀。建議擦拭清潔金手指或執行記憶體測試。</value>
-  </data>
-  <data name="BugCheck_0x0000007E_Desc" xml:space="preserve">
-    <value>系統執行緒產生了例外狀況但未被捕捉。</value>
-  </data>
-  <data name="BugCheck_0x0000007E_Rec" xml:space="preserve">
-    <value>多半由硬體驅動程式不相容或硬碟空間不足引起。請檢視可疑模組名稱並更新該驅動程式。</value>
-  </data>
-  <data name="BugCheck_0x0000009F_Desc" xml:space="preserve">
-    <value>驅動程式處於不一致或無效的電源狀態（通常在睡眠、休眠或喚醒時發生）。</value>
-  </data>
-  <data name="BugCheck_0x0000009F_Rec" xml:space="preserve">
-    <value>通常由電源管理驅動程式、USB 控制器或 Wi-Fi 網路卡驅動程式在睡眠過渡期間逾時引起。建議更新晶片組與無線網路卡驅動程式。</value>
-  </data>
-  <data name="BugCheck_0x000000A0_Desc" xml:space="preserve">
-    <value>電源管理員遇到嚴重內部錯誤（通常與休眠或快速啟動檔案有關）。</value>
-  </data>
-  <data name="BugCheck_0x000000A0_Rec" xml:space="preserve">
-    <value>可能是休眠檔案 (hiberfil.sys) 損毀或儲存裝置驅動程式異常。可嘗試以管理員身分執行 powercfg -h off 再 powercfg -h on 重建休眠檔。</value>
-  </data>
-  <data name="BugCheck_0x000000D1_Desc" xml:space="preserve">
-    <value>驅動程式在過高的 IRQL 下嘗試存取無效的記憶體位址。</value>
-  </data>
-  <data name="BugCheck_0x000000D1_Rec" xml:space="preserve">
-    <value>最常見的系統當機代碼之一，請查看導致崩潰的驅動程式名稱（如網路卡、音效卡、防毒核心等），並前往官網下載最新版本覆蓋安裝。</value>
-  </data>
-  <data name="BugCheck_0x000000EF_Desc" xml:space="preserve">
-    <value>關鍵系統處理程序（如 csrss.exe, wininit.exe）意外終止。</value>
-  </data>
-  <data name="BugCheck_0x000000EF_Rec" xml:space="preserve">
-    <value>可能為系統核心損毀、惡意軟體感染或硬碟壞軌導致系統重要元件崩潰。建議執行 DISM 與 SFC 系統修復指令。</value>
-  </data>
-  <data name="BugCheck_0x00000101_Desc" xml:space="preserve">
-    <value>次要處理器未在分配的時間間隔內收到預期的時脈插斷。</value>
-  </data>
-  <data name="BugCheck_0x00000101_Rec" xml:space="preserve">
-    <value>典型 CPU 相關問題：CPU 核心超頻不穩定、供電電壓不足、過熱降頻或主機板 BIOS 微碼問題。建議重設 BIOS 為預設設定並更新 BIOS。</value>
-  </data>
-  <data name="BugCheck_0x00000116_Desc" xml:space="preserve">
-    <value>顯示卡驅動程式無回應，且系統嘗試透過 TDR 重設復原時逾時失敗。</value>
-  </data>
-  <data name="BugCheck_0x00000116_Rec" xml:space="preserve">
-    <value>顯示卡核心當機：可能為顯示卡驅動程式異常、顯示卡過熱、顯示卡供電不足或顯示卡硬體晶片老化損壞。建議使用 DDU 重新安裝驅動程式並監控顯示卡溫度。</value>
-  </data>
-  <data name="BugCheck_0x00000124_Desc" xml:space="preserve">
-    <value>Windows 硬體錯誤架構 (WHEA) 偵測到無法復原的硬體錯誤。</value>
-  </data>
-  <data name="BugCheck_0x00000124_Rec" xml:space="preserve">
-    <value>極嚴重的純硬體錯誤：通常為 CPU 核心故障/電壓過低、NVMe SSD 斷開連線、RAM 損壞或 PCIe 匯流排錯誤。建議檢查硬體接點與電源供應器。</value>
-  </data>
-  <data name="BugCheck_0x00000133_Desc" xml:space="preserve">
-    <value>DPC 監視程式偵測到單一長時間執行的 DPC 或累積時間過長。</value>
-  </data>
-  <data name="BugCheck_0x00000133_Rec" xml:space="preserve">
-    <value>常見於 NVMe / SATA 固態硬碟韌體過舊、StorAHCI 驅動程式逾時、或 Wi-Fi / 藍牙驅動程式延遲過高。建議更新 SSD 韌體與主機板驅動程式。</value>
-  </data>
-  <data name="BugCheck_0x00000139_Desc" xml:space="preserve">
-    <value>核心偵測到關鍵資料結構損毀（緩衝區溢位或記憶體被非法篡改）。</value>
-  </data>
-  <data name="BugCheck_0x00000139_Rec" xml:space="preserve">
-    <value>通常是驅動程式記憶體越界寫入、損壞的系統檔案或硬體記憶體位元翻轉。請檢查驅動程式與記憶體穩定度。</value>
-  </data>
-  <data name="BugCheck_0x00000154_Desc" xml:space="preserve">
-    <value>記憶體管理器儲存元件在處理分頁時發生未預期的例外狀況。</value>
-  </data>
-  <data name="BugCheck_0x00000154_Rec" xml:space="preserve">
-    <value>常見於硬碟 / SSD 壞軌、SSD 突發斷電掉盤或儲存控制器驅動程式崩潰。強烈建議備份重要資料並檢查硬碟健康狀態 (S.M.A.R.T.)。</value>
-  </data>
-  <data name="BugCheck_0x0000001A_Desc" xml:space="preserve">
-    <value>系統發生了嚴重的記憶體管理錯誤。</value>
-  </data>
-  <data name="BugCheck_0x0000001A_Rec" xml:space="preserve">
-    <value>常見於實體記憶體故障、XMP/EXPO 超頻不穩定或虛擬記憶體分頁檔損毀。建議關閉記憶體超頻並執行 Windows 記憶體診斷工具。</value>
-  </data>
-  <!-- ========================================================================= -->
-  <!-- Crash Report: Application Exception Knowledge Base                        -->
-  <!-- ========================================================================= -->
-  <data name="AppException_Unknown_Desc" xml:space="preserve">
-    <value>應用程式發生未處理的例外狀況代碼。</value>
-  </data>
-  <data name="AppException_Unknown_Rec" xml:space="preserve">
-    <value>請確認該應用程式是否已更新至最新版本。</value>
-  </data>
-  <data name="AppException_0xC0000005_Desc" xml:space="preserve">
-    <value>記憶體存取違規（程式試圖讀取或寫入未分配或受保護的記憶體位址）。</value>
-  </data>
-  <data name="AppException_0xC0000005_Rec" xml:space="preserve">
-    <value>常見原因為軟體本身的 Null 指標錯誤、記憶體溢位、不相容的外掛模組或受保護記憶體衝突。可嘗試更新該軟體或重新安裝。</value>
-  </data>
-  <data name="AppException_0xC0000409_Desc" xml:space="preserve">
-    <value>堆疊緩衝區溢位（觸發系統安全保護機制以防止記憶體破壞）。</value>
-  </data>
-  <data name="AppException_0xC0000409_Rec" xml:space="preserve">
-    <value>軟體內部出現嚴重的緩衝區溢位錯誤，通常為程式設計缺陷或模組衝突。建議向軟體開發商反映或更新版本。</value>
-  </data>
-  <data name="AppException_0xC0000374_Desc" xml:space="preserve">
-    <value>堆積記憶體損毀。</value>
-  </data>
-  <data name="AppException_0xC0000374_Rec" xml:space="preserve">
-    <value>應用程式在釋放或使用記憶體堆積時結構損壞，常見於第三方動態連結庫 (DLL) 衝突或軟體內部記憶體流失。</value>
-  </data>
-  <data name="AppException_0xC00000FD_Desc" xml:space="preserve">
-    <value>堆疊溢位（Stack Overflow）。</value>
-  </data>
-  <data name="AppException_0xC00000FD_Rec" xml:space="preserve">
-    <value>軟體內部發生了無窮迴圈或過深的遞迴呼叫，導致呼叫堆疊耗盡。</value>
-  </data>
-  <data name="AppException_0xE0434352_Desc" xml:space="preserve">
-    <value>.NET Common Language Runtime (CLR) 未處理的例外狀況。</value>
-  </data>
-  <data name="AppException_0xE0434352_Rec" xml:space="preserve">
-    <value>基於 .NET 開發的應用程式拋出例外且未被攔截。請檢查 Windows 事件記錄中的詳細呼叫堆疊 (Stack Trace) 以定位問題。</value>
-  </data>
-  <data name="AppException_Hang_Desc" xml:space="preserve">
-    <value>應用程式發生未回應 (Hang) 凍結事件。</value>
-  </data>
-  <data name="AppException_Hang_Rec" xml:space="preserve">
-    <value>可能為死結 (Deadlock)、大量 I/O 阻塞或無窮迴圈。請檢查程式負載與更新。</value>
-  </data>
-  <data name="AppException_DotNet_Desc" xml:space="preserve">
-    <value>.NET Runtime 未處理的例外狀況。</value>
-  </data>
-  <data name="AppException_DotNet_Rec" xml:space="preserve">
-    <value>請參閱詳細紀錄中的呼叫堆疊 (Stack Trace) 進行排錯。</value>
-  </data>
 
   <!-- ========================================================================= -->
-  <!-- Input Tester: Navigation & UI Strings                                     -->
+  <!-- 4. 輸入裝置檢測 - 鍵盤與滑鼠 -->
   <!-- ========================================================================= -->
-  <data name="Nav_InputTesterPage.Content" xml:space="preserve">
-    <value>鍵盤滑鼠檢測</value>
-  </data>
   <data name="InputTesterPage_Title.Text" xml:space="preserve">
     <value>鍵盤與滑鼠檢測</value>
   </data>
@@ -1349,56 +646,673 @@
   <data name="InputTesterPage_Mouse_PeakChip.Text" xml:space="preserve">
     <value>最高</value>
   </data>
-  <data name="HomePage_RefreshBtn_ToolTip" xml:space="preserve">
-    <value>重新整理硬體規格</value>
-  </data>
-  <data name="HomePage_Refresh_Success" xml:space="preserve">
-    <value>已重新整理硬體規格與系統資訊</value>
-  </data>
-  <data name="HomePage_SystemStatus_Healthy.Text" xml:space="preserve">
-    <value>系統運作狀態良好</value>
-  </data>
-  <data name="HomePage_QuickActions_Title.Text" xml:space="preserve">
-    <value>快速功能總覽</value>
-  </data>
-  <data name="HomePage_Feature_Perf_Title.Text" xml:space="preserve">
-    <value>即時效能監控</value>
-  </data>
-  <data name="HomePage_Feature_Perf_Desc.Text" xml:space="preserve">
-    <value>即時查看 CPU、GPU、RAM 負載與時脈溫度</value>
-  </data>
-  <data name="HomePage_Feature_Input_Title.Text" xml:space="preserve">
-    <value>鍵盤與滑鼠診斷</value>
-  </data>
-  <data name="HomePage_Feature_Input_Desc.Text" xml:space="preserve">
-    <value>全鍵無衝測試、輪詢率、微動連點與軌跡畫布</value>
-  </data>
-  <data name="HomePage_Feature_Repair_Title.Text" xml:space="preserve">
+
+  <!-- ========================================================================= -->
+  <!-- 5. 系統修復與檔案完整性 -->
+  <!-- ========================================================================= -->
+  <data name="SystemRepairPage_Title.Text" xml:space="preserve">
     <value>系統完整性修復</value>
   </data>
-  <data name="HomePage_Feature_Repair_Desc.Text" xml:space="preserve">
-    <value>DISM 與 SFC 映像自動修復與損毀掃描</value>
+  <data name="SystemRepairPage_ScanHealth_Title.Text" xml:space="preserve">
+    <value>掃描映像狀態</value>
   </data>
-  <data name="HomePage_Feature_Crash_Title.Text" xml:space="preserve">
-    <value>系統當機診斷</value>
+  <data name="SystemRepairPage_ScanHealth_Desc.Text" xml:space="preserve">
+    <value>深入檢查 Windows 映像是否有損毀。這像是翻閱維修紀錄，找出潛在的問題但暫不進行修復。</value>
   </data>
-  <data name="HomePage_Feature_Crash_Desc.Text" xml:space="preserve">
-    <value>藍屏 Minidump 與 Windows 錯誤事件分析</value>
+  <data name="SystemRepairPage_CheckHealth_Title.Text" xml:space="preserve">
+    <value>檢查損毀標記</value>
   </data>
-  <data name="HomePage_Feature_Hash_Title.Text" xml:space="preserve">
-    <value>檔案雜湊計算</value>
+  <data name="SystemRepairPage_CheckHealth_Desc.Text" xml:space="preserve">
+    <value>快速掃描系統是否已被標記為損毀。這是一次快速的斷層掃描，用來確認系統目前的健康狀態。</value>
   </data>
-  <data name="HomePage_Feature_Hash_Desc.Text" xml:space="preserve">
-    <value>SHA-256、MD5 快速校驗與檔案指紋比對</value>
+  <data name="SystemRepairPage_RestoreHealth_Title.Text" xml:space="preserve">
+    <value>修復系統映像</value>
   </data>
-  <data name="HomePage_Feature_Assoc_Title.Text" xml:space="preserve">
-    <value>檔案關聯管理</value>
+  <data name="SystemRepairPage_RestoreHealth_Desc.Text" xml:space="preserve">
+    <value>發現損毀時，自動從 Windows Update 下載替代檔案進行修復。這是最徹底的映像復原方式。</value>
   </data>
-  <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
-    <value>重設副檔名預設開啟程式與系統關聯修復</value>
+  <data name="SystemRepairPage_SfcScannow_Title.Text" xml:space="preserve">
+    <value>系統檔案檢查</value>
   </data>
-  <data name="HomePage_Copied_Toast" xml:space="preserve">
-    <value>已複製到剪貼簿：{0}</value>
+  <data name="SystemRepairPage_SfcScannow_Desc.Text" xml:space="preserve">
+    <value>掃描所有受保護的系統檔案並修復損毀。這是最常用的安裝修復工具，能解決多數檔案遺失問題。</value>
+  </data>
+  <data name="SystemRepairPage_RunButton.Content" xml:space="preserve">
+    <value>執行</value>
+  </data>
+  <data name="SystemRepairPage_AutoMode_Title.Text" xml:space="preserve">
+    <value>自動修復模式</value>
+  </data>
+  <data name="SystemRepairPage_AutoMode_Desc.Text" xml:space="preserve">
+    <value>自動執行完整的檢測與修復流程。推薦大多數使用者使用。</value>
+  </data>
+  <data name="SystemRepairPage_AutoMode_Default.Content" xml:space="preserve">
+    <value>完整修復（預設）</value>
+  </data>
+  <data name="SystemRepairPage_AutoMode_SfcOnly.Content" xml:space="preserve">
+    <value>僅系統檔案檢查</value>
+  </data>
+  <data name="SystemRepairPage_AdvancedMode_Title.Text" xml:space="preserve">
+    <value>進階模式</value>
+  </data>
+  <data name="SystemRepairPage_AdvancedMode_Desc.Text" xml:space="preserve">
+    <value>手動執行特定的維護指令。建議進階使用者使用。</value>
+  </data>
+  <data name="SystemRepairPage_StartButton.Content" xml:space="preserve">
+    <value>開始執行</value>
+  </data>
+  <data name="SystemRepairPage_Running" xml:space="preserve">
+    <value>正在執行……</value>
+  </data>
+  <data name="SystemRepairPage_Completed" xml:space="preserve">
+    <value>執行完成</value>
+  </data>
+  <data name="SystemRepairPage_Error" xml:space="preserve">
+    <value>執行期間發生錯誤</value>
+  </data>
+  <data name="SystemRepairPage_AdminRequired" xml:space="preserve">
+    <value>此操作需要管理員權限。</value>
+  </data>
+  <data name="SystemRepairPage_QuitTitle" xml:space="preserve">
+    <value>操作執行中</value>
+  </data>
+  <data name="SystemRepairPage_QuitContent" xml:space="preserve">
+    <value>系統修復操作正在執行中，現在退出將會中斷程序。確定要退出嗎？</value>
+  </data>
+  <data name="SystemRepairPage_QuitConfirm" xml:space="preserve">
+    <value>確定退出</value>
+  </data>
+  <data name="SystemRepairPage_QuitCancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="SystemRepairPage_CompletionInfoBar.Title" xml:space="preserve">
+    <value>修復任務已完成</value>
+  </data>
+  <data name="SystemRepairPage_CompletionInfoBar.Message" xml:space="preserve">
+    <value>所有的修復流程已順利結束，你可以查看歷程紀錄了解詳情。</value>
+  </data>
+  <data name="SystemRepairPage_HistoryHeader.Text" xml:space="preserve">
+    <value>歷程紀錄</value>
+  </data>
+  <data name="SystemRepairPage_Copy.Text" xml:space="preserve">
+    <value>複製</value>
+  </data>
+  <data name="SystemRepairPage_Clear.Text" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="SystemRepairPage_WaitingPlaceholder" xml:space="preserve">
+    <value>等待指令執行……</value>
+  </data>
+  <data name="SystemRepairPage_Log_FullRepairStart" xml:space="preserve">
+    <value>=== 開始自動完整修復流程 ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_FullRepairEnd" xml:space="preserve">
+    <value>=== 自動完整修復流程結束 ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_SfcStart" xml:space="preserve">
+    <value>=== 開始系統檔案檢查流程 ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_SfcEnd" xml:space="preserve">
+    <value>=== 系統檔案檢查流程結束 ===</value>
+  </data>
+  <data name="SystemRepairPage_Log_Executing" xml:space="preserve">
+    <value>執行中：</value>
+  </data>
+  <data name="SystemRepairPage_Log_ErrorPrefix" xml:space="preserve">
+    <value>[錯誤]</value>
+  </data>
+  <data name="SystemRepairPage_Copied" xml:space="preserve">
+    <value>已複製</value>
+  </data>
+  <data name="System_Cut" xml:space="preserve">
+    <value>剪下</value>
+  </data>
+  <data name="System_Copy" xml:space="preserve">
+    <value>複製</value>
+  </data>
+  <data name="System_Paste" xml:space="preserve">
+    <value>貼上</value>
+  </data>
+  <data name="System_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="System_AllFiles" xml:space="preserve">
+    <value>所有檔案</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- 6. 當機記錄與藍屏分析 -->
+  <!-- ========================================================================= -->
+  <data name="CrashReportPage_Title.Text" xml:space="preserve">
+    <value>當機與崩潰分析</value>
+  </data>
+  <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
+    <value>自動掃描並分析系統核心傾印 (Minidump) 與應用程式崩潰事件日誌</value>
+  </data>
+  <data name="CrashReportPage_Guide_Title.Text" xml:space="preserve">
+    <value>功能說明與排錯指引</value>
+  </data>
+  <data name="CrashReportPage_Guide_Desc1.Text" xml:space="preserve">
+    <value>• 自動分析：系統會自動擷取 C:\Windows\Minidump 核心傾印檔與 Windows 事件檢視器中的重大當機事件。</value>
+  </data>
+  <data name="CrashReportPage_Guide_Desc2.Text" xml:space="preserve">
+    <value>• 智慧排錯：點選任一事件即可解析 BugCheck 錯誤代碼、引發崩潰的可疑驅動程式模組並取得改善建議。</value>
+  </data>
+  <data name="CrashReportPage_Guide_Desc3.Text" xml:space="preserve">
+    <value>• 報告匯出：可複製個別診斷摘要，或點選「匯出診斷報告」產生 Markdown 紀錄，方便向技術社群尋求協助。</value>
+  </data>
+  <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
+    <value>總崩潰事件</value>
+  </data>
+  <data name="CrashReportPage_Card_BSOD.Text" xml:space="preserve">
+    <value>系統核心當機</value>
+  </data>
+  <data name="CrashReportPage_Card_AppCrash.Text" xml:space="preserve">
+    <value>應用程式錯誤</value>
+  </data>
+  <data name="CrashReportPage_Card_LastCrash.Text" xml:space="preserve">
+    <value>最近當機時間</value>
+  </data>
+  <data name="CrashReportPage_Filter_All.Content" xml:space="preserve">
+    <value>所有事件</value>
+  </data>
+  <data name="CrashReportPage_Filter_BSOD.Content" xml:space="preserve">
+    <value>僅系統核心當機</value>
+  </data>
+  <data name="CrashReportPage_Filter_App.Content" xml:space="preserve">
+    <value>僅應用程式崩潰</value>
+  </data>
+  <data name="CrashReportPage_SearchBox.PlaceholderText" xml:space="preserve">
+    <value>搜尋程式名稱、錯誤碼、驅動程式或模組...</value>
+  </data>
+  <data name="CrashReportPage_RefreshBtn.Text" xml:space="preserve">
+    <value>重新掃描</value>
+  </data>
+  <data name="CrashReportPage_OpenDumpFolderBtn.Text" xml:space="preserve">
+    <value>開啟 Dump 資料夾</value>
+  </data>
+  <data name="CrashReportPage_ExportBtn.Text" xml:space="preserve">
+    <value>匯出診斷報告</value>
+  </data>
+  <data name="CrashReportPage_NoCrashes_Title.Text" xml:space="preserve">
+    <value>系統非常健康！</value>
+  </data>
+  <data name="CrashReportPage_NoCrashes_Desc.Text" xml:space="preserve">
+    <value>在系統記錄中未發現任何系統核心當機或近期應用程式崩潰記錄。</value>
+  </data>
+  <data name="CrashReportPage_SelectPrompt_Title.Text" xml:space="preserve">
+    <value>請選擇左側事件</value>
+  </data>
+  <data name="CrashReportPage_SelectPrompt_Desc.Text" xml:space="preserve">
+    <value>點選左側清單中的任一當機或崩潰事件以檢視詳細診斷資訊與排錯建議。</value>
+  </data>
+  <data name="CrashReportPage_Detail_Header.Text" xml:space="preserve">
+    <value>崩潰事件詳細診斷</value>
+  </data>
+  <data name="CrashReportPage_Detail_DiagnosisHeader.Text" xml:space="preserve">
+    <value>智慧診斷與成因分析</value>
+  </data>
+  <data name="CrashReportPage_Detail_RecommendationHeader.Text" xml:space="preserve">
+    <value>排錯與改善建議</value>
+  </data>
+  <data name="CrashReportPage_Detail_TechDetailsHeader.Text" xml:space="preserve">
+    <value>技術參數資訊</value>
+  </data>
+  <data name="CrashReportPage_Detail_ErrorCode.Text" xml:space="preserve">
+    <value>錯誤代碼</value>
+  </data>
+  <data name="CrashReportPage_Detail_FaultModule.Text" xml:space="preserve">
+    <value>可疑模組/驅動</value>
+  </data>
+  <data name="CrashReportPage_Detail_SourceApp.Text" xml:space="preserve">
+    <value>錯誤來源 / 程式</value>
+  </data>
+  <data name="CrashReportPage_Detail_Params.Text" xml:space="preserve">
+    <value>崩潰參數 (Arg1~4)</value>
+  </data>
+  <data name="CrashReportPage_Detail_DumpPath.Text" xml:space="preserve">
+    <value>傾印檔案 / 路徑</value>
+  </data>
+  <data name="CrashReportPage_Detail_LocateBtn.Text" xml:space="preserve">
+    <value>開啟位置</value>
+  </data>
+  <data name="CrashReportPage_Detail_RawLogHeader.Text" xml:space="preserve">
+    <value>原始事件紀錄</value>
+  </data>
+  <data name="CrashReportPage_Detail_CopyBtn.Text" xml:space="preserve">
+    <value>複製詳細報告</value>
+  </data>
+  <data name="CrashReportPage_Detail_Copied" xml:space="preserve">
+    <value>已複製到剪貼簿</value>
+  </data>
+  <data name="CrashReportPage_ExportSuccess_Title" xml:space="preserve">
+    <value>匯出成功</value>
+  </data>
+  <data name="CrashReportPage_ExportSuccess_Msg" xml:space="preserve">
+    <value>當機診斷報告已成功儲存至檔案。</value>
+  </data>
+  <data name="CrashReportPage_DumpFolder_NotFound" xml:space="preserve">
+    <value>Minidump 資料夾不存在或尚未產生任何傾印檔案。</value>
+  </data>
+  <data name="CrashReportPage_None" xml:space="preserve">
+    <value>無紀錄</value>
+  </data>
+  <data name="CrashReportPage_Scanning.Text" xml:space="preserve">
+    <value>正在掃描事件記錄與核心傾印檔案...</value>
+  </data>
+  <data name="CrashReportPage_Badge_KernelCrash" xml:space="preserve">
+    <value>核心當機</value>
+  </data>
+  <data name="CrashReportPage_Badge_AppCrash" xml:space="preserve">
+    <value>程式錯誤</value>
+  </data>
+  <data name="CrashReportPage_Badge_AppHang" xml:space="preserve">
+    <value>程式凍結</value>
+  </data>
+  <data name="CrashReportPage_Badge_DotNetCrash" xml:space="preserve">
+    <value>.NET 錯誤</value>
+  </data>
+  <data name="CrashReportPage_Source_Kernel" xml:space="preserve">
+    <value>系統核心 (Kernel)</value>
+  </data>
+  <data name="CrashReportPage_Source_Unknown" xml:space="preserve">
+    <value>未知程式</value>
+  </data>
+  <data name="CrashReportPage_RawLog_None" xml:space="preserve">
+    <value>無其他詳細紀錄。</value>
+  </data>
+  <data name="CrashReport_Export_Title" xml:space="preserve">
+    <value># Windows 系統當機與崩潰診斷報告</value>
+  </data>
+  <data name="CrashReport_Export_GeneratedTime" xml:space="preserve">
+    <value>產生時間：{0}</value>
+  </data>
+  <data name="CrashReport_Export_Summary" xml:space="preserve">
+    <value>總事件數：{0}（系統核心當機：{1}，應用程式錯誤：{2}）</value>
+  </data>
+  <data name="CrashReport_Export_Field_Timestamp" xml:space="preserve">
+    <value>發生時間</value>
+  </data>
+  <data name="CrashReport_Export_Field_ErrorCode" xml:space="preserve">
+    <value>錯誤代碼</value>
+  </data>
+  <data name="CrashReport_Export_Field_Source" xml:space="preserve">
+    <value>錯誤來源</value>
+  </data>
+  <data name="CrashReport_Export_Field_Module" xml:space="preserve">
+    <value>可疑模組／驅動程式</value>
+  </data>
+  <data name="CrashReport_Export_Field_Parameters" xml:space="preserve">
+    <value>崩潰參數</value>
+  </data>
+  <data name="CrashReport_Export_Field_DumpPath" xml:space="preserve">
+    <value>傾印／檔案路徑</value>
+  </data>
+  <data name="CrashReport_Export_Field_Diagnosis" xml:space="preserve">
+    <value>診斷成因</value>
+  </data>
+  <data name="CrashReport_Export_Field_Recommendation" xml:space="preserve">
+    <value>排錯建議</value>
+  </data>
+  <data name="BugCheck_Unknown_Desc" xml:space="preserve">
+    <value>未知的 Windows 系統核心崩潰代碼。</value>
+  </data>
+  <data name="BugCheck_Unknown_Rec" xml:space="preserve">
+    <value>建議在搜尋引擎中查詢該錯誤代碼以取得專屬解決方案。</value>
+  </data>
+  <data name="BugCheck_0x0000000A_Desc" xml:space="preserve">
+    <value>核心試圖在過高的插斷請求層級 (IRQL) 存取可分頁記憶體。</value>
+  </data>
+  <data name="BugCheck_0x0000000A_Rec" xml:space="preserve">
+    <value>通常是由損壞或不相容的硬體驅動程式（例如網路卡、音效卡或防毒軟體驅動）引起，亦可能為記憶體損壞。建議更新相關驅動程式或執行記憶體診斷。</value>
+  </data>
+  <data name="BugCheck_0x0000001E_Desc" xml:space="preserve">
+    <value>核心模式程式產生的例外狀況未被錯誤處理常式攔截。</value>
+  </data>
+  <data name="BugCheck_0x0000001E_Rec" xml:space="preserve">
+    <value>通常與最近安裝的硬體、驅動程式或第三方防毒系統服務衝突有關。可嘗試解除安裝最近更新的驅動或軟體。</value>
+  </data>
+  <data name="BugCheck_0x0000003B_Desc" xml:space="preserve">
+    <value>在執行系統服務常式時發生了未處理的例外狀況。</value>
+  </data>
+  <data name="BugCheck_0x0000003B_Rec" xml:space="preserve">
+    <value>極高機率由顯示卡驅動程式（如 nvlddmkm.sys / amdkmdag.sys）、系統核心檔案損毀或分頁集區損壞所引起。建議使用 DDU 乾淨重新安裝顯示卡驅動程式，並執行 sfc /scannow。</value>
+  </data>
+  <data name="BugCheck_0x00000050_Desc" xml:space="preserve">
+    <value>系統引用了無效的記憶體位址（非分頁集區中的無效分頁）。</value>
+  </data>
+  <data name="BugCheck_0x00000050_Rec" xml:space="preserve">
+    <value>常見原因為實體記憶體 (RAM) 故障、主機板記憶體插槽氧化、防毒軟體核心模組衝突或 NTFS 檔案系統損毀。建議擦拭清潔金手指或執行記憶體測試。</value>
+  </data>
+  <data name="BugCheck_0x0000007E_Desc" xml:space="preserve">
+    <value>系統執行緒產生了例外狀況但未被捕捉。</value>
+  </data>
+  <data name="BugCheck_0x0000007E_Rec" xml:space="preserve">
+    <value>多半由硬體驅動程式不相容或硬碟空間不足引起。請檢視可疑模組名稱並更新該驅動程式。</value>
+  </data>
+  <data name="BugCheck_0x0000009F_Desc" xml:space="preserve">
+    <value>驅動程式處於不一致或無效的電源狀態（通常在睡眠、休眠或喚醒時發生）。</value>
+  </data>
+  <data name="BugCheck_0x0000009F_Rec" xml:space="preserve">
+    <value>通常由電源管理驅動程式、USB 控制器或 Wi-Fi 網路卡驅動程式在睡眠過渡期間逾時引起。建議更新晶片組與無線網路卡驅動程式。</value>
+  </data>
+  <data name="BugCheck_0x000000A0_Desc" xml:space="preserve">
+    <value>電源管理員遇到嚴重內部錯誤（通常與休眠或快速啟動檔案有關）。</value>
+  </data>
+  <data name="BugCheck_0x000000A0_Rec" xml:space="preserve">
+    <value>可能是休眠檔案 (hiberfil.sys) 損毀或儲存裝置驅動程式異常。可嘗試以管理員身分執行 powercfg -h off 再 powercfg -h on 重建休眠檔。</value>
+  </data>
+  <data name="BugCheck_0x000000D1_Desc" xml:space="preserve">
+    <value>驅動程式在過高的 IRQL 下嘗試存取無效的記憶體位址。</value>
+  </data>
+  <data name="BugCheck_0x000000D1_Rec" xml:space="preserve">
+    <value>最常見的系統當機代碼之一，請查看導致崩潰的驅動程式名稱（如網路卡、音效卡、防毒核心等），並前往官網下載最新版本覆蓋安裝。</value>
+  </data>
+  <data name="BugCheck_0x000000EF_Desc" xml:space="preserve">
+    <value>關鍵系統處理程序（如 csrss.exe, wininit.exe）意外終止。</value>
+  </data>
+  <data name="BugCheck_0x000000EF_Rec" xml:space="preserve">
+    <value>可能為系統核心損毀、惡意軟體感染或硬碟壞軌導致系統重要元件崩潰。建議執行 DISM 與 SFC 系統修復指令。</value>
+  </data>
+  <data name="BugCheck_0x00000101_Desc" xml:space="preserve">
+    <value>次要處理器未在分配的時間間隔內收到預期的時脈插斷。</value>
+  </data>
+  <data name="BugCheck_0x00000101_Rec" xml:space="preserve">
+    <value>典型 CPU 相關問題：CPU 核心超頻不穩定、供電電壓不足、過熱降頻或主機板 BIOS 微碼問題。建議重設 BIOS 為預設設定並更新 BIOS。</value>
+  </data>
+  <data name="BugCheck_0x00000116_Desc" xml:space="preserve">
+    <value>顯示卡驅動程式無回應，且系統嘗試透過 TDR 重設復原時逾時失敗。</value>
+  </data>
+  <data name="BugCheck_0x00000116_Rec" xml:space="preserve">
+    <value>顯示卡核心當機：可能為顯示卡驅動程式異常、顯示卡過熱、顯示卡供電不足或顯示卡硬體晶片老化損壞。建議使用 DDU 重新安裝驅動程式並監控顯示卡溫度。</value>
+  </data>
+  <data name="BugCheck_0x00000124_Desc" xml:space="preserve">
+    <value>Windows 硬體錯誤架構 (WHEA) 偵測到無法復原的硬體錯誤。</value>
+  </data>
+  <data name="BugCheck_0x00000124_Rec" xml:space="preserve">
+    <value>極嚴重的純硬體錯誤：通常為 CPU 核心故障/電壓過低、NVMe SSD 斷開連線、RAM 損壞或 PCIe 匯流排錯誤。建議檢查硬體接點與電源供應器。</value>
+  </data>
+  <data name="BugCheck_0x00000133_Desc" xml:space="preserve">
+    <value>DPC 監視程式偵測到單一長時間執行的 DPC 或累積時間過長。</value>
+  </data>
+  <data name="BugCheck_0x00000133_Rec" xml:space="preserve">
+    <value>常見於 NVMe / SATA 固態硬碟韌體過舊、StorAHCI 驅動程式逾時、或 Wi-Fi / 藍牙驅動程式延遲過高。建議更新 SSD 韌體與主機板驅動程式。</value>
+  </data>
+  <data name="BugCheck_0x00000139_Desc" xml:space="preserve">
+    <value>核心偵測到關鍵資料結構損毀（緩衝區溢位或記憶體被非法篡改）。</value>
+  </data>
+  <data name="BugCheck_0x00000139_Rec" xml:space="preserve">
+    <value>通常是驅動程式記憶體越界寫入、損壞的系統檔案或硬體記憶體位元翻轉。請檢查驅動程式與記憶體穩定度。</value>
+  </data>
+  <data name="BugCheck_0x00000154_Desc" xml:space="preserve">
+    <value>記憶體管理器儲存元件在處理分頁時發生未預期的例外狀況。</value>
+  </data>
+  <data name="BugCheck_0x00000154_Rec" xml:space="preserve">
+    <value>常見於硬碟 / SSD 壞軌、SSD 突發斷電掉盤或儲存控制器驅動程式崩潰。強烈建議備份重要資料並檢查硬碟健康狀態 (S.M.A.R.T.)。</value>
+  </data>
+  <data name="BugCheck_0x0000001A_Desc" xml:space="preserve">
+    <value>系統發生了嚴重的記憶體管理錯誤。</value>
+  </data>
+  <data name="BugCheck_0x0000001A_Rec" xml:space="preserve">
+    <value>常見於實體記憶體故障、XMP/EXPO 超頻不穩定或虛擬記憶體分頁檔損毀。建議關閉記憶體超頻並執行 Windows 記憶體診斷工具。</value>
+  </data>
+  <data name="AppException_Unknown_Desc" xml:space="preserve">
+    <value>應用程式發生未處理的例外狀況代碼。</value>
+  </data>
+  <data name="AppException_Unknown_Rec" xml:space="preserve">
+    <value>請確認該應用程式是否已更新至最新版本。</value>
+  </data>
+  <data name="AppException_0xC0000005_Desc" xml:space="preserve">
+    <value>記憶體存取違規（程式試圖讀取或寫入未分配或受保護的記憶體位址）。</value>
+  </data>
+  <data name="AppException_0xC0000005_Rec" xml:space="preserve">
+    <value>常見原因為軟體本身的 Null 指標錯誤、記憶體溢位、不相容的外掛模組或受保護記憶體衝突。可嘗試更新該軟體或重新安裝。</value>
+  </data>
+  <data name="AppException_0xC0000409_Desc" xml:space="preserve">
+    <value>堆疊緩衝區溢位（觸發系統安全保護機制以防止記憶體破壞）。</value>
+  </data>
+  <data name="AppException_0xC0000409_Rec" xml:space="preserve">
+    <value>軟體內部出現嚴重的緩衝區溢位錯誤，通常為程式設計缺陷或模組衝突。建議向軟體開發商反映或更新版本。</value>
+  </data>
+  <data name="AppException_0xC0000374_Desc" xml:space="preserve">
+    <value>堆積記憶體損毀。</value>
+  </data>
+  <data name="AppException_0xC0000374_Rec" xml:space="preserve">
+    <value>應用程式在釋放或使用記憶體堆積時結構損壞，常見於第三方動態連結庫 (DLL) 衝突或軟體內部記憶體流失。</value>
+  </data>
+  <data name="AppException_0xC00000FD_Desc" xml:space="preserve">
+    <value>堆疊溢位（Stack Overflow）。</value>
+  </data>
+  <data name="AppException_0xC00000FD_Rec" xml:space="preserve">
+    <value>軟體內部發生了無窮迴圈或過深的遞迴呼叫，導致呼叫堆疊耗盡。</value>
+  </data>
+  <data name="AppException_0xE0434352_Desc" xml:space="preserve">
+    <value>.NET Common Language Runtime (CLR) 未處理的例外狀況。</value>
+  </data>
+  <data name="AppException_0xE0434352_Rec" xml:space="preserve">
+    <value>基於 .NET 開發的應用程式拋出例外且未被攔截。請檢查 Windows 事件記錄中的詳細呼叫堆疊 (Stack Trace) 以定位問題。</value>
+  </data>
+  <data name="AppException_Hang_Desc" xml:space="preserve">
+    <value>應用程式發生未回應 (Hang) 凍結事件。</value>
+  </data>
+  <data name="AppException_Hang_Rec" xml:space="preserve">
+    <value>可能為死結 (Deadlock)、大量 I/O 阻塞或無窮迴圈。請檢查程式負載與更新。</value>
+  </data>
+  <data name="AppException_DotNet_Desc" xml:space="preserve">
+    <value>.NET Runtime 未處理的例外狀況。</value>
+  </data>
+  <data name="AppException_DotNet_Rec" xml:space="preserve">
+    <value>請參閱詳細紀錄中的呼叫堆疊 (Stack Trace) 進行排錯。</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- 7. 檔案雜湊校驗計算工具 -->
+  <!-- ========================================================================= -->
+  <data name="FileHashPage_Title.Text" xml:space="preserve">
+    <value>計算檔案雜湊碼</value>
+  </data>
+  <data name="FileHashPage_Desc.Text" xml:space="preserve">
+    <value>快速計算與驗證檔案的 SHA-256、SHA-1 或 MD5 雜湊值。</value>
+  </data>
+  <data name="FileHashPage_SelectFile.Content" xml:space="preserve">
+    <value>選擇檔案</value>
+  </data>
+  <data name="FileHashPage_DragDropPrompt.Text" xml:space="preserve">
+    <value>選擇要計算的檔案</value>
+  </data>
+  <data name="FileHashPage_SelectFileCardDesc.Text" xml:space="preserve">
+    <value>從您的電腦中選取一個檔案，系統會即時為您計算並比對對應的雜湊值。</value>
+  </data>
+  <data name="FileHashPage_Algorithm.Text" xml:space="preserve">
+    <value>雜湊演算法</value>
+  </data>
+  <data name="FileHashPage_Result.Header" xml:space="preserve">
+    <value>雜湊結果</value>
+  </data>
+  <data name="FileHashPage_Compare.Text" xml:space="preserve">
+    <value>對比驗證雜湊值（不區分大小寫）</value>
+  </data>
+  <data name="FileHashPage_CompareButton.Text" xml:space="preserve">
+    <value>貼上比對</value>
+  </data>
+  <data name="FileHashPage_CopyButton.Text" xml:space="preserve">
+    <value>複製結果</value>
+  </data>
+  <data name="FileHashPage_CalculateButton.Content" xml:space="preserve">
+    <value>重新計算</value>
+  </data>
+  <data name="FileHashPage_VerifySuccess" xml:space="preserve">
+    <value>雜湊值比對成功！完全一致。</value>
+  </data>
+  <data name="FileHashPage_VerifyFail" xml:space="preserve">
+    <value>雜湊值比對失敗！檔案可能已被修改或演算法不符。</value>
+  </data>
+  <data name="FileHashPage_Calculating" xml:space="preserve">
+    <value>正在計算雜湊值，請稍候……</value>
+  </data>
+  <data name="FileHashPage_SelectFileFirst" xml:space="preserve">
+    <value>請先選擇一個檔案！</value>
+  </data>
+  <data name="FileHashPage_FileSelected" xml:space="preserve">
+    <value>已選擇檔案：</value>
+  </data>
+  <data name="FileHashPage_FileSize" xml:space="preserve">
+    <value>檔案大小：</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Desc.Text" xml:space="preserve">
+    <value>SHA-256（高度安全，建議使用）、SHA-1（舊版相容）、MD5（快速驗證）、SHA-512（極高強度安全）。</value>
+  </data>
+  <data name="FileHashPage_Result.PlaceholderText" xml:space="preserve">
+    <value>選擇檔案並計算後，雜湊結果會在此處顯示……</value>
+  </data>
+  <data name="FileHashPage_Compare_Desc.Text" xml:space="preserve">
+    <value>在此貼上您預期比對的雜湊值，系統會即時進行無大小寫差異的比對驗證。</value>
+  </data>
+  <data name="FileHashPage_CompareInput.PlaceholderText" xml:space="preserve">
+    <value>輸入或貼上預期的雜湊值以進行比對……</value>
+  </data>
+  <data name="FileHashPage_DialogTitle" xml:space="preserve">
+    <value>選擇要計算雜湊值的檔案</value>
+  </data>
+  <data name="FileHashPage_Error_FileNotFound" xml:space="preserve">
+    <value>檔案不存在或無法存取！</value>
+  </data>
+  <data name="FileHashPage_VerifySuccess_Title" xml:space="preserve">
+    <value>驗證成功</value>
+  </data>
+  <data name="FileHashPage_VerifyFail_Title" xml:space="preserve">
+    <value>驗證失敗</value>
+  </data>
+  <data name="FileHashPage_Section_SelectFile" xml:space="preserve">
+    <value>選擇檔案</value>
+  </data>
+  <data name="FileHashPage_Section_Calculate" xml:space="preserve">
+    <value>計算雜湊值</value>
+  </data>
+  <data name="FileHashPage_Section_Verify" xml:space="preserve">
+    <value>比對驗證</value>
+  </data>
+  <data name="FileHashPage_CalculationCancelled" xml:space="preserve">
+    <value>已取消計算。</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- 8. 檔案副檔名關聯修復 -->
+  <!-- ========================================================================= -->
+  <data name="FileAssociationPage_Desc.Text" xml:space="preserve">
+    <value>重設或管理特定副檔名的預設開啟應用程式</value>
+  </data>
+  <data name="FileAssociationPage_ConfigTitle.Text" xml:space="preserve">
+    <value>配置檔案關聯</value>
+  </data>
+  <data name="FileAssociationPage_TargetExtTitle.Text" xml:space="preserve">
+    <value>目標檔案副檔名</value>
+  </data>
+  <data name="FileAssociationPage_TargetExtDesc.Text" xml:space="preserve">
+    <value>輸入您想要重設的檔案副檔名（例如：.pdf、.bin、.myext，會自動標準化格式）</value>
+  </data>
+  <data name="FileAssociationPage_TargetExtBox.PlaceholderText" xml:space="preserve">
+    <value>例如：pdf</value>
+  </data>
+  <data name="FileAssociationPage_SelectMethodTitle.Text" xml:space="preserve">
+    <value>選擇重設方式</value>
+  </data>
+  <data name="FileAssociationPage_Method1Title.Text" xml:space="preserve">
+    <value>方法一：呼叫系統原生開啟方式視窗（標準推薦）</value>
+  </data>
+  <data name="FileAssociationPage_Method1Desc.Text" xml:space="preserve">
+    <value>系統將彈出開啟方式選單，您可以重新選擇此副檔名的關聯程式，或者重設預設關聯。這是 Windows 原生推薦的安全標準做法。</value>
+  </data>
+  <data name="FileAssociationPage_Method1Button.Content" xml:space="preserve">
+    <value>安全引導重設</value>
+  </data>
+  <data name="FileAssociationPage_Method2Title.Text" xml:space="preserve">
+    <value>方法二：智慧定位登錄表手動重設（進階模式）</value>
+  </data>
+  <data name="FileAssociationPage_Method2Desc.Text" xml:space="preserve">
+    <value>針對進階使用者，直接開啟登錄編輯程式並智慧定位，由您親自掌握並手動重設。</value>
+  </data>
+  <data name="FileAssociationPage_Method2Content.Text" xml:space="preserve">
+    <value>直接開啟 Windows 內建的登錄編輯程式，並自動導航定位到該副檔名的關聯路徑下，方便您安全且直覺地進行手動重設與管理。</value>
+  </data>
+  <data name="FileAssociationPage_Method2Button.Content" xml:space="preserve">
+    <value>定位並手動重設</value>
+  </data>
+  <data name="FileAssociationPage_GuideTitle.Text" xml:space="preserve">
+    <value>🛠️ 登錄表手動重設操作說明：</value>
+  </data>
+  <data name="FileAssociationPage_GuideStep1.Text" xml:space="preserve">
+    <value>1. 在啟動的「登錄編輯程式」視窗中，您會發現畫面已自動展開並精確停留在目標目錄。</value>
+  </data>
+  <data name="FileAssociationPage_GuideStep2.Text" xml:space="preserve">
+    <value>2. 請在左側樹狀圖中，找到該副檔名目錄底下的「UserChoice」子資料夾。</value>
+  </data>
+  <data name="FileAssociationPage_GuideStep3.Text" xml:space="preserve">
+    <value>3. 在「UserChoice」資料夾上按滑鼠右鍵，選擇「刪除」，並在確認對話框中點選「是」。</value>
+  </data>
+  <data name="FileAssociationPage_GuideStep4.Text" xml:space="preserve">
+    <value>4. 清除後關閉登錄編輯程式即可。下次雙擊該類型檔案時，Windows 將會重新詢問預設開啟程式！</value>
+  </data>
+  <data name="FileAssociationPage_Warning_CriticalExt" xml:space="preserve">
+    <value>為了保護您的作業系統安全，此副檔名（.{0}）屬於 Windows 系統核心關鍵元件，不允許重設或修改其開啟方式，以免造成系統損毀或無法執行任何程式。</value>
+  </data>
+  <data name="FileAssociationPage_Warning_CriticalExtTitle" xml:space="preserve">
+    <value>🛡️ 系統安全保護</value>
+  </data>
+  <data name="FileAssociationPage_Success_DialogOpened" xml:space="preserve">
+    <value>已成功呼叫系統開啟方式對話框！請在彈出的視窗中進行設定或重設關聯。</value>
+  </data>
+  <data name="FileAssociationPage_Success_Title" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="FileAssociationPage_Error_DialogOpenFailed" xml:space="preserve">
+    <value>無法開啟「開啟方式」對話框：{0}</value>
+  </data>
+  <data name="FileAssociationPage_Error_Title" xml:space="preserve">
+    <value>錯誤</value>
+  </data>
+  <data name="FileAssociationPage_Info_Locating" xml:space="preserve">
+    <value>正在開啟並為您智慧定位登錄編輯程式...</value>
+  </data>
+  <data name="FileAssociationPage_Info_LocatingTitle" xml:space="preserve">
+    <value>智慧定位中</value>
+  </data>
+  <data name="FileAssociationPage_Warning_LocateFailed" xml:space="preserve">
+    <value>已開啟登錄編輯程式，但未能取得其視窗控制代碼以進行自動導航。請確認已同意使用者帳戶控制 (UAC) 提示。</value>
+  </data>
+  <data name="FileAssociationPage_Warning_LocateFailedTitle" xml:space="preserve">
+    <value>無法定位</value>
+  </data>
+  <data name="FileAssociationPage_Success_RegNavigated" xml:space="preserve">
+    <value>登錄編輯程式已成功智慧定位至 `.{0}`！請參閱下方說明卡進行重設。</value>
+  </data>
+  <data name="FileAssociationPage_Success_RegNavigatedTitle" xml:space="preserve">
+    <value>導航定位成功</value>
+  </data>
+  <data name="FileAssociationPage_Warning_FallbackCopy" xml:space="preserve">
+    <value>未能定位到網址列（可能已被隱藏）。目標路徑已為您複製到剪貼簿，請在上方網址列貼上並按 Enter 進行定位！</value>
+  </data>
+  <data name="FileAssociationPage_Warning_FallbackCopyTitle" xml:space="preserve">
+    <value>請手動貼上</value>
+  </data>
+  <data name="FileAssociationPage_Error_RegLaunchFailed" xml:space="preserve">
+    <value>無法啟動登錄編輯程式：{0}。請確認已同意使用者帳戶控制 (UAC) 提示。</value>
+  </data>
+  <data name="FileAssociationPage_Error_RegLaunchFailedTitle" xml:space="preserve">
+    <value>啟動失敗</value>
+  </data>
+  <data name="FileAssociationPage_Title.Text" xml:space="preserve">
+    <value>檔案開啟方式管理員</value>
+  </data>
+
+  <!-- ========================================================================= -->
+  <!-- 9. 測試工具與實用工具集導覽頁 -->
+  <!-- ========================================================================= -->
+  <data name="TestToolPage_Title.Text" xml:space="preserve">
+    <value>測試工具</value>
+  </data>
+  <data name="UtilityPage_Title.Text" xml:space="preserve">
+    <value>實用工具</value>
   </data>
   <data name="ToolHub_SearchBox.PlaceholderText" xml:space="preserve">
     <value>搜尋工具名稱或功能描述……</value>
@@ -1415,11 +1329,120 @@
   <data name="ToolHub_NoResults.Text" xml:space="preserve">
     <value>未找到符合的工具，請嘗試不同關鍵字</value>
   </data>
-  <data name="Notification_Copied" xml:space="preserve">
-    <value>已複製到剪貼簿</value>
+
+  <!-- ========================================================================= -->
+  <!-- 10. 應用程式設定與偏好選項 -->
+  <!-- ========================================================================= -->
+  <data name="SettingsPage_Title.Text" xml:space="preserve">
+    <value>設定</value>
   </data>
-  <data name="HomePage_Refresh_Title" xml:space="preserve">
-    <value>硬體資訊</value>
+  <data name="SettingsPage_AppearanceBehaviorHeader.Text" xml:space="preserve">
+    <value>外觀與行為</value>
+  </data>
+  <data name="SettingsPage_LanguageTitle.Text" xml:space="preserve">
+    <value>應用程式顯示語言</value>
+  </data>
+  <data name="SettingsPage_LanguageDescription.Text" xml:space="preserve">
+    <value>選擇您偏好的語言。變更將在重新啟動後生效。</value>
+  </data>
+  <data name="Language_zh_TW.Content" xml:space="preserve">
+    <value>中文 (臺灣)</value>
+  </data>
+  <data name="Language_en_US.Content" xml:space="preserve">
+    <value>英文 (美國)</value>
+  </data>
+  <data name="SettingsPage_LanguageRestartNotice.Text" xml:space="preserve">
+    <value>※ 變更語言後，需要重新啟動應用程式才會完全生效。</value>
+  </data>
+  <data name="LanguageChangeDialog_Title" xml:space="preserve">
+    <value>需要重新啟動</value>
+  </data>
+  <data name="LanguageChangeDialog_Content" xml:space="preserve">
+    <value>變更語言需要重新啟動應用程式才會生效。確定要儲存變更嗎？</value>
+  </data>
+  <data name="LanguageChangeDialog_Confirm" xml:space="preserve">
+    <value>立刻關閉（需手動重新開啟）</value>
+  </data>
+  <data name="LanguageChangeDialog_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="SettingsPage_ThemeHeader.Text" xml:space="preserve">
+    <value>個人化</value>
+  </data>
+  <data name="SettingsPage_ThemeTitle.Text" xml:space="preserve">
+    <value>應用程式佈景主題</value>
+  </data>
+  <data name="SettingsPage_ThemeDescription.Text" xml:space="preserve">
+    <value>自訂應用程式的外觀風格。</value>
+  </data>
+  <data name="Theme_Default.Content" xml:space="preserve">
+    <value>使用系統設定</value>
+  </data>
+  <data name="Theme_Light.Content" xml:space="preserve">
+    <value>淺色</value>
+  </data>
+  <data name="Theme_Dark.Content" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="SettingsPage_AboutHeader.Text" xml:space="preserve">
+    <value>關於</value>
+  </data>
+  <data name="SettingsPage_AppVersion.Text" xml:space="preserve">
+    <value>蘭蘭露工具箱</value>
+  </data>
+  <data name="SettingsPage_Copyright.Text" xml:space="preserve">
+    <value>© 2026 flandretw 著作權所有，保留一切權利。</value>
+  </data>
+  <data name="SettingsPage_MITLink.Content" xml:space="preserve">
+    <value>MIT 軟體授權條款</value>
+  </data>
+  <data name="SettingsPage_NotificationSound_Title.Text" xml:space="preserve">
+    <value>任務完成提示音</value>
+  </data>
+  <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
+    <value>在系統修復或長時間任務結束時播放提示音。</value>
+  </data>
+  <data name="SettingsPage_NotificationsTitle.Text" xml:space="preserve">
+    <value>通知</value>
+  </data>
+  <data name="SettingsPage_NotificationsDescription.Text" xml:space="preserve">
+    <value>管理應用程式的通知行為與提示方式。</value>
+  </data>
+  <data name="SettingsPage_TempUnitTitle.Text" xml:space="preserve">
+    <value>溫度單位</value>
+  </data>
+  <data name="SettingsPage_TempUnitDescription.Text" xml:space="preserve">
+    <value>選擇應用程式中顯示溫度的單位。</value>
+  </data>
+  <data name="SettingsPage_DebugReportTitle.Text" xml:space="preserve">
+    <value>偵錯報告</value>
+  </data>
+  <data name="SettingsPage_DebugReportDescription.Text" xml:space="preserve">
+    <value>記錄應用程式啟動、系統錯誤、工具執行紀錄與操作事件，以協助排查問題。</value>
+  </data>
+  <data name="SettingsPage_DebugReport_StorageCardTitle.Text" xml:space="preserve">
+    <value>儲存位置</value>
+  </data>
+  <data name="SettingsPage_DebugReport_StoragePathPrefix.Text" xml:space="preserve">
+    <value>目前儲存在：</value>
+  </data>
+  <data name="SettingsPage_DebugReport_SelectFolderButton.Content" xml:space="preserve">
+    <value>變更資料夾</value>
+  </data>
+  <data name="SettingsPage_DebugReport_SelectFolderTitle" xml:space="preserve">
+    <value>選擇偵錯報告儲存資料夾</value>
+  </data>
+  <data name="SettingsPage_DebugReport_ResetButton.Content" xml:space="preserve">
+    <value>重設</value>
+  </data>
+  <data name="SettingsPage_DebugReport_ResetButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>將儲存路徑重設為預設值</value>
+  </data>
+  <data name="SettingsPage_DebugReport_DefaultPathDescription.Text" xml:space="preserve">
+    <value>預設儲存在應用程式所在目錄</value>
+  </data>
+  <data name="SettingsPage_DiagnosticsSectionTitle.Text" xml:space="preserve">
+    <value>診斷與意見反映</value>
   </data>
   <data name="SettingsPage_RescanHardware_Title.Text" xml:space="preserve">
     <value>重新掃描硬體變更</value>
