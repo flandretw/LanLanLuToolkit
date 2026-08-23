@@ -14,8 +14,8 @@
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="VerticalContentAlignment" Value="Stretch" />
-            <Setter Property="Padding" Value="16,14" />
-            <Setter Property="Margin" Value="6" />
+            <Setter Property="Padding" Value="16,16" />
+            <Setter Property="Margin" Value="8" />
             <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
             <Setter Property="BorderThickness" Value="1" />

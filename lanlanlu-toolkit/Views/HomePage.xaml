@@ -42,7 +42,7 @@
             <Style x:Key="SystemInfoCardButtonStyle" TargetType="HyperlinkButton">
                 <Setter Property="Width" Value="230" />
                 <Setter Property="Height" Value="118" />
-                <Setter Property="Padding" Value="16,14" />
+                <Setter Property="Padding" Value="16,16" />
                 <Setter Property="Background" Value="{ThemeResource CardAcrylicBrush}" />
                 <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
                 <Setter Property="BorderThickness" Value="1" />
@@ -84,7 +84,7 @@
                 <Setter Property="VerticalAlignment" Value="Stretch" />
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                <Setter Property="Padding" Value="20,18" />
+                <Setter Property="Padding" Value="20,16" />
                 <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
                 <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
                 <Setter Property="BorderThickness" Value="1" />
