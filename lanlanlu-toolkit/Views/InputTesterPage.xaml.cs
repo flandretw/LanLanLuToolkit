@@ -81,6 +81,13 @@ namespace lanlanlu_toolkit.Views
         public InputTesterPage()
         {
             this.InitializeComponent();
+
+            this.ActualThemeChanged += (s, e) =>
+            {
+                BuildKeyboardLayout();
+                UpdateFocusVisual(ReferenceEquals(FocusManager.GetFocusedElement(this.XamlRoot), KeyboardFocusArea));
+            };
+
             BuildKeyboardLayout();
 
             _hzUpdateTimer.Interval = TimeSpan.FromMilliseconds(200);
@@ -104,6 +111,7 @@ namespace lanlanlu_toolkit.Views
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _isLoaded = true;
+            BuildKeyboardLayout();
             _hzUpdateTimer.Start();
             KeyboardFocusArea?.Focus(FocusState.Programmatic);
             UpdateFocusVisual(true);
@@ -151,13 +159,67 @@ namespace lanlanlu_toolkit.Views
             }
         }
 
-        private static Brush GetThemeBrush(string resourceKey)
+        private bool IsCurrentThemeLight()
         {
-            if (Application.Current.Resources.TryGetValue(resourceKey, out var res) && res is Brush brush)
+            try
             {
-                return brush;
+                string savedTheme = SettingsService.GetTheme();
+                if (string.Equals(savedTheme, "Light", StringComparison.OrdinalIgnoreCase)) return true;
+                if (string.Equals(savedTheme, "Dark", StringComparison.OrdinalIgnoreCase)) return false;
             }
-            return new SolidColorBrush(Colors.Transparent);
+            catch { }
+
+            if (this.ActualTheme == ElementTheme.Light) return true;
+            if (this.ActualTheme == ElementTheme.Dark) return false;
+
+            try
+            {
+                var uiSettings = new Windows.UI.ViewManagement.UISettings();
+                var bg = uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Background);
+                return (bg.R > 128 && bg.G > 128 && bg.B > 128);
+            }
+            catch
+            {
+                return Application.Current.RequestedTheme == ApplicationTheme.Light;
+            }
+        }
+
+        private Brush GetThemeBrush(string resourceKey)
+        {
+            bool isLight = IsCurrentThemeLight();
+
+            if (isLight)
+            {
+                return resourceKey switch
+                {
+                    "ControlFillColorDefaultBrush" => new SolidColorBrush(Color.FromArgb(255, 255, 255, 255)), // Solid white keycaps (#FFFFFF)
+                    "ControlAltFillColorSecondaryBrush" => new SolidColorBrush(Color.FromArgb(20, 0, 0, 0)),
+                    "CardStrokeColorDefaultBrush" => new SolidColorBrush(Color.FromArgb(255, 210, 210, 210)), // Crisp outline (#D2D2D2)
+                    "TextFillColorPrimaryBrush" => new SolidColorBrush(Color.FromArgb(255, 24, 24, 24)),       // Crisp dark black text (#181818)
+                    "TextFillColorSecondaryBrush" => new SolidColorBrush(Color.FromArgb(255, 100, 100, 100)),  // Crisp dark gray text (#646464)
+                    "TextFillColorTertiaryBrush" => new SolidColorBrush(Color.FromArgb(255, 140, 140, 140)),   // Secondary gray (#8C8C8C)
+                    "AccentFillColorDefaultBrush" => new SolidColorBrush(Color.FromArgb(255, 0, 120, 212)),    // Accent Blue (#0078D4)
+                    "SystemFillColorSuccessBrush" => new SolidColorBrush(Color.FromArgb(255, 16, 124, 65)),    // Forest Green (#107C41)
+                    "SystemFillColorCriticalBrush" => new SolidColorBrush(Color.FromArgb(255, 196, 43, 28)),   // Red (#C42B1C)
+                    _ => new SolidColorBrush(Color.FromArgb(255, 30, 30, 30))
+                };
+            }
+            else
+            {
+                return resourceKey switch
+                {
+                    "ControlFillColorDefaultBrush" => new SolidColorBrush(Color.FromArgb(255, 45, 45, 45)),   // Dark keycap fill (#2D2D2D)
+                    "ControlAltFillColorSecondaryBrush" => new SolidColorBrush(Color.FromArgb(30, 255, 255, 255)),
+                    "CardStrokeColorDefaultBrush" => new SolidColorBrush(Color.FromArgb(255, 65, 65, 65)),    // Dark outline (#414141)
+                    "TextFillColorPrimaryBrush" => new SolidColorBrush(Color.FromArgb(255, 255, 255, 255)),   // Pure white text (#FFFFFF)
+                    "TextFillColorSecondaryBrush" => new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), // Light gray text (#B4B4B4)
+                    "TextFillColorTertiaryBrush" => new SolidColorBrush(Color.FromArgb(255, 120, 120, 120)),  // Darker gray (#787878)
+                    "AccentFillColorDefaultBrush" => new SolidColorBrush(Color.FromArgb(255, 0, 120, 212)),   // Accent Blue (#0078D4)
+                    "SystemFillColorSuccessBrush" => new SolidColorBrush(Color.FromArgb(255, 16, 124, 65)),   // Green (#107C41)
+                    "SystemFillColorCriticalBrush" => new SolidColorBrush(Color.FromArgb(255, 196, 43, 28)),  // Red (#C42B1C)
+                    _ => new SolidColorBrush(Color.FromArgb(255, 220, 220, 220))
+                };
+            }
         }
 
         #region Keyboard Visual Layout & Events
@@ -592,12 +654,13 @@ namespace lanlanlu_toolkit.Views
         private void UpdateFocusVisual(bool isFocused)
         {
             if (KeyboardFocusArea == null || FocusStatusBadge == null || FocusStatusText == null) return;
+            bool isLight = IsCurrentThemeLight();
 
             if (isFocused)
             {
                 KeyboardFocusArea.BorderBrush = GetThemeBrush("AccentFillColorDefaultBrush");
                 KeyboardFocusArea.BorderThickness = new Thickness(1.5);
-                FocusStatusBadge.Background = new SolidColorBrush(Color.FromArgb(35, 46, 125, 50));
+                FocusStatusBadge.Background = new SolidColorBrush(isLight ? Color.FromArgb(255, 232, 245, 233) : Color.FromArgb(35, 46, 125, 50));
                 FocusStatusBadge.BorderBrush = GetThemeBrush("SystemFillColorSuccessBrush");
                 if (FocusStatusIcon != null)
                 {
@@ -731,6 +794,7 @@ namespace lanlanlu_toolkit.Views
         private void ApplyKeyVisualState(string keyId, KeyVisualState state)
         {
             if (!_keyVisualMap.TryGetValue(keyId, out var border)) return;
+            bool isLight = IsCurrentThemeLight();
 
             switch (state)
             {
@@ -741,9 +805,18 @@ namespace lanlanlu_toolkit.Views
                     break;
 
                 case KeyVisualState.Tested:
-                    border.Background = new SolidColorBrush(Color.FromArgb(255, 31, 78, 91)); // Subtle active teal
-                    border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 42, 157, 143));
-                    SetTextColors(border, Colors.White);
+                    if (isLight)
+                    {
+                        border.Background = new SolidColorBrush(Color.FromArgb(255, 224, 242, 254)); // Soft sky blue #E0F2FE
+                        border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 2, 132, 199));   // Vibrant blue #0284C7
+                        SetTextColors(border, Color.FromArgb(255, 3, 105, 161));                      // Deep blue #0369A1
+                    }
+                    else
+                    {
+                        border.Background = new SolidColorBrush(Color.FromArgb(255, 31, 78, 91));     // Dark teal #1F4E5B
+                        border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 42, 157, 143));  // Vibrant teal #2A9D8F
+                        SetTextColors(border, Colors.White);
+                    }
                     break;
 
                 case KeyVisualState.Warning:
@@ -775,15 +848,22 @@ namespace lanlanlu_toolkit.Views
             }
         }
 
-        private static void ResetTextColors(Border border)
+        private void ResetTextColors(Border border)
         {
             if (border.Child is StackPanel stack)
             {
-                foreach (var child in stack.Children)
+                for (int i = 0; i < stack.Children.Count; i++)
                 {
-                    if (child is TextBlock tb)
+                    if (stack.Children[i] is TextBlock tb)
                     {
-                        tb.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
+                        if (stack.Children.Count > 1 && i == 0)
+                        {
+                            tb.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
+                        }
+                        else
+                        {
+                            tb.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
+                        }
                     }
                 }
             }
@@ -1137,8 +1217,9 @@ namespace lanlanlu_toolkit.Views
             }
         }
 
-        private static void HighlightBorder(Border border, bool active)
+        private void HighlightBorder(Border border, bool active)
         {
+            if (border == null) return;
             if (active)
             {
                 border.Background = GetThemeBrush("AccentFillColorDefaultBrush");
