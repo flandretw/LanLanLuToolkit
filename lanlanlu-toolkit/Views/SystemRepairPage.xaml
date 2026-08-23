@@ -198,9 +198,10 @@
                 <MenuFlyoutSeparator Grid.Row="1" Margin="0" />
 
                 <!-- Console Area -->
-                <Border Grid.Row="2" Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="20" VerticalAlignment="Stretch">
+                <Border Grid.Row="2" Background="{ThemeResource LayerFillColorDefaultBrush}" VerticalAlignment="Stretch">
                     <ScrollViewer x:Name="LogScrollViewer" VerticalAlignment="Stretch" IsScrollInertiaEnabled="True" ManipulationMode="System">
                         <TextBlock x:Name="LogOutput" 
+                                   Padding="20"
                                    FontFamily="Cascadia Code, Consolas" 
                                    FontSize="12" 
                                    LineHeight="20"

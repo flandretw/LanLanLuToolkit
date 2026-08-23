@@ -12,11 +12,10 @@
 
     <Grid Padding="36" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RowSpacing="16">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" /> <!-- Header & Actions -->
-            <RowDefinition Height="Auto" /> <!-- Guide & Instructions Expander -->
-            <RowDefinition Height="Auto" /> <!-- Stat Summary Cards -->
-            <RowDefinition Height="Auto" /> <!-- Filter & Search -->
-            <RowDefinition Height="*" />    <!-- Master-Detail Content Area -->
+            <RowDefinition Height="Auto" /> <!-- 0: Header & Actions -->
+            <RowDefinition Height="Auto" /> <!-- 1: Stat Summary Cards -->
+            <RowDefinition Height="Auto" /> <!-- 2: Filter & Search -->
+            <RowDefinition Height="*" />    <!-- 3: Master-Detail Content Area -->
         </Grid.RowDefinitions>
 
         <!-- 1. Page Header with Action Buttons -->
@@ -56,33 +55,8 @@
             </StackPanel>
         </Grid>
 
-        <!-- 2. Guide & Instructions Expander -->
-        <Expander Grid.Row="1"
-                  HorizontalAlignment="Stretch"
-                  HorizontalContentAlignment="Stretch"
-                  IsExpanded="False"
-                  CornerRadius="{ThemeResource ControlCornerRadius}">
-            <Expander.Header>
-                <Grid ColumnSpacing="16" Padding="0,4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <FontIcon Glyph="&#xE946;" FontSize="18" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
-                    <TextBlock Grid.Column="1" x:Uid="CrashReportPage_Guide_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
-                </Grid>
-            </Expander.Header>
-            <Expander.Content>
-                <StackPanel Spacing="8" Padding="12,8,12,12">
-                    <TextBlock x:Uid="CrashReportPage_Guide_Desc1" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                    <TextBlock x:Uid="CrashReportPage_Guide_Desc2" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                    <TextBlock x:Uid="CrashReportPage_Guide_Desc3" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                </StackPanel>
-            </Expander.Content>
-        </Expander>
-
-        <!-- 3. Stat Summary Cards -->
-        <Grid Grid.Row="2" ColumnSpacing="16">
+        <!-- 2. Stat Summary Cards -->
+        <Grid Grid.Row="1" ColumnSpacing="16">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -171,8 +145,8 @@
             </Border>
         </Grid>
 
-        <!-- 4. Filter & Search Controls -->
-        <Grid Grid.Row="3" ColumnSpacing="12">
+        <!-- 3. Filter & Search Controls -->
+        <Grid Grid.Row="2" ColumnSpacing="12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -198,8 +172,8 @@
             <TextBlock x:Name="ShowingCountText" Grid.Column="2" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
         </Grid>
 
-        <!-- 5. Master-Detail Content Area -->
-        <Grid Grid.Row="4" ColumnSpacing="16">
+        <!-- 4. Master-Detail Content Area -->
+        <Grid Grid.Row="3" ColumnSpacing="16">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="420" MinWidth="340" MaxWidth="520" />
                 <ColumnDefinition Width="*" />
@@ -390,8 +364,7 @@
                     Background="{ThemeResource LayerFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
-                    CornerRadius="{ThemeResource OverlayCornerRadius}"
-                    Padding="24">
+                    CornerRadius="{ThemeResource OverlayCornerRadius}">
                 <Grid>
                     <!-- Prompt when nothing selected -->
                     <StackPanel x:Name="NoSelectionPrompt"
@@ -406,7 +379,7 @@
 
                     <!-- Selected Item Detail Content -->
                     <ScrollViewer x:Name="DetailScrollViewer" Visibility="Collapsed" IsScrollInertiaEnabled="True" VerticalScrollBarVisibility="Auto">
-                        <StackPanel Spacing="20" Margin="0,0,12,0">
+                        <StackPanel Spacing="20" Padding="24">
                             
                             <!-- Header Info -->
                             <Grid>
