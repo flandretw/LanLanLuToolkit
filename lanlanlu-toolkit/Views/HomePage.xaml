@@ -390,8 +390,8 @@
                 <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
                         BorderThickness="1" CornerRadius="{ThemeResource OverlayCornerRadius}" Padding="24,20">
-                    <StackPanel Spacing="10">
-                        <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                    <StackPanel Spacing="8">
+                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                             <FontIcon x:Name="GreetingIcon" Glyph="&#xE706;" FontSize="20" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
                             <TextBlock x:Name="GreetingText" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" VerticalAlignment="Center" />
                         </StackPanel>
@@ -400,7 +400,7 @@
                 </Border>
 
                 <!-- Quick Action Feature Grid Section -->
-                <StackPanel Spacing="14">
+                <StackPanel Spacing="16">
                     <TextBlock x:Uid="HomePage_QuickActions_Title" 
                                Style="{ThemeResource SubtitleTextBlockStyle}" 
                                FontWeight="SemiBold" />
@@ -536,17 +536,17 @@
                 <!-- Footer Quick Links Bar -->
                 <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                        BorderThickness="1" CornerRadius="{ThemeResource OverlayCornerRadius}" Padding="20,14">
+                        BorderThickness="1" CornerRadius="{ThemeResource OverlayCornerRadius}" Padding="20,16">
                     <Grid>
                         <StackPanel Orientation="Horizontal" Spacing="24" VerticalAlignment="Center">
-                            <HyperlinkButton Click="GoToSettings_Click" Padding="6,4">
+                            <HyperlinkButton Click="GoToSettings_Click" Padding="8,4">
                                 <StackPanel Orientation="Horizontal" Spacing="8">
                                     <FontIcon Glyph="&#xE713;" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     <TextBlock x:Uid="HomePage_AppSettings" Style="{ThemeResource BodyTextBlockStyle}" />
                                 </StackPanel>
                             </HyperlinkButton>
 
-                            <HyperlinkButton NavigateUri="https://github.com/flandretw/LanLanLuToolkit" Padding="6,4">
+                            <HyperlinkButton NavigateUri="https://github.com/flandretw/LanLanLuToolkit" Padding="8,4">
                                 <StackPanel Orientation="Horizontal" Spacing="8">
                                     <FontIcon Glyph="&#xE93C;" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     <TextBlock x:Uid="HomePage_GitHubProject" Style="{ThemeResource BodyTextBlockStyle}" />

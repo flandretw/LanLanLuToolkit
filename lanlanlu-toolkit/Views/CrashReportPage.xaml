@@ -32,7 +32,7 @@
             </StackPanel>
 
             <!-- Actions -->
-            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                 <Button x:Name="OpenDumpFolderBtn" Click="OpenDumpFolderBtn_Click">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <FontIcon Glyph="&#xED25;" FontSize="16" />
@@ -96,7 +96,7 @@
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
                     CornerRadius="{ThemeResource ControlCornerRadius}"
-                    Padding="16,14">
+                    Padding="16,16">
                 <Grid ColumnSpacing="12">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -116,7 +116,7 @@
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
                     CornerRadius="{ThemeResource ControlCornerRadius}"
-                    Padding="16,14">
+                    Padding="16,16">
                 <Grid ColumnSpacing="12">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -136,7 +136,7 @@
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
                     CornerRadius="{ThemeResource ControlCornerRadius}"
-                    Padding="16,14">
+                    Padding="16,16">
                 <Grid ColumnSpacing="12">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -156,7 +156,7 @@
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
                     CornerRadius="{ThemeResource ControlCornerRadius}"
-                    Padding="16,14">
+                    Padding="16,16">
                 <Grid ColumnSpacing="12">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -238,7 +238,7 @@
                     <ListView x:Name="CrashListView"
                               SelectionMode="Single"
                               SelectionChanged="CrashListView_SelectionChanged"
-                              Padding="4,6"
+                              Padding="4,4"
                               IsItemClickEnabled="True">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
@@ -358,7 +358,7 @@
                                     </Border>
 
                                     <!-- Content on Right -->
-                                    <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
+                                    <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
@@ -417,7 +417,7 @@
 
                                 <StackPanel Spacing="4">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <Border x:Name="DetailTypeBadge" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="6,2" Background="{ThemeResource AccentFillColorDefaultBrush}">
+                                        <Border x:Name="DetailTypeBadge" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="8,4" Background="{ThemeResource AccentFillColorDefaultBrush}">
                                             <TextBlock x:Name="DetailTypeBadgeText" Text="Crash" Foreground="White" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="Bold" />
                                         </Border>
                                         <TextBlock x:Name="DetailTimestampText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
@@ -427,7 +427,7 @@
 
                                 <!-- Copy Detail Button -->
                                 <Button x:Name="CopyDetailBtn" Grid.Column="1" Click="CopyDetailBtn_Click" VerticalAlignment="Top">
-                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
                                         <FontIcon x:Name="CopyDetailIcon" Glyph="&#xE8C8;" FontSize="14" />
                                         <TextBlock x:Name="CopyDetailText" x:Uid="CrashReportPage_Detail_CopyBtn" Style="{ThemeResource CaptionTextBlockStyle}" />
                                     </StackPanel>
@@ -468,7 +468,7 @@
                                 <StackPanel Spacing="12">
                                     <TextBlock x:Uid="CrashReportPage_Detail_TechDetailsHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" />
 
-                                    <Grid RowSpacing="10" ColumnSpacing="16">
+                                    <Grid RowSpacing="8" ColumnSpacing="16">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />

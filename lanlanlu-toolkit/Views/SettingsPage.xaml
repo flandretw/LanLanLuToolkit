@@ -330,12 +330,12 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Image x:Name="AppIconImage" Source="ms-appx:///Assets/Square150x150Logo.png" Width="64" Height="64" Margin="0,0,-6,0" VerticalAlignment="Center" Stretch="Uniform" />
+                                <Image x:Name="AppIconImage" Source="ms-appx:///Assets/Square150x150Logo.png" Width="64" Height="64" Margin="0,0,-8,0" VerticalAlignment="Center" Stretch="Uniform" />
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                     <TextBlock x:Name="AppNameTextBlock" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
                                     <TextBlock x:Name="AppCopyrightTextBlock" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                 </StackPanel>
-                                <TextBlock x:Name="AppVersionTextBlock" Grid.Column="2" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,0,-18,0" />
+                                <TextBlock x:Name="AppVersionTextBlock" Grid.Column="2" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,0,-16,0" />
                             </Grid>
                         </Expander.Header>
                         <Expander.Content>

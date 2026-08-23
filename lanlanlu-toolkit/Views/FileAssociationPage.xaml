@@ -36,7 +36,7 @@
                                     </Grid.ColumnDefinitions>
                                     
                                     <!-- Left input and instruction -->
-                                    <StackPanel Spacing="6" VerticalAlignment="Center">
+                                    <StackPanel Spacing="4" VerticalAlignment="Center">
                                         <TextBlock x:Uid="FileAssociationPage_TargetExtTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                         <TextBlock x:Uid="FileAssociationPage_TargetExtDesc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                     </StackPanel>
@@ -108,7 +108,7 @@
                                     <Border x:Name="RegistryInstructionsCard" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Visibility="Collapsed" Background="{ThemeResource LayerFillColorDefaultBrush}">
                                         <StackPanel Padding="16" Spacing="12">
                                             <TextBlock x:Uid="FileAssociationPage_GuideTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
-                                            <StackPanel Spacing="6" Margin="12,0,0,0">
+                                            <StackPanel Spacing="8" Margin="12,0,0,0">
                                                 <TextBlock x:Uid="FileAssociationPage_GuideStep1" Style="{ThemeResource CaptionTextBlockStyle}" />
                                                 <TextBlock x:Uid="FileAssociationPage_GuideStep2" Style="{ThemeResource CaptionTextBlockStyle}" />
                                                 <TextBlock x:Uid="FileAssociationPage_GuideStep3" Style="{ThemeResource CaptionTextBlockStyle}" />

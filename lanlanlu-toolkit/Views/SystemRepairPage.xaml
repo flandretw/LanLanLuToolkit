@@ -76,13 +76,13 @@
                     </Grid>
                 </Expander.Header>
                 <Expander.Content>
-                    <StackPanel Spacing="1" Margin="-16,0,-16,0">
+                    <StackPanel Spacing="0" Margin="-16,0,-16,0">
                         <!-- Inner Cards -->
                         <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1"
                                 CornerRadius="{ThemeResource ControlCornerRadius}">
-                            <Grid Padding="66,16,32,16">
+                            <Grid Padding="64,16,32,16">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
@@ -99,7 +99,7 @@
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1"
                                 CornerRadius="{ThemeResource ControlCornerRadius}">
-                            <Grid Padding="66,16,32,16">
+                            <Grid Padding="64,16,32,16">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
@@ -116,7 +116,7 @@
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1"
                                 CornerRadius="{ThemeResource ControlCornerRadius}">
-                            <Grid Padding="66,16,32,16">
+                            <Grid Padding="64,16,32,16">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
@@ -133,7 +133,7 @@
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1"
                                 CornerRadius="{ThemeResource ControlCornerRadius}">
-                            <Grid Padding="66,16,32,16">
+                            <Grid Padding="64,16,32,16">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
@@ -178,7 +178,7 @@
                         <ProgressBar x:Name="GlobalProgress" IsIndeterminate="True" Width="100" Visibility="Collapsed" VerticalAlignment="Center" />
                         
                         <!-- Copy Button -->
-                        <Button x:Name="CopyLogBtn" Click="CopyLogBtn_Click" Padding="12,5" VerticalAlignment="Center" IsEnabled="False">
+                        <Button x:Name="CopyLogBtn" Click="CopyLogBtn_Click" Padding="12,4" VerticalAlignment="Center" IsEnabled="False">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <FontIcon x:Name="CopyBtnIcon" Glyph="&#xE8C8;" FontSize="14" />
                                 <TextBlock x:Name="CopyBtnText" x:Uid="SystemRepairPage_Copy" Style="{ThemeResource CaptionTextBlockStyle}" />
@@ -186,7 +186,7 @@
                         </Button>
 
                         <!-- Clear Button -->
-                        <Button x:Name="ClearLogBtn" Click="ClearLogBtn_Click" Padding="12,5" VerticalAlignment="Center" IsEnabled="False">
+                        <Button x:Name="ClearLogBtn" Click="ClearLogBtn_Click" Padding="12,4" VerticalAlignment="Center" IsEnabled="False">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <FontIcon Glyph="&#xE74D;" FontSize="14" />
                                 <TextBlock x:Uid="SystemRepairPage_Clear" Style="{StaticResource CaptionTextBlockStyle}" />

@@ -71,7 +71,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Spacing="2">
+                        <StackPanel Spacing="4">
                             <TextBlock x:Uid="InputTesterPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
                             <TextBlock x:Uid="InputTesterPage_Subtitle" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
@@ -96,7 +96,7 @@
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1"
                                 CornerRadius="{ThemeResource ControlCornerRadius}">
-                            <Grid Padding="16,10">
+                            <Grid Padding="16,12">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
@@ -104,7 +104,7 @@
                                 </Grid.ColumnDefinitions>
                                 <FontIcon Glyph="&#xE790;" 
                                           FontSize="18" 
-                                          Margin="0,0,14,0" 
+                                          Margin="0,0,16,0" 
                                           VerticalAlignment="Center" 
                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
@@ -141,7 +141,7 @@
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1"
                                 CornerRadius="{ThemeResource ControlCornerRadius}">
-                            <Grid Padding="16,10">
+                            <Grid Padding="16,12">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
@@ -149,7 +149,7 @@
                                 </Grid.ColumnDefinitions>
                                 <FontIcon Glyph="&#xE767;" 
                                           FontSize="18" 
-                                          Margin="0,0,14,0" 
+                                          Margin="0,0,16,0" 
                                           VerticalAlignment="Center" 
                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
@@ -201,9 +201,9 @@
                             <!-- Card 1: Last Key Pressed -->
                             <Border Grid.Column="0" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="14,8"
+                                    BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="16,8"
                                     VerticalAlignment="Stretch" MinHeight="72">
-                                <Grid RowSpacing="2">
+                                <Grid RowSpacing="4">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
@@ -218,9 +218,9 @@
                             <!-- Card 2: Current Active Down -->
                             <Border Grid.Column="1" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="14,8"
+                                    BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="16,8"
                                     VerticalAlignment="Stretch" MinHeight="72">
-                                <Grid RowSpacing="2">
+                                <Grid RowSpacing="4">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
@@ -235,9 +235,9 @@
                             <!-- Card 3: Max Rollover (NKRO) -->
                             <Border Grid.Column="2" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="14,8"
+                                    BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="16,8"
                                     VerticalAlignment="Stretch" MinHeight="72">
-                                <Grid RowSpacing="2">
+                                <Grid RowSpacing="4">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
@@ -252,9 +252,9 @@
                             <!-- Card 4: Total Presses -->
                             <Border Grid.Column="3" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="14,8"
+                                    BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="16,8"
                                     VerticalAlignment="Stretch" MinHeight="72">
-                                <Grid RowSpacing="2">
+                                <Grid RowSpacing="4">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
@@ -269,9 +269,9 @@
                             <!-- Card 5: Trigger Interval & Chatter Warning -->
                             <Border Grid.Column="4" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="14,8"
+                                    BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="16,8"
                                     VerticalAlignment="Stretch" MinHeight="72">
-                                <Grid RowSpacing="2">
+                                <Grid RowSpacing="4">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
@@ -290,7 +290,7 @@
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1"
                                 CornerRadius="{ThemeResource OverlayCornerRadius}"
-                                Padding="16,12,16,14"
+                                Padding="16,12,16,16"
                                 IsTabStop="True"
                                 SizeChanged="KeyboardFocusArea_SizeChanged"
                                 GotFocus="KeyboardFocusArea_GotFocus"
@@ -332,8 +332,8 @@
                                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                                 BorderThickness="1"
                                                 CornerRadius="12"
-                                                Padding="10,4">
-                                            <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                                Padding="12,4">
+                                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                                 <FontIcon x:Name="FocusStatusIcon" Glyph="&#xEA3A;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                                 <TextBlock x:Name="FocusStatusText"
                                                            x:Uid="InputTesterPage_FocusStatus_Unfocused"
@@ -346,7 +346,7 @@
                                 </Grid>
 
                                 <!-- Helpful Guidance Tip -->
-                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
                                     <FontIcon Glyph="&#xE946;" FontSize="13" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
                                     <TextBlock x:Uid="InputTesterPage_FocusHint"
                                                Style="{ThemeResource CaptionTextBlockStyle}"
@@ -362,7 +362,7 @@
                                          MaxHeight="275"
                                          UseLayoutRounding="False">
                                     <StackPanel Orientation="Horizontal"
-                                                Spacing="18"
+                                                Spacing="16"
                                                 Padding="8"
                                                 UseLayoutRounding="False"
                                                 HorizontalAlignment="Center"
@@ -387,7 +387,7 @@
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Top"
                                               RowSpacing="4"
-                                              ColumnSpacing="6">
+                                              ColumnSpacing="8">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="42" />
                                                 <RowDefinition Height="42" />
@@ -539,8 +539,8 @@
                                 
                                 <StackPanel Spacing="12" HorizontalAlignment="Stretch">
                                     <!-- Header -->
-                                    <StackPanel Spacing="2" HorizontalAlignment="Center">
-                                        <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Center">
+                                    <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
                                             <FontIcon Glyph="&#xE962;" FontSize="16" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
                                             <TextBlock x:Uid="InputTesterPage_Mouse_VisualTitle" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="16" VerticalAlignment="Center" />
                                         </StackPanel>
@@ -566,10 +566,10 @@
                                                 Background="{ThemeResource ControlFillColorDefaultBrush}"
                                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                                 BorderThickness="1"
-                                                Margin="0,0,68,110"
+                                                Margin="0,0,68,112"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center">
-                                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="2">
+                                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="4">
                                                 <TextBlock x:Uid="InputTesterPage_Mouse_LeftBtn_Label" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" />
                                                 <TextBlock x:Name="MouseLeftCountText" Text="0" Style="{ThemeResource BodyStrongTextBlockStyle}" HorizontalAlignment="Center" />
                                             </StackPanel>
@@ -582,10 +582,10 @@
                                                 Background="{ThemeResource ControlFillColorDefaultBrush}"
                                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                                 BorderThickness="1"
-                                                Margin="68,0,0,110"
+                                                Margin="68,0,0,112"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center">
-                                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="2">
+                                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="4">
                                                 <TextBlock x:Uid="InputTesterPage_Mouse_RightBtn_Label" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" />
                                                 <TextBlock x:Name="MouseRightCountText" Text="0" Style="{ThemeResource BodyStrongTextBlockStyle}" HorizontalAlignment="Center" />
                                             </StackPanel>
@@ -601,7 +601,7 @@
                                                 Margin="0,0,0,104"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center">
-                                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="2">
+                                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="4">
                                                 <FontIcon x:Name="WheelUpArrow" Glyph="&#xE70E;" FontSize="8" Foreground="{ThemeResource TextFillColorTertiaryBrush}" HorizontalAlignment="Center" />
                                                 <FontIcon Glyph="&#xE700;" FontSize="10" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" />
                                                 <FontIcon x:Name="WheelDownArrow" Glyph="&#xE70D;" FontSize="8" Foreground="{ThemeResource TextFillColorTertiaryBrush}" HorizontalAlignment="Center" />
@@ -639,7 +639,7 @@
                                     </Grid>
 
                                     <!-- 2x2 Mini-Card Matrix for Micro-Stats -->
-                                    <Grid RowSpacing="6" ColumnSpacing="6" HorizontalAlignment="Stretch">
+                                    <Grid RowSpacing="8" ColumnSpacing="8" HorizontalAlignment="Stretch">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
@@ -653,8 +653,8 @@
                                         <Border Grid.Row="0" Grid.Column="0"
                                                 Background="{ThemeResource ControlAltFillColorSecondaryBrush}"
                                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                                BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,6">
-                                            <StackPanel Spacing="2">
+                                                BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="12,8">
+                                            <StackPanel Spacing="4">
                                                 <TextBlock x:Uid="InputTesterPage_MouseTile_Side1" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                                 <TextBlock x:Name="Side1CountText" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                             </StackPanel>
@@ -664,8 +664,8 @@
                                         <Border Grid.Row="0" Grid.Column="1"
                                                 Background="{ThemeResource ControlAltFillColorSecondaryBrush}"
                                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                                BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,6">
-                                            <StackPanel Spacing="2">
+                                                BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="12,8">
+                                            <StackPanel Spacing="4">
                                                 <TextBlock x:Uid="InputTesterPage_MouseTile_Side2" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                                 <TextBlock x:Name="Side2CountText" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                             </StackPanel>
@@ -675,8 +675,8 @@
                                         <Border Grid.Row="1" Grid.Column="0"
                                                 Background="{ThemeResource ControlAltFillColorSecondaryBrush}"
                                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                                BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,6">
-                                            <StackPanel Spacing="2">
+                                                BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="12,8">
+                                            <StackPanel Spacing="4">
                                                 <TextBlock x:Uid="InputTesterPage_MouseTile_WheelDelta" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                                 <TextBlock x:Name="WheelDeltaText" Text="0 / 0" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                             </StackPanel>
@@ -686,8 +686,8 @@
                                         <Border Grid.Row="1" Grid.Column="1"
                                                 Background="{ThemeResource ControlAltFillColorSecondaryBrush}"
                                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                                BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,6">
-                                            <StackPanel Spacing="2">
+                                                BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="12,8">
+                                            <StackPanel Spacing="4">
                                                 <TextBlock x:Uid="InputTesterPage_MouseTile_WheelStatus" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                                 <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
                                                     <FontIcon x:Name="WheelStatusIcon" Glyph="&#xE73E;" FontSize="11" Foreground="{ThemeResource SystemFillColorSuccessBrush}" VerticalAlignment="Center" />
@@ -702,8 +702,8 @@
                                             BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                             BorderThickness="1"
                                             CornerRadius="{ThemeResource ControlCornerRadius}"
-                                            Padding="10,5">
-                                        <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Center">
+                                            Padding="12,4">
+                                        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
                                             <FontIcon Glyph="&#xE946;" FontSize="11" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
                                             <TextBlock x:Uid="InputTesterPage_Mouse_WheelHint"
                                                        Style="{ThemeResource CaptionTextBlockStyle}"
@@ -735,8 +735,8 @@
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
 
-                                            <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,16,0">
-                                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                            <StackPanel Grid.Column="0" Spacing="4" Margin="0,0,16,0">
+                                                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                                     <FontIcon Glyph="&#xE8B0;" FontSize="16" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
                                                     <TextBlock x:Uid="InputTesterPage_Mouse_ChatterTest_Title" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="16" VerticalAlignment="Center" />
                                                 </StackPanel>
@@ -761,7 +761,7 @@
                                                 PointerPressed="ChatterClickPad_PointerPressed"
                                                 PointerReleased="ChatterClickPad_PointerReleased">
                                             <Grid>
-                                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="3">
+                                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="4">
                                                     <TextBlock x:Uid="InputTesterPage_Mouse_ClickArea" Style="{ThemeResource BodyStrongTextBlockStyle}" HorizontalAlignment="Center" />
                                                     <TextBlock x:Name="LastClickIntervalText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" />
                                                 </StackPanel>
@@ -771,12 +771,12 @@
                                         <!-- Chatter Counter Stats Row -->
                                         <Grid>
                                             <StackPanel Orientation="Horizontal" Spacing="20">
-                                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                                     <TextBlock x:Uid="InputTesterPage_Mouse_NormalClicks" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                                     <TextBlock x:Name="NormalClicksText" Text="0" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
                                                 </StackPanel>
 
-                                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                                     <TextBlock x:Uid="InputTesterPage_Mouse_ChatterClicks" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                                     <TextBlock x:Name="ChatterClicksText" Text="0" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
                                                 </StackPanel>
@@ -784,7 +784,7 @@
 
                                             <StackPanel x:Name="ChatterAlertBanner"
                                                         Orientation="Horizontal"
-                                                        Spacing="6"
+                                                        Spacing="8"
                                                         HorizontalAlignment="Right"
                                                         VerticalAlignment="Center"
                                                         Visibility="Collapsed">
@@ -820,21 +820,21 @@
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
 
-                                            <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,16,0">
-                                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                            <StackPanel Grid.Column="0" Spacing="4" Margin="0,0,16,0">
+                                                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                                     <FontIcon Glyph="&#xEE56;" FontSize="16" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
                                                     <TextBlock x:Uid="InputTesterPage_Mouse_Canvas_Title" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="16" VerticalAlignment="Center" />
                                                 </StackPanel>
                                                 <TextBlock x:Uid="InputTesterPage_Mouse_Canvas_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                             </StackPanel>
 
-                                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                                 <!-- Polling Hz Compact Chips Pill -->
                                                 <Border Background="{ThemeResource ControlAltFillColorSecondaryBrush}"
                                                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                                         BorderThickness="1"
                                                         CornerRadius="14"
-                                                        Padding="10,4">
+                                                        Padding="12,4">
                                                     <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                                         <TextBlock x:Uid="InputTesterPage_Mouse_RealtimeChip" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                                         <TextBlock x:Name="CurrentHzText" Text="0 Hz" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
@@ -848,7 +848,7 @@
                                                 </Border>
 
                                                 <Button Click="ClearCanvasBtn_Click" VerticalAlignment="Center">
-                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                    <StackPanel Orientation="Horizontal" Spacing="8">
                                                         <FontIcon Glyph="&#xE75C;" FontSize="13" />
                                                         <TextBlock x:Uid="InputTesterPage_Mouse_Canvas_Clear" />
                                                     </StackPanel>

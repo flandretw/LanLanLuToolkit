@@ -107,7 +107,7 @@
                           SelectionMode="None" 
                           IsItemClickEnabled="False"
                           HorizontalAlignment="Stretch"
-                          Margin="-6,0,-6,0"
+                          Margin="-8,0,-8,0"
                           SizeChanged="ToolsGridView_SizeChanged">
                     
                     <GridView.ItemsPanel>
