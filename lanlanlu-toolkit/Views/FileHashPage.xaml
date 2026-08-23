@@ -27,7 +27,7 @@
                         <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1"
-                                CornerRadius="8">
+                                CornerRadius="{ThemeResource OverlayCornerRadius}">
                             <Grid Padding="16">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -48,7 +48,7 @@
                                 Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1"
-                                CornerRadius="8"
+                                CornerRadius="{ThemeResource OverlayCornerRadius}"
                                 Visibility="Collapsed">
                             <Grid Padding="16">
                                 <Grid.ColumnDefinitions>
@@ -73,7 +73,7 @@
                         <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1"
-                                CornerRadius="8">
+                                CornerRadius="{ThemeResource OverlayCornerRadius}">
                             <StackPanel Padding="16" Spacing="20">
                                 <!-- Algorithm Selector and Calculate Button in one sleek row -->
                                 <Grid>
@@ -155,7 +155,7 @@
                         <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1"
-                                CornerRadius="8">
+                                CornerRadius="{ThemeResource OverlayCornerRadius}">
                             <StackPanel Padding="16" Spacing="20">
                                 <StackPanel Spacing="4">
                                     <TextBlock x:Name="CompareLabel" Style="{ThemeResource BodyStrongTextBlockStyle}" />

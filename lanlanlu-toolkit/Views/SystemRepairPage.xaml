@@ -28,7 +28,7 @@
             <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
-                    CornerRadius="{ThemeResource ControlCornerRadius}">
+                    CornerRadius="{ThemeResource OverlayCornerRadius}">
                 <Grid Padding="16">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -156,7 +156,7 @@
                 Background="{ThemeResource LayerFillColorDefaultBrush}"
                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                 BorderThickness="1"
-                CornerRadius="{ThemeResource ControlCornerRadius}">
+                CornerRadius="{ThemeResource OverlayCornerRadius}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

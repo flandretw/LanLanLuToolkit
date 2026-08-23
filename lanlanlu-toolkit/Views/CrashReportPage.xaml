@@ -210,7 +210,7 @@
                     Background="{ThemeResource LayerFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
-                    CornerRadius="{ThemeResource ControlCornerRadius}">
+                    CornerRadius="{ThemeResource OverlayCornerRadius}">
                 <Grid>
                     <!-- Loading Indicator -->
                     <StackPanel x:Name="LoadingPanel"
@@ -390,7 +390,7 @@
                     Background="{ThemeResource LayerFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
-                    CornerRadius="{ThemeResource ControlCornerRadius}"
+                    CornerRadius="{ThemeResource OverlayCornerRadius}"
                     Padding="24">
                 <Grid>
                     <!-- Prompt when nothing selected -->
@@ -417,7 +417,7 @@
 
                                 <StackPanel Spacing="4">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <Border x:Name="DetailTypeBadge" CornerRadius="4" Padding="6,2" Background="{ThemeResource AccentFillColorDefaultBrush}">
+                                        <Border x:Name="DetailTypeBadge" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="6,2" Background="{ThemeResource AccentFillColorDefaultBrush}">
                                             <TextBlock x:Name="DetailTypeBadgeText" Text="Crash" Foreground="White" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="Bold" />
                                         </Border>
                                         <TextBlock x:Name="DetailTimestampText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />

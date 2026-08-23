@@ -94,7 +94,7 @@
                          Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
                          BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                          BorderThickness="1"
-                         CornerRadius="{ThemeResource ControlCornerRadius}"
+                         CornerRadius="{ThemeResource OverlayCornerRadius}"
                          Canvas.ZIndex="999">
                     <InfoBar.Shadow>
                         <ThemeShadow />

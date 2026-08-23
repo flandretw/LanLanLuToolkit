@@ -289,7 +289,7 @@
                                 Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1"
-                                CornerRadius="{ThemeResource ControlCornerRadius}"
+                                CornerRadius="{ThemeResource OverlayCornerRadius}"
                                 Padding="16,12,16,14"
                                 IsTabStop="True"
                                 SizeChanged="KeyboardFocusArea_SizeChanged"
@@ -532,7 +532,7 @@
                                     Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                     BorderThickness="1"
-                                    CornerRadius="{ThemeResource ControlCornerRadius}"
+                                    CornerRadius="{ThemeResource OverlayCornerRadius}"
                                     Padding="16"
                                     VerticalAlignment="Stretch"
                                     PointerWheelChanged="MouseVisualCard_PointerWheelChanged">
@@ -701,7 +701,7 @@
                                     <Border Background="{ThemeResource ControlAltFillColorSecondaryBrush}"
                                             BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                             BorderThickness="1"
-                                            CornerRadius="8"
+                                            CornerRadius="{ThemeResource ControlCornerRadius}"
                                             Padding="10,5">
                                         <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Center">
                                             <FontIcon Glyph="&#xE946;" FontSize="11" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
@@ -726,7 +726,7 @@
                                         Background="{ThemeResource LayerFillColorDefaultBrush}"
                                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                         BorderThickness="1"
-                                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                                        CornerRadius="{ThemeResource OverlayCornerRadius}"
                                         Padding="16">
                                     <StackPanel Spacing="12">
                                         <Grid>
@@ -804,7 +804,7 @@
                                         Background="{ThemeResource LayerFillColorDefaultBrush}"
                                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                         BorderThickness="1"
-                                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                                        CornerRadius="{ThemeResource OverlayCornerRadius}"
                                         Padding="16"
                                         VerticalAlignment="Stretch">
                                     <Grid RowSpacing="12" VerticalAlignment="Stretch">

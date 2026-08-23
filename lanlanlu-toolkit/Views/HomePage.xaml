@@ -46,7 +46,7 @@
                 <Setter Property="Background" Value="{ThemeResource CardAcrylicBrush}" />
                 <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
                 <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
+                <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 <Setter Property="VerticalContentAlignment" Value="Stretch" />
                 <Setter Property="Template">
@@ -88,7 +88,7 @@
                 <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
                 <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
                 <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
+                <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -236,7 +236,7 @@
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                TextWrapping="Wrap" MaxLines="3" />
                                 </StackPanel>
-                                <Border x:Name="CpuHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource ControlCornerRadius}" Margin="-16" IsHitTestVisible="False" />
+                                <Border x:Name="CpuHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource OverlayCornerRadius}" Margin="-16" IsHitTestVisible="False" />
                                 <FontIcon x:Name="CpuCopyIcon" Glyph="&#xE8C8;" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                                           FontSize="13" Foreground="{ThemeResource CardCopyIconBrush}" Opacity="0" Margin="0,0,-4,-4" />
                             </Grid>
@@ -263,7 +263,7 @@
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                TextWrapping="Wrap" MaxLines="3" />
                                 </StackPanel>
-                                <Border x:Name="MotherboardHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource ControlCornerRadius}" Margin="-16" IsHitTestVisible="False" />
+                                <Border x:Name="MotherboardHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource OverlayCornerRadius}" Margin="-16" IsHitTestVisible="False" />
                                 <FontIcon x:Name="MotherboardCopyIcon" Glyph="&#xE8C8;" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                                           FontSize="13" Foreground="{ThemeResource CardCopyIconBrush}" Opacity="0" Margin="0,0,-4,-4" />
                             </Grid>
@@ -289,7 +289,7 @@
                                                Style="{ThemeResource CaptionTextBlockStyle}"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </StackPanel>
-                                <Border x:Name="RamHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource ControlCornerRadius}" Margin="-16" IsHitTestVisible="False" />
+                                <Border x:Name="RamHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource OverlayCornerRadius}" Margin="-16" IsHitTestVisible="False" />
                                 <FontIcon x:Name="RamCopyIcon" Glyph="&#xE8C8;" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                                           FontSize="13" Foreground="{ThemeResource CardCopyIconBrush}" Opacity="0" Margin="0,0,-4,-4" />
                             </Grid>
@@ -316,7 +316,7 @@
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                TextWrapping="Wrap" MaxLines="3" />
                                 </StackPanel>
-                                <Border x:Name="GpuHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource ControlCornerRadius}" Margin="-16" IsHitTestVisible="False" />
+                                <Border x:Name="GpuHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource OverlayCornerRadius}" Margin="-16" IsHitTestVisible="False" />
                                 <FontIcon x:Name="GpuCopyIcon" Glyph="&#xE8C8;" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                                           FontSize="13" Foreground="{ThemeResource CardCopyIconBrush}" Opacity="0" Margin="0,0,-4,-4" />
                             </Grid>
@@ -343,7 +343,7 @@
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                TextWrapping="Wrap" MaxLines="3" />
                                 </StackPanel>
-                                <Border x:Name="StorageHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource ControlCornerRadius}" Margin="-16" IsHitTestVisible="False" />
+                                <Border x:Name="StorageHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource OverlayCornerRadius}" Margin="-16" IsHitTestVisible="False" />
                                 <FontIcon x:Name="StorageCopyIcon" Glyph="&#xE8C8;" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                                           FontSize="13" Foreground="{ThemeResource CardCopyIconBrush}" Opacity="0" Margin="0,0,-4,-4" />
                             </Grid>
@@ -389,7 +389,7 @@
                 <!-- Welcome & Greeting Card -->
                 <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                        BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="24,20">
+                        BorderThickness="1" CornerRadius="{ThemeResource OverlayCornerRadius}" Padding="24,20">
                     <StackPanel Spacing="10">
                         <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
                             <FontIcon x:Name="GreetingIcon" Glyph="&#xE706;" FontSize="20" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
@@ -536,7 +536,7 @@
                 <!-- Footer Quick Links Bar -->
                 <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                        BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="20,14">
+                        BorderThickness="1" CornerRadius="{ThemeResource OverlayCornerRadius}" Padding="20,14">
                     <Grid>
                         <StackPanel Orientation="Horizontal" Spacing="24" VerticalAlignment="Center">
                             <HyperlinkButton Click="GoToSettings_Click" Padding="6,4">

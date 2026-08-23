@@ -28,7 +28,7 @@
                         <Border x:Name="CPUCard"
                                 Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                BorderThickness="1" CornerRadius="8" Padding="24"
+                                BorderThickness="1" CornerRadius="{ThemeResource OverlayCornerRadius}" Padding="24"
                                 HorizontalAlignment="Stretch">
                             <Grid ColumnSpacing="24">
                                 <Grid.ColumnDefinitions>
@@ -45,7 +45,7 @@
                                         </StackPanel>
                                         <TextBlock x:Name="CpuNameText" x:Uid="HomePage_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     </StackPanel>
-                                    <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                                    <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                                         <Grid x:Name="CpuChartContainer">
                                             <!-- Horizontal Grid Lines -->
                                             <Rectangle Height="1" VerticalAlignment="Top" Margin="0,40,0,0" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.2" />
@@ -150,7 +150,7 @@
                         <Border x:Name="RAMCard"
                                 Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                BorderThickness="1" CornerRadius="8" Padding="24"
+                                BorderThickness="1" CornerRadius="{ThemeResource OverlayCornerRadius}" Padding="24"
                                 HorizontalAlignment="Stretch">
                             <Grid ColumnSpacing="24">
                                 <Grid.ColumnDefinitions>
@@ -167,7 +167,7 @@
                                         </StackPanel>
                                         <TextBlock x:Name="RamNameText" x:Uid="HomePage_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     </StackPanel>
-                                    <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                                    <Border Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                                         <Grid x:Name="RamChartContainer">
                                             <!-- Horizontal Grid Lines -->
                                             <Rectangle Height="1" VerticalAlignment="Top" Margin="0,40,0,0" Fill="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0.2" />
