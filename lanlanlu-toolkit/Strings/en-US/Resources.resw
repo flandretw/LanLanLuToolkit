@@ -807,18 +807,6 @@
   <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
     <value>Scan and analyze system kernel minidumps and application crash event logs</value>
   </data>
-  <data name="CrashReportPage_Guide_Title.Text" xml:space="preserve">
-    <value>Instructions &amp; Troubleshooting Guide</value>
-  </data>
-  <data name="CrashReportPage_Guide_Desc1.Text" xml:space="preserve">
-    <value>• Auto Analysis: Automatically retrieves minidumps from C:\Windows\Minidump and crash records from Windows Event Log.</value>
-  </data>
-  <data name="CrashReportPage_Guide_Desc2.Text" xml:space="preserve">
-    <value>• Smart Diagnosis: Select any event to analyze BugCheck codes, faulting driver modules, and actionable troubleshooting steps.</value>
-  </data>
-  <data name="CrashReportPage_Guide_Desc3.Text" xml:space="preserve">
-    <value>• Export &amp; Share: Copy individual summaries or click 'Export Report' to save all crash logs as a Markdown document for technical assistance.</value>
-  </data>
   <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
     <value>Total Crashes</value>
   </data>
@@ -902,6 +890,15 @@
   </data>
   <data name="CrashReportPage_Detail_Copied" xml:space="preserve">
     <value>Copied to clipboard</value>
+  </data>
+  <data name="CrashReportPage_Detail_CopyField.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Copy this field</value>
+  </data>
+  <data name="CrashReportPage_Detail_CopyDiagnosis.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Copy diagnosis</value>
+  </data>
+  <data name="CrashReportPage_Detail_CopyRawLog.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Copy raw log</value>
   </data>
   <data name="CrashReportPage_ExportSuccess_Title" xml:space="preserve">
     <value>Export Successful</value>

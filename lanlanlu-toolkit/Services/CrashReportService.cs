@@ -46,7 +46,7 @@ namespace lanlanlu_toolkit.Services
             CrashType.Bsod => "\uE7BA", // Warning Triangle for Kernel Crash / BSOD
             CrashType.AppCrash => "\uE783", // Circle Exclamation for Application Crash
             CrashType.AppHang => "\uE823", // Clock / History for Application Hang / Frozen UI
-            CrashType.DotNetCrash => "\uEC5A", // Code Script for .NET CLR Exceptions
+            CrashType.DotNetCrash => "\uE774", // Globe / Web for .NET Runtime Exceptions
             _ => "\uE783"
         };
 

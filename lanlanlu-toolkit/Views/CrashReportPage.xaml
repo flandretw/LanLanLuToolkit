@@ -10,6 +10,21 @@
     NavigationCacheMode="Required"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <Style x:Key="SubtleCopyButtonStyle" TargetType="Button">
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="Width" Value="28" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="MinHeight" Value="28" />
+            <Setter Property="MinWidth" Value="28" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+    </Page.Resources>
+
     <Grid Padding="36" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RowSpacing="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" /> <!-- 0: Header & Actions -->
@@ -393,9 +408,9 @@
                                         <Border x:Name="DetailTypeBadge" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="8,4" Background="{ThemeResource AccentFillColorDefaultBrush}">
                                             <TextBlock x:Name="DetailTypeBadgeText" Text="Crash" Foreground="White" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="Bold" />
                                         </Border>
-                                        <TextBlock x:Name="DetailTimestampText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                        <TextBlock x:Name="DetailTimestampText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" IsTextSelectionEnabled="True" />
                                     </StackPanel>
-                                    <TextBlock x:Name="DetailTitleText" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                    <TextBlock x:Name="DetailTitleText" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
                                 </StackPanel>
 
                                 <!-- Copy Detail Button -->
@@ -414,20 +429,29 @@
                                     CornerRadius="{ThemeResource ControlCornerRadius}"
                                     Padding="16">
                                 <StackPanel Spacing="12">
-                                    <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xE946;" FontSize="18" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
-                                        <TextBlock x:Uid="CrashReportPage_Detail_DiagnosisHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                    </StackPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                            <FontIcon Glyph="&#xE946;" FontSize="18" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
+                                            <TextBlock x:Uid="CrashReportPage_Detail_DiagnosisHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                        <Button x:Name="CopyDiagnosisBtn" Grid.Column="1" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyField_Click" x:Uid="CrashReportPage_Detail_CopyDiagnosis">
+                                            <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        </Button>
+                                    </Grid>
                                     
                                     <!-- Description -->
-                                    <TextBlock x:Name="DetailDescriptionText" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" />
+                                    <TextBlock x:Name="DetailDescriptionText" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
                                     
                                     <MenuFlyoutSeparator Margin="-16,0,-16,0" />
 
                                     <!-- Recommendation -->
                                     <StackPanel Spacing="4">
                                         <TextBlock x:Uid="CrashReportPage_Detail_RecommendationHeader" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontWeight="SemiBold" />
-                                        <TextBlock x:Name="DetailRecommendationText" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" />
+                                        <TextBlock x:Name="DetailRecommendationText" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
                                     </StackPanel>
                                 </StackPanel>
                             </Border>
@@ -441,7 +465,7 @@
                                 <StackPanel Spacing="12">
                                     <TextBlock x:Uid="CrashReportPage_Detail_TechDetailsHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" />
 
-                                    <Grid RowSpacing="8" ColumnSpacing="16">
+                                    <Grid RowSpacing="8" ColumnSpacing="12">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
@@ -452,39 +476,51 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="140" />
                                             <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
                                         <!-- Error Code -->
-                                        <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="CrashReportPage_Detail_ErrorCode" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                        <TextBlock x:Name="DetailErrorCodeText" Grid.Row="0" Grid.Column="1" Style="{ThemeResource BodyStrongTextBlockStyle}" FontFamily="Cascadia Code, Consolas" IsTextSelectionEnabled="True" />
+                                        <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="CrashReportPage_Detail_ErrorCode" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                        <TextBlock x:Name="DetailErrorCodeText" Grid.Row="0" Grid.Column="1" Style="{ThemeResource BodyStrongTextBlockStyle}" FontFamily="Cascadia Code, Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center" />
+                                        <Button x:Name="CopyErrorCodeBtn" Grid.Row="0" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyField_Click" x:Uid="CrashReportPage_Detail_CopyField">
+                                            <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        </Button>
 
                                         <!-- Faulting Module / Driver -->
-                                        <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="CrashReportPage_Detail_FaultModule" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                        <TextBlock x:Name="DetailFaultModuleText" Grid.Row="1" Grid.Column="1" Style="{ThemeResource BodyTextBlockStyle}" FontFamily="Cascadia Code, Consolas" IsTextSelectionEnabled="True" />
+                                        <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="CrashReportPage_Detail_FaultModule" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                        <TextBlock x:Name="DetailFaultModuleText" Grid.Row="1" Grid.Column="1" Style="{ThemeResource BodyTextBlockStyle}" FontFamily="Cascadia Code, Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center" />
+                                        <Button x:Name="CopyFaultModuleBtn" Grid.Row="1" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyField_Click" x:Uid="CrashReportPage_Detail_CopyField">
+                                            <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        </Button>
 
                                         <!-- Source / App -->
-                                        <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="CrashReportPage_Detail_SourceApp" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                        <TextBlock x:Name="DetailSourceAppText" Grid.Row="2" Grid.Column="1" Style="{ThemeResource BodyTextBlockStyle}" IsTextSelectionEnabled="True" />
+                                        <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="CrashReportPage_Detail_SourceApp" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                        <TextBlock x:Name="DetailSourceAppText" Grid.Row="2" Grid.Column="1" Style="{ThemeResource BodyTextBlockStyle}" IsTextSelectionEnabled="True" VerticalAlignment="Center" />
+                                        <Button x:Name="CopySourceAppBtn" Grid.Row="2" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyField_Click" x:Uid="CrashReportPage_Detail_CopyField">
+                                            <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        </Button>
 
                                         <!-- Parameters -->
-                                        <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="CrashReportPage_Detail_Params" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                        <TextBlock x:Name="DetailParamsText" Grid.Row="3" Grid.Column="1" Style="{ThemeResource BodyTextBlockStyle}" FontFamily="Cascadia Code, Consolas" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                                        <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="CrashReportPage_Detail_Params" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                        <TextBlock x:Name="DetailParamsText" Grid.Row="3" Grid.Column="1" Style="{ThemeResource BodyTextBlockStyle}" FontFamily="Cascadia Code, Consolas" TextWrapping="Wrap" IsTextSelectionEnabled="True" VerticalAlignment="Center" />
+                                        <Button x:Name="CopyParamsBtn" Grid.Row="3" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyField_Click" x:Uid="CrashReportPage_Detail_CopyField">
+                                            <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        </Button>
 
                                         <!-- Dump / File Path -->
-                                        <TextBlock Grid.Row="4" Grid.Column="0" x:Uid="CrashReportPage_Detail_DumpPath" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                        <Grid Grid.Row="4" Grid.Column="1" ColumnSpacing="8">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock x:Name="DetailDumpPathText" Style="{ThemeResource BodyTextBlockStyle}" FontFamily="Cascadia Code, Consolas" TextWrapping="Wrap" IsTextSelectionEnabled="True" VerticalAlignment="Center" />
-                                            <Button x:Name="LocateDumpBtn" Grid.Column="1" Click="LocateDumpBtn_Click" Padding="8,4" VerticalAlignment="Center" Visibility="Collapsed">
+                                        <TextBlock Grid.Row="4" Grid.Column="0" x:Uid="CrashReportPage_Detail_DumpPath" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                        <TextBlock x:Name="DetailDumpPathText" Grid.Row="4" Grid.Column="1" Style="{ThemeResource BodyTextBlockStyle}" FontFamily="Cascadia Code, Consolas" TextWrapping="Wrap" IsTextSelectionEnabled="True" VerticalAlignment="Center" />
+                                        <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
+                                            <Button x:Name="LocateDumpBtn" Click="LocateDumpBtn_Click" Padding="8,4" VerticalAlignment="Center" Visibility="Collapsed">
                                                 <StackPanel Orientation="Horizontal" Spacing="4">
                                                     <FontIcon Glyph="&#xED25;" FontSize="12" />
                                                     <TextBlock x:Uid="CrashReportPage_Detail_LocateBtn" Style="{ThemeResource CaptionTextBlockStyle}" />
                                                 </StackPanel>
                                             </Button>
-                                        </Grid>
+                                            <Button x:Name="CopyDumpPathBtn" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyField_Click" x:Uid="CrashReportPage_Detail_CopyField">
+                                                <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            </Button>
+                                        </StackPanel>
                                     </Grid>
                                 </StackPanel>
                             </Border>
@@ -496,7 +532,16 @@
                                     CornerRadius="{ThemeResource ControlCornerRadius}"
                                     Padding="16">
                                 <StackPanel Spacing="8">
-                                    <TextBlock x:Uid="CrashReportPage_Detail_RawLogHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Uid="CrashReportPage_Detail_RawLogHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
+                                        <Button x:Name="CopyRawLogBtn" Grid.Column="1" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyField_Click" x:Uid="CrashReportPage_Detail_CopyRawLog">
+                                            <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        </Button>
+                                    </Grid>
                                     <Border Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="4" Padding="12">
                                         <TextBlock x:Name="DetailRawLogText"
                                                    FontFamily="Cascadia Code, Consolas"

@@ -813,18 +813,6 @@
   <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
     <value>自動掃描並分析系統核心傾印 (Minidump) 與應用程式崩潰事件日誌</value>
   </data>
-  <data name="CrashReportPage_Guide_Title.Text" xml:space="preserve">
-    <value>功能說明與排錯指引</value>
-  </data>
-  <data name="CrashReportPage_Guide_Desc1.Text" xml:space="preserve">
-    <value>• 自動分析：系統會自動擷取 C:\Windows\Minidump 核心傾印檔與 Windows 事件檢視器中的重大當機事件。</value>
-  </data>
-  <data name="CrashReportPage_Guide_Desc2.Text" xml:space="preserve">
-    <value>• 智慧排錯：點選任一事件即可解析 BugCheck 錯誤代碼、引發崩潰的可疑驅動程式模組並取得改善建議。</value>
-  </data>
-  <data name="CrashReportPage_Guide_Desc3.Text" xml:space="preserve">
-    <value>• 報告匯出：可複製個別診斷摘要，或點選「匯出診斷報告」產生 Markdown 紀錄，方便向技術社群尋求協助。</value>
-  </data>
   <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
     <value>總崩潰事件</value>
   </data>
@@ -908,6 +896,15 @@
   </data>
   <data name="CrashReportPage_Detail_Copied" xml:space="preserve">
     <value>已複製到剪貼簿</value>
+  </data>
+  <data name="CrashReportPage_Detail_CopyField.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>複製此欄位</value>
+  </data>
+  <data name="CrashReportPage_Detail_CopyDiagnosis.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>複製診斷分析</value>
+  </data>
+  <data name="CrashReportPage_Detail_CopyRawLog.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>複製原始紀錄</value>
   </data>
   <data name="CrashReportPage_ExportSuccess_Title" xml:space="preserve">
     <value>匯出成功</value>

@@ -154,6 +154,23 @@ namespace lanlanlu_toolkit.Views
                 ? LocalizationHelper.GetString("CrashReportPage_RawLog_None") 
                 : item.RawDetails;
 
+            // Wire up copy tags
+            CopyDiagnosisBtn.Tag = $"{item.ErrorDescription}\n\n{item.Recommendation}".Trim();
+            CopyErrorCodeBtn.Tag = item.ErrorCode;
+            CopyFaultModuleBtn.Tag = item.FaultingModule;
+            CopySourceAppBtn.Tag = item.SourceOrApp;
+            CopyParamsBtn.Tag = item.Parameters;
+            CopyDumpPathBtn.Tag = item.FilePathOrDump;
+            CopyRawLogBtn.Tag = item.RawDetails;
+
+            CopyDiagnosisBtn.Visibility = (!string.IsNullOrEmpty(item.ErrorDescription) || !string.IsNullOrEmpty(item.Recommendation)) ? Visibility.Visible : Visibility.Collapsed;
+            CopyErrorCodeBtn.Visibility = !string.IsNullOrEmpty(item.ErrorCode) ? Visibility.Visible : Visibility.Collapsed;
+            CopyFaultModuleBtn.Visibility = !string.IsNullOrEmpty(item.FaultingModule) ? Visibility.Visible : Visibility.Collapsed;
+            CopySourceAppBtn.Visibility = !string.IsNullOrEmpty(item.SourceOrApp) ? Visibility.Visible : Visibility.Collapsed;
+            CopyParamsBtn.Visibility = !string.IsNullOrEmpty(item.Parameters) ? Visibility.Visible : Visibility.Collapsed;
+            CopyDumpPathBtn.Visibility = !string.IsNullOrEmpty(item.FilePathOrDump) ? Visibility.Visible : Visibility.Collapsed;
+            CopyRawLogBtn.Visibility = !string.IsNullOrEmpty(item.RawDetails) ? Visibility.Visible : Visibility.Collapsed;
+
             // Show or hide locate button
             LocateDumpBtn.Visibility = (!string.IsNullOrEmpty(item.FilePathOrDump) && File.Exists(item.FilePathOrDump))
                 ? Visibility.Visible 
@@ -223,6 +240,47 @@ namespace lanlanlu_toolkit.Views
             }
         }
 
+        private async void CopyField_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is string value && !string.IsNullOrEmpty(value) && value != "N/A")
+            {
+                try
+                {
+                    var data = new DataPackage();
+                    data.SetText(value);
+                    Clipboard.SetContent(data);
+
+                    NotificationService.Show(
+                        LocalizationHelper.GetString("Notification_Success"),
+                        LocalizationHelper.GetString("CrashReportPage_Detail_Copied"),
+                        InfoBarSeverity.Success);
+
+                    if (btn.Content is FontIcon icon)
+                    {
+                        string oldGlyph = icon.Glyph;
+                        icon.Glyph = "\uE8FB"; // Checkmark
+                        await Task.Delay(1500);
+                        icon.Glyph = oldGlyph;
+                    }
+                    else if (btn.Content is StackPanel sp)
+                    {
+                        var fontIcon = sp.Children.OfType<FontIcon>().FirstOrDefault();
+                        if (fontIcon != null)
+                        {
+                            string oldGlyph = fontIcon.Glyph;
+                            fontIcon.Glyph = "\uE8FB"; // Checkmark
+                            await Task.Delay(1500);
+                            fontIcon.Glyph = oldGlyph;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LoggingService.Log($"[CrashReportPage] Failed to copy single field: {ex.Message}");
+                }
+            }
+        }
+
         private async void CopyDetailBtn_Click(object sender, RoutedEventArgs e)
         {
             if (_selectedItem == null) return;
@@ -253,6 +311,11 @@ namespace lanlanlu_toolkit.Views
                 var data = new DataPackage();
                 data.SetText(reportText);
                 Clipboard.SetContent(data);
+
+                NotificationService.Show(
+                    LocalizationHelper.GetString("Notification_Success"),
+                    LocalizationHelper.GetString("CrashReportPage_Detail_Copied"),
+                    InfoBarSeverity.Success);
 
                 CopyDetailIcon.Glyph = "\uE8FB"; // Checkmark
                 CopyDetailText.Text = LocalizationHelper.GetString("CrashReportPage_Detail_Copied");
