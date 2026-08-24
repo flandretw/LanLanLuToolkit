@@ -451,6 +451,9 @@
   <data name="InputTesterPage_Key_Units" xml:space="preserve">
     <value>{0} 個鍵</value>
   </data>
+  <data name="InputTesterPage_Key_ChatterNormal" xml:space="preserve">
+    <value>正常</value>
+  </data>
   <data name="InputTesterPage_Key_ChatterWarning" xml:space="preserve">
     <value>疑似連點 ({0} ms)</value>
   </data>
@@ -626,7 +629,7 @@
     <value>▲ {0} · ▼ {1} · {2}</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterStatus_OK" xml:space="preserve">
-    <value>OK</value>
+    <value>正常</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterStatus_Warning" xml:space="preserve">
     <value>連點警告</value>

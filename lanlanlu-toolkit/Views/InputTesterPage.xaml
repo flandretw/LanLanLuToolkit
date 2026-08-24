@@ -228,7 +228,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Row="0" x:Uid="InputTesterPage_Card_CurrentKeys" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     <TextBlock Grid.Row="1" x:Name="CurrentDownText" Text="0" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" VerticalAlignment="Center" />
-                                    <TextBlock Grid.Row="2" x:Name="ActiveKeyListText" Text="None" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextTrimming="CharacterEllipsis" />
+                                    <TextBlock Grid.Row="2" x:Name="ActiveKeyListText" Text="-" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextTrimming="CharacterEllipsis" />
                                 </Grid>
                             </Border>
 
@@ -262,7 +262,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Row="0" x:Uid="InputTesterPage_Card_TotalPresses" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     <TextBlock Grid.Row="1" x:Name="TotalPressesText" Text="0" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" VerticalAlignment="Center" />
-                                    <TextBlock Grid.Row="2" x:Name="TestedKeysCountText" Text="0 / 104 Keys" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextTrimming="CharacterEllipsis" />
+                                    <TextBlock Grid.Row="2" x:Name="TestedKeysCountText" Text="0 / 104" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextTrimming="CharacterEllipsis" />
                                 </Grid>
                             </Border>
 
@@ -279,7 +279,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Row="0" x:Uid="InputTesterPage_Card_KeyInterval" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     <TextBlock Grid.Row="1" x:Name="KeyIntervalText" Text="-" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" VerticalAlignment="Center" />
-                                    <TextBlock Grid.Row="2" x:Name="KeyChatterStatusText" Text="OK" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorSuccessBrush}" TextTrimming="CharacterEllipsis" />
+                                    <TextBlock Grid.Row="2" x:Name="KeyChatterStatusText" Text="-" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorSuccessBrush}" TextTrimming="CharacterEllipsis" />
                                 </Grid>
                             </Border>
                         </Grid>
@@ -513,7 +513,7 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Row="0" x:Uid="InputTesterPage_MouseCard_Chatter" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                    <TextBlock Grid.Row="1" x:Name="ChatterStatusSummaryText" Text="OK" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" Foreground="{ThemeResource SystemFillColorSuccessBrush}" VerticalAlignment="Center" />
+                                    <TextBlock Grid.Row="1" x:Name="ChatterStatusSummaryText" Text="-" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" Foreground="{ThemeResource SystemFillColorSuccessBrush}" VerticalAlignment="Center" />
                                     <TextBlock Grid.Row="2" x:Name="ChatterCountsText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextTrimming="CharacterEllipsis" />
                                 </Grid>
                             </Border>

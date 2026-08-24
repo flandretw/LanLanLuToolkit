@@ -115,6 +115,7 @@ namespace lanlanlu_toolkit.Views
             _hzUpdateTimer.Start();
             KeyboardFocusArea?.Focus(FocusState.Programmatic);
             UpdateFocusVisual(true);
+            ResetKeyboardVisualsAndStats();
             ResetMouseVisualsAndStats();
 
             this.AddHandler(UIElement.PointerPressedEvent, _pointerPressedHandler, true);
@@ -526,7 +527,7 @@ namespace lanlanlu_toolkit.Views
             LastKeyCodeText.Text = $"VK: {(int)e.Key} (0x{(int)e.Key:X2}) | Scan: 0x{e.KeyStatus.ScanCode:X2}";
             CurrentDownText.Text = _activeKeys.Count.ToString();
             ActiveKeyListText.Text = string.Join(", ", _activeKeys);
-            MaxRolloverText.Text = $"{_maxRollover} Keys";
+            MaxRolloverText.Text = _maxRollover.ToString();
             TotalPressesText.Text = _totalPresses.ToString();
             UpdateTestedKeysStat();
 
@@ -540,7 +541,7 @@ namespace lanlanlu_toolkit.Views
                 }
                 else
                 {
-                    KeyChatterStatusText.Text = "OK";
+                    KeyChatterStatusText.Text = LocalizationHelper.GetString("InputTesterPage_Key_ChatterNormal");
                     KeyChatterStatusText.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
                 }
             }
@@ -1331,7 +1332,12 @@ namespace lanlanlu_toolkit.Views
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Reset Keyboard states
+            ResetKeyboardVisualsAndStats();
+            ResetMouseVisualsAndStats();
+        }
+
+        private void ResetKeyboardVisualsAndStats()
+        {
             _activeKeys.Clear();
             _testedKeys.Clear();
             _maxRollover = 0;
@@ -1344,19 +1350,19 @@ namespace lanlanlu_toolkit.Views
                 ApplyKeyVisualState(keyId, KeyVisualState.Default);
             }
 
-            LastKeyText.Text = "-";
-            LastKeyCodeText.Text = "VK: - | Scan: -";
-            CurrentDownText.Text = "0";
-            ActiveKeyListText.Text = LocalizationHelper.GetString("InputTesterPage_Key_None");
-            MaxRolloverText.Text = "0";
-            TotalPressesText.Text = "0";
+            if (LastKeyText != null) LastKeyText.Text = "-";
+            if (LastKeyCodeText != null) LastKeyCodeText.Text = "VK: - | Scan: -";
+            if (CurrentDownText != null) CurrentDownText.Text = "0";
+            if (ActiveKeyListText != null) ActiveKeyListText.Text = LocalizationHelper.GetString("InputTesterPage_Key_None");
+            if (MaxRolloverText != null) MaxRolloverText.Text = "0";
+            if (TotalPressesText != null) TotalPressesText.Text = "0";
             UpdateTestedKeysStat();
-            KeyIntervalText.Text = "-";
-            KeyChatterStatusText.Text = "OK";
-            KeyChatterStatusText.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
-
-            // Reset Mouse states
-            ResetMouseVisualsAndStats();
+            if (KeyIntervalText != null) KeyIntervalText.Text = "-";
+            if (KeyChatterStatusText != null)
+            {
+                KeyChatterStatusText.Text = LocalizationHelper.GetString("InputTesterPage_Key_ChatterNormal");
+                KeyChatterStatusText.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
+            }
         }
 
         private void ResetMouseVisualsAndStats()

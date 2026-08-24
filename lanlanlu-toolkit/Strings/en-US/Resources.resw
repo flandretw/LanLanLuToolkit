@@ -445,6 +445,9 @@
   <data name="InputTesterPage_Key_Units" xml:space="preserve">
     <value>{0} Keys</value>
   </data>
+  <data name="InputTesterPage_Key_ChatterNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
   <data name="InputTesterPage_Key_ChatterWarning" xml:space="preserve">
     <value>Suspected Chatter ({0} ms)</value>
   </data>
@@ -620,7 +623,7 @@
     <value>▲ {0} · ▼ {1} · {2}</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterStatus_OK" xml:space="preserve">
-    <value>OK</value>
+    <value>Normal</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterStatus_Warning" xml:space="preserve">
     <value>Chatter Alert</value>

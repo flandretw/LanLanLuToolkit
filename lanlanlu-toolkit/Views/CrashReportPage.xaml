@@ -406,7 +406,7 @@
                                 <StackPanel Spacing="4">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <Border x:Name="DetailTypeBadge" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="8,4" Background="{ThemeResource AccentFillColorDefaultBrush}">
-                                            <TextBlock x:Name="DetailTypeBadgeText" Text="Crash" Foreground="White" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="Bold" />
+                                            <TextBlock x:Name="DetailTypeBadgeText" Foreground="White" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="Bold" />
                                         </Border>
                                         <TextBlock x:Name="DetailTimestampText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" IsTextSelectionEnabled="True" />
                                     </StackPanel>
