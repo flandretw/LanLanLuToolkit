@@ -21,7 +21,7 @@
             <StackPanel Grid.Column="0" Spacing="8">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Spacing="8">
-                        <FontIcon Glyph="&#xEEA1;" FontSize="16" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
+                        <FontIcon Glyph="&#xEEA1;" FontSize="16" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                         <TextBlock x:Name="GpuTitleText" x:Uid="GpuMonitorCard_DefaultTitle" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold" VerticalAlignment="Center" />
                     </StackPanel>
                     <TextBlock x:Name="GpuNameText" x:Uid="GpuMonitorCard_Detecting" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />

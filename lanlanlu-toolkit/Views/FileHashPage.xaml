@@ -34,7 +34,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xF12B;" FontSize="24" Margin="0,0,16,0" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
+                                <FontIcon Glyph="&#xF12B;" FontSize="24" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0" Spacing="4">
                                     <TextBlock x:Name="DragDropPromptTextBlock" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                     <TextBlock x:Name="SelectFileCardDescTextBlock" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
@@ -55,7 +55,7 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE8A5;" FontSize="24" Margin="0,0,16,0" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
+                                <FontIcon Glyph="&#xE8A5;" FontSize="24" Margin="0,0,16,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                 <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
                                     <TextBlock x:Name="FileNameText" Style="{ThemeResource BodyStrongTextBlockStyle}" TextWrapping="Wrap" />
                                     <TextBlock x:Name="FilePathText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />

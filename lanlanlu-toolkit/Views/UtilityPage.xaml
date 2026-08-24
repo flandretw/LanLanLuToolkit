@@ -129,7 +129,7 @@
                                     </Grid.ColumnDefinitions>
                                     
                                     <!-- Left: High-Contrast Icon -->
-                                    <FontIcon Glyph="{x:Bind Icon}" FontSize="28" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
+                                    <FontIcon Glyph="{x:Bind Icon}" FontSize="28" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
                                     
                                     <!-- Middle: Text Content -->
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">

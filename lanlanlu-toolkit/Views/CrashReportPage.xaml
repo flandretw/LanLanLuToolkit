@@ -91,7 +91,7 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <FontIcon Glyph="&#xE9F9;" FontSize="24" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
+                    <FontIcon Glyph="&#xE9F9;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                         <TextBlock x:Uid="CrashReportPage_Card_Total" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                         <TextBlock x:Name="TotalCountText" Text="0" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" />
@@ -111,10 +111,10 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <FontIcon Glyph="&#xE7BA;" FontSize="24" Foreground="#D13438" VerticalAlignment="Center" />
+                    <FontIcon Glyph="&#xE7BA;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                         <TextBlock x:Uid="CrashReportPage_Card_BSOD" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                        <TextBlock x:Name="BsodCountText" Text="0" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" Foreground="#D13438" />
+                        <TextBlock x:Name="BsodCountText" Text="0" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" />
                     </StackPanel>
                 </Grid>
             </Border>
@@ -131,7 +131,7 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <FontIcon Glyph="&#xE783;" FontSize="24" Foreground="#EA385B" VerticalAlignment="Center" />
+                    <FontIcon Glyph="&#xE783;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                         <TextBlock x:Uid="CrashReportPage_Card_AppCrash" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                         <TextBlock x:Name="AppCrashCountText" Text="0" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" />
@@ -343,7 +343,7 @@
                                             Background="{ThemeResource ControlFillColorSecondaryBrush}"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Center">
-                                        <FontIcon Glyph="{x:Bind DisplayIcon}" FontSize="18" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        <FontIcon Glyph="{x:Bind DisplayIcon}" FontSize="18" Foreground="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     </Border>
 
                                     <!-- Content on Right -->
@@ -435,7 +435,7 @@
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                            <FontIcon Glyph="&#xE946;" FontSize="18" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
+                                            <FontIcon Glyph="&#xE946;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                             <TextBlock x:Uid="CrashReportPage_Detail_DiagnosisHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
                                         </StackPanel>
                                         <Button x:Name="CopyDiagnosisBtn" Grid.Column="1" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyField_Click" x:Uid="CrashReportPage_Detail_CopyDiagnosis">

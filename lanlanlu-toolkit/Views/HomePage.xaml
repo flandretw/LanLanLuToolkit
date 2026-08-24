@@ -197,7 +197,7 @@
                             <Grid>
                                 <StackPanel Spacing="8">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xE8A9;" FontSize="18" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                        <FontIcon Glyph="&#xE8A9;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                         <TextBlock x:Uid="HomePage_OS" 
                                                    Style="{ThemeResource BodyStrongTextBlockStyle}" 
                                                    FontWeight="Bold"
@@ -224,7 +224,7 @@
                             <Grid>
                                 <StackPanel Spacing="8">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xEEA1;" FontSize="18" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                        <FontIcon Glyph="&#xEEA1;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                         <TextBlock x:Uid="HomePage_CPU" 
                                                    Style="{ThemeResource BodyStrongTextBlockStyle}" 
                                                    FontWeight="Bold"
@@ -251,7 +251,7 @@
                             <Grid>
                                 <StackPanel Spacing="8">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xEA6C;" FontSize="18" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                        <FontIcon Glyph="&#xEA6C;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                         <TextBlock x:Uid="HomePage_Motherboard" 
                                                    Style="{ThemeResource BodyStrongTextBlockStyle}" 
                                                    FontWeight="Bold"
@@ -278,7 +278,7 @@
                             <Grid>
                                 <StackPanel Spacing="8">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xEEA0;" FontSize="18" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                        <FontIcon Glyph="&#xEEA0;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                         <TextBlock x:Uid="HomePage_RAM" 
                                                    Style="{ThemeResource BodyStrongTextBlockStyle}" 
                                                    FontWeight="Bold"
@@ -304,7 +304,7 @@
                             <Grid>
                                 <StackPanel Spacing="8">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xEEA1;" FontSize="18" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                        <FontIcon Glyph="&#xEEA1;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                         <TextBlock x:Uid="HomePage_GPU" 
                                                    Style="{ThemeResource BodyStrongTextBlockStyle}" 
                                                    FontWeight="Bold"
@@ -331,7 +331,7 @@
                             <Grid>
                                 <StackPanel Spacing="8">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xEDA2;" FontSize="18" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                        <FontIcon Glyph="&#xEDA2;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                         <TextBlock x:Uid="HomePage_Storage" 
                                                    Style="{ThemeResource BodyStrongTextBlockStyle}" 
                                                    FontWeight="Bold"
@@ -392,7 +392,7 @@
                         BorderThickness="1" CornerRadius="{ThemeResource OverlayCornerRadius}" Padding="24,20">
                     <StackPanel Spacing="8">
                         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                            <FontIcon x:Name="GreetingIcon" Glyph="&#xE706;" FontSize="20" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                            <FontIcon x:Name="GreetingIcon" Glyph="&#xE706;" FontSize="20" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                             <TextBlock x:Name="GreetingText" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" VerticalAlignment="Center" />
                         </StackPanel>
                         <TextBlock x:Uid="HomePage_Intro" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" LineHeight="22" />
@@ -427,7 +427,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE9D9;" FontSize="28" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
+                                <FontIcon Glyph="&#xE9D9;" FontSize="28" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
                                 <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
                                     <TextBlock x:Uid="HomePage_Feature_Perf_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
                                     <TextBlock x:Uid="HomePage_Feature_Perf_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
@@ -446,7 +446,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE765;" FontSize="28" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
+                                <FontIcon Glyph="&#xE765;" FontSize="28" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
                                 <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
                                     <TextBlock x:Uid="HomePage_Feature_Input_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
                                     <TextBlock x:Uid="HomePage_Feature_Input_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
@@ -465,7 +465,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE762;" FontSize="28" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
+                                <FontIcon Glyph="&#xE762;" FontSize="28" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
                                 <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
                                     <TextBlock x:Uid="HomePage_Feature_Repair_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
                                     <TextBlock x:Uid="HomePage_Feature_Repair_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
@@ -484,7 +484,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE7BA;" FontSize="28" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
+                                <FontIcon Glyph="&#xE7BA;" FontSize="28" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
                                 <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
                                     <TextBlock x:Uid="HomePage_Feature_Crash_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
                                     <TextBlock x:Uid="HomePage_Feature_Crash_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
@@ -503,7 +503,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xEC19;" FontSize="28" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
+                                <FontIcon Glyph="&#xEC19;" FontSize="28" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
                                 <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
                                     <TextBlock x:Uid="HomePage_Feature_Hash_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
                                     <TextBlock x:Uid="HomePage_Feature_Hash_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
@@ -522,7 +522,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE7B5;" FontSize="28" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
+                                <FontIcon Glyph="&#xE7B5;" FontSize="28" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
                                 <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
                                     <TextBlock x:Uid="HomePage_Feature_Assoc_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
                                     <TextBlock x:Uid="HomePage_Feature_Assoc_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />

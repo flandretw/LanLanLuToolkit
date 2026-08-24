@@ -64,7 +64,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 
-                                <FontIcon Glyph="&#xE756;" FontSize="24" Margin="0,0,20,0" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
+                                <FontIcon Glyph="&#xE756;" FontSize="24" Margin="0,0,20,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                 
                                 <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center" Margin="0,0,20,0">
                                     <TextBlock x:Uid="FileAssociationPage_Method1Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
@@ -89,7 +89,7 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     
-                                    <FontIcon Glyph="&#xEC7A;" FontSize="24" Foreground="{ThemeResource AccentFillColorDefaultBrush}" VerticalAlignment="Center" />
+                                    <FontIcon Glyph="&#xEC7A;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                     
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
                                         <TextBlock x:Uid="FileAssociationPage_Method2Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
@@ -107,7 +107,7 @@
                                     <!-- Guideline Container inside the expander -->
                                     <Border x:Name="RegistryInstructionsCard" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Visibility="Collapsed" Background="{ThemeResource LayerFillColorDefaultBrush}">
                                         <StackPanel Padding="16" Spacing="12">
-                                            <TextBlock x:Uid="FileAssociationPage_GuideTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
+                                            <TextBlock x:Uid="FileAssociationPage_GuideTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                             <StackPanel Spacing="8" Margin="12,0,0,0">
                                                 <TextBlock x:Uid="FileAssociationPage_GuideStep1" Style="{ThemeResource CaptionTextBlockStyle}" />
                                                 <TextBlock x:Uid="FileAssociationPage_GuideStep2" Style="{ThemeResource CaptionTextBlockStyle}" />
