@@ -17,3 +17,6 @@ Generated Files/
 _pkg/
 
 /out_portable*/
+
+# AI Assistant Memory
+.agents/
