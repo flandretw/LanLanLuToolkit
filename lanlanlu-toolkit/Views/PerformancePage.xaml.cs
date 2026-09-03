@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -205,7 +205,19 @@ namespace lanlanlu_toolkit.Views
             var list = new List<GpuInfo>();
             try
             {
-                // Check NVIDIA first via NVML (< 1ms)
+                // 1. Check AMD / Integrated GPU first via ADL (< 1ms)
+                double amdTemp = AdlHelper.GetTemperature(0);
+                if (amdTemp > 0)
+                {
+                    list.Add(new GpuInfo
+                    {
+                        Name = "AMD Radeon Graphics",
+                        DedicatedMemoryGb = 0.5,
+                        IsDiscrete = false
+                    });
+                }
+
+                // 2. Check NVIDIA discrete GPU via NVML (< 1ms)
                 var nvTelemetry = NvmlHelper.GetTelemetry(0);
                 if (nvTelemetry.IsValid)
                 {
@@ -213,19 +225,8 @@ namespace lanlanlu_toolkit.Views
                     {
                         Name = "NVIDIA GeForce GPU",
                         DedicatedMemoryGb = nvTelemetry.TotalVramGb > 0 ? nvTelemetry.TotalVramGb : 4.0,
+                        HardwareReservedGb = nvTelemetry.ReservedVramMb > 0 ? nvTelemetry.ReservedVramMb / 1024.0 : 0,
                         IsDiscrete = true
-                    });
-                }
-
-                // Check AMD next via ADL (< 1ms)
-                double amdTemp = AdlHelper.GetTemperature(0);
-                if (amdTemp > 0 && list.Count == 0)
-                {
-                    list.Add(new GpuInfo
-                    {
-                        Name = "AMD Radeon Graphics",
-                        DedicatedMemoryGb = 0.5,
-                        IsDiscrete = false
                     });
                 }
             }
@@ -235,7 +236,9 @@ namespace lanlanlu_toolkit.Views
             {
                 list.Add(new GpuInfo { Name = "GPU" });
             }
-            return list;
+
+            // Order so that Integrated GPU is GPU 0 and Discrete GPU is GPU 1 (matches Windows Task Manager)
+            return list.OrderBy(g => g.IsDiscrete ? 1 : 0).ToList();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -248,6 +251,14 @@ namespace lanlanlu_toolkit.Views
         }
 
         #region Native Win32 Sub-Millisecond APIs
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SetCursor(IntPtr hCursor);
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr LoadCursor(IntPtr hInstance, int lpCursorName);
+
+        private const int IDC_ARROW = 32512;
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
         private struct MEMORYSTATUSEX
@@ -683,6 +694,15 @@ namespace lanlanlu_toolkit.Views
                         {
                             GpuDedicatedMemText.Text = $"{usedVramGb:F1} / {totalVramGb:F1} GB";
                         }
+                        if (gpu.HardwareReservedGb > 0)
+                        {
+                            double mb = gpu.HardwareReservedGb * 1024.0;
+                            GpuHardwareReservedText.Text = mb >= 1024 ? $"{gpu.HardwareReservedGb:F1} GB" : $"{mb:F0} MB";
+                        }
+                        else
+                        {
+                            GpuHardwareReservedText.Text = "--";
+                        }
                         RenderWaveform(GpuPolyline, GpuPolygon, history);
                     }
                 }
@@ -1114,6 +1134,18 @@ namespace lanlanlu_toolkit.Views
                 rootGrid.PointerEntered += NavCard_PointerEntered;
                 rootGrid.PointerExited += NavCard_PointerExited;
 
+                var flyout = new Microsoft.UI.Xaml.Controls.MenuFlyout();
+                flyout.Opening += MenuFlyout_Opening;
+                flyout.Opened += MenuFlyout_Opened;
+                var copyItem = new Microsoft.UI.Xaml.Controls.MenuFlyoutItem
+                {
+                    Text = LocalizationHelper.GetString("PerformancePage_CopyAllMenu/Text"),
+                    Icon = new Microsoft.UI.Xaml.Controls.FontIcon { Glyph = "\uE8C8" },
+                    Tag = letter,
+                };
+                copyItem.Click += CopyAllDisk_Click;
+                flyout.Items.Add(copyItem);
+                rootGrid.ContextFlyout = flyout;
                 DiskNavCardContainer.Children.Add(rootGrid);
 
                 _diskUiBindings.Add(new DiskUiBinding
@@ -1153,6 +1185,18 @@ namespace lanlanlu_toolkit.Views
         private List<GpuInfo> ProbeGpuSpecs()
         {
             var list = new List<GpuInfo>();
+            double defaultSharedGb = 0;
+            try
+            {
+                var memStatus = new MEMORYSTATUSEX { dwLength = (uint)Marshal.SizeOf(typeof(MEMORYSTATUSEX)) };
+                if (GlobalMemoryStatusEx(ref memStatus))
+                {
+                    double totalPhysGb = memStatus.ullTotalPhys / (1024.0 * 1024.0 * 1024.0);
+                    defaultSharedGb = Math.Round(totalPhysGb / 2.0, 1);
+                }
+            }
+            catch { }
+
             try
             {
                 using var searcher = new ManagementObjectSearcher("SELECT Name, DriverVersion, DriverDate, PNPDeviceID, AdapterRAM FROM Win32_VideoController");
@@ -1167,7 +1211,8 @@ namespace lanlanlu_toolkit.Views
                         Name = name,
                         DriverVersion = obj["DriverVersion"]?.ToString() ?? "--",
                         DirectXVersion = "12 (FL 12.1)",
-                        PhysicalLocation = "PCI Express"
+                        PhysicalLocation = "PCI Express",
+                        SharedMemoryGb = defaultSharedGb
                     };
 
                     string? dDate = obj["DriverDate"]?.ToString();
@@ -1190,6 +1235,17 @@ namespace lanlanlu_toolkit.Views
                                    g.Name.Contains("GTX", StringComparison.OrdinalIgnoreCase) ||
                                    g.Name.Contains("Arc", StringComparison.OrdinalIgnoreCase);
 
+                    // If NVIDIA discrete GPU, use exact NVML VRAM & Reserved metrics
+                    if (g.IsDiscrete && g.Name.Contains("NVIDIA", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var nv = NvmlHelper.GetTelemetry(0);
+                        if (nv.IsValid)
+                        {
+                            if (nv.TotalVramGb > 0) g.DedicatedMemoryGb = nv.TotalVramGb;
+                            if (nv.ReservedVramMb > 0) g.HardwareReservedGb = nv.ReservedVramMb / 1024.0;
+                        }
+                    }
+
                     list.Add(g);
                 }
             }
@@ -1199,7 +1255,9 @@ namespace lanlanlu_toolkit.Views
             {
                 list.Add(new GpuInfo { Name = "Generic Graphics Controller" });
             }
-            return list;
+
+            // Order so that Integrated GPU is GPU 0 and Discrete GPU is GPU 1 (matches Windows Task Manager)
+            return list.OrderBy(g => g.IsDiscrete ? 1 : 0).ToList();
         }
 
         private void RebuildGpuNavCards()
@@ -1308,6 +1366,18 @@ namespace lanlanlu_toolkit.Views
                 rootGrid.PointerEntered += NavCard_PointerEntered;
                 rootGrid.PointerExited += NavCard_PointerExited;
 
+                var flyout = new Microsoft.UI.Xaml.Controls.MenuFlyout();
+                flyout.Opening += MenuFlyout_Opening;
+                flyout.Opened += MenuFlyout_Opened;
+                var copyItem = new Microsoft.UI.Xaml.Controls.MenuFlyoutItem
+                {
+                    Text = LocalizationHelper.GetString("PerformancePage_CopyAllMenu/Text"),
+                    Icon = new Microsoft.UI.Xaml.Controls.FontIcon { Glyph = "\uE8C8" },
+                    Tag = i,
+                };
+                copyItem.Click += CopyAllGpu_Click;
+                flyout.Items.Add(copyItem);
+                rootGrid.ContextFlyout = flyout;
                 GpuNavCardContainer.Children.Add(rootGrid);
 
                 _gpuUiBindings.Add(new GpuUiBinding
@@ -1421,8 +1491,24 @@ namespace lanlanlu_toolkit.Views
 
         #region Navigation & Tab Selection
 
+        private void MenuFlyout_Opening(object? sender, object e)
+        {
+            try { SetCursor(LoadCursor(IntPtr.Zero, IDC_ARROW)); } catch { }
+        }
+
+        private void MenuFlyout_Opened(object? sender, object e)
+        {
+            try { SetCursor(LoadCursor(IntPtr.Zero, IDC_ARROW)); } catch { }
+        }
+
         private void NavCard_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            var ptr = e.GetCurrentPoint(sender as UIElement);
+            if (!ptr.Properties.IsLeftButtonPressed)
+            {
+                try { SetCursor(LoadCursor(IntPtr.Zero, IDC_ARROW)); } catch { }
+                return;
+            }
             if (sender is not FrameworkElement clickedCard || clickedCard.Tag is not string tag) return;
 
             _selectedNavTag = tag;
@@ -1483,6 +1569,15 @@ namespace lanlanlu_toolkit.Views
                     GpuDedicatedMemText.Text = $"{gpu.DedicatedMemoryGb:F1} GB";
                     GpuSharedMemText.Text = $"{gpu.SharedMemoryGb:F1} GB";
                     GpuTotalMemText.Text = $"{(gpu.DedicatedMemoryGb + gpu.SharedMemoryGb):F1} GB";
+                    if (gpu.HardwareReservedGb > 0)
+                    {
+                        double mb = gpu.HardwareReservedGb * 1024.0;
+                        GpuHardwareReservedText.Text = mb >= 1024 ? $"{gpu.HardwareReservedGb:F1} GB" : $"{mb:F0} MB";
+                    }
+                    else
+                    {
+                        GpuHardwareReservedText.Text = "--";
+                    }
                     GpuDriverVerText.Text = gpu.DriverVersion;
                     GpuDriverDateText.Text = gpu.DriverDate;
                     GpuDirectXVerText.Text = gpu.DirectXVersion;
@@ -1593,7 +1688,6 @@ namespace lanlanlu_toolkit.Views
             sb.AppendLine(string.Format(LocalizationHelper.GetString("PerformancePage_Copy_Model"), CpuNameText.Text));
             sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Stat_Usage.Text")}{c}{CpuUsageBigText.Text}");
             sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Stat_Speed.Text")}{c}{CpuClockBigText.Text}");
-            sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Cpu_Temp.Text")}{c}{CpuTempText.Text}");
             sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Cpu_Processes.Text")}{c}{CpuProcessesText.Text}");
             sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Cpu_Threads.Text")}{c}{CpuSystemThreadsText.Text}");
             sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Cpu_BaseSpeed.Text")}{c}{CpuBaseSpeedText.Text}");
@@ -1633,6 +1727,31 @@ namespace lanlanlu_toolkit.Views
         {
             var sb = new StringBuilder();
             string c = GetColon();
+            string? targetLetter = (sender as Microsoft.UI.Xaml.Controls.MenuFlyoutItem)?.Tag as string;
+            var targetDisk = !string.IsNullOrEmpty(targetLetter)
+                ? _currentDiskList.FirstOrDefault(d => d.DriveLetter == targetLetter)
+                : null;
+
+            if (targetDisk != null && _selectedNavTag != $"DISK_{targetDisk.DriveLetter}")
+            {
+                string diskTitleFormat = LocalizationHelper.GetString("PerformancePage_Disk_Title_Format");
+                string title = string.Format(diskTitleFormat, targetDisk.DriveLetter);
+                sb.AppendLine(string.Format(LocalizationHelper.GetString("PerformancePage_Copy_DiskHeader_Format"), title));
+                sb.AppendLine(string.Format(LocalizationHelper.GetString("PerformancePage_Copy_Model"), targetDisk.ModelName));
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Disk_UsedSpace.Text")}{c}{targetDisk.UsedSpaceGb:F1} GB");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Disk_FreeSpace.Text")}{c}{targetDisk.FreeSpaceGb:F1} GB");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Disk_TotalCapacity.Text")}{c}{targetDisk.TotalSizeGb:F1} GB");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Disk_UsagePercent.Text")}{c}{targetDisk.UsagePercent:F0}%");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Disk_DriveLetter.Text")}{c}{targetDisk.DriveLetter}:");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Disk_VolumeLabel.Text")}{c}{targetDisk.VolumeLabel}");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Disk_FileSystem.Text")}{c}{targetDisk.FileSystem}");
+                string driveTypeStr = targetDisk.DriveType == DriveType.Fixed ? LocalizationHelper.GetString("PerformancePage_FixedDisk") : LocalizationHelper.GetString("PerformancePage_RemovableDisk");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Disk_DriveType.Text")}{c}{driveTypeStr}");
+
+                CopyToClipboard(sb.ToString(), sender as Button);
+                return;
+            }
+
             sb.AppendLine(string.Format(LocalizationHelper.GetString("PerformancePage_Copy_DiskHeader_Format"), DiskTitleText.Text));
             sb.AppendLine(string.Format(LocalizationHelper.GetString("PerformancePage_Copy_Model"), DiskModelText.Text));
             sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Stat_ActiveTime.Text")}{c}{DiskActiveTimeBigText.Text}");
@@ -1655,6 +1774,29 @@ namespace lanlanlu_toolkit.Views
         {
             var sb = new StringBuilder();
             string c = GetColon();
+            int? targetIndex = (sender as Microsoft.UI.Xaml.Controls.MenuFlyoutItem)?.Tag as int?;
+            var targetGpu = (targetIndex.HasValue && targetIndex.Value >= 0 && targetIndex.Value < _currentGpuList.Count)
+                ? _currentGpuList[targetIndex.Value]
+                : null;
+
+            if (targetGpu != null && _selectedNavTag != $"GPU_{targetIndex!.Value}")
+            {
+                string title = _currentGpuList.Count > 1 ? $"GPU {targetIndex!.Value}" : "GPU";
+                sb.AppendLine(string.Format(LocalizationHelper.GetString("PerformancePage_Copy_GpuHeader_Format"), title));
+                sb.AppendLine(string.Format(LocalizationHelper.GetString("PerformancePage_Copy_Model"), targetGpu.Name));
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Gpu_DedicatedMem.Text")}{c}{targetGpu.DedicatedMemoryGb:F1} GB");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Gpu_SharedMem.Text")}{c}{targetGpu.SharedMemoryGb:F1} GB");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Gpu_TotalMem.Text")}{c}{targetGpu.TotalMemoryGb:F1} GB");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Gpu_ReservedMem.Text")}{c}{targetGpu.HardwareReservedGb:F1} GB");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Gpu_DriverVersion.Text")}{c}{targetGpu.DriverVersion}");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Gpu_DriverDate.Text")}{c}{targetGpu.DriverDate}");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Gpu_DirectX.Text")}{c}{targetGpu.DirectXVersion}");
+                sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Gpu_Location.Text")}{c}{targetGpu.PhysicalLocation}");
+
+                CopyToClipboard(sb.ToString(), sender as Button);
+                return;
+            }
+
             sb.AppendLine(string.Format(LocalizationHelper.GetString("PerformancePage_Copy_GpuHeader_Format"), GpuTitleText.Text));
             sb.AppendLine(string.Format(LocalizationHelper.GetString("PerformancePage_Copy_Model"), GpuNameText.Text));
             sb.AppendLine($"{LocalizationHelper.GetString("PerformancePage_Stat_Usage.Text")}{c}{GpuUsageBigText.Text}");

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
@@ -6,7 +6,7 @@ namespace lanlanlu_toolkit.Services
 {
     /// <summary>
     /// Lightweight P/Invoke wrapper for NVIDIA Management Library (nvml.dll).
-    /// Provides zero-dependency, sub-millisecond GPU telemetry (Temperature, Clocks, Usage, VRAM).
+    /// Provides zero-dependency, sub-millisecond GPU telemetry (Temperature, Clocks, Usage, VRAM, Reserved Memory).
     /// </summary>
     public static class NvmlHelper
     {
@@ -54,8 +54,22 @@ namespace lanlanlu_toolkit.Services
             public ulong used;
         }
 
+        [StructLayout(LayoutKind.Sequential)]
+        public struct nvmlMemory_v2_t
+        {
+            public uint version;
+            public uint padding;
+            public ulong total;
+            public ulong reserved;
+            public ulong free;
+            public ulong used;
+        }
+
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate int nvmlDeviceGetMemoryInfo_delegate(IntPtr device, out nvmlMemory_t memory);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int nvmlDeviceGetMemoryInfo_v2_delegate(IntPtr device, ref nvmlMemory_v2_t memory);
 
         private static nvmlInit_v2_delegate? _nvmlInit;
         private static nvmlShutdown_delegate? _nvmlShutdown;
@@ -64,6 +78,7 @@ namespace lanlanlu_toolkit.Services
         private static nvmlDeviceGetClockInfo_delegate? _nvmlDeviceGetClockInfo;
         private static nvmlDeviceGetUtilizationRates_delegate? _nvmlDeviceGetUtilizationRates;
         private static nvmlDeviceGetMemoryInfo_delegate? _nvmlDeviceGetMemoryInfo;
+        private static nvmlDeviceGetMemoryInfo_v2_delegate? _nvmlDeviceGetMemoryInfo_v2;
 
         public static bool Initialize()
         {
@@ -96,6 +111,7 @@ namespace lanlanlu_toolkit.Services
                 _nvmlDeviceGetTemperature = GetDelegate<nvmlDeviceGetTemperature_delegate>("nvmlDeviceGetTemperature");
                 _nvmlDeviceGetClockInfo = GetDelegate<nvmlDeviceGetClockInfo_delegate>("nvmlDeviceGetClockInfo");
                 _nvmlDeviceGetUtilizationRates = GetDelegate<nvmlDeviceGetUtilizationRates_delegate>("nvmlDeviceGetUtilizationRates");
+                _nvmlDeviceGetMemoryInfo_v2 = GetDelegate<nvmlDeviceGetMemoryInfo_v2_delegate>("nvmlDeviceGetMemoryInfo_v2");
                 _nvmlDeviceGetMemoryInfo = GetDelegate<nvmlDeviceGetMemoryInfo_delegate>("nvmlDeviceGetMemoryInfo");
 
                 if (_nvmlInit != null && _nvmlInit() == 0)
@@ -127,6 +143,7 @@ namespace lanlanlu_toolkit.Services
             public uint MemoryUsagePercent;
             public double UsedVramGb;
             public double TotalVramGb;
+            public double ReservedVramMb;
         }
 
         public static GpuTelemetry GetTelemetry(uint deviceIndex = 0)
@@ -165,8 +182,22 @@ namespace lanlanlu_toolkit.Services
                         result.MemoryUsagePercent = util.memory;
                     }
 
-                    // Memory Info
-                    if (_nvmlDeviceGetMemoryInfo != null && _nvmlDeviceGetMemoryInfo(device, out nvmlMemory_t mem) == 0)
+                    // Memory Info (v2 with reserved support, fallback to v1)
+                    bool memQueried = false;
+                    if (_nvmlDeviceGetMemoryInfo_v2 != null)
+                    {
+                        // NVML_STRUCT_VERSION(memory, 2) = sizeof(nvmlMemory_v2_t) | (2 << 24) = 40 | (2 << 24) = 0x02000028
+                        var memV2 = new nvmlMemory_v2_t { version = 0x02000028 };
+                        if (_nvmlDeviceGetMemoryInfo_v2(device, ref memV2) == 0)
+                        {
+                            result.UsedVramGb = memV2.used / (1024.0 * 1024.0 * 1024.0);
+                            result.TotalVramGb = memV2.total / (1024.0 * 1024.0 * 1024.0);
+                            result.ReservedVramMb = memV2.reserved / (1024.0 * 1024.0);
+                            memQueried = true;
+                        }
+                    }
+
+                    if (!memQueried && _nvmlDeviceGetMemoryInfo != null && _nvmlDeviceGetMemoryInfo(device, out nvmlMemory_t mem) == 0)
                     {
                         result.UsedVramGb = mem.used / (1024.0 * 1024.0 * 1024.0);
                         result.TotalVramGb = mem.total / (1024.0 * 1024.0 * 1024.0);
