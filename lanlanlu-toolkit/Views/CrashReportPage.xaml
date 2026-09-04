@@ -23,6 +23,23 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
+        <!-- Fluent Design Transition Storyboard on Item Switch -->
+        <Storyboard x:Name="FadeInDetailStoryboard">
+            <DoubleAnimation Storyboard.TargetName="DetailContentPanel"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.20">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="DetailContentTransform"
+                             Storyboard.TargetProperty="Y"
+                             From="12" To="0" Duration="0:0:0.20">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
     </Page.Resources>
 
     <Grid Padding="36" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RowSpacing="16">
@@ -201,6 +218,12 @@
                     BorderThickness="1"
                     CornerRadius="{ThemeResource OverlayCornerRadius}">
                 <Grid>
+                    <Grid.ChildrenTransitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition FromVerticalOffset="14" />
+                        </TransitionCollection>
+                    </Grid.ChildrenTransitions>
+
                     <!-- Loading Indicator -->
                     <StackPanel x:Name="LoadingPanel"
                                 HorizontalAlignment="Center"
@@ -229,6 +252,9 @@
                               SelectionChanged="CrashListView_SelectionChanged"
                               Padding="4,4"
                               IsItemClickEnabled="True">
+                        <ListView.ItemContainerTransitions>
+                            <TransitionCollection />
+                        </ListView.ItemContainerTransitions>
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Margin" Value="4,4" />

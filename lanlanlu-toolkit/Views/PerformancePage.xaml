@@ -234,6 +234,11 @@
                 <Grid>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24">
                         <Grid>
+                            <Grid.ChildrenTransitions>
+                                <TransitionCollection>
+                                    <EntranceThemeTransition FromVerticalOffset="14" />
+                                </TransitionCollection>
+                            </Grid.ChildrenTransitions>
                             
                             <!-- 1. CPU Detail Dashboard Panel -->
                             <StackPanel x:Name="CpuDetailPanel" Spacing="16" Visibility="Visible">

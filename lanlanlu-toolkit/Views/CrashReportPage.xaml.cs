@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Animation;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.Storage.Pickers;
 using WinRT.Interop;
 using lanlanlu_toolkit.Services;
 
@@ -42,12 +37,15 @@ namespace lanlanlu_toolkit.Views
             LoadingPanel.Visibility = Visibility.Visible;
             EmptyPanel.Visibility = Visibility.Collapsed;
             CrashListView.Visibility = Visibility.Collapsed;
+            NoSelectionPrompt.Visibility = Visibility.Visible;
+            DetailScrollViewer.Visibility = Visibility.Collapsed;
             RefreshBtn.IsEnabled = false;
             ExportBtn.IsEnabled = false;
 
             try
             {
                 _allReports = await CrashReportService.GetCrashReportsAsync();
+                LoadingPanel.Visibility = Visibility.Collapsed;
                 
                 // Update summary statistics
                 var summary = CrashReportService.GenerateSummary(_allReports);
@@ -108,10 +106,16 @@ namespace lanlanlu_toolkit.Views
                 EmptyPanel.Visibility = Visibility.Collapsed;
                 CrashListView.Visibility = Visibility.Visible;
 
-                // Auto-select first item if available
+                // Auto-select first item if available (延遲至 UI 渲染佇列，確保左側清單先進入畫面，再淡入呈現右側詳細資訊)
                 if (CrashListView.SelectedItem == null || !_filteredReports.Contains((CrashReportItem)CrashListView.SelectedItem))
                 {
-                    CrashListView.SelectedIndex = 0;
+                    DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Normal, () =>
+                    {
+                        if (_filteredReports.Count > 0 && (CrashListView.SelectedItem == null || !_filteredReports.Contains((CrashReportItem)CrashListView.SelectedItem)))
+                        {
+                            CrashListView.SelectedIndex = 0;
+                        }
+                    });
                 }
             }
         }
@@ -135,6 +139,7 @@ namespace lanlanlu_toolkit.Views
         {
             NoSelectionPrompt.Visibility = Visibility.Collapsed;
             DetailScrollViewer.Visibility = Visibility.Visible;
+            try { FadeInDetailStoryboard.Begin(); } catch { }
 
             DetailTypeBadgeText.Text = item.DisplayBadge;
             DetailTimestampText.Text = item.Timestamp.ToString("yyyy-MM-dd HH:mm:ss");
