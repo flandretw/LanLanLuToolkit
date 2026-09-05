@@ -680,9 +680,6 @@
   <data name="SystemRepairPage_SfcScannow_Desc.Text" xml:space="preserve">
     <value>Scans all protected system files and repairs corrupted ones.</value>
   </data>
-  <data name="SystemRepairPage_RunButton.Content" xml:space="preserve">
-    <value>Run</value>
-  </data>
   <data name="SystemRepairPage_AutoMode_Title.Text" xml:space="preserve">
     <value>Automatic Repair Mode</value>
   </data>
@@ -695,23 +692,11 @@
   <data name="SystemRepairPage_AutoMode_SfcOnly.Content" xml:space="preserve">
     <value>System File Check Only</value>
   </data>
-  <data name="SystemRepairPage_AdvancedMode_Title.Text" xml:space="preserve">
-    <value>Advanced Mode</value>
-  </data>
-  <data name="SystemRepairPage_AdvancedMode_Desc.Text" xml:space="preserve">
-    <value>Manually execute specific maintenance commands. Recommended for advanced users.</value>
-  </data>
   <data name="SystemRepairPage_StartButton.Content" xml:space="preserve">
     <value>Start</value>
   </data>
-  <data name="SystemRepairPage_Running" xml:space="preserve">
-    <value>Running...</value>
-  </data>
   <data name="SystemRepairPage_Completed" xml:space="preserve">
     <value>Execution completed</value>
-  </data>
-  <data name="SystemRepairPage_Error" xml:space="preserve">
-    <value>An error occurred during execution</value>
   </data>
   <data name="SystemRepairPage_AdminRequired" xml:space="preserve">
     <value>Administrator privileges are required for this operation.</value>
@@ -1894,5 +1879,38 @@
   </data>
   <data name="PerformancePage_CopyAllMenu.Text" xml:space="preserve">
     <value>Copy</value>
+  </data>
+  <data name="SystemRepairPage_Hero_ElapsedTimeFormat" xml:space="preserve">
+    <value>Elapsed: {0}</value>
+  </data>
+  <data name="SystemRepairPage_Hero_TotalTimeFormat" xml:space="preserve">
+    <value>Total time: {0}</value>
+  </data>
+  <data name="SystemRepairPage_ErrorFormat" xml:space="preserve">
+    <value>Error: {0}</value>
+  </data>
+  <data name="SystemRepairPage_Step_Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="SystemRepairPage_Step_Running" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="SystemRepairPage_Step_Success" xml:space="preserve">
+    <value>Healthy / Normal</value>
+  </data>
+  <data name="SystemRepairPage_Step_Repaired" xml:space="preserve">
+    <value>Corrupted files repaired</value>
+  </data>
+  <data name="SystemRepairPage_Step_Failed" xml:space="preserve">
+    <value>Execution failed</value>
+  </data>
+  <data name="SystemRepairPage_AdvancedExpander_Header.Text" xml:space="preserve">
+    <value>Advanced Mode &amp; Raw Logs</value>
+  </data>
+  <data name="SystemRepairPage_AdvancedExpander_Desc.Text" xml:space="preserve">
+    <value>Execute individual maintenance commands or inspect live terminal output.</value>
+  </data>
+  <data name="SystemRepairPage_AdvancedTools_Header.Text" xml:space="preserve">
+    <value>Individual Tools</value>
   </data>
 </root>

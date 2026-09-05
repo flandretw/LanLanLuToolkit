@@ -477,7 +477,7 @@
     <value>在此區域快速點擊滑鼠進行連點測試</value>
   </data>
   <data name="InputTesterPage_Mouse_Threshold.Text" xml:space="preserve">
-    <value>連點判定閥值</value>
+    <value>連點判定臨界值</value>
   </data>
   <data name="InputTesterPage_Mouse_NormalClicks.Text" xml:space="preserve">
     <value>正常點擊</value>
@@ -534,7 +534,7 @@
     <value>滑鼠按鍵視覺儀表</value>
   </data>
   <data name="InputTesterPage_Mouse_VisualDesc.Text" xml:space="preserve">
-    <value>按下任何實體滑鼠按鍵或滾動滾輪，儀表將即時連動反饋。</value>
+    <value>按下任何實體滑鼠按鍵或滾動滾輪，儀表將即時連動回饋。</value>
   </data>
   <data name="InputTesterPage_Mouse_WheelHint.Text" xml:space="preserve">
     <value>在左側儀表卡片上滾動滾輪即可量測步進與跳幀</value>
@@ -680,9 +680,6 @@
   <data name="SystemRepairPage_SfcScannow_Desc.Text" xml:space="preserve">
     <value>掃描所有受保護的系統檔案並修復損毀。這是最常用的安裝修復工具，能解決多數檔案遺失問題。</value>
   </data>
-  <data name="SystemRepairPage_RunButton.Content" xml:space="preserve">
-    <value>執行</value>
-  </data>
   <data name="SystemRepairPage_AutoMode_Title.Text" xml:space="preserve">
     <value>自動修復模式</value>
   </data>
@@ -695,23 +692,11 @@
   <data name="SystemRepairPage_AutoMode_SfcOnly.Content" xml:space="preserve">
     <value>僅系統檔案檢查</value>
   </data>
-  <data name="SystemRepairPage_AdvancedMode_Title.Text" xml:space="preserve">
-    <value>進階模式</value>
-  </data>
-  <data name="SystemRepairPage_AdvancedMode_Desc.Text" xml:space="preserve">
-    <value>手動執行特定的維護指令。建議進階使用者使用。</value>
-  </data>
   <data name="SystemRepairPage_StartButton.Content" xml:space="preserve">
     <value>開始執行</value>
   </data>
-  <data name="SystemRepairPage_Running" xml:space="preserve">
-    <value>正在執行……</value>
-  </data>
   <data name="SystemRepairPage_Completed" xml:space="preserve">
     <value>執行完成</value>
-  </data>
-  <data name="SystemRepairPage_Error" xml:space="preserve">
-    <value>執行期間發生錯誤</value>
   </data>
   <data name="SystemRepairPage_AdminRequired" xml:space="preserve">
     <value>此操作需要管理員權限。</value>
@@ -720,7 +705,7 @@
     <value>操作執行中</value>
   </data>
   <data name="SystemRepairPage_QuitContent" xml:space="preserve">
-    <value>系統修復操作正在執行中，現在退出將會中斷程序。確定要退出嗎？</value>
+    <value>系統修復操作正在執行中，現在退出將會中斷流程。確定要退出嗎？</value>
   </data>
   <data name="SystemRepairPage_QuitConfirm" xml:space="preserve">
     <value>確定退出</value>
@@ -786,7 +771,7 @@
     <value>當機與崩潰分析</value>
   </data>
   <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
-    <value>自動掃描並分析系統核心傾印 (Minidump) 與應用程式崩潰事件日誌</value>
+    <value>自動掃描並分析系統核心傾印 (Minidump) 與應用程式崩潰事件記錄檔</value>
   </data>
   <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
     <value>總崩潰事件</value>
@@ -1215,7 +1200,7 @@
     <value>安全引導重設</value>
   </data>
   <data name="FileAssociationPage_Method2Title.Text" xml:space="preserve">
-    <value>方法二：智慧定位登錄表手動重設（進階模式）</value>
+    <value>方法二：智慧定位登錄編輯程式手動重設（進階模式）</value>
   </data>
   <data name="FileAssociationPage_Method2Desc.Text" xml:space="preserve">
     <value>針對進階使用者，直接開啟登錄編輯程式並智慧定位，由您親自掌握並手動重設。</value>
@@ -1227,7 +1212,7 @@
     <value>定位並手動重設</value>
   </data>
   <data name="FileAssociationPage_GuideTitle.Text" xml:space="preserve">
-    <value>🛠️ 登錄表手動重設操作說明：</value>
+    <value>🛠️ 登錄編輯程式手動重設操作說明：</value>
   </data>
   <data name="FileAssociationPage_GuideStep1.Text" xml:space="preserve">
     <value>1. 在啟動的「登錄編輯程式」視窗中，您會發現畫面已自動展開並精確停留在目標目錄。</value>
@@ -1894,5 +1879,38 @@
   </data>
   <data name="PerformancePage_CopyAllMenu.Text" xml:space="preserve">
     <value>複製</value>
+  </data>
+  <data name="SystemRepairPage_Hero_ElapsedTimeFormat" xml:space="preserve">
+    <value>已耗時：{0}</value>
+  </data>
+  <data name="SystemRepairPage_Hero_TotalTimeFormat" xml:space="preserve">
+    <value>總耗時：{0}</value>
+  </data>
+  <data name="SystemRepairPage_ErrorFormat" xml:space="preserve">
+    <value>發生錯誤：{0}</value>
+  </data>
+  <data name="SystemRepairPage_Step_Pending" xml:space="preserve">
+    <value>等待中</value>
+  </data>
+  <data name="SystemRepairPage_Step_Running" xml:space="preserve">
+    <value>執行中</value>
+  </data>
+  <data name="SystemRepairPage_Step_Success" xml:space="preserve">
+    <value>無異常</value>
+  </data>
+  <data name="SystemRepairPage_Step_Repaired" xml:space="preserve">
+    <value>已修復損毀</value>
+  </data>
+  <data name="SystemRepairPage_Step_Failed" xml:space="preserve">
+    <value>執行失敗</value>
+  </data>
+  <data name="SystemRepairPage_AdvancedExpander_Header.Text" xml:space="preserve">
+    <value>進階模式與原始記錄檔</value>
+  </data>
+  <data name="SystemRepairPage_AdvancedExpander_Desc.Text" xml:space="preserve">
+    <value>單獨執行特定維護指令或檢視終端機原始即時輸出。</value>
+  </data>
+  <data name="SystemRepairPage_AdvancedTools_Header.Text" xml:space="preserve">
+    <value>單獨執行工具</value>
   </data>
 </root>
