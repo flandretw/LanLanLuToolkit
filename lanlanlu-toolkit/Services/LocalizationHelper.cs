@@ -1,4 +1,4 @@
-﻿using Microsoft.Windows.ApplicationModel.Resources;
+using Microsoft.Windows.ApplicationModel.Resources;
 using System;
 
 namespace lanlanlu_toolkit.Services
@@ -25,13 +25,23 @@ namespace lanlanlu_toolkit.Services
             }
             catch { }
 
-            // 2. If key contains dot (e.g. PerformancePage_Cpu_Temp.Text), MRT Core expects slash (PerformancePage_Cpu_Temp/Text)
+            // 2. Cross-lookup between dot and slash (MRT Core ResourceLoader conventions)
             if (key.Contains('.'))
             {
                 try
                 {
                     string slashKey = key.Replace('.', '/');
                     string val = Loader.GetString(slashKey);
+                    if (!string.IsNullOrEmpty(val)) return val;
+                }
+                catch { }
+            }
+            else if (key.Contains('/'))
+            {
+                try
+                {
+                    string dotKey = key.Replace('/', '.');
+                    string val = Loader.GetString(dotKey);
                     if (!string.IsNullOrEmpty(val)) return val;
                 }
                 catch { }
@@ -70,6 +80,14 @@ namespace lanlanlu_toolkit.Services
                 }
                 catch { }
             }
+
+            // 5. Fallback for baseKey -> try /Text
+            try
+            {
+                string val = Loader.GetString(key + "/Text");
+                if (!string.IsNullOrEmpty(val)) return val;
+            }
+            catch { }
 
             return key; // Fallback to key name if resource not found
         }

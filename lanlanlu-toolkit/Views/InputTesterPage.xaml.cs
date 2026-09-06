@@ -86,6 +86,7 @@ namespace lanlanlu_toolkit.Views
             {
                 BuildKeyboardLayout();
                 UpdateFocusVisual(ReferenceEquals(FocusManager.GetFocusedElement(this.XamlRoot), KeyboardFocusArea));
+                UpdateMouseThemeVisuals();
             };
 
             BuildKeyboardLayout();
@@ -187,40 +188,71 @@ namespace lanlanlu_toolkit.Views
 
         private Brush GetThemeBrush(string resourceKey)
         {
-            bool isLight = IsCurrentThemeLight();
+            if (this.Resources.TryGetValue(resourceKey, out var pageRes) && pageRes is Brush pb)
+            {
+                return pb;
+            }
 
-            if (isLight)
+            bool isLight = IsCurrentThemeLight();
+            string themeKey = isLight ? "Light" : "Default";
+
+            if (Application.Current.Resources.ThemeDictionaries.TryGetValue(themeKey, out var tdObj) && tdObj is ResourceDictionary td)
             {
-                return resourceKey switch
+                if (td.TryGetValue(resourceKey, out var res) && res is Brush b)
                 {
-                    "ControlFillColorDefaultBrush" => new SolidColorBrush(Color.FromArgb(255, 255, 255, 255)), // Solid white keycaps (#FFFFFF)
-                    "ControlAltFillColorSecondaryBrush" => new SolidColorBrush(Color.FromArgb(20, 0, 0, 0)),
-                    "CardStrokeColorDefaultBrush" => new SolidColorBrush(Color.FromArgb(255, 210, 210, 210)), // Crisp outline (#D2D2D2)
-                    "TextFillColorPrimaryBrush" => new SolidColorBrush(Color.FromArgb(255, 24, 24, 24)),       // Crisp dark black text (#181818)
-                    "TextFillColorSecondaryBrush" => new SolidColorBrush(Color.FromArgb(255, 100, 100, 100)),  // Crisp dark gray text (#646464)
-                    "TextFillColorTertiaryBrush" => new SolidColorBrush(Color.FromArgb(255, 140, 140, 140)),   // Secondary gray (#8C8C8C)
-                    "AccentFillColorDefaultBrush" => new SolidColorBrush(Color.FromArgb(255, 0, 120, 212)),    // Accent Blue (#0078D4)
-                    "SystemFillColorSuccessBrush" => new SolidColorBrush(Color.FromArgb(255, 16, 124, 65)),    // Forest Green (#107C41)
-                    "SystemFillColorCriticalBrush" => new SolidColorBrush(Color.FromArgb(255, 196, 43, 28)),   // Red (#C42B1C)
-                    _ => new SolidColorBrush(Color.FromArgb(255, 30, 30, 30))
-                };
+                    return b;
+                }
             }
-            else
+
+            foreach (var md in Application.Current.Resources.MergedDictionaries)
             {
-                return resourceKey switch
+                if (md.ThemeDictionaries.TryGetValue(themeKey, out var mtdObj) && mtdObj is ResourceDictionary mtd)
                 {
-                    "ControlFillColorDefaultBrush" => new SolidColorBrush(Color.FromArgb(255, 45, 45, 45)),   // Dark keycap fill (#2D2D2D)
-                    "ControlAltFillColorSecondaryBrush" => new SolidColorBrush(Color.FromArgb(30, 255, 255, 255)),
-                    "CardStrokeColorDefaultBrush" => new SolidColorBrush(Color.FromArgb(255, 65, 65, 65)),    // Dark outline (#414141)
-                    "TextFillColorPrimaryBrush" => new SolidColorBrush(Color.FromArgb(255, 255, 255, 255)),   // Pure white text (#FFFFFF)
-                    "TextFillColorSecondaryBrush" => new SolidColorBrush(Color.FromArgb(255, 180, 180, 180)), // Light gray text (#B4B4B4)
-                    "TextFillColorTertiaryBrush" => new SolidColorBrush(Color.FromArgb(255, 120, 120, 120)),  // Darker gray (#787878)
-                    "AccentFillColorDefaultBrush" => new SolidColorBrush(Color.FromArgb(255, 0, 120, 212)),   // Accent Blue (#0078D4)
-                    "SystemFillColorSuccessBrush" => new SolidColorBrush(Color.FromArgb(255, 16, 124, 65)),   // Green (#107C41)
-                    "SystemFillColorCriticalBrush" => new SolidColorBrush(Color.FromArgb(255, 196, 43, 28)),  // Red (#C42B1C)
-                    _ => new SolidColorBrush(Color.FromArgb(255, 220, 220, 220))
-                };
+                    if (mtd.TryGetValue(resourceKey, out var mtdRes) && mtdRes is Brush mtdb)
+                    {
+                        return mtdb;
+                    }
+                }
             }
+
+            // In Dark theme only, check root resources
+            if (!isLight && Application.Current.Resources.TryGetValue(resourceKey, out var appRes) && appRes is Brush ab)
+            {
+                return ab;
+            }
+
+            return GetFallbackBrush(resourceKey, isLight);
+        }
+
+        private static Brush GetFallbackBrush(string resourceKey, bool isLight)
+        {
+            Color accentColor;
+            try
+            {
+                var uiSettings = new Windows.UI.ViewManagement.UISettings();
+                accentColor = uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Accent);
+            }
+            catch
+            {
+                accentColor = Color.FromArgb(255, 0, 120, 212);
+            }
+
+            return resourceKey switch
+            {
+                "TextFillColorPrimaryBrush" => new SolidColorBrush(isLight ? Color.FromArgb(255, 27, 27, 27) : Color.FromArgb(255, 255, 255, 255)),
+                "TextFillColorSecondaryBrush" => new SolidColorBrush(isLight ? Color.FromArgb(255, 92, 92, 92) : Color.FromArgb(255, 197, 197, 197)),
+                "TextFillColorTertiaryBrush" => new SolidColorBrush(isLight ? Color.FromArgb(255, 140, 140, 140) : Color.FromArgb(255, 120, 120, 120)),
+                "TextOnAccentFillColorPrimaryBrush" => new SolidColorBrush(Colors.White),
+                "TextOnAccentFillColorSecondaryBrush" => new SolidColorBrush(Color.FromArgb(220, 255, 255, 255)),
+                "AccentFillColorDefaultBrush" => new SolidColorBrush(accentColor),
+                "SystemFillColorSuccessBrush" => new SolidColorBrush(isLight ? Color.FromArgb(255, 16, 124, 65) : Color.FromArgb(255, 108, 203, 95)),
+                "SystemFillColorCriticalBrush" => new SolidColorBrush(isLight ? Color.FromArgb(255, 196, 43, 28) : Color.FromArgb(255, 255, 153, 164)),
+                "ControlFillColorDefaultBrush" => new SolidColorBrush(isLight ? Colors.White : Color.FromArgb(255, 45, 45, 45)),
+                "ControlFillColorSecondaryBrush" => new SolidColorBrush(isLight ? Color.FromArgb(255, 243, 243, 243) : Color.FromArgb(255, 56, 56, 56)),
+                "ControlAltFillColorSecondaryBrush" => new SolidColorBrush(isLight ? Color.FromArgb(20, 0, 0, 0) : Color.FromArgb(30, 255, 255, 255)),
+                "CardStrokeColorDefaultBrush" => new SolidColorBrush(isLight ? Color.FromArgb(255, 222, 222, 222) : Color.FromArgb(255, 60, 60, 60)),
+                _ => new SolidColorBrush(isLight ? Color.FromArgb(255, 27, 27, 27) : Color.FromArgb(255, 255, 255, 255))
+            };
         }
 
         #region Keyboard Visual Layout & Events
@@ -381,12 +413,9 @@ namespace lanlanlu_toolkit.Views
                 Width = key.Width,
                 Height = key.Height,
                 Margin = new Thickness(key.LeftMargin, 0, 0, 0),
-                CornerRadius = new CornerRadius(4),
-                BorderThickness = new Thickness(1),
                 Tag = key.Id,
                 UseLayoutRounding = false,
-                Background = GetThemeBrush("ControlFillColorDefaultBrush"),
-                BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush")
+                Style = (Style)Resources["KeycapDefaultStyle"]
             };
 
             border.PointerPressed += (s, e) =>
@@ -423,7 +452,7 @@ namespace lanlanlu_toolkit.Views
                     Text = key.SubLabel,
                     FontSize = 9,
                     HorizontalAlignment = HorizontalAlignment.Center,
-                    Foreground = GetThemeBrush("TextFillColorSecondaryBrush")
+                    Style = (Style)Resources["KeycapSubTextDefaultStyle"]
                 };
                 stack.Children.Add(subText);
             }
@@ -434,7 +463,7 @@ namespace lanlanlu_toolkit.Views
                 FontSize = key.DisplayLabel.Length > 3 ? 10 : 12,
                 FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Foreground = GetThemeBrush("TextFillColorPrimaryBrush")
+                Style = (Style)Resources["KeycapMainTextDefaultStyle"]
             };
             stack.Children.Add(mainText);
 
@@ -542,7 +571,7 @@ namespace lanlanlu_toolkit.Views
                 else
                 {
                     KeyChatterStatusText.Text = LocalizationHelper.GetString("InputTesterPage_Key_ChatterNormal");
-                    KeyChatterStatusText.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
+                    KeyChatterStatusText.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
                 }
             }
         }
@@ -655,35 +684,38 @@ namespace lanlanlu_toolkit.Views
         private void UpdateFocusVisual(bool isFocused)
         {
             if (KeyboardFocusArea == null || FocusStatusBadge == null || FocusStatusText == null) return;
-            bool isLight = IsCurrentThemeLight();
 
             if (isFocused)
             {
                 KeyboardFocusArea.BorderBrush = GetThemeBrush("AccentFillColorDefaultBrush");
                 KeyboardFocusArea.BorderThickness = new Thickness(1.5);
-                FocusStatusBadge.Background = new SolidColorBrush(isLight ? Color.FromArgb(255, 232, 245, 233) : Color.FromArgb(35, 46, 125, 50));
-                FocusStatusBadge.BorderBrush = GetThemeBrush("SystemFillColorSuccessBrush");
+                KeyboardFocusArea.Opacity = 1.0;
+
+                FocusStatusBadge.Style = (Style)Resources["FocusBadgeActiveStyle"];
                 if (FocusStatusIcon != null)
                 {
-                    FocusStatusIcon.Glyph = "\uEA3B";
-                    FocusStatusIcon.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
+                    FocusStatusIcon.Glyph = "\uE73E"; // Fluent Checkmark
+                    FocusStatusIcon.Style = (Style)Resources["FocusStatusIconActiveStyle"];
                 }
-                FocusStatusText.Text = LocalizationHelper.GetString("InputTesterPage_FocusStatus_Focused/Text");
-                FocusStatusText.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
+                string focusedText = LocalizationHelper.GetString("InputTesterPage_FocusStatus_Focused.Text");
+                FocusStatusText.Text = string.IsNullOrEmpty(focusedText) || focusedText.Contains('/') ? "已就緒" : focusedText;
+                FocusStatusText.Style = (Style)Resources["FocusStatusTextActiveStyle"];
             }
             else
             {
                 KeyboardFocusArea.BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush");
                 KeyboardFocusArea.BorderThickness = new Thickness(1);
-                FocusStatusBadge.Background = GetThemeBrush("ControlFillColorDefaultBrush");
-                FocusStatusBadge.BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush");
+                KeyboardFocusArea.Opacity = 0.85;
+
+                FocusStatusBadge.Style = (Style)Resources["FocusBadgeDefaultStyle"];
                 if (FocusStatusIcon != null)
                 {
-                    FocusStatusIcon.Glyph = "\uEA3A";
-                    FocusStatusIcon.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
+                    FocusStatusIcon.Glyph = "\uE765"; // Fluent Keyboard
+                    FocusStatusIcon.Style = (Style)Resources["FocusStatusIconDefaultStyle"];
                 }
-                FocusStatusText.Text = LocalizationHelper.GetString("InputTesterPage_FocusStatus_Unfocused/Text");
-                FocusStatusText.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
+                string unfocusedText = LocalizationHelper.GetString("InputTesterPage_FocusStatus_Unfocused.Text");
+                FocusStatusText.Text = string.IsNullOrEmpty(unfocusedText) || unfocusedText.Contains('/') ? "點擊以聚焦輸入" : unfocusedText;
+                FocusStatusText.Style = (Style)Resources["FocusStatusTextDefaultStyle"];
             }
         }
 
@@ -795,76 +827,63 @@ namespace lanlanlu_toolkit.Views
         private void ApplyKeyVisualState(string keyId, KeyVisualState state)
         {
             if (!_keyVisualMap.TryGetValue(keyId, out var border)) return;
-            bool isLight = IsCurrentThemeLight();
 
             switch (state)
             {
                 case KeyVisualState.Pressed:
-                    border.Background = GetThemeBrush("AccentFillColorDefaultBrush");
-                    border.BorderBrush = GetThemeBrush("AccentFillColorDefaultBrush");
-                    SetTextColors(border, Colors.White);
+                    border.Style = (Style)Resources["KeycapPressedStyle"];
+                    SetKeycapTextColors(border, KeyVisualState.Pressed);
                     break;
 
                 case KeyVisualState.Tested:
-                    if (isLight)
-                    {
-                        border.Background = new SolidColorBrush(Color.FromArgb(255, 224, 242, 254)); // Soft sky blue #E0F2FE
-                        border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 2, 132, 199));   // Vibrant blue #0284C7
-                        SetTextColors(border, Color.FromArgb(255, 3, 105, 161));                      // Deep blue #0369A1
-                    }
-                    else
-                    {
-                        border.Background = new SolidColorBrush(Color.FromArgb(255, 31, 78, 91));     // Dark teal #1F4E5B
-                        border.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 42, 157, 143));  // Vibrant teal #2A9D8F
-                        SetTextColors(border, Colors.White);
-                    }
+                    border.Style = (Style)Resources["KeycapTestedStyle"];
+                    SetKeycapTextColors(border, KeyVisualState.Tested);
                     break;
 
                 case KeyVisualState.Warning:
-                    border.Background = GetThemeBrush("SystemFillColorCriticalBrush");
-                    border.BorderBrush = GetThemeBrush("SystemFillColorCriticalBrush");
-                    SetTextColors(border, Colors.White);
+                    border.Style = (Style)Resources["KeycapWarningStyle"];
+                    SetKeycapTextColors(border, KeyVisualState.Warning);
                     break;
 
                 case KeyVisualState.Default:
                 default:
-                    border.Background = GetThemeBrush("ControlFillColorDefaultBrush");
-                    border.BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush");
-                    ResetTextColors(border);
+                    border.Style = (Style)Resources["KeycapDefaultStyle"];
+                    SetKeycapTextColors(border, KeyVisualState.Default);
                     break;
             }
         }
 
-        private static void SetTextColors(Border border, Color color)
+        private void SetKeycapTextColors(Border border, KeyVisualState state)
         {
-            if (border.Child is StackPanel stack)
-            {
-                foreach (var child in stack.Children)
-                {
-                    if (child is TextBlock tb)
-                    {
-                        tb.Foreground = new SolidColorBrush(color);
-                    }
-                }
-            }
-        }
+            if (border.Child is not StackPanel stack) return;
 
-        private void ResetTextColors(Border border)
-        {
-            if (border.Child is StackPanel stack)
+            var mainStyle = state switch
             {
-                for (int i = 0; i < stack.Children.Count; i++)
+                KeyVisualState.Pressed => (Style)Resources["KeycapMainTextPressedStyle"],
+                KeyVisualState.Warning => (Style)Resources["KeycapMainTextPressedStyle"],
+                KeyVisualState.Tested => (Style)Resources["KeycapMainTextTestedStyle"],
+                _ => (Style)Resources["KeycapMainTextDefaultStyle"]
+            };
+
+            var subStyle = state switch
+            {
+                KeyVisualState.Pressed => (Style)Resources["KeycapSubTextPressedStyle"],
+                KeyVisualState.Warning => (Style)Resources["KeycapSubTextPressedStyle"],
+                _ => (Style)Resources["KeycapSubTextDefaultStyle"]
+            };
+
+            for (int i = 0; i < stack.Children.Count; i++)
+            {
+                if (stack.Children[i] is TextBlock tb)
                 {
-                    if (stack.Children[i] is TextBlock tb)
+                    tb.ClearValue(TextBlock.ForegroundProperty);
+                    if (stack.Children.Count > 1 && i == 0)
                     {
-                        if (stack.Children.Count > 1 && i == 0)
-                        {
-                            tb.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
-                        }
-                        else
-                        {
-                            tb.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
-                        }
+                        tb.Style = subStyle;
+                    }
+                    else
+                    {
+                        tb.Style = mainStyle;
                     }
                 }
             }
@@ -1075,11 +1094,17 @@ namespace lanlanlu_toolkit.Views
                 LastMouseActionText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_IntervalAction"), $"{intervalMs:F1}");
             }
             ChatterClickPad.Background = GetThemeBrush("AccentFillColorDefaultBrush");
+            ChatterClickPad.BorderBrush = GetThemeBrush("AccentFillColorDefaultBrush");
+            if (ChatterClickPadTitle != null) ChatterClickPadTitle.Foreground = GetThemeBrush("TextOnAccentFillColorPrimaryBrush");
+            if (LastClickIntervalText != null) LastClickIntervalText.Foreground = GetThemeBrush("TextOnAccentFillColorSecondaryBrush");
         }
 
         private void ChatterClickPad_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             ChatterClickPad.Background = GetThemeBrush("ControlAltFillColorSecondaryBrush");
+            ChatterClickPad.BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush");
+            if (ChatterClickPadTitle != null) ChatterClickPadTitle.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
+            if (LastClickIntervalText != null) LastClickIntervalText.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
         }
 
         private void MouseVisualCard_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
@@ -1218,17 +1243,102 @@ namespace lanlanlu_toolkit.Views
             }
         }
 
-        private void HighlightBorder(Border border, bool active)
+        private void HighlightBorder(Border? border, bool active)
         {
             if (border == null) return;
+
             if (active)
             {
                 border.Background = GetThemeBrush("AccentFillColorDefaultBrush");
+                border.BorderBrush = GetThemeBrush("AccentFillColorDefaultBrush");
+                SetMouseButtonContentState(border, true);
             }
             else
             {
-                border.Background = GetThemeBrush("ControlFillColorDefaultBrush");
+                if (ReferenceEquals(border, MouseMiddleBtnVisual))
+                {
+                    border.Background = GetThemeBrush("ControlSolidFillColorDefaultBrush");
+                }
+                else
+                {
+                    border.Background = GetThemeBrush("ControlFillColorDefaultBrush");
+                }
+                border.BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush");
+                SetMouseButtonContentState(border, false);
             }
+        }
+
+        private void SetMouseButtonContentState(Border border, bool active)
+        {
+            if (active)
+            {
+                var activeTextBrush = GetThemeBrush("TextOnAccentFillColorPrimaryBrush");
+                var activeSubTextBrush = GetThemeBrush("TextOnAccentFillColorSecondaryBrush");
+
+                if (ReferenceEquals(border, MouseLeftBtnVisual))
+                {
+                    if (MouseLeftBtnLabel != null) MouseLeftBtnLabel.Foreground = activeSubTextBrush;
+                    if (MouseLeftCountText != null) MouseLeftCountText.Foreground = activeTextBrush;
+                }
+                else if (ReferenceEquals(border, MouseRightBtnVisual))
+                {
+                    if (MouseRightBtnLabel != null) MouseRightBtnLabel.Foreground = activeSubTextBrush;
+                    if (MouseRightCountText != null) MouseRightCountText.Foreground = activeTextBrush;
+                }
+                else if (ReferenceEquals(border, MouseMiddleBtnVisual))
+                {
+                    if (WheelMiddleIcon != null) WheelMiddleIcon.Foreground = activeTextBrush;
+                }
+                else if (ReferenceEquals(border, MouseSide1BtnVisual))
+                {
+                    if (MouseSide1Text != null) MouseSide1Text.Foreground = activeTextBrush;
+                }
+                else if (ReferenceEquals(border, MouseSide2BtnVisual))
+                {
+                    if (MouseSide2Text != null) MouseSide2Text.Foreground = activeTextBrush;
+                }
+            }
+            else
+            {
+                if (ReferenceEquals(border, MouseLeftBtnVisual))
+                {
+                    if (MouseLeftBtnLabel != null) MouseLeftBtnLabel.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
+                    if (MouseLeftCountText != null) MouseLeftCountText.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
+                }
+                else if (ReferenceEquals(border, MouseRightBtnVisual))
+                {
+                    if (MouseRightBtnLabel != null) MouseRightBtnLabel.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
+                    if (MouseRightCountText != null) MouseRightCountText.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
+                }
+                else if (ReferenceEquals(border, MouseMiddleBtnVisual))
+                {
+                    if (WheelMiddleIcon != null) WheelMiddleIcon.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
+                }
+                else if (ReferenceEquals(border, MouseSide1BtnVisual))
+                {
+                    if (MouseSide1Text != null) MouseSide1Text.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
+                }
+                else if (ReferenceEquals(border, MouseSide2BtnVisual))
+                {
+                    if (MouseSide2Text != null) MouseSide2Text.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
+                }
+            }
+        }
+
+        private void UpdateMouseThemeVisuals()
+        {
+            ReleaseAllMouseButtonVisuals();
+            if (ChatterClickPad != null)
+            {
+                ChatterClickPad.Background = GetThemeBrush("ControlAltFillColorSecondaryBrush");
+                ChatterClickPad.BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush");
+                if (ChatterClickPadTitle != null) ChatterClickPadTitle.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
+                if (LastClickIntervalText != null) LastClickIntervalText.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
+            }
+            if (WheelStatusIcon != null) WheelStatusIcon.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
+            if (WheelStatusText != null) WheelStatusText.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
+            if (WheelUpArrow != null) WheelUpArrow.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
+            if (WheelDownArrow != null) WheelDownArrow.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
         }
 
         #endregion
@@ -1361,7 +1471,7 @@ namespace lanlanlu_toolkit.Views
             if (KeyChatterStatusText != null)
             {
                 KeyChatterStatusText.Text = LocalizationHelper.GetString("InputTesterPage_Key_ChatterNormal");
-                KeyChatterStatusText.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
+                KeyChatterStatusText.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
             }
         }
 
@@ -1426,6 +1536,13 @@ namespace lanlanlu_toolkit.Views
             if (ChatterAlertBanner != null) ChatterAlertBanner.Visibility = Visibility.Collapsed;
             if (TrajectoryCanvas != null) TrajectoryCanvas.Children.Clear();
             ReleaseAllMouseButtonVisuals();
+            if (ChatterClickPad != null)
+            {
+                ChatterClickPad.Background = GetThemeBrush("ControlAltFillColorSecondaryBrush");
+                ChatterClickPad.BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush");
+                if (ChatterClickPadTitle != null) ChatterClickPadTitle.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
+                if (LastClickIntervalText != null) LastClickIntervalText.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
+            }
         }
 
         #endregion
