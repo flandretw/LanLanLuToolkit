@@ -553,7 +553,7 @@ namespace lanlanlu_toolkit.Views
 
             // Update Stat Cards
             LastKeyText.Text = _keyModelMap.TryGetValue(keyId, out var model) ? model.DisplayLabel : e.Key.ToString();
-            LastKeyCodeText.Text = $"VK: {(int)e.Key} (0x{(int)e.Key:X2}) | Scan: 0x{e.KeyStatus.ScanCode:X2}";
+            LastKeyCodeText.Text = FormatKeyCode((int)e.Key, e.KeyStatus.ScanCode);
             CurrentDownText.Text = _activeKeys.Count.ToString();
             ActiveKeyListText.Text = string.Join(", ", _activeKeys);
             MaxRolloverText.Text = _maxRollover.ToString();
@@ -562,7 +562,13 @@ namespace lanlanlu_toolkit.Views
 
             if (intervalMs > 0)
             {
-                KeyIntervalText.Text = $"{intervalMs:F1} ms";
+                string intervalFormat = LocalizationHelper.GetString("InputTesterPage_Key_IntervalFormat");
+                if (string.IsNullOrEmpty(intervalFormat) || intervalFormat == "InputTesterPage_Key_IntervalFormat")
+                {
+                    intervalFormat = "{0:F1} ms";
+                }
+                KeyIntervalText.Text = string.Format(intervalFormat, intervalMs);
+
                 if (isChatter)
                 {
                     KeyChatterStatusText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Key_ChatterWarning"), $"{intervalMs:F0}");
@@ -574,6 +580,16 @@ namespace lanlanlu_toolkit.Views
                     KeyChatterStatusText.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
                 }
             }
+        }
+
+        private static string FormatKeyCode(int vk, uint scanCode)
+        {
+            string format = LocalizationHelper.GetString("InputTesterPage_Key_CodeFormat");
+            if (string.IsNullOrEmpty(format) || format == "InputTesterPage_Key_CodeFormat")
+            {
+                format = "VK: {0} (0x{1:X2}) | Scan: 0x{2:X2}";
+            }
+            return string.Format(format, vk, vk, scanCode);
         }
 
         private void KeyboardFocusArea_KeyUp(object sender, KeyRoutedEventArgs e)
@@ -595,8 +611,8 @@ namespace lanlanlu_toolkit.Views
                     await System.Threading.Tasks.Task.Delay(150);
                     ApplyKeyVisualState("Snapshot", KeyVisualState.Tested);
                 });
-                LastKeyText.Text = "PrtSc";
-                LastKeyCodeText.Text = "VK: 44 (0x2C) | Scan: 0x37";
+                LastKeyText.Text = _keyModelMap.TryGetValue("Snapshot", out var snapshotModel) ? snapshotModel.DisplayLabel : "PrtSc";
+                LastKeyCodeText.Text = FormatKeyCode(44, 0x37);
                 TotalPressesText.Text = _totalPresses.ToString();
                 UpdateTestedKeysStat();
                 return;
@@ -1461,7 +1477,7 @@ namespace lanlanlu_toolkit.Views
             }
 
             if (LastKeyText != null) LastKeyText.Text = "-";
-            if (LastKeyCodeText != null) LastKeyCodeText.Text = "VK: - | Scan: -";
+            if (LastKeyCodeText != null) LastKeyCodeText.Text = LocalizationHelper.GetString("InputTesterPage_Key_CodeEmpty");
             if (CurrentDownText != null) CurrentDownText.Text = "0";
             if (ActiveKeyListText != null) ActiveKeyListText.Text = LocalizationHelper.GetString("InputTesterPage_Key_None");
             if (MaxRolloverText != null) MaxRolloverText.Text = "0";

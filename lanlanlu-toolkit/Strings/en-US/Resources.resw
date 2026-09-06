@@ -425,6 +425,15 @@
   <data name="InputTesterPage_Card_KeyInterval.Text" xml:space="preserve">
     <value>Trigger Interval</value>
   </data>
+  <data name="InputTesterPage_Key_IntervalFormat" xml:space="preserve">
+    <value>{0:F1} ms</value>
+  </data>
+  <data name="InputTesterPage_Key_CodeFormat" xml:space="preserve">
+    <value>VK: {0} (0x{1:X2}) | Scan: 0x{2:X2}</value>
+  </data>
+  <data name="InputTesterPage_Key_CodeEmpty.Text" xml:space="preserve">
+    <value>VK: - | Scan: -</value>
+  </data>
   <data name="InputTesterPage_Key_None" xml:space="preserve">
     <value>None</value>
   </data>
