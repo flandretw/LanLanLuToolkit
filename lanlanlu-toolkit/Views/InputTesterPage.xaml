@@ -1,8 +1,12 @@
 <Page
     x:Class="lanlanlu_toolkit.Views.InputTesterPage"
+    
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -11,7 +15,6 @@
     Unloaded="Page_Unloaded"
     KeyDown="Page_KeyDown"
     KeyUp="Page_KeyUp">
-
     <Page.Resources>
         <!-- Tab Transition Storyboards (Guaranteed smooth 60fps animation on EVERY switch) -->
         <Storyboard x:Name="FadeInKeyboardStoryboard">
@@ -30,7 +33,6 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
-
         <Storyboard x:Name="FadeInMouseStoryboard">
             <DoubleAnimation Storyboard.TargetName="MouseSection"
                              Storyboard.TargetProperty="Opacity"
@@ -47,7 +49,6 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
-
         <!-- Keycap Dynamic ThemeResource Styles -->
         <Style x:Key="KeycapDefaultStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="4" />
@@ -55,28 +56,24 @@
             <Setter Property="Background" Value="{ThemeResource ControlFillColorDefaultBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
         </Style>
-
         <Style x:Key="KeycapPressedStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="4" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Background" Value="{ThemeResource AccentFillColorDefaultBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource AccentFillColorDefaultBrush}" />
         </Style>
-
         <Style x:Key="KeycapTestedStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="4" />
             <Setter Property="BorderThickness" Value="1.5" />
             <Setter Property="Background" Value="{ThemeResource ControlFillColorSecondaryBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource AccentFillColorDefaultBrush}" />
         </Style>
-
         <Style x:Key="KeycapWarningStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="4" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Background" Value="{ThemeResource SystemFillColorCriticalBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource SystemFillColorCriticalBrush}" />
         </Style>
-
         <!-- Focus Badge Dynamic ThemeResource Styles -->
         <Style x:Key="FocusBadgeDefaultStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="12" />
@@ -84,57 +81,46 @@
             <Setter Property="Background" Value="{ThemeResource ControlFillColorDefaultBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
         </Style>
-
         <Style x:Key="FocusBadgeActiveStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="12" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Background" Value="{ThemeResource SubtleFillColorSecondaryBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource AccentFillColorDefaultBrush}" />
         </Style>
-
         <!-- Focus Badge Content Dynamic ThemeResource Styles -->
         <Style x:Key="FocusStatusIconDefaultStyle" TargetType="FontIcon">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
         </Style>
-
         <Style x:Key="FocusStatusIconActiveStyle" TargetType="FontIcon">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="{ThemeResource SystemFillColorSuccessBrush}" />
         </Style>
-
         <Style x:Key="FocusStatusTextDefaultStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
         </Style>
-
         <Style x:Key="FocusStatusTextActiveStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
         </Style>
-
         <!-- Keycap Text Dynamic ThemeResource Styles -->
         <Style x:Key="KeycapMainTextDefaultStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
         </Style>
-
         <Style x:Key="KeycapMainTextTestedStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{ThemeResource AccentFillColorDefaultBrush}" />
         </Style>
-
         <Style x:Key="KeycapMainTextPressedStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{ThemeResource TextOnAccentFillColorPrimaryBrush}" />
         </Style>
-
         <Style x:Key="KeycapSubTextDefaultStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
         </Style>
-
         <Style x:Key="KeycapSubTextPressedStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{ThemeResource TextOnAccentFillColorPrimaryBrush}" />
         </Style>
     </Page.Resources>
-
     <Grid>
         <ScrollViewer x:Name="PageScrollViewer"
                       VerticalScrollBarVisibility="Auto"
@@ -147,19 +133,16 @@
                   HorizontalAlignment="Stretch"
                   SizeChanged="RootContentGrid_SizeChanged">
                 <StackPanel Spacing="12" MaxWidth="1600" HorizontalAlignment="Stretch">
-                    
                     <!-- Page Header & Action Bar -->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-
                         <StackPanel Spacing="4">
                             <TextBlock x:Uid="InputTesterPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
                             <TextBlock x:Uid="InputTesterPage_Subtitle" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
-
                         <!-- Top Right Controls -->
                         <Button x:Name="ResetBtn"
                                 Grid.Column="1"
@@ -172,7 +155,6 @@
                             </StackPanel>
                         </Button>
                     </Grid>
-
                     <!-- Fluent Design Settings-Style Options Section (2 Rows) -->
                     <StackPanel Spacing="8">
                         <TextBlock x:Uid="InputTesterPage_Section_Options" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
@@ -188,7 +170,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Glyph="&#xE790;" 
+                                    <FontIcon Glyph="&#xF271;" 
                                               FontSize="18" 
                                               Margin="0,0,16,0" 
                                               VerticalAlignment="Center" 
@@ -221,7 +203,6 @@
                                     </ComboBox>
                                 </Grid>
                             </Border>
-
                             <!-- Card 2: Audio Feedback Toggle Card (with ToggleSwitch on the right) -->
                             <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -263,7 +244,6 @@
                             </Border>
                         </StackPanel>
                     </StackPanel>
-
                     <!-- ========================================================================= -->
                     <!-- 1. KEYBOARD TESTING SECTION                                               -->
                     <!-- ========================================================================= -->
@@ -271,9 +251,7 @@
                         <StackPanel.RenderTransform>
                             <TranslateTransform x:Name="KeyboardSectionTransform" />
                         </StackPanel.RenderTransform>
-                        
                         <TextBlock x:Uid="InputTesterPage_Section_Keyboard" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
-                        
                         <!-- Summary Stat Cards Grid (5 Columns with 100% Uniform Height & 3-Row Alignment) -->
                         <Grid ColumnSpacing="12" HorizontalAlignment="Stretch">
                             <Grid.RowDefinitions>
@@ -286,7 +264,6 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-
                             <!-- Card 1: Last Key Pressed -->
                             <Border Grid.Column="0" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -310,7 +287,6 @@
                                     </Grid>
                                 </Grid>
                             </Border>
-
                             <!-- Card 2: Current Active Down -->
                             <Border Grid.Column="1" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -334,7 +310,6 @@
                                     </Grid>
                                 </Grid>
                             </Border>
-
                             <!-- Card 3: Max Rollover (NKRO) -->
                             <Border Grid.Column="2" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -358,7 +333,6 @@
                                     </Grid>
                                 </Grid>
                             </Border>
-
                             <!-- Card 4: Total Presses -->
                             <Border Grid.Column="3" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -382,7 +356,6 @@
                                     </Grid>
                                 </Grid>
                             </Border>
-
                             <!-- Card 5: Trigger Interval & Chatter Warning -->
                             <Border Grid.Column="4" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -407,7 +380,6 @@
                                 </Grid>
                             </Border>
                         </Grid>
-
                         <!-- Keyboard Interactive Vector Stage with Focus State Wrapper -->
                         <Border x:Name="KeyboardFocusArea"
                                 Background="{ThemeResource LayerFillColorDefaultBrush}"
@@ -427,7 +399,6 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-
                                     <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                         <FontIcon Glyph="&#xE765;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                         <TextBlock x:Name="KeyboardLayoutTitleText"
@@ -435,7 +406,6 @@
                                                    Style="{ThemeResource SubtitleTextBlockStyle}"
                                                    VerticalAlignment="Center" />
                                     </StackPanel>
-
                                     <!-- Layout Selector & Focus Status Badge -->
                                     <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
                                         <ComboBox x:Name="KeyboardLayoutComboBox"
@@ -449,7 +419,6 @@
                                             <ComboBoxItem x:Uid="InputTesterPage_Layout_80" />
                                             <ComboBoxItem x:Uid="InputTesterPage_Layout_60" />
                                         </ComboBox>
-
                                         <!-- Focus Status Badge Indicator with Fluent Icon -->
                                         <Border x:Name="FocusStatusBadge"
                                                 Width="88"
@@ -470,7 +439,6 @@
                                         </Border>
                                     </StackPanel>
                                 </Grid>
-
                                 <!-- Vector Layout Keyboard Stage (Mathematical Sub-pixel Alignment) -->
                                 <Viewbox x:Name="KeyboardViewbox"
                                          Stretch="Uniform"
@@ -490,14 +458,12 @@
                                                     UseLayoutRounding="False"
                                                     HorizontalAlignment="Left"
                                                     VerticalAlignment="Top" />
-
                                         <!-- Nav / Arrow Cluster (138px) -->
                                         <StackPanel x:Name="NavClusterPanel"
                                                     Spacing="4"
                                                     UseLayoutRounding="False"
                                                     HorizontalAlignment="Left"
                                                     VerticalAlignment="Top" />
-
                                         <!-- Numpad Cluster (186px) -->
                                         <Grid x:Name="NumpadClusterGrid"
                                               UseLayoutRounding="False"
@@ -525,7 +491,6 @@
                             </StackPanel>
                         </Border>
                     </StackPanel>
-
                     <!-- ========================================================================= -->
                     <!-- 2. MOUSE TESTING SECTION                                                  -->
                     <!-- ========================================================================= -->
@@ -536,9 +501,7 @@
                         <StackPanel.RenderTransform>
                             <TranslateTransform x:Name="MouseSectionTransform" />
                         </StackPanel.RenderTransform>
-                        
                         <TextBlock x:Uid="InputTesterPage_Section_Mouse" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
-                        
                         <!-- Summary Stat Cards Grid (5 Columns with 100% Uniform Height & 3-Row Alignment) -->
                         <Grid ColumnSpacing="12" HorizontalAlignment="Stretch">
                             <Grid.RowDefinitions>
@@ -551,7 +514,6 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-
                             <!-- Card 1: Last Triggered Mouse Button -->
                             <Border Grid.Column="0" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -575,7 +537,6 @@
                                     </Grid>
                                 </Grid>
                             </Border>
-
                             <!-- Card 2: Total Clicks & Counts Breakdown -->
                             <Border Grid.Column="1" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -599,7 +560,6 @@
                                     </Grid>
                                 </Grid>
                             </Border>
-
                             <!-- Card 3: Sensor Polling Rate (Hz) -->
                             <Border Grid.Column="2" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -623,7 +583,6 @@
                                     </Grid>
                                 </Grid>
                             </Border>
-
                             <!-- Card 4: Scroll Wheel Measurement -->
                             <Border Grid.Column="3" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -655,7 +614,6 @@
                                     </Grid>
                                 </Grid>
                             </Border>
-
                             <!-- Card 5: Switch Chatter & Health Status -->
                             <Border Grid.Column="4" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -680,7 +638,6 @@
                                 </Grid>
                             </Border>
                         </Grid>
-
                         <!-- 3-Column Interactive Stages Grid (1 Row: Mouse Visual + Chatter Tester + Sensor Canvas) -->
                         <Grid ColumnSpacing="12" HorizontalAlignment="Stretch">
                             <Grid.ColumnDefinitions>
@@ -688,7 +645,6 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-
                             <!-- Card 1: Interactive Vector Mouse Dashboard -->
                             <Border Grid.Column="0"
                                     x:Name="MouseVisualCard"
@@ -706,7 +662,6 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-
                                     <!-- Header -->
                                     <StackPanel Grid.Row="0" Spacing="4">
                                         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
@@ -715,7 +670,6 @@
                                         </StackPanel>
                                         <TextBlock x:Uid="InputTesterPage_Mouse_VisualDesc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                     </StackPanel>
-
                                     <!-- Vector Mouse Interactive Visual Graphic -->
                                     <Grid Grid.Row="1" Width="190" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <!-- Mouse Base Silhouette Body -->
@@ -726,7 +680,6 @@
                                                 BorderThickness="1.5"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center" />
-
                                         <!-- Top Left Button (Left Click) -->
                                         <Border x:Name="MouseLeftBtnVisual"
                                                 Width="56" Height="72"
@@ -739,7 +692,6 @@
                                                 VerticalAlignment="Center">
                                             <TextBlock x:Name="MouseLeftCountText" Text="0" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                         </Border>
-
                                         <!-- Top Right Button (Right Click) -->
                                         <Border x:Name="MouseRightBtnVisual"
                                                 Width="56" Height="72"
@@ -752,7 +704,6 @@
                                                 VerticalAlignment="Center">
                                             <TextBlock x:Name="MouseRightCountText" Text="0" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                         </Border>
-
                                         <!-- Scroll Wheel Visual -->
                                         <Border x:Name="MouseMiddleBtnVisual"
                                                 Width="20" Height="42"
@@ -769,7 +720,6 @@
                                                 <FontIcon x:Name="WheelDownArrow" Glyph="&#xE70D;" FontSize="8" Foreground="{ThemeResource TextFillColorTertiaryBrush}" HorizontalAlignment="Center" />
                                             </StackPanel>
                                         </Border>
-
                                         <!-- Side Button 1 (Back) -->
                                         <Border x:Name="MouseSide1BtnVisual"
                                                 Width="10" Height="28"
@@ -782,7 +732,6 @@
                                                 VerticalAlignment="Center">
                                             <TextBlock x:Name="MouseSide1Text" Text="1" FontSize="8" FontWeight="Bold" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                         </Border>
-
                                         <!-- Side Button 2 (Forward) -->
                                         <Border x:Name="MouseSide2BtnVisual"
                                                 Width="10" Height="28"
@@ -795,16 +744,13 @@
                                                 VerticalAlignment="Center">
                                             <TextBlock x:Name="MouseSide2Text" Text="2" FontSize="8" FontWeight="Bold" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                         </Border>
-
                                     </Grid>
-
                                     <!-- Streamlined Micro-Stats: Side Button 1 and Side Button 2 -->
                                     <Grid Grid.Row="2" ColumnSpacing="8" HorizontalAlignment="Stretch">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-
                                         <!-- Tile 1: Side Button 1 -->
                                         <Border Grid.Column="0"
                                                 Background="{ThemeResource ControlAltFillColorSecondaryBrush}"
@@ -815,7 +761,6 @@
                                                 <TextBlock x:Name="Side1CountText" Text="0" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                             </StackPanel>
                                         </Border>
-
                                         <!-- Tile 2: Side Button 2 -->
                                         <Border Grid.Column="1"
                                                 Background="{ThemeResource ControlAltFillColorSecondaryBrush}"
@@ -827,7 +772,6 @@
                                             </StackPanel>
                                         </Border>
                                     </Grid>
-
                                     <!-- Wheel Guidance Tip Badge -->
                                     <Border Grid.Row="3"
                                             Background="{ThemeResource ControlAltFillColorSecondaryBrush}"
@@ -846,7 +790,6 @@
                                     </Border>
                                 </Grid>
                             </Border>
-
                             <!-- Card 2: Switch Chatter & Double-Click Tester -->
                             <Border Grid.Column="1"
                                     Background="{ThemeResource LayerFillColorDefaultBrush}"
@@ -862,7 +805,6 @@
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-
                                     <!-- Header -->
                                     <StackPanel Grid.Row="0" Spacing="4">
                                         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
@@ -871,7 +813,6 @@
                                         </StackPanel>
                                         <TextBlock x:Uid="InputTesterPage_Mouse_ChatterTest_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                     </StackPanel>
-
                                     <!-- Threshold Slider Row -->
                                     <Grid Grid.Row="1" ColumnSpacing="8">
                                         <Grid.ColumnDefinitions>
@@ -883,7 +824,6 @@
                                         <Slider Grid.Column="1" x:Name="ChatterThresholdSlider" Minimum="20" Maximum="150" Value="80" StepFrequency="5" ValueChanged="ChatterThresholdSlider_ValueChanged" VerticalAlignment="Center" />
                                         <TextBlock Grid.Column="2" x:Name="ChatterThresholdValueText" Text="80 ms" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" Width="44" TextAlignment="Right" VerticalAlignment="Center" />
                                     </Grid>
-
                                     <!-- Interactive Clickable Test Area -->
                                     <Border Grid.Row="2"
                                             x:Name="ChatterClickPad"
@@ -899,7 +839,6 @@
                                             <TextBlock x:Name="LastClickIntervalText" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="16" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                         </Grid>
                                     </Border>
-
                                     <!-- Bottom Status / Guidance Badge -->
                                     <Border Grid.Row="3"
                                             x:Name="ChatterStatusBorder"
@@ -922,7 +861,6 @@
                                                            VerticalAlignment="Center"
                                                            TextTrimming="CharacterEllipsis" />
                                             </StackPanel>
-
                                             <!-- Chatter Warning State -->
                                             <StackPanel x:Name="ChatterAlertBanner"
                                                         Orientation="Horizontal"
@@ -941,7 +879,6 @@
                                     </Border>
                                 </Grid>
                             </Border>
-
                             <!-- Card 3: Sensor Polling Rate (Hz) & Trajectory Smoothness Canvas -->
                             <Border Grid.Column="2"
                                     Background="{ThemeResource LayerFillColorDefaultBrush}"
@@ -956,7 +893,6 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
-
                                     <!-- Header (Title on Left, Clear Button on Right) -->
                                     <Grid Grid.Row="0" ColumnSpacing="8">
                                         <Grid.ColumnDefinitions>
@@ -978,11 +914,9 @@
                                             </StackPanel>
                                         </Button>
                                     </Grid>
-
                                     <!-- Description & Polling Hz Compact Chips Pill -->
                                     <StackPanel Grid.Row="1" Spacing="6">
                                         <TextBlock x:Uid="InputTesterPage_Mouse_Canvas_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                                        
                                         <Border Background="{ThemeResource ControlAltFillColorSecondaryBrush}"
                                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                                 BorderThickness="1"
@@ -1016,7 +950,6 @@
                                             </Grid>
                                         </Border>
                                     </StackPanel>
-
                                     <!-- Large Interactive Drawing Canvas Area -->
                                     <Border Grid.Row="2"
                                             Background="{ThemeResource ControlAltFillColorSecondaryBrush}"
