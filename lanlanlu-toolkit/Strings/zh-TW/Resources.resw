@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<root 
+  
+  xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" 
+  
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:element name="root" ns1:IsDataSet="true">
       <xs:complexType>
@@ -376,7 +380,7 @@
     <value>鍵盤與滑鼠檢測</value>
   </data>
   <data name="InputTesterPage_Subtitle.Text" xml:space="preserve">
-    <value>檢測鍵盤按鍵觸發、多鍵無衝 (NKRO)、滑鼠微動連點、回報率 (Hz) 與滾輪跳幀</value>
+    <value>檢測鍵盤按鍵觸發、多鍵無衝 (NKRO)、滑鼠微動連點、回報率 (Hz) 與滾輪跳幀。</value>
   </data>
   <data name="InputTesterPage_Section_Options.Text" xml:space="preserve">
     <value>檢測選項</value>
@@ -619,7 +623,7 @@
     <value>系統完整性修復</value>
   </data>
   <data name="SystemRepairPage_Desc.Text" xml:space="preserve">
-    <value>透過 DISM 與 SFC 工具掃描並修復 Windows 映像與系統檔案損毀</value>
+    <value>透過 DISM 與 SFC 工具掃描並修復 Windows 映像與系統檔案損毀。</value>
   </data>
   <data name="SystemRepairPage_Section_AutoMode.Text" xml:space="preserve">
     <value>修復模式</value>
@@ -742,7 +746,7 @@
     <value>當機與崩潰分析</value>
   </data>
   <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
-    <value>自動掃描並分析系統核心傾印 (Minidump) 與應用程式崩潰事件記錄檔</value>
+    <value>自動掃描並分析系統核心傾印 (Minidump) 與應用程式崩潰事件記錄檔。</value>
   </data>
   <data name="CrashReportPage_Section_Overview.Text" xml:space="preserve">
     <value>狀態概覽</value>
@@ -1150,7 +1154,7 @@
     <value>已取消計算。</value>
   </data>
   <data name="FileAssociationPage_Desc.Text" xml:space="preserve">
-    <value>清除副檔名之自訂關聯鎖定，還原至未關聯或系統預設狀態</value>
+    <value>清除副檔名之自訂關聯鎖定，還原至未關聯或系統預設狀態。</value>
   </data>
   <data name="FileAssociationPage_ConfigTitle.Text" xml:space="preserve">
     <value>目標副檔名</value>
@@ -1189,19 +1193,19 @@
     <value>定位登錄檔</value>
   </data>
   <data name="FileAssociationPage_GuideTitle.Text" xml:space="preserve">
-    <value>登錄編輯程式手動排查步驟：</value>
+    <value>登錄編輯程式手動排查步驟</value>
   </data>
   <data name="FileAssociationPage_GuideStep1.Text" xml:space="preserve">
-    <value>1. 啟動「登錄編輯程式」後，畫面已由工具自動展開並停留在目標副檔名目錄。</value>
+    <value>啟動登錄編輯程式後，工具會自動展開並定位至目標副檔名目錄。</value>
   </data>
   <data name="FileAssociationPage_GuideStep2.Text" xml:space="preserve">
-    <value>2. 在左側樹狀圖中，可檢視該副檔名目錄底下的「UserChoice」子機碼。</value>
+    <value>在左側樹狀目錄中，檢視該副檔名目錄底下的「UserChoice」子機碼。</value>
   </data>
   <data name="FileAssociationPage_GuideStep3.Text" xml:space="preserve">
-    <value>3. 「UserChoice」為 Windows 記錄的使用者自訂開啟方式鎖定項，刪除即可恢復預設。</value>
+    <value>「UserChoice」為 Windows 記錄的使用者自訂開啟方式鎖定項，刪除即可恢復預設。</value>
   </data>
   <data name="FileAssociationPage_GuideStep4.Text" xml:space="preserve">
-    <value>4. 清除後關閉登錄編輯程式即可。本工具的一鍵清除功能亦可全自動完成此步驟。</value>
+    <value>清除完成後關閉登錄編輯程式即可，亦可直接使用上方的一鍵清除功能全自動完成。</value>
   </data>
   <data name="FileAssociationPage_Warning_CriticalExt" xml:space="preserve">
     <value>副檔名 .{0} 屬於 Windows 核心可執行檔或關鍵系統元件。為維護系統安全已全面鎖定保護，禁止清除或修改關聯。</value>

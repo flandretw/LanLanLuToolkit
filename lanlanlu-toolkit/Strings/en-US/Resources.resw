@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<root 
+  
+  
+  xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" 
+  
+  
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:element name="root" ns1:IsDataSet="true">
       <xs:complexType>
@@ -376,7 +382,7 @@
     <value>Keyboard &amp; Mouse Diagnostics</value>
   </data>
   <data name="InputTesterPage_Subtitle.Text" xml:space="preserve">
-    <value>Test keyboard key response, N-Key Rollover (NKRO), mouse switch chatter, polling rate (Hz), and scroll wheel jitter</value>
+    <value>Test keyboard key response, N-Key Rollover (NKRO), mouse switch chatter, polling rate (Hz), and scroll wheel jitter.</value>
   </data>
   <data name="InputTesterPage_Section_Options.Text" xml:space="preserve">
     <value>Testing Options</value>
@@ -619,7 +625,7 @@
     <value>System Integrity Repair</value>
   </data>
   <data name="SystemRepairPage_Desc.Text" xml:space="preserve">
-    <value>Scan and repair Windows system image and file corruption using DISM and SFC tools</value>
+    <value>Scan and repair Windows system image and file corruption using DISM and SFC tools.</value>
   </data>
   <data name="SystemRepairPage_Section_AutoMode.Text" xml:space="preserve">
     <value>Repair Mode</value>
@@ -742,7 +748,7 @@
     <value>Crash &amp; Dump Analysis</value>
   </data>
   <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
-    <value>Scan and analyze system kernel minidumps and application crash event logs</value>
+    <value>Scan and analyze system kernel minidumps and application crash event logs.</value>
   </data>
   <data name="CrashReportPage_Section_Overview.Text" xml:space="preserve">
     <value>Overview</value>
@@ -1150,7 +1156,7 @@
     <value>Calculation cancelled.</value>
   </data>
   <data name="FileAssociationPage_Desc.Text" xml:space="preserve">
-    <value>Clear custom file association overrides and restore them to unassociated or default state</value>
+    <value>Clear custom file association overrides and restore them to unassociated or default state.</value>
   </data>
   <data name="FileAssociationPage_ConfigTitle.Text" xml:space="preserve">
     <value>Target File Extension</value>
@@ -1189,19 +1195,19 @@
     <value>Navigate Registry</value>
   </data>
   <data name="FileAssociationPage_GuideTitle.Text" xml:space="preserve">
-    <value>Registry Manual Troubleshooting Guide:</value>
+    <value>Registry Manual Troubleshooting Guide</value>
   </data>
   <data name="FileAssociationPage_GuideStep1.Text" xml:space="preserve">
-    <value>1. When Registry Editor launches, it is automatically expanded and stopped at the target extension directory.</value>
+    <value>When Registry Editor launches, it automatically expands and navigates to the target extension directory.</value>
   </data>
   <data name="FileAssociationPage_GuideStep2.Text" xml:space="preserve">
-    <value>2. In the left tree view, locate the "UserChoice" subkey under this extension directory.</value>
+    <value>In the left tree view, locate the "UserChoice" subkey under this extension directory.</value>
   </data>
   <data name="FileAssociationPage_GuideStep3.Text" xml:space="preserve">
-    <value>3. "UserChoice" stores the custom app lock. Deleting it restores the clean default behavior.</value>
+    <value>"UserChoice" stores the custom app lock. Deleting it restores the clean default behavior.</value>
   </data>
   <data name="FileAssociationPage_GuideStep4.Text" xml:space="preserve">
-    <value>4. Close Registry Editor when done. The direct reset action in this toolkit can perform this step automatically and safely.</value>
+    <value>Close Registry Editor when done, or use the direct reset action above to perform this step automatically.</value>
   </data>
   <data name="FileAssociationPage_Warning_CriticalExt" xml:space="preserve">
     <value>The extension .{0} is a critical Windows executable or core component. It is strictly protected to prevent system failure.</value>
