@@ -805,7 +805,7 @@
     <value>原始事件紀錄</value>
   </data>
   <data name="CrashReportPage_Detail_CopyBtn.Text" xml:space="preserve">
-    <value>複製詳細報告</value>
+    <value>複製全部</value>
   </data>
   <data name="CrashReportPage_Detail_Copied" xml:space="preserve">
     <value>已複製到剪貼簿</value>

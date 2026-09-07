@@ -805,7 +805,7 @@
     <value>Raw Event Record</value>
   </data>
   <data name="CrashReportPage_Detail_CopyBtn.Text" xml:space="preserve">
-    <value>Copy Details</value>
+    <value>Copy All</value>
   </data>
   <data name="CrashReportPage_Detail_Copied" xml:space="preserve">
     <value>Copied to clipboard</value>

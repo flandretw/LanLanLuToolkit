@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="lanlanlu_toolkit.Views.CrashReportPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -432,7 +432,7 @@
                                 <StackPanel Spacing="4">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <Border x:Name="DetailTypeBadge" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="8,4" Background="{ThemeResource AccentFillColorDefaultBrush}">
-                                            <TextBlock x:Name="DetailTypeBadgeText" Foreground="White" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="Bold" />
+                                            <TextBlock x:Name="DetailTypeBadgeText" Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="Bold" />
                                         </Border>
                                         <TextBlock x:Name="DetailTimestampText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" IsTextSelectionEnabled="True" />
                                     </StackPanel>
