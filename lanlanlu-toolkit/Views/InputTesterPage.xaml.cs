@@ -714,7 +714,7 @@ namespace lanlanlu_toolkit.Views
                     FocusStatusIcon.Style = (Style)Resources["FocusStatusIconActiveStyle"];
                 }
                 string focusedText = LocalizationHelper.GetString("InputTesterPage_FocusStatus_Focused.Text");
-                FocusStatusText.Text = string.IsNullOrEmpty(focusedText) || focusedText.Contains('/') ? "已就緒" : focusedText;
+                FocusStatusText.Text = !string.IsNullOrEmpty(focusedText) ? focusedText : "Ready";
                 FocusStatusText.Style = (Style)Resources["FocusStatusTextActiveStyle"];
             }
             else
@@ -730,7 +730,7 @@ namespace lanlanlu_toolkit.Views
                     FocusStatusIcon.Style = (Style)Resources["FocusStatusIconDefaultStyle"];
                 }
                 string unfocusedText = LocalizationHelper.GetString("InputTesterPage_FocusStatus_Unfocused.Text");
-                FocusStatusText.Text = string.IsNullOrEmpty(unfocusedText) || unfocusedText.Contains('/') ? "點擊以聚焦輸入" : unfocusedText;
+                FocusStatusText.Text = !string.IsNullOrEmpty(unfocusedText) ? unfocusedText : "Focus";
                 FocusStatusText.Style = (Style)Resources["FocusStatusTextDefaultStyle"];
             }
         }

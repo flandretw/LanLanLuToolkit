@@ -378,6 +378,15 @@
   <data name="InputTesterPage_Subtitle.Text" xml:space="preserve">
     <value>檢測鍵盤按鍵觸發、多鍵無衝 (NKRO)、滑鼠微動連點、回報率 (Hz) 與滾輪跳幀</value>
   </data>
+  <data name="InputTesterPage_Section_Options.Text" xml:space="preserve">
+    <value>檢測選項</value>
+  </data>
+  <data name="InputTesterPage_Section_Keyboard.Text" xml:space="preserve">
+    <value>鍵盤診斷</value>
+  </data>
+  <data name="InputTesterPage_Section_Mouse.Text" xml:space="preserve">
+    <value>滑鼠診斷</value>
+  </data>
   <data name="InputTesterPage_Tab_Keyboard.Text" xml:space="preserve">
     <value>鍵盤檢測</value>
   </data>
@@ -448,7 +457,7 @@
     <value>已就緒</value>
   </data>
   <data name="InputTesterPage_FocusStatus_Unfocused.Text" xml:space="preserve">
-    <value>點擊以聚焦輸入</value>
+    <value>未聚焦</value>
   </data>
   <data name="InputTesterPage_FocusHint.Text" xml:space="preserve">
     <value>請先點選此視窗以聚焦，隨後即可隨意敲擊鍵盤進行檢測，系統將即時記錄與分析按鍵反應（亦可直接點選虛擬按鍵測試）。</value>
@@ -612,6 +621,12 @@
   <data name="SystemRepairPage_Desc.Text" xml:space="preserve">
     <value>透過 DISM 與 SFC 工具掃描並修復 Windows 映像與系統檔案損毀</value>
   </data>
+  <data name="SystemRepairPage_Section_AutoMode.Text" xml:space="preserve">
+    <value>修復模式</value>
+  </data>
+  <data name="SystemRepairPage_Section_Pipeline.Text" xml:space="preserve">
+    <value>修復流程</value>
+  </data>
   <data name="SystemRepairPage_ScanHealth_Title.Text" xml:space="preserve">
     <value>掃描映像狀態</value>
   </data>
@@ -728,6 +743,12 @@
   </data>
   <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
     <value>自動掃描並分析系統核心傾印 (Minidump) 與應用程式崩潰事件記錄檔</value>
+  </data>
+  <data name="CrashReportPage_Section_Overview.Text" xml:space="preserve">
+    <value>狀態概覽</value>
+  </data>
+  <data name="CrashReportPage_Section_Events.Text" xml:space="preserve">
+    <value>事件記錄</value>
   </data>
   <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
     <value>總崩潰事件</value>

@@ -3,7 +3,6 @@
     x:Class="lanlanlu_toolkit.Views.SystemRepairPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:lanlanlu_toolkit.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -26,64 +25,67 @@
             </StackPanel>
 
             <!-- 1: Auto Repair Mode Card -->
-            <Border Grid.Row="1"
-                    Background="{ThemeResource LayerFillColorDefaultBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="{ThemeResource ControlCornerRadius}"
-                    Padding="16">
-                <StackPanel Spacing="16">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="1" Spacing="8">
+                <TextBlock x:Uid="SystemRepairPage_Section_AutoMode" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
+                <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                        Padding="16">
+                    <StackPanel Spacing="16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                        <!-- Auto Mode Title & Desc -->
-                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0" Spacing="4">
-                            <TextBlock x:Uid="SystemRepairPage_AutoMode_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                            <TextBlock x:Uid="SystemRepairPage_AutoMode_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                        </StackPanel>
+                            <!-- Auto Mode Title & Desc -->
+                            <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0" Spacing="4">
+                                <TextBlock x:Uid="SystemRepairPage_AutoMode_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                <TextBlock x:Uid="SystemRepairPage_AutoMode_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                            </StackPanel>
 
-                        <!-- Right Actions -->
-                        <StackPanel x:Name="HeroActionControls" Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                            <ComboBox x:Name="AutoModeComboBox" Width="200" SelectedIndex="0" VerticalAlignment="Center">
-                                <ComboBoxItem x:Uid="SystemRepairPage_AutoMode_Default" />
-                                <ComboBoxItem x:Uid="SystemRepairPage_AutoMode_SfcOnly" />
-                            </ComboBox>
-                            <Button x:Name="AutoStartBtn" x:Uid="SystemRepairPage_StartButton" Click="RunAutoRepair_Click" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center" />
-                        </StackPanel>
-                    </Grid>
+                            <!-- Right Actions -->
+                            <StackPanel x:Name="HeroActionControls" Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <ComboBox x:Name="AutoModeComboBox" Width="200" SelectedIndex="0" VerticalAlignment="Center">
+                                    <ComboBoxItem x:Uid="SystemRepairPage_AutoMode_Default" />
+                                    <ComboBoxItem x:Uid="SystemRepairPage_AutoMode_SfcOnly" />
+                                </ComboBox>
+                                <Button x:Name="AutoStartBtn" x:Uid="SystemRepairPage_StartButton" Click="RunAutoRepair_Click" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Grid>
 
-                    <!-- Overall Progress Bar Container -->
-                    <Grid x:Name="HeroProgressContainer" Visibility="Collapsed" Margin="0,4,0,0">
-                        <StackPanel Spacing="8">
-                            <ProgressBar x:Name="MainProgressBar" Minimum="0" Maximum="100" Value="0" Height="8" CornerRadius="4" />
-                            <Grid>
-                                <!-- Left Info: Status text + live / total timer -->
-                                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                    <TextBlock x:Name="HeroStepStatusText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                    <StackPanel x:Name="HeroTimerContainer" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center" Visibility="Collapsed">
-                                        <TextBlock Text="•" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="2,0,2,0" />
-                                        <FontIcon Glyph="&#xE823;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                        <TextBlock x:Name="HeroTimerText" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
+                        <!-- Overall Progress Bar Container -->
+                        <Grid x:Name="HeroProgressContainer" Visibility="Collapsed" Margin="0,4,0,0">
+                            <StackPanel Spacing="8">
+                                <ProgressBar x:Name="MainProgressBar" Minimum="0" Maximum="100" Value="0" Height="8" CornerRadius="4" />
+                                <Grid>
+                                    <!-- Left Info: Status text + live / total timer -->
+                                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                        <TextBlock x:Name="HeroStepStatusText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                        <StackPanel x:Name="HeroTimerContainer" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center" Visibility="Collapsed">
+                                            <TextBlock Text="•" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="2,0,2,0" />
+                                            <FontIcon Glyph="&#xE823;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                            <TextBlock x:Name="HeroTimerText" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
+                                        </StackPanel>
                                     </StackPanel>
-                                </StackPanel>
 
-                                <!-- Right Percentage -->
-                                <TextBlock x:Name="HeroPercentageText" Text="0%" HorizontalAlignment="Right" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}" VerticalAlignment="Center" />
-                            </Grid>
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-            </Border>
+                                    <!-- Right Percentage -->
+                                    <TextBlock x:Name="HeroPercentageText" Text="0%" HorizontalAlignment="Right" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
 
             <!-- 2: Step Pipeline Cards -->
-            <Border Grid.Row="2"
-                    Background="{ThemeResource LayerFillColorDefaultBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="{ThemeResource OverlayCornerRadius}">
+            <StackPanel Grid.Row="2" Spacing="8">
+                <TextBlock x:Uid="SystemRepairPage_Section_Pipeline" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
+                <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="{ThemeResource OverlayCornerRadius}">
                 <StackPanel Spacing="0">
                     <!-- Step 1: CheckHealth -->
                     <Grid Padding="20,16">
@@ -186,6 +188,7 @@
                     </Grid>
                 </StackPanel>
             </Border>
+        </StackPanel>
 
             <!-- 3: Advanced Mode & Raw Terminal Expander -->
             <Expander Grid.Row="3"

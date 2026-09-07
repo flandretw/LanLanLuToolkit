@@ -378,6 +378,15 @@
   <data name="InputTesterPage_Subtitle.Text" xml:space="preserve">
     <value>Test keyboard key response, N-Key Rollover (NKRO), mouse switch chatter, polling rate (Hz), and scroll wheel jitter</value>
   </data>
+  <data name="InputTesterPage_Section_Options.Text" xml:space="preserve">
+    <value>Testing Options</value>
+  </data>
+  <data name="InputTesterPage_Section_Keyboard.Text" xml:space="preserve">
+    <value>Keyboard Diagnostics</value>
+  </data>
+  <data name="InputTesterPage_Section_Mouse.Text" xml:space="preserve">
+    <value>Mouse Diagnostics</value>
+  </data>
   <data name="InputTesterPage_Tab_Keyboard.Text" xml:space="preserve">
     <value>Keyboard Test</value>
   </data>
@@ -448,7 +457,7 @@
     <value>Ready</value>
   </data>
   <data name="InputTesterPage_FocusStatus_Unfocused.Text" xml:space="preserve">
-    <value>Click to focus</value>
+    <value>Focus</value>
   </data>
   <data name="InputTesterPage_FocusHint.Text" xml:space="preserve">
     <value>Please click this window to focus first, then type freely to inspect real-time input response and diagnostics (or click virtual keys directly).</value>
@@ -612,6 +621,12 @@
   <data name="SystemRepairPage_Desc.Text" xml:space="preserve">
     <value>Scan and repair Windows system image and file corruption using DISM and SFC tools</value>
   </data>
+  <data name="SystemRepairPage_Section_AutoMode.Text" xml:space="preserve">
+    <value>Repair Mode</value>
+  </data>
+  <data name="SystemRepairPage_Section_Pipeline.Text" xml:space="preserve">
+    <value>Repair Pipeline</value>
+  </data>
   <data name="SystemRepairPage_ScanHealth_Title.Text" xml:space="preserve">
     <value>Scan Image Health (ScanHealth)</value>
   </data>
@@ -728,6 +743,12 @@
   </data>
   <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
     <value>Scan and analyze system kernel minidumps and application crash event logs</value>
+  </data>
+  <data name="CrashReportPage_Section_Overview.Text" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="CrashReportPage_Section_Events.Text" xml:space="preserve">
+    <value>Crash Events</value>
   </data>
   <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
     <value>Total Crashes</value>
