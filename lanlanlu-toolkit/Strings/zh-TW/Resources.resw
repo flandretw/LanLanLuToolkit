@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root 
-  xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" 
-  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:element name="root" ns1:IsDataSet="true">
       <xs:complexType>
@@ -465,10 +463,10 @@
     <value>滾輪中鍵</value>
   </data>
   <data name="InputTesterPage_Mouse_Side1Button" xml:space="preserve">
-    <value>側鍵 1 (後退)</value>
+    <value>側鍵 1（後退）</value>
   </data>
   <data name="InputTesterPage_Mouse_Side2Button" xml:space="preserve">
-    <value>側鍵 2 (前進)</value>
+    <value>側鍵 2（前進）</value>
   </data>
   <data name="InputTesterPage_Mouse_WheelUp" xml:space="preserve">
     <value>滾輪向上</value>
@@ -482,47 +480,8 @@
   <data name="InputTesterPage_Mouse_ChatterTest_Desc.Text" xml:space="preserve">
     <value>在下方區域快速點擊滑鼠按鍵，檢測微動開關是否有異常雙擊 (Chatter) 現象。</value>
   </data>
-  <data name="InputTesterPage_Mouse_ClickArea.Text" xml:space="preserve">
-    <value>在此區域快速點擊滑鼠進行連點測試</value>
-  </data>
   <data name="InputTesterPage_Mouse_Threshold.Text" xml:space="preserve">
     <value>連點判定臨界值</value>
-  </data>
-  <data name="InputTesterPage_Mouse_NormalClicks.Text" xml:space="preserve">
-    <value>正常點擊</value>
-  </data>
-  <data name="InputTesterPage_Mouse_ChatterClicks.Text" xml:space="preserve">
-    <value>異常連點</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Polling_Title.Text" xml:space="preserve">
-    <value>滑鼠回報率 (Polling Rate)</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Polling_Desc.Text" xml:space="preserve">
-    <value>在下方區域連續劃動滑鼠，即時計算感應器每秒回報次數 (Hz)。</value>
-  </data>
-  <data name="InputTesterPage_Mouse_PollingArea.Text" xml:space="preserve">
-    <value>請在此區域快速繞圈或劃動滑鼠</value>
-  </data>
-  <data name="InputTesterPage_Mouse_CurrentHz.Text" xml:space="preserve">
-    <value>即時 Hz</value>
-  </data>
-  <data name="InputTesterPage_Mouse_AvgHz.Text" xml:space="preserve">
-    <value>平均 Hz</value>
-  </data>
-  <data name="InputTesterPage_Mouse_PeakHz.Text" xml:space="preserve">
-    <value>最高 Hz</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Wheel_Title.Text" xml:space="preserve">
-    <value>滾輪方向與跳幀檢測</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Wheel_Desc.Text" xml:space="preserve">
-    <value>檢測滾輪編碼器是否有反向跳幀或漏幀問題。</value>
-  </data>
-  <data name="InputTesterPage_Mouse_WheelCount.Text" xml:space="preserve">
-    <value>滾動累計：</value>
-  </data>
-  <data name="InputTesterPage_Mouse_WheelJitterWarning" xml:space="preserve">
-    <value>偵測到反向跳幀</value>
   </data>
   <data name="InputTesterPage_Mouse_WheelStatus_OK" xml:space="preserve">
     <value>正常</value>
@@ -531,7 +490,7 @@
     <value>反向跳幀</value>
   </data>
   <data name="InputTesterPage_Mouse_Canvas_Title.Text" xml:space="preserve">
-    <value>感應器回報率 (Hz) 與軌跡平滑度畫布</value>
+    <value>感應器回報率畫布</value>
   </data>
   <data name="InputTesterPage_Mouse_Canvas_Clear.Text" xml:space="preserve">
     <value>清除畫布</value>
@@ -582,16 +541,10 @@
     <value>微動開關狀態</value>
   </data>
   <data name="InputTesterPage_MouseTile_Side1.Text" xml:space="preserve">
-    <value>側鍵 1 (後退)</value>
+    <value>側鍵 1（後退）</value>
   </data>
   <data name="InputTesterPage_MouseTile_Side2.Text" xml:space="preserve">
-    <value>側鍵 2 (前進)</value>
-  </data>
-  <data name="InputTesterPage_MouseTile_WheelDelta.Text" xml:space="preserve">
-    <value>滾輪上 / 下</value>
-  </data>
-  <data name="InputTesterPage_MouseTile_WheelStatus.Text" xml:space="preserve">
-    <value>滾輪狀態</value>
+    <value>側鍵 2（前進）</value>
   </data>
   <data name="InputTesterPage_Mouse_NoAction" xml:space="preserve">
     <value>無操作</value>
@@ -606,16 +559,13 @@
     <value>間隔：{0} ms</value>
   </data>
   <data name="InputTesterPage_Mouse_ClicksBreakdown" xml:space="preserve">
-    <value>左 {0} · 右 {1} · 中 {2}</value>
+    <value>左 {0} | 右 {1} | 中 {2}</value>
   </data>
   <data name="InputTesterPage_Mouse_HzSummary" xml:space="preserve">
-    <value>平均 {0} Hz · 最高 {1} Hz</value>
+    <value>平均 {0} Hz | 最高 {1} Hz</value>
   </data>
   <data name="InputTesterPage_Mouse_StepsUnit" xml:space="preserve">
     <value>{0} 格</value>
-  </data>
-  <data name="InputTesterPage_Mouse_WheelBreakdown" xml:space="preserve">
-    <value>▲ {0} · ▼ {1} · {2}</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterStatus_OK" xml:space="preserve">
     <value>正常</value>
@@ -624,22 +574,16 @@
     <value>連點警告</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterCounts" xml:space="preserve">
-    <value>正常 {0} · 異常 {1}</value>
-  </data>
-  <data name="InputTesterPage_Mouse_LeftBtn_Label.Text" xml:space="preserve">
-    <value>左鍵</value>
-  </data>
-  <data name="InputTesterPage_Mouse_RightBtn_Label.Text" xml:space="preserve">
-    <value>右鍵</value>
-  </data>
-  <data name="InputTesterPage_Mouse_TotalClicksFormat" xml:space="preserve">
-    <value>總點擊：{0}</value>
+    <value>正常 {0} / 異常 {1}</value>
   </data>
   <data name="InputTesterPage_Mouse_ClickCountUnit" xml:space="preserve">
     <value>{0} 次</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterBanner.Text" xml:space="preserve">
     <value>偵測到疑似微動連點</value>
+  </data>
+  <data name="InputTesterPage_Mouse_ChatterHint.Text" xml:space="preserve">
+    <value>點擊間隔低於設定臨界值即判定為連點</value>
   </data>
   <data name="InputTesterPage_Mouse_LastIntervalFormat" xml:space="preserve">
     <value>最後間隔：{0} ms</value>

@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root 
-  xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" 
-  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:element name="root" ns1:IsDataSet="true">
       <xs:complexType>
@@ -482,47 +480,8 @@
   <data name="InputTesterPage_Mouse_ChatterTest_Desc.Text" xml:space="preserve">
     <value>Click rapidly in the zone below to test for mechanical switch chatter or double-clicking faults.</value>
   </data>
-  <data name="InputTesterPage_Mouse_ClickArea.Text" xml:space="preserve">
-    <value>Click rapidly in this area to test for switch chatter</value>
-  </data>
   <data name="InputTesterPage_Mouse_Threshold.Text" xml:space="preserve">
     <value>Chatter Threshold:</value>
-  </data>
-  <data name="InputTesterPage_Mouse_NormalClicks.Text" xml:space="preserve">
-    <value>Normal Clicks:</value>
-  </data>
-  <data name="InputTesterPage_Mouse_ChatterClicks.Text" xml:space="preserve">
-    <value>Chatter Faults:</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Polling_Title.Text" xml:space="preserve">
-    <value>Mouse Polling Rate (Hz)</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Polling_Desc.Text" xml:space="preserve">
-    <value>Move the mouse continuously inside the area to measure real-time sensor polling frequency (Hz).</value>
-  </data>
-  <data name="InputTesterPage_Mouse_PollingArea.Text" xml:space="preserve">
-    <value>Move mouse continuously in circles or lines</value>
-  </data>
-  <data name="InputTesterPage_Mouse_CurrentHz.Text" xml:space="preserve">
-    <value>Current Hz</value>
-  </data>
-  <data name="InputTesterPage_Mouse_AvgHz.Text" xml:space="preserve">
-    <value>Average Hz</value>
-  </data>
-  <data name="InputTesterPage_Mouse_PeakHz.Text" xml:space="preserve">
-    <value>Peak Hz</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Wheel_Title.Text" xml:space="preserve">
-    <value>Scroll Wheel &amp; Jitter Test</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Wheel_Desc.Text" xml:space="preserve">
-    <value>Detect encoder reverse jitter, skipped steps, or scroll bounce.</value>
-  </data>
-  <data name="InputTesterPage_Mouse_WheelCount.Text" xml:space="preserve">
-    <value>Total Steps:</value>
-  </data>
-  <data name="InputTesterPage_Mouse_WheelJitterWarning" xml:space="preserve">
-    <value>Reverse Jitter Detected</value>
   </data>
   <data name="InputTesterPage_Mouse_WheelStatus_OK" xml:space="preserve">
     <value>Normal</value>
@@ -531,7 +490,7 @@
     <value>Reverse Jitter</value>
   </data>
   <data name="InputTesterPage_Mouse_Canvas_Title.Text" xml:space="preserve">
-    <value>Sensor Polling Rate (Hz) &amp; Trajectory Canvas</value>
+    <value>Sensor Polling Rate Canvas</value>
   </data>
   <data name="InputTesterPage_Mouse_Canvas_Clear.Text" xml:space="preserve">
     <value>Clear Canvas</value>
@@ -587,12 +546,6 @@
   <data name="InputTesterPage_MouseTile_Side2.Text" xml:space="preserve">
     <value>Side 2 (Forward)</value>
   </data>
-  <data name="InputTesterPage_MouseTile_WheelDelta.Text" xml:space="preserve">
-    <value>Wheel Up / Down</value>
-  </data>
-  <data name="InputTesterPage_MouseTile_WheelStatus.Text" xml:space="preserve">
-    <value>Wheel Status</value>
-  </data>
   <data name="InputTesterPage_Mouse_NoAction" xml:space="preserve">
     <value>No action</value>
   </data>
@@ -606,16 +559,13 @@
     <value>Interval: {0} ms</value>
   </data>
   <data name="InputTesterPage_Mouse_ClicksBreakdown" xml:space="preserve">
-    <value>L {0} · R {1} · M {2}</value>
+    <value>L {0} | R {1} | M {2}</value>
   </data>
   <data name="InputTesterPage_Mouse_HzSummary" xml:space="preserve">
-    <value>Avg {0} Hz · Peak {1} Hz</value>
+    <value>Avg {0} Hz | Peak {1} Hz</value>
   </data>
   <data name="InputTesterPage_Mouse_StepsUnit" xml:space="preserve">
     <value>{0} Steps</value>
-  </data>
-  <data name="InputTesterPage_Mouse_WheelBreakdown" xml:space="preserve">
-    <value>▲ {0} · ▼ {1} · {2}</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterStatus_OK" xml:space="preserve">
     <value>Normal</value>
@@ -624,22 +574,16 @@
     <value>Chatter Alert</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterCounts" xml:space="preserve">
-    <value>Normal {0} · Chatter {1}</value>
-  </data>
-  <data name="InputTesterPage_Mouse_LeftBtn_Label.Text" xml:space="preserve">
-    <value>Left</value>
-  </data>
-  <data name="InputTesterPage_Mouse_RightBtn_Label.Text" xml:space="preserve">
-    <value>Right</value>
-  </data>
-  <data name="InputTesterPage_Mouse_TotalClicksFormat" xml:space="preserve">
-    <value>Total Clicks: {0}</value>
+    <value>Normal {0} / Chatter {1}</value>
   </data>
   <data name="InputTesterPage_Mouse_ClickCountUnit" xml:space="preserve">
     <value>{0} Clicks</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterBanner.Text" xml:space="preserve">
     <value>Suspected switch chatter detected</value>
+  </data>
+  <data name="InputTesterPage_Mouse_ChatterHint.Text" xml:space="preserve">
+    <value>Interval below threshold is flagged as chatter</value>
   </data>
   <data name="InputTesterPage_Mouse_LastIntervalFormat" xml:space="preserve">
     <value>Last interval: {0} ms</value>

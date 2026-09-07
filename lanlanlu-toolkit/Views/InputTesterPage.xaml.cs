@@ -1078,8 +1078,7 @@ namespace lanlanlu_toolkit.Views
             if (isChatter)
             {
                 _chatterClicks++;
-                ChatterClicksText.Text = _chatterClicks.ToString();
-                ChatterClicksText.Foreground = GetThemeBrush("SystemFillColorCriticalBrush");
+                if (ChatterNormalHint != null) ChatterNormalHint.Visibility = Visibility.Collapsed;
                 ChatterAlertBanner.Visibility = Visibility.Visible;
                 if (ChatterStatusSummaryText != null)
                 {
@@ -1090,12 +1089,12 @@ namespace lanlanlu_toolkit.Views
             else
             {
                 _normalClicks++;
-                NormalClicksText.Text = _normalClicks.ToString();
+                if (ChatterNormalHint != null) ChatterNormalHint.Visibility = Visibility.Visible;
                 ChatterAlertBanner.Visibility = Visibility.Collapsed;
                 if (_chatterClicks == 0 && ChatterStatusSummaryText != null)
                 {
                     ChatterStatusSummaryText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_ChatterStatus_OK");
-                    ChatterStatusSummaryText.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
+                    ChatterStatusSummaryText.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
                 }
             }
 
@@ -1111,7 +1110,6 @@ namespace lanlanlu_toolkit.Views
             }
             ChatterClickPad.Background = GetThemeBrush("AccentFillColorDefaultBrush");
             ChatterClickPad.BorderBrush = GetThemeBrush("AccentFillColorDefaultBrush");
-            if (ChatterClickPadTitle != null) ChatterClickPadTitle.Foreground = GetThemeBrush("TextOnAccentFillColorPrimaryBrush");
             if (LastClickIntervalText != null) LastClickIntervalText.Foreground = GetThemeBrush("TextOnAccentFillColorSecondaryBrush");
         }
 
@@ -1119,7 +1117,6 @@ namespace lanlanlu_toolkit.Views
         {
             ChatterClickPad.Background = GetThemeBrush("ControlAltFillColorSecondaryBrush");
             ChatterClickPad.BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush");
-            if (ChatterClickPadTitle != null) ChatterClickPadTitle.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
             if (LastClickIntervalText != null) LastClickIntervalText.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
         }
 
@@ -1161,12 +1158,10 @@ namespace lanlanlu_toolkit.Views
             _wheelVisualResetTimer?.Start();
 
             // Detect Wheel Jitter (Inversion during continuous scrolling)
+            bool isJitter = false;
             if (_lastWheelDirection != 0 && currentDir != _lastWheelDirection && _consecutiveWheelSameDir >= 3)
             {
-                WheelStatusIcon.Glyph = "\uE7BA";
-                WheelStatusIcon.Foreground = GetThemeBrush("SystemFillColorCriticalBrush");
-                WheelStatusText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_WheelStatus_Jitter");
-                WheelStatusText.Foreground = GetThemeBrush("SystemFillColorCriticalBrush");
+                isJitter = true;
                 _consecutiveWheelSameDir = 1;
             }
             else
@@ -1174,13 +1169,6 @@ namespace lanlanlu_toolkit.Views
                 if (currentDir == _lastWheelDirection)
                 {
                     _consecutiveWheelSameDir++;
-                    if (_consecutiveWheelSameDir > 5)
-                    {
-                        WheelStatusIcon.Glyph = "\uE73E";
-                        WheelStatusIcon.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
-                        WheelStatusText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_WheelStatus_OK");
-                        WheelStatusText.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
-                    }
                 }
                 else
                 {
@@ -1189,16 +1177,17 @@ namespace lanlanlu_toolkit.Views
             }
 
             _lastWheelDirection = currentDir;
-            WheelDeltaText.Text = $"{_wheelUpCount} / {_wheelDownCount}";
 
             if (WheelStepsSummaryText != null)
             {
                 WheelStepsSummaryText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_StepsUnit"), _wheelUpCount + _wheelDownCount);
             }
-            if (WheelDeltaBreakdownText != null)
+            if (WheelUpCountText != null) WheelUpCountText.Text = _wheelUpCount.ToString();
+            if (WheelDownCountText != null) WheelDownCountText.Text = _wheelDownCount.ToString();
+            if (WheelStatusSummaryText != null)
             {
-                string status = _consecutiveWheelSameDir > 5 || _lastWheelDirection == 0 ? LocalizationHelper.GetString("InputTesterPage_Mouse_WheelStatus_OK") : LocalizationHelper.GetString("InputTesterPage_Mouse_WheelStatus_Jitter");
-                WheelDeltaBreakdownText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_WheelBreakdown"), _wheelUpCount, _wheelDownCount, status);
+                WheelStatusSummaryText.Text = isJitter ? LocalizationHelper.GetString("InputTesterPage_Mouse_WheelStatus_Jitter") : LocalizationHelper.GetString("InputTesterPage_Mouse_WheelStatus_OK");
+                WheelStatusSummaryText.Foreground = isJitter ? GetThemeBrush("SystemFillColorCriticalBrush") : GetThemeBrush("TextFillColorTertiaryBrush");
             }
             if (LastMouseBtnText != null)
             {
@@ -1293,12 +1282,10 @@ namespace lanlanlu_toolkit.Views
 
                 if (ReferenceEquals(border, MouseLeftBtnVisual))
                 {
-                    if (MouseLeftBtnLabel != null) MouseLeftBtnLabel.Foreground = activeSubTextBrush;
                     if (MouseLeftCountText != null) MouseLeftCountText.Foreground = activeTextBrush;
                 }
                 else if (ReferenceEquals(border, MouseRightBtnVisual))
                 {
-                    if (MouseRightBtnLabel != null) MouseRightBtnLabel.Foreground = activeSubTextBrush;
                     if (MouseRightCountText != null) MouseRightCountText.Foreground = activeTextBrush;
                 }
                 else if (ReferenceEquals(border, MouseMiddleBtnVisual))
@@ -1318,12 +1305,10 @@ namespace lanlanlu_toolkit.Views
             {
                 if (ReferenceEquals(border, MouseLeftBtnVisual))
                 {
-                    if (MouseLeftBtnLabel != null) MouseLeftBtnLabel.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
                     if (MouseLeftCountText != null) MouseLeftCountText.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
                 }
                 else if (ReferenceEquals(border, MouseRightBtnVisual))
                 {
-                    if (MouseRightBtnLabel != null) MouseRightBtnLabel.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
                     if (MouseRightCountText != null) MouseRightCountText.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
                 }
                 else if (ReferenceEquals(border, MouseMiddleBtnVisual))
@@ -1348,11 +1333,9 @@ namespace lanlanlu_toolkit.Views
             {
                 ChatterClickPad.Background = GetThemeBrush("ControlAltFillColorSecondaryBrush");
                 ChatterClickPad.BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush");
-                if (ChatterClickPadTitle != null) ChatterClickPadTitle.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
                 if (LastClickIntervalText != null) LastClickIntervalText.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
             }
-            if (WheelStatusIcon != null) WheelStatusIcon.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
-            if (WheelStatusText != null) WheelStatusText.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
+
             if (WheelUpArrow != null) WheelUpArrow.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
             if (WheelDownArrow != null) WheelDownArrow.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
         }
@@ -1510,13 +1493,8 @@ namespace lanlanlu_toolkit.Views
             if (MouseRightCountText != null) MouseRightCountText.Text = "0";
             if (Side1CountText != null) Side1CountText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_ClickCountUnit"), 0);
             if (Side2CountText != null) Side2CountText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_ClickCountUnit"), 0);
-            if (WheelDeltaText != null) WheelDeltaText.Text = "0 / 0";
-            if (NormalClicksText != null) NormalClicksText.Text = "0";
-            if (ChatterClicksText != null)
-            {
-                ChatterClicksText.Text = "0";
-                ChatterClicksText.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
-            }
+            if (ChatterNormalHint != null) ChatterNormalHint.Visibility = Visibility.Visible;
+            if (ChatterAlertBanner != null) ChatterAlertBanner.Visibility = Visibility.Collapsed;
             if (LastClickIntervalText != null) LastClickIntervalText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_LastIntervalNone");
             if (CurrentHzText != null) CurrentHzText.Text = "0 Hz";
             if (AvgHzText != null) AvgHzText.Text = "0 Hz";
@@ -1530,24 +1508,19 @@ namespace lanlanlu_toolkit.Views
             if (MouseCurrentHzSummaryText != null) MouseCurrentHzSummaryText.Text = "0 Hz";
             if (HzSummaryText != null) HzSummaryText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_HzSummary"), 0, 0);
             if (WheelStepsSummaryText != null) WheelStepsSummaryText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_StepsUnit"), 0);
-            if (WheelDeltaBreakdownText != null) WheelDeltaBreakdownText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_WheelBreakdown"), 0, 0, LocalizationHelper.GetString("InputTesterPage_Mouse_WheelStatus_OK"));
+            if (WheelUpCountText != null) WheelUpCountText.Text = "0";
+            if (WheelDownCountText != null) WheelDownCountText.Text = "0";
+            if (WheelStatusSummaryText != null)
+            {
+                WheelStatusSummaryText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_WheelStatus_OK");
+                WheelStatusSummaryText.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
+            }
             if (ChatterStatusSummaryText != null)
             {
                 ChatterStatusSummaryText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_ChatterStatus_OK");
-                ChatterStatusSummaryText.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
+                ChatterStatusSummaryText.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
             }
             if (ChatterCountsText != null) ChatterCountsText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_ChatterCounts"), 0, 0);
-
-            if (WheelStatusIcon != null)
-            {
-                WheelStatusIcon.Glyph = "\uE73E";
-                WheelStatusIcon.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
-            }
-            if (WheelStatusText != null)
-            {
-                WheelStatusText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_WheelStatus_OK");
-                WheelStatusText.Foreground = GetThemeBrush("SystemFillColorSuccessBrush");
-            }
 
             if (ChatterAlertBanner != null) ChatterAlertBanner.Visibility = Visibility.Collapsed;
             if (TrajectoryCanvas != null) TrajectoryCanvas.Children.Clear();
@@ -1556,7 +1529,6 @@ namespace lanlanlu_toolkit.Views
             {
                 ChatterClickPad.Background = GetThemeBrush("ControlAltFillColorSecondaryBrush");
                 ChatterClickPad.BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush");
-                if (ChatterClickPadTitle != null) ChatterClickPadTitle.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
                 if (LastClickIntervalText != null) LastClickIntervalText.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
             }
         }
