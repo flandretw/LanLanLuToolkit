@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Page
     x:Class="lanlanlu_toolkit.Views.SystemRepairPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -22,7 +22,7 @@
             <!-- 0: Page Header with Subtitle -->
             <StackPanel Grid.Row="0" Spacing="4" Margin="0">
                 <TextBlock x:Uid="SystemRepairPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
-                <TextBlock x:Uid="SystemRepairPage_Desc" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <TextBlock x:Uid="SystemRepairPage_Desc" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
             </StackPanel>
 
             <!-- 1: Auto Repair Mode Card -->
@@ -298,7 +298,6 @@
                                                FontSize="12"
                                                LineHeight="18"
                                                TextWrapping="Wrap"
-                                               x:Uid="SystemRepairPage_LogOutput"
                                                IsTextSelectionEnabled="True"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </ScrollViewer>

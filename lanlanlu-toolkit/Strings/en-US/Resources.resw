@@ -609,6 +609,9 @@
   <data name="SystemRepairPage_Title.Text" xml:space="preserve">
     <value>System Integrity Repair</value>
   </data>
+  <data name="SystemRepairPage_Desc.Text" xml:space="preserve">
+    <value>Scan and repair Windows system image and file corruption using DISM and SFC tools</value>
+  </data>
   <data name="SystemRepairPage_ScanHealth_Title.Text" xml:space="preserve">
     <value>Scan Image Health (ScanHealth)</value>
   </data>

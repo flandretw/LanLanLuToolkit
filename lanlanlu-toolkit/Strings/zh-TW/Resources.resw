@@ -609,6 +609,9 @@
   <data name="SystemRepairPage_Title.Text" xml:space="preserve">
     <value>系統完整性修復</value>
   </data>
+  <data name="SystemRepairPage_Desc.Text" xml:space="preserve">
+    <value>透過 DISM 與 SFC 工具掃描並修復 Windows 映像與系統檔案損毀</value>
+  </data>
   <data name="SystemRepairPage_ScanHealth_Title.Text" xml:space="preserve">
     <value>掃描映像狀態</value>
   </data>
