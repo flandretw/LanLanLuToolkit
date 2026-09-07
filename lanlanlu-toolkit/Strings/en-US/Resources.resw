@@ -1150,106 +1150,85 @@
     <value>Calculation cancelled.</value>
   </data>
   <data name="FileAssociationPage_Desc.Text" xml:space="preserve">
-    <value>Reset or manage the default application for specific file extensions</value>
+    <value>Clear custom file association overrides and restore them to unassociated or default state</value>
   </data>
   <data name="FileAssociationPage_ConfigTitle.Text" xml:space="preserve">
-    <value>Configure File Association</value>
-  </data>
-  <data name="FileAssociationPage_TargetExtTitle.Text" xml:space="preserve">
     <value>Target File Extension</value>
   </data>
+  <data name="FileAssociationPage_TargetExtTitle.Text" xml:space="preserve">
+    <value>File Extension</value>
+  </data>
   <data name="FileAssociationPage_TargetExtDesc.Text" xml:space="preserve">
-    <value>Enter the file extension you want to reset (e.g., .pdf, .bin, .myext, will be auto-formatted)</value>
+    <value>Enter the file extension you want to reset, such as pdf, dat, or log. Leading dots are automatically ignored and case-insensitive.</value>
   </data>
   <data name="FileAssociationPage_TargetExtBox.PlaceholderText" xml:space="preserve">
     <value>e.g., pdf</value>
   </data>
   <data name="FileAssociationPage_SelectMethodTitle.Text" xml:space="preserve">
-    <value>Select Reset Method</value>
+    <value>Reset and Recovery Actions</value>
   </data>
-  <data name="FileAssociationPage_Method1Title.Text" xml:space="preserve">
-    <value>Method 1: Call Native System Open With Dialog (Standard &amp; Recommended)</value>
+  <data name="FileAssociationPage_ResetTitle.Text" xml:space="preserve">
+    <value>Clear Custom Association</value>
   </data>
-  <data name="FileAssociationPage_Method1Desc.Text" xml:space="preserve">
-    <value>The system will pop up the Open With menu. You can reselect the associated program for this extension or reset the default association. This is the standard, safe method recommended by Windows.</value>
+  <data name="FileAssociationPage_ResetDesc.Text" xml:space="preserve">
+    <value>Thoroughly clears the custom association override in the registry, reverting the extension to its clean state. Non-system formats will revert to having no default app and Windows will ask on double-click.</value>
   </data>
-  <data name="FileAssociationPage_Method1Button.Content" xml:space="preserve">
-    <value>Safe Guided Reset</value>
+  <data name="FileAssociationPage_ResetButton.Content" xml:space="preserve">
+    <value>Reset to Default</value>
   </data>
   <data name="FileAssociationPage_Method2Title.Text" xml:space="preserve">
-    <value>Method 2: Smart Registry Navigation &amp; Manual Reset (Advanced Mode)</value>
+    <value>Advanced Mode</value>
   </data>
   <data name="FileAssociationPage_Method2Desc.Text" xml:space="preserve">
-    <value>For advanced users. Directly open the Registry Editor and smartly navigate to the target, giving you full control to manually reset.</value>
+    <value>Automatically navigate to the target extension registry key for manual inspection.</value>
   </data>
   <data name="FileAssociationPage_Method2Content.Text" xml:space="preserve">
-    <value>Directly open the built-in Windows Registry Editor and automatically navigate to the association path for the extension, allowing you to manually reset and manage it safely and intuitively.</value>
+    <value>Launch the Windows Registry Editor and automatically navigate to the target file extension path for advanced inspection and troubleshooting.</value>
   </data>
   <data name="FileAssociationPage_Method2Button.Content" xml:space="preserve">
-    <value>Navigate &amp; Manually Reset</value>
+    <value>Navigate Registry</value>
   </data>
   <data name="FileAssociationPage_GuideTitle.Text" xml:space="preserve">
-    <value>🛠️ Registry Manual Reset Instructions:</value>
+    <value>Registry Manual Troubleshooting Guide:</value>
   </data>
   <data name="FileAssociationPage_GuideStep1.Text" xml:space="preserve">
-    <value>1. In the launched "Registry Editor" window, you will find the screen automatically expanded and precisely stopped at the target directory.</value>
+    <value>1. When Registry Editor launches, it is automatically expanded and stopped at the target extension directory.</value>
   </data>
   <data name="FileAssociationPage_GuideStep2.Text" xml:space="preserve">
-    <value>2. In the left tree view, find the "UserChoice" subfolder under this extension's directory.</value>
+    <value>2. In the left tree view, locate the "UserChoice" subkey under this extension directory.</value>
   </data>
   <data name="FileAssociationPage_GuideStep3.Text" xml:space="preserve">
-    <value>3. Right-click on the "UserChoice" folder, select "Delete", and click "Yes" in the confirmation dialog.</value>
+    <value>3. "UserChoice" stores the custom app lock. Deleting it restores the clean default behavior.</value>
   </data>
   <data name="FileAssociationPage_GuideStep4.Text" xml:space="preserve">
-    <value>4. Close the Registry Editor after clearing. The next time you double-click this type of file, Windows will prompt for the default program again!</value>
+    <value>4. Close Registry Editor when done. The direct reset action in this toolkit can perform this step automatically and safely.</value>
   </data>
   <data name="FileAssociationPage_Warning_CriticalExt" xml:space="preserve">
-    <value>To protect your operating system security, this extension (.{0}) is a core critical Windows component and its association cannot be reset or modified to prevent system crashes or the inability to execute any programs.</value>
+    <value>The extension .{0} is a critical Windows executable or core component. It is strictly protected to prevent system failure.</value>
   </data>
   <data name="FileAssociationPage_Warning_CriticalExtTitle" xml:space="preserve">
-    <value>🛡️ System Security Protection</value>
+    <value>System Core Protection</value>
   </data>
-  <data name="FileAssociationPage_Success_DialogOpened" xml:space="preserve">
-    <value>Successfully called the system Open With dialog! Please configure or reset the association in the popped-up window.</value>
+  <data name="FileAssociationPage_Success_ResetCompleted" xml:space="preserve">
+    <value>Successfully cleared custom association for .{0} and refreshed shell cache. Restored to initial state.</value>
   </data>
-  <data name="FileAssociationPage_Success_Title" xml:space="preserve">
-    <value>Success</value>
-  </data>
-  <data name="FileAssociationPage_Error_DialogOpenFailed" xml:space="preserve">
-    <value>Failed to open the Open With dialog: {0}</value>
-  </data>
-  <data name="FileAssociationPage_Error_Title" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="FileAssociationPage_Info_Locating" xml:space="preserve">
-    <value>Opening and smartly locating Registry Editor for you...</value>
-  </data>
-  <data name="FileAssociationPage_Info_LocatingTitle" xml:space="preserve">
-    <value>Smart Locating</value>
-  </data>
-  <data name="FileAssociationPage_Warning_LocateFailed" xml:space="preserve">
-    <value>Registry Editor opened, but failed to get its window handle for auto-navigation. Please ensure you approved the User Account Control (UAC) prompt.</value>
-  </data>
-  <data name="FileAssociationPage_Warning_LocateFailedTitle" xml:space="preserve">
-    <value>Failed to Locate</value>
+  <data name="FileAssociationPage_Success_ResetTitle" xml:space="preserve">
+    <value>Reset Successful</value>
   </data>
   <data name="FileAssociationPage_Success_RegNavigated" xml:space="preserve">
-    <value>Registry Editor successfully and smartly navigated to `.{0}`! Please refer to the instruction card below for resetting.</value>
+    <value>Registry Editor successfully navigated to .{0}. Please refer to the guide below.</value>
   </data>
   <data name="FileAssociationPage_Success_RegNavigatedTitle" xml:space="preserve">
     <value>Navigation Successful</value>
   </data>
   <data name="FileAssociationPage_Warning_FallbackCopy" xml:space="preserve">
-    <value>Failed to locate the address bar (it might be hidden). The target path has been copied to your clipboard, please paste it in the address bar above and press Enter to locate!</value>
+    <value>The target path has been copied to your clipboard. Paste it into Registry Editor's address bar and press Enter to navigate.</value>
   </data>
   <data name="FileAssociationPage_Warning_FallbackCopyTitle" xml:space="preserve">
-    <value>Please Paste Manually</value>
+    <value>Path Copied</value>
   </data>
-  <data name="FileAssociationPage_Error_RegLaunchFailed" xml:space="preserve">
-    <value>Failed to launch Registry Editor: {0}. Please ensure you approved the User Account Control (UAC) prompt.</value>
-  </data>
-  <data name="FileAssociationPage_Error_RegLaunchFailedTitle" xml:space="preserve">
-    <value>Launch Failed</value>
+  <data name="FileAssociationPage_Error_Title" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="FileAssociationPage_Title.Text" xml:space="preserve">
     <value>File Association Manager</value>

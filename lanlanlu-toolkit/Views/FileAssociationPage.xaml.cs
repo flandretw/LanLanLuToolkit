@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
@@ -17,11 +18,25 @@ namespace lanlanlu_toolkit.Views
         }
 
         // A safety guardrail: Blacklist of critical system file extensions that must NEVER be modified or reset.
-        // Disabling these (especially .exe or .lnk) will lead to bricking the OS.
+        // Disabling or altering these will lead to serious system damage or inability to launch executables.
         private static readonly string[] CriticalSystemExtensions = new string[]
         {
-            "exe", "lnk", "bat", "cmd", "msi", "reg", "sys", "dll", "cpl", "msc", "com", "scr"
+            // Executables and scripts
+            "exe", "com", "bat", "cmd", "msi", "scr", "vbs", "vbe", "js", "jse", "wsf", "wsh", "ps1",
+            // System drivers and libraries
+            "dll", "sys", "drv", "ocx", "cpl",
+            // System consoles, shortcuts and critical configs
+            "lnk", "msc", "reg", "pif", "diagcab", "theme"
         };
+
+        #region Win32 API Definitions
+
+        [DllImport("shell32.dll")]
+        private static extern void SHChangeNotify(int wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
+        private const int SHCNE_ASSOCCHANGED = 0x08000000;
+        private const uint SHCNF_IDLIST = 0x0000;
+
+        #endregion
 
         private void ExtensionTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -29,9 +44,8 @@ namespace lanlanlu_toolkit.Views
 
             if (string.IsNullOrEmpty(ext))
             {
-                SystemDialogBtn.IsEnabled = false;
+                ResetAssociationBtn.IsEnabled = false;
                 RegistryNavBtn.IsEnabled = false;
-                FeedbackInfoBar.IsOpen = false;
                 return;
             }
 
@@ -40,191 +54,160 @@ namespace lanlanlu_toolkit.Views
 
             if (isBlacklisted)
             {
-                SystemDialogBtn.IsEnabled = false;
+                ResetAssociationBtn.IsEnabled = false;
                 RegistryNavBtn.IsEnabled = false;
-                ShowFeedback(string.Format(LocalizationHelper.GetString("FileAssociationPage_Warning_CriticalExt"), ext), InfoBarSeverity.Warning, LocalizationHelper.GetString("FileAssociationPage_Warning_CriticalExtTitle"));
+
+                NotificationService.Show(LocalizationHelper.GetString("FileAssociationPage_Warning_CriticalExtTitle"), string.Format(LocalizationHelper.GetString("FileAssociationPage_Warning_CriticalExt"), ext), InfoBarSeverity.Warning);
             }
             else
             {
-                SystemDialogBtn.IsEnabled = true;
+                ResetAssociationBtn.IsEnabled = true;
                 RegistryNavBtn.IsEnabled = true;
-                FeedbackInfoBar.IsOpen = false; // Hide warning when safe
             }
         }
 
-        private void SystemDialogBtn_Click(object sender, RoutedEventArgs e)
+        private void ResetAssociationBtn_Click(object sender, RoutedEventArgs e)
         {
-            string ext = ExtensionTextBox.Text.Trim();
+            string ext = ExtensionTextBox.Text.Trim().ToLower().TrimStart('.');
             if (string.IsNullOrEmpty(ext)) return;
 
-            // Normalize: ensure it starts with a dot
-            if (!ext.StartsWith("."))
+            if (Array.Exists(CriticalSystemExtensions, s => s.Equals(ext, StringComparison.OrdinalIgnoreCase)))
             {
-                ext = "." + ext;
+                NotificationService.Show(LocalizationHelper.GetString("FileAssociationPage_Warning_CriticalExtTitle"), string.Format(LocalizationHelper.GetString("FileAssociationPage_Warning_CriticalExt"), ext), InfoBarSeverity.Warning);
+                return;
             }
 
             try
             {
-                // Create a temporary file with the target extension so that the OpenWith dialog operates on it
-                string tempFileName = $"temp_association_reset_{Guid.NewGuid().ToString("N").Substring(0, 8)}{ext}";
-                string tempFilePath = Path.Combine(Path.GetTempPath(), tempFileName);
-
-                File.WriteAllText(tempFilePath, string.Empty);
-
-                // Run rundll32 shell32.dll,OpenAs_RunDLL to open the system dialog
+                // 1. Delete user override subkey tree via reg.exe (handles subtree permissions smoothly)
+                string regArgs = $"delete \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.{ext}\" /f";
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
-                    FileName = "rundll32.exe",
-                    Arguments = $"shell32.dll,OpenAs_RunDLL \"{tempFilePath}\"",
-                    UseShellExecute = true
+                    FileName = "reg.exe",
+                    Arguments = regArgs,
+                    CreateNoWindow = true,
+                    UseShellExecute = false
                 };
 
-                Process.Start(psi);
+                using (var proc = Process.Start(psi))
+                {
+                    proc?.WaitForExit(3000);
+                }
 
-                ShowFeedback(LocalizationHelper.GetString("FileAssociationPage_Success_DialogOpened"), InfoBarSeverity.Success, LocalizationHelper.GetString("FileAssociationPage_Success_Title"));
-                LoggingService.Log($"Opened system association dialog for extension: {ext}");
+                // 2. Also ensure C# registry cleanup in case of any edge cases
+                try
+                {
+                    Registry.CurrentUser.DeleteSubKeyTree($@"Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.{ext}", false);
+                }
+                catch { }
+
+                // 3. Notify Windows Explorer immediately to refresh icons and association cache
+                SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
+
+                // 4. Show success feedback
+                NotificationService.Show(LocalizationHelper.GetString("FileAssociationPage_Success_ResetTitle"), string.Format(LocalizationHelper.GetString("FileAssociationPage_Success_ResetCompleted"), ext), InfoBarSeverity.Success);
+                LoggingService.Log($"Successfully cleared user association override for: .{ext}");
             }
             catch (Exception ex)
             {
-                ShowFeedback(string.Format(LocalizationHelper.GetString("FileAssociationPage_Error_DialogOpenFailed"), ex.Message), InfoBarSeverity.Error, LocalizationHelper.GetString("FileAssociationPage_Error_Title"));
-                LoggingService.Log($"Error launching system association dialog: {ex.Message}");
+                NotificationService.Show(LocalizationHelper.GetString("FileAssociationPage_Error_Title"), ex.Message, InfoBarSeverity.Error);
+                LoggingService.Log($"Error resetting association for .{ext}: {ex.Message}");
             }
         }
 
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern IntPtr FindWindow(string lpClassName, string? lpWindowName);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string? lpszWindow);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, string lParam);
-
-        [DllImport("user32.dll")]
-        private static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
-
-        [DllImport("user32.dll")]
-        private static extern bool SetForegroundWindow(IntPtr hWnd);
-
-        private const uint WM_SETTEXT = 0x000C;
-        private const uint WM_KEYDOWN = 0x0100;
-        private const uint WM_KEYUP = 0x0101;
-        private const int VK_RETURN = 0x0D;
-
-        private async void RegistryNavBtn_Click(object sender, RoutedEventArgs e)
+        private void OpenSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
-            string ext = ExtensionTextBox.Text.Trim();
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "ms-settings:defaultapps",
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                NotificationService.Show(LocalizationHelper.GetString("FileAssociationPage_Error_Title"), ex.Message, InfoBarSeverity.Error);
+            }
+        }
+
+        private void RegistryNavBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string ext = ExtensionTextBox.Text.Trim().ToLower().TrimStart('.');
             if (string.IsNullOrEmpty(ext)) return;
 
-            ext = ext.TrimStart('.');
-
-            // Target path in registry for address bar
-            string targetPath = $@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.{ext}";
+            string subKeyPath = $@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.{ext}";
+            string rootPrefix = "電腦";
 
             try
             {
-                // Show visual feedback that we are launching/positioning
-                ShowFeedback(LocalizationHelper.GetString("FileAssociationPage_Info_Locating"), InfoBarSeverity.Informational, LocalizationHelper.GetString("FileAssociationPage_Info_LocatingTitle"));
-
-                Process[] processes = Process.GetProcessesByName("regedit");
-                IntPtr hwndRegedit = IntPtr.Zero;
-
-                if (processes.Length == 0)
+                using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Applets\Regedit", false))
                 {
-                    // Launch new Registry Editor
-                    Process.Start(new ProcessStartInfo
+                    string? last = key?.GetValue("LastKey") as string;
+                    if (!string.IsNullOrEmpty(last))
                     {
-                        FileName = "regedit.exe",
-                        UseShellExecute = true
-                    });
-
-                    // Poll to locate the newly created window (up to 3 seconds)
-                    for (int i = 0; i < 20; i++)
-                    {
-                        await System.Threading.Tasks.Task.Delay(150);
-                        hwndRegedit = FindWindow("RegEdit_RegEdit", null);
-                        if (hwndRegedit != IntPtr.Zero) break;
+                        int idx = last.IndexOf('\\');
+                        rootPrefix = (idx > 0) ? last.Substring(0, idx) : last;
                     }
                 }
-                else
+            }
+            catch { }
+
+            string regeditFullPath = $"{rootPrefix}\\{subKeyPath}";
+
+            try
+            {
+                // 1. Set LastKey in registry with the localized root prefix
+                Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit", "LastKey", regeditFullPath);
+
+                // 2. If regedit is already running, terminate it so it re-reads LastKey upon startup
+                Process[] existing = Process.GetProcessesByName("regedit");
+                foreach (var p in existing)
                 {
-                    hwndRegedit = FindWindow("RegEdit_RegEdit", null);
-                }
-
-                if (hwndRegedit == IntPtr.Zero)
-                {
-                    ShowFeedback(LocalizationHelper.GetString("FileAssociationPage_Warning_LocateFailed"), InfoBarSeverity.Warning, LocalizationHelper.GetString("FileAssociationPage_Warning_LocateFailedTitle"));
-                    return;
-                }
-
-                // Bring regedit window to the foreground
-                SetForegroundWindow(hwndRegedit);
-                await System.Threading.Tasks.Task.Delay(300); // Wait for UI to initialize/focus
-
-                // Locate the Address Bar: RegEdit_RegEdit -> ReBarWindow32 -> ComboBox -> Edit
-                IntPtr hwndRebar = FindWindowEx(hwndRegedit, IntPtr.Zero, "ReBarWindow32", null);
-                IntPtr hwndCombo = IntPtr.Zero;
-                IntPtr hwndEdit = IntPtr.Zero;
-
-                if (hwndRebar != IntPtr.Zero)
-                {
-                    hwndCombo = FindWindowEx(hwndRebar, IntPtr.Zero, "ComboBox", null);
-                    if (hwndCombo != IntPtr.Zero)
+                    try
                     {
-                        hwndEdit = FindWindowEx(hwndCombo, IntPtr.Zero, "Edit", null);
+                        p.Kill();
+                        p.WaitForExit(1000);
                     }
+                    catch { }
                 }
 
-                if (hwndEdit == IntPtr.Zero)
+                // 3. Start fresh regedit process
+                Process.Start(new ProcessStartInfo
                 {
-                    // Fallback to searching without Rebar just in case Win11 modifies the structure slightly
-                    hwndCombo = FindWindowEx(hwndRegedit, IntPtr.Zero, "ComboBox", null);
-                    if (hwndCombo != IntPtr.Zero)
-                    {
-                        hwndEdit = FindWindowEx(hwndCombo, IntPtr.Zero, "Edit", null);
-                    }
-                }
+                    FileName = "regedit.exe",
+                    UseShellExecute = true
+                });
 
-                if (hwndEdit != IntPtr.Zero)
+                // 4. Also copy the target path to clipboard as a reliable backup
+                try
                 {
-                    // Inject target path directly into Regedit's address bar
-                    SendMessage(hwndEdit, WM_SETTEXT, IntPtr.Zero, targetPath);
-                    await System.Threading.Tasks.Task.Delay(150);
-
-                    // Press ENTER key to navigate
-                    PostMessage(hwndEdit, WM_KEYDOWN, (IntPtr)VK_RETURN, IntPtr.Zero);
-                    PostMessage(hwndEdit, WM_KEYUP, (IntPtr)VK_RETURN, IntPtr.Zero);
-
-                    // Show step-by-step instructions card in UI
-                    RegistryInstructionsCard.Visibility = Visibility.Visible;
-                    ShowFeedback(string.Format(LocalizationHelper.GetString("FileAssociationPage_Success_RegNavigated"), ext), InfoBarSeverity.Success, LocalizationHelper.GetString("FileAssociationPage_Success_RegNavigatedTitle"));
-                    LoggingService.Log($"UI Injected Registry Editor navigation to: {targetPath}");
-                }
-                else
-                {
-                    // Fallback to copy-paste mechanism if address bar is not visible/hidden by user
                     var package = new Windows.ApplicationModel.DataTransfer.DataPackage();
-                    package.SetText(targetPath);
+                    package.SetText(subKeyPath);
                     Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(package);
-
-                    RegistryInstructionsCard.Visibility = Visibility.Visible;
-                    ShowFeedback(LocalizationHelper.GetString("FileAssociationPage_Warning_FallbackCopy"), InfoBarSeverity.Warning, LocalizationHelper.GetString("FileAssociationPage_Warning_FallbackCopyTitle"));
-                    LoggingService.Log($"Registry Address bar not found. Copied path: {targetPath} to clipboard.");
                 }
+                catch { }
+
+                // 5. Automatically expand guidance card
+                AdvancedModeExpander.IsExpanded = true;
+
+                NotificationService.Show(LocalizationHelper.GetString("FileAssociationPage_Success_RegNavigatedTitle"), string.Format(LocalizationHelper.GetString("FileAssociationPage_Success_RegNavigated"), ext), InfoBarSeverity.Success);
+                LoggingService.Log($"Launched Registry Editor with LastKey: {regeditFullPath}");
             }
             catch (Exception ex)
             {
-                ShowFeedback(string.Format(LocalizationHelper.GetString("FileAssociationPage_Error_RegLaunchFailed"), ex.Message), InfoBarSeverity.Error, LocalizationHelper.GetString("FileAssociationPage_Error_RegLaunchFailedTitle"));
-                LoggingService.Log($"Error launching Registry Editor UI navigation: {ex.Message}");
-            }
-        }
+                // Fallback copy to clipboard
+                try
+                {
+                    var package = new Windows.ApplicationModel.DataTransfer.DataPackage();
+                    package.SetText(subKeyPath);
+                    Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(package);
+                    NotificationService.Show(LocalizationHelper.GetString("FileAssociationPage_Warning_FallbackCopyTitle"), LocalizationHelper.GetString("FileAssociationPage_Warning_FallbackCopy"), InfoBarSeverity.Warning);
+                }
+                catch { }
 
-        private void ShowFeedback(string message, InfoBarSeverity severity, string title)
-        {
-            FeedbackInfoBar.Title = title;
-            FeedbackInfoBar.Message = message;
-            FeedbackInfoBar.Severity = severity;
-            FeedbackInfoBar.IsOpen = true;
+                LoggingService.Log($"Error launching Registry Editor navigation: {ex.Message}");
+            }
         }
     }
 }
