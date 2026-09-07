@@ -30,7 +30,7 @@
                 <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         BorderThickness="1"
-                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                        CornerRadius="{ThemeResource OverlayCornerRadius}"
                         Padding="16">
                     <StackPanel Spacing="16">
                         <Grid>
@@ -63,8 +63,8 @@
                                     <!-- Left Info: Status text + live / total timer -->
                                     <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                         <TextBlock x:Name="HeroStepStatusText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                        <StackPanel x:Name="HeroTimerContainer" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center" Visibility="Collapsed">
-                                            <TextBlock Text="•" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="2,0,2,0" />
+                                        <StackPanel x:Name="HeroTimerContainer" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" Visibility="Collapsed">
+                                            <TextBlock Text="•" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,4,0" />
                                             <FontIcon Glyph="&#xE823;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                             <TextBlock x:Name="HeroTimerText" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
                                         </StackPanel>
@@ -106,7 +106,7 @@
                         </StackPanel>
                         <!-- Status Badge & Micro Progress -->
                         <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                            <Border x:Name="Step1Badge" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,4">
+                            <Border x:Name="Step1Badge" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="12,4">
                                 <TextBlock x:Name="Step1StatusText" Style="{ThemeResource CaptionTextBlockStyle}" />
                             </Border>
                         </StackPanel>
@@ -131,7 +131,7 @@
                         </StackPanel>
                         <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
                             <ProgressBar x:Name="Step2ProgressBar" Width="100" Height="4" CornerRadius="2" Visibility="Collapsed" VerticalAlignment="Center" />
-                            <Border x:Name="Step2Badge" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,4">
+                            <Border x:Name="Step2Badge" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="12,4">
                                 <TextBlock x:Name="Step2StatusText" Style="{ThemeResource CaptionTextBlockStyle}" />
                             </Border>
                         </StackPanel>
@@ -156,7 +156,7 @@
                         </StackPanel>
                         <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
                             <ProgressBar x:Name="Step3ProgressBar" Width="100" Height="4" CornerRadius="2" Visibility="Collapsed" VerticalAlignment="Center" />
-                            <Border x:Name="Step3Badge" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,4">
+                            <Border x:Name="Step3Badge" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="12,4">
                                 <TextBlock x:Name="Step3StatusText" Style="{ThemeResource CaptionTextBlockStyle}" />
                             </Border>
                         </StackPanel>
@@ -181,7 +181,7 @@
                         </StackPanel>
                         <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
                             <ProgressBar x:Name="Step4ProgressBar" Width="100" Height="4" CornerRadius="2" Visibility="Collapsed" VerticalAlignment="Center" />
-                            <Border x:Name="Step4Badge" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,4">
+                            <Border x:Name="Step4Badge" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="12,4">
                                 <TextBlock x:Name="Step4StatusText" Style="{ThemeResource CaptionTextBlockStyle}" />
                             </Border>
                         </StackPanel>
@@ -195,7 +195,8 @@
                       x:Name="AdvancedExpander"
                       HorizontalAlignment="Stretch"
                       HorizontalContentAlignment="Stretch"
-                      IsExpanded="False">
+                      IsExpanded="False"
+                      CornerRadius="{ThemeResource OverlayCornerRadius}">
                 <Expander.Header>
                     <Grid Padding="0,12">
                         <Grid.ColumnDefinitions>
@@ -222,7 +223,7 @@
                             </Grid.ColumnDefinitions>
 
                             <!-- Button 1: CheckHealth -->
-                            <Button x:Name="CheckHealthBtn" Click="RunCheckHealth_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="12,10">
+                            <Button x:Name="CheckHealthBtn" Click="RunCheckHealth_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="12,8">
                                 <StackPanel Spacing="4">
                                     <TextBlock x:Uid="SystemRepairPage_CheckHealth_Title" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
                                     <TextBlock Text="CheckHealth" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="11" />
@@ -230,7 +231,7 @@
                             </Button>
 
                             <!-- Button 2: ScanHealth -->
-                            <Button x:Name="ScanHealthBtn" Grid.Column="1" Click="RunScanHealth_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="12,10">
+                            <Button x:Name="ScanHealthBtn" Grid.Column="1" Click="RunScanHealth_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="12,8">
                                 <StackPanel Spacing="4">
                                     <TextBlock x:Uid="SystemRepairPage_ScanHealth_Title" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
                                     <TextBlock Text="ScanHealth" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="11" />
@@ -238,7 +239,7 @@
                             </Button>
 
                             <!-- Button 3: RestoreHealth -->
-                            <Button x:Name="RestoreHealthBtn" Grid.Column="2" Click="RunRestoreHealth_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="12,10">
+                            <Button x:Name="RestoreHealthBtn" Grid.Column="2" Click="RunRestoreHealth_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="12,8">
                                 <StackPanel Spacing="4">
                                     <TextBlock x:Uid="SystemRepairPage_RestoreHealth_Title" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
                                     <TextBlock Text="RestoreHealth" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="11" />
@@ -246,7 +247,7 @@
                             </Button>
 
                             <!-- Button 4: SFC -->
-                            <Button x:Name="SfcBtn" Grid.Column="3" Click="RunSfc_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="12,10">
+                            <Button x:Name="SfcBtn" Grid.Column="3" Click="RunSfc_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="12,8">
                                 <StackPanel Spacing="4">
                                     <TextBlock x:Uid="SystemRepairPage_SfcScannow_Title" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
                                     <TextBlock Text="sfc /scannow" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="11" />
@@ -258,7 +259,7 @@
                         <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1"
-                                CornerRadius="{ThemeResource ControlCornerRadius}"
+                                CornerRadius="{ThemeResource OverlayCornerRadius}"
                                 Margin="0,8,0,0">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -278,13 +279,13 @@
                                     <TextBlock Grid.Column="1" x:Uid="SystemRepairPage_HistoryHeader" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" VerticalAlignment="Center" />
                                     <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                         <Button x:Name="CopyLogBtn" Click="CopyLogBtn_Click" Padding="8,4" VerticalAlignment="Center" IsEnabled="False">
-                                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                            <StackPanel Orientation="Horizontal" Spacing="8">
                                                 <FontIcon x:Name="CopyBtnIcon" Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                                 <TextBlock x:Name="CopyBtnText" x:Uid="SystemRepairPage_Copy" Style="{ThemeResource CaptionTextBlockStyle}" />
                                             </StackPanel>
                                         </Button>
                                         <Button x:Name="ClearLogBtn" Click="ClearLogBtn_Click" Padding="8,4" VerticalAlignment="Center" IsEnabled="False">
-                                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                            <StackPanel Orientation="Horizontal" Spacing="8">
                                                 <FontIcon Glyph="&#xE74D;" FontSize="12" />
                                                 <TextBlock x:Uid="SystemRepairPage_Clear" Style="{StaticResource CaptionTextBlockStyle}" />
                                             </StackPanel>

@@ -102,7 +102,7 @@
                         Background="{ThemeResource LayerFillColorDefaultBrush}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         BorderThickness="1"
-                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                        CornerRadius="{ThemeResource OverlayCornerRadius}"
                         Padding="16,16">
                     <Grid ColumnSpacing="12">
                         <Grid.ColumnDefinitions>
@@ -122,7 +122,7 @@
                         Background="{ThemeResource LayerFillColorDefaultBrush}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         BorderThickness="1"
-                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                        CornerRadius="{ThemeResource OverlayCornerRadius}"
                         Padding="16,16">
                     <Grid ColumnSpacing="12">
                         <Grid.ColumnDefinitions>
@@ -142,7 +142,7 @@
                         Background="{ThemeResource LayerFillColorDefaultBrush}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         BorderThickness="1"
-                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                        CornerRadius="{ThemeResource OverlayCornerRadius}"
                         Padding="16,16">
                     <Grid ColumnSpacing="12">
                         <Grid.ColumnDefinitions>
@@ -162,7 +162,7 @@
                         Background="{ThemeResource LayerFillColorDefaultBrush}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         BorderThickness="1"
-                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                        CornerRadius="{ThemeResource OverlayCornerRadius}"
                         Padding="16,16">
                     <Grid ColumnSpacing="12">
                         <Grid.ColumnDefinitions>

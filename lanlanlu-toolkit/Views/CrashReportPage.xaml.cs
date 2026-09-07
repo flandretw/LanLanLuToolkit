@@ -106,7 +106,7 @@ namespace lanlanlu_toolkit.Views
                 EmptyPanel.Visibility = Visibility.Collapsed;
                 CrashListView.Visibility = Visibility.Visible;
 
-                // Auto-select first item if available (延遲至 UI 渲染佇列，確保左側清單先進入畫面，再淡入呈現右側詳細資訊)
+                // Auto-select first item if available (enqueue to UI dispatcher queue to ensure list renders first before detail view)
                 if (CrashListView.SelectedItem == null || !_filteredReports.Contains((CrashReportItem)CrashListView.SelectedItem))
                 {
                     DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Normal, () =>
