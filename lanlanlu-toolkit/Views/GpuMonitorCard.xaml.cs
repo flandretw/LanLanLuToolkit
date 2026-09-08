@@ -72,15 +72,14 @@ namespace lanlanlu_toolkit.Views
             var fillPoints = new Microsoft.UI.Xaml.Media.PointCollection();
             double step = w / (MaxHistory - 1);
 
-            var historyArray = _history.ToArray();
-
-            // 1. Polyline & Polygon Base: Left to Right
-            for (int i = 0; i < historyArray.Length; i++)
+            int i = 0;
+            foreach (var val in _history)
             {
-                double y = (100 - historyArray[i]) / 100.0 * h;
+                double y = (100 - val) / 100.0 * h;
                 var p = new Windows.Foundation.Point(i * step, y);
                 linePoints.Add(p);
                 fillPoints.Add(p);
+                i++;
             }
 
             // Close the polygon for fill area (Bottom-right then Bottom-left)

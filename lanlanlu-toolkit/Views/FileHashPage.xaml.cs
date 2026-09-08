@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -24,7 +25,19 @@ namespace lanlanlu_toolkit.Views
         public FileHashPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             InitializeLocalization();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            if (_hashCancellationTokenSource != null)
+            {
+                _hashCancellationTokenSource.Cancel();
+                _hashCancellationTokenSource.Dispose();
+                _hashCancellationTokenSource = null;
+            }
         }
 
         private void InitializeLocalization()
@@ -194,41 +207,44 @@ namespace lanlanlu_toolkit.Views
         {
             return await Task.Run(() =>
             {
-                using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 262144, FileOptions.SequentialScan);
+                using HashAlgorithm hasher = algorithm.ToUpper() switch
                 {
-                    using (HashAlgorithm hasher = algorithm.ToUpper() switch
-                    {
-                        "SHA256" => SHA256.Create(),
-                        "SHA1" => SHA1.Create(),
-                        "MD5" => MD5.Create(),
-                        "SHA512" => SHA512.Create(),
-                        _ => throw new ArgumentException("Unsupported algorithm")
-                    })
-                    {
-                        byte[] buffer = new byte[81920]; // 80KB buffer
-                        int bytesRead;
+                    "SHA256" => SHA256.Create(),
+                    "SHA1" => SHA1.Create(),
+                    "MD5" => MD5.Create(),
+                    "SHA512" => SHA512.Create(),
+                    _ => throw new ArgumentException("Unsupported algorithm")
+                };
 
-                        while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                byte[] buffer = System.Buffers.ArrayPool<byte>.Shared.Rent(262144);
+                try
+                {
+                    int bytesRead;
+                    while ((bytesRead = stream.Read(buffer, 0, 262144)) > 0)
+                    {
+                        if (cancellationToken.IsCancellationRequested)
                         {
-                            if (cancellationToken.IsCancellationRequested)
-                            {
-                                return string.Empty; // Return empty directly on cancellation (exception-less)
-                            }
-
-                            hasher.TransformBlock(buffer, 0, bytesRead, buffer, 0);
+                            return string.Empty; // Return empty directly on cancellation (exception-less)
                         }
 
-                        // Finalize the hashing process
-                        hasher.TransformFinalBlock(buffer, 0, 0);
-
-                        byte[] hashBytes = hasher.Hash ?? throw new InvalidOperationException("Hash computation failed");
-                        var sb = new StringBuilder(hashBytes.Length * 2);
-                        foreach (byte b in hashBytes)
-                        {
-                            sb.Append(b.ToString("x2"));
-                        }
-                        return sb.ToString();
+                        hasher.TransformBlock(buffer, 0, bytesRead, buffer, 0);
                     }
+
+                    // Finalize the hashing process
+                    hasher.TransformFinalBlock(buffer, 0, 0);
+
+                    byte[] hashBytes = hasher.Hash ?? throw new InvalidOperationException("Hash computation failed");
+                    var sb = new StringBuilder(hashBytes.Length * 2);
+                    foreach (byte b in hashBytes)
+                    {
+                        sb.Append(b.ToString("x2"));
+                    }
+                    return sb.ToString();
+                }
+                finally
+                {
+                    System.Buffers.ArrayPool<byte>.Shared.Return(buffer);
                 }
             }, cancellationToken);
         }

@@ -94,7 +94,7 @@ namespace lanlanlu_toolkit.Services
     /// Service responsible for scanning, parsing, and diagnosing Windows kernel minidumps and Application crash events.
     /// All localized diagnostic texts and recommendations are dynamically resolved from Resources.resw.
     /// </summary>
-    public static class CrashReportService
+    public static partial class CrashReportService
     {
         private static readonly Dictionary<uint, string> KnownBugChecks = new()
         {
@@ -253,7 +253,7 @@ namespace lanlanlu_toolkit.Services
                     if (record.Properties.Count > 0)
                     {
                         var prop0 = record.Properties[0]?.Value?.ToString() ?? "";
-                        var match = Regex.Match(prop0, @"(0x[0-9a-fA-F]+)\s*\(([^)]*)\)");
+                        var match = BugCheckPropertiesRegex().Match(prop0);
                         if (match.Success)
                         {
                             bugcheckCode = NormalizeHexCode(match.Groups[1].Value);
@@ -272,7 +272,7 @@ namespace lanlanlu_toolkit.Services
 
                     if (string.IsNullOrEmpty(bugcheckCode))
                     {
-                        var match = Regex.Match(msg, @"(0x[0-9a-fA-F]{4,8})");
+                        var match = ErrorCodeRegex().Match(msg);
                         if (match.Success) bugcheckCode = NormalizeHexCode(match.Groups[1].Value);
                     }
 
@@ -444,7 +444,7 @@ namespace lanlanlu_toolkit.Services
                 else if (record.Id == 1026) // .NET Runtime
                 {
                     string appName = unknownApp;
-                    var appMatch = Regex.Match(msg, @"Application:\s*([^\r\n]+)");
+                    var appMatch = DotNetApplicationRegex().Match(msg);
                     if (appMatch.Success)
                     {
                         appName = Path.GetFileName(appMatch.Groups[1].Value.Trim());
@@ -453,7 +453,7 @@ namespace lanlanlu_toolkit.Services
                     string desc = LocalizationHelper.GetString("AppException_DotNet_Desc");
                     string rec = LocalizationHelper.GetString("AppException_DotNet_Rec");
 
-                    var excMatch = Regex.Match(msg, @"Exception Info:\s*([^\r\n]+)");
+                    var excMatch = DotNetExceptionRegex().Match(msg);
                     string excType = excMatch.Success ? excMatch.Groups[1].Value.Trim() : "";
 
                     string title = !string.IsNullOrEmpty(excType)
@@ -744,7 +744,22 @@ namespace lanlanlu_toolkit.Services
         private static string NormalizeHexParameters(string? parameters)
         {
             if (string.IsNullOrWhiteSpace(parameters)) return "";
-            return Regex.Replace(parameters, @"(?i)\b0x([0-9a-f]+)\b", m => "0x" + m.Groups[1].Value.ToUpperInvariant());
+            return HexParametersRegex().Replace(parameters, m => "0x" + m.Groups[1].Value.ToUpperInvariant());
         }
+
+        [GeneratedRegex(@"(0x[0-9a-fA-F]+)\s*\(([^)]*)\)")]
+        private static partial Regex BugCheckPropertiesRegex();
+
+        [GeneratedRegex(@"(0x[0-9a-fA-F]{4,8})")]
+        private static partial Regex ErrorCodeRegex();
+
+        [GeneratedRegex(@"Application:\s*([^\r\n]+)")]
+        private static partial Regex DotNetApplicationRegex();
+
+        [GeneratedRegex(@"Exception Info:\s*([^\r\n]+)")]
+        private static partial Regex DotNetExceptionRegex();
+
+        [GeneratedRegex(@"\b0x([0-9a-fA-F]+)\b")]
+        private static partial Regex HexParametersRegex();
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Navigation;
 using Windows.ApplicationModel.DataTransfer;
 using lanlanlu_toolkit.Services;
 
@@ -36,6 +37,7 @@ namespace lanlanlu_toolkit.Views
         public HomePage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             UpdateGreeting();
             this.SizeChanged += HomePage_SizeChanged;
             this.Loaded += HomePage_Loaded;

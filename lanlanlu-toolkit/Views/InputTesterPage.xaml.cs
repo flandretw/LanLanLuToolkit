@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
 using Windows.Foundation;
 using Windows.System;
@@ -81,6 +82,7 @@ namespace lanlanlu_toolkit.Views
         public InputTesterPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
 
             this.ActualThemeChanged += (s, e) =>
             {
@@ -112,7 +114,10 @@ namespace lanlanlu_toolkit.Views
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _isLoaded = true;
-            BuildKeyboardLayout();
+            if (_keyVisualMap.Count == 0)
+            {
+                BuildKeyboardLayout();
+            }
             _hzUpdateTimer.Start();
             KeyboardFocusArea?.Focus(FocusState.Programmatic);
             UpdateFocusVisual(true);

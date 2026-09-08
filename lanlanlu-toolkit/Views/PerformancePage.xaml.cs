@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -85,6 +85,7 @@ namespace lanlanlu_toolkit.Views
         public PerformancePage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
 
             for (int i = 0; i < MaxHistory; i++)
             {
@@ -724,8 +725,7 @@ namespace lanlanlu_toolkit.Views
             polygon.HorizontalAlignment = HorizontalAlignment.Left;
             polygon.VerticalAlignment = VerticalAlignment.Top;
 
-            var points = history.ToArray();
-            int n = points.Length;
+            int n = history.Count;
             double step = n > 1 ? w / (n - 1) : w;
 
             var linePoints = new PointCollection();
@@ -733,14 +733,16 @@ namespace lanlanlu_toolkit.Views
 
             fillPoints.Add(new Point(0, h));
 
-            for (int i = 0; i < n; i++)
+            int i = 0;
+            foreach (var rawVal in history)
             {
-                double val = Math.Clamp(points[i], 0, 100);
+                double val = Math.Clamp(rawVal, 0, 100);
                 double x = i * step;
                 double y = h - (val / 100.0 * h);
                 var pt = new Point(x, y);
                 linePoints.Add(pt);
                 fillPoints.Add(pt);
+                i++;
             }
 
             fillPoints.Add(new Point(w, h));

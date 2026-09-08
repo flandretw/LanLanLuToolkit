@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
@@ -16,6 +17,7 @@ namespace lanlanlu_toolkit.Views
         public UtilityPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             InitializeTools();
         }
 

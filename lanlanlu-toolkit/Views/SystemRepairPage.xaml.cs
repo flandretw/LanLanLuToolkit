@@ -22,6 +22,7 @@ namespace lanlanlu_toolkit.Views
         private DispatcherTimer? _timer;
         private readonly Stopwatch _stopwatch = new();
         private readonly StepStatus[] _stepStatuses = new StepStatus[5];
+        private readonly StringBuilder _logBuilder = new();
 
         public static bool IsAnyProcessRunning { get; private set; } = false;
 
@@ -37,13 +38,26 @@ namespace lanlanlu_toolkit.Views
         public SystemRepairPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             this.Loaded += SystemRepairPage_Loaded;
+            this.Unloaded += SystemRepairPage_Unloaded;
         }
 
         private void SystemRepairPage_Loaded(object sender, RoutedEventArgs e)
         {
-            ResetToIdleState();
+            if (!_isProcessRunning)
+            {
+                ResetToIdleState();
+            }
+        }
+
+        private void SystemRepairPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (!_isProcessRunning)
+            {
+                _timer?.Stop();
+            }
         }
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -514,7 +528,7 @@ namespace lanlanlu_toolkit.Views
             }
 
             // Regex 1: Match DISM bracketed or generic percentage e.g. [=== 64.0% ===] or 64.0%
-            var match = Regex.Match(line, @"(\d+(?:\.\d+)?)%");
+            var match = ProgressPercentRegex().Match(line);
             if (match.Success && double.TryParse(match.Groups[1].Value, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out double p))
             {
                 UpdateStepProgress(activeVisualStep, p);
@@ -525,6 +539,9 @@ namespace lanlanlu_toolkit.Views
                 HeroPercentageText.Text = $"{overall:0}%";
             }
         }
+
+        [GeneratedRegex(@"(\d+(?:\.\d+)?)%")]
+        private static partial Regex ProgressPercentRegex();
 
         #endregion
 
@@ -553,6 +570,7 @@ namespace lanlanlu_toolkit.Views
 
         private void ClearLogBtn_Click(object sender, RoutedEventArgs e)
         {
+            _logBuilder.Clear();
             LogOutput.Text = string.Empty;
             ClearLogBtn.IsEnabled = false;
             CopyLogBtn.IsEnabled = false;
@@ -590,17 +608,15 @@ namespace lanlanlu_toolkit.Views
             if (string.IsNullOrEmpty(text)) return;
 
             string placeholder = LocalizationHelper.GetString("SystemRepairPage_WaitingPlaceholder");
-            if (LogOutput.Text == placeholder)
+            if (LogOutput.Text == placeholder || _logBuilder.Length == 0)
             {
-                LogOutput.Text = text + "\n";
-            }
-            else
-            {
-                LogOutput.Text += text + "\n";
+                _logBuilder.Clear();
             }
 
-            LogScrollViewer.UpdateLayout();
-            LogScrollViewer.ChangeView(null, LogScrollViewer.ScrollableHeight, null);
+            _logBuilder.AppendLine(text);
+            LogOutput.Text = _logBuilder.ToString();
+
+            LogScrollViewer.ChangeView(null, double.MaxValue, null, true);
 
             ClearLogBtn.IsEnabled = true;
             CopyLogBtn.IsEnabled = true;

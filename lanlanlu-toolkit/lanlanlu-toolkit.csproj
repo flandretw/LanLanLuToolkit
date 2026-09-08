@@ -17,9 +17,11 @@
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <AppxPackage>false</AppxPackage>
     
-    <PublishReadyToRun>false</PublishReadyToRun>
+    <PublishReadyToRun>true</PublishReadyToRun>
     <DebuggerSupport>false</DebuggerSupport>
     <UseSystemResourceKeys>true</UseSystemResourceKeys>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
     <NoWarn>$(NoWarn);IL2059;IL2104;IL2026</NoWarn>
   </PropertyGroup>
 

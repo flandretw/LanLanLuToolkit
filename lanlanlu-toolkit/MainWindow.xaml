@@ -91,7 +91,7 @@
                 </NavigationViewItem>
             </NavigationView.MenuItems>
             <Grid>
-                <Frame x:Name="ContentFrame" />
+                <Frame x:Name="ContentFrame" CacheSize="10" />
                 <!-- Global App Notification InfoBar / Toast Popup (Solid Opaque Windows 11 Floating Card) -->
                 <InfoBar x:Name="AppInfoBar"
                          IsOpen="False"

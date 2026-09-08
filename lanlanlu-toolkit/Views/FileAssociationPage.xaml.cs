@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using System;
 using System.Diagnostics;
@@ -15,6 +16,7 @@ namespace lanlanlu_toolkit.Views
         public FileAssociationPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         // A safety guardrail: Blacklist of critical system file extensions that must NEVER be modified or reset.

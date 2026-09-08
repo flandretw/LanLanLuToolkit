@@ -10,7 +10,7 @@
             </ResourceDictionary.MergedDictionaries>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
-                    <BitmapImage x:Key="HomePageHeroImage" UriSource="ms-appx:///Assets/HomePageWindows11Light.jpg" />
+                    <BitmapImage x:Key="HomePageHeroImage" UriSource="ms-appx:///Assets/HomePageWindows11Light.jpg" DecodePixelWidth="1920" />
                     <Color x:Key="HeroFadeColor">#FFF3F3F3</Color>
                     <Color x:Key="HeroFadeColorTransparent">#00F3F3F3</Color>
                     <Color x:Key="HeroFadeColorSemiTransparent">#80F3F3F3</Color>
@@ -19,7 +19,7 @@
                     <SolidColorBrush x:Key="HeroSubtitleBrush" Color="Black" />
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Dark">
-                    <BitmapImage x:Key="HomePageHeroImage" UriSource="ms-appx:///Assets/HomePageWindows11Dark.jpg" />
+                    <BitmapImage x:Key="HomePageHeroImage" UriSource="ms-appx:///Assets/HomePageWindows11Dark.jpg" DecodePixelWidth="1920" />
                     <Color x:Key="HeroFadeColor">#FF202020</Color>
                     <Color x:Key="HeroFadeColorTransparent">#00202020</Color>
                     <Color x:Key="HeroFadeColorSemiTransparent">#80202020</Color>
@@ -28,7 +28,7 @@
                     <SolidColorBrush x:Key="HeroSubtitleBrush" Color="White" />
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Default">
-                    <BitmapImage x:Key="HomePageHeroImage" UriSource="ms-appx:///Assets/HomePageWindows11Dark.jpg" />
+                    <BitmapImage x:Key="HomePageHeroImage" UriSource="ms-appx:///Assets/HomePageWindows11Dark.jpg" DecodePixelWidth="1920" />
                     <Color x:Key="HeroFadeColor">#FF202020</Color>
                     <Color x:Key="HeroFadeColorTransparent">#00202020</Color>
                     <Color x:Key="HeroFadeColorSemiTransparent">#80202020</Color>

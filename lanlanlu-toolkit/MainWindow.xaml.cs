@@ -16,11 +16,11 @@ namespace lanlanlu_toolkit
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr GetModuleHandle(string? lpModuleName);
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr LoadIcon(IntPtr hInstance, IntPtr lpIconName);
-
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr ExtractIcon(IntPtr hInst, string lpszExeFileName, int nIconIndex);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool SetProcessWorkingSetSize(IntPtr hProcess, IntPtr dwMinimumWorkingSetSize, IntPtr dwMaximumWorkingSetSize);
 
         private bool _isClosingConfirmed = false;
         private AppWindow? _appWindow;
@@ -76,10 +76,11 @@ namespace lanlanlu_toolkit
                 }
             }
 
-            // Register window closing event for safety check
+            // Register window closing and changed event for safety check and memory trimming
             if (_appWindow != null)
             {
                 _appWindow.Closing += AppWindow_Closing;
+                _appWindow.Changed += AppWindow_Changed;
             }
 
             // Register navigation completion event to sync sidebar menu state
@@ -176,15 +177,41 @@ namespace lanlanlu_toolkit
             if (e.SourcePageType == typeof(SettingsPage))
             {
                 NavView.SelectedItem = (NavigationViewItem)NavView.SettingsItem;
-                return;
             }
-
-            var tag = e.SourcePageType.Name;
-            var item = FindNavigationViewItem(NavView.MenuItems, tag);
-            if (item != null && (NavView.SelectedItem as NavigationViewItem) != item)
+            else
             {
-                NavView.SelectedItem = item;
+                var tag = e.SourcePageType.Name;
+                var item = FindNavigationViewItem(NavView.MenuItems, tag);
+                if (item != null && (NavView.SelectedItem as NavigationViewItem) != item)
+                {
+                    NavView.SelectedItem = item;
+                }
             }
+        }
+
+        private void AppWindow_Changed(AppWindow sender, AppWindowChangedEventArgs args)
+        {
+            if (args.DidPresenterChange)
+            {
+                if (sender.Presenter is OverlappedPresenter presenter && presenter.State == OverlappedPresenterState.Minimized)
+                {
+                    System.Threading.Tasks.Task.Run(() =>
+                    {
+                        GC.Collect(2, GCCollectionMode.Optimized, false, false);
+                        TrimWorkingSet();
+                    });
+                }
+            }
+        }
+
+        public static void TrimWorkingSet()
+        {
+            try
+            {
+                using var proc = System.Diagnostics.Process.GetCurrentProcess();
+                SetProcessWorkingSetSize(proc.Handle, (IntPtr)(-1), (IntPtr)(-1));
+            }
+            catch { }
         }
 
         private NavigationViewItem? FindNavigationViewItem(System.Collections.Generic.IList<object> items, string tag)

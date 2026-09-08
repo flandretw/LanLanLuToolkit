@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using Windows.ApplicationModel.DataTransfer;
 using WinRT.Interop;
 using lanlanlu_toolkit.Services;
@@ -21,6 +22,7 @@ namespace lanlanlu_toolkit.Views
         public CrashReportPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             this.Loaded += CrashReportPage_Loaded;
         }
 
