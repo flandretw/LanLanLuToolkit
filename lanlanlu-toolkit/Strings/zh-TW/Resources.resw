@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <root 
   
+  
   xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" 
+  
   
   xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
@@ -134,7 +136,7 @@
     <value>GitHub 專案頁面</value>
   </data>
   <data name="HomePage_Refresh_Success" xml:space="preserve">
-    <value>已重新整理硬體規格與系統資訊</value>
+    <value>已重新整理硬體規格與系統資訊。</value>
   </data>
   <data name="HomePage_QuickActions_Title.Text" xml:space="preserve">
     <value>快速功能總覽</value>
@@ -143,37 +145,37 @@
     <value>效能監控</value>
   </data>
   <data name="HomePage_Feature_Perf_Desc.Text" xml:space="preserve">
-    <value>即時查看 CPU、GPU、RAM 負載與時脈溫度</value>
+    <value>即時查看 CPU、GPU、RAM 負載與時脈溫度。</value>
   </data>
   <data name="HomePage_Feature_Input_Title.Text" xml:space="preserve">
     <value>鍵盤滑鼠診斷</value>
   </data>
   <data name="HomePage_Feature_Input_Desc.Text" xml:space="preserve">
-    <value>全鍵無衝測試、輪詢率、微動連點與軌跡畫布</value>
+    <value>全鍵無衝測試、輪詢率、微動連點與軌跡畫布。</value>
   </data>
   <data name="HomePage_Feature_Repair_Title.Text" xml:space="preserve">
     <value>系統完整性修復</value>
   </data>
   <data name="HomePage_Feature_Repair_Desc.Text" xml:space="preserve">
-    <value>DISM 與 SFC 映像自動修復與損毀掃描</value>
+    <value>DISM 與 SFC 映像自動修復與損毀掃描。</value>
   </data>
   <data name="HomePage_Feature_Crash_Title.Text" xml:space="preserve">
     <value>系統當機分析</value>
   </data>
   <data name="HomePage_Feature_Crash_Desc.Text" xml:space="preserve">
-    <value>藍屏 Minidump 與 Windows 錯誤事件分析</value>
+    <value>藍屏 Minidump 與 Windows 錯誤事件分析。</value>
   </data>
   <data name="HomePage_Feature_Hash_Title.Text" xml:space="preserve">
     <value>檔案雜湊驗證</value>
   </data>
   <data name="HomePage_Feature_Hash_Desc.Text" xml:space="preserve">
-    <value>SHA-256、MD5 快速校驗與檔案指紋比對</value>
+    <value>SHA-256、MD5 快速校驗與檔案指紋比對。</value>
   </data>
   <data name="HomePage_Feature_Assoc_Title.Text" xml:space="preserve">
     <value>檔案關聯管理</value>
   </data>
   <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
-    <value>重設副檔名預設開啟程式與系統關聯修復</value>
+    <value>重設副檔名預設開啟程式與系統關聯修復。</value>
   </data>
   <data name="HomePage_Refresh_Title" xml:space="preserve">
     <value>硬體資訊</value>
@@ -374,7 +376,7 @@
     <value>按下任何實體滑鼠按鍵或滾動滾輪，儀表將即時連動回饋。</value>
   </data>
   <data name="InputTesterPage_Mouse_WheelHint.Text" xml:space="preserve">
-    <value>在左側儀表卡片上滾動滾輪即可量測步進與跳幀</value>
+    <value>在左側儀表卡片上滾動滾輪即可量測步進與跳幀。</value>
   </data>
   <data name="InputTesterPage_Layout_100.Content" xml:space="preserve">
     <value>100% 全尺寸 (104 鍵)</value>
@@ -449,10 +451,10 @@
     <value>{0} 次</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterBanner.Text" xml:space="preserve">
-    <value>偵測到疑似微動連點</value>
+    <value>偵測到疑似微動連點。</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterHint.Text" xml:space="preserve">
-    <value>點擊間隔低於設定臨界值即判定為連點</value>
+    <value>點擊間隔低於設定臨界值即判定為連點。</value>
   </data>
   <data name="InputTesterPage_Mouse_LastIntervalFormat" xml:space="preserve">
     <value>最後間隔：{0} ms</value>
@@ -1103,7 +1105,7 @@
     <value>檔案工具</value>
   </data>
   <data name="ToolHub_NoResults.Text" xml:space="preserve">
-    <value>未找到符合的工具，請嘗試不同關鍵字</value>
+    <value>未找到符合的工具，請嘗試不同關鍵字。</value>
   </data>
   <data name="SettingsPage_Title.Text" xml:space="preserve">
     <value>設定</value>
@@ -1211,7 +1213,7 @@
     <value>重新掃描硬體變更</value>
   </data>
   <data name="SettingsPage_RescanHardware_Desc.Text" xml:space="preserve">
-    <value>清除硬體快取並重新偵測 CPU、GPU、記憶體、主機板與磁碟等系統規格</value>
+    <value>清除硬體快取並重新偵測 CPU、GPU、記憶體、主機板與磁碟等系統規格。</value>
   </data>
   <data name="SettingsPage_RescanHardware_ButtonText.Text" xml:space="preserve">
     <value>立即掃描</value>
