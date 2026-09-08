@@ -59,7 +59,7 @@
     <value>蘭蘭露工具箱</value>
   </data>
   <data name="Shell_Performance.Content" xml:space="preserve">
-    <value>效能</value>
+    <value>效能監控</value>
   </data>
   <data name="Greeting_LateNight" xml:space="preserve">
     <value>晚安，早點休息吧，明天也是新的一天！</value>
@@ -80,7 +80,7 @@
     <value>實用工具</value>
   </data>
   <data name="Nav_FileHashPage.Content" xml:space="preserve">
-    <value>計算檔案雜湊碼</value>
+    <value>檔案雜湊驗證</value>
   </data>
   <data name="Notification_Success" xml:space="preserve">
     <value>成功</value>
@@ -89,19 +89,16 @@
     <value>錯誤</value>
   </data>
   <data name="Nav_FileAssociationPage.Content" xml:space="preserve">
-    <value>檔案開啟方式管理員</value>
+    <value>檔案關聯管理</value>
   </data>
   <data name="Nav_CrashReportPage.Content" xml:space="preserve">
-    <value>當機與崩潰分析</value>
+    <value>系統當機分析</value>
   </data>
   <data name="Nav_InputTesterPage.Content" xml:space="preserve">
-    <value>鍵盤滑鼠檢測</value>
+    <value>鍵盤滑鼠診斷</value>
   </data>
   <data name="Notification_Copied" xml:space="preserve">
     <value>已複製到剪貼簿</value>
-  </data>
-  <data name="HomePage_Title.Text" xml:space="preserve">
-    <value>首頁</value>
   </data>
   <data name="HomePage_CPU.Text" xml:space="preserve">
     <value>處理器 (CPU)</value>
@@ -121,83 +118,35 @@
   <data name="HomePage_Storage.Text" xml:space="preserve">
     <value>儲存體 (Storage)</value>
   </data>
-  <data name="HomePage_Usage.Label" xml:space="preserve">
-    <value>使用率</value>
-  </data>
-  <data name="HomePage_Clock.Label" xml:space="preserve">
-    <value>核心時脈</value>
-  </data>
-  <data name="HomePage_MemClock.Label" xml:space="preserve">
-    <value>記憶體時脈</value>
-  </data>
-  <data name="HomePage_Temp.Label" xml:space="preserve">
-    <value>溫度</value>
-  </data>
-  <data name="HomePage_Fan.Label" xml:space="preserve">
-    <value>風扇</value>
-  </data>
-  <data name="HomePage_Used.Text" xml:space="preserve">
-    <value>使用中</value>
-  </data>
-  <data name="HomePage_Disk.Text" xml:space="preserve">
-    <value>磁碟</value>
-  </data>
-  <data name="HomePage_ReadSpeed.Label" xml:space="preserve">
-    <value>讀取速度</value>
-  </data>
-  <data name="HomePage_WriteSpeed.Label" xml:space="preserve">
-    <value>寫入速度</value>
-  </data>
   <data name="HomePage_Detecting.Text" xml:space="preserve">
     <value>偵測中……</value>
-  </data>
-  <data name="HomePage_Welcome.Text" xml:space="preserve">
-    <value>歡迎使用蘭蘭露工具箱</value>
   </data>
   <data name="HomePage_Intro.Text" xml:space="preserve">
     <value>專為 Windows 11 設計的現代化工具箱，提供硬體監控與各類實用工具。點擊下方連結或側邊選單開始探索吧！</value>
   </data>
-  <data name="HomePage_Version_Format" xml:space="preserve">
-    <value>版本 {0}</value>
-  </data>
   <data name="HomePage_PoweredBy.Text" xml:space="preserve">
     <value>由 flandretw 驅動</value>
-  </data>
-  <data name="HomePage_QuickStart.Text" xml:space="preserve">
-    <value>快速開始</value>
-  </data>
-  <data name="HomePage_ViewPerformance.Content" xml:space="preserve">
-    <value>查看系統效能</value>
   </data>
   <data name="HomePage_AppSettings.Text" xml:space="preserve">
     <value>軟體設定</value>
   </data>
-  <data name="HomePage_ContactUs.Text" xml:space="preserve">
-    <value>聯絡我們</value>
-  </data>
   <data name="HomePage_GitHubProject.Text" xml:space="preserve">
     <value>GitHub 專案頁面</value>
   </data>
-  <data name="HomePage_RefreshBtn_ToolTip" xml:space="preserve">
-    <value>重新整理硬體規格</value>
-  </data>
   <data name="HomePage_Refresh_Success" xml:space="preserve">
     <value>已重新整理硬體規格與系統資訊</value>
-  </data>
-  <data name="HomePage_SystemStatus_Healthy.Text" xml:space="preserve">
-    <value>系統運作狀態良好</value>
   </data>
   <data name="HomePage_QuickActions_Title.Text" xml:space="preserve">
     <value>快速功能總覽</value>
   </data>
   <data name="HomePage_Feature_Perf_Title.Text" xml:space="preserve">
-    <value>即時效能監控</value>
+    <value>效能監控</value>
   </data>
   <data name="HomePage_Feature_Perf_Desc.Text" xml:space="preserve">
     <value>即時查看 CPU、GPU、RAM 負載與時脈溫度</value>
   </data>
   <data name="HomePage_Feature_Input_Title.Text" xml:space="preserve">
-    <value>鍵盤與滑鼠診斷</value>
+    <value>鍵盤滑鼠診斷</value>
   </data>
   <data name="HomePage_Feature_Input_Desc.Text" xml:space="preserve">
     <value>全鍵無衝測試、輪詢率、微動連點與軌跡畫布</value>
@@ -209,13 +158,13 @@
     <value>DISM 與 SFC 映像自動修復與損毀掃描</value>
   </data>
   <data name="HomePage_Feature_Crash_Title.Text" xml:space="preserve">
-    <value>系統當機診斷</value>
+    <value>系統當機分析</value>
   </data>
   <data name="HomePage_Feature_Crash_Desc.Text" xml:space="preserve">
     <value>藍屏 Minidump 與 Windows 錯誤事件分析</value>
   </data>
   <data name="HomePage_Feature_Hash_Title.Text" xml:space="preserve">
-    <value>檔案雜湊計算</value>
+    <value>檔案雜湊驗證</value>
   </data>
   <data name="HomePage_Feature_Hash_Desc.Text" xml:space="preserve">
     <value>SHA-256、MD5 快速校驗與檔案指紋比對</value>
@@ -226,20 +175,14 @@
   <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
     <value>重設副檔名預設開啟程式與系統關聯修復</value>
   </data>
-  <data name="HomePage_Copied_Toast" xml:space="preserve">
-    <value>已複製到剪貼簿：{0}</value>
-  </data>
   <data name="HomePage_Refresh_Title" xml:space="preserve">
     <value>硬體資訊</value>
   </data>
   <data name="PerformancePage_Title.Text" xml:space="preserve">
-    <value>效能</value>
+    <value>效能監控</value>
   </data>
   <data name="PerformancePage_Description.Text" xml:space="preserve">
     <value>即時監控 CPU、記憶體、儲存體與顯示卡的使用狀態與硬體資訊。</value>
-  </data>
-  <data name="PerformancePage_Loading.Text" xml:space="preserve">
-    <value>正在讀取系統資訊……</value>
   </data>
   <data name="TempUnit_Celsius.Content" xml:space="preserve">
     <value>攝氏 (°C)</value>
@@ -265,39 +208,6 @@
   <data name="GpuMonitorCard_Usage.Label" xml:space="preserve">
     <value>使用率</value>
   </data>
-  <data name="GpuMonitorCard_CoreClock.Label" xml:space="preserve">
-    <value>核心時脈</value>
-  </data>
-  <data name="GpuMonitorCard_MemoryClock.Label" xml:space="preserve">
-    <value>記憶體時脈</value>
-  </data>
-  <data name="GpuMonitorCard_Temperature.Label" xml:space="preserve">
-    <value>溫度</value>
-  </data>
-  <data name="PerfPage_Cpu_BaseSpeed.Text" xml:space="preserve">
-    <value>基本速度</value>
-  </data>
-  <data name="PerfPage_Cpu_Sockets.Text" xml:space="preserve">
-    <value>插槽</value>
-  </data>
-  <data name="PerfPage_Cpu_Cores.Text" xml:space="preserve">
-    <value>核心數目</value>
-  </data>
-  <data name="PerfPage_Cpu_Threads.Text" xml:space="preserve">
-    <value>邏輯處理器</value>
-  </data>
-  <data name="PerfPage_Cpu_Virtualization.Text" xml:space="preserve">
-    <value>虛擬化</value>
-  </data>
-  <data name="PerfPage_Cpu_L1Cache.Text" xml:space="preserve">
-    <value>L1 快取</value>
-  </data>
-  <data name="PerfPage_Cpu_L2Cache.Text" xml:space="preserve">
-    <value>L2 快取</value>
-  </data>
-  <data name="PerfPage_Cpu_L3Cache.Text" xml:space="preserve">
-    <value>L3 快取</value>
-  </data>
   <data name="PerfPage_Gpu_DedicatedMemory.Text" xml:space="preserve">
     <value>專屬 GPU 記憶體</value>
   </data>
@@ -322,12 +232,6 @@
   <data name="PerfPage_Gpu_HardwareReserved.Text" xml:space="preserve">
     <value>硬體保留記憶體</value>
   </data>
-  <data name="PerfPage_Cpu_CurrentClock.Text" xml:space="preserve">
-    <value>目前時脈</value>
-  </data>
-  <data name="PerfPage_Cpu_CurrentTemp.Text" xml:space="preserve">
-    <value>溫度</value>
-  </data>
   <data name="PerfPage_Gpu_CurrentCoreClock.Text" xml:space="preserve">
     <value>核心時脈</value>
   </data>
@@ -343,47 +247,14 @@
   <data name="PerfPage_Cpu_Disabled" xml:space="preserve">
     <value>已停用</value>
   </data>
-  <data name="PerfPage_Ram_InUse.Text" xml:space="preserve">
-    <value>使用中（已壓縮）</value>
-  </data>
-  <data name="PerfPage_Ram_Available.Text" xml:space="preserve">
-    <value>可用的</value>
-  </data>
-  <data name="PerfPage_Ram_Committed.Text" xml:space="preserve">
-    <value>已認可</value>
-  </data>
-  <data name="PerfPage_Ram_Cached.Text" xml:space="preserve">
-    <value>已快取</value>
-  </data>
-  <data name="PerfPage_Ram_PagedPool.Text" xml:space="preserve">
-    <value>分頁集區</value>
-  </data>
-  <data name="PerfPage_Ram_NonPagedPool.Text" xml:space="preserve">
-    <value>非分頁集區</value>
-  </data>
-  <data name="PerfPage_Ram_Compressed.Text" xml:space="preserve">
-    <value>已壓縮</value>
-  </data>
-  <data name="PerfPage_Ram_Speed.Text" xml:space="preserve">
-    <value>速度：</value>
-  </data>
-  <data name="PerfPage_Ram_Slots.Text" xml:space="preserve">
-    <value>已使用插槽：</value>
-  </data>
-  <data name="PerfPage_Ram_FormFactor.Text" xml:space="preserve">
-    <value>尺寸：</value>
-  </data>
-  <data name="PerfPage_Ram_HardwareReserved.Text" xml:space="preserve">
-    <value>硬體保留：</value>
-  </data>
   <data name="InputTesterPage_Title.Text" xml:space="preserve">
-    <value>鍵盤與滑鼠檢測</value>
+    <value>鍵盤滑鼠診斷</value>
   </data>
   <data name="InputTesterPage_Subtitle.Text" xml:space="preserve">
-    <value>檢測鍵盤按鍵觸發、多鍵無衝 (NKRO)、滑鼠微動連點、回報率 (Hz) 與滾輪跳幀。</value>
+    <value>測試鍵盤按鍵觸發、多鍵無衝 (NKRO)、滑鼠微動連點、回報率 (Hz) 與滾輪跳幀。</value>
   </data>
   <data name="InputTesterPage_Section_Options.Text" xml:space="preserve">
-    <value>檢測選項</value>
+    <value>測試選項</value>
   </data>
   <data name="InputTesterPage_Section_Keyboard.Text" xml:space="preserve">
     <value>鍵盤診斷</value>
@@ -392,16 +263,16 @@
     <value>滑鼠診斷</value>
   </data>
   <data name="InputTesterPage_Tab_Keyboard.Text" xml:space="preserve">
-    <value>鍵盤檢測</value>
+    <value>鍵盤測試</value>
   </data>
   <data name="InputTesterPage_Tab_Mouse.Text" xml:space="preserve">
-    <value>滑鼠檢測</value>
+    <value>滑鼠測試</value>
   </data>
   <data name="InputTesterPage_Setting_ModeTitle.Text" xml:space="preserve">
-    <value>檢測模式</value>
+    <value>測試模式</value>
   </data>
   <data name="InputTesterPage_Setting_ModeDesc.Text" xml:space="preserve">
-    <value>選擇要進行診斷與檢測的輸入裝置（鍵盤或滑鼠）。</value>
+    <value>選擇要進行診斷與測試的輸入裝置（鍵盤或滑鼠）。</value>
   </data>
   <data name="InputTesterPage_Setting_SoundTitle.Text" xml:space="preserve">
     <value>按鍵音效</value>
@@ -409,17 +280,8 @@
   <data name="InputTesterPage_Setting_SoundDesc.Text" xml:space="preserve">
     <value>在按下按鍵或點擊滑鼠時播放聲音回饋。</value>
   </data>
-  <data name="InputTesterPage_Toggle_On" xml:space="preserve">
-    <value>開啟</value>
-  </data>
-  <data name="InputTesterPage_Toggle_Off" xml:space="preserve">
-    <value>關閉</value>
-  </data>
   <data name="InputTesterPage_ResetBtn.Text" xml:space="preserve">
     <value>重設紀錄</value>
-  </data>
-  <data name="InputTesterPage_SoundToggle.Header" xml:space="preserve">
-    <value>按鍵音效</value>
   </data>
   <data name="InputTesterPage_Card_LastKey.Text" xml:space="preserve">
     <value>最後按下按鍵</value>
@@ -448,9 +310,6 @@
   <data name="InputTesterPage_Key_None" xml:space="preserve">
     <value>無</value>
   </data>
-  <data name="InputTesterPage_Key_Units" xml:space="preserve">
-    <value>{0} 個鍵</value>
-  </data>
   <data name="InputTesterPage_Key_ChatterNormal" xml:space="preserve">
     <value>正常</value>
   </data>
@@ -462,9 +321,6 @@
   </data>
   <data name="InputTesterPage_FocusStatus_Unfocused.Text" xml:space="preserve">
     <value>未聚焦</value>
-  </data>
-  <data name="InputTesterPage_FocusHint.Text" xml:space="preserve">
-    <value>請先點選此視窗以聚焦，隨後即可隨意敲擊鍵盤進行檢測，系統將即時記錄與分析按鍵反應（亦可直接點選虛擬按鍵測試）。</value>
   </data>
   <data name="InputTesterPage_Mouse_LeftButton" xml:space="preserve">
     <value>左鍵</value>
@@ -488,10 +344,10 @@
     <value>滾輪向下</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterTest_Title.Text" xml:space="preserve">
-    <value>微動開關連點檢測</value>
+    <value>微動開關連點測試</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterTest_Desc.Text" xml:space="preserve">
-    <value>在下方區域快速點擊滑鼠按鍵，檢測微動開關是否有異常雙擊 (Chatter) 現象。</value>
+    <value>在下方區域快速點擊滑鼠按鍵，測試微動開關是否有異常雙擊 (Chatter) 現象。</value>
   </data>
   <data name="InputTesterPage_Mouse_Threshold.Text" xml:space="preserve">
     <value>連點判定臨界值</value>
@@ -659,7 +515,7 @@
     <value>自動修復模式</value>
   </data>
   <data name="SystemRepairPage_AutoMode_Desc.Text" xml:space="preserve">
-    <value>自動執行完整的檢測與修復流程。推薦大多數使用者使用。</value>
+    <value>自動執行完整的掃描與修復流程。推薦大多數使用者使用。</value>
   </data>
   <data name="SystemRepairPage_AutoMode_Default.Content" xml:space="preserve">
     <value>完整修復（預設）</value>
@@ -743,10 +599,10 @@
     <value>所有檔案</value>
   </data>
   <data name="CrashReportPage_Title.Text" xml:space="preserve">
-    <value>當機與崩潰分析</value>
+    <value>系統當機分析</value>
   </data>
   <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
-    <value>自動掃描並分析系統核心傾印 (Minidump) 與應用程式崩潰事件記錄檔。</value>
+    <value>自動掃描並分析系統核心傾印 (Minidump) 與應用程式當機事件記錄檔。</value>
   </data>
   <data name="CrashReportPage_Section_Overview.Text" xml:space="preserve">
     <value>狀態概覽</value>
@@ -755,7 +611,7 @@
     <value>事件記錄</value>
   </data>
   <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
-    <value>總崩潰事件</value>
+    <value>總當機事件</value>
   </data>
   <data name="CrashReportPage_Card_BSOD.Text" xml:space="preserve">
     <value>系統核心當機</value>
@@ -773,7 +629,7 @@
     <value>僅系統核心當機</value>
   </data>
   <data name="CrashReportPage_Filter_App.Content" xml:space="preserve">
-    <value>僅應用程式崩潰</value>
+    <value>僅應用程式當機</value>
   </data>
   <data name="CrashReportPage_SearchBox.PlaceholderText" xml:space="preserve">
     <value>搜尋程式名稱、錯誤碼、驅動程式或模組...</value>
@@ -791,16 +647,13 @@
     <value>系統非常健康！</value>
   </data>
   <data name="CrashReportPage_NoCrashes_Desc.Text" xml:space="preserve">
-    <value>在系統記錄中未發現任何系統核心當機或近期應用程式崩潰記錄。</value>
+    <value>在系統記錄中未發現任何系統核心當機或近期應用程式當機記錄。</value>
   </data>
   <data name="CrashReportPage_SelectPrompt_Title.Text" xml:space="preserve">
     <value>請選擇左側事件</value>
   </data>
   <data name="CrashReportPage_SelectPrompt_Desc.Text" xml:space="preserve">
-    <value>點選左側清單中的任一當機或崩潰事件以檢視詳細診斷資訊與排錯建議。</value>
-  </data>
-  <data name="CrashReportPage_Detail_Header.Text" xml:space="preserve">
-    <value>崩潰事件詳細診斷</value>
+    <value>點選左側清單中的任一當機事件以檢視詳細診斷資訊與排錯建議。</value>
   </data>
   <data name="CrashReportPage_Detail_DiagnosisHeader.Text" xml:space="preserve">
     <value>智慧診斷與成因分析</value>
@@ -821,7 +674,7 @@
     <value>錯誤來源 / 程式</value>
   </data>
   <data name="CrashReportPage_Detail_Params.Text" xml:space="preserve">
-    <value>崩潰參數 (Arg1~4)</value>
+    <value>當機參數 (Arg1~4)</value>
   </data>
   <data name="CrashReportPage_Detail_DumpPath.Text" xml:space="preserve">
     <value>傾印檔案 / 路徑</value>
@@ -884,7 +737,7 @@
     <value>無其他詳細紀錄。</value>
   </data>
   <data name="CrashReport_Export_Title" xml:space="preserve">
-    <value># Windows 系統當機與崩潰診斷報告</value>
+    <value># Windows 系統當機診斷報告</value>
   </data>
   <data name="CrashReport_Export_GeneratedTime" xml:space="preserve">
     <value>產生時間：{0}</value>
@@ -905,7 +758,7 @@
     <value>可疑模組／驅動程式</value>
   </data>
   <data name="CrashReport_Export_Field_Parameters" xml:space="preserve">
-    <value>崩潰參數</value>
+    <value>當機參數</value>
   </data>
   <data name="CrashReport_Export_Field_DumpPath" xml:space="preserve">
     <value>傾印／檔案路徑</value>
@@ -917,7 +770,7 @@
     <value>排錯建議</value>
   </data>
   <data name="BugCheck_Unknown_Desc" xml:space="preserve">
-    <value>未知的 Windows 系統核心崩潰代碼。</value>
+    <value>未知的 Windows 系統核心當機代碼。</value>
   </data>
   <data name="BugCheck_Unknown_Rec" xml:space="preserve">
     <value>建議在搜尋引擎中查詢該錯誤代碼以取得專屬解決方案。</value>
@@ -968,13 +821,13 @@
     <value>驅動程式在過高的 IRQL 下嘗試存取無效的記憶體位址。</value>
   </data>
   <data name="BugCheck_0x000000D1_Rec" xml:space="preserve">
-    <value>最常見的系統當機代碼之一，請查看導致崩潰的驅動程式名稱（如網路卡、音效卡、防毒核心等），並前往官網下載最新版本覆蓋安裝。</value>
+    <value>最常見的系統當機代碼之一，請查看導致當機的驅動程式名稱（如網路卡、音效卡、防毒核心等），並前往官網下載最新版本覆蓋安裝。</value>
   </data>
   <data name="BugCheck_0x000000EF_Desc" xml:space="preserve">
     <value>關鍵系統處理程序（如 csrss.exe, wininit.exe）意外終止。</value>
   </data>
   <data name="BugCheck_0x000000EF_Rec" xml:space="preserve">
-    <value>可能為系統核心損毀、惡意軟體感染或硬碟壞軌導致系統重要元件崩潰。建議執行 DISM 與 SFC 系統修復指令。</value>
+    <value>可能為系統核心損毀、惡意軟體感染或硬碟壞軌導致系統重要元件當機。建議執行 DISM 與 SFC 系統修復指令。</value>
   </data>
   <data name="BugCheck_0x00000101_Desc" xml:space="preserve">
     <value>次要處理器未在分配的時間間隔內收到預期的時脈插斷。</value>
@@ -1010,7 +863,7 @@
     <value>記憶體管理器儲存元件在處理分頁時發生未預期的例外狀況。</value>
   </data>
   <data name="BugCheck_0x00000154_Rec" xml:space="preserve">
-    <value>常見於硬碟 / SSD 壞軌、SSD 突發斷電掉盤或儲存控制器驅動程式崩潰。強烈建議備份重要資料並檢查硬碟健康狀態 (S.M.A.R.T.)。</value>
+    <value>常見於硬碟 / SSD 壞軌、SSD 突發斷電掉盤或儲存控制器驅動程式當機。強烈建議備份重要資料並檢查硬碟健康狀態 (S.M.A.R.T.)。</value>
   </data>
   <data name="BugCheck_0x0000001A_Desc" xml:space="preserve">
     <value>系統發生了嚴重的記憶體管理錯誤。</value>
@@ -1067,7 +920,7 @@
     <value>請參閱詳細紀錄中的呼叫堆疊 (Stack Trace) 進行排錯。</value>
   </data>
   <data name="FileHashPage_Title.Text" xml:space="preserve">
-    <value>計算檔案雜湊碼</value>
+    <value>檔案雜湊驗證</value>
   </data>
   <data name="FileHashPage_Desc.Text" xml:space="preserve">
     <value>快速計算與驗證檔案的 SHA-256、SHA-1 或 MD5 雜湊值。</value>
@@ -1107,12 +960,6 @@
   </data>
   <data name="FileHashPage_Calculating" xml:space="preserve">
     <value>正在計算雜湊值，請稍候……</value>
-  </data>
-  <data name="FileHashPage_SelectFileFirst" xml:space="preserve">
-    <value>請先選擇一個檔案！</value>
-  </data>
-  <data name="FileHashPage_FileSelected" xml:space="preserve">
-    <value>已選擇檔案：</value>
   </data>
   <data name="FileHashPage_FileSize" xml:space="preserve">
     <value>檔案大小：</value>
@@ -1235,7 +1082,7 @@
     <value>錯誤</value>
   </data>
   <data name="FileAssociationPage_Title.Text" xml:space="preserve">
-    <value>檔案開啟方式管理員</value>
+    <value>檔案關聯管理</value>
   </data>
   <data name="TestToolPage_Title.Text" xml:space="preserve">
     <value>測試工具</value>
@@ -1247,7 +1094,7 @@
     <value>搜尋工具名稱或功能描述……</value>
   </data>
   <data name="ToolHub_Tag_Hardware.Text" xml:space="preserve">
-    <value>硬體檢測</value>
+    <value>硬體診斷</value>
   </data>
   <data name="ToolHub_Tag_System.Text" xml:space="preserve">
     <value>系統診斷</value>
@@ -1276,9 +1123,6 @@
   <data name="Language_en_US.Content" xml:space="preserve">
     <value>英文 (美國)</value>
   </data>
-  <data name="SettingsPage_LanguageRestartNotice.Text" xml:space="preserve">
-    <value>※ 變更語言後，需要重新啟動應用程式才會完全生效。</value>
-  </data>
   <data name="LanguageChangeDialog_Title" xml:space="preserve">
     <value>需要重新啟動</value>
   </data>
@@ -1290,9 +1134,6 @@
   </data>
   <data name="LanguageChangeDialog_Cancel" xml:space="preserve">
     <value>取消</value>
-  </data>
-  <data name="SettingsPage_ThemeHeader.Text" xml:space="preserve">
-    <value>個人化</value>
   </data>
   <data name="SettingsPage_ThemeTitle.Text" xml:space="preserve">
     <value>應用程式佈景主題</value>
@@ -1363,9 +1204,6 @@
   <data name="SettingsPage_DebugReport_ResetButton.ToolTipService.ToolTip" xml:space="preserve">
     <value>將儲存路徑重設為預設值</value>
   </data>
-  <data name="SettingsPage_DebugReport_DefaultPathDescription.Text" xml:space="preserve">
-    <value>預設儲存在應用程式所在目錄</value>
-  </data>
   <data name="SettingsPage_DiagnosticsSectionTitle.Text" xml:space="preserve">
     <value>診斷與意見反映</value>
   </data>
@@ -1378,50 +1216,8 @@
   <data name="SettingsPage_RescanHardware_ButtonText.Text" xml:space="preserve">
     <value>立即掃描</value>
   </data>
-  <data name="PerfPage_Usage.Text" xml:space="preserve">
-    <value>使用率</value>
-  </data>
-  <data name="PerfPage_LiveMetrics.Text" xml:space="preserve">
-    <value>運作即時指標</value>
-  </data>
-  <data name="PerfPage_HardwareSpecs.Text" xml:space="preserve">
-    <value>硬體核心規格</value>
-  </data>
-  <data name="PerfPage_CacheSpecs.Text" xml:space="preserve">
-    <value>快取記憶體</value>
-  </data>
-  <data name="PerfPage_Processes.Text" xml:space="preserve">
-    <value>處理程序</value>
-  </data>
-  <data name="PerfPage_Ram_CapacityCommit.Text" xml:space="preserve">
-    <value>容量與配置</value>
-  </data>
-  <data name="PerfPage_Ram_PoolsCache.Text" xml:space="preserve">
-    <value>集區與快取</value>
-  </data>
-  <data name="PerfPage_Ram_HardwareSpecs.Text" xml:space="preserve">
-    <value>硬體插槽規格</value>
-  </data>
-  <data name="PerfPage_Gpu_LiveClocks.Text" xml:space="preserve">
-    <value>即時時脈與溫度</value>
-  </data>
-  <data name="PerfPage_Gpu_MemorySpecs.Text" xml:space="preserve">
-    <value>顯示記憶體</value>
-  </data>
-  <data name="PerfPage_Gpu_DriverSpecs.Text" xml:space="preserve">
-    <value>驅動與介面</value>
-  </data>
-  <data name="PerfPage_ChartCaption.Text" xml:space="preserve">
-    <value>60 秒使用率歷程 (0% - 100%)</value>
-  </data>
   <data name="PerformancePage_CopyAll.Text" xml:space="preserve">
     <value>複製全部</value>
-  </data>
-  <data name="PerformancePage_CopyAll_Tooltip" xml:space="preserve">
-    <value>複製所有硬體資訊</value>
-  </data>
-  <data name="PerformancePage_Copy_Tooltip" xml:space="preserve">
-    <value>複製數值</value>
   </data>
   <data name="PerformancePage_Memory_Title.Text" xml:space="preserve">
     <value>記憶體</value>
@@ -1510,144 +1306,6 @@
   <data name="PerformancePage_Section_GpuDriver.Text" xml:space="preserve">
     <value>驅動程式與硬體</value>
   </data>
-  <data name="PerformancePage_Cpu_Clock_Label" xml:space="preserve">
-    <value>目前時脈：</value>
-  </data>
-  <data name="PerformancePage_Cpu_Temp_Label" xml:space="preserve">
-    <value>溫度：</value>
-  </data>
-  <data name="PerformancePage_Cpu_Processes_Label" xml:space="preserve">
-    <value>處理程序：</value>
-  </data>
-  <data name="PerformancePage_Cpu_Threads_Label" xml:space="preserve">
-    <value>系統執行緒：</value>
-  </data>
-  <data name="PerformancePage_Cpu_BaseSpeed_Label" xml:space="preserve">
-    <value>基本速度：</value>
-  </data>
-  <data name="PerformancePage_Cpu_Sockets_Label" xml:space="preserve">
-    <value>插槽：</value>
-  </data>
-  <data name="PerformancePage_Cpu_Cores_Label" xml:space="preserve">
-    <value>核心數目：</value>
-  </data>
-  <data name="PerformancePage_Cpu_LogicalCores_Label" xml:space="preserve">
-    <value>邏輯處理器：</value>
-  </data>
-  <data name="PerformancePage_Cpu_Virtualization_Label" xml:space="preserve">
-    <value>虛擬化：</value>
-  </data>
-  <data name="PerformancePage_Cpu_L1_Label" xml:space="preserve">
-    <value>L1 快取：</value>
-  </data>
-  <data name="PerformancePage_Cpu_L2_Label" xml:space="preserve">
-    <value>L2 快取：</value>
-  </data>
-  <data name="PerformancePage_Cpu_L3_Label" xml:space="preserve">
-    <value>L3 快取：</value>
-  </data>
-  <data name="PerformancePage_Ram_InUse_Label" xml:space="preserve">
-    <value>使用中：</value>
-  </data>
-  <data name="PerformancePage_Ram_Available_Label" xml:space="preserve">
-    <value>可用空間：</value>
-  </data>
-  <data name="PerformancePage_Ram_Committed_Label" xml:space="preserve">
-    <value>已認可：</value>
-  </data>
-  <data name="PerformancePage_Ram_Cached_Label" xml:space="preserve">
-    <value>已快取：</value>
-  </data>
-  <data name="PerformancePage_Ram_PagedPool_Label" xml:space="preserve">
-    <value>分頁集區：</value>
-  </data>
-  <data name="PerformancePage_Ram_NonPagedPool_Label" xml:space="preserve">
-    <value>非分頁集區：</value>
-  </data>
-  <data name="PerformancePage_Ram_Compressed_Label" xml:space="preserve">
-    <value>已壓縮：</value>
-  </data>
-  <data name="PerformancePage_Ram_HardwareReserved_Label" xml:space="preserve">
-    <value>硬體保留：</value>
-  </data>
-  <data name="PerformancePage_Ram_Speed_Label" xml:space="preserve">
-    <value>速度：</value>
-  </data>
-  <data name="PerformancePage_Ram_Slots_Label" xml:space="preserve">
-    <value>插槽使用：</value>
-  </data>
-  <data name="PerformancePage_Ram_FormFactor_Label" xml:space="preserve">
-    <value>尺寸規格：</value>
-  </data>
-  <data name="PerformancePage_Disk_ReadSpeed_Label" xml:space="preserve">
-    <value>讀取速度：</value>
-  </data>
-  <data name="PerformancePage_Disk_WriteSpeed_Label" xml:space="preserve">
-    <value>寫入速度：</value>
-  </data>
-  <data name="PerformancePage_Disk_ResponseTime_Label" xml:space="preserve">
-    <value>平均回應時間：</value>
-  </data>
-  <data name="PerformancePage_Disk_ActiveTime_Label" xml:space="preserve">
-    <value>作用中時間：</value>
-  </data>
-  <data name="PerformancePage_Disk_UsedSpace_Label" xml:space="preserve">
-    <value>已用空間：</value>
-  </data>
-  <data name="PerformancePage_Disk_FreeSpace_Label" xml:space="preserve">
-    <value>可用空間：</value>
-  </data>
-  <data name="PerformancePage_Disk_TotalCapacity_Label" xml:space="preserve">
-    <value>總容量：</value>
-  </data>
-  <data name="PerformancePage_Disk_UsagePercent_Label" xml:space="preserve">
-    <value>空間使用率：</value>
-  </data>
-  <data name="PerformancePage_Disk_DriveLetter_Label" xml:space="preserve">
-    <value>磁碟機代號：</value>
-  </data>
-  <data name="PerformancePage_Disk_VolumeLabel_Label" xml:space="preserve">
-    <value>磁碟標籤：</value>
-  </data>
-  <data name="PerformancePage_Disk_FileSystem_Label" xml:space="preserve">
-    <value>檔案系統：</value>
-  </data>
-  <data name="PerformancePage_Disk_DriveType_Label" xml:space="preserve">
-    <value>磁碟類型：</value>
-  </data>
-  <data name="PerformancePage_Gpu_CoreClock_Label" xml:space="preserve">
-    <value>核心時脈：</value>
-  </data>
-  <data name="PerformancePage_Gpu_MemoryClock_Label" xml:space="preserve">
-    <value>記憶體時脈：</value>
-  </data>
-  <data name="PerformancePage_Gpu_Temp_Label" xml:space="preserve">
-    <value>溫度：</value>
-  </data>
-  <data name="PerformancePage_Gpu_DedicatedMem_Label" xml:space="preserve">
-    <value>專屬 GPU 記憶體：</value>
-  </data>
-  <data name="PerformancePage_Gpu_SharedMem_Label" xml:space="preserve">
-    <value>共用 GPU 記憶體：</value>
-  </data>
-  <data name="PerformancePage_Gpu_TotalMem_Label" xml:space="preserve">
-    <value>GPU 記憶體總計：</value>
-  </data>
-  <data name="PerformancePage_Gpu_ReservedMem_Label" xml:space="preserve">
-    <value>硬體保留記憶體：</value>
-  </data>
-  <data name="PerformancePage_Gpu_DriverVersion_Label" xml:space="preserve">
-    <value>驅動程式版本：</value>
-  </data>
-  <data name="PerformancePage_Gpu_DriverDate_Label" xml:space="preserve">
-    <value>驅動程式日期：</value>
-  </data>
-  <data name="PerformancePage_Gpu_DirectX_Label" xml:space="preserve">
-    <value>DirectX 版本：</value>
-  </data>
-  <data name="PerformancePage_Gpu_Location_Label" xml:space="preserve">
-    <value>實體位置：</value>
-  </data>
   <data name="PerformancePage_Copy_CpuHeader" xml:space="preserve">
     <value>【CPU 硬體資訊】</value>
   </data>
@@ -1666,24 +1324,6 @@
   <data name="PerformancePage_Copy_Specs" xml:space="preserve">
     <value>規格：{0}</value>
   </data>
-  <data name="PerformancePage_Stat_Usage_Label" xml:space="preserve">
-    <value>使用率：</value>
-  </data>
-  <data name="PerformancePage_Stat_Speed_Label" xml:space="preserve">
-    <value>速度：</value>
-  </data>
-  <data name="PerformancePage_Stat_InUse_Label" xml:space="preserve">
-    <value>使用中：</value>
-  </data>
-  <data name="PerformancePage_Stat_Available_Label" xml:space="preserve">
-    <value>可用空間：</value>
-  </data>
-  <data name="PerformancePage_Stat_ActiveTime_Label" xml:space="preserve">
-    <value>作用中時間：</value>
-  </data>
-  <data name="PerformancePage_Stat_ResponseTime_Label" xml:space="preserve">
-    <value>平均回應時間：</value>
-  </data>
   <data name="PerformancePage_CopyAll_Cpu_Tooltip" xml:space="preserve">
     <value>複製 CPU 所有硬體資訊</value>
   </data>
@@ -1698,9 +1338,6 @@
   </data>
   <data name="PerformancePage_Cpu_Clock.Text" xml:space="preserve">
     <value>目前時脈</value>
-  </data>
-  <data name="PerformancePage_Cpu_Temp.Text" xml:space="preserve">
-    <value>溫度</value>
   </data>
   <data name="PerformancePage_Cpu_Processes.Text" xml:space="preserve">
     <value>處理程序</value>

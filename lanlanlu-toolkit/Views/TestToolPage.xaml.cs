@@ -43,7 +43,7 @@ namespace lanlanlu_toolkit.Views
             AllTools.Add(new ToolItem
             {
                 Title = LocalizationHelper.GetString("Nav_SystemRepairPage/Content"),
-                Description = LocalizationHelper.GetString("SystemRepairPage_AutoMode_Desc/Text"),
+                Description = LocalizationHelper.GetString("SystemRepairPage_Desc/Text"),
                 Icon = "\uE762",
                 Tag = "SystemRepairPage",
                 Category = LocalizationHelper.GetString("ToolHub_Tag_System/Text")

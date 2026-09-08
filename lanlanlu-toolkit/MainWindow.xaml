@@ -47,7 +47,7 @@
                 <NavigationViewItem Tag="HomePage" Icon="Home" x:Uid="Nav_HomePage" />
                 <NavigationViewItem Tag="PerformancePage" x:Uid="Shell_Performance">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE9D2;" />
+                        <FontIcon Glyph="&#xE9D9;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Tag="TestToolPage" x:Uid="Nav_TestToolPage">
