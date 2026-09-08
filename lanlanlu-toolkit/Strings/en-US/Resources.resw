@@ -1,13 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<root 
-  
-  
-  
-  xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" 
-  
-  
-  
-  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:element name="root" ns1:IsDataSet="true">
       <xs:complexType>
@@ -927,16 +919,16 @@
     <value>File Hash Verification</value>
   </data>
   <data name="FileHashPage_Desc.Text" xml:space="preserve">
-    <value>Quickly calculate and verify file SHA-256, SHA-1, or MD5 hash values.</value>
+    <value>Quickly calculate and verify file SHA-256, SHA-1, MD5, or SHA-512 hash values.</value>
   </data>
-  <data name="FileHashPage_SelectFile.Content" xml:space="preserve">
-    <value>Select File</value>
+  <data name="FileHashPage_SelectFile.Text" xml:space="preserve">
+    <value>Browse File</value>
   </data>
   <data name="FileHashPage_DragDropPrompt.Text" xml:space="preserve">
-    <value>Select a file to calculate</value>
+    <value>Drag and drop file here, or click to browse</value>
   </data>
   <data name="FileHashPage_SelectFileCardDesc.Text" xml:space="preserve">
-    <value>Select a file from your computer to calculate and compare its hash codes.</value>
+    <value>Supports any file format. Computes SHA-256, SHA-1, MD5, and SHA-512 checksums automatically.</value>
   </data>
   <data name="FileHashPage_Algorithm.Text" xml:space="preserve">
     <value>Hash Algorithm</value>
@@ -951,9 +943,9 @@
     <value>Paste &amp; Verify</value>
   </data>
   <data name="FileHashPage_CopyButton.Text" xml:space="preserve">
-    <value>Copy Result</value>
+    <value>Copy</value>
   </data>
-  <data name="FileHashPage_CalculateButton.Content" xml:space="preserve">
+  <data name="FileHashPage_CalculateButton.Text" xml:space="preserve">
     <value>Recalculate</value>
   </data>
   <data name="FileHashPage_VerifySuccess" xml:space="preserve">
@@ -975,10 +967,10 @@
     <value>After selecting a file and calculating, the hash result will be displayed here...</value>
   </data>
   <data name="FileHashPage_Compare_Desc.Text" xml:space="preserve">
-    <value>Paste the expected hash here, and the system will verify it in real-time, ignoring case.</value>
+    <value>Enter or paste expected hash value; system will match against all calculated results.</value>
   </data>
   <data name="FileHashPage_CompareInput.PlaceholderText" xml:space="preserve">
-    <value>Enter or paste the expected hash to compare...</value>
+    <value>Enter or paste expected hash here...</value>
   </data>
   <data name="FileHashPage_DialogTitle" xml:space="preserve">
     <value>Select a file to calculate hash</value>
@@ -992,13 +984,13 @@
   <data name="FileHashPage_VerifyFail_Title" xml:space="preserve">
     <value>Verification Failed</value>
   </data>
-  <data name="FileHashPage_Section_SelectFile" xml:space="preserve">
+  <data name="FileHashPage_Section_SelectFile.Text" xml:space="preserve">
     <value>Select File</value>
   </data>
-  <data name="FileHashPage_Section_Calculate" xml:space="preserve">
-    <value>Calculate Hash</value>
+  <data name="FileHashPage_Section_Calculate.Text" xml:space="preserve">
+    <value>Calculation Results</value>
   </data>
-  <data name="FileHashPage_Section_Verify" xml:space="preserve">
+  <data name="FileHashPage_Section_Verify.Text" xml:space="preserve">
     <value>Verify &amp; Compare</value>
   </data>
   <data name="FileHashPage_CalculationCancelled" xml:space="preserve">
@@ -1514,4 +1506,4 @@
   <data name="SystemRepairPage_AdvancedTools_Header.Text" xml:space="preserve">
     <value>Individual Tools</value>
   </data>
-</root>
+<data name="FileHashPage_ChangeFile.Text" xml:space="preserve"><value>Change File</value></data><data name="FileHashPage_ClearFile" xml:space="preserve"><value>Clear File</value></data><data name="FileHashPage_CopyAll.Text" xml:space="preserve"><value>Copy All</value></data><data name="FileHashPage_CopyAll_Success" xml:space="preserve"><value>All algorithm hashes copied to clipboard.</value></data><data name="FileHashPage_MatchTag.Text" xml:space="preserve"><value>Match</value></data><data name="FileHashPage_MatchSuccess_Format" xml:space="preserve"><value>Verification successful: Exact match with {0}.</value></data><data name="FileHashPage_MatchFail" xml:space="preserve"><value>No match: Does not match any calculated algorithm hash.</value></data><data name="FileHashPage_MatchPending" xml:space="preserve"><value>Enter or paste a hash value for real-time comparison.</value></data><data name="FileHashPage_DragDrop_Caption" xml:space="preserve"><value>Drop to calculate hash</value></data><data name="FileHashPage_Algorithm_Sha256_Tag.Text" xml:space="preserve"><value>High Security · Recommended</value></data><data name="FileHashPage_Algorithm_Sha1_Tag.Text" xml:space="preserve"><value>Legacy Compatibility</value></data><data name="FileHashPage_Algorithm_Md5_Tag.Text" xml:space="preserve"><value>Fast Checksum</value></data><data name="FileHashPage_Algorithm_Sha512_Tag.Text" xml:space="preserve"><value>Maximum Strength</value></data><data name="FileHashPage_Algorithm_Pending" xml:space="preserve"><value>Pending calculation...</value></data><data name="FileHashPage_ClearInput" xml:space="preserve"><value>Clear text</value></data></root>

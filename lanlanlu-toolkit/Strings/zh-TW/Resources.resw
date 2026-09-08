@@ -1,11 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<root 
-  
-  
-  xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" 
-  
-  
-  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:element name="root" ns1:IsDataSet="true">
       <xs:complexType>
@@ -925,16 +919,16 @@
     <value>檔案雜湊驗證</value>
   </data>
   <data name="FileHashPage_Desc.Text" xml:space="preserve">
-    <value>快速計算與驗證檔案的 SHA-256、SHA-1 或 MD5 雜湊值。</value>
+    <value>快速計算與驗證檔案的 SHA-256、SHA-1、MD5 或 SHA-512 雜湊值。</value>
   </data>
-  <data name="FileHashPage_SelectFile.Content" xml:space="preserve">
-    <value>選擇檔案</value>
+  <data name="FileHashPage_SelectFile.Text" xml:space="preserve">
+    <value>瀏覽檔案</value>
   </data>
   <data name="FileHashPage_DragDropPrompt.Text" xml:space="preserve">
-    <value>選擇要計算的檔案</value>
+    <value>拖放檔案至此處，或點擊瀏覽選取</value>
   </data>
   <data name="FileHashPage_SelectFileCardDesc.Text" xml:space="preserve">
-    <value>從您的電腦中選取一個檔案，系統會即時為您計算並比對對應的雜湊值。</value>
+    <value>支援任意格式檔案，將自動計算 SHA-256、SHA-1、MD5 與 SHA-512 雜湊值。</value>
   </data>
   <data name="FileHashPage_Algorithm.Text" xml:space="preserve">
     <value>雜湊演算法</value>
@@ -943,15 +937,15 @@
     <value>雜湊結果</value>
   </data>
   <data name="FileHashPage_Compare.Text" xml:space="preserve">
-    <value>對比驗證雜湊值（不區分大小寫）</value>
+    <value>比對驗證雜湊值（不區分大小寫）</value>
   </data>
   <data name="FileHashPage_CompareButton.Text" xml:space="preserve">
     <value>貼上比對</value>
   </data>
   <data name="FileHashPage_CopyButton.Text" xml:space="preserve">
-    <value>複製結果</value>
+    <value>複製</value>
   </data>
-  <data name="FileHashPage_CalculateButton.Content" xml:space="preserve">
+  <data name="FileHashPage_CalculateButton.Text" xml:space="preserve">
     <value>重新計算</value>
   </data>
   <data name="FileHashPage_VerifySuccess" xml:space="preserve">
@@ -973,10 +967,10 @@
     <value>選擇檔案並計算後，雜湊結果會在此處顯示……</value>
   </data>
   <data name="FileHashPage_Compare_Desc.Text" xml:space="preserve">
-    <value>在此貼上您預期比對的雜湊值，系統會即時進行無大小寫差異的比對驗證。</value>
+    <value>輸入或貼上預期的雜湊值，系統將即時比對上述演算法結果。</value>
   </data>
   <data name="FileHashPage_CompareInput.PlaceholderText" xml:space="preserve">
-    <value>輸入或貼上預期的雜湊值以進行比對……</value>
+    <value>在此輸入或貼上預期的雜湊值……</value>
   </data>
   <data name="FileHashPage_DialogTitle" xml:space="preserve">
     <value>選擇要計算雜湊值的檔案</value>
@@ -990,13 +984,13 @@
   <data name="FileHashPage_VerifyFail_Title" xml:space="preserve">
     <value>驗證失敗</value>
   </data>
-  <data name="FileHashPage_Section_SelectFile" xml:space="preserve">
+  <data name="FileHashPage_Section_SelectFile.Text" xml:space="preserve">
     <value>選擇檔案</value>
   </data>
-  <data name="FileHashPage_Section_Calculate" xml:space="preserve">
-    <value>計算雜湊值</value>
+  <data name="FileHashPage_Section_Calculate.Text" xml:space="preserve">
+    <value>計算結果</value>
   </data>
-  <data name="FileHashPage_Section_Verify" xml:space="preserve">
+  <data name="FileHashPage_Section_Verify.Text" xml:space="preserve">
     <value>比對驗證</value>
   </data>
   <data name="FileHashPage_CalculationCancelled" xml:space="preserve">
@@ -1512,4 +1506,4 @@
   <data name="SystemRepairPage_AdvancedTools_Header.Text" xml:space="preserve">
     <value>單獨執行工具</value>
   </data>
-</root>
+<data name="FileHashPage_ChangeFile.Text" xml:space="preserve"><value>更換檔案</value></data><data name="FileHashPage_ClearFile" xml:space="preserve"><value>清除檔案</value></data><data name="FileHashPage_CopyAll.Text" xml:space="preserve"><value>複製全部</value></data><data name="FileHashPage_CopyAll_Success" xml:space="preserve"><value>已複製全部演算法雜湊值至剪貼簿。</value></data><data name="FileHashPage_MatchTag.Text" xml:space="preserve"><value>相符</value></data><data name="FileHashPage_MatchSuccess_Format" xml:space="preserve"><value>驗證成功：與 {0} 雜湊值完全相符。</value></data><data name="FileHashPage_MatchFail" xml:space="preserve"><value>比對不相符：未符合任何已計算之演算法雜湊值。</value></data><data name="FileHashPage_MatchPending" xml:space="preserve"><value>請輸入或貼上雜湊值以進行即時比對。</value></data><data name="FileHashPage_DragDrop_Caption" xml:space="preserve"><value>放置以計算雜湊值</value></data><data name="FileHashPage_Algorithm_Sha256_Tag.Text" xml:space="preserve"><value>高度安全 · 建議使用</value></data><data name="FileHashPage_Algorithm_Sha1_Tag.Text" xml:space="preserve"><value>舊版相容</value></data><data name="FileHashPage_Algorithm_Md5_Tag.Text" xml:space="preserve"><value>快速驗證</value></data><data name="FileHashPage_Algorithm_Sha512_Tag.Text" xml:space="preserve"><value>極高強度</value></data><data name="FileHashPage_Algorithm_Pending" xml:space="preserve"><value>等待計算……</value></data><data name="FileHashPage_ClearInput" xml:space="preserve"><value>清除比對文字</value></data></root>

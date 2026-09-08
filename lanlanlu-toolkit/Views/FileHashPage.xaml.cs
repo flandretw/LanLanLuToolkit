@@ -2,6 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -16,8 +17,8 @@ namespace lanlanlu_toolkit.Views
     public sealed partial class FileHashPage : Page
     {
         private string? _selectedFilePath;
-        private string _calculatedHash = string.Empty;
-        private CancellationTokenSource? _hashCancellationTokenSource;
+        private readonly Dictionary<string, string> _calculatedHashes = new(StringComparer.OrdinalIgnoreCase);
+        private CancellationTokenSource? _hashCts;
 
         [DllImport("user32.dll")]
         private static extern IntPtr GetActiveWindow();
@@ -26,51 +27,57 @@ namespace lanlanlu_toolkit.Views
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
-            InitializeLocalization();
+            ToolTipService.SetToolTip(ClearFileBtn, LocalizationHelper.GetString("FileHashPage_ClearFile"));
+            ToolTipService.SetToolTip(ClearCompareBtn, LocalizationHelper.GetString("FileHashPage_ClearInput"));
+            ResetHashTextBoxPlaceholders();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            if (_hashCancellationTokenSource != null)
-            {
-                _hashCancellationTokenSource.Cancel();
-                _hashCancellationTokenSource.Dispose();
-                _hashCancellationTokenSource = null;
-            }
+            CancelOngoingHashCalculation();
         }
 
-        private void InitializeLocalization()
+        private void ResetHashTextBoxPlaceholders()
         {
-            PageHeaderTitleTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Title/Text");
-            PageHeaderDescTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Desc/Text");
-            
-            SectionSelectFileTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Section_SelectFile");
-            DragDropPromptTextBlock.Text = LocalizationHelper.GetString("FileHashPage_DragDropPrompt/Text");
-            SelectFileCardDescTextBlock.Text = LocalizationHelper.GetString("FileHashPage_SelectFileCardDesc/Text");
-            SelectFileBtn.Content = LocalizationHelper.GetString("FileHashPage_SelectFile/Content");
-            
-            SectionCalculateTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Section_Calculate");
-            AlgorithmLabel.Text = LocalizationHelper.GetString("FileHashPage_Algorithm/Text");
-            AlgorithmDescLabel.Text = LocalizationHelper.GetString("FileHashPage_Algorithm_Desc/Text");
-            CalculateBtn.Content = LocalizationHelper.GetString("FileHashPage_CalculateButton/Content");
-            ProgressStatusText.Text = LocalizationHelper.GetString("FileHashPage_Calculating");
-            
-            ResultTextBox.Header = LocalizationHelper.GetString("FileHashPage_Result/Header");
-            ResultTextBox.PlaceholderText = LocalizationHelper.GetString("FileHashPage_Result/PlaceholderText");
-            CopyBtnText.Text = LocalizationHelper.GetString("FileHashPage_CopyButton/Text");
-            
-            SectionVerifyTextBlock.Text = LocalizationHelper.GetString("FileHashPage_Section_Verify");
-            CompareLabel.Text = LocalizationHelper.GetString("FileHashPage_Compare/Text");
-            CompareDescLabel.Text = LocalizationHelper.GetString("FileHashPage_Compare_Desc/Text");
-            CompareTextBox.PlaceholderText = LocalizationHelper.GetString("FileHashPage_CompareInput/PlaceholderText");
-            VerifyBtnText.Text = LocalizationHelper.GetString("FileHashPage_CompareButton/Text");
+            string pendingText = LocalizationHelper.GetString("FileHashPage_Algorithm_Pending") ?? "Pending calculation...";
+            Sha256TextBox.Text = pendingText;
+            Sha1TextBox.Text = pendingText;
+            Md5TextBox.Text = pendingText;
+            Sha512TextBox.Text = pendingText;
 
-            // Context Menu Localization
-            if (ResultCopyMenu != null) ResultCopyMenu.Text = LocalizationHelper.GetString("System_Copy");
-            if (CompareCutMenu != null) CompareCutMenu.Text = LocalizationHelper.GetString("System_Cut");
-            if (CompareCopyMenu != null) CompareCopyMenu.Text = LocalizationHelper.GetString("System_Copy");
-            if (ComparePasteMenu != null) ComparePasteMenu.Text = LocalizationHelper.GetString("System_Paste");
+            Sha256MatchBadge.Visibility = Visibility.Collapsed;
+            Sha1MatchBadge.Visibility = Visibility.Collapsed;
+            Md5MatchBadge.Visibility = Visibility.Collapsed;
+            Sha512MatchBadge.Visibility = Visibility.Collapsed;
+        }
+
+        private void FileCard_DragOver(object sender, DragEventArgs e)
+        {
+            e.AcceptedOperation = DataPackageOperation.Copy;
+            e.DragUIOverride.Caption = LocalizationHelper.GetString("FileHashPage_DragDrop_Caption") ?? "Drop to calculate hash";
+            e.DragUIOverride.IsCaptionVisible = true;
+            e.DragUIOverride.IsContentVisible = true;
+        }
+
+        private async void FileCard_Drop(object sender, DragEventArgs e)
+        {
+            if (e.DataView.Contains(StandardDataFormats.StorageItems))
+            {
+                try
+                {
+                    var items = await e.DataView.GetStorageItemsAsync();
+                    if (items.Count > 0 && items[0] is Windows.Storage.StorageFile file)
+                    {
+                        await ProcessSelectedFilePath(file.Path);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"File drop error: {ex.Message}");
+                    ShowErrorNotification(ex.Message);
+                }
+            }
         }
 
         private async void SelectFileBtn_Click(object sender, RoutedEventArgs e)
@@ -95,7 +102,28 @@ namespace lanlanlu_toolkit.Views
                 ShowErrorNotification(ex.Message);
             }
         }
-        
+
+        private void ClearFileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CancelOngoingHashCalculation();
+
+            _selectedFilePath = null;
+            _calculatedHashes.Clear();
+
+            FileDetailsCard.Visibility = Visibility.Collapsed;
+            FileDropZoneCard.Visibility = Visibility.Visible;
+
+            ResetHashTextBoxPlaceholders();
+            RecalculateBtn.IsEnabled = false;
+            CopyAllBtn.IsEnabled = false;
+            CopySha256Btn.IsEnabled = false;
+            CopySha1Btn.IsEnabled = false;
+            CopyMd5Btn.IsEnabled = false;
+            CopySha512Btn.IsEnabled = false;
+
+            CompareTextBox.Text = string.Empty;
+            VerifyStatusCard.Visibility = Visibility.Collapsed;
+        }
 
         private async Task ProcessSelectedFilePath(string filePath)
         {
@@ -109,138 +137,210 @@ namespace lanlanlu_toolkit.Views
             }
 
             _selectedFilePath = filePath;
-            _calculatedHash = string.Empty;
-            ResultTextBox.Text = string.Empty;
-            CompareTextBox.Text = string.Empty;
-            VerifyResultInfoBar.IsOpen = false;
+            _calculatedHashes.Clear();
 
-            // Get File Properties using standard System.IO
+            // Populate File Metadata Card
             var fileInfo = new FileInfo(filePath);
-            
-            // Display File Details
             FileNameText.Text = fileInfo.Name;
             FilePathText.Text = fileInfo.FullName;
-            FileSizeText.Text = $"{LocalizationHelper.GetString("FileHashPage_FileSize")}{FormatFileSize((ulong)fileInfo.Length)} ({fileInfo.Length:N0} bytes)";
+            FileSizeText.Text = $"{LocalizationHelper.GetString("FileHashPage_FileSize")} {FormatFileSize((ulong)fileInfo.Length)} ({fileInfo.Length:N0} bytes)";
+
+            FileDropZoneCard.Visibility = Visibility.Collapsed;
             FileDetailsCard.Visibility = Visibility.Visible;
 
-            // Enable action buttons
-            CalculateBtn.IsEnabled = true;
-            VerifyBtn.IsEnabled = false;
-            CopyBtn.IsEnabled = false;
+            ResetHashTextBoxPlaceholders();
+            VerifyStatusCard.Visibility = Visibility.Collapsed;
 
-            // Trigger Hash Calculation Automatically
+            // Trigger parallel multi-algorithm hash calculation
             await RunHashCalculation();
         }
 
-        private async void CalculateBtn_Click(object sender, RoutedEventArgs e)
+        private async void RecalculateBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (_hashCancellationTokenSource != null)
+            if (_hashCts != null)
             {
-                // Calculation is in progress, request cancellation!
-                _hashCancellationTokenSource.Cancel();
+                CancelOngoingHashCalculation();
                 return;
             }
 
             await RunHashCalculation();
         }
 
+        private void CancelOngoingHashCalculation()
+        {
+            if (_hashCts != null)
+            {
+                _hashCts.Cancel();
+                _hashCts.Dispose();
+                _hashCts = null;
+            }
+        }
+
         private async Task RunHashCalculation()
         {
             if (string.IsNullOrEmpty(_selectedFilePath)) return;
 
-            string algorithm = "SHA256";
-            if (AlgorithmComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag != null)
+            CancelOngoingHashCalculation();
+            _hashCts = new CancellationTokenSource();
+            var token = _hashCts.Token;
+
+            // UI State: Starting calculation
+            HashProgressRing.IsActive = true;
+            HashProgressRing.Visibility = Visibility.Visible;
+            HashProgressBar.Visibility = Visibility.Visible;
+            HashProgressBar.Value = 0;
+            HashProgressPercentText.Visibility = Visibility.Visible;
+            HashProgressPercentText.Text = "0%";
+
+            RecalculateBtn.IsEnabled = true;
+            RecalculateIcon.Glyph = "\uE711"; // Cancel icon
+            RecalculateBtnText.Text = LocalizationHelper.GetString("System_Cancel") ?? "Cancel";
+
+            CopyAllBtn.IsEnabled = false;
+            CopySha256Btn.IsEnabled = false;
+            CopySha1Btn.IsEnabled = false;
+            CopyMd5Btn.IsEnabled = false;
+            CopySha512Btn.IsEnabled = false;
+
+            string calcText = LocalizationHelper.GetString("FileHashPage_Calculating") ?? "Calculating...";
+            Sha256TextBox.Text = calcText;
+            Sha1TextBox.Text = calcText;
+            Md5TextBox.Text = calcText;
+            Sha512TextBox.Text = calcText;
+
+            var progress = new Progress<int>(percent =>
             {
-                algorithm = selectedItem.Tag.ToString()!;
-            }
-
-            // Create cancellation token
-            _hashCancellationTokenSource = new CancellationTokenSource();
-            var token = _hashCancellationTokenSource.Token;
-
-            // UI feedback
-            ProgressGrid.Visibility = Visibility.Visible;
-            CalculateBtn.Content = LocalizationHelper.GetString("System_Cancel");
-            CalculateBtn.IsEnabled = true; // Keep enabled for cancellation!
-            SelectFileBtn.IsEnabled = false;
-            AlgorithmComboBox.IsEnabled = false;
-            ResultTextBox.Text = LocalizationHelper.GetString("FileHashPage_Calculating");
+                HashProgressBar.Value = percent;
+                HashProgressPercentText.Text = $"{percent}%";
+            });
 
             try
             {
-                _calculatedHash = await CalculateHashAsync(_selectedFilePath, algorithm, token);
+                var results = await CalculateHashesAsync(_selectedFilePath, progress, token);
 
-                if (string.IsNullOrEmpty(_calculatedHash))
+                if (results == null)
                 {
-                    // Hashing was cancelled!
-                    ResultTextBox.Text = LocalizationHelper.GetString("FileHashPage_CalculationCancelled");
-                    CopyBtn.IsEnabled = false;
-                    VerifyBtn.IsEnabled = false;
-                    VerifyResultInfoBar.IsOpen = false;
+                    // Calculation was cancelled
+                    string cancelledText = LocalizationHelper.GetString("FileHashPage_CalculationCancelled") ?? "Calculation cancelled.";
+                    Sha256TextBox.Text = cancelledText;
+                    Sha1TextBox.Text = cancelledText;
+                    Md5TextBox.Text = cancelledText;
+                    Sha512TextBox.Text = cancelledText;
                     return;
                 }
-                
-                ResultTextBox.Text = _calculatedHash;
-                CopyBtn.IsEnabled = true;
-                VerifyBtn.IsEnabled = true;
 
-                // Perform verification if user has already entered verification text
+                _calculatedHashes.Clear();
+                foreach (var kvp in results)
+                {
+                    _calculatedHashes[kvp.Key] = kvp.Value;
+                }
+
+                Sha256TextBox.Text = _calculatedHashes.GetValueOrDefault("SHA256", string.Empty);
+                Sha1TextBox.Text = _calculatedHashes.GetValueOrDefault("SHA1", string.Empty);
+                Md5TextBox.Text = _calculatedHashes.GetValueOrDefault("MD5", string.Empty);
+                Sha512TextBox.Text = _calculatedHashes.GetValueOrDefault("SHA512", string.Empty);
+
+                CopyAllBtn.IsEnabled = true;
+                CopySha256Btn.IsEnabled = true;
+                CopySha1Btn.IsEnabled = true;
+                CopyMd5Btn.IsEnabled = true;
+                CopySha512Btn.IsEnabled = true;
+
                 PerformHashVerification();
             }
             catch (Exception ex)
             {
-                ResultTextBox.Text = $"{LocalizationHelper.GetString("Notification_Error")}: {ex.Message}";
                 ShowErrorNotification(ex.Message);
+                ResetHashTextBoxPlaceholders();
             }
             finally
             {
-                ProgressGrid.Visibility = Visibility.Collapsed;
-                CalculateBtn.Content = LocalizationHelper.GetString("FileHashPage_CalculateButton/Content");
-                SelectFileBtn.IsEnabled = true;
-                AlgorithmComboBox.IsEnabled = true;
-                _hashCancellationTokenSource?.Dispose();
-                _hashCancellationTokenSource = null;
+                HashProgressRing.IsActive = false;
+                HashProgressRing.Visibility = Visibility.Collapsed;
+                HashProgressBar.Visibility = Visibility.Collapsed;
+                HashProgressPercentText.Visibility = Visibility.Collapsed;
+
+                RecalculateIcon.Glyph = "\uE72C"; // Recalculate icon
+                RecalculateBtnText.Text = LocalizationHelper.GetString("FileHashPage_CalculateButton/Text") ?? "Recalculate";
+                RecalculateBtn.IsEnabled = true;
+
+                _hashCts?.Dispose();
+                _hashCts = null;
             }
         }
 
-        private async Task<string> CalculateHashAsync(string filePath, string algorithm, CancellationToken cancellationToken)
+        private static async Task<Dictionary<string, string>?> CalculateHashesAsync(
+            string filePath,
+            IProgress<int>? progress,
+            CancellationToken cancellationToken)
         {
             return await Task.Run(() =>
             {
-                using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 262144, FileOptions.SequentialScan);
-                using HashAlgorithm hasher = algorithm.ToUpper() switch
-                {
-                    "SHA256" => SHA256.Create(),
-                    "SHA1" => SHA1.Create(),
-                    "MD5" => MD5.Create(),
-                    "SHA512" => SHA512.Create(),
-                    _ => throw new ArgumentException("Unsupported algorithm")
-                };
+                var fileInfo = new FileInfo(filePath);
+                long totalBytes = fileInfo.Length;
+                long totalRead = 0;
 
+                using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 262144, FileOptions.SequentialScan);
+                using var sha256 = SHA256.Create();
+                using var sha1 = SHA1.Create();
+                using var md5 = MD5.Create();
+                using var sha512 = SHA512.Create();
+
+                var hashers = new HashAlgorithm[] { sha256, sha1, md5, sha512 };
                 byte[] buffer = System.Buffers.ArrayPool<byte>.Shared.Rent(262144);
+
                 try
                 {
                     int bytesRead;
+                    int lastReportedPercent = -1;
+
                     while ((bytesRead = stream.Read(buffer, 0, 262144)) > 0)
                     {
                         if (cancellationToken.IsCancellationRequested)
                         {
-                            return string.Empty; // Return empty directly on cancellation (exception-less)
+                            return null;
                         }
 
-                        hasher.TransformBlock(buffer, 0, bytesRead, buffer, 0);
+                        for (int i = 0; i < hashers.Length; i++)
+                        {
+                            hashers[i].TransformBlock(buffer, 0, bytesRead, buffer, 0);
+                        }
+
+                        totalRead += bytesRead;
+                        if (totalBytes > 0 && progress != null)
+                        {
+                            int currentPercent = (int)((double)totalRead * 100 / totalBytes);
+                            if (currentPercent != lastReportedPercent)
+                            {
+                                lastReportedPercent = currentPercent;
+                                progress.Report(currentPercent);
+                            }
+                        }
                     }
 
-                    // Finalize the hashing process
-                    hasher.TransformFinalBlock(buffer, 0, 0);
-
-                    byte[] hashBytes = hasher.Hash ?? throw new InvalidOperationException("Hash computation failed");
-                    var sb = new StringBuilder(hashBytes.Length * 2);
-                    foreach (byte b in hashBytes)
+                    for (int i = 0; i < hashers.Length; i++)
                     {
-                        sb.Append(b.ToString("x2"));
+                        hashers[i].TransformFinalBlock(buffer, 0, 0);
                     }
-                    return sb.ToString();
+
+                    static string ToHexString(byte[]? bytes)
+                    {
+                        if (bytes == null) return string.Empty;
+                        var sb = new StringBuilder(bytes.Length * 2);
+                        foreach (byte b in bytes)
+                        {
+                            sb.Append(b.ToString("x2"));
+                        }
+                        return sb.ToString();
+                    }
+
+                    return new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                    {
+                        ["SHA256"] = ToHexString(sha256.Hash),
+                        ["SHA1"] = ToHexString(sha1.Hash),
+                        ["MD5"] = ToHexString(md5.Hash),
+                        ["SHA512"] = ToHexString(sha512.Hash)
+                    };
                 }
                 finally
                 {
@@ -249,23 +349,61 @@ namespace lanlanlu_toolkit.Views
             }, cancellationToken);
         }
 
-        private async void AlgorithmComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CopySha256Btn_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(_selectedFilePath))
-            {
-                await RunHashCalculation();
-            }
+            CopySingleHash(_calculatedHashes.GetValueOrDefault("SHA256", string.Empty), CopySha256Icon);
         }
 
-        private void CopyBtn_Click(object sender, RoutedEventArgs e)
+        private void CopySha1Btn_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(_calculatedHash)) return;
+            CopySingleHash(_calculatedHashes.GetValueOrDefault("SHA1", string.Empty), CopySha1Icon);
+        }
+
+        private void CopyMd5Btn_Click(object sender, RoutedEventArgs e)
+        {
+            CopySingleHash(_calculatedHashes.GetValueOrDefault("MD5", string.Empty), CopyMd5Icon);
+        }
+
+        private void CopySha512Btn_Click(object sender, RoutedEventArgs e)
+        {
+            CopySingleHash(_calculatedHashes.GetValueOrDefault("SHA512", string.Empty), CopySha512Icon);
+        }
+
+        private async void CopySingleHash(string hash, FontIcon icon)
+        {
+            if (string.IsNullOrEmpty(hash)) return;
 
             var package = new DataPackage();
-            package.SetText(_calculatedHash);
+            package.SetText(hash);
             Clipboard.SetContent(package);
 
-            NotificationService.Show(LocalizationHelper.GetString("Notification_Success"), LocalizationHelper.GetString("SystemRepairPage_Copied"), InfoBarSeverity.Success);
+            icon.Glyph = "\uE73E"; // Checkmark icon
+            icon.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorSuccessBrush"];
+            await Task.Delay(1200);
+            icon.Glyph = "\uE8C8"; // Copy icon
+            icon.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+        }
+
+        private void CopyAllBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (_calculatedHashes.Count == 0) return;
+
+            var sb = new StringBuilder();
+            sb.AppendLine($"File: {FileNameText.Text}");
+            sb.AppendLine($"Path: {FilePathText.Text}");
+            sb.AppendLine($"Size: {FileSizeText.Text}");
+            sb.AppendLine();
+            sb.AppendLine($"SHA-256: {_calculatedHashes.GetValueOrDefault("SHA256", string.Empty)}");
+            sb.AppendLine($"SHA-1:   {_calculatedHashes.GetValueOrDefault("SHA1", string.Empty)}");
+            sb.AppendLine($"MD5:     {_calculatedHashes.GetValueOrDefault("MD5", string.Empty)}");
+            sb.AppendLine($"SHA-512: {_calculatedHashes.GetValueOrDefault("SHA512", string.Empty)}");
+
+            var package = new DataPackage();
+            package.SetText(sb.ToString());
+            Clipboard.SetContent(package);
+
+            string successMsg = LocalizationHelper.GetString("FileHashPage_CopyAll_Success") ?? "All hashes copied to clipboard.";
+            NotificationService.Show(LocalizationHelper.GetString("Notification_Success") ?? "Success", successMsg, InfoBarSeverity.Success);
         }
 
         private void CompareTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -273,7 +411,7 @@ namespace lanlanlu_toolkit.Views
             PerformHashVerification();
         }
 
-        private async void VerifyBtn_Click(object sender, RoutedEventArgs e)
+        private async void PasteCompareBtn_Click(object sender, RoutedEventArgs e)
         {
             var packageView = Clipboard.GetContent();
             if (packageView.Contains(StandardDataFormats.Text))
@@ -291,32 +429,81 @@ namespace lanlanlu_toolkit.Views
             PerformHashVerification();
         }
 
+        private void ClearCompareBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CompareTextBox.Text = string.Empty;
+        }
+
         private void PerformHashVerification()
         {
             string expectedHash = CompareTextBox.Text.Trim();
-            if (string.IsNullOrEmpty(expectedHash) || string.IsNullOrEmpty(_calculatedHash))
+
+            // Reset all match badges first
+            Sha256MatchBadge.Visibility = Visibility.Collapsed;
+            Sha1MatchBadge.Visibility = Visibility.Collapsed;
+            Md5MatchBadge.Visibility = Visibility.Collapsed;
+            Sha512MatchBadge.Visibility = Visibility.Collapsed;
+
+            if (string.IsNullOrEmpty(expectedHash))
             {
-                VerifyResultInfoBar.IsOpen = false;
+                VerifyStatusCard.Visibility = Visibility.Collapsed;
                 return;
             }
 
-            if (string.Equals(_calculatedHash, expectedHash, StringComparison.OrdinalIgnoreCase))
+            if (_calculatedHashes.Count == 0)
             {
-                VerifyResultInfoBar.Severity = InfoBarSeverity.Success;
-                VerifyResultInfoBar.Title = LocalizationHelper.GetString("FileHashPage_VerifySuccess_Title");
-                VerifyResultInfoBar.Message = LocalizationHelper.GetString("FileHashPage_VerifySuccess");
-                VerifyResultInfoBar.IsOpen = true;
+                VerifyStatusCard.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            string? matchedAlgorithm = null;
+            if (string.Equals(_calculatedHashes.GetValueOrDefault("SHA256"), expectedHash, StringComparison.OrdinalIgnoreCase))
+            {
+                matchedAlgorithm = "SHA-256";
+                Sha256MatchBadge.Visibility = Visibility.Visible;
+            }
+            else if (string.Equals(_calculatedHashes.GetValueOrDefault("SHA1"), expectedHash, StringComparison.OrdinalIgnoreCase))
+            {
+                matchedAlgorithm = "SHA-1";
+                Sha1MatchBadge.Visibility = Visibility.Visible;
+            }
+            else if (string.Equals(_calculatedHashes.GetValueOrDefault("MD5"), expectedHash, StringComparison.OrdinalIgnoreCase))
+            {
+                matchedAlgorithm = "MD5";
+                Md5MatchBadge.Visibility = Visibility.Visible;
+            }
+            else if (string.Equals(_calculatedHashes.GetValueOrDefault("SHA512"), expectedHash, StringComparison.OrdinalIgnoreCase))
+            {
+                matchedAlgorithm = "SHA-512";
+                Sha512MatchBadge.Visibility = Visibility.Visible;
+            }
+
+            VerifyStatusCard.Visibility = Visibility.Visible;
+
+            if (matchedAlgorithm != null)
+            {
+                VerifyStatusCard.Background = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorSuccessBackgroundBrush"];
+                VerifyStatusCard.BorderBrush = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorSuccessBrush"];
+                VerifyStatusIcon.Glyph = "\uE73E"; // Checkmark
+                VerifyStatusIcon.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorSuccessBrush"];
+
+                string format = LocalizationHelper.GetString("FileHashPage_MatchSuccess_Format") ?? "Verification successful: Exact match with {0}.";
+                VerifyStatusMessage.Text = string.Format(format, matchedAlgorithm);
+                VerifyStatusMessage.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorSuccessBrush"];
             }
             else
             {
-                VerifyResultInfoBar.Severity = InfoBarSeverity.Error;
-                VerifyResultInfoBar.Title = LocalizationHelper.GetString("FileHashPage_VerifyFail_Title");
-                VerifyResultInfoBar.Message = LocalizationHelper.GetString("FileHashPage_VerifyFail");
-                VerifyResultInfoBar.IsOpen = true;
+                VerifyStatusCard.Background = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorCriticalBackgroundBrush"];
+                VerifyStatusCard.BorderBrush = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorCriticalBrush"];
+                VerifyStatusIcon.Glyph = "\uE711"; // Cancel/Error cross
+                VerifyStatusIcon.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorCriticalBrush"];
+
+                VerifyStatusMessage.Text = LocalizationHelper.GetString("FileHashPage_MatchFail") ?? "No match: Does not match any calculated algorithm hash.";
+                VerifyStatusMessage.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorCriticalBrush"];
             }
         }
 
-        private string FormatFileSize(ulong sizeInBytes)
+        private static string FormatFileSize(ulong sizeInBytes)
         {
             string[] sizes = { "B", "KB", "MB", "GB", "TB" };
             double len = sizeInBytes;
@@ -329,83 +516,9 @@ namespace lanlanlu_toolkit.Views
             return $"{len:0.##} {sizes[order]}";
         }
 
-        private void ShowErrorNotification(string message)
+        private static void ShowErrorNotification(string message)
         {
             NotificationService.Show(LocalizationHelper.GetString("Notification_Error") ?? "Error", message, InfoBarSeverity.Error);
-        }
-
-        private void ResultCopyMenu_Click(object sender, RoutedEventArgs e)
-        {
-            CopyTextBoxContent(ResultTextBox);
-        }
-
-        private void CompareCutMenu_Click(object sender, RoutedEventArgs e)
-        {
-            CutTextBoxContent(CompareTextBox);
-        }
-
-        private void CompareCopyMenu_Click(object sender, RoutedEventArgs e)
-        {
-            CopyTextBoxContent(CompareTextBox);
-        }
-
-        private async void ComparePasteMenu_Click(object sender, RoutedEventArgs e)
-        {
-            await PasteTextBoxContentAsync(CompareTextBox);
-        }
-
-        private void CopyTextBoxContent(TextBox textBox)
-        {
-            string textToCopy = textBox.SelectedText;
-            if (string.IsNullOrEmpty(textToCopy))
-            {
-                textToCopy = textBox.Text;
-            }
-            if (string.IsNullOrEmpty(textToCopy)) return;
-
-            var package = new DataPackage();
-            package.SetText(textToCopy);
-            Clipboard.SetContent(package);
-        }
-
-        private void CutTextBoxContent(TextBox textBox)
-        {
-            string textToCut = textBox.SelectedText;
-            if (string.IsNullOrEmpty(textToCut)) return;
-
-            var package = new DataPackage();
-            package.SetText(textToCut);
-            Clipboard.SetContent(package);
-
-            int selectionStart = textBox.SelectionStart;
-            textBox.Text = textBox.Text.Remove(selectionStart, textBox.SelectionLength);
-            textBox.SelectionStart = selectionStart;
-        }
-
-        private async Task PasteTextBoxContentAsync(TextBox textBox)
-        {
-            var packageView = Clipboard.GetContent();
-            if (packageView.Contains(StandardDataFormats.Text))
-            {
-                try
-                {
-                    string textToPaste = await packageView.GetTextAsync();
-                    int selectionStart = textBox.SelectionStart;
-                    int selectionLength = textBox.SelectionLength;
-
-                    string currentText = textBox.Text ?? string.Empty;
-                    if (selectionLength > 0)
-                    {
-                        currentText = currentText.Remove(selectionStart, selectionLength);
-                    }
-                    textBox.Text = currentText.Insert(selectionStart, textToPaste);
-                    textBox.SelectionStart = selectionStart + textToPaste.Length;
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Paste Error: {ex.Message}");
-                }
-            }
         }
     }
 }
