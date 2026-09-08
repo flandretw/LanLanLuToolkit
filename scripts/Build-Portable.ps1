@@ -15,11 +15,16 @@ if (-not (Test-Path $ProjectDir)) {
     exit
 }
 
+if (Test-Path $OutputPath) {
+    Remove-Item -Path $OutputPath -Recurse -Force
+}
+
 dotnet publish "$ProjectDir\lanlanlu-toolkit.csproj" -c Release `
     -p:PublishProfile=$PublishProfile `
     -p:WindowsPackageType=None `
     -p:WindowsAppSDKSelfContained=true `
     -p:PublishTrimmed=false `
+    -p:PublishReadyToRun=false `
     -o $OutputPath
 
 if ($LASTEXITCODE -eq 0) {
