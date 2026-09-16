@@ -7,9 +7,9 @@
 [English](README.md) | [臺灣正體中文](README-zh_TW.md)
 
 > **Disclaimer**  
-> This project was forged using **Gemini "Vibe Coding"**, fueled by AI assistance and digital creativity. **Proceed with caution**! If the UI behaves unexpectedly or the code looks like an incantation, it is all part of the vibe.
+> This project was forged using **Gemini "Vibe Coding"**, fueled by AI magic and excessive amounts of digital fries. **Proceed with caution**! If the UI starts dancing or the code looks like a magical incantation, don't worry—it's just the vibe.
 
-"RAN RAN RU! Your WinUI 3 experience just got a dose of madness!"
+"Lan Lan Lu! Your Windows experience just got a dose of madness!"
 
 ## What is this chaotic masterpiece?
 
