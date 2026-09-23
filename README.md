@@ -2,7 +2,7 @@
   <img src="lanlanlu-toolkit/Assets/AppIcon.png" alt="LanLanLu Toolkit Icon" width="128">
 </p>
 
-# LanLanLu Toolkit (蘭蘭露工具箱)
+# LanLanLu Toolkit
 
 [English](README.md) | [臺灣正體中文](README-zh_TW.md)
 
@@ -11,58 +11,48 @@
 
 "Lan Lan Lu! Your Windows experience just got a dose of madness!"
 
-## What is this chaotic masterpiece?
+## What is this project?
 
-Are you tired of boring, gray, installer-bloated tools that take forever to set up? Do you crave the snap and pop of a modern Windows interface combined with the raw energy of a 2000s meme?
-
-The **LanLanLu Toolkit** is born for this! Built on the cutting-edge **WinUI 3** framework, it brings you a premium, portable experience that lives entirely in your pocket or your USB drive. No installation, no registry junk, just pure, unadulterated tool magic.
+LanLanLu Toolkit is a lightweight, portable Windows system maintenance and peripheral diagnostic toolbox built with WinUI 3. Combining modern fluent animations with the raw energy of 2000s meme culture, it runs without installation or registry clutter—just unpack, run, and take it with you anywhere on a USB drive.
 
 ## Features
 
 * **Hardware Performance Monitoring (Experimental)**  
-  We tried building hardware monitoring! While it is currently an experimental work-in-progress with rough usability and nowhere near the efficiency or polish of the native Windows Task Manager (seriously, just use Task Manager for serious diagnostics), it still gives you a quick snapshot of **CPU, GPU, RAM, and Disk** utilization, clock speeds, VRAM, and temperatures.  
-  > **Practical Use Case**: Quick casual glance at hardware specs without opening Task Manager, or exploring experimental hardware polling.
+  Provides a quick glance at CPU, GPU, RAM, and disk utilization, clock speeds, VRAM, and temperatures without opening Task Manager. This feature is currently experimental; for comprehensive diagnostics, Windows Task Manager remains the recommended choice.
 
 * **High-Velocity Input Diagnostics**  
-  Tailored for gamers and hardware enthusiasts with 60 fps responsive vector layouts and acoustic key feedback!  
-  * **Versatile Keyboard Testing**: Live switching between **104 Full-size / 87-key TKL / 61-key Compact** layouts, **NKRO (N-Key Rollover)** simultaneous key tracking, Virtual Key code (VK) inspection, and key chatter/interval warnings.  
-  * **Extreme Mouse Diagnostics**: Microswitch click counters, high-precision **Real-time Polling Rate (Hz)** calculator, scroll wheel delta measurement, **Switch Chatter Detection** (custom debounce threshold to spot double-click degradation), and real-time trajectory canvas.  
-  > **Practical Use Cases**: Verify NKRO on brand-new or second-hand keyboards, detect if an aging mouse switch is suffering from accidental double-clicking, and test if a gaming mouse sustains true 1000 Hz+ polling.
+  Tailored for gamers and hardware enthusiasts with 60 fps responsive vector layouts and acoustic key feedback.
+  * Keyboard Testing: Live switching between 104 full-size, 87-key TKL, and 61-key compact layouts with NKRO simultaneous key tracking, Virtual Key (VK) inspection, and key chatter warnings to verify rollover on new or secondhand gear.
+  * Mouse Diagnostics: Microswitch click counters, real-time polling rate (Hz) calculation, scroll wheel delta measurement, trajectory canvas, and customizable switch chatter debounce thresholds to detect double-click degradation.
 
-* **Crash & BSOD Destroyer**  
-  No need to download gigabytes of heavy debuggers; unravel system crash mysteries right inside a lightweight, elegant UI!  
-  * **Minidump Analysis**: Automatically scans `C:\Windows\Minidump`, parses BugCheck codes, timestamps, and offending driver modules (`.sys`).  
-  * **Critical Event Filtering**: Integrates with the Windows Event Log to extract recent critical crash events in real time.  
-  > **Practical Use Case**: When sudden Blue Screens (BSOD) or reboots happen, instantly pinpoint the faulty GPU driver, antivirus filter, or broken system component.
+* **Crash & BSOD Analysis**  
+  Investigate system crashes directly in a clean UI without installing gigabytes of debugging toolkits.
+  * Minidump Analysis: Automatically reads `C:\Windows\Minidump`, parsing BugCheck codes, timestamps, and offending driver modules (`.sys`).
+  * Critical Event Filtering: Integrates with Windows Event Log to extract recent critical crash events, helping pinpoint faulty drivers or hardware conflicts immediately after a sudden reboot.
 
 * **System Repair**  
-  Windows acting up? Boom! One-click access to **DISM and SFC** repair spells.  
-  * **DISM Image Repair**: Execute CheckHealth, ScanHealth, and online RestoreHealth.  
-  * **SFC System File Repair**: One-click `SFC /scannow` to rescue corrupted Windows core system files before chaos takes over.  
-  * **Component Store Cleanup**: Automated cleanup of superseded update caches and WinSxS store.  
-  > **Practical Use Case**: Effortlessly resolve stuck Windows Updates or repair damaged system files without opening the Command Prompt.
+  One-click access to DISM and SFC repair tools without opening the command prompt, helping resolve stuck Windows updates or corrupted system files.
+  * DISM Image Repair: Execute CheckHealth, ScanHealth, and online RestoreHealth.
+  * SFC System File Repair: Run `SFC /scannow` to verify and repair core system integrity.
+  * Component Store Cleanup: Automate cleanup of superseded update caches and the WinSxS store.
 
 * **File Hash Calculation**  
-  Multi-threaded, high-speed file checksum generation supporting **MD5, SHA-1, SHA-256, SHA-384, SHA-512, and SHA-3**.  
-  * Instant calculation with drag-and-drop support.  
-  * Built-in hash comparison field with instant color-coded match feedback.  
-  > **Practical Use Case**: Instantly verify downloaded Windows ISOs, installers, or backups against published checksums to guarantee data integrity.
+  Multi-threaded high-speed file checksum generation supporting MD5, SHA-1, SHA-256, SHA-384, SHA-512, and SHA-3. Features drag-and-drop support and instant comparison fields with color feedback to verify download integrity.
 
 * **File Association Caretaker**  
-  Inspect registered default handler applications for common text, archive, media, and code formats, allowing quick recovery of corrupted associations.  
-  > **Practical Use Case**: Quickly diagnose and restore hijacked default applications or broken file extension icons.
+  Inspect registered default handler applications for common text, archive, media, and code formats, allowing quick recovery when default file associations or icons are hijacked.
 
-* **Modern Interface (WinUI 3 & Mica)**  
-  Smooth animations, **Mica effects**, and a layout that feels as fresh as a newly salted batch of fries! The dynamic hero dashboard and all cards adapt to your window size seamlessly.
+* **Modern Fluent Interface**  
+  Built on WinUI 3 with Mica backdrop effects, featuring smooth animations and dynamic cards that scale seamlessly with your window.
 
 * **Theme Support**  
-  The entire app adapts instantly to your vibe! Whether you are in a light or dark theme, our theme-aware UI ensures perfect contrast and readability.
+  Full support for light and dark themes with adaptive contrast and optimal readability across environments.
 
 * **100% Portable**  
-  We hate installers! This toolkit is **100% Portable**. Download, unzip, and run! It leaves zero registry footprint on your system, keeping your Windows as clean as a whistle.
+  Zero installer needed. Simply extract and run without touching your system registry.
 
-* **Global Language Support**  
-  Fully localized for the world! Whether you speak English or Traditional Chinese (Taiwan), the experience is perfectly translated.
+* **Localization Support**  
+  Fully localized in English and Traditional Chinese (Taiwan).
 
 ## Setup & Usage
 
