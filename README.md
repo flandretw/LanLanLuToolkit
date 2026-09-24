@@ -13,33 +13,33 @@
 
 ## What is this project?
 
-LanLanLu Toolkit is a lightweight, portable Windows system maintenance and peripheral diagnostic toolbox built with WinUI 3. Combining modern fluent animations with the raw energy of 2000s meme culture, it runs without installation or registry clutter—just unpack, run, and take it with you anywhere on a USB drive.
+We hate bloated installers, heavy background services, and leftover registry junk. LanLanLu Toolkit is a pure, portable toolbox built on WinUI 3—drop it onto a USB flash drive, plug it in, and run your diagnostics anywhere. Combining modern fluent animations with the raw energy of 2000s meme culture, it delivers essential system maintenance and peripheral diagnostics without leaving a trace on your machine.
 
 ## Features
 
 * **Hardware Performance Monitoring (Experimental)**  
   Provides a quick glance at CPU, GPU, RAM, and disk utilization, clock speeds, VRAM, and temperatures without opening Task Manager. This feature is currently experimental; for comprehensive diagnostics, Windows Task Manager remains the recommended choice.
 
-* **High-Velocity Input Diagnostics**  
+* **Peripheral Diagnostics: Keyboard NKRO & Mouse Chatter Detection**  
   Tailored for gamers and hardware enthusiasts with 60 fps responsive vector layouts and acoustic key feedback.
   * Keyboard Testing: Live switching between 104 full-size, 87-key TKL, and 61-key compact layouts with NKRO simultaneous key tracking, Virtual Key (VK) inspection, and key chatter warnings to verify rollover on new or secondhand gear.
-  * Mouse Diagnostics: Microswitch click counters, real-time polling rate (Hz) calculation, scroll wheel delta measurement, trajectory canvas, and customizable switch chatter debounce thresholds to detect double-click degradation.
+  * Mouse Diagnostics: Microswitch click counters, real-time polling rate (Hz) calculation, scroll wheel delta measurement, trajectory canvas, and customizable switch chatter debounce thresholds to detect double-click degradation on gaming mice up to 1000 Hz+.
 
-* **Crash & BSOD Analysis**  
+* **Crash Analysis: Minidump & BugCheck Parsing**  
   Investigate system crashes directly in a clean UI without installing gigabytes of debugging toolkits.
   * Minidump Analysis: Automatically reads `C:\Windows\Minidump`, parsing BugCheck codes, timestamps, and offending driver modules (`.sys`).
   * Critical Event Filtering: Integrates with Windows Event Log to extract recent critical crash events, helping pinpoint faulty drivers or hardware conflicts immediately after a sudden reboot.
 
-* **System Repair**  
+* **System Repair: One-Click DISM & SFC Recovery**  
   One-click access to DISM and SFC repair tools without opening the command prompt, helping resolve stuck Windows updates or corrupted system files.
   * DISM Image Repair: Execute CheckHealth, ScanHealth, and online RestoreHealth.
   * SFC System File Repair: Run `SFC /scannow` to verify and repair core system integrity.
   * Component Store Cleanup: Automate cleanup of superseded update caches and the WinSxS store.
 
-* **File Hash Calculation**  
+* **File Hash Verification: SHA-3 Support & Fast Comparison**  
   Multi-threaded high-speed file checksum generation supporting MD5, SHA-1, SHA-256, SHA-384, SHA-512, and SHA-3. Features drag-and-drop support and instant comparison fields with color feedback to verify download integrity.
 
-* **File Association Caretaker**  
+* **File Association Fixer: Default App Inspection & Recovery**  
   Inspect registered default handler applications for common text, archive, media, and code formats, allowing quick recovery when default file associations or icons are hijacked.
 
 * **Modern Fluent Interface**  
