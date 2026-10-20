@@ -55,9 +55,10 @@ namespace lanlanlu_toolkit.Views
         private int _wheelDownCount = 0;
         private int _normalClicks = 0;
         private int _chatterClicks = 0;
-        private long _lastMouseClickTimestamp = 0;
+        private readonly Dictionary<int, long> _lastClickTimestampByButton = new();
         private int _lastWheelDirection = 0; // 1 = Up, -1 = Down
         private int _consecutiveWheelSameDir = 0;
+        private long _lastWheelTimestamp = 0;
 
         // Polling Rate Tracking
         private int _pollingEventCount = 0;
@@ -78,6 +79,7 @@ namespace lanlanlu_toolkit.Views
         private readonly PointerEventHandler _pointerCanceledHandler;
         private readonly PointerEventHandler _pointerCaptureLostHandler;
         private bool _isLoaded = false;
+        private int SelectedModeIndex => (InputModeSelectorBar?.SelectedItem == MouseSelectorItem) ? 1 : 0;
 
         public InputTesterPage()
         {
@@ -114,6 +116,19 @@ namespace lanlanlu_toolkit.Views
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _isLoaded = true;
+            if (KeyboardSelectorItem != null && string.IsNullOrEmpty(KeyboardSelectorItem.Text))
+            {
+                KeyboardSelectorItem.Text = LocalizationHelper.GetString("InputTesterPage_Tab_Keyboard.Text") ?? "鍵盤測試";
+            }
+            if (MouseSelectorItem != null && string.IsNullOrEmpty(MouseSelectorItem.Text))
+            {
+                MouseSelectorItem.Text = LocalizationHelper.GetString("InputTesterPage_Tab_Mouse.Text") ?? "滑鼠測試";
+            }
+            if (InputModeSelectorBar != null && InputModeSelectorBar.SelectedItem == null)
+            {
+                InputModeSelectorBar.SelectedItem = KeyboardSelectorItem;
+            }
+
             if (_keyVisualMap.Count == 0)
             {
                 BuildKeyboardLayout();
@@ -130,7 +145,6 @@ namespace lanlanlu_toolkit.Views
             this.AddHandler(UIElement.PointerCanceledEvent, _pointerCanceledHandler, true);
             this.AddHandler(UIElement.PointerCaptureLostEvent, _pointerCaptureLostHandler, true);
 
-            UpdateSoundToggleStateText();
             UpdatePageLayoutBounds(this.ActualWidth, this.ActualHeight);
         }
 
@@ -148,7 +162,7 @@ namespace lanlanlu_toolkit.Views
 
         private void Page_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (ModeComboBox != null && ModeComboBox.SelectedIndex == 0)
+            if (SelectedModeIndex == 0)
             {
                 if (!ReferenceEquals(FocusManager.GetFocusedElement(this.XamlRoot), KeyboardFocusArea))
                 {
@@ -160,7 +174,7 @@ namespace lanlanlu_toolkit.Views
 
         private void Page_KeyUp(object sender, KeyRoutedEventArgs e)
         {
-            if (ModeComboBox != null && ModeComboBox.SelectedIndex == 0)
+            if (SelectedModeIndex == 0)
             {
                 KeyboardFocusArea_KeyUp(sender, e);
             }
@@ -478,7 +492,7 @@ namespace lanlanlu_toolkit.Views
 
         private void PlayKeySound()
         {
-            if (!SoundToggle.IsOn) return;
+            if (!SettingsService.GetSoundEffectsEnabled()) return;
             try
             {
                 MessageBeep(0xFFFFFFFF);
@@ -565,25 +579,15 @@ namespace lanlanlu_toolkit.Views
             TotalPressesText.Text = _totalPresses.ToString();
             UpdateTestedKeysStat();
 
-            if (intervalMs > 0)
+            if (intervalMs > 0 && isChatter)
             {
-                string intervalFormat = LocalizationHelper.GetString("InputTesterPage_Key_IntervalFormat");
-                if (string.IsNullOrEmpty(intervalFormat) || intervalFormat == "InputTesterPage_Key_IntervalFormat")
-                {
-                    intervalFormat = "{0:F1} ms";
-                }
-                KeyIntervalText.Text = string.Format(intervalFormat, intervalMs);
-
-                if (isChatter)
-                {
-                    KeyChatterStatusText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Key_ChatterWarning"), $"{intervalMs:F0}");
-                    KeyChatterStatusText.Foreground = GetThemeBrush("SystemFillColorCriticalBrush");
-                }
-                else
-                {
-                    KeyChatterStatusText.Text = LocalizationHelper.GetString("InputTesterPage_Key_ChatterNormal");
-                    KeyChatterStatusText.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
-                }
+                LastKeyCodeText.Text = FormatKeyCode((int)e.Key, e.KeyStatus.ScanCode) + " (" + string.Format(LocalizationHelper.GetString("InputTesterPage_Key_ChatterWarning"), $"{intervalMs:F0}") + ")";
+                LastKeyCodeText.Foreground = GetThemeBrush("SystemFillColorCriticalBrush");
+            }
+            else
+            {
+                LastKeyCodeText.Text = FormatKeyCode((int)e.Key, e.KeyStatus.ScanCode);
+                LastKeyCodeText.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
             }
         }
 
@@ -918,41 +922,45 @@ namespace lanlanlu_toolkit.Views
         {
             var updateKind = props.PointerUpdateKind;
             string lastBtnName = "-";
+            int buttonId = 0; // 1: Left, 2: Right, 3: Middle, 4: Side1, 5: Side2
 
             if (updateKind == PointerUpdateKind.LeftButtonPressed || (updateKind == PointerUpdateKind.Other && props.IsLeftButtonPressed))
             {
+                buttonId = 1;
                 _mouseLeftCount++;
-                MouseLeftCountText.Text = _mouseLeftCount.ToString();
                 HighlightBorder(MouseLeftBtnVisual, true);
                 lastBtnName = LocalizationHelper.GetString("InputTesterPage_Mouse_LeftButton");
             }
             else if (updateKind == PointerUpdateKind.RightButtonPressed || (updateKind == PointerUpdateKind.Other && props.IsRightButtonPressed))
             {
+                buttonId = 2;
                 _mouseRightCount++;
-                MouseRightCountText.Text = _mouseRightCount.ToString();
                 HighlightBorder(MouseRightBtnVisual, true);
                 lastBtnName = LocalizationHelper.GetString("InputTesterPage_Mouse_RightButton");
             }
             else if (updateKind == PointerUpdateKind.MiddleButtonPressed || (updateKind == PointerUpdateKind.Other && props.IsMiddleButtonPressed))
             {
+                buttonId = 3;
                 _mouseMiddleCount++;
                 HighlightBorder(MouseMiddleBtnVisual, true);
                 lastBtnName = LocalizationHelper.GetString("InputTesterPage_Mouse_MiddleButton");
             }
             else if (updateKind == PointerUpdateKind.XButton1Pressed || (updateKind == PointerUpdateKind.Other && props.IsXButton1Pressed))
             {
+                buttonId = 4;
                 _mouseSide1Count++;
-                Side1CountText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_ClickCountUnit"), _mouseSide1Count);
                 HighlightBorder(MouseSide1BtnVisual, true);
                 lastBtnName = LocalizationHelper.GetString("InputTesterPage_Mouse_Side1Button");
             }
             else if (updateKind == PointerUpdateKind.XButton2Pressed || (updateKind == PointerUpdateKind.Other && props.IsXButton2Pressed))
             {
+                buttonId = 5;
                 _mouseSide2Count++;
-                Side2CountText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_ClickCountUnit"), _mouseSide2Count);
                 HighlightBorder(MouseSide2BtnVisual, true);
                 lastBtnName = LocalizationHelper.GetString("InputTesterPage_Mouse_Side2Button");
             }
+
+            if (buttonId == 0) return;
 
             PlayKeySound();
 
@@ -960,9 +968,11 @@ namespace lanlanlu_toolkit.Views
 
             // Update Mouse Summary Cards
             if (LastMouseBtnText != null) LastMouseBtnText.Text = lastBtnName;
-            if (LastMouseActionText != null) LastMouseActionText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_CumulativeClicks"), totalClicks);
             if (MouseTotalClicksCountText != null) MouseTotalClicksCountText.Text = totalClicks.ToString();
             if (MouseClicksBreakdownText != null) MouseClicksBreakdownText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_ClicksBreakdown"), _mouseLeftCount, _mouseRightCount, _mouseMiddleCount);
+
+            // Automatically evaluate switch chatter for this specific physical switch
+            ProcessMouseClickChatterCheck(buttonId);
         }
 
         private void HandleMouseButtonRelease(PointerPointProperties props)
@@ -993,11 +1003,11 @@ namespace lanlanlu_toolkit.Views
 
         private void OnGlobalPointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            if (ModeComboBox == null || ModeComboBox.SelectedIndex != 1) return;
+            if (SelectedModeIndex != 1) return;
 
             if (e.OriginalSource is DependencyObject dep)
             {
-                if (IsDescendantOf<Button>(dep) || IsDescendantOf<Slider>(dep) || IsDescendantOf<ToggleSwitch>(dep) || IsDescendantOf<ComboBox>(dep) || IsDescendantOf<ComboBoxItem>(dep))
+                if (IsDescendantOf<Button>(dep) || IsDescendantOf<Slider>(dep) || IsDescendantOf<ToggleSwitch>(dep) || IsDescendantOf<ComboBox>(dep) || IsDescendantOf<ComboBoxItem>(dep) || IsDescendantOf<SelectorBar>(dep) || IsDescendantOf<SelectorBarItem>(dep))
                 {
                     return;
                 }
@@ -1009,7 +1019,7 @@ namespace lanlanlu_toolkit.Views
 
         private void OnGlobalPointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            if (ModeComboBox == null || ModeComboBox.SelectedIndex != 1) return;
+            if (SelectedModeIndex != 1) return;
 
             var props = e.GetCurrentPoint(this).Properties;
             HandleMouseButtonRelease(props);
@@ -1017,7 +1027,7 @@ namespace lanlanlu_toolkit.Views
 
         private void OnGlobalPointerMoved(object sender, PointerRoutedEventArgs e)
         {
-            if (ModeComboBox == null || ModeComboBox.SelectedIndex != 1) return;
+            if (SelectedModeIndex != 1) return;
 
             var props = e.GetCurrentPoint(this).Properties;
             if (!props.IsLeftButtonPressed) HighlightBorder(MouseLeftBtnVisual, false);
@@ -1066,25 +1076,24 @@ namespace lanlanlu_toolkit.Views
             // Global handler takes care of release
         }
 
-        private void ChatterClickPad_PointerPressed(object sender, PointerRoutedEventArgs e)
+        private void ProcessMouseClickChatterCheck(int buttonId)
         {
             long now = Stopwatch.GetTimestamp();
             double intervalMs = 0;
 
-            if (_lastMouseClickTimestamp > 0)
+            if (_lastClickTimestampByButton.TryGetValue(buttonId, out long lastTimestamp) && lastTimestamp > 0)
             {
-                intervalMs = (now - _lastMouseClickTimestamp) * 1000.0 / Stopwatch.Frequency;
+                intervalMs = (now - lastTimestamp) * 1000.0 / Stopwatch.Frequency;
             }
-            _lastMouseClickTimestamp = now;
+            _lastClickTimestampByButton[buttonId] = now;
 
-            double threshold = ChatterThresholdSlider.Value;
+            // Industry standard: chatter / switch contact bounce is typically < 50ms on the same switch
+            const double threshold = 50.0;
             bool isChatter = intervalMs > 0 && intervalMs < threshold;
 
             if (isChatter)
             {
                 _chatterClicks++;
-                if (ChatterNormalHint != null) ChatterNormalHint.Visibility = Visibility.Collapsed;
-                ChatterAlertBanner.Visibility = Visibility.Visible;
                 if (ChatterStatusSummaryText != null)
                 {
                     ChatterStatusSummaryText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_ChatterStatus_Warning");
@@ -1094,8 +1103,6 @@ namespace lanlanlu_toolkit.Views
             else
             {
                 _normalClicks++;
-                if (ChatterNormalHint != null) ChatterNormalHint.Visibility = Visibility.Visible;
-                ChatterAlertBanner.Visibility = Visibility.Collapsed;
                 if (_chatterClicks == 0 && ChatterStatusSummaryText != null)
                 {
                     ChatterStatusSummaryText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_ChatterStatus_OK");
@@ -1108,21 +1115,35 @@ namespace lanlanlu_toolkit.Views
                 ChatterCountsText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_ChatterCounts"), _normalClicks, _chatterClicks);
             }
 
-            LastClickIntervalText.Text = intervalMs > 0 ? string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_LastIntervalFormat"), $"{intervalMs:F1}") : LocalizationHelper.GetString("InputTesterPage_Mouse_LastIntervalNone");
-            if (LastMouseActionText != null && intervalMs > 0)
+            if (LastMouseActionText != null)
             {
-                LastMouseActionText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_IntervalAction"), $"{intervalMs:F1}");
+                if (intervalMs > 0)
+                {
+                    if (isChatter)
+                    {
+                        LastMouseActionText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_IntervalAction"), $"{intervalMs:F1}")
+                            + " (" + LocalizationHelper.GetString("InputTesterPage_Mouse_ChatterStatus_Warning") + ")";
+                        LastMouseActionText.Foreground = GetThemeBrush("SystemFillColorCriticalBrush");
+                    }
+                    else
+                    {
+                        LastMouseActionText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_IntervalAction"), $"{intervalMs:F1}");
+                        LastMouseActionText.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
+                    }
+                }
+                else
+                {
+                    LastMouseActionText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_NoAction");
+                    LastMouseActionText.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
+                }
             }
-            ChatterClickPad.Background = GetThemeBrush("AccentFillColorDefaultBrush");
-            ChatterClickPad.BorderBrush = GetThemeBrush("AccentFillColorDefaultBrush");
-            if (LastClickIntervalText != null) LastClickIntervalText.Foreground = GetThemeBrush("TextOnAccentFillColorSecondaryBrush");
         }
 
-        private void ChatterClickPad_PointerReleased(object sender, PointerRoutedEventArgs e)
+        private void TrajectoryCanvas_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
-            ChatterClickPad.Background = GetThemeBrush("ControlAltFillColorSecondaryBrush");
-            ChatterClickPad.BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush");
-            if (LastClickIntervalText != null) LastClickIntervalText.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
+            e.Handled = true;
+            int delta = e.GetCurrentPoint(sender as UIElement).Properties.MouseWheelDelta;
+            HandleWheelScroll(delta);
         }
 
         private void MouseVisualCard_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
@@ -1162,45 +1183,63 @@ namespace lanlanlu_toolkit.Views
             _wheelVisualResetTimer?.Stop();
             _wheelVisualResetTimer?.Start();
 
-            // Detect Wheel Jitter (Inversion during continuous scrolling)
+            // Detect Wheel Jitter (Encoder contact bounce / rollback):
+            // Hardware jitter occurs when an encoder contact bounce generates an erratic reverse pulse
+            // during continuous scrolling in a single direction.
+            // Human physical direction changes:
+            // 1) Human finger needs to stop and reverse motion (takes >= 50ms).
+            // 2) An intentional direction switch is sustained across multiple ticks in the new direction.
+            // A false bounce occurs when:
+            // - Previously scrolling rapidly in the opposite direction (_consecutiveWheelSameDir >= 3)
+            // - The reversal arrives in an impossibly short physical time window (< 40ms)
+            // - If the pause was > 150ms, it is always a new distinct scroll gesture, not jitter.
+            long now = Stopwatch.GetTimestamp();
+            double elapsedMs = _lastWheelTimestamp > 0
+                ? (now - _lastWheelTimestamp) * 1000.0 / Stopwatch.Frequency
+                : 1000.0;
+            _lastWheelTimestamp = now;
+
             bool isJitter = false;
-            if (_lastWheelDirection != 0 && currentDir != _lastWheelDirection && _consecutiveWheelSameDir >= 3)
+            if (elapsedMs > 150.0)
             {
-                isJitter = true;
+                // Pause detected: this is a fresh user scroll gesture, not a continuation/bounce
                 _consecutiveWheelSameDir = 1;
+            }
+            else if (currentDir == _lastWheelDirection)
+            {
+                // Continuing in the same direction: normal valid scroll
+                _consecutiveWheelSameDir++;
             }
             else
             {
-                if (currentDir == _lastWheelDirection)
+                // Direction changed within an active scroll stream (<= 150ms)
+                // Only flag as jitter if it reversed in < 40ms after a sustained stream of >= 3 ticks
+                if (_lastWheelDirection != 0 && _consecutiveWheelSameDir >= 3 && elapsedMs < 40.0)
                 {
-                    _consecutiveWheelSameDir++;
+                    isJitter = true;
                 }
-                else
-                {
-                    _consecutiveWheelSameDir = 1;
-                }
+                _consecutiveWheelSameDir = 1;
             }
 
             _lastWheelDirection = currentDir;
 
-            if (WheelStepsSummaryText != null)
-            {
-                WheelStepsSummaryText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_StepsUnit"), _wheelUpCount + _wheelDownCount);
-            }
-            if (WheelUpCountText != null) WheelUpCountText.Text = _wheelUpCount.ToString();
-            if (WheelDownCountText != null) WheelDownCountText.Text = _wheelDownCount.ToString();
-            if (WheelStatusSummaryText != null)
-            {
-                WheelStatusSummaryText.Text = isJitter ? LocalizationHelper.GetString("InputTesterPage_Mouse_WheelStatus_Jitter") : LocalizationHelper.GetString("InputTesterPage_Mouse_WheelStatus_OK");
-                WheelStatusSummaryText.Foreground = isJitter ? GetThemeBrush("SystemFillColorCriticalBrush") : GetThemeBrush("TextFillColorTertiaryBrush");
-            }
             if (LastMouseBtnText != null)
             {
                 LastMouseBtnText.Text = currentDir > 0 ? LocalizationHelper.GetString("InputTesterPage_Mouse_WheelUp") : LocalizationHelper.GetString("InputTesterPage_Mouse_WheelDown");
             }
             if (LastMouseActionText != null)
             {
-                LastMouseActionText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_WheelScrollAction"), delta);
+                string deltaStr = delta > 0 ? $"+{delta}" : $"{delta}";
+                if (isJitter)
+                {
+                    LastMouseActionText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_WheelScrollAction"), deltaStr) + " (" + LocalizationHelper.GetString("InputTesterPage_Mouse_WheelStatus_Jitter") + ")";
+                    LastMouseActionText.Foreground = GetThemeBrush("SystemFillColorCriticalBrush");
+                }
+                else
+                {
+                    LastMouseActionText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_WheelScrollAction"), deltaStr);
+                    LastMouseActionText.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
+                }
             }
         }
 
@@ -1219,13 +1258,11 @@ namespace lanlanlu_toolkit.Views
 
                 if (hz > 0)
                 {
-                    CurrentHzText.Text = $"{hz:F0} Hz";
                     if (MouseCurrentHzSummaryText != null) MouseCurrentHzSummaryText.Text = $"{hz:F0} Hz";
 
                     if (hz > _peakHz)
                     {
                         _peakHz = hz;
-                        PeakHzText.Text = $"{_peakHz:F0} Hz";
                     }
 
                     _hzHistory.Add(hz);
@@ -1234,22 +1271,12 @@ namespace lanlanlu_toolkit.Views
                     double sum = 0;
                     foreach (var h in _hzHistory) sum += h;
                     double avg = sum / _hzHistory.Count;
-                    AvgHzText.Text = $"{avg:F0} Hz";
                     if (HzSummaryText != null) HzSummaryText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_HzSummary"), $"{avg:F0}", $"{_peakHz:F0}");
                 }
                 else
                 {
-                    CurrentHzText.Text = "0 Hz";
                     if (MouseCurrentHzSummaryText != null) MouseCurrentHzSummaryText.Text = "0 Hz";
                 }
-            }
-        }
-
-        private void ChatterThresholdSlider_ValueChanged(object sender, Microsoft.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
-        {
-            if (ChatterThresholdValueText != null)
-            {
-                ChatterThresholdValueText.Text = $"{e.NewValue:F0} ms";
             }
         }
 
@@ -1280,67 +1307,17 @@ namespace lanlanlu_toolkit.Views
 
         private void SetMouseButtonContentState(Border border, bool active)
         {
-            if (active)
+            if (ReferenceEquals(border, MouseMiddleBtnVisual) && WheelMiddleIcon != null)
             {
-                var activeTextBrush = GetThemeBrush("TextOnAccentFillColorPrimaryBrush");
-                var activeSubTextBrush = GetThemeBrush("TextOnAccentFillColorSecondaryBrush");
-
-                if (ReferenceEquals(border, MouseLeftBtnVisual))
-                {
-                    if (MouseLeftCountText != null) MouseLeftCountText.Foreground = activeTextBrush;
-                }
-                else if (ReferenceEquals(border, MouseRightBtnVisual))
-                {
-                    if (MouseRightCountText != null) MouseRightCountText.Foreground = activeTextBrush;
-                }
-                else if (ReferenceEquals(border, MouseMiddleBtnVisual))
-                {
-                    if (WheelMiddleIcon != null) WheelMiddleIcon.Foreground = activeTextBrush;
-                }
-                else if (ReferenceEquals(border, MouseSide1BtnVisual))
-                {
-                    if (MouseSide1Text != null) MouseSide1Text.Foreground = activeTextBrush;
-                }
-                else if (ReferenceEquals(border, MouseSide2BtnVisual))
-                {
-                    if (MouseSide2Text != null) MouseSide2Text.Foreground = activeTextBrush;
-                }
-            }
-            else
-            {
-                if (ReferenceEquals(border, MouseLeftBtnVisual))
-                {
-                    if (MouseLeftCountText != null) MouseLeftCountText.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
-                }
-                else if (ReferenceEquals(border, MouseRightBtnVisual))
-                {
-                    if (MouseRightCountText != null) MouseRightCountText.Foreground = GetThemeBrush("TextFillColorPrimaryBrush");
-                }
-                else if (ReferenceEquals(border, MouseMiddleBtnVisual))
-                {
-                    if (WheelMiddleIcon != null) WheelMiddleIcon.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
-                }
-                else if (ReferenceEquals(border, MouseSide1BtnVisual))
-                {
-                    if (MouseSide1Text != null) MouseSide1Text.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
-                }
-                else if (ReferenceEquals(border, MouseSide2BtnVisual))
-                {
-                    if (MouseSide2Text != null) MouseSide2Text.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
-                }
+                WheelMiddleIcon.Foreground = active
+                    ? GetThemeBrush("TextOnAccentFillColorPrimaryBrush")
+                    : GetThemeBrush("TextFillColorSecondaryBrush");
             }
         }
 
         private void UpdateMouseThemeVisuals()
         {
             ReleaseAllMouseButtonVisuals();
-            if (ChatterClickPad != null)
-            {
-                ChatterClickPad.Background = GetThemeBrush("ControlAltFillColorSecondaryBrush");
-                ChatterClickPad.BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush");
-                if (LastClickIntervalText != null) LastClickIntervalText.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
-            }
-
             if (WheelUpArrow != null) WheelUpArrow.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
             if (WheelDownArrow != null) WheelDownArrow.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
         }
@@ -1351,10 +1328,7 @@ namespace lanlanlu_toolkit.Views
 
         private void TrajectoryCanvas_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            e.Handled = true;
             var props = e.GetCurrentPoint(TrajectoryCanvas).Properties;
-            HandleMouseButtonPress(props);
-
             if (props.IsLeftButtonPressed)
             {
                 _isDrawing = true;
@@ -1392,29 +1366,42 @@ namespace lanlanlu_toolkit.Views
 
         private void TrajectoryCanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            e.Handled = true;
             if (_isDrawing)
             {
                 _isDrawing = false;
                 TrajectoryCanvas.ReleasePointerCapture(e.Pointer);
             }
-            HandleMouseButtonRelease(e.GetCurrentPoint(TrajectoryCanvas).Properties);
         }
 
-        private void ClearCanvasBtn_Click(object sender, RoutedEventArgs e)
+        private void MouseLayoutComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TrajectoryCanvas.Children.Clear();
+            if (!_isLoaded || MouseLayoutComboBox == null || MouseLayoutTitleText == null) return;
+
+            bool hasSideButtons = MouseLayoutComboBox.SelectedIndex == 1;
+
+            if (MouseSide1BtnVisual != null)
+            {
+                MouseSide1BtnVisual.Visibility = hasSideButtons ? Visibility.Visible : Visibility.Collapsed;
+            }
+            if (MouseSide2BtnVisual != null)
+            {
+                MouseSide2BtnVisual.Visibility = hasSideButtons ? Visibility.Visible : Visibility.Collapsed;
+            }
+
+            MouseLayoutTitleText.Text = hasSideButtons
+                ? LocalizationHelper.GetString("InputTesterPage_Mouse_StageTitle_5Key")
+                : LocalizationHelper.GetString("InputTesterPage_Mouse_StageTitle_3Key");
         }
 
         #endregion
 
         #region Top Controls & Reset
 
-        private void ModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void InputModeSelectorBar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
         {
             if (!_isLoaded || KeyboardSection == null || MouseSection == null) return;
 
-            if (ModeComboBox.SelectedIndex == 0)
+            if (sender.SelectedItem == KeyboardSelectorItem)
             {
                 MouseSection.Visibility = Visibility.Collapsed;
                 KeyboardSection.Visibility = Visibility.Visible;
@@ -1429,19 +1416,6 @@ namespace lanlanlu_toolkit.Views
                 FadeInMouseStoryboard?.Begin();
                 ReleaseAllMouseButtonVisuals();
             }
-        }
-
-        private void SoundToggle_Toggled(object sender, RoutedEventArgs e)
-        {
-            UpdateSoundToggleStateText();
-        }
-
-        private void UpdateSoundToggleStateText()
-        {
-            if (SoundToggle == null || SoundToggleStateText == null) return;
-            SoundToggleStateText.Text = SoundToggle.IsOn
-                ? LocalizationHelper.GetString("Common_Toggle_On")
-                : LocalizationHelper.GetString("Common_Toggle_Off");
         }
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
@@ -1465,18 +1439,16 @@ namespace lanlanlu_toolkit.Views
             }
 
             if (LastKeyText != null) LastKeyText.Text = "-";
-            if (LastKeyCodeText != null) LastKeyCodeText.Text = LocalizationHelper.GetString("InputTesterPage_Key_CodeEmpty");
+            if (LastKeyCodeText != null)
+            {
+                LastKeyCodeText.Text = LocalizationHelper.GetString("InputTesterPage_Key_CodeEmpty");
+                LastKeyCodeText.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
+            }
             if (CurrentDownText != null) CurrentDownText.Text = "0";
             if (ActiveKeyListText != null) ActiveKeyListText.Text = LocalizationHelper.GetString("InputTesterPage_Key_None");
             if (MaxRolloverText != null) MaxRolloverText.Text = "0";
             if (TotalPressesText != null) TotalPressesText.Text = "0";
             UpdateTestedKeysStat();
-            if (KeyIntervalText != null) KeyIntervalText.Text = "-";
-            if (KeyChatterStatusText != null)
-            {
-                KeyChatterStatusText.Text = LocalizationHelper.GetString("InputTesterPage_Key_ChatterNormal");
-                KeyChatterStatusText.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
-            }
         }
 
         private void ResetMouseVisualsAndStats()
@@ -1490,36 +1462,24 @@ namespace lanlanlu_toolkit.Views
             _wheelDownCount = 0;
             _normalClicks = 0;
             _chatterClicks = 0;
-            _lastMouseClickTimestamp = 0;
+            _lastClickTimestampByButton.Clear();
+            _lastWheelDirection = 0;
+            _consecutiveWheelSameDir = 0;
+            _lastWheelTimestamp = 0;
             _peakHz = 0;
             _hzHistory.Clear();
 
-            if (MouseLeftCountText != null) MouseLeftCountText.Text = "0";
-            if (MouseRightCountText != null) MouseRightCountText.Text = "0";
-            if (Side1CountText != null) Side1CountText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_ClickCountUnit"), 0);
-            if (Side2CountText != null) Side2CountText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_ClickCountUnit"), 0);
-            if (ChatterNormalHint != null) ChatterNormalHint.Visibility = Visibility.Visible;
-            if (ChatterAlertBanner != null) ChatterAlertBanner.Visibility = Visibility.Collapsed;
-            if (LastClickIntervalText != null) LastClickIntervalText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_LastIntervalNone");
-            if (CurrentHzText != null) CurrentHzText.Text = "0 Hz";
-            if (AvgHzText != null) AvgHzText.Text = "0 Hz";
-            if (PeakHzText != null) PeakHzText.Text = "0 Hz";
-
             // Mouse Summary Cards Reset
             if (LastMouseBtnText != null) LastMouseBtnText.Text = "-";
-            if (LastMouseActionText != null) LastMouseActionText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_NoAction");
+            if (LastMouseActionText != null)
+            {
+                LastMouseActionText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_NoAction");
+                LastMouseActionText.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
+            }
             if (MouseTotalClicksCountText != null) MouseTotalClicksCountText.Text = "0";
             if (MouseClicksBreakdownText != null) MouseClicksBreakdownText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_ClicksBreakdown"), 0, 0, 0);
             if (MouseCurrentHzSummaryText != null) MouseCurrentHzSummaryText.Text = "0 Hz";
             if (HzSummaryText != null) HzSummaryText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_HzSummary"), 0, 0);
-            if (WheelStepsSummaryText != null) WheelStepsSummaryText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_StepsUnit"), 0);
-            if (WheelUpCountText != null) WheelUpCountText.Text = "0";
-            if (WheelDownCountText != null) WheelDownCountText.Text = "0";
-            if (WheelStatusSummaryText != null)
-            {
-                WheelStatusSummaryText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_WheelStatus_OK");
-                WheelStatusSummaryText.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
-            }
             if (ChatterStatusSummaryText != null)
             {
                 ChatterStatusSummaryText.Text = LocalizationHelper.GetString("InputTesterPage_Mouse_ChatterStatus_OK");
@@ -1527,15 +1487,8 @@ namespace lanlanlu_toolkit.Views
             }
             if (ChatterCountsText != null) ChatterCountsText.Text = string.Format(LocalizationHelper.GetString("InputTesterPage_Mouse_ChatterCounts"), 0, 0);
 
-            if (ChatterAlertBanner != null) ChatterAlertBanner.Visibility = Visibility.Collapsed;
             if (TrajectoryCanvas != null) TrajectoryCanvas.Children.Clear();
             ReleaseAllMouseButtonVisuals();
-            if (ChatterClickPad != null)
-            {
-                ChatterClickPad.Background = GetThemeBrush("ControlAltFillColorSecondaryBrush");
-                ChatterClickPad.BorderBrush = GetThemeBrush("CardStrokeColorDefaultBrush");
-                if (LastClickIntervalText != null) LastClickIntervalText.Foreground = GetThemeBrush("TextFillColorSecondaryBrush");
-            }
         }
 
         #endregion

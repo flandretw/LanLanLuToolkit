@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<root 
+  
+  xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" 
+  
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:element name="root" ns1:IsDataSet="true">
       <xs:complexType>
@@ -51,6 +55,12 @@
   <data name="Nav_TestToolPage.Content" xml:space="preserve">
     <value>測試工具</value>
   </data>
+  <data name="Category_System" xml:space="preserve">
+    <value>系統</value>
+  </data>
+  <data name="Category_Settings" xml:space="preserve">
+    <value>設定</value>
+  </data>
   <data name="AppTitle.Text" xml:space="preserve">
     <value>蘭蘭露工具箱</value>
   </data>
@@ -58,16 +68,16 @@
     <value>效能監控</value>
   </data>
   <data name="Greeting_LateNight" xml:space="preserve">
-    <value>晚安，早點休息吧，明天也是新的一天！</value>
+    <value>夜深了，請注意適度休息。</value>
   </data>
   <data name="Greeting_Morning" xml:space="preserve">
-    <value>早安，今天又是一個新的開始！</value>
+    <value>早安，祝您有美好的一天。</value>
   </data>
   <data name="Greeting_Afternoon" xml:space="preserve">
-    <value>午安，忙碌之餘別忘了休息一下喔！</value>
+    <value>午安，持續專注與前進。</value>
   </data>
   <data name="Greeting_Evening" xml:space="preserve">
-    <value>晚安，辛苦了一天，放鬆享受夜晚時光吧！</value>
+    <value>晚安，放鬆享受夜晚時光。</value>
   </data>
   <data name="Nav_SystemRepairPage.Content" xml:space="preserve">
     <value>系統完整性修復</value>
@@ -118,7 +128,7 @@
     <value>偵測中……</value>
   </data>
   <data name="HomePage_Intro.Text" xml:space="preserve">
-    <value>專為 Windows 11 設計的現代化工具箱，提供硬體監控與各類實用工具。點擊下方連結或側邊選單開始探索吧！</value>
+    <value>專為 Windows 11 打造的系統診斷與修復工具箱。從下方快速啟動常用工具，或使用側邊導覽列瀏覽完整功能。</value>
   </data>
   <data name="HomePage_PoweredBy.Text" xml:space="preserve">
     <value>由 flandretw 驅動</value>
@@ -145,19 +155,19 @@
     <value>鍵盤滑鼠診斷</value>
   </data>
   <data name="HomePage_Feature_Input_Desc.Text" xml:space="preserve">
-    <value>全鍵無衝測試、輪詢率、微動連點與軌跡畫布。</value>
+    <value>鍵盤觸發、多鍵無衝、滑鼠連點與軌跡診斷。</value>
   </data>
   <data name="HomePage_Feature_Repair_Title.Text" xml:space="preserve">
     <value>系統完整性修復</value>
   </data>
   <data name="HomePage_Feature_Repair_Desc.Text" xml:space="preserve">
-    <value>DISM 與 SFC 映像自動修復與損毀掃描。</value>
+    <value>自動檢測並修復損毀的 Windows 系統檔案與映像。</value>
   </data>
   <data name="HomePage_Feature_Crash_Title.Text" xml:space="preserve">
     <value>系統當機分析</value>
   </data>
   <data name="HomePage_Feature_Crash_Desc.Text" xml:space="preserve">
-    <value>藍屏 Minidump 與 Windows 錯誤事件分析。</value>
+    <value>系統藍屏當機與應用程式閃退排查分析。</value>
   </data>
   <data name="HomePage_Feature_Hash_Title.Text" xml:space="preserve">
     <value>檔案雜湊驗證</value>
@@ -169,10 +179,13 @@
     <value>檔案關聯管理</value>
   </data>
   <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
-    <value>重設副檔名預設開啟程式與系統關聯修復。</value>
+    <value>清除副檔名自訂關聯，還原為系統預設開啟方式。</value>
   </data>
   <data name="HomePage_Refresh_Title" xml:space="preserve">
     <value>硬體資訊</value>
+  </data>
+  <data name="HomePage_HardwareSpecs_Title.Text" xml:space="preserve">
+    <value>硬體規格</value>
   </data>
   <data name="PerformancePage_Title.Text" xml:space="preserve">
     <value>效能監控</value>
@@ -298,10 +311,10 @@
     <value>{0:F1} ms</value>
   </data>
   <data name="InputTesterPage_Key_CodeFormat" xml:space="preserve">
-    <value>VK: {0} (0x{1:X2}) | Scan: 0x{2:X2}</value>
+    <value>鍵碼: 0x{1:X2}</value>
   </data>
   <data name="InputTesterPage_Key_CodeEmpty.Text" xml:space="preserve">
-    <value>VK: - | Scan: -</value>
+    <value>鍵碼: -</value>
   </data>
   <data name="InputTesterPage_Key_None" xml:space="preserve">
     <value>無</value>
@@ -370,7 +383,22 @@
     <value>按下任何實體滑鼠按鍵或滾動滾輪，儀表將即時連動回饋。</value>
   </data>
   <data name="InputTesterPage_Mouse_WheelHint.Text" xml:space="preserve">
-    <value>在左側儀表卡片上滾動滾輪即可量測步進與跳幀。</value>
+    <value>在右側畫布中操作即可同時量測軌跡、回報率、滾輪與微動連點。</value>
+  </data>
+  <data name="InputTesterPage_Mouse_StageTitle.Text" xml:space="preserve">
+    <value>標準 3 鍵配置虛擬滑鼠</value>
+  </data>
+  <data name="InputTesterPage_Mouse_StageTitle_3Key" xml:space="preserve">
+    <value>標準 3 鍵配置虛擬滑鼠</value>
+  </data>
+  <data name="InputTesterPage_Mouse_StageTitle_5Key" xml:space="preserve">
+    <value>5 鍵配置虛擬滑鼠</value>
+  </data>
+  <data name="InputTesterPage_MouseLayout_NoSide.Content" xml:space="preserve">
+    <value>標準滑鼠 (無側鍵)</value>
+  </data>
+  <data name="InputTesterPage_MouseLayout_WithSide.Content" xml:space="preserve">
+    <value>5 鍵滑鼠 (含雙側鍵)</value>
   </data>
   <data name="InputTesterPage_Layout_100.Content" xml:space="preserve">
     <value>100% 全尺寸 (104 鍵)</value>
@@ -418,16 +446,16 @@
     <value>累計 {0} 次點擊</value>
   </data>
   <data name="InputTesterPage_Mouse_WheelScrollAction" xml:space="preserve">
-    <value>滾動步進 (Delta: {0})</value>
+    <value>Delta: {0}</value>
   </data>
   <data name="InputTesterPage_Mouse_IntervalAction" xml:space="preserve">
     <value>間隔：{0} ms</value>
   </data>
   <data name="InputTesterPage_Mouse_ClicksBreakdown" xml:space="preserve">
-    <value>左 {0} | 右 {1} | 中 {2}</value>
+    <value>左 {0} / 右 {1} / 中 {2}</value>
   </data>
   <data name="InputTesterPage_Mouse_HzSummary" xml:space="preserve">
-    <value>平均 {0} Hz | 最高 {1} Hz</value>
+    <value>平均 {0} Hz / 最高 {1} Hz</value>
   </data>
   <data name="InputTesterPage_Mouse_StepsUnit" xml:space="preserve">
     <value>{0} 格</value>
@@ -487,37 +515,37 @@
     <value>掃描映像狀態</value>
   </data>
   <data name="SystemRepairPage_ScanHealth_Desc.Text" xml:space="preserve">
-    <value>深入檢查 Windows 映像是否有損毀。這像是翻閱維修紀錄，找出潛在的問題但暫不進行修復。</value>
+    <value>完整掃描 Windows 元件存放區以偵測損毀狀態，此過程可能需要數分鐘。</value>
   </data>
   <data name="SystemRepairPage_CheckHealth_Title.Text" xml:space="preserve">
     <value>檢查損毀標記</value>
   </data>
   <data name="SystemRepairPage_CheckHealth_Desc.Text" xml:space="preserve">
-    <value>快速掃描系統是否已被標記為損毀。這是一次快速的斷層掃描，用來確認系統目前的健康狀態。</value>
+    <value>快速檢查元件存放區是否已被標記為損毀，此檢查不進行修復。</value>
   </data>
   <data name="SystemRepairPage_RestoreHealth_Title.Text" xml:space="preserve">
     <value>修復系統映像</value>
   </data>
   <data name="SystemRepairPage_RestoreHealth_Desc.Text" xml:space="preserve">
-    <value>發現損毀時，自動從 Windows Update 下載替代檔案進行修復。這是最徹底的映像復原方式。</value>
+    <value>掃描並自動從 Windows Update 下載全新檔案，以修復受損的元件存放區映像。</value>
   </data>
   <data name="SystemRepairPage_SfcScannow_Title.Text" xml:space="preserve">
     <value>系統檔案檢查</value>
   </data>
   <data name="SystemRepairPage_SfcScannow_Desc.Text" xml:space="preserve">
-    <value>掃描所有受保護的系統檔案並修復損毀。這是最常用的安裝修復工具，能解決多數檔案遺失問題。</value>
+    <value>驗證所有受保護系統檔案的完整性，並在發現損毀時以正常複本取代。</value>
   </data>
   <data name="SystemRepairPage_AutoMode_Title.Text" xml:space="preserve">
     <value>自動修復模式</value>
   </data>
   <data name="SystemRepairPage_AutoMode_Desc.Text" xml:space="preserve">
-    <value>自動執行完整的掃描與修復流程。推薦大多數使用者使用。</value>
+    <value>自動依序執行標準掃描與修復流程，建議大部分使用者使用。</value>
   </data>
   <data name="SystemRepairPage_AutoMode_Default.Content" xml:space="preserve">
-    <value>完整修復（預設）</value>
+    <value>完整修復 (建議)</value>
   </data>
   <data name="SystemRepairPage_AutoMode_SfcOnly.Content" xml:space="preserve">
-    <value>僅系統檔案檢查</value>
+    <value>快速修復 (僅執行系統檔案檢查)</value>
   </data>
   <data name="SystemRepairPage_StartButton.Content" xml:space="preserve">
     <value>開始執行</value>
@@ -618,14 +646,14 @@
   <data name="CrashReportPage_Card_LastCrash.Text" xml:space="preserve">
     <value>最近當機時間</value>
   </data>
-  <data name="CrashReportPage_Filter_All.Content" xml:space="preserve">
-    <value>所有事件</value>
+  <data name="CrashReportPage_Filter_All.Text" xml:space="preserve">
+    <value>全部事件</value>
   </data>
-  <data name="CrashReportPage_Filter_BSOD.Content" xml:space="preserve">
-    <value>僅系統核心當機</value>
+  <data name="CrashReportPage_Filter_BSOD.Text" xml:space="preserve">
+    <value>系統藍屏 (BSOD)</value>
   </data>
-  <data name="CrashReportPage_Filter_App.Content" xml:space="preserve">
-    <value>僅應用程式當機</value>
+  <data name="CrashReportPage_Filter_App.Text" xml:space="preserve">
+    <value>應用程式</value>
   </data>
   <data name="CrashReportPage_SearchBox.PlaceholderText" xml:space="preserve">
     <value>搜尋程式名稱、錯誤碼、驅動程式或模組...</value>
@@ -640,16 +668,16 @@
     <value>匯出診斷報告</value>
   </data>
   <data name="CrashReportPage_NoCrashes_Title.Text" xml:space="preserve">
-    <value>系統非常健康！</value>
+    <value>未發現當機事件</value>
   </data>
   <data name="CrashReportPage_NoCrashes_Desc.Text" xml:space="preserve">
-    <value>在系統記錄中未發現任何系統核心當機或近期應用程式當機記錄。</value>
+    <value>在系統記錄中未發現任何系統核心損毀 (BSOD) 或近期應用程式當機事件。</value>
   </data>
   <data name="CrashReportPage_SelectPrompt_Title.Text" xml:space="preserve">
     <value>請選擇左側事件</value>
   </data>
   <data name="CrashReportPage_SelectPrompt_Desc.Text" xml:space="preserve">
-    <value>點選左側清單中的任一當機事件以檢視詳細診斷資訊與排錯建議。</value>
+    <value>選取左側清單中的事件以檢視詳細診斷資訊與排錯建議。</value>
   </data>
   <data name="CrashReportPage_Detail_DiagnosisHeader.Text" xml:space="preserve">
     <value>智慧診斷與成因分析</value>
@@ -670,7 +698,7 @@
     <value>錯誤來源 / 程式</value>
   </data>
   <data name="CrashReportPage_Detail_Params.Text" xml:space="preserve">
-    <value>當機參數 (Arg1~4)</value>
+    <value>核心診斷參數 (BugCheck Args)</value>
   </data>
   <data name="CrashReportPage_Detail_DumpPath.Text" xml:space="preserve">
     <value>傾印檔案 / 路徑</value>
@@ -680,6 +708,9 @@
   </data>
   <data name="CrashReportPage_Detail_RawLogHeader.Text" xml:space="preserve">
     <value>原始事件紀錄</value>
+  </data>
+  <data name="CrashReportPage_Detail_RawLogSubheader.Text" xml:space="preserve">
+    <value>Windows 事件檢視器原始記錄 (XML / Text)</value>
   </data>
   <data name="CrashReportPage_Detail_CopyBtn.Text" xml:space="preserve">
     <value>複製全部</value>
@@ -925,7 +956,7 @@
     <value>瀏覽檔案</value>
   </data>
   <data name="FileHashPage_DragDropPrompt.Text" xml:space="preserve">
-    <value>拖放檔案至此處，或點擊瀏覽選取</value>
+    <value>拖放檔案至這裡，或點擊瀏覽選取</value>
   </data>
   <data name="FileHashPage_SelectFileCardDesc.Text" xml:space="preserve">
     <value>支援任意格式檔案，將自動計算 SHA-256、SHA-1、MD5 與 SHA-512 雜湊值。</value>
@@ -937,7 +968,7 @@
     <value>雜湊結果</value>
   </data>
   <data name="FileHashPage_Compare.Text" xml:space="preserve">
-    <value>比對驗證雜湊值（不區分大小寫）</value>
+    <value>雜湊值比對驗證</value>
   </data>
   <data name="FileHashPage_CompareButton.Text" xml:space="preserve">
     <value>貼上比對</value>
@@ -949,10 +980,10 @@
     <value>重新計算</value>
   </data>
   <data name="FileHashPage_VerifySuccess" xml:space="preserve">
-    <value>雜湊值比對成功！完全一致。</value>
+    <value>雜湊值比對成功，完全一致。</value>
   </data>
   <data name="FileHashPage_VerifyFail" xml:space="preserve">
-    <value>雜湊值比對失敗！檔案可能已被修改或演算法不符。</value>
+    <value>比對不相符：檔案內容可能已被修改或演算法不符。</value>
   </data>
   <data name="FileHashPage_Calculating" xml:space="preserve">
     <value>正在計算雜湊值，請稍候……</value>
@@ -964,10 +995,10 @@
     <value>SHA-256（高度安全，建議使用）、SHA-1（舊版相容）、MD5（快速驗證）、SHA-512（極高強度安全）。</value>
   </data>
   <data name="FileHashPage_Result.PlaceholderText" xml:space="preserve">
-    <value>選擇檔案並計算後，雜湊結果會在此處顯示……</value>
+    <value>選擇檔案並計算後，雜湊結果會在這裡顯示……</value>
   </data>
   <data name="FileHashPage_Compare_Desc.Text" xml:space="preserve">
-    <value>輸入或貼上預期的雜湊值，系統將即時比對上述演算法結果。</value>
+    <value>雜湊值比對與完整性驗證。</value>
   </data>
   <data name="FileHashPage_CompareInput.PlaceholderText" xml:space="preserve">
     <value>在此輸入或貼上預期的雜湊值……</value>
@@ -976,7 +1007,7 @@
     <value>選擇要計算雜湊值的檔案</value>
   </data>
   <data name="FileHashPage_Error_FileNotFound" xml:space="preserve">
-    <value>檔案不存在或無法存取！</value>
+    <value>檔案不存在或無法存取。</value>
   </data>
   <data name="FileHashPage_VerifySuccess_Title" xml:space="preserve">
     <value>驗證成功</value>
@@ -997,7 +1028,7 @@
     <value>已取消計算。</value>
   </data>
   <data name="FileAssociationPage_Desc.Text" xml:space="preserve">
-    <value>清除副檔名之自訂關聯鎖定，還原至未關聯或系統預設狀態。</value>
+    <value>清除副檔名的自訂開啟方式，還原至系統預設或未關聯狀態。</value>
   </data>
   <data name="FileAssociationPage_ConfigTitle.Text" xml:space="preserve">
     <value>目標副檔名</value>
@@ -1018,16 +1049,16 @@
     <value>一鍵清除自訂關聯</value>
   </data>
   <data name="FileAssociationPage_ResetDesc.Text" xml:space="preserve">
-    <value>徹底清除登錄檔中的自訂關聯鎖定，讓副檔名還原至初始狀態。非系統專屬檔案將變回無預設應用程式，按兩下開啟時 Windows 會再次詢問開啟方式。</value>
+    <value>清除登錄檔中的自訂開啟方式，讓副檔名還原至系統初始設定。按兩下開啟檔案時 Windows 將重新詢問欲使用的應用程式。</value>
   </data>
   <data name="FileAssociationPage_ResetButton.Content" xml:space="preserve">
     <value>還原為預設狀態</value>
   </data>
   <data name="FileAssociationPage_Method2Title.Text" xml:space="preserve">
-    <value>進階模式</value>
+    <value>登錄編輯程式手動排查</value>
   </data>
   <data name="FileAssociationPage_Method2Desc.Text" xml:space="preserve">
-    <value>自動導航定位至目標副檔名機碼目錄，供進階檢視與手動排查。</value>
+    <value>開啟登錄編輯程式手動定位。</value>
   </data>
   <data name="FileAssociationPage_Method2Content.Text" xml:space="preserve">
     <value>開啟 Windows 內建的登錄編輯程式並自動定位至目標副檔名路徑，方便進行進階檢視與手動排查。</value>
@@ -1045,7 +1076,7 @@
     <value>在左側樹狀目錄中，檢視該副檔名目錄底下的「UserChoice」子機碼。</value>
   </data>
   <data name="FileAssociationPage_GuideStep3.Text" xml:space="preserve">
-    <value>「UserChoice」為 Windows 記錄的使用者自訂開啟方式鎖定項，刪除即可恢復預設。</value>
+    <value>「UserChoice」為 Windows 記錄的使用者自訂開啟方式鎖定項，刪除即可復原預設。</value>
   </data>
   <data name="FileAssociationPage_GuideStep4.Text" xml:space="preserve">
     <value>清除完成後關閉登錄編輯程式即可，亦可直接使用上方的一鍵清除功能全自動完成。</value>
@@ -1080,29 +1111,11 @@
   <data name="FileAssociationPage_Title.Text" xml:space="preserve">
     <value>檔案關聯管理</value>
   </data>
-  <data name="TestToolPage_Title.Text" xml:space="preserve">
-    <value>測試工具</value>
-  </data>
-  <data name="UtilityPage_Title.Text" xml:space="preserve">
-    <value>實用工具</value>
-  </data>
-  <data name="ToolHub_SearchBox.PlaceholderText" xml:space="preserve">
-    <value>搜尋工具名稱或功能描述……</value>
-  </data>
-  <data name="ToolHub_Tag_Hardware.Text" xml:space="preserve">
-    <value>硬體診斷</value>
-  </data>
-  <data name="ToolHub_Tag_System.Text" xml:space="preserve">
-    <value>系統診斷</value>
-  </data>
-  <data name="ToolHub_Tag_Utility.Text" xml:space="preserve">
-    <value>檔案工具</value>
-  </data>
-  <data name="ToolHub_NoResults.Text" xml:space="preserve">
-    <value>未找到符合的工具，請嘗試不同關鍵字。</value>
-  </data>
   <data name="SettingsPage_Title.Text" xml:space="preserve">
     <value>設定</value>
+  </data>
+  <data name="SettingsPage_Subtitle.Text" xml:space="preserve">
+    <value>自訂應用程式偏好設定、外觀風格與系統選項</value>
   </data>
   <data name="SettingsPage_AppearanceBehaviorHeader.Text" xml:space="preserve">
     <value>外觀與行為</value>
@@ -1163,6 +1176,12 @@
   </data>
   <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
     <value>在系統修復或長時間任務結束時播放提示音。</value>
+  </data>
+  <data name="SettingsPage_SoundEffectsTitle.Text" xml:space="preserve">
+    <value>介面與診斷音效</value>
+  </data>
+  <data name="SettingsPage_SoundEffectsDescription.Text" xml:space="preserve">
+    <value>控制應用程式內按鍵測試、操作回饋與互動音效。</value>
   </data>
   <data name="SettingsPage_NotificationsTitle.Text" xml:space="preserve">
     <value>通知</value>
@@ -1474,10 +1493,13 @@
     <value>複製</value>
   </data>
   <data name="SystemRepairPage_Hero_ElapsedTimeFormat" xml:space="preserve">
-    <value>已耗時：{0}</value>
+    <value>已耗時 {0}</value>
   </data>
   <data name="SystemRepairPage_Hero_TotalTimeFormat" xml:space="preserve">
-    <value>總耗時：{0}</value>
+    <value>總耗時 {0}</value>
+  </data>
+  <data name="SystemRepairPage_Step_Format" xml:space="preserve">
+    <value>步驟 {0}/{1}：正在{2}</value>
   </data>
   <data name="SystemRepairPage_ErrorFormat" xml:space="preserve">
     <value>發生錯誤：{0}</value>
@@ -1498,12 +1520,257 @@
     <value>執行失敗</value>
   </data>
   <data name="SystemRepairPage_AdvancedExpander_Header.Text" xml:space="preserve">
-    <value>進階模式與原始記錄檔</value>
+    <value>獨立修復工具與終端輸出</value>
   </data>
   <data name="SystemRepairPage_AdvancedExpander_Desc.Text" xml:space="preserve">
-    <value>單獨執行特定維護指令或檢視終端機原始即時輸出。</value>
+    <value>單獨維護工具與即時終端機輸出。</value>
   </data>
   <data name="SystemRepairPage_AdvancedTools_Header.Text" xml:space="preserve">
     <value>單獨執行工具</value>
   </data>
-<data name="FileHashPage_ChangeFile.Text" xml:space="preserve"><value>更換檔案</value></data><data name="FileHashPage_ClearFile" xml:space="preserve"><value>清除檔案</value></data><data name="FileHashPage_CopyAll.Text" xml:space="preserve"><value>複製全部</value></data><data name="FileHashPage_CopyAll_Success" xml:space="preserve"><value>已複製全部演算法雜湊值至剪貼簿。</value></data><data name="FileHashPage_MatchTag.Text" xml:space="preserve"><value>相符</value></data><data name="FileHashPage_MatchSuccess_Format" xml:space="preserve"><value>驗證成功：與 {0} 雜湊值完全相符。</value></data><data name="FileHashPage_MatchFail" xml:space="preserve"><value>比對不相符：未符合任何已計算之演算法雜湊值。</value></data><data name="FileHashPage_MatchPending" xml:space="preserve"><value>請輸入或貼上雜湊值以進行即時比對。</value></data><data name="FileHashPage_DragDrop_Caption" xml:space="preserve"><value>放置以計算雜湊值</value></data><data name="FileHashPage_Algorithm_Sha256_Tag.Text" xml:space="preserve"><value>高度安全 · 建議使用</value></data><data name="FileHashPage_Algorithm_Sha1_Tag.Text" xml:space="preserve"><value>舊版相容</value></data><data name="FileHashPage_Algorithm_Md5_Tag.Text" xml:space="preserve"><value>快速驗證</value></data><data name="FileHashPage_Algorithm_Sha512_Tag.Text" xml:space="preserve"><value>極高強度</value></data><data name="FileHashPage_Algorithm_Pending" xml:space="preserve"><value>等待計算……</value></data><data name="FileHashPage_ClearInput" xml:space="preserve"><value>清除比對文字</value></data></root>
+  <data name="FileHashPage_ChangeFile.Text" xml:space="preserve">
+    <value>更換檔案</value>
+  </data>
+  <data name="FileHashPage_ClearFile" xml:space="preserve">
+    <value>清除檔案</value>
+  </data>
+  <data name="FileHashPage_CopyAll.Text" xml:space="preserve">
+    <value>複製全部</value>
+  </data>
+  <data name="FileHashPage_CopyAll_Success" xml:space="preserve">
+    <value>已複製全部演算法雜湊值至剪貼簿。</value>
+  </data>
+  <data name="FileHashPage_MatchTag.Text" xml:space="preserve">
+    <value>相符</value>
+  </data>
+  <data name="FileHashPage_MatchSuccess_Format" xml:space="preserve">
+    <value>驗證成功：與 {0} 雜湊值完全相符。</value>
+  </data>
+  <data name="FileHashPage_MatchFail" xml:space="preserve">
+    <value>比對不相符：未符合任何已計算之演算法雜湊值。</value>
+  </data>
+  <data name="FileHashPage_MatchPending" xml:space="preserve">
+    <value>請輸入或貼上雜湊值以進行即時比對。</value>
+  </data>
+  <data name="FileHashPage_DragDrop_Caption" xml:space="preserve">
+    <value>放置以計算雜湊值</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Sha256_Desc.Text" xml:space="preserve">
+    <value>業界標準高安全演算法，具備極高碰撞抵抗力，廣泛用於現代軟體發行與數位簽章驗證。</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Sha1_Desc.Text" xml:space="preserve">
+    <value>舊版 160 位元演算法，常用於 Git 版本庫或舊式系統校驗，安全性較低不建議用於敏感檔案。</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Md5_Desc.Text" xml:space="preserve">
+    <value>128 位元極速演算法，運算效能最高，常用於下載檔案基本完整性確認與重複檔排查。</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Sha512_Desc.Text" xml:space="preserve">
+    <value>512 位元超高強度演算法，提供頂級碰撞抵抗力與安全裕度，適合機密與高規格檔案驗證。</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Pending" xml:space="preserve">
+    <value>等待計算……</value>
+  </data>
+  <data name="FileHashPage_ClearInput" xml:space="preserve">
+    <value>清除比對文字</value>
+  </data>
+  <data name="FileHashPage_Status_Calculating" xml:space="preserve">
+    <value>計算中...</value>
+  </data>
+  <data name="FileHashPage_Status_Completed" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="Nav_SearchBox.PlaceholderText" xml:space="preserve">
+    <value>搜尋工具或功能</value>
+  </data>
+  <data name="FileHashPage_CancelButton.Text" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="CrashReportPage_CheckDumpConfigBtn.Text" xml:space="preserve">
+    <value>檢查系統傾印 (Minidump) 設定</value>
+  </data>
+  <data name="CrashDump_Disabled" xml:space="preserve">
+    <value>已停用 (不會產生當機傾印記錄檔)</value>
+  </data>
+  <data name="CrashDump_Complete" xml:space="preserve">
+    <value>完整記憶體傾印 (Complete Dump)</value>
+  </data>
+  <data name="CrashDump_Kernel" xml:space="preserve">
+    <value>核心記憶體傾印 (Kernel Dump)</value>
+  </data>
+  <data name="CrashDump_Small" xml:space="preserve">
+    <value>小型記憶體傾印 (Minidump 256KB，推薦)</value>
+  </data>
+  <data name="CrashDump_Automatic" xml:space="preserve">
+    <value>自動記憶體傾印 (Automatic Dump)</value>
+  </data>
+  <data name="CrashDump_Unknown" xml:space="preserve">
+    <value>未設定或由系統管理</value>
+  </data>
+  <data name="CrashReport_DumpConfigTitle" xml:space="preserve">
+    <value>系統當機轉儲 (Minidump) 設定檢查</value>
+  </data>
+  <data name="CrashReport_DumpTypeLabel" xml:space="preserve">
+    <value>當機轉儲類型</value>
+  </data>
+  <data name="CrashReport_DumpFolderLabel" xml:space="preserve">
+    <value>轉儲儲存路徑</value>
+  </data>
+  <data name="CrashReport_AutoRebootLabel" xml:space="preserve">
+    <value>當機自動重新啟動</value>
+  </data>
+  <data name="CrashReport_DumpHint" xml:space="preserve">
+    <value>若系統遭遇 BSOD 藍屏卻未產生傾印檔案，請確保這裡設為「小型記憶體傾印 (256KB)」，且分頁檔 (pagefile.sys) 位於系統磁碟 C: 上。</value>
+  </data>
+  <data name="CrashReport_OpenSystemSettings" xml:space="preserve">
+    <value>開啟 Windows 啟動及修復設定</value>
+  </data>
+  <data name="Folder_Exists" xml:space="preserve">
+    <value>目錄存在</value>
+  </data>
+  <data name="Folder_NotExists" xml:space="preserve">
+    <value>目錄尚未建立</value>
+  </data>
+  <data name="Common_Enabled" xml:space="preserve">
+    <value>已啟用</value>
+  </data>
+  <data name="Common_Disabled" xml:space="preserve">
+    <value>已停用</value>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>關閉</value>
+  </data>
+  <data name="FileAssociationPage_Error_Timeout" xml:space="preserve">
+    <value>登錄機碼操作逾時。</value>
+  </data>
+  <data name="FileAssociationPage_Error_KeyStillExists" xml:space="preserve">
+    <value>機碼仍存在，無法完全刪除使用者關聯設定。</value>
+  </data>
+  <data name="FileAssociationPage_Error_DeleteFailed" xml:space="preserve">
+    <value>刪除檔案關聯失敗：{0}</value>
+  </data>
+  <data name="PerformancePage_Cpu_Title.Text" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="PerformancePage_Gpu_Title.Text" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="PerformancePage_Disk_DefaultTitle.Text" xml:space="preserve">
+    <value>磁碟 (C:)</value>
+  </data>
+  <data name="SystemRepairPage_CheckHealth_Cmd.Text" xml:space="preserve">
+    <value>CheckHealth</value>
+  </data>
+  <data name="SystemRepairPage_ScanHealth_Cmd.Text" xml:space="preserve">
+    <value>ScanHealth</value>
+  </data>
+  <data name="SystemRepairPage_RestoreHealth_Cmd.Text" xml:space="preserve">
+    <value>RestoreHealth</value>
+  </data>
+  <data name="SystemRepairPage_SfcScannow_Cmd.Text" xml:space="preserve">
+    <value>sfc /scannow</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Sha256_Title.Text" xml:space="preserve">
+    <value>SHA-256</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Sha1_Title.Text" xml:space="preserve">
+    <value>SHA-1</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Md5_Title.Text" xml:space="preserve">
+    <value>MD5</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Sha512_Title.Text" xml:space="preserve">
+    <value>SHA-512</value>
+  </data>
+  <data name="FileAssociationPage_Warning_InvalidExt" xml:space="preserve">
+    <value>請輸入有效的副檔名（僅限英數字與連字號，請勿包含引號、反斜線或路徑符號）。</value>
+  </data>
+  <data name="FileAssociationPage_Warning_InvalidExtTitle" xml:space="preserve">
+    <value>副檔名格式無效</value>
+  </data>
+  <data name="FileAssociationPage_RegRunning_Title" xml:space="preserve">
+    <value>登錄編輯程式正在執行</value>
+  </data>
+  <data name="FileAssociationPage_RegRunning_Content" xml:space="preserve">
+    <value>偵測到登錄編輯程式已開啟。若要由本工具自動定位至 .{0} 機碼，需要重新啟動登錄編輯程式。
+
+您也可以保留目前視窗，目標路徑已複製到您的剪貼簿，可直接貼上至網址列。</value>
+  </data>
+  <data name="FileAssociationPage_RegRunning_Restart" xml:space="preserve">
+    <value>重新啟動並定位</value>
+  </data>
+  <data name="FileAssociationPage_RegRunning_Keep" xml:space="preserve">
+    <value>保留目前視窗 (已複製路徑)</value>
+  </data>
+  <data name="SystemRepairPage_Status_AllRepaired" xml:space="preserve">
+    <value>已完成：已成功修復損毀項目</value>
+  </data>
+  <data name="SystemRepairPage_Notification_AllRepaired" xml:space="preserve">
+    <value>系統修復作業已順利結束，並已修復檢測到的損毀元件。</value>
+  </data>
+  <data name="SystemRepairPage_Status_AllHealthy" xml:space="preserve">
+    <value>已完成：系統狀態健康無異常</value>
+  </data>
+  <data name="SystemRepairPage_Notification_AllHealthy" xml:space="preserve">
+    <value>所有修復流程已順利結束，未發現系統損毀或違規項目。</value>
+  </data>
+  <data name="SystemRepairPage_Status_PartialFailed" xml:space="preserve">
+    <value>部分步驟失敗 ({0}/{1} 成功)</value>
+  </data>
+  <data name="SystemRepairPage_Notification_PartialFailed_Title" xml:space="preserve">
+    <value>修復未完全成功</value>
+  </data>
+  <data name="SystemRepairPage_Notification_PartialFailed_Message" xml:space="preserve">
+    <value>系統修復已結束，但有 {0} 個步驟遭遇錯誤，請查看下方終端記錄以獲取詳細資訊。</value>
+  </data>
+  <data name="SystemRepairPage_Status_AllFailed" xml:space="preserve">
+    <value>修復失敗</value>
+  </data>
+  <data name="SystemRepairPage_Notification_Failed_Title" xml:space="preserve">
+    <value>修復失敗</value>
+  </data>
+  <data name="SystemRepairPage_Notification_Failed_Message" xml:space="preserve">
+    <value>系統修復作業執行失敗，請檢查終端機記錄以獲取詳細資訊。</value>
+  </data>
+  <data name="SystemRepairPage_Status_SingleFailed" xml:space="preserve">
+    <value>{0} 執行失敗</value>
+  </data>
+  <data name="SystemRepairPage_Notification_SingleFailed_Message" xml:space="preserve">
+    <value>執行「{0}」時發生錯誤，請檢查終端機記錄以獲取詳細資訊。</value>
+  </data>
+  <data name="SystemRepairPage_Step_Corrupted" xml:space="preserve">
+    <value>發現損毀</value>
+  </data>
+  <data name="SystemRepairPage_Status_CorruptionDetected" xml:space="preserve">
+    <value>檢查完成：發現可修復損毀</value>
+  </data>
+  <data name="SystemRepairPage_Notification_CheckDetected_Title" xml:space="preserve">
+    <value>發現可修復損毀</value>
+  </data>
+  <data name="SystemRepairPage_Notification_CheckDetected_Message" xml:space="preserve">
+    <value>檢查程序檢測到元件存放區存在損毀，建議執行「RestoreHealth 映像修復」進行修復。</value>
+  </data>
+  <data name="SystemRepairPage_Step_Unknown" xml:space="preserve">
+    <value>狀態不明</value>
+  </data>
+  <data name="SystemRepairPage_Status_Unknown" xml:space="preserve">
+    <value>檢查完成：狀態不明，請查看終端記錄</value>
+  </data>
+  <data name="SystemRepairPage_Notification_Unknown_Title" xml:space="preserve">
+    <value>狀態無法自動辨識</value>
+  </data>
+  <data name="SystemRepairPage_Notification_Unknown_Message" xml:space="preserve">
+    <value>檢查程序已順利結束，但未能自動辨識目前系統語言之健康狀態文字，請檢視終端機記錄以確認映像狀況。</value>
+  </data>
+  <data name="SystemRepairPage_Status_AggregatedUnknown" xml:space="preserve">
+    <value>已完成：部分步驟狀態未明，請查看記錄</value>
+  </data>
+  <data name="SystemRepairPage_Notification_AggregatedUnknown_Message" xml:space="preserve">
+    <value>修復作業已結束，但部分檢查步驟的系統語言輸出未被自動辨識，建議檢視終端機輸出以確認狀態。</value>
+  </data>
+  <data name="FileHashPage_Error_FileInUse" xml:space="preserve">
+    <value>檔案正由其他程式使用或寫入中，無法進行雜湊計算。</value>
+  </data>
+  <data name="FileHashPage_Error_FileModified" xml:space="preserve">
+    <value>檔案在計算期間被外部程式修改，雜湊結果已作廢。</value>
+  </data>
+</root>

@@ -51,6 +51,12 @@
   <data name="Nav_TestToolPage.Content" xml:space="preserve">
     <value>Test Tool</value>
   </data>
+  <data name="Category_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Category_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="AppTitle.Text" xml:space="preserve">
     <value>LanLanLu Toolkit</value>
   </data>
@@ -58,16 +64,16 @@
     <value>Performance Monitor</value>
   </data>
   <data name="Greeting_LateNight" xml:space="preserve">
-    <value>Good night, get some rest for a brand new day!</value>
+    <value>It's late, remember to get enough rest.</value>
   </data>
   <data name="Greeting_Morning" xml:space="preserve">
-    <value>Good morning, a fresh start for a wonderful day!</value>
+    <value>Good morning, have a productive day.</value>
   </data>
   <data name="Greeting_Afternoon" xml:space="preserve">
-    <value>Good afternoon, don't forget to take a break!</value>
+    <value>Good afternoon, keep up the great work.</value>
   </data>
   <data name="Greeting_Evening" xml:space="preserve">
-    <value>Good evening, time to relax and enjoy your night!</value>
+    <value>Good evening, relax and enjoy your night.</value>
   </data>
   <data name="Nav_SystemRepairPage.Content" xml:space="preserve">
     <value>System Integrity Repair</value>
@@ -118,7 +124,7 @@
     <value>Detecting...</value>
   </data>
   <data name="HomePage_Intro.Text" xml:space="preserve">
-    <value>A modern toolkit designed for Windows 11, providing hardware monitoring, system optimization, and various practical utilities. Click the links below or use the side menu to start exploring!</value>
+    <value>A modern Windows 11 system diagnostic and repair toolkit. Launch frequently used tools below or use the navigation pane to browse all features.</value>
   </data>
   <data name="HomePage_PoweredBy.Text" xml:space="preserve">
     <value>Powered by flandretw</value>
@@ -145,19 +151,19 @@
     <value>Keyboard &amp; Mouse Diagnostics</value>
   </data>
   <data name="HomePage_Feature_Input_Desc.Text" xml:space="preserve">
-    <value>NKRO rollover, polling rate, switch chatter &amp; trajectory.</value>
+    <value>Keyboard triggers, rollover, switch chatter &amp; mouse tracking test.</value>
   </data>
   <data name="HomePage_Feature_Repair_Title.Text" xml:space="preserve">
     <value>System Integrity Repair</value>
   </data>
   <data name="HomePage_Feature_Repair_Desc.Text" xml:space="preserve">
-    <value>Automated DISM &amp; SFC image repair and integrity scan.</value>
+    <value>Automatically detect and repair corrupted Windows system files.</value>
   </data>
   <data name="HomePage_Feature_Crash_Title.Text" xml:space="preserve">
     <value>System Crash Analysis</value>
   </data>
   <data name="HomePage_Feature_Crash_Desc.Text" xml:space="preserve">
-    <value>BSOD Minidump &amp; Windows error event diagnosis.</value>
+    <value>BSOD crash dump &amp; application crash diagnosis.</value>
   </data>
   <data name="HomePage_Feature_Hash_Title.Text" xml:space="preserve">
     <value>File Hash Verification</value>
@@ -169,10 +175,13 @@
     <value>File Association Management</value>
   </data>
   <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
-    <value>Reset default file extension openers and associations.</value>
+    <value>Clear custom associations and reset default apps.</value>
   </data>
   <data name="HomePage_Refresh_Title" xml:space="preserve">
     <value>Hardware Specs</value>
+  </data>
+  <data name="HomePage_HardwareSpecs_Title.Text" xml:space="preserve">
+    <value>Hardware Specifications</value>
   </data>
   <data name="PerformancePage_Title.Text" xml:space="preserve">
     <value>Performance Monitor</value>
@@ -298,10 +307,10 @@
     <value>{0:F1} ms</value>
   </data>
   <data name="InputTesterPage_Key_CodeFormat" xml:space="preserve">
-    <value>VK: {0} (0x{1:X2}) | Scan: 0x{2:X2}</value>
+    <value>Code: 0x{1:X2}</value>
   </data>
   <data name="InputTesterPage_Key_CodeEmpty.Text" xml:space="preserve">
-    <value>VK: - | Scan: -</value>
+    <value>Code: -</value>
   </data>
   <data name="InputTesterPage_Key_None" xml:space="preserve">
     <value>None</value>
@@ -370,7 +379,22 @@
     <value>Press any physical mouse button or scroll wheel; the visualizer reacts in real time.</value>
   </data>
   <data name="InputTesterPage_Mouse_WheelHint.Text" xml:space="preserve">
-    <value>Scroll wheel over this card to measure steps and jitter.</value>
+    <value>Interact within the canvas to measure trajectory, polling rate, wheel scroll, and chatter simultaneously.</value>
+  </data>
+  <data name="InputTesterPage_Mouse_StageTitle.Text" xml:space="preserve">
+    <value>Standard 3-Button Virtual Mouse</value>
+  </data>
+  <data name="InputTesterPage_Mouse_StageTitle_3Key" xml:space="preserve">
+    <value>Standard 3-Button Virtual Mouse</value>
+  </data>
+  <data name="InputTesterPage_Mouse_StageTitle_5Key" xml:space="preserve">
+    <value>5-Button Virtual Mouse</value>
+  </data>
+  <data name="InputTesterPage_MouseLayout_NoSide.Content" xml:space="preserve">
+    <value>Standard Mouse (No Side Buttons)</value>
+  </data>
+  <data name="InputTesterPage_MouseLayout_WithSide.Content" xml:space="preserve">
+    <value>5-Button Mouse (With Side Buttons)</value>
   </data>
   <data name="InputTesterPage_Layout_100.Content" xml:space="preserve">
     <value>100% Full Size (104 Keys)</value>
@@ -418,16 +442,16 @@
     <value>Total {0} clicks</value>
   </data>
   <data name="InputTesterPage_Mouse_WheelScrollAction" xml:space="preserve">
-    <value>Wheel scroll (Delta: {0})</value>
+    <value>Delta: {0}</value>
   </data>
   <data name="InputTesterPage_Mouse_IntervalAction" xml:space="preserve">
     <value>Interval: {0} ms</value>
   </data>
   <data name="InputTesterPage_Mouse_ClicksBreakdown" xml:space="preserve">
-    <value>L {0} | R {1} | M {2}</value>
+    <value>L {0} / R {1} / M {2}</value>
   </data>
   <data name="InputTesterPage_Mouse_HzSummary" xml:space="preserve">
-    <value>Avg {0} Hz | Peak {1} Hz</value>
+    <value>Avg {0} Hz / Peak {1} Hz</value>
   </data>
   <data name="InputTesterPage_Mouse_StepsUnit" xml:space="preserve">
     <value>{0} Steps</value>
@@ -484,40 +508,40 @@
     <value>Repair Pipeline</value>
   </data>
   <data name="SystemRepairPage_ScanHealth_Title.Text" xml:space="preserve">
-    <value>Scan Image Health (ScanHealth)</value>
+    <value>Scan Image Health</value>
   </data>
   <data name="SystemRepairPage_ScanHealth_Desc.Text" xml:space="preserve">
-    <value>Checks the image for corruption but does not perform repairs.</value>
+    <value>Comprehensively scans the component store for corruption. This process may take several minutes.</value>
   </data>
   <data name="SystemRepairPage_CheckHealth_Title.Text" xml:space="preserve">
-    <value>Check Image Health (CheckHealth)</value>
+    <value>Check Image Health</value>
   </data>
   <data name="SystemRepairPage_CheckHealth_Desc.Text" xml:space="preserve">
-    <value>Checks whether the image has been flagged as corrupted.</value>
+    <value>Quickly verifies whether the component store is flagged as corrupted. This check does not perform repairs.</value>
   </data>
   <data name="SystemRepairPage_RestoreHealth_Title.Text" xml:space="preserve">
-    <value>Restore System Image (RestoreHealth)</value>
+    <value>Restore System Image</value>
   </data>
   <data name="SystemRepairPage_RestoreHealth_Desc.Text" xml:space="preserve">
-    <value>Scans the image and automatically performs repair operations.</value>
+    <value>Scans and automatically downloads clean replacement files from Windows Update to repair corrupted component store images.</value>
   </data>
   <data name="SystemRepairPage_SfcScannow_Title.Text" xml:space="preserve">
-    <value>System File Checker (SFC /Scannow)</value>
+    <value>System File Checker</value>
   </data>
   <data name="SystemRepairPage_SfcScannow_Desc.Text" xml:space="preserve">
-    <value>Scans all protected system files and repairs corrupted ones.</value>
+    <value>Verifies the integrity of all protected system files and replaces corrupted files with clean cached copies.</value>
   </data>
   <data name="SystemRepairPage_AutoMode_Title.Text" xml:space="preserve">
     <value>Automatic Repair Mode</value>
   </data>
   <data name="SystemRepairPage_AutoMode_Desc.Text" xml:space="preserve">
-    <value>Automatically perform full detection and repair. Recommended for most users.</value>
+    <value>Automatically execute standard detection and repair steps in sequence. Recommended for most users.</value>
   </data>
   <data name="SystemRepairPage_AutoMode_Default.Content" xml:space="preserve">
-    <value>Full Repair (Default)</value>
+    <value>Full Repair (Recommended)</value>
   </data>
   <data name="SystemRepairPage_AutoMode_SfcOnly.Content" xml:space="preserve">
-    <value>System File Check Only</value>
+    <value>Quick Repair (System File Checker Only)</value>
   </data>
   <data name="SystemRepairPage_StartButton.Content" xml:space="preserve">
     <value>Start</value>
@@ -618,14 +642,14 @@
   <data name="CrashReportPage_Card_LastCrash.Text" xml:space="preserve">
     <value>Last Crash Time</value>
   </data>
-  <data name="CrashReportPage_Filter_All.Content" xml:space="preserve">
+  <data name="CrashReportPage_Filter_All.Text" xml:space="preserve">
     <value>All Events</value>
   </data>
-  <data name="CrashReportPage_Filter_BSOD.Content" xml:space="preserve">
-    <value>Kernel Crashes Only</value>
+  <data name="CrashReportPage_Filter_BSOD.Text" xml:space="preserve">
+    <value>System BSOD</value>
   </data>
-  <data name="CrashReportPage_Filter_App.Content" xml:space="preserve">
-    <value>App Crashes Only</value>
+  <data name="CrashReportPage_Filter_App.Text" xml:space="preserve">
+    <value>App Crashes</value>
   </data>
   <data name="CrashReportPage_SearchBox.PlaceholderText" xml:space="preserve">
     <value>Search app name, error code, driver or module...</value>
@@ -640,16 +664,16 @@
     <value>Export Report</value>
   </data>
   <data name="CrashReportPage_NoCrashes_Title.Text" xml:space="preserve">
-    <value>System is Healthy!</value>
+    <value>No crash events found</value>
   </data>
   <data name="CrashReportPage_NoCrashes_Desc.Text" xml:space="preserve">
-    <value>No system kernel crash dumps or recent application crash events were found in system logs.</value>
+    <value>No kernel crash dumps (BSOD) or recent application crash events were found in system event logs.</value>
   </data>
   <data name="CrashReportPage_SelectPrompt_Title.Text" xml:space="preserve">
     <value>Select an Event</value>
   </data>
   <data name="CrashReportPage_SelectPrompt_Desc.Text" xml:space="preserve">
-    <value>Click any crash event from the list on the left to view detailed diagnostic information and recommendations.</value>
+    <value>Select any crash event from the list on the left to view detailed diagnostic information and recommendations.</value>
   </data>
   <data name="CrashReportPage_Detail_DiagnosisHeader.Text" xml:space="preserve">
     <value>Smart Diagnosis &amp; Root Cause</value>
@@ -670,7 +694,7 @@
     <value>Source / Application</value>
   </data>
   <data name="CrashReportPage_Detail_Params.Text" xml:space="preserve">
-    <value>Parameters (Arg1~4)</value>
+    <value>Crash Parameters (BugCheck Args)</value>
   </data>
   <data name="CrashReportPage_Detail_DumpPath.Text" xml:space="preserve">
     <value>Dump File / Path</value>
@@ -680,6 +704,9 @@
   </data>
   <data name="CrashReportPage_Detail_RawLogHeader.Text" xml:space="preserve">
     <value>Raw Event Record</value>
+  </data>
+  <data name="CrashReportPage_Detail_RawLogSubheader.Text" xml:space="preserve">
+    <value>Windows Event Viewer Raw Record (XML / Text)</value>
   </data>
   <data name="CrashReportPage_Detail_CopyBtn.Text" xml:space="preserve">
     <value>Copy All</value>
@@ -937,7 +964,7 @@
     <value>Hash Result</value>
   </data>
   <data name="FileHashPage_Compare.Text" xml:space="preserve">
-    <value>Compare &amp; Verify Hash (Case-insensitive)</value>
+    <value>Hash Comparison &amp; Verification</value>
   </data>
   <data name="FileHashPage_CompareButton.Text" xml:space="preserve">
     <value>Paste &amp; Verify</value>
@@ -949,10 +976,10 @@
     <value>Recalculate</value>
   </data>
   <data name="FileHashPage_VerifySuccess" xml:space="preserve">
-    <value>Hash verification succeeded! Perfect match.</value>
+    <value>Hash verification succeeded, exact match.</value>
   </data>
   <data name="FileHashPage_VerifyFail" xml:space="preserve">
-    <value>Hash verification failed! File may be modified or algorithm mismatch.</value>
+    <value>Hash verification failed: File content may be modified or algorithm mismatch.</value>
   </data>
   <data name="FileHashPage_Calculating" xml:space="preserve">
     <value>Calculating hash, please wait...</value>
@@ -967,7 +994,7 @@
     <value>After selecting a file and calculating, the hash result will be displayed here...</value>
   </data>
   <data name="FileHashPage_Compare_Desc.Text" xml:space="preserve">
-    <value>Enter or paste expected hash value; system will match against all calculated results.</value>
+    <value>Hash value comparison and integrity verification.</value>
   </data>
   <data name="FileHashPage_CompareInput.PlaceholderText" xml:space="preserve">
     <value>Enter or paste expected hash here...</value>
@@ -976,7 +1003,7 @@
     <value>Select a file to calculate hash</value>
   </data>
   <data name="FileHashPage_Error_FileNotFound" xml:space="preserve">
-    <value>File does not exist or is inaccessible!</value>
+    <value>File does not exist or is inaccessible.</value>
   </data>
   <data name="FileHashPage_VerifySuccess_Title" xml:space="preserve">
     <value>Verification Succeeded</value>
@@ -997,7 +1024,7 @@
     <value>Calculation cancelled.</value>
   </data>
   <data name="FileAssociationPage_Desc.Text" xml:space="preserve">
-    <value>Clear custom file association overrides and restore them to unassociated or default state.</value>
+    <value>Clear custom file extension associations and restore system defaults.</value>
   </data>
   <data name="FileAssociationPage_ConfigTitle.Text" xml:space="preserve">
     <value>Target File Extension</value>
@@ -1018,16 +1045,16 @@
     <value>Clear Custom Association</value>
   </data>
   <data name="FileAssociationPage_ResetDesc.Text" xml:space="preserve">
-    <value>Thoroughly clears the custom association override in the registry, reverting the extension to its clean state. Non-system formats will revert to having no default app and Windows will ask on double-click.</value>
+    <value>Clear custom open-with overrides in the registry to restore clean system defaults. Windows will prompt to choose an app when opened.</value>
   </data>
   <data name="FileAssociationPage_ResetButton.Content" xml:space="preserve">
     <value>Reset to Default</value>
   </data>
   <data name="FileAssociationPage_Method2Title.Text" xml:space="preserve">
-    <value>Advanced Mode</value>
+    <value>Registry Manual Troubleshooting</value>
   </data>
   <data name="FileAssociationPage_Method2Desc.Text" xml:space="preserve">
-    <value>Automatically navigate to the target extension registry key for manual inspection.</value>
+    <value>Open Registry Editor and navigate to target key.</value>
   </data>
   <data name="FileAssociationPage_Method2Content.Text" xml:space="preserve">
     <value>Launch the Windows Registry Editor and automatically navigate to the target file extension path for advanced inspection and troubleshooting.</value>
@@ -1080,29 +1107,11 @@
   <data name="FileAssociationPage_Title.Text" xml:space="preserve">
     <value>File Association Management</value>
   </data>
-  <data name="TestToolPage_Title.Text" xml:space="preserve">
-    <value>Test Tool</value>
-  </data>
-  <data name="UtilityPage_Title.Text" xml:space="preserve">
-    <value>Utilities</value>
-  </data>
-  <data name="ToolHub_SearchBox.PlaceholderText" xml:space="preserve">
-    <value>Search tool name or description...</value>
-  </data>
-  <data name="ToolHub_Tag_Hardware.Text" xml:space="preserve">
-    <value>Hardware</value>
-  </data>
-  <data name="ToolHub_Tag_System.Text" xml:space="preserve">
-    <value>System</value>
-  </data>
-  <data name="ToolHub_Tag_Utility.Text" xml:space="preserve">
-    <value>Utility</value>
-  </data>
-  <data name="ToolHub_NoResults.Text" xml:space="preserve">
-    <value>No matching tools found. Try another query.</value>
-  </data>
   <data name="SettingsPage_Title.Text" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="SettingsPage_Subtitle.Text" xml:space="preserve">
+    <value>Customize application preferences, appearance, and system options</value>
   </data>
   <data name="SettingsPage_AppearanceBehaviorHeader.Text" xml:space="preserve">
     <value>Appearance &amp; Behavior</value>
@@ -1163,6 +1172,12 @@
   </data>
   <data name="SettingsPage_NotificationSound_Desc.Text" xml:space="preserve">
     <value>Play a sound when system repairs or long tasks are completed.</value>
+  </data>
+  <data name="SettingsPage_SoundEffectsTitle.Text" xml:space="preserve">
+    <value>Interface and Diagnostic Sounds</value>
+  </data>
+  <data name="SettingsPage_SoundEffectsDescription.Text" xml:space="preserve">
+    <value>Control key test feedback and interaction sounds across the application.</value>
   </data>
   <data name="SettingsPage_NotificationsTitle.Text" xml:space="preserve">
     <value>Notifications</value>
@@ -1474,10 +1489,13 @@
     <value>Copy</value>
   </data>
   <data name="SystemRepairPage_Hero_ElapsedTimeFormat" xml:space="preserve">
-    <value>Elapsed: {0}</value>
+    <value>Elapsed {0}</value>
   </data>
   <data name="SystemRepairPage_Hero_TotalTimeFormat" xml:space="preserve">
-    <value>Total time: {0}</value>
+    <value>Total time {0}</value>
+  </data>
+  <data name="SystemRepairPage_Step_Format" xml:space="preserve">
+    <value>Step {0} of {1}: {2}</value>
   </data>
   <data name="SystemRepairPage_ErrorFormat" xml:space="preserve">
     <value>Error: {0}</value>
@@ -1498,12 +1516,257 @@
     <value>Execution failed</value>
   </data>
   <data name="SystemRepairPage_AdvancedExpander_Header.Text" xml:space="preserve">
-    <value>Advanced Mode &amp; Raw Logs</value>
+    <value>Manual Repair Tools &amp; Console Output</value>
   </data>
   <data name="SystemRepairPage_AdvancedExpander_Desc.Text" xml:space="preserve">
-    <value>Execute individual maintenance commands or inspect live terminal output.</value>
+    <value>Individual maintenance tools and live console output.</value>
   </data>
   <data name="SystemRepairPage_AdvancedTools_Header.Text" xml:space="preserve">
     <value>Individual Tools</value>
   </data>
-<data name="FileHashPage_ChangeFile.Text" xml:space="preserve"><value>Change File</value></data><data name="FileHashPage_ClearFile" xml:space="preserve"><value>Clear File</value></data><data name="FileHashPage_CopyAll.Text" xml:space="preserve"><value>Copy All</value></data><data name="FileHashPage_CopyAll_Success" xml:space="preserve"><value>All algorithm hashes copied to clipboard.</value></data><data name="FileHashPage_MatchTag.Text" xml:space="preserve"><value>Match</value></data><data name="FileHashPage_MatchSuccess_Format" xml:space="preserve"><value>Verification successful: Exact match with {0}.</value></data><data name="FileHashPage_MatchFail" xml:space="preserve"><value>No match: Does not match any calculated algorithm hash.</value></data><data name="FileHashPage_MatchPending" xml:space="preserve"><value>Enter or paste a hash value for real-time comparison.</value></data><data name="FileHashPage_DragDrop_Caption" xml:space="preserve"><value>Drop to calculate hash</value></data><data name="FileHashPage_Algorithm_Sha256_Tag.Text" xml:space="preserve"><value>High Security · Recommended</value></data><data name="FileHashPage_Algorithm_Sha1_Tag.Text" xml:space="preserve"><value>Legacy Compatibility</value></data><data name="FileHashPage_Algorithm_Md5_Tag.Text" xml:space="preserve"><value>Fast Checksum</value></data><data name="FileHashPage_Algorithm_Sha512_Tag.Text" xml:space="preserve"><value>Maximum Strength</value></data><data name="FileHashPage_Algorithm_Pending" xml:space="preserve"><value>Pending calculation...</value></data><data name="FileHashPage_ClearInput" xml:space="preserve"><value>Clear text</value></data></root>
+  <data name="FileHashPage_ChangeFile.Text" xml:space="preserve">
+    <value>Change File</value>
+  </data>
+  <data name="FileHashPage_ClearFile" xml:space="preserve">
+    <value>Clear File</value>
+  </data>
+  <data name="FileHashPage_CopyAll.Text" xml:space="preserve">
+    <value>Copy All</value>
+  </data>
+  <data name="FileHashPage_CopyAll_Success" xml:space="preserve">
+    <value>All algorithm hashes copied to clipboard.</value>
+  </data>
+  <data name="FileHashPage_MatchTag.Text" xml:space="preserve">
+    <value>Match</value>
+  </data>
+  <data name="FileHashPage_MatchSuccess_Format" xml:space="preserve">
+    <value>Verification successful: Exact match with {0}.</value>
+  </data>
+  <data name="FileHashPage_MatchFail" xml:space="preserve">
+    <value>No match: Does not match any calculated algorithm hash.</value>
+  </data>
+  <data name="FileHashPage_MatchPending" xml:space="preserve">
+    <value>Enter or paste a hash value for real-time comparison.</value>
+  </data>
+  <data name="FileHashPage_DragDrop_Caption" xml:space="preserve">
+    <value>Drop to calculate hash</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Sha256_Desc.Text" xml:space="preserve">
+    <value>Industry-standard secure hash with high collision resistance, widely used for modern software release verification.</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Sha1_Desc.Text" xml:space="preserve">
+    <value>Legacy 160-bit algorithm commonly used for Git object validation; not recommended for security-critical files.</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Md5_Desc.Text" xml:space="preserve">
+    <value>128-bit ultra-fast algorithm ideal for quick download integrity checks and duplicate file detection.</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Sha512_Desc.Text" xml:space="preserve">
+    <value>512-bit high-security algorithm offering maximum cryptographic margin, suitable for sensitive data verification.</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Pending" xml:space="preserve">
+    <value>Pending calculation...</value>
+  </data>
+  <data name="FileHashPage_ClearInput" xml:space="preserve">
+    <value>Clear text</value>
+  </data>
+  <data name="FileHashPage_Status_Calculating" xml:space="preserve">
+    <value>Calculating...</value>
+  </data>
+  <data name="FileHashPage_Status_Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="Nav_SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Search tools or features...</value>
+  </data>
+  <data name="FileHashPage_CancelButton.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CrashReportPage_CheckDumpConfigBtn.Text" xml:space="preserve">
+    <value>Check System Minidump Settings</value>
+  </data>
+  <data name="CrashDump_Disabled" xml:space="preserve">
+    <value>Disabled (No crash dump files will be created)</value>
+  </data>
+  <data name="CrashDump_Complete" xml:space="preserve">
+    <value>Complete memory dump</value>
+  </data>
+  <data name="CrashDump_Kernel" xml:space="preserve">
+    <value>Kernel memory dump</value>
+  </data>
+  <data name="CrashDump_Small" xml:space="preserve">
+    <value>Small memory dump (Minidump 256KB, Recommended)</value>
+  </data>
+  <data name="CrashDump_Automatic" xml:space="preserve">
+    <value>Automatic memory dump</value>
+  </data>
+  <data name="CrashDump_Unknown" xml:space="preserve">
+    <value>Not configured or system managed</value>
+  </data>
+  <data name="CrashReport_DumpConfigTitle" xml:space="preserve">
+    <value>System Crash Dump (Minidump) Diagnostic</value>
+  </data>
+  <data name="CrashReport_DumpTypeLabel" xml:space="preserve">
+    <value>Crash dump type</value>
+  </data>
+  <data name="CrashReport_DumpFolderLabel" xml:space="preserve">
+    <value>Dump storage path</value>
+  </data>
+  <data name="CrashReport_AutoRebootLabel" xml:space="preserve">
+    <value>Automatically restart on crash</value>
+  </data>
+  <data name="CrashReport_DumpHint" xml:space="preserve">
+    <value>If your PC experiences BSODs but generates no minidump files, verify that the dump type is set to 'Small memory dump (256KB)' and the paging file (pagefile.sys) is active on the system drive C:.</value>
+  </data>
+  <data name="CrashReport_OpenSystemSettings" xml:space="preserve">
+    <value>Open Windows Startup &amp; Recovery Settings</value>
+  </data>
+  <data name="Folder_Exists" xml:space="preserve">
+    <value>Directory exists</value>
+  </data>
+  <data name="Folder_NotExists" xml:space="preserve">
+    <value>Directory not created yet</value>
+  </data>
+  <data name="Common_Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="Common_Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="FileAssociationPage_Error_Timeout" xml:space="preserve">
+    <value>The registry operation timed out.</value>
+  </data>
+  <data name="FileAssociationPage_Error_KeyStillExists" xml:space="preserve">
+    <value>The registry key still exists and could not be removed.</value>
+  </data>
+  <data name="FileAssociationPage_Error_DeleteFailed" xml:space="preserve">
+    <value>Failed to delete association key: {0}</value>
+  </data>
+  <data name="PerformancePage_Cpu_Title.Text" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="PerformancePage_Gpu_Title.Text" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="PerformancePage_Disk_DefaultTitle.Text" xml:space="preserve">
+    <value>Disk (C:)</value>
+  </data>
+  <data name="SystemRepairPage_CheckHealth_Cmd.Text" xml:space="preserve">
+    <value>CheckHealth</value>
+  </data>
+  <data name="SystemRepairPage_ScanHealth_Cmd.Text" xml:space="preserve">
+    <value>ScanHealth</value>
+  </data>
+  <data name="SystemRepairPage_RestoreHealth_Cmd.Text" xml:space="preserve">
+    <value>RestoreHealth</value>
+  </data>
+  <data name="SystemRepairPage_SfcScannow_Cmd.Text" xml:space="preserve">
+    <value>sfc /scannow</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Sha256_Title.Text" xml:space="preserve">
+    <value>SHA-256</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Sha1_Title.Text" xml:space="preserve">
+    <value>SHA-1</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Md5_Title.Text" xml:space="preserve">
+    <value>MD5</value>
+  </data>
+  <data name="FileHashPage_Algorithm_Sha512_Title.Text" xml:space="preserve">
+    <value>SHA-512</value>
+  </data>
+  <data name="FileAssociationPage_Warning_InvalidExt" xml:space="preserve">
+    <value>Please enter a valid file extension (alphanumeric characters, hyphens or periods without quotes or slashes).</value>
+  </data>
+  <data name="FileAssociationPage_Warning_InvalidExtTitle" xml:space="preserve">
+    <value>Invalid Extension Format</value>
+  </data>
+  <data name="FileAssociationPage_RegRunning_Title" xml:space="preserve">
+    <value>Registry Editor is Already Running</value>
+  </data>
+  <data name="FileAssociationPage_RegRunning_Content" xml:space="preserve">
+    <value>Registry Editor is currently open. To automatically navigate to .{0}, Registry Editor needs to be restarted.
+
+You can also keep the existing window; the target path has already been copied to your clipboard to paste into the address bar.</value>
+  </data>
+  <data name="FileAssociationPage_RegRunning_Restart" xml:space="preserve">
+    <value>Restart &amp; Navigate</value>
+  </data>
+  <data name="FileAssociationPage_RegRunning_Keep" xml:space="preserve">
+    <value>Keep Existing Window</value>
+  </data>
+  <data name="SystemRepairPage_Status_AllRepaired" xml:space="preserve">
+    <value>Completed: Corruptions Successfully Repaired</value>
+  </data>
+  <data name="SystemRepairPage_Notification_AllRepaired" xml:space="preserve">
+    <value>System repair completed successfully, and detected corruptions have been repaired.</value>
+  </data>
+  <data name="SystemRepairPage_Status_AllHealthy" xml:space="preserve">
+    <value>Completed: System is Healthy</value>
+  </data>
+  <data name="SystemRepairPage_Notification_AllHealthy" xml:space="preserve">
+    <value>All repair processes finished successfully with no integrity violations found.</value>
+  </data>
+  <data name="SystemRepairPage_Status_PartialFailed" xml:space="preserve">
+    <value>Partially Completed ({0}/{1} Succeeded)</value>
+  </data>
+  <data name="SystemRepairPage_Notification_PartialFailed_Title" xml:space="preserve">
+    <value>Repair Partially Completed</value>
+  </data>
+  <data name="SystemRepairPage_Notification_PartialFailed_Message" xml:space="preserve">
+    <value>System repair finished, but {0} step(s) encountered errors. Please check the terminal log below for details.</value>
+  </data>
+  <data name="SystemRepairPage_Status_AllFailed" xml:space="preserve">
+    <value>Repair Failed</value>
+  </data>
+  <data name="SystemRepairPage_Notification_Failed_Title" xml:space="preserve">
+    <value>Repair Failed</value>
+  </data>
+  <data name="SystemRepairPage_Notification_Failed_Message" xml:space="preserve">
+    <value>System repair operation failed. Please check the terminal log below for details.</value>
+  </data>
+  <data name="SystemRepairPage_Status_SingleFailed" xml:space="preserve">
+    <value>{0} Failed</value>
+  </data>
+  <data name="SystemRepairPage_Notification_SingleFailed_Message" xml:space="preserve">
+    <value>An error occurred while executing {0}. Please check the terminal log for details.</value>
+  </data>
+  <data name="SystemRepairPage_Step_Corrupted" xml:space="preserve">
+    <value>Issues Found</value>
+  </data>
+  <data name="SystemRepairPage_Status_CorruptionDetected" xml:space="preserve">
+    <value>Completed: Repairable corruption detected</value>
+  </data>
+  <data name="SystemRepairPage_Notification_CheckDetected_Title" xml:space="preserve">
+    <value>Corruption Detected</value>
+  </data>
+  <data name="SystemRepairPage_Notification_CheckDetected_Message" xml:space="preserve">
+    <value>Component store corruption was detected. It is recommended to run "RestoreHealth" to repair.</value>
+  </data>
+  <data name="SystemRepairPage_Step_Unknown" xml:space="preserve">
+    <value>Status Unknown</value>
+  </data>
+  <data name="SystemRepairPage_Status_Unknown" xml:space="preserve">
+    <value>Check Completed: Status unknown, please verify terminal log</value>
+  </data>
+  <data name="SystemRepairPage_Notification_Unknown_Title" xml:space="preserve">
+    <value>Unrecognized Health Status</value>
+  </data>
+  <data name="SystemRepairPage_Notification_Unknown_Message" xml:space="preserve">
+    <value>Check completed, but could not automatically determine health status for the current system language. Please check the terminal log.</value>
+  </data>
+  <data name="SystemRepairPage_Status_AggregatedUnknown" xml:space="preserve">
+    <value>Completed: Some steps have unknown status, please check log</value>
+  </data>
+  <data name="SystemRepairPage_Notification_AggregatedUnknown_Message" xml:space="preserve">
+    <value>Repair completed, but the output language for some inspection steps was not recognized. Please check terminal output.</value>
+  </data>
+  <data name="FileHashPage_Error_FileInUse" xml:space="preserve">
+    <value>The file is currently in use or being written by another process.</value>
+  </data>
+  <data name="FileHashPage_Error_FileModified" xml:space="preserve">
+    <value>The file was modified during hash calculation. The result has been invalidated.</value>
+  </data>
+</root>

@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="lanlanlu_toolkit.Views.HomePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,553 +6,500 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="Transparent">
 
     <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="CardHoverOverlayBrush" Color="Black" Opacity="0.04" />
-                    <AcrylicBrush x:Key="CardAcrylicBrush" 
-                                  TintColor="White" 
-                                  TintOpacity="0.90" 
-                                  FallbackColor="White" />
-                </ResourceDictionary>
+        <!-- Hardware Info Card Button Style -->
+        <Style x:Key="HardwareCardButtonStyle" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="20,16" />
+            <Setter Property="MinHeight" Value="72" />
+            <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" 
+                              Background="{TemplateBinding Background}" 
+                              BorderBrush="{TemplateBinding BorderBrush}" 
+                              BorderThickness="{TemplateBinding BorderThickness}" 
+                              CornerRadius="{TemplateBinding CornerRadius}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ControlFillColorSecondaryBrush}" />
+                                            <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ControlFillColorTertiaryBrush}" />
+                                            <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Opacity" Value="0.6" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter Content="{TemplateBinding Content}" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Padding="{TemplateBinding Padding}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-                <ResourceDictionary x:Key="Dark">
-                    <SolidColorBrush x:Key="CardHoverOverlayBrush" Color="White" Opacity="0.08" />
-                    <AcrylicBrush x:Key="CardAcrylicBrush" 
-                                  TintColor="#202020" 
-                                  TintOpacity="0.88" 
-                                  FallbackColor="#202020" />
-                </ResourceDictionary>
-
-                <ResourceDictionary x:Key="Default">
-                    <SolidColorBrush x:Key="CardHoverOverlayBrush" Color="White" Opacity="0.08" />
-                    <AcrylicBrush x:Key="CardAcrylicBrush" 
-                                  TintColor="#202020" 
-                                  TintOpacity="0.88" 
-                                  FallbackColor="#202020" />
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
-
-            <Style x:Key="SystemInfoCardButtonStyle" TargetType="HyperlinkButton">
-                <Setter Property="Width" Value="230" />
-                <Setter Property="Height" Value="118" />
-                <Setter Property="Padding" Value="16,16" />
-                <Setter Property="Background" Value="{ThemeResource CardAcrylicBrush}" />
-                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
-                <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="HyperlinkButton">
-                            <Grid x:Name="RootGrid" 
-                                  Background="{TemplateBinding Background}" 
-                                  BorderBrush="{TemplateBinding BorderBrush}" 
-                                  BorderThickness="{TemplateBinding BorderThickness}" 
-                                  CornerRadius="{TemplateBinding CornerRadius}">
-                                <ContentPresenter Content="{TemplateBinding Content}" 
-                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                  Padding="{TemplateBinding Padding}"
-                                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <Style x:Key="SolidScrollButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
-                <Setter Property="Background" Value="{ThemeResource SolidBackgroundFillColorBaseBrush}" />
-                <Setter Property="Padding" Value="0" />
-                <Setter Property="Width" Value="24" />
-                <Setter Property="Height" Value="44" />
-                <Setter Property="CornerRadius" Value="4" />
-                <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
-            </Style>
-
-            <!-- Responsive Interactive Feature Card Style with Lighter Hover State in Dark Mode -->
-            <Style x:Key="FeatureCardButtonStyle" TargetType="Button">
-                <Setter Property="HorizontalAlignment" Value="Stretch" />
-                <Setter Property="VerticalAlignment" Value="Stretch" />
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                <Setter Property="Padding" Value="20,16" />
-                <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
-                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
-                <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Grid x:Name="RootGrid" 
-                                  Background="{TemplateBinding Background}" 
-                                  BorderBrush="{TemplateBinding BorderBrush}" 
-                                  BorderThickness="{TemplateBinding BorderThickness}" 
-                                  CornerRadius="{TemplateBinding CornerRadius}">
-                                
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup x:Name="CommonStates">
-                                        <VisualState x:Name="Normal" />
-                                        <VisualState x:Name="PointerOver">
-                                            <VisualState.Setters>
-                                                <Setter Target="RootGrid.Background" Value="{ThemeResource ControlFillColorSecondaryBrush}" />
-                                                <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                        <VisualState x:Name="Pressed">
-                                            <VisualState.Setters>
-                                                <Setter Target="RootGrid.Background" Value="{ThemeResource ControlFillColorTertiaryBrush}" />
-                                                <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                        <VisualState x:Name="Disabled">
-                                            <VisualState.Setters>
-                                                <Setter Target="RootGrid.Opacity" Value="0.6" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-                                
-                                <ContentPresenter Content="{TemplateBinding Content}" 
-                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                  Padding="{TemplateBinding Padding}"
-                                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </ResourceDictionary>
+        <!-- Feature Action Card Button Style -->
+        <Style x:Key="FeatureCardButtonStyle" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="20,16" />
+            <Setter Property="MinHeight" Value="72" />
+            <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" 
+                              Background="{TemplateBinding Background}" 
+                              BorderBrush="{TemplateBinding BorderBrush}" 
+                              BorderThickness="{TemplateBinding BorderThickness}" 
+                              CornerRadius="{TemplateBinding CornerRadius}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ControlFillColorSecondaryBrush}" />
+                                            <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ControlFillColorTertiaryBrush}" />
+                                            <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Opacity" Value="0.6" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter Content="{TemplateBinding Content}" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Padding="{TemplateBinding Padding}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
-    <ScrollViewer x:Name="MainScrollViewer" IsScrollInertiaEnabled="True" ManipulationMode="System">
-        <Grid x:Name="RootGrid">
-            <!-- Background Hero Image Layer -->
-            <Grid x:Name="HeroGrid" 
-                  VerticalAlignment="Top" 
-                  Background="{ThemeResource HeroFadeColor}"
-                  Height="{x:Bind HeroHeight, Mode=OneWay}">
-                <!-- Rounded Corner Container for Hero Wallpaper -->
-                <Border CornerRadius="8,0,0,0">
-                    <Border.Background>
-                        <ImageBrush ImageSource="{ThemeResource HomePageHeroImage}" 
-                                    Stretch="UniformToFill" 
-                                    AlignmentY="Center" />
-                    </Border.Background>
-                </Border>
-
-                <!-- Ultra-Smooth Lower Fade Overlay (Seamlessly dissolves into page background #202020) -->
-                <Rectangle VerticalAlignment="Bottom" Height="140">
-                    <Rectangle.Fill>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                            <GradientStop Color="{ThemeResource HeroFadeColorTransparent}" Offset="0.0" />
-                            <GradientStop Color="{ThemeResource HeroFadeColorSemiTransparent}" Offset="0.35" />
-                            <GradientStop Color="{ThemeResource HeroFadeColorMid}" Offset="0.70" />
-                            <GradientStop Color="{ThemeResource HeroFadeColor}" Offset="0.95" />
-                            <GradientStop Color="{ThemeResource HeroFadeColor}" Offset="1.0" />
-                        </LinearGradientBrush>
-                    </Rectangle.Fill>
-                </Rectangle>
-
-                <!-- Top-Left Clean Brand Text Overlay -->
-                <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="36,32,36,0">
-                    <StackPanel HorizontalAlignment="Left" Spacing="4">
-                        <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold" Foreground="{ThemeResource HeroTitleBrush}" />
-                        <TextBlock x:Uid="HomePage_PoweredBy" 
-                                   Style="{ThemeResource BodyTextBlockStyle}" 
-                                   Foreground="{ThemeResource HeroSubtitleBrush}" />
+    <ScrollViewer x:Name="MainScrollViewer" 
+                  IsScrollInertiaEnabled="True" 
+                  HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Auto">
+        <Grid Style="{StaticResource PageScrollableGridStyle}">
+            <StackPanel Spacing="20" HorizontalAlignment="Stretch">
+                
+                <!-- Page Header: Consistent Fluent Alignment -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center">
+                        <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold" />
+                        <TextBlock x:Uid="HomePage_PoweredBy" Style="{StaticResource PageHeaderSubtitleStyle}" />
                     </StackPanel>
                 </Grid>
-            </Grid>
-            
-            <!-- System Information Cards Layer (Floating Half-On Hero Strip) -->
-            <Grid VerticalAlignment="Top" 
-                  Margin="{x:Bind SystemCardsMargin, Mode=OneWay}"
-                  HorizontalAlignment="Stretch">
-                
-                <ScrollViewer x:Name="CardsScrollViewer" 
-                              HorizontalScrollBarVisibility="Hidden" 
-                              HorizontalScrollMode="Enabled" 
-                              VerticalScrollMode="Disabled"
-                              IsScrollInertiaEnabled="True"
-                              ManipulationMode="System"
-                              ViewChanged="CardsScrollViewer_ViewChanged">
-                    <StackPanel Orientation="Horizontal" Spacing="12" Padding="36,4,36,4">
-                        
-                        <!-- OS Card -->
-                        <HyperlinkButton x:Name="OsCard" Style="{StaticResource SystemInfoCardButtonStyle}"
-                                         Click="OsCard_Tapped" 
-                                         PointerEntered="Card_PointerEntered"
-                                         PointerExited="Card_PointerExited"
-                                         ToolTipService.ToolTip="{x:Bind OsVersion, Mode=OneWay}">
-                            <Grid>
-                                <StackPanel Spacing="8">
-                                    <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xE8A9;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                        <TextBlock x:Uid="HomePage_OS" 
-                                                   Style="{ThemeResource BodyStrongTextBlockStyle}" 
-                                                   FontWeight="Bold"
-                                                   VerticalAlignment="Center"
-                                                   Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
-                                    </StackPanel>
-                                    <TextBlock Text="{x:Bind OsVersion, Mode=OneWay}" 
-                                               Style="{ThemeResource CaptionTextBlockStyle}"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                               TextWrapping="Wrap" MaxLines="3" />
-                                </StackPanel>
-                                <Border x:Name="OsHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource ControlCornerRadius}" Margin="-16" IsHitTestVisible="False" />
-                                <FontIcon x:Name="OsCopyIcon" Glyph="&#xE8C8;" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                                          FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0" Margin="0,0,-4,-4" />
-                            </Grid>
-                        </HyperlinkButton>
 
-                        <!-- CPU Card -->
-                        <HyperlinkButton x:Name="CpuCard" Style="{StaticResource SystemInfoCardButtonStyle}"
-                                         Click="CpuCard_Tapped" 
-                                         PointerEntered="Card_PointerEntered"
-                                         PointerExited="Card_PointerExited"
-                                         ToolTipService.ToolTip="{x:Bind CpuName, Mode=OneWay}">
-                            <Grid>
-                                <StackPanel Spacing="8">
-                                    <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xEEA1;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                        <TextBlock x:Uid="HomePage_CPU" 
-                                                   Style="{ThemeResource BodyStrongTextBlockStyle}" 
-                                                   FontWeight="Bold"
-                                                   VerticalAlignment="Center"
-                                                   Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
-                                    </StackPanel>
-                                    <TextBlock Text="{x:Bind CpuName, Mode=OneWay}" 
-                                               Style="{ThemeResource CaptionTextBlockStyle}"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                               TextWrapping="Wrap" MaxLines="3" />
-                                </StackPanel>
-                                <Border x:Name="CpuHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource OverlayCornerRadius}" Margin="-16" IsHitTestVisible="False" />
-                                <FontIcon x:Name="CpuCopyIcon" Glyph="&#xE8C8;" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                                          FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0" Margin="0,0,-4,-4" />
-                            </Grid>
-                        </HyperlinkButton>
-
-                        <!-- Motherboard Card -->
-                        <HyperlinkButton x:Name="MotherboardCard" Style="{StaticResource SystemInfoCardButtonStyle}"
-                                         Click="MotherboardCard_Tapped" 
-                                         PointerEntered="Card_PointerEntered"
-                                         PointerExited="Card_PointerExited"
-                                         ToolTipService.ToolTip="{x:Bind MotherboardModel, Mode=OneWay}">
-                            <Grid>
-                                <StackPanel Spacing="8">
-                                    <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xEA6C;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                        <TextBlock x:Uid="HomePage_Motherboard" 
-                                                   Style="{ThemeResource BodyStrongTextBlockStyle}" 
-                                                   FontWeight="Bold"
-                                                   VerticalAlignment="Center"
-                                                   Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
-                                    </StackPanel>
-                                    <TextBlock Text="{x:Bind MotherboardModel, Mode=OneWay}" 
-                                               Style="{ThemeResource CaptionTextBlockStyle}"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                               TextWrapping="Wrap" MaxLines="3" />
-                                </StackPanel>
-                                <Border x:Name="MotherboardHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource OverlayCornerRadius}" Margin="-16" IsHitTestVisible="False" />
-                                <FontIcon x:Name="MotherboardCopyIcon" Glyph="&#xE8C8;" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                                          FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0" Margin="0,0,-4,-4" />
-                            </Grid>
-                        </HyperlinkButton>
-
-                        <!-- RAM Card -->
-                        <HyperlinkButton x:Name="RamCard" Style="{StaticResource SystemInfoCardButtonStyle}"
-                                         Click="RamCard_Tapped" 
-                                         PointerEntered="Card_PointerEntered"
-                                         PointerExited="Card_PointerExited"
-                                         ToolTipService.ToolTip="{x:Bind RamSize, Mode=OneWay}">
-                            <Grid>
-                                <StackPanel Spacing="8">
-                                    <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xEEA0;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                        <TextBlock x:Uid="HomePage_RAM" 
-                                                   Style="{ThemeResource BodyStrongTextBlockStyle}" 
-                                                   FontWeight="Bold"
-                                                   VerticalAlignment="Center"
-                                                   Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
-                                    </StackPanel>
-                                    <TextBlock Text="{x:Bind RamSize, Mode=OneWay}" 
-                                               Style="{ThemeResource CaptionTextBlockStyle}"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                </StackPanel>
-                                <Border x:Name="RamHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource OverlayCornerRadius}" Margin="-16" IsHitTestVisible="False" />
-                                <FontIcon x:Name="RamCopyIcon" Glyph="&#xE8C8;" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                                          FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0" Margin="0,0,-4,-4" />
-                            </Grid>
-                        </HyperlinkButton>
-
-                        <!-- GPU Card -->
-                        <HyperlinkButton x:Name="GpuCard" Style="{StaticResource SystemInfoCardButtonStyle}"
-                                         Click="GpuCard_Tapped" 
-                                         PointerEntered="Card_PointerEntered"
-                                         PointerExited="Card_PointerExited"
-                                         ToolTipService.ToolTip="{x:Bind GpuName, Mode=OneWay}">
-                            <Grid>
-                                <StackPanel Spacing="8">
-                                    <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xEEA1;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                        <TextBlock x:Uid="HomePage_GPU" 
-                                                   Style="{ThemeResource BodyStrongTextBlockStyle}" 
-                                                   FontWeight="Bold"
-                                                   VerticalAlignment="Center"
-                                                   Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
-                                    </StackPanel>
-                                    <TextBlock Text="{x:Bind GpuName, Mode=OneWay}" 
-                                               Style="{ThemeResource CaptionTextBlockStyle}"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                               TextWrapping="Wrap" MaxLines="3" />
-                                </StackPanel>
-                                <Border x:Name="GpuHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource OverlayCornerRadius}" Margin="-16" IsHitTestVisible="False" />
-                                <FontIcon x:Name="GpuCopyIcon" Glyph="&#xE8C8;" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                                          FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0" Margin="0,0,-4,-4" />
-                            </Grid>
-                        </HyperlinkButton>
-
-                        <!-- Storage Card -->
-                        <HyperlinkButton x:Name="StorageCard" Style="{StaticResource SystemInfoCardButtonStyle}"
-                                         Click="StorageCard_Tapped" 
-                                         PointerEntered="Card_PointerEntered"
-                                         PointerExited="Card_PointerExited"
-                                         ToolTipService.ToolTip="{x:Bind StorageInfo, Mode=OneWay}">
-                            <Grid>
-                                <StackPanel Spacing="8">
-                                    <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xEDA2;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                        <TextBlock x:Uid="HomePage_Storage" 
-                                                   Style="{ThemeResource BodyStrongTextBlockStyle}" 
-                                                   FontWeight="Bold"
-                                                   VerticalAlignment="Center"
-                                                   Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
-                                    </StackPanel>
-                                    <TextBlock Text="{x:Bind StorageInfo, Mode=OneWay}" 
-                                               Style="{ThemeResource CaptionTextBlockStyle}"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                               TextWrapping="Wrap" MaxLines="3" />
-                                </StackPanel>
-                                <Border x:Name="StorageHoverOverlay" Background="{ThemeResource CardHoverOverlayBrush}" Opacity="0" CornerRadius="{ThemeResource OverlayCornerRadius}" Margin="-16" IsHitTestVisible="False" />
-                                <FontIcon x:Name="StorageCopyIcon" Glyph="&#xE8C8;" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                                          FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Opacity="0" Margin="0,0,-4,-4" />
-                            </Grid>
-                        </HyperlinkButton>
-                    </StackPanel>
-                </ScrollViewer>
-
-                <!-- Floating Navigation Buttons -->
-                <Button x:Name="ScrollLeftButton" 
-                        Style="{StaticResource SolidScrollButtonStyle}"
-                        VerticalAlignment="Center" 
-                        HorizontalAlignment="Left"
-                        Margin="8,0,0,0"
-                        Click="ScrollLeft_Click"
-                        Opacity="0"
-                        IsHitTestVisible="False">
-                    <Button.Resources>
-                        <StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="ControlFillColorSecondaryBrush" />
-                        <StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="ControlFillColorTertiaryBrush" />
-                    </Button.Resources>
-                    <FontIcon Glyph="&#xF08D;" FontSize="8" />
-                </Button>
-
-                <Button x:Name="ScrollRightButton" 
-                        Style="{StaticResource SolidScrollButtonStyle}"
-                        VerticalAlignment="Center" 
-                        HorizontalAlignment="Right"
-                        Margin="0,0,8,0"
-                        Click="ScrollRight_Click"
-                        Opacity="1"
-                        IsHitTestVisible="True">
-                    <Button.Resources>
-                        <StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="ControlFillColorSecondaryBrush" />
-                        <StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="ControlFillColorTertiaryBrush" />
-                    </Button.Resources>
-                    <FontIcon Glyph="&#xF08F;" FontSize="8" />
-                </Button>
-            </Grid>
-
-            <!-- Foreground Content Layer (Structured with Consistent 32px Vertical Rhythm) -->
-            <StackPanel Spacing="32" MaxWidth="1600" HorizontalAlignment="Stretch" Margin="{x:Bind ContentMargin, Mode=OneWay}">
-                
-                <!-- Welcome & Greeting Card -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
-                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                        BorderThickness="1" CornerRadius="{ThemeResource OverlayCornerRadius}" Padding="24,20">
-                    <StackPanel Spacing="8">
-                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                            <FontIcon x:Name="GreetingIcon" Glyph="&#xE706;" FontSize="20" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                            <TextBlock x:Name="GreetingText" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" VerticalAlignment="Center" />
-                        </StackPanel>
-                        <TextBlock x:Uid="HomePage_Intro" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" LineHeight="22" />
-                    </StackPanel>
-                </Border>
-
-                <!-- Quick Action Feature Grid Section -->
-                <StackPanel Spacing="16">
-                    <TextBlock x:Uid="HomePage_QuickActions_Title" 
-                               Style="{ThemeResource SubtitleTextBlockStyle}" 
-                               FontWeight="SemiBold" />
-
-                    <!-- Responsive 3-Column Feature Cards Grid with 12px Gaps -->
-                    <Grid RowSpacing="12" ColumnSpacing="12">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+                <!-- Welcome / Greeting Hero Card -->
+                <Border Style="{StaticResource FluentCardBorderStyle}" Padding="24,20">
+                    <Grid ColumnSpacing="20">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-
-                        <!-- Feature 1: Performance Monitor -->
-                        <Button Grid.Row="0" Grid.Column="0" 
-                                Style="{StaticResource FeatureCardButtonStyle}"
-                                Click="FeaturePerf_Click">
-                            <Grid ColumnSpacing="16">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE9D9;" FontSize="28" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
-                                <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                    <TextBlock x:Uid="HomePage_Feature_Perf_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
-                                    <TextBlock x:Uid="HomePage_Feature_Perf_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
-                                </StackPanel>
-                                <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
-                            </Grid>
-                        </Button>
-
-                        <!-- Feature 2: Input Tester -->
-                        <Button Grid.Row="0" Grid.Column="1" 
-                                Style="{StaticResource FeatureCardButtonStyle}"
-                                Click="FeatureInput_Click">
-                            <Grid ColumnSpacing="16">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE765;" FontSize="28" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
-                                <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                    <TextBlock x:Uid="HomePage_Feature_Input_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
-                                    <TextBlock x:Uid="HomePage_Feature_Input_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
-                                </StackPanel>
-                                <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
-                            </Grid>
-                        </Button>
-
-                        <!-- Feature 3: System Repair -->
-                        <Button Grid.Row="0" Grid.Column="2" 
-                                Style="{StaticResource FeatureCardButtonStyle}"
-                                Click="FeatureRepair_Click">
-                            <Grid ColumnSpacing="16">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE762;" FontSize="28" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
-                                <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                    <TextBlock x:Uid="HomePage_Feature_Repair_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
-                                    <TextBlock x:Uid="HomePage_Feature_Repair_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
-                                </StackPanel>
-                                <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
-                            </Grid>
-                        </Button>
-
-                        <!-- Feature 4: Crash Dump Analysis -->
-                        <Button Grid.Row="1" Grid.Column="0" 
-                                Style="{StaticResource FeatureCardButtonStyle}"
-                                Click="FeatureCrash_Click">
-                            <Grid ColumnSpacing="16">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE7BA;" FontSize="28" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
-                                <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                    <TextBlock x:Uid="HomePage_Feature_Crash_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
-                                    <TextBlock x:Uid="HomePage_Feature_Crash_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
-                                </StackPanel>
-                                <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
-                            </Grid>
-                        </Button>
-
-                        <!-- Feature 5: File Hash Calculator -->
-                        <Button Grid.Row="1" Grid.Column="1" 
-                                Style="{StaticResource FeatureCardButtonStyle}"
-                                Click="FeatureHash_Click">
-                            <Grid ColumnSpacing="16">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xEC19;" FontSize="28" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
-                                <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                    <TextBlock x:Uid="HomePage_Feature_Hash_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
-                                    <TextBlock x:Uid="HomePage_Feature_Hash_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
-                                </StackPanel>
-                                <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
-                            </Grid>
-                        </Button>
-
-                        <!-- Feature 6: File Associations -->
-                        <Button Grid.Row="1" Grid.Column="2" 
-                                Style="{StaticResource FeatureCardButtonStyle}"
-                                Click="FeatureAssoc_Click">
-                            <Grid ColumnSpacing="16">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE7B5;" FontSize="28" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Margin="4,0,8,0" />
-                                <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                    <TextBlock x:Uid="HomePage_Feature_Assoc_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
-                                    <TextBlock x:Uid="HomePage_Feature_Assoc_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
-                                </StackPanel>
-                                <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
-                            </Grid>
-                        </Button>
-                    </Grid>
-                </StackPanel>
-
-                <!-- Footer Quick Links Bar -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
-                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                        BorderThickness="1" CornerRadius="{ThemeResource OverlayCornerRadius}" Padding="20,16">
-                    <Grid>
-                        <StackPanel Orientation="Horizontal" Spacing="24" VerticalAlignment="Center">
-                            <HyperlinkButton Click="GoToSettings_Click" Padding="8,4">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <FontIcon Glyph="&#xE713;" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                    <TextBlock x:Uid="HomePage_AppSettings" Style="{ThemeResource BodyTextBlockStyle}" />
-                                </StackPanel>
-                            </HyperlinkButton>
-
-                            <HyperlinkButton NavigateUri="https://github.com/flandretw/LanLanLuToolkit" Padding="8,4">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <FontIcon Glyph="&#xE93C;" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                    <TextBlock x:Uid="HomePage_GitHubProject" Style="{ThemeResource BodyTextBlockStyle}" />
-                                </StackPanel>
-                            </HyperlinkButton>
+                        <FontIcon x:Name="GreetingIcon" Glyph="&#xE706;" FontSize="36" 
+                                  Foreground="{ThemeResource AccentFillColorDefaultBrush}" 
+                                  VerticalAlignment="Center" />
+                        <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                            <TextBlock x:Name="GreetingText" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold" />
+                            <TextBlock x:Uid="HomePage_Intro" Style="{ThemeResource BodyTextBlockStyle}" 
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                                       TextWrapping="Wrap" LineHeight="20" />
                         </StackPanel>
                     </Grid>
                 </Border>
+
+            <!-- Hardware Specifications Section (3-Column x 2-Row Structured Grid) -->
+            <StackPanel Spacing="12">
+                <TextBlock x:Uid="HomePage_HardwareSpecs_Title" 
+                           Style="{ThemeResource SubtitleTextBlockStyle}" 
+                           FontWeight="SemiBold" />
+
+                <Grid RowSpacing="12" ColumnSpacing="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- OS Card -->
+                    <Button x:Name="OsCard" Grid.Row="0" Grid.Column="0" 
+                            Style="{StaticResource HardwareCardButtonStyle}"
+                            Click="OsCard_Tapped" 
+                            PointerEntered="Card_PointerEntered"
+                            PointerExited="Card_PointerExited"
+                            ToolTipService.ToolTip="{x:Bind OsVersion, Mode=OneWay}">
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE8A9;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock x:Uid="HomePage_OS" 
+                                           Style="{ThemeResource BodyStrongTextBlockStyle}" 
+                                           FontWeight="SemiBold" />
+                                <TextBlock Text="{x:Bind OsVersion, Mode=OneWay}" 
+                                           Style="{ThemeResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                            <FontIcon x:Name="OsCopyIcon" Grid.Column="2" Glyph="&#xE8C8;" 
+                                      FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                                      Opacity="0.4" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <!-- CPU Card -->
+                    <Button x:Name="CpuCard" Grid.Row="0" Grid.Column="1" 
+                            Style="{StaticResource HardwareCardButtonStyle}"
+                            Click="CpuCard_Tapped" 
+                            PointerEntered="Card_PointerEntered"
+                            PointerExited="Card_PointerExited"
+                            ToolTipService.ToolTip="{x:Bind CpuName, Mode=OneWay}">
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xEEA1;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock x:Uid="HomePage_CPU" 
+                                           Style="{ThemeResource BodyStrongTextBlockStyle}" 
+                                           FontWeight="SemiBold" />
+                                <TextBlock Text="{x:Bind CpuName, Mode=OneWay}" 
+                                           Style="{ThemeResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                            <FontIcon x:Name="CpuCopyIcon" Grid.Column="2" Glyph="&#xE8C8;" 
+                                      FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                                      Opacity="0.4" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <!-- Motherboard Card -->
+                    <Button x:Name="MotherboardCard" Grid.Row="0" Grid.Column="2" 
+                            Style="{StaticResource HardwareCardButtonStyle}"
+                            Click="MotherboardCard_Tapped" 
+                            PointerEntered="Card_PointerEntered"
+                            PointerExited="Card_PointerExited"
+                            ToolTipService.ToolTip="{x:Bind MotherboardModel, Mode=OneWay}">
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xEA6C;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock x:Uid="HomePage_Motherboard" 
+                                           Style="{ThemeResource BodyStrongTextBlockStyle}" 
+                                           FontWeight="SemiBold" />
+                                <TextBlock Text="{x:Bind MotherboardModel, Mode=OneWay}" 
+                                           Style="{ThemeResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                            <FontIcon x:Name="MotherboardCopyIcon" Grid.Column="2" Glyph="&#xE8C8;" 
+                                      FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                                      Opacity="0.4" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <!-- RAM Card -->
+                    <Button x:Name="RamCard" Grid.Row="1" Grid.Column="0" 
+                            Style="{StaticResource HardwareCardButtonStyle}"
+                            Click="RamCard_Tapped" 
+                            PointerEntered="Card_PointerEntered"
+                            PointerExited="Card_PointerExited"
+                            ToolTipService.ToolTip="{x:Bind RamSize, Mode=OneWay}">
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xEEA0;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock x:Uid="HomePage_RAM" 
+                                           Style="{ThemeResource BodyStrongTextBlockStyle}" 
+                                           FontWeight="SemiBold" />
+                                <TextBlock Text="{x:Bind RamSize, Mode=OneWay}" 
+                                           Style="{ThemeResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                            <FontIcon x:Name="RamCopyIcon" Grid.Column="2" Glyph="&#xE8C8;" 
+                                      FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                                      Opacity="0.4" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <!-- GPU Card -->
+                    <Button x:Name="GpuCard" Grid.Row="1" Grid.Column="1" 
+                            Style="{StaticResource HardwareCardButtonStyle}"
+                            Click="GpuCard_Tapped" 
+                            PointerEntered="Card_PointerEntered"
+                            PointerExited="Card_PointerExited"
+                            ToolTipService.ToolTip="{x:Bind GpuName, Mode=OneWay}">
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xEEA1;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock x:Uid="HomePage_GPU" 
+                                           Style="{ThemeResource BodyStrongTextBlockStyle}" 
+                                           FontWeight="SemiBold" />
+                                <TextBlock Text="{x:Bind GpuName, Mode=OneWay}" 
+                                           Style="{ThemeResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                            <FontIcon x:Name="GpuCopyIcon" Grid.Column="2" Glyph="&#xE8C8;" 
+                                      FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                                      Opacity="0.4" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <!-- Storage Card -->
+                    <Button x:Name="StorageCard" Grid.Row="1" Grid.Column="2" 
+                            Style="{StaticResource HardwareCardButtonStyle}"
+                            Click="StorageCard_Tapped" 
+                            PointerEntered="Card_PointerEntered"
+                            PointerExited="Card_PointerExited"
+                            ToolTipService.ToolTip="{x:Bind StorageInfo, Mode=OneWay}">
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xEDA2;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock x:Uid="HomePage_Storage" 
+                                           Style="{ThemeResource BodyStrongTextBlockStyle}" 
+                                           FontWeight="SemiBold" />
+                                <TextBlock Text="{x:Bind StorageInfo, Mode=OneWay}" 
+                                           Style="{ThemeResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                            <FontIcon x:Name="StorageCopyIcon" Grid.Column="2" Glyph="&#xE8C8;" 
+                                      FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                                      Opacity="0.4" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+                </Grid>
             </StackPanel>
-        </Grid>
-    </ScrollViewer>
+
+            <!-- Quick Action Feature Grid Section -->
+            <StackPanel Spacing="12">
+                <TextBlock x:Uid="HomePage_QuickActions_Title" 
+                           Style="{ThemeResource SubtitleTextBlockStyle}" 
+                           FontWeight="SemiBold" />
+
+                <!-- Responsive 3-Column Feature Cards Grid -->
+                <Grid RowSpacing="12" ColumnSpacing="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Feature 1: Performance Monitor -->
+                    <Button Grid.Row="0" Grid.Column="0" 
+                            Style="{StaticResource FeatureCardButtonStyle}"
+                            Click="FeaturePerf_Click">
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE9D9;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock x:Uid="HomePage_Feature_Perf_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
+                                <TextBlock x:Uid="HomePage_Feature_Perf_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
+                            </StackPanel>
+                            <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <!-- Feature 2: Input Tester -->
+                    <Button Grid.Row="0" Grid.Column="1" 
+                            Style="{StaticResource FeatureCardButtonStyle}"
+                            Click="FeatureInput_Click">
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE765;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock x:Uid="HomePage_Feature_Input_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
+                                <TextBlock x:Uid="HomePage_Feature_Input_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
+                            </StackPanel>
+                            <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <!-- Feature 3: System Repair -->
+                    <Button Grid.Row="0" Grid.Column="2" 
+                            Style="{StaticResource FeatureCardButtonStyle}"
+                            Click="FeatureRepair_Click">
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE762;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock x:Uid="HomePage_Feature_Repair_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
+                                <TextBlock x:Uid="HomePage_Feature_Repair_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
+                            </StackPanel>
+                            <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <!-- Feature 4: Crash Dump Analysis -->
+                    <Button Grid.Row="1" Grid.Column="0" 
+                            Style="{StaticResource FeatureCardButtonStyle}"
+                            Click="FeatureCrash_Click">
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE7BA;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock x:Uid="HomePage_Feature_Crash_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
+                                <TextBlock x:Uid="HomePage_Feature_Crash_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
+                            </StackPanel>
+                            <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <!-- Feature 5: File Hash Calculator -->
+                    <Button Grid.Row="1" Grid.Column="1" 
+                            Style="{StaticResource FeatureCardButtonStyle}"
+                            Click="FeatureHash_Click">
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xEC19;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock x:Uid="HomePage_Feature_Hash_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
+                                <TextBlock x:Uid="HomePage_Feature_Hash_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
+                            </StackPanel>
+                            <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <!-- Feature 6: File Associations -->
+                    <Button Grid.Row="1" Grid.Column="2" 
+                            Style="{StaticResource FeatureCardButtonStyle}"
+                            Click="FeatureAssoc_Click">
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE7B5;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock x:Uid="HomePage_Feature_Assoc_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
+                                <TextBlock x:Uid="HomePage_Feature_Assoc_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
+                            </StackPanel>
+                            <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+                </Grid>
+            </StackPanel>
+
+            <!-- Footer Quick Links Bar -->
+            <Border Style="{StaticResource FluentCardBorderStyle}">
+                <StackPanel Orientation="Horizontal" Spacing="24" VerticalAlignment="Center">
+                    <HyperlinkButton Click="GoToSettings_Click" Padding="8,4">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon Glyph="&#xE713;" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <TextBlock x:Uid="HomePage_AppSettings" Style="{ThemeResource BodyTextBlockStyle}" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </HyperlinkButton>
+
+                    <HyperlinkButton NavigateUri="https://github.com/flandretw/LanLanLuToolkit" Padding="8,4">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon Glyph="&#xE93C;" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <TextBlock x:Uid="HomePage_GitHubProject" Style="{ThemeResource BodyTextBlockStyle}" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </HyperlinkButton>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</ScrollViewer>
 </Page>

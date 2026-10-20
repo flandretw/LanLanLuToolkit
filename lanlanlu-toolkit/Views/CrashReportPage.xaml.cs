@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -28,6 +29,18 @@ namespace lanlanlu_toolkit.Views
 
         private async void CrashReportPage_Loaded(object sender, RoutedEventArgs e)
         {
+            if (FilterAllItem != null && string.IsNullOrEmpty(FilterAllItem.Text))
+                FilterAllItem.Text = LocalizationHelper.GetString("CrashReportPage_Filter_All.Text") ?? "全部事件";
+            if (FilterBsodItem != null && string.IsNullOrEmpty(FilterBsodItem.Text))
+                FilterBsodItem.Text = LocalizationHelper.GetString("CrashReportPage_Filter_BSOD.Text") ?? "系統黑色畫面";
+            if (FilterAppItem != null && string.IsNullOrEmpty(FilterAppItem.Text))
+                FilterAppItem.Text = LocalizationHelper.GetString("CrashReportPage_Filter_App.Text") ?? "應用程式";
+
+            if (TypeSelectorBar != null && TypeSelectorBar.SelectedItem == null && FilterAllItem != null)
+            {
+                TypeSelectorBar.SelectedItem = FilterAllItem;
+            }
+
             if (_allReports.Count == 0)
             {
                 await LoadReportsAsync();
@@ -58,6 +71,11 @@ namespace lanlanlu_toolkit.Views
                     ? summary.LastCrashTime.Value.ToString("yyyy/MM/dd HH:mm") 
                     : LocalizationHelper.GetString("CrashReportPage_None");
 
+                if (TypeSelectorBar != null && TypeSelectorBar.SelectedItem == null && FilterAllItem != null)
+                {
+                    TypeSelectorBar.SelectedItem = FilterAllItem;
+                }
+
                 ApplyFilters();
                 ExportBtn.IsEnabled = _allReports.Count > 0;
             }
@@ -74,12 +92,11 @@ namespace lanlanlu_toolkit.Views
 
         private void ApplyFilters()
         {
-            var filterType = TypeFilterComboBox.SelectedIndex switch
-            {
-                1 => (Func<CrashReportItem, bool>)(x => x.Type == CrashType.Bsod),
-                2 => (Func<CrashReportItem, bool>)(x => x.Type != CrashType.Bsod),
-                _ => (Func<CrashReportItem, bool>)(x => true)
-            };
+            var filterType = (TypeSelectorBar?.SelectedItem == FilterBsodItem)
+                ? (Func<CrashReportItem, bool>)(x => x.Type == CrashType.Bsod)
+                : (TypeSelectorBar?.SelectedItem == FilterAppItem)
+                    ? (Func<CrashReportItem, bool>)(x => x.Type != CrashType.Bsod)
+                    : (Func<CrashReportItem, bool>)(x => true);
 
             string search = CrashSearchBox.Text?.Trim() ?? "";
 
@@ -141,6 +158,7 @@ namespace lanlanlu_toolkit.Views
         {
             NoSelectionPrompt.Visibility = Visibility.Collapsed;
             DetailScrollViewer.Visibility = Visibility.Visible;
+            if (RawLogExpander != null) RawLogExpander.IsExpanded = false;
             try { FadeInDetailStoryboard.Begin(); } catch { }
 
             DetailTypeBadgeText.Text = item.DisplayBadge;
@@ -162,20 +180,7 @@ namespace lanlanlu_toolkit.Views
                 : item.RawDetails;
 
             // Wire up copy tags
-            CopyDiagnosisBtn.Tag = $"{item.ErrorDescription}\n\n{item.Recommendation}".Trim();
-            CopyErrorCodeBtn.Tag = item.ErrorCode;
-            CopyFaultModuleBtn.Tag = item.FaultingModule;
-            CopySourceAppBtn.Tag = item.SourceOrApp;
-            CopyParamsBtn.Tag = item.Parameters;
-            CopyDumpPathBtn.Tag = item.FilePathOrDump;
             CopyRawLogBtn.Tag = item.RawDetails;
-
-            CopyDiagnosisBtn.Visibility = (!string.IsNullOrEmpty(item.ErrorDescription) || !string.IsNullOrEmpty(item.Recommendation)) ? Visibility.Visible : Visibility.Collapsed;
-            CopyErrorCodeBtn.Visibility = !string.IsNullOrEmpty(item.ErrorCode) ? Visibility.Visible : Visibility.Collapsed;
-            CopyFaultModuleBtn.Visibility = !string.IsNullOrEmpty(item.FaultingModule) ? Visibility.Visible : Visibility.Collapsed;
-            CopySourceAppBtn.Visibility = !string.IsNullOrEmpty(item.SourceOrApp) ? Visibility.Visible : Visibility.Collapsed;
-            CopyParamsBtn.Visibility = !string.IsNullOrEmpty(item.Parameters) ? Visibility.Visible : Visibility.Collapsed;
-            CopyDumpPathBtn.Visibility = !string.IsNullOrEmpty(item.FilePathOrDump) ? Visibility.Visible : Visibility.Collapsed;
             CopyRawLogBtn.Visibility = !string.IsNullOrEmpty(item.RawDetails) ? Visibility.Visible : Visibility.Collapsed;
 
             // Show or hide locate button
@@ -184,7 +189,7 @@ namespace lanlanlu_toolkit.Views
                 : Visibility.Collapsed;
         }
 
-        private void TypeFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TypeSelectorBar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
         {
             if (ShowingCountText != null) ApplyFilters();
         }
@@ -361,6 +366,81 @@ namespace lanlanlu_toolkit.Views
             catch (Exception ex)
             {
                 LoggingService.Log($"[CrashReportPage] Export failed: {ex.Message}");
+            }
+        }
+
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (MasterListColumn != null)
+            {
+                MasterListColumn.Width = e.NewSize.Width < 960 ? new GridLength(280) : new GridLength(360);
+            }
+        }
+
+        private async void CheckDumpConfigBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int dumpType = -1;
+                string dumpFolder = @"%SystemRoot%\Minidump";
+                bool autoReboot = false;
+
+                try
+                {
+                    using var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\CrashControl");
+                    if (key != null)
+                    {
+                        dumpType = Convert.ToInt32(key.GetValue("CrashDumpEnabled", -1));
+                        dumpFolder = key.GetValue("MinidumpDir", @"%SystemRoot%\Minidump")?.ToString() ?? @"%SystemRoot%\Minidump";
+                        autoReboot = Convert.ToInt32(key.GetValue("AutoReboot", 0)) == 1;
+                    }
+                }
+                catch { }
+
+                string dumpDesc = dumpType switch
+                {
+                    0 => LocalizationHelper.GetString("CrashDump_Disabled") ?? "已停用 (不會產生當機傾印記錄檔)",
+                    1 => LocalizationHelper.GetString("CrashDump_Complete") ?? "完整記憶體傾印 (Complete Dump)",
+                    2 => LocalizationHelper.GetString("CrashDump_Kernel") ?? "核心記憶體傾印 (Kernel Dump)",
+                    3 => LocalizationHelper.GetString("CrashDump_Small") ?? "小型記憶體傾印 (Minidump 256KB，推薦)",
+                    7 => LocalizationHelper.GetString("CrashDump_Automatic") ?? "自動記憶體傾印 (Automatic Dump)",
+                    _ => LocalizationHelper.GetString("CrashDump_Unknown") ?? "未設定或由系統管理"
+                };
+
+                var expFolder = Environment.ExpandEnvironmentVariables(dumpFolder);
+                bool folderExists = Directory.Exists(expFolder);
+
+                var sb = new StringBuilder();
+                sb.AppendLine($"{LocalizationHelper.GetString("CrashReport_DumpTypeLabel") ?? "當機轉儲類型"}：{dumpDesc}");
+                sb.AppendLine($"{LocalizationHelper.GetString("CrashReport_DumpFolderLabel") ?? "轉儲儲存路徑"}：{expFolder} ({(folderExists ? (LocalizationHelper.GetString("Folder_Exists") ?? "目錄存在") : (LocalizationHelper.GetString("Folder_NotExists") ?? "目錄尚未建立"))})");
+                sb.AppendLine($"{LocalizationHelper.GetString("CrashReport_AutoRebootLabel") ?? "當機自動重新啟動"}：{(autoReboot ? (LocalizationHelper.GetString("Common_Enabled") ?? "已啟用") : (LocalizationHelper.GetString("Common_Disabled") ?? "已停用"))}");
+                sb.AppendLine();
+                sb.AppendLine(LocalizationHelper.GetString("CrashReport_DumpHint") ?? "若系統遭遇 BSOD 藍屏卻未產生傾印檔案，請確保此處設為「小型記憶體傾印 (256KB)」，且分頁檔 (pagefile.sys) 位於系統磁碟 C: 上。");
+
+                var dialog = new ContentDialog
+                {
+                    Title = LocalizationHelper.GetString("CrashReport_DumpConfigTitle") ?? "系統當機轉儲 (Minidump) 設定檢查",
+                    Content = sb.ToString(),
+                    PrimaryButtonText = LocalizationHelper.GetString("CrashReport_OpenSystemSettings") ?? "開啟 Windows 啟動及修復設定",
+                    CloseButtonText = LocalizationHelper.GetString("Common_Close") ?? "關閉",
+                    XamlRoot = this.XamlRoot,
+                    DefaultButton = ContentDialogButton.Primary
+                };
+
+                var result = await dialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "sysdm.cpl",
+                        Arguments = ",3",
+                        UseShellExecute = true
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggingService.Log($"[CrashReportPage] CheckDumpConfig failed: {ex.Message}");
             }
         }
     }

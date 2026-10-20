@@ -13,6 +13,7 @@ namespace lanlanlu_toolkit.Services
         public string Theme { get; set; } = "Default";
         public bool NotificationsEnabled { get; set; } = true;
         public bool NotificationSoundEnabled { get; set; } = true;
+        public bool SoundEffectsEnabled { get; set; } = true;
         public string TemperatureUnit { get; set; } = "Celsius";
         public bool DebugReportEnabled { get; set; } = false;
         public string? DebugReportPath { get; set; } = null;
@@ -29,46 +30,116 @@ namespace lanlanlu_toolkit.Services
         private const string AppFolderName = "lanlanlu_toolkit";
         private const string SettingsFileName = "settings.json";
         private static AppSettings? _currentSettings;
+        private static string? _activeSettingsFilePath;
 
-        private static string GetAppFolder(bool createIfMissing)
+        private static string GetPortableSettingsPath()
+        {
+            string? exePath = Environment.ProcessPath;
+            string exeFolder = !string.IsNullOrEmpty(exePath) 
+                ? Path.GetDirectoryName(Path.GetFullPath(exePath))! 
+                : AppDomain.CurrentDomain.BaseDirectory;
+
+            return Path.Combine(exeFolder, "Data", SettingsFileName);
+        }
+
+        private static string GetLocalAppDataSettingsPath()
+        {
+            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            return Path.Combine(localAppData, AppFolderName, SettingsFileName);
+        }
+
+        private static bool CanWriteToDirectory(string dirPath)
         {
             try
             {
-                string? exePath = Environment.ProcessPath;
-                string exeFolder = !string.IsNullOrEmpty(exePath) 
-                    ? Path.GetDirectoryName(Path.GetFullPath(exePath))! 
-                    : AppDomain.CurrentDomain.BaseDirectory;
-                
-                string portableFolder = Path.Combine(exeFolder, "Data");
-
-                if (createIfMissing)
+                if (!Directory.Exists(dirPath))
                 {
-                    if (!Directory.Exists(portableFolder))
+                    Directory.CreateDirectory(dirPath);
+                }
+
+                string testFile = Path.Combine(dirPath, $".write_test_{Guid.NewGuid():N}");
+                File.WriteAllText(testFile, "test");
+                File.Delete(testFile);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static string ResolveSettingsFilePath(bool forWriting = false)
+        {
+            if (_activeSettingsFilePath != null)
+            {
+                if (forWriting)
+                {
+                    string dir = Path.GetDirectoryName(_activeSettingsFilePath)!;
+                    if (CanWriteToDirectory(dir))
                     {
-                        Directory.CreateDirectory(portableFolder);
+                        return _activeSettingsFilePath;
                     }
 
-                    // Permission test
-                    string testFile = Path.Combine(portableFolder, ".write_test");
-                    File.WriteAllText(testFile, "test");
-                    File.Delete(testFile);
+                    // Active path became unwritable; fall back to LocalAppData
+                    _activeSettingsFilePath = GetLocalAppDataSettingsPath();
+                    return _activeSettingsFilePath;
+                }
+                return _activeSettingsFilePath;
+            }
+
+            string portablePath = GetPortableSettingsPath();
+            string portableDir = Path.GetDirectoryName(portablePath)!;
+            string localAppDataPath = GetLocalAppDataSettingsPath();
+
+            bool portableExists = File.Exists(portablePath);
+            bool localAppDataExists = File.Exists(localAppDataPath);
+
+            if (portableExists && localAppDataExists)
+            {
+                // Both exist: if portable directory is not writable, LocalAppData must be the active one
+                if (!CanWriteToDirectory(portableDir))
+                {
+                    _activeSettingsFilePath = localAppDataPath;
+                    return _activeSettingsFilePath;
                 }
 
-                return portableFolder;
+                // Both are available; choose the one with the latest modification time
+                DateTime portableTime = File.GetLastWriteTimeUtc(portablePath);
+                DateTime localTime = File.GetLastWriteTimeUtc(localAppDataPath);
+
+                _activeSettingsFilePath = (localTime > portableTime) ? localAppDataPath : portablePath;
+                return _activeSettingsFilePath;
             }
-            catch (Exception ex)
+
+            if (portableExists)
             {
-                string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                string fallbackFolder = Path.Combine(localAppData, AppFolderName);
-                
-                if (createIfMissing && !Directory.Exists(fallbackFolder))
+                if (!forWriting || CanWriteToDirectory(portableDir))
                 {
-                    Directory.CreateDirectory(fallbackFolder);
+                    _activeSettingsFilePath = portablePath;
+                    return _activeSettingsFilePath;
                 }
-                
-                Debug.WriteLine($"Local folder access issue, using AppData fallback: {ex.Message}");
-                return fallbackFolder;
+
+                _activeSettingsFilePath = localAppDataPath;
+                return _activeSettingsFilePath;
             }
+
+            if (localAppDataExists)
+            {
+                _activeSettingsFilePath = localAppDataPath;
+                return _activeSettingsFilePath;
+            }
+
+            // Neither file exists yet. Prefer portable if directory is writable, otherwise LocalAppData
+            if (CanWriteToDirectory(portableDir))
+            {
+                _activeSettingsFilePath = portablePath;
+            }
+            else
+            {
+                _activeSettingsFilePath = localAppDataPath;
+            }
+
+            return _activeSettingsFilePath;
         }
 
         private static void LoadSettings()
@@ -77,12 +148,22 @@ namespace lanlanlu_toolkit.Services
 
             try
             {
-                // Pass false when reading, do not proactively create folders
-                string filePath = Path.Combine(GetAppFolder(false), SettingsFileName);
+                string filePath = ResolveSettingsFilePath(forWriting: false);
                 if (File.Exists(filePath))
                 {
                     string json = File.ReadAllText(filePath);
                     _currentSettings = JsonSerializer.Deserialize(json, AppSettingsContext.Default.AppSettings);
+                }
+                else
+                {
+                    // Fallback check: if primary path didn't exist, check LocalAppData as well
+                    string fallbackPath = GetLocalAppDataSettingsPath();
+                    if (File.Exists(fallbackPath))
+                    {
+                        string json = File.ReadAllText(fallbackPath);
+                        _currentSettings = JsonSerializer.Deserialize(json, AppSettingsContext.Default.AppSettings);
+                        _activeSettingsFilePath = fallbackPath;
+                    }
                 }
             }
             catch (Exception ex)
@@ -102,14 +183,38 @@ namespace lanlanlu_toolkit.Services
 
             try
             {
-                // Only pass true when saving, this is when the folder will be created
-                string filePath = Path.Combine(GetAppFolder(true), SettingsFileName);
+                string filePath = ResolveSettingsFilePath(forWriting: true);
+                string? dir = Path.GetDirectoryName(filePath);
+                if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+
                 string json = JsonSerializer.Serialize(_currentSettings, AppSettingsContext.Default.AppSettings);
                 File.WriteAllText(filePath, json);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Failed to save settings: {ex.Message}");
+
+                // If writing to the primary path failed, fall back to LocalAppData
+                try
+                {
+                    string fallbackPath = GetLocalAppDataSettingsPath();
+                    string? fallbackDir = Path.GetDirectoryName(fallbackPath);
+                    if (!string.IsNullOrEmpty(fallbackDir) && !Directory.Exists(fallbackDir))
+                    {
+                        Directory.CreateDirectory(fallbackDir);
+                    }
+
+                    string json = JsonSerializer.Serialize(_currentSettings, AppSettingsContext.Default.AppSettings);
+                    File.WriteAllText(fallbackPath, json);
+                    _activeSettingsFilePath = fallbackPath;
+                }
+                catch (Exception fallbackEx)
+                {
+                    Debug.WriteLine($"Failed to save settings to fallback: {fallbackEx.Message}");
+                }
             }
         }
 
@@ -194,6 +299,22 @@ namespace lanlanlu_toolkit.Services
             }
         }
 
+        public static bool GetSoundEffectsEnabled()
+        {
+            LoadSettings();
+            return _currentSettings?.SoundEffectsEnabled ?? true;
+        }
+
+        public static void SaveSoundEffectsEnabled(bool enabled)
+        {
+            LoadSettings();
+            if (_currentSettings != null)
+            {
+                _currentSettings.SoundEffectsEnabled = enabled;
+                SaveSettings();
+            }
+        }
+
         public static string GetTemperatureUnit()
         {
             LoadSettings();
@@ -234,13 +355,26 @@ namespace lanlanlu_toolkit.Services
                 return _currentSettings.DebugReportPath;
             }
 
-            // Default path: Same directory as executable
+            // Default path: Prefer executable directory if writable; otherwise LocalAppData
             try
             {
                 string? exePath = Environment.ProcessPath;
-                return !string.IsNullOrEmpty(exePath) 
+                string exeFolder = !string.IsNullOrEmpty(exePath) 
                     ? Path.GetDirectoryName(Path.GetFullPath(exePath))! 
                     : AppDomain.CurrentDomain.BaseDirectory;
+
+                if (CanWriteToDirectory(exeFolder))
+                {
+                    return exeFolder;
+                }
+
+                string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string fallbackFolder = Path.Combine(localAppData, AppFolderName);
+                if (!Directory.Exists(fallbackFolder))
+                {
+                    Directory.CreateDirectory(fallbackFolder);
+                }
+                return fallbackFolder;
             }
             catch
             {

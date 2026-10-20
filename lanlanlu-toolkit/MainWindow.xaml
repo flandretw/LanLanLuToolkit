@@ -13,13 +13,8 @@
     
     
     xmlns:local="using:lanlanlu_toolkit"
-    
-    
-    
+    xmlns:views="using:lanlanlu_toolkit.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    
-    
-    
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="LanLanLu Toolkit">
@@ -27,22 +22,96 @@
         <MicaBackdrop />
     </Window.SystemBackdrop>
     <Grid>
+        <Grid.KeyboardAccelerators>
+            <KeyboardAccelerator Modifiers="Control" Key="F" Invoked="SearchAccelerator_Invoked" />
+            <KeyboardAccelerator Modifiers="Control" Key="E" Invoked="SearchAccelerator_Invoked" />
+            <KeyboardAccelerator Key="F3" Invoked="SearchAccelerator_Invoked" />
+        </Grid.KeyboardAccelerators>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Border x:Name="AppTitleBar" Height="32" Background="Transparent" IsHitTestVisible="True">
-            <StackPanel Orientation="Horizontal" Margin="16,0,0,0">
-                <Image Source="ms-appx:///Assets/Square44x44Logo.png" Width="16" Height="16" VerticalAlignment="Center" Margin="0,0,12,0"/>
-                <TextBlock x:Name="AppTitleTextBlock" x:Uid="AppTitle" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}" />
+
+        <!-- Custom TitleBar Draggable Region & Centered Global Search -->
+        <Grid x:Name="AppTitleBar"
+              Grid.Row="0"
+              Height="48"
+              Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Reserved space for left caption controls if any (RTL / system buttons) -->
+            <Border x:Name="TitleBarLeftSpacer" Grid.Column="0" Width="0" Background="Transparent" />
+
+            <!-- Left: App Branding -->
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Spacing="10"
+                        Margin="16,0,0,0">
+                <Image Source="ms-appx:///Assets/Square44x44Logo.png"
+                       Width="20"
+                       Height="20"
+                       VerticalAlignment="Center" />
+                <TextBlock x:Name="AppTitleTextBlock"
+                           x:Uid="AppTitle"
+                           VerticalAlignment="Center"
+                           Style="{ThemeResource BodyStrongTextBlockStyle}"
+                           FontWeight="SemiBold"
+                           TextTrimming="CharacterEllipsis"
+                           MaxLines="1" />
             </StackPanel>
-        </Border>
+
+            <!-- Center: Global Search Box (Centered Window Header) -->
+            <AutoSuggestBox x:Name="NavSearchBox"
+                            Grid.Column="2"
+                            x:Uid="Nav_SearchBox"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            MinWidth="120"
+                            MaxWidth="480"
+                            Margin="16,0"
+                            QueryIcon="Find"
+                            TextMemberPath="Title"
+                            KeyDown="NavSearchBox_KeyDown"
+                            TextChanged="NavSearchBox_TextChanged"
+                            SuggestionChosen="NavSearchBox_SuggestionChosen"
+                            QuerySubmitted="NavSearchBox_QuerySubmitted">
+                <AutoSuggestBox.ItemTemplate>
+                    <DataTemplate x:DataType="views:ToolItem">
+                        <Grid ColumnSpacing="12" Margin="0,4" MinWidth="240" MaxWidth="440">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="{x:Bind Icon}" FontSize="16" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                                <TextBlock Text="{x:Bind Title}" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                <TextBlock Text="{x:Bind Description}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </AutoSuggestBox.ItemTemplate>
+            </AutoSuggestBox>
+
+            <!-- Right: Reserved space for standard caption buttons (Min/Max/Close) -->
+            <Border x:Name="TitleBarRightSpacer" Grid.Column="3" Width="144" Background="Transparent" />
+        </Grid>
+
+        <!-- Main Application Navigation Shell -->
         <NavigationView x:Name="NavView"
                         Grid.Row="1"
                         Loaded="NavView_Loaded"
                         ItemInvoked="NavView_ItemInvoked"
                         IsSettingsVisible="True"
+                        IsBackButtonVisible="Collapsed"
                         PaneDisplayMode="Auto">
+
             <NavigationView.MenuItems>
                 <NavigationViewItem Tag="HomePage" Icon="Home" x:Uid="Nav_HomePage" />
                 <NavigationViewItem Tag="PerformancePage" x:Uid="Shell_Performance">
@@ -50,7 +119,10 @@
                         <FontIcon Glyph="&#xE9D9;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Tag="TestToolPage" x:Uid="Nav_TestToolPage">
+
+                <NavigationViewItem x:Uid="Nav_TestToolPage"
+                                    SelectsOnInvoked="False"
+                                    IsExpanded="True">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF32A;" />
                     </NavigationViewItem.Icon>
@@ -72,7 +144,10 @@
                         </NavigationViewItem>
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
-                <NavigationViewItem Tag="UtilityPage" x:Uid="Nav_UtilityPage">
+
+                <NavigationViewItem x:Uid="Nav_UtilityPage"
+                                    SelectsOnInvoked="False"
+                                    IsExpanded="True">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xEC7A;" />
                     </NavigationViewItem.Icon>
@@ -90,15 +165,17 @@
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
+
             <Grid>
                 <Frame x:Name="ContentFrame" CacheSize="10" />
+
                 <!-- Global App Notification InfoBar / Toast Popup (Solid Opaque Windows 11 Floating Card) -->
                 <InfoBar x:Name="AppInfoBar"
                          IsOpen="False"
                          Severity="Informational"
                          HorizontalAlignment="Right"
                          VerticalAlignment="Top"
-                         Margin="0,24,24,0"
+                         Margin="0,20,24,0"
                          MaxWidth="520"
                          Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
                          BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"

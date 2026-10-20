@@ -40,16 +40,29 @@ namespace lanlanlu_toolkit.Views
 
         private void ResetHashTextBoxPlaceholders()
         {
-            string pendingText = LocalizationHelper.GetString("FileHashPage_Algorithm_Pending") ?? "Pending calculation...";
-            Sha256TextBox.Text = pendingText;
-            Sha1TextBox.Text = pendingText;
-            Md5TextBox.Text = pendingText;
-            Sha512TextBox.Text = pendingText;
+            Sha256TextBox.Text = string.Empty;
+            Sha1TextBox.Text = string.Empty;
+            Md5TextBox.Text = string.Empty;
+            Sha512TextBox.Text = string.Empty;
+
+            Sha256TextBox.Visibility = Visibility.Collapsed;
+            Sha1TextBox.Visibility = Visibility.Collapsed;
+            Md5TextBox.Visibility = Visibility.Collapsed;
+            Sha512TextBox.Visibility = Visibility.Collapsed;
 
             Sha256MatchBadge.Visibility = Visibility.Collapsed;
             Sha1MatchBadge.Visibility = Visibility.Collapsed;
             Md5MatchBadge.Visibility = Visibility.Collapsed;
             Sha512MatchBadge.Visibility = Visibility.Collapsed;
+
+            CopySha256Btn.Visibility = Visibility.Collapsed;
+            CopySha1Btn.Visibility = Visibility.Collapsed;
+            CopyMd5Btn.Visibility = Visibility.Collapsed;
+            CopySha512Btn.Visibility = Visibility.Collapsed;
+
+            RecalculateBtn.IsEnabled = false;
+            CopyAllBtn.IsEnabled = false;
+            CancelHashBtn.Visibility = Visibility.Collapsed;
         }
 
         private void FileCard_DragOver(object sender, DragEventArgs e)
@@ -157,23 +170,24 @@ namespace lanlanlu_toolkit.Views
 
         private async void RecalculateBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (_hashCts != null)
-            {
-                CancelOngoingHashCalculation();
-                return;
-            }
-
             await RunHashCalculation();
+        }
+
+        private void CancelHashBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CancelOngoingHashCalculation();
         }
 
         private void CancelOngoingHashCalculation()
         {
-            if (_hashCts != null)
+            try
             {
-                _hashCts.Cancel();
-                _hashCts.Dispose();
-                _hashCts = null;
+                if (_hashCts != null && !_hashCts.IsCancellationRequested)
+                {
+                    _hashCts.Cancel();
+                }
             }
+            catch (ObjectDisposedException) { }
         }
 
         private async Task RunHashCalculation()
@@ -181,8 +195,9 @@ namespace lanlanlu_toolkit.Views
             if (string.IsNullOrEmpty(_selectedFilePath)) return;
 
             CancelOngoingHashCalculation();
-            _hashCts = new CancellationTokenSource();
-            var token = _hashCts.Token;
+            var currentCts = new CancellationTokenSource();
+            _hashCts = currentCts;
+            var token = currentCts.Token;
 
             // UI State: Starting calculation
             HashProgressRing.IsActive = true;
@@ -192,9 +207,8 @@ namespace lanlanlu_toolkit.Views
             HashProgressPercentText.Visibility = Visibility.Visible;
             HashProgressPercentText.Text = "0%";
 
-            RecalculateBtn.IsEnabled = true;
-            RecalculateIcon.Glyph = "\uE711"; // Cancel icon
-            RecalculateBtnText.Text = LocalizationHelper.GetString("System_Cancel") ?? "Cancel";
+            CancelHashBtn.Visibility = Visibility.Visible;
+            RecalculateBtn.IsEnabled = false;
 
             CopyAllBtn.IsEnabled = false;
             CopySha256Btn.IsEnabled = false;
@@ -202,23 +216,37 @@ namespace lanlanlu_toolkit.Views
             CopyMd5Btn.IsEnabled = false;
             CopySha512Btn.IsEnabled = false;
 
-            string calcText = LocalizationHelper.GetString("FileHashPage_Calculating") ?? "Calculating...";
+            string calcText = LocalizationHelper.GetString("FileHashPage_Status_Calculating") ?? "計算中...";
             Sha256TextBox.Text = calcText;
             Sha1TextBox.Text = calcText;
             Md5TextBox.Text = calcText;
             Sha512TextBox.Text = calcText;
 
+            Sha256TextBox.Visibility = Visibility.Visible;
+            Sha1TextBox.Visibility = Visibility.Visible;
+            Md5TextBox.Visibility = Visibility.Visible;
+            Sha512TextBox.Visibility = Visibility.Visible;
+
             var progress = new Progress<int>(percent =>
             {
-                HashProgressBar.Value = percent;
-                HashProgressPercentText.Text = $"{percent}%";
+                if (ReferenceEquals(_hashCts, currentCts))
+                {
+                    HashProgressBar.Value = percent;
+                    HashProgressPercentText.Text = $"{percent}%";
+                }
             });
 
             try
             {
                 var results = await CalculateHashesAsync(_selectedFilePath, progress, token);
 
-                if (results == null)
+                // If a newer calculation was started, discard results of this obsolete run
+                if (!ReferenceEquals(_hashCts, currentCts))
+                {
+                    return;
+                }
+
+                if (results == null || token.IsCancellationRequested)
                 {
                     // Calculation was cancelled
                     string cancelledText = LocalizationHelper.GetString("FileHashPage_CalculationCancelled") ?? "Calculation cancelled.";
@@ -226,6 +254,11 @@ namespace lanlanlu_toolkit.Views
                     Sha1TextBox.Text = cancelledText;
                     Md5TextBox.Text = cancelledText;
                     Sha512TextBox.Text = cancelledText;
+
+                    Sha256TextBox.Visibility = Visibility.Visible;
+                    Sha1TextBox.Visibility = Visibility.Visible;
+                    Md5TextBox.Visibility = Visibility.Visible;
+                    Sha512TextBox.Visibility = Visibility.Visible;
                     return;
                 }
 
@@ -240,32 +273,80 @@ namespace lanlanlu_toolkit.Views
                 Md5TextBox.Text = _calculatedHashes.GetValueOrDefault("MD5", string.Empty);
                 Sha512TextBox.Text = _calculatedHashes.GetValueOrDefault("SHA512", string.Empty);
 
+                Sha256TextBox.Visibility = Visibility.Visible;
+                Sha1TextBox.Visibility = Visibility.Visible;
+                Md5TextBox.Visibility = Visibility.Visible;
+                Sha512TextBox.Visibility = Visibility.Visible;
+
                 CopyAllBtn.IsEnabled = true;
                 CopySha256Btn.IsEnabled = true;
                 CopySha1Btn.IsEnabled = true;
                 CopyMd5Btn.IsEnabled = true;
                 CopySha512Btn.IsEnabled = true;
 
+                CopySha256Btn.Visibility = Visibility.Visible;
+                CopySha1Btn.Visibility = Visibility.Visible;
+                CopyMd5Btn.Visibility = Visibility.Visible;
+                CopySha512Btn.Visibility = Visibility.Visible;
+
                 PerformHashVerification();
+            }
+            catch (OperationCanceledException)
+            {
+                if (ReferenceEquals(_hashCts, currentCts))
+                {
+                    string cancelledText = LocalizationHelper.GetString("FileHashPage_CalculationCancelled") ?? "Calculation cancelled.";
+                    Sha256TextBox.Text = cancelledText;
+                    Sha1TextBox.Text = cancelledText;
+                    Md5TextBox.Text = cancelledText;
+                    Sha512TextBox.Text = cancelledText;
+                }
+            }
+            catch (IOException ex)
+            {
+                if (ReferenceEquals(_hashCts, currentCts))
+                {
+                    string msgKey = ex.Message.Contains("modified", StringComparison.OrdinalIgnoreCase)
+                        ? "FileHashPage_Error_FileModified"
+                        : "FileHashPage_Error_FileInUse";
+                    string msg = LocalizationHelper.GetString(msgKey) ?? ex.Message;
+                    ShowErrorNotification(msg);
+                    ResetHashTextBoxPlaceholders();
+                }
             }
             catch (Exception ex)
             {
-                ShowErrorNotification(ex.Message);
-                ResetHashTextBoxPlaceholders();
+                if (ReferenceEquals(_hashCts, currentCts))
+                {
+                    ShowErrorNotification(ex.Message);
+                    ResetHashTextBoxPlaceholders();
+                }
             }
             finally
             {
-                HashProgressRing.IsActive = false;
-                HashProgressRing.Visibility = Visibility.Collapsed;
-                HashProgressBar.Visibility = Visibility.Collapsed;
-                HashProgressPercentText.Visibility = Visibility.Collapsed;
+                // Only dispose this run's own CancellationTokenSource
+                try
+                {
+                    currentCts.Dispose();
+                }
+                catch { }
 
-                RecalculateIcon.Glyph = "\uE72C"; // Recalculate icon
-                RecalculateBtnText.Text = LocalizationHelper.GetString("FileHashPage_CalculateButton/Text") ?? "Recalculate";
-                RecalculateBtn.IsEnabled = true;
+                // Only clean up state and UI if this run is still the active one
+                if (ReferenceEquals(_hashCts, currentCts))
+                {
+                    _hashCts = null;
 
-                _hashCts?.Dispose();
-                _hashCts = null;
+                    CancelHashBtn.Visibility = Visibility.Collapsed;
+
+                    HashProgressRing.IsActive = false;
+                    HashProgressRing.Visibility = Visibility.Collapsed;
+                    HashProgressBar.Visibility = Visibility.Collapsed;
+                    HashProgressPercentText.Visibility = Visibility.Collapsed;
+
+                    RecalculateIcon.Glyph = "\uE72C"; // Recalculate icon
+                    RecalculateBtnText.Text = LocalizationHelper.GetString("FileHashPage_CalculateButton.Text") ?? "重新計算";
+                    RecalculateBtn.IsEnabled = !string.IsNullOrEmpty(_selectedFilePath);
+                }
             }
         }
 
@@ -277,10 +358,16 @@ namespace lanlanlu_toolkit.Views
             return await Task.Run(() =>
             {
                 var fileInfo = new FileInfo(filePath);
-                long totalBytes = fileInfo.Length;
-                long totalRead = 0;
+                if (!fileInfo.Exists)
+                {
+                    throw new FileNotFoundException(LocalizationHelper.GetString("FileHashPage_Error_FileNotFound") ?? "File not found.", filePath);
+                }
 
-                using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 262144, FileOptions.SequentialScan);
+                long initialLength = fileInfo.Length;
+                DateTime initialWriteTime = fileInfo.LastWriteTimeUtc;
+
+                // Open with FileShare.Read to prevent concurrent write modifications during calculation
+                using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 262144, FileOptions.SequentialScan);
                 using var sha256 = SHA256.Create();
                 using var sha1 = SHA1.Create();
                 using var md5 = MD5.Create();
@@ -293,6 +380,7 @@ namespace lanlanlu_toolkit.Views
                 {
                     int bytesRead;
                     int lastReportedPercent = -1;
+                    long totalRead = 0;
 
                     while ((bytesRead = stream.Read(buffer, 0, 262144)) > 0)
                     {
@@ -307,15 +395,27 @@ namespace lanlanlu_toolkit.Views
                         }
 
                         totalRead += bytesRead;
-                        if (totalBytes > 0 && progress != null)
+                        if (initialLength > 0 && progress != null)
                         {
-                            int currentPercent = (int)((double)totalRead * 100 / totalBytes);
+                            int currentPercent = (int)((double)totalRead * 100 / initialLength);
                             if (currentPercent != lastReportedPercent)
                             {
                                 lastReportedPercent = currentPercent;
                                 progress.Report(currentPercent);
                             }
                         }
+                    }
+
+                    if (cancellationToken.IsCancellationRequested)
+                    {
+                        return null;
+                    }
+
+                    // Verify the file was not modified while computing
+                    fileInfo.Refresh();
+                    if (fileInfo.Length != initialLength || fileInfo.LastWriteTimeUtc != initialWriteTime)
+                    {
+                        throw new IOException(LocalizationHelper.GetString("FileHashPage_Error_FileModified") ?? "The file was modified during hash calculation.");
                     }
 
                     for (int i = 0; i < hashers.Length; i++)
@@ -349,27 +449,27 @@ namespace lanlanlu_toolkit.Views
             }, cancellationToken);
         }
 
-        private void CopySha256Btn_Click(object sender, RoutedEventArgs e)
+        private async void CopySha256Btn_Click(object sender, RoutedEventArgs e)
         {
-            CopySingleHash(_calculatedHashes.GetValueOrDefault("SHA256", string.Empty), CopySha256Icon);
+            await CopySingleHashAsync(_calculatedHashes.GetValueOrDefault("SHA256", string.Empty), CopySha256Icon);
         }
 
-        private void CopySha1Btn_Click(object sender, RoutedEventArgs e)
+        private async void CopySha1Btn_Click(object sender, RoutedEventArgs e)
         {
-            CopySingleHash(_calculatedHashes.GetValueOrDefault("SHA1", string.Empty), CopySha1Icon);
+            await CopySingleHashAsync(_calculatedHashes.GetValueOrDefault("SHA1", string.Empty), CopySha1Icon);
         }
 
-        private void CopyMd5Btn_Click(object sender, RoutedEventArgs e)
+        private async void CopyMd5Btn_Click(object sender, RoutedEventArgs e)
         {
-            CopySingleHash(_calculatedHashes.GetValueOrDefault("MD5", string.Empty), CopyMd5Icon);
+            await CopySingleHashAsync(_calculatedHashes.GetValueOrDefault("MD5", string.Empty), CopyMd5Icon);
         }
 
-        private void CopySha512Btn_Click(object sender, RoutedEventArgs e)
+        private async void CopySha512Btn_Click(object sender, RoutedEventArgs e)
         {
-            CopySingleHash(_calculatedHashes.GetValueOrDefault("SHA512", string.Empty), CopySha512Icon);
+            await CopySingleHashAsync(_calculatedHashes.GetValueOrDefault("SHA512", string.Empty), CopySha512Icon);
         }
 
-        private async void CopySingleHash(string hash, FontIcon icon)
+        private async Task CopySingleHashAsync(string hash, FontIcon icon)
         {
             if (string.IsNullOrEmpty(hash)) return;
 

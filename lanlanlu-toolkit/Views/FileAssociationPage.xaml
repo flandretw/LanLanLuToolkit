@@ -26,33 +26,40 @@
     
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid>
-        <ScrollViewer IsScrollInertiaEnabled="True" ManipulationMode="System">
-            <Grid Padding="36" HorizontalAlignment="Stretch">
-                <StackPanel Spacing="24" MaxWidth="1600" HorizontalAlignment="Stretch">
+    Background="Transparent">
+    <ScrollViewer IsScrollInertiaEnabled="True"
+                  HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Auto">
+        <Grid Style="{StaticResource PageScrollableGridStyle}">
+            <StackPanel Spacing="20" HorizontalAlignment="Stretch">
                     <!-- Page Header -->
-                    <StackPanel Spacing="4" Margin="0">
-                        <TextBlock x:Name="PageHeaderTitleTextBlock" x:Uid="FileAssociationPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
-                        <TextBlock x:Name="PageHeaderDescTextBlock" x:Uid="FileAssociationPage_Desc" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center">
+                            <TextBlock x:Name="PageHeaderTitleTextBlock" x:Uid="FileAssociationPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
+                            <TextBlock x:Name="PageHeaderDescTextBlock" x:Uid="FileAssociationPage_Desc" Style="{StaticResource PageHeaderSubtitleStyle}" />
+                        </StackPanel>
+                    </Grid>
                     <!-- Section: Association Configuration -->
                     <StackPanel Spacing="8">
                         <TextBlock x:Uid="FileAssociationPage_ConfigTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
                         <!-- Input Card -->
-                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                BorderThickness="1"
-                                CornerRadius="{ThemeResource OverlayCornerRadius}">
-                            <Grid Padding="20">
+                        <Border Style="{StaticResource FluentCardBorderStyle}">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE7B5;" FontSize="24" Margin="0,0,20,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                <!-- Left Icon (Standard 24x24 Container for 60px text axis alignment) -->
+                                <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                    <FontIcon Glyph="&#xE7B5;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
                                 <!-- Left input and instruction -->
-                                <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center" Margin="0,0,20,0">
+                                <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center" Margin="0,0,16,0">
                                     <TextBlock x:Uid="FileAssociationPage_TargetExtTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                     <TextBlock x:Uid="FileAssociationPage_TargetExtDesc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                 </StackPanel>
@@ -65,22 +72,22 @@
                     <StackPanel Spacing="16">
                         <TextBlock x:Uid="FileAssociationPage_SelectMethodTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
                         <!-- Action 1: Reset to default state -->
-                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                BorderThickness="1"
-                                CornerRadius="{ThemeResource OverlayCornerRadius}">
-                            <Grid Padding="20">
+                        <Border Style="{StaticResource FluentCardBorderStyle}">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xEA99;" FontSize="24" Margin="0,0,20,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center" Margin="0,0,20,0">
+                                <!-- Left Icon (Standard 24x24 Container for 60px text axis alignment) -->
+                                <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                    <FontIcon Glyph="&#xEA99;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                                <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center" Margin="0,0,16,0">
                                     <TextBlock x:Uid="FileAssociationPage_ResetTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                     <TextBlock x:Uid="FileAssociationPage_ResetDesc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                 </StackPanel>
-                                <Button x:Name="ResetAssociationBtn" Grid.Column="2" Click="ResetAssociationBtn_Click" x:Uid="FileAssociationPage_ResetButton" Style="{ThemeResource AccentButtonStyle}" MinWidth="160" Height="36" Padding="16,0" VerticalAlignment="Center" IsEnabled="False" />
+                                <Button x:Name="ResetAssociationBtn" Grid.Column="2" Click="ResetAssociationBtn_Click" x:Uid="FileAssociationPage_ResetButton" Style="{ThemeResource AccentButtonStyle}" MinWidth="140" VerticalAlignment="Center" IsEnabled="False" />
                             </Grid>
                         </Border>
                         <!-- Action 2: Advanced Mode -->
@@ -91,12 +98,15 @@
                                   IsExpanded="False"
                                   CornerRadius="{ThemeResource OverlayCornerRadius}">
                             <Expander.Header>
-                                <Grid HorizontalAlignment="Stretch" MinHeight="64">
+                                <Grid HorizontalAlignment="Stretch" MinHeight="64" Margin="4,0,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Glyph="&#xF196;" FontSize="24" Margin="0,0,20,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                    <!-- Standard 24x24 Container (aligned with cards above at 20px left margin) -->
+                                    <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                        <FontIcon Glyph="&#xEC7A;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Grid>
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
                                         <TextBlock x:Uid="FileAssociationPage_Method2Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
                                         <TextBlock x:Uid="FileAssociationPage_Method2Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
@@ -112,10 +122,10 @@
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
                                         <TextBlock x:Uid="FileAssociationPage_Method2Content" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,16,0" />
-                                        <Button x:Name="RegistryNavBtn" Grid.Column="1" Click="RegistryNavBtn_Click" x:Uid="FileAssociationPage_Method2Button" Style="{ThemeResource AccentButtonStyle}" MinWidth="160" Height="36" Padding="16,0" VerticalAlignment="Center" IsEnabled="False" />
+                                        <Button x:Name="RegistryNavBtn" Grid.Column="1" Click="RegistryNavBtn_Click" x:Uid="FileAssociationPage_Method2Button" Style="{ThemeResource AccentButtonStyle}" MinWidth="140" VerticalAlignment="Center" IsEnabled="False" />
                                     </Grid>
                                     <!-- Guideline Container inside the expander -->
-                                    <Border BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource LayerFillColorDefaultBrush}">
+                                    <Border Style="{StaticResource FluentCalloutBoxStyle}">
                                         <StackPanel Padding="16" Spacing="16">
                                             <TextBlock x:Uid="FileAssociationPage_GuideTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                             <StackPanel Spacing="12">
@@ -173,5 +183,4 @@
                 </StackPanel>
             </Grid>
         </ScrollViewer>
-    </Grid>
 </Page>

@@ -13,33 +13,11 @@ namespace lanlanlu_toolkit.Views
 {
     public sealed partial class HomePage : Page, INotifyPropertyChanged
     {
-        private double _heroHeight = 400;
-        
-        public double HeroHeight
-        {
-            get => _heroHeight;
-            set
-            {
-                if (_heroHeight != value)
-                {
-                    _heroHeight = value;
-                    OnPropertyChanged();
-                    OnPropertyChanged(nameof(ContentMargin));
-                    OnPropertyChanged(nameof(SystemCardsMargin));
-                }
-            }
-        }
-
-        public Thickness ContentMargin => new Thickness(36, HeroHeight + 86, 36, 36);
-
-        public Thickness SystemCardsMargin => new Thickness(0, HeroHeight - 64, 0, 0);
-
         public HomePage()
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
             UpdateGreeting();
-            this.SizeChanged += HomePage_SizeChanged;
             this.Loaded += HomePage_Loaded;
             this.Unloaded += HomePage_Unloaded;
             LoadFromCache();
@@ -93,14 +71,6 @@ namespace lanlanlu_toolkit.Views
         private string _storageInfo = LocalizationHelper.GetString("HomePage_Detecting");
         public string StorageInfo { get => _storageInfo; set { _storageInfo = value; OnPropertyChanged(); } }
 
-        private void HomePage_SizeChanged(object sender, SizeChangedEventArgs e) => UpdateLayoutProportions(e.NewSize.Height);
-
-        private void UpdateLayoutProportions(double windowHeight)
-        {
-            if (windowHeight <= 0) return;
-            HeroHeight = windowHeight < 800 ? windowHeight * 0.5 : windowHeight * 0.33;
-        }
-
         private void UpdateGreeting()
         {
             var hour = DateTime.Now.Hour;
@@ -125,7 +95,7 @@ namespace lanlanlu_toolkit.Views
                     greetingKey = "Greeting_Evening";
                     iconGlyph = "\uE708"; // Moon
                     break;
-                }
+            }
 
             GreetingText.Text = LocalizationHelper.GetString(greetingKey);
             GreetingIcon.Glyph = iconGlyph;
@@ -139,27 +109,12 @@ namespace lanlanlu_toolkit.Views
         private void FeatureAssoc_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(FileAssociationPage));
         private void GoToSettings_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(SettingsPage));
 
-        private void ScrollLeft_Click(object sender, RoutedEventArgs e) => CardsScrollViewer.ChangeView(CardsScrollViewer.HorizontalOffset - 240, null, null);
-        private void ScrollRight_Click(object sender, RoutedEventArgs e) => CardsScrollViewer.ChangeView(CardsScrollViewer.HorizontalOffset + 240, null, null);
-
-        private void CardsScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
-        {
-            bool showLeft = CardsScrollViewer.HorizontalOffset > 0;
-            ScrollLeftButton.Opacity = showLeft ? 1 : 0;
-            ScrollLeftButton.IsHitTestVisible = showLeft;
-
-            bool showRight = CardsScrollViewer.HorizontalOffset < CardsScrollViewer.ScrollableWidth;
-            ScrollRightButton.Opacity = showRight ? 1 : 0;
-            ScrollRightButton.IsHitTestVisible = showRight;
-        }
-
         private void Card_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             if (sender is FrameworkElement element)
             {
                 string name = element.Name.Replace("Card", "");
-                if (this.FindName(name + "HoverOverlay") is Border overlay) overlay.Opacity = 1;
-                if (this.FindName(name + "CopyIcon") is FontIcon icon) icon.Opacity = 1;
+                if (this.FindName(name + "CopyIcon") is FontIcon icon) icon.Opacity = 1.0;
             }
         }
 
@@ -168,19 +123,18 @@ namespace lanlanlu_toolkit.Views
             if (sender is FrameworkElement element)
             {
                 string name = element.Name.Replace("Card", "");
-                if (this.FindName(name + "HoverOverlay") is Border overlay) overlay.Opacity = 0;
-                if (this.FindName(name + "CopyIcon") is FontIcon icon) icon.Opacity = 0;
+                if (this.FindName(name + "CopyIcon") is FontIcon icon) icon.Opacity = 0.4;
             }
         }
 
-        private void CpuCard_Tapped(object sender, RoutedEventArgs e) => CopyToClipboard(CpuName, CpuCopyIcon);
-        private void GpuCard_Tapped(object sender, RoutedEventArgs e) => CopyToClipboard(GpuName, GpuCopyIcon);
-        private void RamCard_Tapped(object sender, RoutedEventArgs e) => CopyToClipboard(RamSize, RamCopyIcon);
-        private void OsCard_Tapped(object sender, RoutedEventArgs e) => CopyToClipboard(OsVersion, OsCopyIcon);
-        private void StorageCard_Tapped(object sender, RoutedEventArgs e) => CopyToClipboard(StorageInfo, StorageCopyIcon);
-        private void MotherboardCard_Tapped(object sender, RoutedEventArgs e) => CopyToClipboard(MotherboardModel, MotherboardCopyIcon);
+        private async void CpuCard_Tapped(object sender, RoutedEventArgs e) => await CopyToClipboardAsync(CpuName, CpuCopyIcon);
+        private async void GpuCard_Tapped(object sender, RoutedEventArgs e) => await CopyToClipboardAsync(GpuName, GpuCopyIcon);
+        private async void RamCard_Tapped(object sender, RoutedEventArgs e) => await CopyToClipboardAsync(RamSize, RamCopyIcon);
+        private async void OsCard_Tapped(object sender, RoutedEventArgs e) => await CopyToClipboardAsync(OsVersion, OsCopyIcon);
+        private async void StorageCard_Tapped(object sender, RoutedEventArgs e) => await CopyToClipboardAsync(StorageInfo, StorageCopyIcon);
+        private async void MotherboardCard_Tapped(object sender, RoutedEventArgs e) => await CopyToClipboardAsync(MotherboardModel, MotherboardCopyIcon);
 
-        private async void CopyToClipboard(string text, FontIcon icon)
+        private async Task CopyToClipboardAsync(string text, FontIcon icon)
         {
             try
             {

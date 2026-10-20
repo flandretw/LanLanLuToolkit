@@ -6,59 +6,35 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="Transparent">
 
-    <Grid>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <!-- Small Window State -->
-                <VisualState x:Name="SmallState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="RootGrid.Padding" Value="12,42,12,24" />
-                        <Setter Target="LeftCol.Width" Value="0" />
-                        <Setter Target="RightCol.Width" Value="0" />
-                        <Setter Target="ContentCol.Width" Value="*" />
-                    </VisualState.Setters>
-                </VisualState>
-                <!-- Wide Window State -->
-                <VisualState x:Name="WideState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="RootGrid.Padding" Value="48,36,48,36" />
-                        <Setter Target="LeftCol.Width" Value="*" />
-                        <Setter Target="RightCol.Width" Value="*" />
-                        <Setter Target="ContentCol.Width" Value="6*" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
-        <ScrollViewer IsScrollInertiaEnabled="True" ManipulationMode="System">
-            <Grid x:Name="RootGrid" HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition x:Name="LeftCol" Width="*" />
-                    <ColumnDefinition x:Name="ContentCol" Width="6*" />
-                    <ColumnDefinition x:Name="RightCol" Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Column="1" Spacing="28">
-                    <TextBlock x:Uid="SettingsPage_Title" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,12" />
+    <ScrollViewer IsScrollInertiaEnabled="True"
+                  HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Auto">
+        <Grid Style="{StaticResource PageScrollableGridStyle}">
+            <StackPanel Spacing="24" HorizontalAlignment="Stretch">
+                <!-- Page Header: Consistent Fluent Alignment -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center">
+                        <TextBlock x:Uid="SettingsPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
+                        <TextBlock x:Uid="SettingsPage_Subtitle" Style="{StaticResource PageHeaderSubtitleStyle}" />
+                    </StackPanel>
+                </Grid>
 
                 <!-- Appearance & Behavior Section -->
                 <StackPanel Spacing="4">
                     <TextBlock x:Uid="SettingsPage_AppearanceBehaviorHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,8" />
                     
                     <!-- Language Card -->
-                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                             BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                             BorderThickness="1"
-                            CornerRadius="{ThemeResource ControlCornerRadius}">
-                        <Grid Padding="16">
+                            CornerRadius="{ThemeResource OverlayCornerRadius}">
+                        <Grid MinHeight="64" Padding="16,12">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -71,7 +47,7 @@
                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                 <TextBlock x:Uid="SettingsPage_LanguageTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                <TextBlock x:Uid="SettingsPage_LanguageDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock x:Uid="SettingsPage_LanguageDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                             </StackPanel>
                             <ComboBox x:Name="LanguageComboBox" 
                                       Grid.Column="2"
@@ -85,11 +61,11 @@
                     </Border>
 
                     <!-- Theme Card -->
-                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                             BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                             BorderThickness="1"
-                            CornerRadius="{ThemeResource ControlCornerRadius}">
-                        <Grid Padding="16">
+                            CornerRadius="{ThemeResource OverlayCornerRadius}">
+                        <Grid MinHeight="64" Padding="16,12">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -102,7 +78,7 @@
                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                 <TextBlock x:Uid="SettingsPage_ThemeTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                <TextBlock x:Uid="SettingsPage_ThemeDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock x:Uid="SettingsPage_ThemeDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                             </StackPanel>
                             <ComboBox x:Name="ThemeComboBox" 
                                       Grid.Column="2"
@@ -117,11 +93,11 @@
                     </Border>
 
                     <!-- Temperature Unit Card -->
-                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                             BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                             BorderThickness="1"
-                            CornerRadius="{ThemeResource ControlCornerRadius}">
-                        <Grid Padding="16">
+                            CornerRadius="{ThemeResource OverlayCornerRadius}">
+                        <Grid MinHeight="64" Padding="16,12">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -134,7 +110,7 @@
                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                 <TextBlock x:Uid="SettingsPage_TempUnitTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                <TextBlock x:Uid="SettingsPage_TempUnitDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock x:Uid="SettingsPage_TempUnitDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                             </StackPanel>
                             <ComboBox x:Name="TemperatureUnitComboBox" 
                                       Grid.Column="2"
@@ -150,10 +126,11 @@
                     <!-- Notifications Card -->
                     <Expander HorizontalAlignment="Stretch" 
                               HorizontalContentAlignment="Stretch"
-                              Padding="0"
-                              CornerRadius="{ThemeResource ControlCornerRadius}">
+                              CornerRadius="{ThemeResource OverlayCornerRadius}"
+                              MinHeight="64"
+                              Padding="0">
                         <Expander.Header>
-                            <Grid HorizontalAlignment="Stretch" MinHeight="72" Padding="0">
+                            <Grid MinHeight="64" Padding="0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
@@ -166,20 +143,19 @@
                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                     <TextBlock x:Uid="SettingsPage_NotificationsTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                    <TextBlock x:Uid="SettingsPage_NotificationsDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    <TextBlock x:Uid="SettingsPage_NotificationsDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                 </StackPanel>
                                 <StackPanel Grid.Column="2"
                                             Orientation="Horizontal"
                                             Spacing="8"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Right"
-                                            Margin="0,0,-28,0">
+                                            VerticalAlignment="Center">
                                     <TextBlock x:Name="NotificationsToggleStateText"
                                                Style="{ThemeResource BodyTextBlockStyle}"
-                                               VerticalAlignment="Center" />
+                                               VerticalAlignment="Center"
+                                               TextAlignment="Right"
+                                               MinWidth="36" />
                                     <ToggleSwitch x:Name="NotificationsToggle" 
                                                   VerticalAlignment="Center"
-                                                  HorizontalAlignment="Right"
                                                   Header="{x:Null}"
                                                   MinWidth="0" Padding="0"
                                                   OnContent="" OffContent=""
@@ -188,27 +164,26 @@
                             </Grid>
                         </Expander.Header>
                         <Expander.Content>
-                            <Grid Padding="52,12,16,12">
+                            <Grid MinHeight="60" Padding="52,10,60,10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel VerticalAlignment="Center" Margin="0,0,16,0">
                                     <TextBlock x:Uid="SettingsPage_NotificationSound_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                    <TextBlock x:Uid="SettingsPage_NotificationSound_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    <TextBlock x:Uid="SettingsPage_NotificationSound_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                 </StackPanel>
                                 <StackPanel Grid.Column="1"
                                             Orientation="Horizontal"
                                             Spacing="8"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Right"
-                                            Margin="0,0,-12,0">
+                                            VerticalAlignment="Center">
                                     <TextBlock x:Name="NotificationSoundToggleStateText"
                                                Style="{ThemeResource BodyTextBlockStyle}"
-                                               VerticalAlignment="Center" />
+                                               VerticalAlignment="Center"
+                                               TextAlignment="Right"
+                                               MinWidth="36" />
                                     <ToggleSwitch x:Name="NotificationSoundToggle" 
                                                   VerticalAlignment="Center"
-                                                  HorizontalAlignment="Right"
                                                   Header="{x:Null}"
                                                   MinWidth="0" Padding="0"
                                                   OnContent="" OffContent=""
@@ -217,6 +192,45 @@
                             </Grid>
                         </Expander.Content>
                     </Expander>
+                    
+                    <!-- Sound Feedback Card (Global Sound Effects for Interface & Diagnostics) -->
+                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{ThemeResource OverlayCornerRadius}">
+                        <Grid MinHeight="64" Padding="16,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE767;" 
+                                      FontSize="20" 
+                                      Margin="0,0,16,0" 
+                                      VerticalAlignment="Center" 
+                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                <TextBlock x:Uid="SettingsPage_SoundEffectsTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                <TextBlock x:Uid="SettingsPage_SoundEffectsDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2"
+                                        Orientation="Horizontal"
+                                        Spacing="8"
+                                        VerticalAlignment="Center">
+                                <TextBlock x:Name="SoundEffectsToggleStateText"
+                                           Style="{ThemeResource BodyTextBlockStyle}"
+                                           VerticalAlignment="Center"
+                                           TextAlignment="Right"
+                                           MinWidth="36" />
+                                <ToggleSwitch x:Name="SoundEffectsToggle" 
+                                              VerticalAlignment="Center"
+                                              Header="{x:Null}"
+                                              MinWidth="0" Padding="0"
+                                              OnContent="" OffContent=""
+                                              Toggled="SoundEffectsToggle_Toggled" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
                 </StackPanel>
 
                 <!-- Diagnostics & Feedback Section -->
@@ -224,11 +238,11 @@
                     <TextBlock x:Uid="SettingsPage_DiagnosticsSectionTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,8" />
                     
                     <!-- Rescan Hardware Specs Card -->
-                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                             BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                             BorderThickness="1"
-                            CornerRadius="{ThemeResource ControlCornerRadius}">
-                        <Grid Padding="16">
+                            CornerRadius="{ThemeResource OverlayCornerRadius}">
+                        <Grid MinHeight="64" Padding="16,12">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -241,7 +255,7 @@
                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                 <TextBlock x:Uid="SettingsPage_RescanHardware_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                <TextBlock x:Uid="SettingsPage_RescanHardware_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock x:Uid="SettingsPage_RescanHardware_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                             </StackPanel>
                             <Button x:Name="RescanHardwareButton" 
                                     Grid.Column="2" 
@@ -258,10 +272,11 @@
                     <!-- Debug Report Card -->
                     <Expander HorizontalAlignment="Stretch" 
                               HorizontalContentAlignment="Stretch"
-                              Padding="0"
-                              CornerRadius="{ThemeResource ControlCornerRadius}">
+                              CornerRadius="{ThemeResource OverlayCornerRadius}"
+                              MinHeight="64"
+                              Padding="0">
                         <Expander.Header>
-                            <Grid HorizontalAlignment="Stretch" MinHeight="72" Padding="0">
+                            <Grid MinHeight="64" Padding="0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
@@ -274,20 +289,19 @@
                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
                                     <TextBlock x:Uid="SettingsPage_DebugReportTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                    <TextBlock x:Uid="SettingsPage_DebugReportDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    <TextBlock x:Uid="SettingsPage_DebugReportDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                 </StackPanel>
                                 <StackPanel Grid.Column="2"
                                             Orientation="Horizontal"
                                             Spacing="8"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Right"
-                                            Margin="0,0,-28,0">
+                                            VerticalAlignment="Center">
                                     <TextBlock x:Name="DebugReportToggleStateText"
                                                Style="{ThemeResource BodyTextBlockStyle}"
-                                               VerticalAlignment="Center" />
+                                               VerticalAlignment="Center"
+                                               TextAlignment="Right"
+                                               MinWidth="36" />
                                     <ToggleSwitch x:Name="DebugReportToggle" 
                                                   VerticalAlignment="Center"
-                                                  HorizontalAlignment="Right"
                                                   Header="{x:Null}"
                                                   MinWidth="0" Padding="0"
                                                   OnContent="" OffContent=""
@@ -296,7 +310,7 @@
                             </Grid>
                         </Expander.Header>
                         <Expander.Content>
-                            <Grid Padding="52,12,16,12">
+                            <Grid MinHeight="60" Padding="52,10,60,10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
@@ -320,31 +334,36 @@
                 </StackPanel>
 
                 <!-- About Section -->
-                <StackPanel Spacing="12">
-                    <TextBlock x:Uid="SettingsPage_AboutHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                    <Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                <StackPanel Spacing="8">
+                    <TextBlock x:Uid="SettingsPage_AboutHeader" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
+                    <Expander HorizontalAlignment="Stretch" 
+                              HorizontalContentAlignment="Stretch" 
+                              CornerRadius="{ThemeResource OverlayCornerRadius}"
+                              MinHeight="64"
+                              Padding="0">
                         <Expander.Header>
-                            <Grid HorizontalAlignment="Stretch" MinHeight="64" Margin="-24,0,0,0" Padding="0">
+                            <Grid MinHeight="64" Padding="0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Image x:Name="AppIconImage" Source="ms-appx:///Assets/Square150x150Logo.png" Width="64" Height="64" Margin="0,0,-8,0" VerticalAlignment="Center" Stretch="Uniform" />
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <Image x:Name="AppIconImage" Source="ms-appx:///Assets/Square150x150Logo.png" Width="40" Height="40" Margin="0,0,16,0" VerticalAlignment="Center" Stretch="Uniform" />
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
                                     <TextBlock x:Name="AppNameTextBlock" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
                                     <TextBlock x:Name="AppCopyrightTextBlock" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                 </StackPanel>
-                                <TextBlock x:Name="AppVersionTextBlock" Grid.Column="2" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,0,-16,0" />
+                                <TextBlock x:Name="AppVersionTextBlock" Grid.Column="2" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Style="{ThemeResource BodyTextBlockStyle}" />
                             </Grid>
                         </Expander.Header>
                         <Expander.Content>
-                            <HyperlinkButton x:Uid="SettingsPage_MITLink" NavigateUri="https://github.com/flandretw/LanLanLuToolkit/blob/main/LICENSE.txt" Padding="0" />
+                            <StackPanel MinHeight="48" Padding="56,12,60,12" Spacing="8">
+                                <HyperlinkButton x:Uid="SettingsPage_MITLink" NavigateUri="https://github.com/flandretw/LanLanLuToolkit/blob/main/LICENSE.txt" Padding="0" />
+                            </StackPanel>
                         </Expander.Content>
                     </Expander>
                 </StackPanel>
             </StackPanel>
         </Grid>
     </ScrollViewer>
-    </Grid>
 </Page>

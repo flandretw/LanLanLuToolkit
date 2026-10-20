@@ -1633,32 +1633,36 @@ namespace lanlanlu_toolkit.Views
 
                 if (btn != null)
                 {
-                    AnimateButtonCopied(btn);
+                    _ = AnimateButtonCopiedAsync(btn);
                 }
             }
             catch { }
         }
 
-        private async void AnimateButtonCopied(Button btn)
+        private async Task AnimateButtonCopiedAsync(Button btn)
         {
-            if (btn.Content is FontIcon icon)
+            try
             {
-                string prevGlyph = icon.Glyph;
-                icon.Glyph = "\uE8FB"; // Accept / Checkmark icon
-                await Task.Delay(2000);
-                icon.Glyph = prevGlyph;
-            }
-            else if (btn.Content is StackPanel sp)
-            {
-                var fontIcon = sp.Children.OfType<FontIcon>().FirstOrDefault();
-                if (fontIcon != null)
+                if (btn.Content is FontIcon icon)
                 {
-                    string prevGlyph = fontIcon.Glyph;
-                    fontIcon.Glyph = "\uE8FB";
+                    string prevGlyph = icon.Glyph;
+                    icon.Glyph = "\uE8FB"; // Accept / Checkmark icon
                     await Task.Delay(2000);
-                    fontIcon.Glyph = prevGlyph;
+                    icon.Glyph = prevGlyph;
+                }
+                else if (btn.Content is StackPanel sp)
+                {
+                    var fontIcon = sp.Children.OfType<FontIcon>().FirstOrDefault();
+                    if (fontIcon != null)
+                    {
+                        string prevGlyph = fontIcon.Glyph;
+                        fontIcon.Glyph = "\uE8FB";
+                        await Task.Delay(2000);
+                        fontIcon.Glyph = prevGlyph;
+                    }
                 }
             }
+            catch { }
         }
 
         private void CopyButton_Click(object sender, RoutedEventArgs e)
@@ -1830,6 +1834,14 @@ namespace lanlanlu_toolkit.Views
                 return $"{f:F0} °F";
             }
             return $"{celsius:F0} °C";
+        }
+
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (PerfMasterColumn != null)
+            {
+                PerfMasterColumn.Width = e.NewSize.Width < 950 ? new GridLength(210) : new GridLength(260);
+            }
         }
     }
 }

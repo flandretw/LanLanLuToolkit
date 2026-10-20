@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="lanlanlu_toolkit.Views.PerformancePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,23 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     NavigationCacheMode="Required"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="Transparent"
+    SizeChanged="Page_SizeChanged">
 
     <Page.Resources>
-        <!-- Subtle Compact Copy Button Style -->
-        <Style x:Key="SubtleCopyButtonStyle" TargetType="Button">
-            <Setter Property="Width" Value="24" />
-            <Setter Property="Height" Value="24" />
-            <Setter Property="MinWidth" Value="24" />
-            <Setter Property="MinHeight" Value="24" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-        </Style>
-        
         <!-- Header Copy All Button Style -->
         <Style x:Key="HeaderCopyButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{ThemeResource SubtleFillColorSecondaryBrush}" />
@@ -72,34 +59,35 @@
         </Style>
     </Page.Resources>
 
-    <Grid Padding="36" RowSpacing="16">
+    <Grid Style="{StaticResource PageRootGridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" /> <!-- 0: Page Header -->
             <RowDefinition Height="*" />    <!-- 1: Master-Detail Content Area -->
         </Grid.RowDefinitions>
 
         <!-- Page Header -->
-        <StackPanel Grid.Row="0" Spacing="4">
-            <TextBlock x:Uid="PerformancePage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
-            <TextBlock x:Uid="PerformancePage_Description" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-        </StackPanel>
-
-        <!-- Master-Detail Content Area -->
-        <Grid Grid.Row="1" ColumnSpacing="16">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="280" MinWidth="240" MaxWidth="320" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center">
+                <TextBlock x:Uid="PerformancePage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
+                <TextBlock x:Uid="PerformancePage_Description" Style="{StaticResource PageHeaderSubtitleStyle}" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Master-Detail Content Area: Direct Mica Canvas (No bulky double border) -->
+        <Grid x:Name="PerformanceMasterDetailGrid" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="PerfMasterColumn" Width="260" MinWidth="200" MaxWidth="320" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Left: Master Hardware Navigation Panel (Same as CrashReportPage) -->
-            <Border Grid.Column="0"
-                    Background="{ThemeResource LayerFillColorDefaultBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="{ThemeResource OverlayCornerRadius}"
-                    Padding="6">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="MasterCardList" Spacing="4">
+                <!-- Left: Master Hardware Navigation Panel -->
+                <Grid Grid.Column="0" Padding="6">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="MasterCardList" Spacing="4">
                         
                         <!-- 1. CPU Navigation Item -->
                         <Grid Tag="CPU"
@@ -144,7 +132,7 @@
                                 
                                 <StackPanel Grid.Column="1" Spacing="2">
                                     <Grid>
-                                        <TextBlock Text="CPU" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" FontSize="14" />
+                                        <TextBlock x:Uid="PerformancePage_Cpu_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" FontSize="14" />
                                         <TextBlock x:Name="CpuNavUsageText" Text="0%" HorizontalAlignment="Right" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     </Grid>
                                     <TextBlock x:Name="CpuNavSubtext" Text="--" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextTrimming="CharacterEllipsis" />
@@ -223,16 +211,17 @@
 
                     </StackPanel>
                 </ScrollViewer>
-            </Border>
+            </Grid>
+
+            <!-- Vertical Divider between Master and Detail -->
+            <Border Grid.Column="0"
+                    HorizontalAlignment="Right"
+                    Width="1"
+                    Background="{ThemeResource CardStrokeColorDefaultBrush}" />
 
             <!-- Right: Detailed Dashboard Area -->
-            <Border Grid.Column="1"
-                    Background="{ThemeResource LayerFillColorDefaultBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="{ThemeResource OverlayCornerRadius}">
-                <Grid>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24">
+            <Grid Grid.Column="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24">
                         <Grid>
                             <Grid.ChildrenTransitions>
                                 <TransitionCollection>
@@ -253,52 +242,38 @@
                                     <StackPanel Spacing="4" VerticalAlignment="Center">
                                         <StackPanel Orientation="Horizontal" Spacing="8">
                                             <FontIcon Glyph="&#xEEA1;" FontSize="20" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                            <TextBlock Text="CPU" Style="{ThemeResource TitleTextBlockStyle}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
+                                            <TextBlock x:Uid="PerformancePage_Cpu_Title" Style="{ThemeResource TitleTextBlockStyle}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
                                             
                                             <!-- Copy All Info Button -->
                                             <Button x:Name="CopyAllCpuBtn"
                                                     Click="CopyAllCpu_Click"
                                                     Style="{StaticResource HeaderCopyButtonStyle}"
-                                                    Margin="8,0,0,0">
-                                                <StackPanel Orientation="Horizontal" Spacing="6">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                    <TextBlock x:Uid="PerformancePage_CopyAll" Style="{ThemeResource BodyTextBlockStyle}" FontSize="12" />
+                                                    Margin="8,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                                    <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                                    <TextBlock x:Uid="PerformancePage_CopyAll" Style="{ThemeResource BodyTextBlockStyle}" FontSize="12" VerticalAlignment="Center" />
                                                 </StackPanel>
                                             </Button>
                                         </StackPanel>
                                         
-                                        <!-- CPU Model + Direct Copy Button -->
-                                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                            <TextBlock x:Name="CpuNameText" Text="--"
-                                                       IsTextSelectionEnabled="True"
-                                                       Style="{ThemeResource BodyTextBlockStyle}"
-                                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                       TextWrapping="Wrap" />
-                                            <Button Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuNameText">
-                                                <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                            </Button>
-                                        </StackPanel>
+                                        <!-- CPU Model -->
+                                        <TextBlock x:Name="CpuNameText" Text="--"
+                                                   IsTextSelectionEnabled="True"
+                                                   Style="{ThemeResource BodyTextBlockStyle}"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                   TextWrapping="Wrap" />
                                     </StackPanel>
 
                                     <!-- Big Real-time Stats -->
                                     <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="24" VerticalAlignment="Center">
                                         <StackPanel HorizontalAlignment="Right">
                                             <TextBlock x:Uid="PerformancePage_Stat_Usage" IsTextSelectionEnabled="True" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right" />
-                                            <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Right">
-                                                <TextBlock x:Name="CpuUsageBigText" IsTextSelectionEnabled="True" Text="0%" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
-                                                <Button Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuUsageBigText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
-                                            </StackPanel>
+                                            <TextBlock x:Name="CpuUsageBigText" IsTextSelectionEnabled="True" Text="0%" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Right" />
                                         </StackPanel>
                                         <StackPanel HorizontalAlignment="Right">
                                             <TextBlock x:Uid="PerformancePage_Stat_Speed" IsTextSelectionEnabled="True" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right" />
-                                            <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Right">
-                                                <TextBlock x:Name="CpuClockBigText" IsTextSelectionEnabled="True" Text="-- GHz" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" />
-                                                <Button Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuClockBigText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
-                                            </StackPanel>
+                                            <TextBlock x:Name="CpuClockBigText" IsTextSelectionEnabled="True" Text="-- GHz" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" HorizontalAlignment="Right" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
@@ -350,27 +325,16 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 
                                                 <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="PerformancePage_Cpu_Clock" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CpuClockText" Text="-- GHz" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuClockText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
-
+                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CpuClockText" Text="-- GHz" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="PerformancePage_Cpu_Processes" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="CpuProcessesText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuProcessesText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="CpuProcessesText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="PerformancePage_Cpu_Threads" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="CpuSystemThreadsText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuSystemThreadsText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="CpuSystemThreadsText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
                                             </Grid>
                                         </StackPanel>
                                     </Border>
@@ -386,38 +350,22 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 
                                                 <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="PerformancePage_Cpu_BaseSpeed" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CpuBaseSpeedText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuBaseSpeedText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CpuBaseSpeedText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="PerformancePage_Cpu_Sockets" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="CpuSocketsText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuSocketsText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="CpuSocketsText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="PerformancePage_Cpu_Cores" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="CpuCoresText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuCoresText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="CpuCoresText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="PerformancePage_Cpu_LogicalCores" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="CpuLogicalCoresText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuLogicalCoresText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="CpuLogicalCoresText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="4" Grid.Column="0" x:Uid="PerformancePage_Cpu_Virtualization" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="4" Grid.Column="1" x:Name="CpuVirtualizationText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="4" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuVirtualizationText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="4" Grid.Column="1" x:Name="CpuVirtualizationText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
                                             </Grid>
                                         </StackPanel>
                                     </Border>
@@ -433,26 +381,16 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 
                                                 <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="PerformancePage_Cpu_L1" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CpuL1Text" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuL1Text">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CpuL1Text" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="PerformancePage_Cpu_L2" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="CpuL2Text" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuL2Text">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="CpuL2Text" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="PerformancePage_Cpu_L3" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="CpuL3Text" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="CpuL3Text">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="CpuL3Text" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
                                             </Grid>
                                         </StackPanel>
                                     </Border>
@@ -479,46 +417,32 @@
                                             <Button x:Name="CopyAllRamBtn"
                                                     Click="CopyAllRam_Click"
                                                     Style="{StaticResource HeaderCopyButtonStyle}"
-                                                    Margin="8,0,0,0">
-                                                <StackPanel Orientation="Horizontal" Spacing="6">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                    <TextBlock x:Uid="PerformancePage_CopyAll" Style="{ThemeResource BodyTextBlockStyle}" FontSize="12" />
+                                                    Margin="8,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                                    <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                                    <TextBlock x:Uid="PerformancePage_CopyAll" Style="{ThemeResource BodyTextBlockStyle}" FontSize="12" VerticalAlignment="Center" />
                                                 </StackPanel>
                                             </Button>
                                         </StackPanel>
                                         
-                                        <!-- RAM Model + Direct Copy Button -->
-                                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                            <TextBlock x:Name="RamNameText" Text="--"
-                                                       IsTextSelectionEnabled="True"
-                                                       Style="{ThemeResource BodyTextBlockStyle}"
-                                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                       TextWrapping="Wrap" />
-                                            <Button Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamNameText">
-                                                <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                            </Button>
-                                        </StackPanel>
+                                        <!-- RAM Model -->
+                                        <TextBlock x:Name="RamNameText" Text="--"
+                                                   IsTextSelectionEnabled="True"
+                                                   Style="{ThemeResource BodyTextBlockStyle}"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                   TextWrapping="Wrap" />
                                     </StackPanel>
 
                                     <!-- Big Real-time Stats -->
                                     <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="24" VerticalAlignment="Center">
                                         <StackPanel HorizontalAlignment="Right">
                                             <TextBlock x:Uid="PerformancePage_Stat_InUse" IsTextSelectionEnabled="True" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right" />
-                                            <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Right">
-                                                <TextBlock x:Name="RamInUseBigText" IsTextSelectionEnabled="True" Text="-- GB" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
-                                                <Button Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamInUseBigText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
-                                            </StackPanel>
+                                            <TextBlock x:Name="RamInUseBigText" IsTextSelectionEnabled="True" Text="-- GB" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Right" />
                                         </StackPanel>
                                         <StackPanel HorizontalAlignment="Right">
                                             <TextBlock x:Uid="PerformancePage_Stat_Available" IsTextSelectionEnabled="True" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right" />
-                                            <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Right">
-                                                <TextBlock x:Name="RamAvailBigText" IsTextSelectionEnabled="True" Text="-- GB" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" />
-                                                <Button Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamAvailBigText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
-                                            </StackPanel>
+                                            <TextBlock x:Name="RamAvailBigText" IsTextSelectionEnabled="True" Text="-- GB" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" HorizontalAlignment="Right" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
@@ -570,32 +494,19 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 
                                                 <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="PerformancePage_Ram_InUse" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="RamInUseText" Text="-- GB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamInUseText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="RamInUseText" Text="-- GB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="PerformancePage_Ram_Available" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="RamAvailableText" Text="-- GB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamAvailableText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="RamAvailableText" Text="-- GB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="PerformancePage_Ram_Committed" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="RamCommittedText" Text="-- / --" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamCommittedText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="RamCommittedText" Text="-- / --" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="PerformancePage_Ram_Cached" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="RamCachedText" Text="-- GB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamCachedText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="RamCachedText" Text="-- GB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
                                             </Grid>
                                         </StackPanel>
                                     </Border>
@@ -611,32 +522,19 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 
                                                 <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="PerformancePage_Ram_PagedPool" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="RamPagedPoolText" Text="-- MB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamPagedPoolText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="RamPagedPoolText" Text="-- MB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="PerformancePage_Ram_NonPagedPool" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="RamNonPagedPoolText" Text="-- MB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamNonPagedPoolText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="RamNonPagedPoolText" Text="-- MB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="PerformancePage_Ram_Compressed" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="RamCompressedText" Text="-- MB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamCompressedText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="RamCompressedText" Text="-- MB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="PerformancePage_Ram_HardwareReserved" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="RamHardwareReservedText" Text="-- MB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamHardwareReservedText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="RamHardwareReservedText" Text="-- MB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
                                             </Grid>
                                         </StackPanel>
                                     </Border>
@@ -652,26 +550,16 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 
                                                 <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="PerformancePage_Ram_Speed" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="RamSpeedText" Text="-- MT/s" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamSpeedText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="RamSpeedText" Text="-- MT/s" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="PerformancePage_Ram_Slots" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="RamSlotsText" Text="-- / --" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamSlotsText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="RamSlotsText" Text="-- / --" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="PerformancePage_Ram_FormFactor" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="RamFormFactorText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="RamFormFactorText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="RamFormFactorText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
                                             </Grid>
                                         </StackPanel>
                                     </Border>
@@ -692,7 +580,7 @@
                                     <StackPanel Spacing="4" VerticalAlignment="Center">
                                         <StackPanel Orientation="Horizontal" Spacing="8">
                                             <FontIcon Glyph="&#xEDA2;" FontSize="20" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                            <TextBlock x:Name="DiskTitleText" Text="Disk (C:)" Style="{ThemeResource TitleTextBlockStyle}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
+                                            <TextBlock x:Name="DiskTitleText" x:Uid="PerformancePage_Disk_DefaultTitle" Style="{ThemeResource TitleTextBlockStyle}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
                                             
                                             <!-- Copy All Info Button -->
                                             <Button x:Name="CopyAllDiskBtn"
@@ -700,45 +588,30 @@
                                                     Style="{StaticResource HeaderCopyButtonStyle}"
                                                     Margin="8,0,0,0"
                                                     VerticalAlignment="Center">
-                                                <StackPanel Orientation="Horizontal" Spacing="6">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                    <TextBlock x:Uid="PerformancePage_CopyAll" Style="{ThemeResource BodyTextBlockStyle}" FontSize="12" />
+                                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                                    <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                                    <TextBlock x:Uid="PerformancePage_CopyAll" Style="{ThemeResource BodyTextBlockStyle}" FontSize="12" VerticalAlignment="Center" />
                                                 </StackPanel>
                                             </Button>
                                         </StackPanel>
                                         
-                                        <!-- Disk Model + Direct Copy Button -->
-                                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                            <TextBlock x:Name="DiskModelText" Text="--"
-                                                       IsTextSelectionEnabled="True"
-                                                       Style="{ThemeResource BodyTextBlockStyle}"
-                                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                       TextWrapping="Wrap" />
-                                            <Button Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskModelText">
-                                                <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                            </Button>
-                                        </StackPanel>
+                                        <!-- Disk Model -->
+                                        <TextBlock x:Name="DiskModelText" Text="--"
+                                                   IsTextSelectionEnabled="True"
+                                                   Style="{ThemeResource BodyTextBlockStyle}"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                   TextWrapping="Wrap" />
                                     </StackPanel>
 
                                     <!-- Big Real-time Stats -->
                                     <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="24" VerticalAlignment="Center">
                                         <StackPanel HorizontalAlignment="Right">
                                             <TextBlock x:Uid="PerformancePage_Stat_ActiveTime" IsTextSelectionEnabled="True" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right" />
-                                            <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Right">
-                                                <TextBlock x:Name="DiskActiveTimeBigText" IsTextSelectionEnabled="True" Text="0%" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
-                                                <Button Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskActiveTimeBigText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
-                                            </StackPanel>
+                                            <TextBlock x:Name="DiskActiveTimeBigText" IsTextSelectionEnabled="True" Text="0%" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Right" />
                                         </StackPanel>
                                         <StackPanel HorizontalAlignment="Right">
                                             <TextBlock x:Uid="PerformancePage_Stat_ResponseTime" IsTextSelectionEnabled="True" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right" />
-                                            <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Right">
-                                                <TextBlock x:Name="DiskResponseTimeBigText" IsTextSelectionEnabled="True" Text="0.0 ms" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" />
-                                                <Button Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskResponseTimeBigText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
-                                            </StackPanel>
+                                            <TextBlock x:Name="DiskResponseTimeBigText" IsTextSelectionEnabled="True" Text="0.0 ms" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" HorizontalAlignment="Right" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
@@ -790,32 +663,19 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 
                                                 <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="PerformancePage_Disk_ReadSpeed" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="DiskReadSpeedText" Text="0 KB/s" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskReadSpeedText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="DiskReadSpeedText" Text="0 KB/s" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="PerformancePage_Disk_WriteSpeed" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="DiskWriteSpeedText" Text="0 KB/s" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskWriteSpeedText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="DiskWriteSpeedText" Text="0 KB/s" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="PerformancePage_Disk_ResponseTime" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="DiskResponseTimeText" Text="0.0 ms" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskResponseTimeText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="DiskResponseTimeText" Text="0.0 ms" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="PerformancePage_Disk_ActiveTime" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="DiskActiveTimeText" Text="0%" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskActiveTimeText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="DiskActiveTimeText" Text="0%" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
                                             </Grid>
                                         </StackPanel>
                                     </Border>
@@ -831,32 +691,19 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 
                                                 <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="PerformancePage_Disk_UsedSpace" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="DiskUsedSpaceText" Text="-- GB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskUsedSpaceText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="DiskUsedSpaceText" Text="-- GB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="PerformancePage_Disk_FreeSpace" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="DiskFreeSpaceText" Text="-- GB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskFreeSpaceText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="DiskFreeSpaceText" Text="-- GB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="PerformancePage_Disk_TotalCapacity" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="DiskTotalCapacityText" Text="-- GB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskTotalCapacityText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="DiskTotalCapacityText" Text="-- GB" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="PerformancePage_Disk_UsagePercent" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="DiskUsagePercentText" Text="--%" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskUsagePercentText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="DiskUsagePercentText" Text="--%" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
                                             </Grid>
                                         </StackPanel>
                                     </Border>
@@ -872,32 +719,19 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 
                                                 <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="PerformancePage_Disk_DriveLetter" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="DiskDriveLetterText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskDriveLetterText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="DiskDriveLetterText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="PerformancePage_Disk_VolumeLabel" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="DiskVolumeLabelText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskVolumeLabelText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="DiskVolumeLabelText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="PerformancePage_Disk_FileSystem" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="DiskFileSystemText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskFileSystemText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="DiskFileSystemText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="PerformancePage_Disk_DriveType" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="DiskDriveTypeText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="DiskDriveTypeText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="DiskDriveTypeText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
                                             </Grid>
                                         </StackPanel>
                                     </Border>
@@ -918,7 +752,7 @@
                                     <StackPanel Spacing="4" VerticalAlignment="Center">
                                         <StackPanel Orientation="Horizontal" Spacing="8">
                                             <FontIcon Glyph="&#xEEA1;" FontSize="20" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                            <TextBlock x:Name="GpuTitleText" Text="GPU" Style="{ThemeResource TitleTextBlockStyle}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
+                                            <TextBlock x:Name="GpuTitleText" x:Uid="PerformancePage_Gpu_Title" Style="{ThemeResource TitleTextBlockStyle}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
                                             
                                             <!-- Copy All Info Button -->
                                             <Button x:Name="CopyAllGpuBtn"
@@ -926,45 +760,30 @@
                                                     Style="{StaticResource HeaderCopyButtonStyle}"
                                                     Margin="8,0,0,0"
                                                     VerticalAlignment="Center">
-                                                <StackPanel Orientation="Horizontal" Spacing="6">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                    <TextBlock x:Uid="PerformancePage_CopyAll" Style="{ThemeResource BodyTextBlockStyle}" FontSize="12" />
+                                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                                    <FontIcon Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                                    <TextBlock x:Uid="PerformancePage_CopyAll" Style="{ThemeResource BodyTextBlockStyle}" FontSize="12" VerticalAlignment="Center" />
                                                 </StackPanel>
                                             </Button>
                                         </StackPanel>
                                         
-                                        <!-- GPU Model + Direct Copy Button -->
-                                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                            <TextBlock x:Name="GpuNameText" Text="--"
-                                                       IsTextSelectionEnabled="True"
-                                                       Style="{ThemeResource BodyTextBlockStyle}"
-                                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                       TextWrapping="Wrap" />
-                                            <Button Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuNameText">
-                                                <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                            </Button>
-                                        </StackPanel>
+                                        <!-- GPU Model -->
+                                        <TextBlock x:Name="GpuNameText" Text="--"
+                                                   IsTextSelectionEnabled="True"
+                                                   Style="{ThemeResource BodyTextBlockStyle}"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                   TextWrapping="Wrap" />
                                     </StackPanel>
 
                                     <!-- Big Real-time Stats -->
                                     <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="24" VerticalAlignment="Center">
                                         <StackPanel HorizontalAlignment="Right">
                                             <TextBlock x:Uid="PerformancePage_Stat_Usage" IsTextSelectionEnabled="True" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right" />
-                                            <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Right">
-                                                <TextBlock x:Name="GpuUsageBigText" IsTextSelectionEnabled="True" Text="0%" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
-                                                <Button Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuUsageBigText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
-                                            </StackPanel>
+                                            <TextBlock x:Name="GpuUsageBigText" IsTextSelectionEnabled="True" Text="0%" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Right" />
                                         </StackPanel>
                                         <StackPanel HorizontalAlignment="Right">
                                             <TextBlock x:Uid="PerformancePage_Stat_Temperature" IsTextSelectionEnabled="True" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right" />
-                                            <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Right">
-                                                <TextBlock x:Name="GpuTempBigText" IsTextSelectionEnabled="True" Text="-- °C" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" />
-                                                <Button Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuTempBigText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
-                                            </StackPanel>
+                                            <TextBlock x:Name="GpuTempBigText" IsTextSelectionEnabled="True" Text="-- °C" Style="{ThemeResource TitleTextBlockStyle}" FontSize="28" FontWeight="Bold" HorizontalAlignment="Right" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
@@ -1016,26 +835,16 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 
                                                 <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="PerformancePage_Gpu_CoreClock" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="GpuCoreClockText" Text="-- MHz" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuCoreClockText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="GpuCoreClockText" Text="-- MHz" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="PerformancePage_Gpu_MemoryClock" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="GpuMemClockText" Text="-- MHz" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuMemClockText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="GpuMemClockText" Text="-- MHz" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="PerformancePage_Gpu_Temp" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="GpuTempText" Text="-- °C" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuTempText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="GpuTempText" Text="-- °C" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
                                             </Grid>
                                         </StackPanel>
                                     </Border>
@@ -1051,32 +860,19 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 
                                                 <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="PerformancePage_Gpu_DedicatedMem" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="GpuDedicatedMemText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuDedicatedMemText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="GpuDedicatedMemText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="PerformancePage_Gpu_SharedMem" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="GpuSharedMemText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuSharedMemText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="GpuSharedMemText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="PerformancePage_Gpu_TotalMem" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="GpuTotalMemText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuTotalMemText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="GpuTotalMemText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="PerformancePage_Gpu_ReservedMem" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="GpuHardwareReservedText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuHardwareReservedText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="GpuHardwareReservedText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
                                             </Grid>
                                         </StackPanel>
                                     </Border>
@@ -1092,32 +888,19 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 
                                                 <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="PerformancePage_Gpu_DriverVersion" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="GpuDriverVerText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuDriverVerText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="GpuDriverVerText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="PerformancePage_Gpu_DriverDate" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="GpuDriverDateText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuDriverDateText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="GpuDriverDateText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="PerformancePage_Gpu_DirectX" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="GpuDirectXVerText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuDirectXVerText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="GpuDirectXVerText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
 
                                                 <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="PerformancePage_Gpu_Location" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="GpuLocationText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" Margin="8,0,4,0" TextTrimming="CharacterEllipsis" />
-                                                <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource SubtleCopyButtonStyle}" Click="CopyButton_Click" Tag="GpuLocationText">
-                                                    <FontIcon Glyph="&#xE8C8;" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
+                                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="GpuLocationText" Text="--" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="13" IsTextSelectionEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
                                             </Grid>
                                         </StackPanel>
                                     </Border>
@@ -1128,9 +911,7 @@
                         </Grid>
                     </ScrollViewer>
                 </Grid>
-            </Border>
-
-        </Grid>
+            </Grid>
     </Grid>
 </Page>
 

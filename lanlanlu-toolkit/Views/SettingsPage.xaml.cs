@@ -19,6 +19,7 @@ namespace lanlanlu_toolkit.Views
             LoadCurrentTheme();
             LoadCurrentTemperatureUnit();
             LoadNotificationSettings();
+            LoadSoundEffectsSettings();
             LoadDebugReportSettings();
             InitializeAboutInfo();
             _isInitialized = true;
@@ -191,6 +192,27 @@ namespace lanlanlu_toolkit.Views
         {
             if (NotificationSoundToggle == null || NotificationSoundToggleStateText == null) return;
             NotificationSoundToggleStateText.Text = NotificationSoundToggle.IsOn
+                ? LocalizationHelper.GetString("Common_Toggle_On")
+                : LocalizationHelper.GetString("Common_Toggle_Off");
+        }
+
+        private void LoadSoundEffectsSettings()
+        {
+            SoundEffectsToggle.IsOn = SettingsService.GetSoundEffectsEnabled();
+            UpdateSoundEffectsToggleText();
+        }
+
+        private void SoundEffectsToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            UpdateSoundEffectsToggleText();
+            if (!_isInitialized) return;
+            SettingsService.SaveSoundEffectsEnabled(SoundEffectsToggle.IsOn);
+        }
+
+        private void UpdateSoundEffectsToggleText()
+        {
+            if (SoundEffectsToggle == null || SoundEffectsToggleStateText == null) return;
+            SoundEffectsToggleStateText.Text = SoundEffectsToggle.IsOn
                 ? LocalizationHelper.GetString("Common_Toggle_On")
                 : LocalizationHelper.GetString("Common_Toggle_Off");
         }
