@@ -365,10 +365,10 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <!-- Feature 1: Performance Monitor -->
+                    <!-- Feature 1: Windows Task Manager -->
                     <Button Grid.Row="0" Grid.Column="0" 
                             Style="{StaticResource FeatureCardButtonStyle}"
-                            Click="FeaturePerf_Click">
+                            Click="FeatureTaskMgr_Click">
                         <Grid ColumnSpacing="16">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -377,8 +377,8 @@
                             </Grid.ColumnDefinitions>
                             <FontIcon Glyph="&#xE9D9;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                             <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                <TextBlock x:Uid="HomePage_Feature_Perf_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
-                                <TextBlock x:Uid="HomePage_Feature_Perf_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
+                                <TextBlock x:Uid="HomePage_Feature_TaskMgr_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
+                                <TextBlock x:Uid="HomePage_Feature_TaskMgr_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
                             </StackPanel>
                             <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
                         </Grid>

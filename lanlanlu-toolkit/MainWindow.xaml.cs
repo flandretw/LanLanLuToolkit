@@ -310,12 +310,12 @@ namespace lanlanlu_toolkit
 
             _searchableTools.Add(new ToolItem
             {
-                Title = LocalizationHelper.GetString("Shell_Performance/Content"),
-                Description = LocalizationHelper.GetString("Shell_Performance/Content"),
+                Title = LocalizationHelper.GetString("HomePage_Feature_TaskMgr_Title/Text"),
+                Description = LocalizationHelper.GetString("HomePage_Feature_TaskMgr_Desc/Text"),
                 Icon = "\uE9D9",
-                Tag = "PerformancePage",
+                Tag = "TaskMgr",
                 Category = LocalizationHelper.GetString("Category_System"),
-                Keywords = new() { "效能", "效能監控", "工作管理員", "硬體負載", "cpu", "gpu", "ram", "記憶體", "顯卡", "處理器", "溫度", "磁碟", "網路", "performance" }
+                Keywords = new() { "工作管理員", "效能", "taskmgr", "task manager", "cpu", "gpu", "ram", "記憶體", "顯卡", "處理器", "行程", "處理程序", "結束工作", "效能監控", "performance" }
             });
 
             _searchableTools.Add(new ToolItem
@@ -462,6 +462,16 @@ namespace lanlanlu_toolkit
 
         public void NavigateToTool(string tag)
         {
+            if (tag == "TaskMgr")
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("taskmgr.exe") { UseShellExecute = true });
+                }
+                catch { }
+                return;
+            }
+
             if (tag == "SettingsPage")
             {
                 if (ContentFrame.SourcePageType != typeof(SettingsPage))
@@ -476,7 +486,6 @@ namespace lanlanlu_toolkit
             Type? targetType = tag switch
             {
                 "HomePage" => typeof(HomePage),
-                "PerformancePage" => typeof(PerformancePage),
                 "InputTesterPage" => typeof(InputTesterPage),
                 "CrashReportPage" => typeof(CrashReportPage),
                 "SystemRepairPage" => typeof(SystemRepairPage),

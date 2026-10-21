@@ -101,7 +101,14 @@ namespace lanlanlu_toolkit.Views
             GreetingIcon.Glyph = iconGlyph;
         }
 
-        private void FeaturePerf_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(PerformancePage));
+        private void FeatureTaskMgr_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("taskmgr.exe") { UseShellExecute = true });
+            }
+            catch { }
+        }
         private void FeatureInput_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(InputTesterPage));
         private void FeatureRepair_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(SystemRepairPage));
         private void FeatureCrash_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(CrashReportPage));
@@ -136,22 +143,13 @@ namespace lanlanlu_toolkit.Views
 
         private async Task CopyToClipboardAsync(string text, FontIcon icon)
         {
-            try
-            {
-                var data = new DataPackage();
-                data.SetText(text);
-                Clipboard.SetContent(data);
-
-                icon.Glyph = "\uE8FB"; // Check icon
-                NotificationService.Show(
-                    LocalizationHelper.GetString("Notification_Copied"),
-                    text,
-                    InfoBarSeverity.Informational);
-
-                await Task.Delay(2000);
-                icon.Glyph = "\uE8C8"; // Back to Copy icon
-            }
-            catch { }
+            if (string.IsNullOrEmpty(text) || text == "--") return;
+            await ClipboardService.CopyTextAsync(
+                text,
+                icon,
+                showNotification: true,
+                customNotificationMessage: text,
+                customNotificationTitle: LocalizationHelper.GetString("Notification_Copied"));
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

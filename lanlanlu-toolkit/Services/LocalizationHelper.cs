@@ -81,7 +81,14 @@ namespace lanlanlu_toolkit.Services
                 catch { }
             }
 
-            // 5. Fallback for baseKey -> try /Text
+            // 5. Fallback for baseKey -> try .Text or /Text
+            try
+            {
+                string val = Loader.GetString(key + ".Text");
+                if (!string.IsNullOrEmpty(val)) return val;
+            }
+            catch { }
+
             try
             {
                 string val = Loader.GetString(key + "/Text");

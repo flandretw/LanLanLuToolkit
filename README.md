@@ -17,8 +17,8 @@ We hate bloated installers, heavy background services, and leftover registry jun
 
 ## Features
 
-* **Hardware Performance Monitoring (Experimental)**  
-  Provides a quick glance at CPU, GPU, RAM, and disk utilization, clock speeds, VRAM, and temperatures without opening Task Manager. This feature is currently experimental; for comprehensive diagnostics, Windows Task Manager remains the recommended choice.
+* **Hardware Specification Quick View: System Specs & One-Click Copy**  
+  Quickly inspect core hardware specifications directly on the Home dashboard—including CPU model, discrete/integrated GPU, RAM capacity, motherboard model, storage devices, and Windows OS build—with one-click clipboard copying for diagnostic reports.
 
 * **Peripheral Diagnostics: Keyboard NKRO & Mouse Chatter Detection**  
   Tailored for gamers and hardware enthusiasts with 60 fps responsive vector layouts and acoustic key feedback.

@@ -30,7 +30,7 @@ namespace lanlanlu_toolkit.Services
         private const string AppFolderName = "lanlanlu_toolkit";
         private const string SettingsFileName = "settings.json";
         private static AppSettings? _currentSettings;
-        private static string? _activeSettingsFilePath;
+        private static string? _activeWriteFilePath;
 
         private static string GetPortableSettingsPath()
         {
@@ -68,23 +68,43 @@ namespace lanlanlu_toolkit.Services
             }
         }
 
-        private static string ResolveSettingsFilePath(bool forWriting = false)
+        private static string GetSettingsPathForReading()
         {
-            if (_activeSettingsFilePath != null)
-            {
-                if (forWriting)
-                {
-                    string dir = Path.GetDirectoryName(_activeSettingsFilePath)!;
-                    if (CanWriteToDirectory(dir))
-                    {
-                        return _activeSettingsFilePath;
-                    }
+            string portablePath = GetPortableSettingsPath();
+            string localAppDataPath = GetLocalAppDataSettingsPath();
 
-                    // Active path became unwritable; fall back to LocalAppData
-                    _activeSettingsFilePath = GetLocalAppDataSettingsPath();
-                    return _activeSettingsFilePath;
+            bool portableExists = File.Exists(portablePath);
+            bool localAppDataExists = File.Exists(localAppDataPath);
+
+            if (portableExists && localAppDataExists)
+            {
+                // Both files exist: compare timestamps and always read the newer one,
+                // regardless of whether the portable directory is currently writable or read-only.
+                DateTime portableTime = File.GetLastWriteTimeUtc(portablePath);
+                DateTime localTime = File.GetLastWriteTimeUtc(localAppDataPath);
+
+                return (portableTime > localTime) ? portablePath : localAppDataPath;
+            }
+
+            if (portableExists) return portablePath;
+            if (localAppDataExists) return localAppDataPath;
+
+            return portablePath;
+        }
+
+        private static string GetSettingsPathForWriting()
+        {
+            if (_activeWriteFilePath != null)
+            {
+                string dir = Path.GetDirectoryName(_activeWriteFilePath)!;
+                if (CanWriteToDirectory(dir))
+                {
+                    return _activeWriteFilePath;
                 }
-                return _activeSettingsFilePath;
+
+                // Active write path became unwritable; fall back to LocalAppData
+                _activeWriteFilePath = GetLocalAppDataSettingsPath();
+                return _activeWriteFilePath;
             }
 
             string portablePath = GetPortableSettingsPath();
@@ -94,52 +114,37 @@ namespace lanlanlu_toolkit.Services
             bool portableExists = File.Exists(portablePath);
             bool localAppDataExists = File.Exists(localAppDataPath);
 
-            if (portableExists && localAppDataExists)
-            {
-                // Both exist: if portable directory is not writable, LocalAppData must be the active one
-                if (!CanWriteToDirectory(portableDir))
-                {
-                    _activeSettingsFilePath = localAppDataPath;
-                    return _activeSettingsFilePath;
-                }
-
-                // Both are available; choose the one with the latest modification time
-                DateTime portableTime = File.GetLastWriteTimeUtc(portablePath);
-                DateTime localTime = File.GetLastWriteTimeUtc(localAppDataPath);
-
-                _activeSettingsFilePath = (localTime > portableTime) ? localAppDataPath : portablePath;
-                return _activeSettingsFilePath;
-            }
-
-            if (portableExists)
-            {
-                if (!forWriting || CanWriteToDirectory(portableDir))
-                {
-                    _activeSettingsFilePath = portablePath;
-                    return _activeSettingsFilePath;
-                }
-
-                _activeSettingsFilePath = localAppDataPath;
-                return _activeSettingsFilePath;
-            }
-
-            if (localAppDataExists)
-            {
-                _activeSettingsFilePath = localAppDataPath;
-                return _activeSettingsFilePath;
-            }
-
-            // Neither file exists yet. Prefer portable if directory is writable, otherwise LocalAppData
             if (CanWriteToDirectory(portableDir))
             {
-                _activeSettingsFilePath = portablePath;
+                // Portable directory is writable.
+                // If LocalAppData already exists and was modified more recently than portable,
+                // prioritize LocalAppData so we don't overwrite newer local configurations.
+                if (portableExists && localAppDataExists)
+                {
+                    DateTime portableTime = File.GetLastWriteTimeUtc(portablePath);
+                    DateTime localTime = File.GetLastWriteTimeUtc(localAppDataPath);
+                    if (localTime > portableTime)
+                    {
+                        _activeWriteFilePath = localAppDataPath;
+                        return _activeWriteFilePath;
+                    }
+                }
+                else if (localAppDataExists && !portableExists)
+                {
+                    _activeWriteFilePath = localAppDataPath;
+                    return _activeWriteFilePath;
+                }
+
+                _activeWriteFilePath = portablePath;
+                return _activeWriteFilePath;
             }
             else
             {
-                _activeSettingsFilePath = localAppDataPath;
+                // Portable directory is NOT writable (e.g. Program Files);
+                // redirect all future saves to LocalAppData.
+                _activeWriteFilePath = localAppDataPath;
+                return _activeWriteFilePath;
             }
-
-            return _activeSettingsFilePath;
         }
 
         private static void LoadSettings()
@@ -148,21 +153,20 @@ namespace lanlanlu_toolkit.Services
 
             try
             {
-                string filePath = ResolveSettingsFilePath(forWriting: false);
-                if (File.Exists(filePath))
+                string readPath = GetSettingsPathForReading();
+                if (File.Exists(readPath))
                 {
-                    string json = File.ReadAllText(filePath);
+                    string json = File.ReadAllText(readPath);
                     _currentSettings = JsonSerializer.Deserialize(json, AppSettingsContext.Default.AppSettings);
                 }
                 else
                 {
-                    // Fallback check: if primary path didn't exist, check LocalAppData as well
+                    // Fallback check: check LocalAppData as well
                     string fallbackPath = GetLocalAppDataSettingsPath();
                     if (File.Exists(fallbackPath))
                     {
                         string json = File.ReadAllText(fallbackPath);
                         _currentSettings = JsonSerializer.Deserialize(json, AppSettingsContext.Default.AppSettings);
-                        _activeSettingsFilePath = fallbackPath;
                     }
                 }
             }
@@ -183,7 +187,7 @@ namespace lanlanlu_toolkit.Services
 
             try
             {
-                string filePath = ResolveSettingsFilePath(forWriting: true);
+                string filePath = GetSettingsPathForWriting();
                 string? dir = Path.GetDirectoryName(filePath);
                 if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
                 {
@@ -209,7 +213,7 @@ namespace lanlanlu_toolkit.Services
 
                     string json = JsonSerializer.Serialize(_currentSettings, AppSettingsContext.Default.AppSettings);
                     File.WriteAllText(fallbackPath, json);
-                    _activeSettingsFilePath = fallbackPath;
+                    _activeWriteFilePath = fallbackPath;
                 }
                 catch (Exception fallbackEx)
                 {

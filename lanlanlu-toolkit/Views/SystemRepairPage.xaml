@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Page
     x:Class="lanlanlu_toolkit.Views.SystemRepairPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -219,48 +219,105 @@
                 </Expander.Header>
                 <Expander.Content>
                     <StackPanel Spacing="16" Padding="0,8,0,8">
-                        <!-- Individual Tools Section -->
-                        <TextBlock x:Uid="SystemRepairPage_AdvancedTools_Header" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                        <Grid ColumnSpacing="12" RowSpacing="12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                        <!-- Individual Tools Section (Grouped Action List - Unified with Pipeline List) -->
+                        <TextBlock x:Uid="SystemRepairPage_AdvancedTools_Header" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
+                        <Border Style="{StaticResource FluentWorkspaceBorderStyle}">
+                            <StackPanel Spacing="0">
+                                <!-- Tool 1: CheckHealth -->
+                                <Grid Padding="20,16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
 
-                            <!-- Button 1: CheckHealth -->
-                            <Button x:Name="CheckHealthBtn" Click="RunCheckHealth_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="12,8">
-                                <StackPanel Spacing="4">
-                                    <TextBlock x:Uid="SystemRepairPage_CheckHealth_Title" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
-                                    <TextBlock x:Uid="SystemRepairPage_CheckHealth_Cmd" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="11" />
-                                </StackPanel>
-                            </Button>
+                                    <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                        <FontIcon Glyph="&#xE721;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Grid>
 
-                            <!-- Button 2: ScanHealth -->
-                            <Button x:Name="ScanHealthBtn" Grid.Column="1" Click="RunScanHealth_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="12,8">
-                                <StackPanel Spacing="4">
-                                    <TextBlock x:Uid="SystemRepairPage_ScanHealth_Title" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
-                                    <TextBlock x:Uid="SystemRepairPage_ScanHealth_Cmd" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="11" />
-                                </StackPanel>
-                            </Button>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                                        <TextBlock x:Uid="SystemRepairPage_CheckHealth_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                        <TextBlock x:Uid="SystemRepairPage_CheckHealth_Cmd" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontFamily="Cascadia Code, Consolas" />
+                                    </StackPanel>
 
-                            <!-- Button 3: RestoreHealth -->
-                            <Button x:Name="RestoreHealthBtn" Grid.Column="2" Click="RunRestoreHealth_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="12,8">
-                                <StackPanel Spacing="4">
-                                    <TextBlock x:Uid="SystemRepairPage_RestoreHealth_Title" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
-                                    <TextBlock x:Uid="SystemRepairPage_RestoreHealth_Cmd" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="11" />
-                                </StackPanel>
-                            </Button>
+                                    <Button x:Name="CheckHealthBtn" Grid.Column="2" Click="RunCheckHealth_Click" Style="{StaticResource StandardActionButtonStyle}" MinWidth="68">
+                                        <TextBlock x:Uid="SystemRepairPage_RunButton" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
+                                    </Button>
+                                </Grid>
 
-                            <!-- Button 4: SFC -->
-                            <Button x:Name="SfcBtn" Grid.Column="3" Click="RunSfc_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="12,8">
-                                <StackPanel Spacing="4">
-                                    <TextBlock x:Uid="SystemRepairPage_SfcScannow_Title" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
-                                    <TextBlock x:Uid="SystemRepairPage_SfcScannow_Cmd" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="11" />
-                                </StackPanel>
-                            </Button>
-                        </Grid>
+                                <Border Style="{StaticResource FluentHorizontalDividerStyle}" />
+
+                                <!-- Tool 2: ScanHealth -->
+                                <Grid Padding="20,16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                        <FontIcon Glyph="&#xE8FE;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Grid>
+
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                                        <TextBlock x:Uid="SystemRepairPage_ScanHealth_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                        <TextBlock x:Uid="SystemRepairPage_ScanHealth_Cmd" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontFamily="Cascadia Code, Consolas" />
+                                    </StackPanel>
+
+                                    <Button x:Name="ScanHealthBtn" Grid.Column="2" Click="RunScanHealth_Click" Style="{StaticResource StandardActionButtonStyle}" MinWidth="68">
+                                        <TextBlock x:Uid="SystemRepairPage_RunButton" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
+                                    </Button>
+                                </Grid>
+
+                                <Border Style="{StaticResource FluentHorizontalDividerStyle}" />
+
+                                <!-- Tool 3: RestoreHealth -->
+                                <Grid Padding="20,16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                        <FontIcon Glyph="&#xEBD3;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Grid>
+
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                                        <TextBlock x:Uid="SystemRepairPage_RestoreHealth_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                        <TextBlock x:Uid="SystemRepairPage_RestoreHealth_Cmd" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontFamily="Cascadia Code, Consolas" />
+                                    </StackPanel>
+
+                                    <Button x:Name="RestoreHealthBtn" Grid.Column="2" Click="RunRestoreHealth_Click" Style="{StaticResource StandardActionButtonStyle}" MinWidth="68">
+                                        <TextBlock x:Uid="SystemRepairPage_RunButton" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
+                                    </Button>
+                                </Grid>
+
+                                <Border Style="{StaticResource FluentHorizontalDividerStyle}" />
+
+                                <!-- Tool 4: SFC -->
+                                <Grid Padding="20,16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                        <FontIcon Glyph="&#xEA18;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Grid>
+
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                                        <TextBlock x:Uid="SystemRepairPage_SfcScannow_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                                        <TextBlock x:Uid="SystemRepairPage_SfcScannow_Cmd" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontFamily="Cascadia Code, Consolas" />
+                                    </StackPanel>
+
+                                    <Button x:Name="SfcBtn" Grid.Column="2" Click="RunSfc_Click" Style="{StaticResource StandardActionButtonStyle}" MinWidth="68">
+                                        <TextBlock x:Uid="SystemRepairPage_RunButton" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
 
                         <!-- Raw Terminal Console Card -->
                         <Border Style="{StaticResource FluentWorkspaceBorderStyle}" Margin="0,8,0,0">
@@ -281,16 +338,16 @@
                                     <FontIcon Glyph="&#xE81C;" FontSize="14" Margin="0,0,12,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                                     <TextBlock Grid.Column="1" x:Uid="SystemRepairPage_HistoryHeader" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" VerticalAlignment="Center" />
                                     <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                        <Button x:Name="CopyLogBtn" Click="CopyLogBtn_Click" Padding="8,4" VerticalAlignment="Center" IsEnabled="False">
-                                            <StackPanel Orientation="Horizontal" Spacing="8">
-                                                <FontIcon x:Name="CopyBtnIcon" Glyph="&#xE8C8;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                <TextBlock x:Name="CopyBtnText" x:Uid="SystemRepairPage_Copy" Style="{ThemeResource CaptionTextBlockStyle}" />
+                                        <Button x:Name="CopyLogBtn" Click="CopyLogBtn_Click" Style="{StaticResource StandardActionCopyButtonStyle}" IsEnabled="False">
+                                            <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                                <FontIcon x:Name="CopyBtnIcon" Glyph="&#xE8C8;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                                <TextBlock x:Name="CopyBtnText" x:Uid="SystemRepairPage_Copy" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
                                             </StackPanel>
                                         </Button>
-                                        <Button x:Name="ClearLogBtn" Click="ClearLogBtn_Click" Padding="8,4" VerticalAlignment="Center" IsEnabled="False">
-                                            <StackPanel Orientation="Horizontal" Spacing="8">
-                                                <FontIcon Glyph="&#xE74D;" FontSize="12" />
-                                                <TextBlock x:Uid="SystemRepairPage_Clear" Style="{StaticResource CaptionTextBlockStyle}" />
+                                        <Button x:Name="ClearLogBtn" Click="ClearLogBtn_Click" Style="{StaticResource StandardActionCopyButtonStyle}" IsEnabled="False">
+                                            <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                                <FontIcon Glyph="&#xE74D;" FontSize="13" VerticalAlignment="Center" />
+                                                <TextBlock x:Uid="SystemRepairPage_Clear" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
                                             </StackPanel>
                                         </Button>
                                     </StackPanel>

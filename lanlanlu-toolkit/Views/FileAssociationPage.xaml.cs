@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
@@ -253,20 +253,14 @@ namespace lanlanlu_toolkit.Views
             }
 
             string subKeyPath = $@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.{ext}";
-            string rootPrefix = "電腦";
+            string rootPrefix = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.Equals("zh", StringComparison.OrdinalIgnoreCase) ? "電腦" : "Computer";
 
             RegistryNavBtn.IsEnabled = false;
 
             try
             {
                 // 1. Copy the target path to clipboard as a reliable backup
-                try
-                {
-                    var package = new Windows.ApplicationModel.DataTransfer.DataPackage();
-                    package.SetText(subKeyPath);
-                    Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(package);
-                }
-                catch { }
+                _ = ClipboardService.CopyTextAsync(subKeyPath);
 
                 // 2. Check if regedit is already running
                 Process[] existing = Process.GetProcessesByName("regedit");
@@ -375,14 +369,11 @@ namespace lanlanlu_toolkit.Views
             catch (Exception ex)
             {
                 // Fallback copy to clipboard
-                try
-                {
-                    var package = new Windows.ApplicationModel.DataTransfer.DataPackage();
-                    package.SetText(subKeyPath);
-                    Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(package);
-                    NotificationService.Show(LocalizationHelper.GetString("FileAssociationPage_Warning_FallbackCopyTitle"), LocalizationHelper.GetString("FileAssociationPage_Warning_FallbackCopy"), InfoBarSeverity.Warning);
-                }
-                catch { }
+                _ = ClipboardService.CopyTextAsync(
+                    subKeyPath,
+                    showNotification: true,
+                    customNotificationTitle: LocalizationHelper.GetString("FileAssociationPage_Warning_FallbackCopyTitle"),
+                    customNotificationMessage: LocalizationHelper.GetString("FileAssociationPage_Warning_FallbackCopy"));
 
                 LoggingService.Log($"Error launching Registry Editor navigation: {ex.Message}");
             }

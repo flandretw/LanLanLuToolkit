@@ -1,4 +1,4 @@
-<Page
+﻿<Page
     x:Class="lanlanlu_toolkit.Views.FileHashPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,19 +10,7 @@
     Background="Transparent">
 
     <Page.Resources>
-        <!-- Subtle Action Button Style -->
-        <Style x:Key="SubtleActionButtonStyle" TargetType="Button">
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Width" Value="32" />
-            <Setter Property="Height" Value="32" />
-            <Setter Property="MinHeight" Value="32" />
-            <Setter Property="MinWidth" Value="32" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-        </Style>
+
 
         <!-- Seamless Borderless ReadOnly Hash TextBox Style -->
         <Style x:Key="HashResultTextBoxStyle" TargetType="TextBox">
@@ -117,21 +105,21 @@
 
                         <!-- File Metadata -->
                         <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3" Margin="0,0,16,0">
-                            <TextBlock x:Name="FileNameText" Style="{ThemeResource BodyStrongTextBlockStyle}" TextWrapping="Wrap" />
+                            <TextBlock x:Name="FileNameText" Style="{ThemeResource BodyStrongTextBlockStyle}" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
                             <TextBlock x:Name="FilePathText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
                             <TextBlock x:Name="FileSizeText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
 
                         <!-- Actions -->
                         <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                            <Button Click="SelectFileBtn_Click" VerticalAlignment="Center">
-                                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                    <FontIcon Glyph="&#xE8E5;" FontSize="14" VerticalAlignment="Center" />
-                                    <TextBlock x:Uid="FileHashPage_ChangeFile" VerticalAlignment="Center" />
+                            <Button Click="SelectFileBtn_Click" Style="{StaticResource StandardActionButtonStyle}" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                    <FontIcon Glyph="&#xE8E5;" FontSize="13" VerticalAlignment="Center" />
+                                    <TextBlock x:Uid="FileHashPage_ChangeFile" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
                                 </StackPanel>
                             </Button>
-                            <Button x:Name="ClearFileBtn" Click="ClearFileBtn_Click" Style="{StaticResource SubtleActionButtonStyle}" VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xE74D;" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <Button x:Name="ClearFileBtn" Click="ClearFileBtn_Click" Style="{StaticResource SubtleCopyButtonStyle}" VerticalAlignment="Center">
+                                <FontIcon Glyph="&#xE74D;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                             </Button>
                         </StackPanel>
                     </Grid>
@@ -153,22 +141,23 @@
                         <TextBlock x:Name="HashProgressPercentText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Visibility="Collapsed" Margin="0,0,8,0" />
                         <Button x:Name="CancelHashBtn"
                                 Click="CancelHashBtn_Click"
+                                Style="{StaticResource StandardActionButtonStyle}"
                                 Visibility="Collapsed"
                                 VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xE711;" FontSize="12" Foreground="{ThemeResource SystemFillColorCriticalBrush}" VerticalAlignment="Center" />
+                                <FontIcon Glyph="&#xE711;" FontSize="13" Foreground="{ThemeResource SystemFillColorCriticalBrush}" VerticalAlignment="Center" />
                                 <TextBlock x:Uid="FileHashPage_CancelButton" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorCriticalBrush}" VerticalAlignment="Center" />
                             </StackPanel>
                         </Button>
-                        <Button x:Name="RecalculateBtn" Click="RecalculateBtn_Click" IsEnabled="False" VerticalAlignment="Center">
+                        <Button x:Name="RecalculateBtn" Click="RecalculateBtn_Click" IsEnabled="False" Style="{StaticResource StandardActionButtonStyle}" VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                <FontIcon x:Name="RecalculateIcon" Glyph="&#xE72C;" FontSize="12" VerticalAlignment="Center" />
+                                <FontIcon x:Name="RecalculateIcon" Glyph="&#xE72C;" FontSize="13" VerticalAlignment="Center" />
                                 <TextBlock x:Name="RecalculateBtnText" x:Uid="FileHashPage_CalculateButton" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
                             </StackPanel>
                         </Button>
-                        <Button x:Name="CopyAllBtn" Click="CopyAllBtn_Click" IsEnabled="False" VerticalAlignment="Center">
+                        <Button x:Name="CopyAllBtn" Click="CopyAllBtn_Click" IsEnabled="False" Style="{StaticResource StandardActionButtonStyle}" VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xE8C8;" FontSize="12" VerticalAlignment="Center" />
+                                <FontIcon Glyph="&#xE8C8;" FontSize="13" VerticalAlignment="Center" />
                                 <TextBlock x:Uid="FileHashPage_CopyAll" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
                             </StackPanel>
                         </Button>
@@ -215,8 +204,8 @@
                                     </StackPanel>
                                 </Border>
 
-                                <Button x:Name="CopySha256Btn" Click="CopySha256Btn_Click" Style="{StaticResource SubtleActionButtonStyle}" Visibility="Collapsed">
-                                    <FontIcon x:Name="CopySha256Icon" Glyph="&#xE8C8;" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <Button x:Name="CopySha256Btn" Click="CopySha256Btn_Click" Style="{StaticResource SubtleCopyButtonStyle}" Visibility="Collapsed">
+                                    <FontIcon x:Name="CopySha256Icon" Glyph="&#xE8C8;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </Button>
                             </StackPanel>
                         </Grid>
@@ -249,8 +238,8 @@
                                     </StackPanel>
                                 </Border>
 
-                                <Button x:Name="CopySha1Btn" Click="CopySha1Btn_Click" Style="{StaticResource SubtleActionButtonStyle}" Visibility="Collapsed">
-                                    <FontIcon x:Name="CopySha1Icon" Glyph="&#xE8C8;" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <Button x:Name="CopySha1Btn" Click="CopySha1Btn_Click" Style="{StaticResource SubtleCopyButtonStyle}" Visibility="Collapsed">
+                                    <FontIcon x:Name="CopySha1Icon" Glyph="&#xE8C8;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </Button>
                             </StackPanel>
                         </Grid>
@@ -283,8 +272,8 @@
                                     </StackPanel>
                                 </Border>
 
-                                <Button x:Name="CopyMd5Btn" Click="CopyMd5Btn_Click" Style="{StaticResource SubtleActionButtonStyle}" Visibility="Collapsed">
-                                    <FontIcon x:Name="CopyMd5Icon" Glyph="&#xE8C8;" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <Button x:Name="CopyMd5Btn" Click="CopyMd5Btn_Click" Style="{StaticResource SubtleCopyButtonStyle}" Visibility="Collapsed">
+                                    <FontIcon x:Name="CopyMd5Icon" Glyph="&#xE8C8;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </Button>
                             </StackPanel>
                         </Grid>
@@ -317,8 +306,8 @@
                                     </StackPanel>
                                 </Border>
 
-                                <Button x:Name="CopySha512Btn" Click="CopySha512Btn_Click" Style="{StaticResource SubtleActionButtonStyle}" Visibility="Collapsed">
-                                    <FontIcon x:Name="CopySha512Icon" Glyph="&#xE8C8;" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <Button x:Name="CopySha512Btn" Click="CopySha512Btn_Click" Style="{StaticResource SubtleCopyButtonStyle}" Visibility="Collapsed">
+                                    <FontIcon x:Name="CopySha512Icon" Glyph="&#xE8C8;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </Button>
                             </StackPanel>
                         </Grid>
@@ -366,15 +355,15 @@
                                      VerticalAlignment="Center"
                                      TextChanged="CompareTextBox_TextChanged" />
 
-                            <Button x:Name="PasteCompareBtn" Grid.Column="1" Click="PasteCompareBtn_Click" VerticalAlignment="Center">
-                                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                    <FontIcon Glyph="&#xE77F;" FontSize="14" VerticalAlignment="Center" />
-                                    <TextBlock x:Uid="FileHashPage_CompareButton" VerticalAlignment="Center" />
+                            <Button x:Name="PasteCompareBtn" Grid.Column="1" Click="PasteCompareBtn_Click" Style="{StaticResource StandardActionCopyButtonStyle}">
+                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                    <FontIcon Glyph="&#xE77F;" FontSize="13" VerticalAlignment="Center" />
+                                    <TextBlock x:Uid="FileHashPage_CompareButton" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
                                 </StackPanel>
                             </Button>
 
-                            <Button x:Name="ClearCompareBtn" Grid.Column="2" Click="ClearCompareBtn_Click" Style="{StaticResource SubtleActionButtonStyle}" VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xE894;" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <Button x:Name="ClearCompareBtn" Grid.Column="2" Click="ClearCompareBtn_Click" Style="{StaticResource SubtleCopyButtonStyle}" VerticalAlignment="Center">
+                                <FontIcon Glyph="&#xE894;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                             </Button>
                         </Grid>
 

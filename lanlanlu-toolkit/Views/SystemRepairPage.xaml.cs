@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
@@ -948,26 +948,10 @@ namespace lanlanlu_toolkit.Views
 
         private async void CopyLogBtn_Click(object sender, RoutedEventArgs e)
         {
-            var dataPackage = new DataPackage();
-            dataPackage.SetText(LogOutput.Text);
-            Clipboard.SetContent(dataPackage);
+            if (string.IsNullOrEmpty(LogOutput.Text)) return;
 
-            var originalGlyph = CopyBtnIcon.Glyph;
-            var originalText = CopyBtnText.Text;
-
-            CopyBtnIcon.Glyph = "\uE73E"; // Checkmark
-            CopyBtnText.Text = LocalizationHelper.GetString("SystemRepairPage_Copied");
-            CopyLogBtn.IsEnabled = false;
-
-            await Task.Delay(2000);
-
-            CopyBtnIcon.Glyph = originalGlyph;
-            CopyBtnText.Text = originalText;
-
-            if (!string.IsNullOrEmpty(LogOutput.Text) && !_isProcessRunning)
-            {
-                CopyLogBtn.IsEnabled = true;
-            }
+            string successMsg = LocalizationHelper.GetString("Notification_Copied") ?? "Copied to clipboard.";
+            await ClipboardService.CopyTextAsync(LogOutput.Text, CopyLogBtn, showNotification: true, successMsg);
         }
 
         private void AppendLog(string text)

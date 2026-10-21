@@ -86,7 +86,8 @@
                 <Setter Property="Padding" Value="12" />
             </Style>
 
-            <!-- 4. Micro Components & Utilities -->
+            <!-- 4. Micro Components & Utilities (Copy, Paste & Selection Standards) -->
+            <!-- Inline Micro Copy Button (Icon-only, 28x28) -->
             <Style x:Key="SubtleCopyButtonStyle" TargetType="Button">
                 <Setter Property="Padding" Value="4" />
                 <Setter Property="Width" Value="28" />
@@ -98,6 +99,40 @@
                 <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+
+            <!-- Inline Micro Paste Button (Icon-only, 28x28) -->
+            <Style x:Key="SubtlePasteButtonStyle" TargetType="Button">
+                <Setter Property="Padding" Value="4" />
+                <Setter Property="Width" Value="28" />
+                <Setter Property="Height" Value="28" />
+                <Setter Property="MinHeight" Value="28" />
+                <Setter Property="MinWidth" Value="28" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+
+            <!-- Standard Section Action Button (Icon + Text, 32px height) -->
+            <Style x:Key="StandardActionButtonStyle" TargetType="Button">
+                <Setter Property="Height" Value="32" />
+                <Setter Property="MinHeight" Value="32" />
+                <Setter Property="Padding" Value="10,4,10,4" />
+                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="StandardActionCopyButtonStyle" TargetType="Button" BasedOn="{StaticResource StandardActionButtonStyle}" />
+
+            <!-- Standard Selectable Text (Enables native highlight & right-click copy) -->
+            <Style x:Key="SelectableCaptionTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+                <Setter Property="IsTextSelectionEnabled" Value="True" />
+            </Style>
+
+            <Style x:Key="SelectableBodyTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
+                <Setter Property="IsTextSelectionEnabled" Value="True" />
             </Style>
 
             <Style x:Key="FluentMonospaceTextStyle" TargetType="TextBlock">

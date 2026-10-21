@@ -29,6 +29,10 @@ namespace lanlanlu_toolkit.Views
             this.NavigationCacheMode = NavigationCacheMode.Required;
             ToolTipService.SetToolTip(ClearFileBtn, LocalizationHelper.GetString("FileHashPage_ClearFile"));
             ToolTipService.SetToolTip(ClearCompareBtn, LocalizationHelper.GetString("FileHashPage_ClearInput"));
+            ToolTipService.SetToolTip(CopySha256Btn, LocalizationHelper.GetString("FileHashPage_CopySha256_Tooltip") ?? "Copy SHA-256");
+            ToolTipService.SetToolTip(CopySha1Btn, LocalizationHelper.GetString("FileHashPage_CopySha1_Tooltip") ?? "Copy SHA-1");
+            ToolTipService.SetToolTip(CopyMd5Btn, LocalizationHelper.GetString("FileHashPage_CopyMd5_Tooltip") ?? "Copy MD5");
+            ToolTipService.SetToolTip(CopySha512Btn, LocalizationHelper.GetString("FileHashPage_CopySha512_Tooltip") ?? "Copy SHA-512");
             ResetHashTextBoxPlaceholders();
         }
 
@@ -472,19 +476,10 @@ namespace lanlanlu_toolkit.Views
         private async Task CopySingleHashAsync(string hash, FontIcon icon)
         {
             if (string.IsNullOrEmpty(hash)) return;
-
-            var package = new DataPackage();
-            package.SetText(hash);
-            Clipboard.SetContent(package);
-
-            icon.Glyph = "\uE73E"; // Checkmark icon
-            icon.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorSuccessBrush"];
-            await Task.Delay(1200);
-            icon.Glyph = "\uE8C8"; // Copy icon
-            icon.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+            await ClipboardService.CopyTextAsync(hash, icon, showNotification: false);
         }
 
-        private void CopyAllBtn_Click(object sender, RoutedEventArgs e)
+        private async void CopyAllBtn_Click(object sender, RoutedEventArgs e)
         {
             if (_calculatedHashes.Count == 0) return;
 
@@ -498,12 +493,8 @@ namespace lanlanlu_toolkit.Views
             sb.AppendLine($"MD5:     {_calculatedHashes.GetValueOrDefault("MD5", string.Empty)}");
             sb.AppendLine($"SHA-512: {_calculatedHashes.GetValueOrDefault("SHA512", string.Empty)}");
 
-            var package = new DataPackage();
-            package.SetText(sb.ToString());
-            Clipboard.SetContent(package);
-
             string successMsg = LocalizationHelper.GetString("FileHashPage_CopyAll_Success") ?? "All hashes copied to clipboard.";
-            NotificationService.Show(LocalizationHelper.GetString("Notification_Success") ?? "Success", successMsg, InfoBarSeverity.Success);
+            await ClipboardService.CopyTextAsync(sb.ToString(), CopyAllBtn, showNotification: true, successMsg);
         }
 
         private void CompareTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -513,18 +504,10 @@ namespace lanlanlu_toolkit.Views
 
         private async void PasteCompareBtn_Click(object sender, RoutedEventArgs e)
         {
-            var packageView = Clipboard.GetContent();
-            if (packageView.Contains(StandardDataFormats.Text))
+            string? textToPaste = await ClipboardService.GetTextAsync();
+            if (!string.IsNullOrEmpty(textToPaste))
             {
-                try
-                {
-                    string textToPaste = await packageView.GetTextAsync();
-                    CompareTextBox.Text = textToPaste.Trim();
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Verify Auto-Paste Error: {ex.Message}");
-                }
+                CompareTextBox.Text = textToPaste.Trim();
             }
             PerformHashVerification();
         }

@@ -18,5 +18,6 @@ _pkg/
 
 /out_portable*/
 
-# AI Assistant Memory
-.agents/
+# AI Assistant Customizations & Skills (ignore runtime memory, keep skills)
+.agents/*
+!.agents/skills/

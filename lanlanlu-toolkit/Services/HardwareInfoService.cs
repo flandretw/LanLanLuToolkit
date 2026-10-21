@@ -73,8 +73,23 @@ namespace lanlanlu_toolkit.Services
                             if (speed == 0) speed = Convert.ToUInt32(obj["Speed"]);
                             count++;
                         }
+
+                        int totalSlots = count;
+                        try
+                        {
+                            using var arraySearcher = new ManagementObjectSearcher("SELECT MemoryDevices FROM Win32_PhysicalMemoryArray");
+                            using var arrayCol = arraySearcher.Get();
+                            int slotsSum = 0;
+                            foreach (var arr in arrayCol)
+                            {
+                                slotsSum += Convert.ToInt32(arr["MemoryDevices"]);
+                            }
+                            if (slotsSum > 0) totalSlots = slotsSum;
+                        }
+                        catch { }
+
                         double gb = totalBytes / (1024.0 * 1024.0 * 1024.0);
-                        ram = $"{gb:F0} GB ({count}/{count}) @ {speed} MHz";
+                        ram = $"{gb:F0} GB ({count}/{Math.Max(count, totalSlots)}) @ {speed} MHz";
                     }
                     catch { }
 

@@ -256,40 +256,7 @@ namespace lanlanlu_toolkit.Views
         {
             if (sender is Button btn && btn.Tag is string value && !string.IsNullOrEmpty(value) && value != "N/A")
             {
-                try
-                {
-                    var data = new DataPackage();
-                    data.SetText(value);
-                    Clipboard.SetContent(data);
-
-                    NotificationService.Show(
-                        LocalizationHelper.GetString("Notification_Success"),
-                        LocalizationHelper.GetString("CrashReportPage_Detail_Copied"),
-                        InfoBarSeverity.Success);
-
-                    if (btn.Content is FontIcon icon)
-                    {
-                        string oldGlyph = icon.Glyph;
-                        icon.Glyph = "\uE8FB"; // Checkmark
-                        await Task.Delay(1500);
-                        icon.Glyph = oldGlyph;
-                    }
-                    else if (btn.Content is StackPanel sp)
-                    {
-                        var fontIcon = sp.Children.OfType<FontIcon>().FirstOrDefault();
-                        if (fontIcon != null)
-                        {
-                            string oldGlyph = fontIcon.Glyph;
-                            fontIcon.Glyph = "\uE8FB"; // Checkmark
-                            await Task.Delay(1500);
-                            fontIcon.Glyph = oldGlyph;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    LoggingService.Log($"[CrashReportPage] Failed to copy single field: {ex.Message}");
-                }
+                await ClipboardService.CopyTextAsync(value, btn, showNotification: false);
             }
         }
 
@@ -297,46 +264,29 @@ namespace lanlanlu_toolkit.Views
         {
             if (_selectedItem == null) return;
 
-            try
-            {
-                string lblTime = LocalizationHelper.GetString("CrashReport_Export_Field_Timestamp");
-                string lblCode = LocalizationHelper.GetString("CrashReportPage_Detail_ErrorCode/Text");
-                string lblModule = LocalizationHelper.GetString("CrashReportPage_Detail_FaultModule/Text");
-                string lblSource = LocalizationHelper.GetString("CrashReportPage_Detail_SourceApp/Text");
-                string lblParams = LocalizationHelper.GetString("CrashReportPage_Detail_Params/Text");
-                string lblDump = LocalizationHelper.GetString("CrashReportPage_Detail_DumpPath/Text");
-                string lblDiag = LocalizationHelper.GetString("CrashReportPage_Detail_DiagnosisHeader/Text");
-                string lblRec = LocalizationHelper.GetString("CrashReportPage_Detail_RecommendationHeader/Text");
-                string lblRaw = LocalizationHelper.GetString("CrashReportPage_Detail_RawLogHeader/Text");
+            string lblTime = LocalizationHelper.GetString("CrashReport_Export_Field_Timestamp");
+            string lblCode = LocalizationHelper.GetString("CrashReportPage_Detail_ErrorCode/Text");
+            string lblModule = LocalizationHelper.GetString("CrashReportPage_Detail_FaultModule/Text");
+            string lblSource = LocalizationHelper.GetString("CrashReportPage_Detail_SourceApp/Text");
+            string lblParams = LocalizationHelper.GetString("CrashReportPage_Detail_Params/Text");
+            string lblDump = LocalizationHelper.GetString("CrashReportPage_Detail_DumpPath/Text");
+            string lblDiag = LocalizationHelper.GetString("CrashReportPage_Detail_DiagnosisHeader/Text");
+            string lblRec = LocalizationHelper.GetString("CrashReportPage_Detail_RecommendationHeader/Text");
+            string lblRaw = LocalizationHelper.GetString("CrashReportPage_Detail_RawLogHeader/Text");
 
-                string reportText = $"[{_selectedItem.DisplayBadge}] {_selectedItem.Title}\n" +
-                                    $"{lblTime}: {_selectedItem.Timestamp:yyyy-MM-dd HH:mm:ss}\n" +
-                                    $"{lblCode}: {_selectedItem.ErrorCode}\n" +
-                                    $"{lblModule}: {_selectedItem.FaultingModule}\n" +
-                                    $"{lblSource}: {_selectedItem.SourceOrApp}\n" +
-                                    (!string.IsNullOrEmpty(_selectedItem.Parameters) ? $"{lblParams}: {_selectedItem.Parameters}\n" : "") +
-                                    (!string.IsNullOrEmpty(_selectedItem.FilePathOrDump) ? $"{lblDump}: {_selectedItem.FilePathOrDump}\n" : "") +
-                                    $"\n{lblDiag}:\n{_selectedItem.ErrorDescription}\n" +
-                                    $"\n{lblRec}:\n{_selectedItem.Recommendation}\n" +
-                                    (!string.IsNullOrEmpty(_selectedItem.RawDetails) ? $"\n--- {lblRaw} ---\n{_selectedItem.RawDetails}" : "");
+            string reportText = $"[{_selectedItem.DisplayBadge}] {_selectedItem.Title}\n" +
+                                $"{lblTime}: {_selectedItem.Timestamp:yyyy-MM-dd HH:mm:ss}\n" +
+                                $"{lblCode}: {_selectedItem.ErrorCode}\n" +
+                                $"{lblModule}: {_selectedItem.FaultingModule}\n" +
+                                $"{lblSource}: {_selectedItem.SourceOrApp}\n" +
+                                (!string.IsNullOrEmpty(_selectedItem.Parameters) ? $"{lblParams}: {_selectedItem.Parameters}\n" : "") +
+                                (!string.IsNullOrEmpty(_selectedItem.FilePathOrDump) ? $"{lblDump}: {_selectedItem.FilePathOrDump}\n" : "") +
+                                $"\n{lblDiag}:\n{_selectedItem.ErrorDescription}\n" +
+                                $"\n{lblRec}:\n{_selectedItem.Recommendation}\n" +
+                                (!string.IsNullOrEmpty(_selectedItem.RawDetails) ? $"\n--- {lblRaw} ---\n{_selectedItem.RawDetails}" : "");
 
-                var data = new DataPackage();
-                data.SetText(reportText);
-                Clipboard.SetContent(data);
-
-                NotificationService.Show(
-                    LocalizationHelper.GetString("Notification_Success"),
-                    LocalizationHelper.GetString("CrashReportPage_Detail_Copied"),
-                    InfoBarSeverity.Success);
-
-                CopyDetailIcon.Glyph = "\uE8FB"; // Checkmark
-                CopyDetailText.Text = LocalizationHelper.GetString("CrashReportPage_Detail_Copied");
-
-                await Task.Delay(2000);
-                CopyDetailIcon.Glyph = "\uE8C8"; // Copy icon
-                CopyDetailText.Text = LocalizationHelper.GetString("CrashReportPage_Detail_CopyBtn/Text");
-            }
-            catch { }
+            string successMsg = LocalizationHelper.GetString("CrashReportPage_Detail_Copied") ?? "Copied to clipboard.";
+            await ClipboardService.CopyTextAsync(reportText, CopyDetailBtn, showNotification: true, successMsg);
         }
 
         private async void ExportBtn_Click(object sender, RoutedEventArgs e)
@@ -399,11 +349,11 @@ namespace lanlanlu_toolkit.Views
 
                 string dumpDesc = dumpType switch
                 {
-                    0 => LocalizationHelper.GetString("CrashDump_Disabled") ?? "已停用 (不會產生當機傾印記錄檔)",
-                    1 => LocalizationHelper.GetString("CrashDump_Complete") ?? "完整記憶體傾印 (Complete Dump)",
-                    2 => LocalizationHelper.GetString("CrashDump_Kernel") ?? "核心記憶體傾印 (Kernel Dump)",
-                    3 => LocalizationHelper.GetString("CrashDump_Small") ?? "小型記憶體傾印 (Minidump 256KB，推薦)",
-                    7 => LocalizationHelper.GetString("CrashDump_Automatic") ?? "自動記憶體傾印 (Automatic Dump)",
+                    0 => LocalizationHelper.GetString("CrashDump_Disabled") ?? "已停用",
+                    1 => LocalizationHelper.GetString("CrashDump_Complete") ?? "完整記憶體傾印",
+                    2 => LocalizationHelper.GetString("CrashDump_Kernel") ?? "核心記憶體傾印",
+                    3 => LocalizationHelper.GetString("CrashDump_Small") ?? "小型記憶體傾印 (256 KB)",
+                    7 => LocalizationHelper.GetString("CrashDump_Automatic") ?? "自動記憶體傾印",
                     _ => LocalizationHelper.GetString("CrashDump_Unknown") ?? "未設定或由系統管理"
                 };
 
@@ -411,15 +361,15 @@ namespace lanlanlu_toolkit.Views
                 bool folderExists = Directory.Exists(expFolder);
 
                 var sb = new StringBuilder();
-                sb.AppendLine($"{LocalizationHelper.GetString("CrashReport_DumpTypeLabel") ?? "當機轉儲類型"}：{dumpDesc}");
-                sb.AppendLine($"{LocalizationHelper.GetString("CrashReport_DumpFolderLabel") ?? "轉儲儲存路徑"}：{expFolder} ({(folderExists ? (LocalizationHelper.GetString("Folder_Exists") ?? "目錄存在") : (LocalizationHelper.GetString("Folder_NotExists") ?? "目錄尚未建立"))})");
+                sb.AppendLine($"{LocalizationHelper.GetString("CrashReport_DumpTypeLabel") ?? "記憶體傾印類型"}：{dumpDesc}");
+                sb.AppendLine($"{LocalizationHelper.GetString("CrashReport_DumpFolderLabel") ?? "傾印檔案路徑"}：{expFolder} ({(folderExists ? (LocalizationHelper.GetString("Folder_Exists") ?? "目錄存在") : (LocalizationHelper.GetString("Folder_NotExists") ?? "目錄尚未建立"))})");
                 sb.AppendLine($"{LocalizationHelper.GetString("CrashReport_AutoRebootLabel") ?? "當機自動重新啟動"}：{(autoReboot ? (LocalizationHelper.GetString("Common_Enabled") ?? "已啟用") : (LocalizationHelper.GetString("Common_Disabled") ?? "已停用"))}");
                 sb.AppendLine();
-                sb.AppendLine(LocalizationHelper.GetString("CrashReport_DumpHint") ?? "若系統遭遇 BSOD 藍屏卻未產生傾印檔案，請確保此處設為「小型記憶體傾印 (256KB)」，且分頁檔 (pagefile.sys) 位於系統磁碟 C: 上。");
+                sb.AppendLine(LocalizationHelper.GetString("CrashReport_DumpHint") ?? "若系統發生停止錯誤卻未產生傾印檔案，請確認此處設為「小型記憶體傾印 (256 KB)」，且分頁檔 pagefile.sys 位於系統磁碟 C: 上。");
 
                 var dialog = new ContentDialog
                 {
-                    Title = LocalizationHelper.GetString("CrashReport_DumpConfigTitle") ?? "系統當機轉儲 (Minidump) 設定檢查",
+                    Title = LocalizationHelper.GetString("CrashReport_DumpConfigTitle") ?? "系統記憶體傾印設定檢查",
                     Content = sb.ToString(),
                     PrimaryButtonText = LocalizationHelper.GetString("CrashReport_OpenSystemSettings") ?? "開啟 Windows 啟動及修復設定",
                     CloseButtonText = LocalizationHelper.GetString("Common_Close") ?? "關閉",

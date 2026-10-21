@@ -150,8 +150,46 @@ namespace lanlanlu_toolkit.Services
                             var item = ParseSystemEvent(record);
                             if (item != null)
                             {
-                                list.Add(item);
-                                count++;
+                                // Correlate & merge Event 1001 (WER-SystemErrorReporting/BugCheck) and Event 41 (Kernel-Power)
+                                // Both events occur during the reboot sequence of the same BSOD incident.
+                                var existingBsod = list.FirstOrDefault(x => x.Type == CrashType.Bsod &&
+                                    Math.Abs((x.Timestamp - item.Timestamp).TotalMinutes) < 3.0 &&
+                                    (string.IsNullOrEmpty(x.ErrorCode) || string.IsNullOrEmpty(item.ErrorCode) ||
+                                     string.Equals(x.ErrorCode, item.ErrorCode, StringComparison.OrdinalIgnoreCase)));
+
+                                if (existingBsod != null)
+                                {
+                                    // Merge: upgrade missing fields (dump path, detailed bugcheck info, recommendation)
+                                    if (string.IsNullOrEmpty(existingBsod.FilePathOrDump) && !string.IsNullOrEmpty(item.FilePathOrDump))
+                                    {
+                                        existingBsod.FilePathOrDump = item.FilePathOrDump;
+                                    }
+                                    if (string.IsNullOrEmpty(existingBsod.Parameters) && !string.IsNullOrEmpty(item.Parameters))
+                                    {
+                                        existingBsod.Parameters = item.Parameters;
+                                    }
+                                    if (string.IsNullOrEmpty(existingBsod.ErrorCode) && !string.IsNullOrEmpty(item.ErrorCode))
+                                    {
+                                        existingBsod.ErrorCode = item.ErrorCode;
+                                    }
+                                    if (!string.IsNullOrEmpty(item.ErrorDescription) && string.IsNullOrEmpty(existingBsod.ErrorDescription))
+                                    {
+                                        existingBsod.ErrorDescription = item.ErrorDescription;
+                                    }
+                                    if (!string.IsNullOrEmpty(item.Recommendation) && string.IsNullOrEmpty(existingBsod.Recommendation))
+                                    {
+                                        existingBsod.Recommendation = item.Recommendation;
+                                    }
+                                    if (item.RawDetails.Length > existingBsod.RawDetails.Length)
+                                    {
+                                        existingBsod.RawDetails = item.RawDetails;
+                                    }
+                                }
+                                else
+                                {
+                                    list.Add(item);
+                                    count++;
+                                }
                             }
                         }
                     }
@@ -180,8 +218,42 @@ namespace lanlanlu_toolkit.Services
                             var item = ParseAppEvent(record);
                             if (item != null)
                             {
-                                list.Add(item);
-                                count++;
+                                // Correlate & merge .NET Runtime (Event 1026) and Application Error (Event 1000) for the same application crash
+                                var existingApp = list.FirstOrDefault(x =>
+                                    (x.Type == CrashType.AppCrash || x.Type == CrashType.DotNetCrash) &&
+                                    Math.Abs((x.Timestamp - item.Timestamp).TotalSeconds) < 10.0 &&
+                                    !string.IsNullOrEmpty(x.SourceOrApp) &&
+                                    !string.IsNullOrEmpty(item.SourceOrApp) &&
+                                    string.Equals(x.SourceOrApp, item.SourceOrApp, StringComparison.OrdinalIgnoreCase));
+
+                                if (existingApp != null)
+                                {
+                                    if (item.Type == CrashType.DotNetCrash && existingApp.Type == CrashType.AppCrash)
+                                    {
+                                        existingApp.Type = CrashType.DotNetCrash;
+                                        existingApp.Title = item.Title;
+                                        existingApp.ErrorDescription = item.ErrorDescription;
+                                        existingApp.Recommendation = item.Recommendation;
+                                        if (!string.IsNullOrEmpty(item.RawDetails))
+                                        {
+                                            existingApp.RawDetails = $"{item.RawDetails}\n\n[Application Error Event Details]\n{existingApp.RawDetails}";
+                                        }
+                                    }
+                                    else if (item.Type == CrashType.AppCrash && existingApp.Type == CrashType.DotNetCrash)
+                                    {
+                                        if (!string.IsNullOrEmpty(item.FaultingModule)) existingApp.FaultingModule = item.FaultingModule;
+                                        if (!string.IsNullOrEmpty(item.FilePathOrDump)) existingApp.FilePathOrDump = item.FilePathOrDump;
+                                        if (!string.IsNullOrEmpty(item.RawDetails))
+                                        {
+                                            existingApp.RawDetails = $"{existingApp.RawDetails}\n\n[Application Error Event Details]\n{item.RawDetails}";
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    list.Add(item);
+                                    count++;
+                                }
                             }
                         }
                     }
@@ -244,6 +316,14 @@ namespace lanlanlu_toolkit.Services
 
                 if (record.Id == 1001) // BugCheck / WER System Error
                 {
+                    // Filter Provider: in System log, Event 1001 must be Microsoft-Windows-WER-SystemErrorReporting or BugCheck
+                    string provider = record.ProviderName ?? "";
+                    if (!string.Equals(provider, "Microsoft-Windows-WER-SystemErrorReporting", StringComparison.OrdinalIgnoreCase) &&
+                        !string.Equals(provider, "BugCheck", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return null;
+                    }
+
                     var msg = record.FormatDescription() ?? "";
                     string bugcheckCode = "";
                     string parameters = "";
@@ -311,6 +391,13 @@ namespace lanlanlu_toolkit.Services
                 }
                 else if (record.Id == 41) // Kernel-Power unexpected shutdown
                 {
+                    // Filter Provider: in System log, Event 41 must be Microsoft-Windows-Kernel-Power
+                    string provider = record.ProviderName ?? "";
+                    if (!string.Equals(provider, "Microsoft-Windows-Kernel-Power", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return null;
+                    }
+
                     string bugcheckStr = "";
                     string paramsStr = "";
                     uint bugcheckCode = 0;

@@ -1,5 +1,9 @@
-<?xml version='1.0' encoding='utf-8'?>
-<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+﻿<?xml version='1.0' encoding='utf-8'?>
+<root 
+  
+  xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" 
+  
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:element name="root" ns1:IsDataSet="true">
       <xs:complexType>
@@ -59,9 +63,6 @@
   </data>
   <data name="AppTitle.Text" xml:space="preserve">
     <value>LanLanLu Toolkit</value>
-  </data>
-  <data name="Shell_Performance.Content" xml:space="preserve">
-    <value>Performance Monitor</value>
   </data>
   <data name="Greeting_LateNight" xml:space="preserve">
     <value>It's late, remember to get enough rest.</value>
@@ -141,11 +142,11 @@
   <data name="HomePage_QuickActions_Title.Text" xml:space="preserve">
     <value>Quick Actions</value>
   </data>
-  <data name="HomePage_Feature_Perf_Title.Text" xml:space="preserve">
-    <value>Performance Monitor</value>
+  <data name="HomePage_Feature_TaskMgr_Title.Text" xml:space="preserve">
+    <value>Windows Task Manager</value>
   </data>
-  <data name="HomePage_Feature_Perf_Desc.Text" xml:space="preserve">
-    <value>Monitor CPU, GPU, RAM usage, clocks &amp; temperature.</value>
+  <data name="HomePage_Feature_TaskMgr_Desc.Text" xml:space="preserve">
+    <value>Launch built-in Task Manager to monitor real-time performance and processes.</value>
   </data>
   <data name="HomePage_Feature_Input_Title.Text" xml:space="preserve">
     <value>Keyboard &amp; Mouse Diagnostics</value>
@@ -183,12 +184,6 @@
   <data name="HomePage_HardwareSpecs_Title.Text" xml:space="preserve">
     <value>Hardware Specifications</value>
   </data>
-  <data name="PerformancePage_Title.Text" xml:space="preserve">
-    <value>Performance Monitor</value>
-  </data>
-  <data name="PerformancePage_Description.Text" xml:space="preserve">
-    <value>Monitor real-time CPU, RAM, disk, and GPU usage and hardware specifications.</value>
-  </data>
   <data name="TempUnit_Celsius.Content" xml:space="preserve">
     <value>Celsius (°C)</value>
   </data>
@@ -200,57 +195,6 @@
   </data>
   <data name="Temperature_Fahrenheit_Format" xml:space="preserve">
     <value>{0:F1}°F</value>
-  </data>
-  <data name="GpuMonitorCard_GpuTitle" xml:space="preserve">
-    <value>Graphics Card (GPU {0})</value>
-  </data>
-  <data name="GpuMonitorCard_DefaultTitle.Text" xml:space="preserve">
-    <value>Graphics Card (GPU)</value>
-  </data>
-  <data name="GpuMonitorCard_Detecting.Text" xml:space="preserve">
-    <value>Detecting...</value>
-  </data>
-  <data name="GpuMonitorCard_Usage.Label" xml:space="preserve">
-    <value>Usage</value>
-  </data>
-  <data name="PerfPage_Gpu_DedicatedMemory.Text" xml:space="preserve">
-    <value>Dedicated GPU memory</value>
-  </data>
-  <data name="PerfPage_Gpu_SharedMemory.Text" xml:space="preserve">
-    <value>Shared GPU memory</value>
-  </data>
-  <data name="PerfPage_Gpu_TotalMemory.Text" xml:space="preserve">
-    <value>GPU memory</value>
-  </data>
-  <data name="PerfPage_Gpu_DriverVersion.Text" xml:space="preserve">
-    <value>Driver version</value>
-  </data>
-  <data name="PerfPage_Gpu_DriverDate.Text" xml:space="preserve">
-    <value>Driver date</value>
-  </data>
-  <data name="PerfPage_Gpu_DirectXVersion.Text" xml:space="preserve">
-    <value>DirectX version</value>
-  </data>
-  <data name="PerfPage_Gpu_PhysicalLocation.Text" xml:space="preserve">
-    <value>Physical location</value>
-  </data>
-  <data name="PerfPage_Gpu_HardwareReserved.Text" xml:space="preserve">
-    <value>Hardware reserved memory</value>
-  </data>
-  <data name="PerfPage_Gpu_CurrentCoreClock.Text" xml:space="preserve">
-    <value>Core clock</value>
-  </data>
-  <data name="PerfPage_Gpu_CurrentMemClock.Text" xml:space="preserve">
-    <value>Memory clock</value>
-  </data>
-  <data name="PerfPage_Gpu_CurrentTemp.Text" xml:space="preserve">
-    <value>Temperature</value>
-  </data>
-  <data name="PerfPage_Cpu_Enabled" xml:space="preserve">
-    <value>Enabled</value>
-  </data>
-  <data name="PerfPage_Cpu_Disabled" xml:space="preserve">
-    <value>Disabled</value>
   </data>
   <data name="InputTesterPage_Title.Text" xml:space="preserve">
     <value>Keyboard &amp; Mouse Diagnostics</value>
@@ -601,7 +545,7 @@
     <value>[Error]</value>
   </data>
   <data name="SystemRepairPage_Copied" xml:space="preserve">
-    <value>Copied</value>
+    <value>Copied to clipboard</value>
   </data>
   <data name="System_Cut" xml:space="preserve">
     <value>Cut</value>
@@ -652,7 +596,7 @@
     <value>App Crashes</value>
   </data>
   <data name="CrashReportPage_SearchBox.PlaceholderText" xml:space="preserve">
-    <value>Search app name, error code, driver or module...</value>
+    <value>Search app name, error code, driver or module</value>
   </data>
   <data name="CrashReportPage_RefreshBtn.Text" xml:space="preserve">
     <value>Rescan</value>
@@ -967,7 +911,7 @@
     <value>Hash Comparison &amp; Verification</value>
   </data>
   <data name="FileHashPage_CompareButton.Text" xml:space="preserve">
-    <value>Paste &amp; Verify</value>
+    <value>Paste</value>
   </data>
   <data name="FileHashPage_CopyButton.Text" xml:space="preserve">
     <value>Copy</value>
@@ -1227,266 +1171,8 @@
   <data name="SettingsPage_RescanHardware_ButtonText.Text" xml:space="preserve">
     <value>Scan Now</value>
   </data>
-  <data name="PerformancePage_CopyAll.Text" xml:space="preserve">
-    <value>Copy All</value>
-  </data>
-  <data name="PerformancePage_Memory_Title.Text" xml:space="preserve">
-    <value>Memory</value>
-  </data>
-  <data name="PerformancePage_Disk_Title_Format" xml:space="preserve">
-    <value>Disk ({0}:)</value>
-  </data>
-  <data name="PerformancePage_LocalDisk" xml:space="preserve">
-    <value>Local Disk</value>
-  </data>
-  <data name="PerformancePage_FixedDisk" xml:space="preserve">
-    <value>Fixed Disk (SSD / HDD)</value>
-  </data>
-  <data name="PerformancePage_RemovableDisk" xml:space="preserve">
-    <value>Removable Disk</value>
-  </data>
-  <data name="PerformancePage_Ms" xml:space="preserve">
-    <value>{0:F1} ms</value>
-  </data>
-  <data name="PerformancePage_Stat_Usage.Text" xml:space="preserve">
-    <value>Utilization</value>
-  </data>
-  <data name="PerformancePage_Stat_Speed.Text" xml:space="preserve">
-    <value>Speed</value>
-  </data>
-  <data name="PerformancePage_Stat_InUse.Text" xml:space="preserve">
-    <value>In use</value>
-  </data>
-  <data name="PerformancePage_Stat_Available.Text" xml:space="preserve">
-    <value>Available</value>
-  </data>
-  <data name="PerformancePage_Stat_ActiveTime.Text" xml:space="preserve">
-    <value>Active time</value>
-  </data>
-  <data name="PerformancePage_Stat_ResponseTime.Text" xml:space="preserve">
-    <value>Avg response time</value>
-  </data>
-  <data name="PerformancePage_Stat_Temperature.Text" xml:space="preserve">
-    <value>Temperature</value>
-  </data>
-  <data name="PerformancePage_Chart_Cpu_Usage.Text" xml:space="preserve">
-    <value>60s Utilization History (%)</value>
-  </data>
-  <data name="PerformancePage_Chart_Ram_Usage.Text" xml:space="preserve">
-    <value>60s Utilization History (%)</value>
-  </data>
-  <data name="PerformancePage_Chart_Disk_Active.Text" xml:space="preserve">
-    <value>60s Active Time History (%)</value>
-  </data>
-  <data name="PerformancePage_Chart_Gpu_Usage.Text" xml:space="preserve">
-    <value>60s Utilization History (%)</value>
-  </data>
-  <data name="PerformancePage_Section_LiveStatus.Text" xml:space="preserve">
-    <value>Live Status</value>
-  </data>
-  <data name="PerformancePage_Section_ProcessorSpecs.Text" xml:space="preserve">
-    <value>Processor Specs</value>
-  </data>
-  <data name="PerformancePage_Section_CacheSpecs.Text" xml:space="preserve">
-    <value>Cache Specs</value>
-  </data>
-  <data name="PerformancePage_Section_RamCapacity.Text" xml:space="preserve">
-    <value>Capacity &amp; Allocation</value>
-  </data>
-  <data name="PerformancePage_Section_RamPools.Text" xml:space="preserve">
-    <value>Pools &amp; Reserved</value>
-  </data>
-  <data name="PerformancePage_Section_RamSpecs.Text" xml:space="preserve">
-    <value>Memory Hardware Specs</value>
-  </data>
-  <data name="PerformancePage_Section_DiskTransfer.Text" xml:space="preserve">
-    <value>Transfer Rates</value>
-  </data>
-  <data name="PerformancePage_Section_DiskCapacity.Text" xml:space="preserve">
-    <value>Storage Capacity</value>
-  </data>
-  <data name="PerformancePage_Section_DiskSpecs.Text" xml:space="preserve">
-    <value>Disk &amp; System Specs</value>
-  </data>
-  <data name="PerformancePage_Section_GpuClocks.Text" xml:space="preserve">
-    <value>Live Clocks &amp; Temperature</value>
-  </data>
-  <data name="PerformancePage_Section_GpuMemory.Text" xml:space="preserve">
-    <value>GPU Memory Specs</value>
-  </data>
-  <data name="PerformancePage_Section_GpuDriver.Text" xml:space="preserve">
-    <value>Driver &amp; Interface</value>
-  </data>
-  <data name="PerformancePage_Copy_CpuHeader" xml:space="preserve">
-    <value>[CPU Hardware Information]</value>
-  </data>
-  <data name="PerformancePage_Copy_RamHeader" xml:space="preserve">
-    <value>[Memory Hardware Information]</value>
-  </data>
-  <data name="PerformancePage_Copy_DiskHeader_Format" xml:space="preserve">
-    <value>[Disk Hardware Information - {0}]</value>
-  </data>
-  <data name="PerformancePage_Copy_GpuHeader_Format" xml:space="preserve">
-    <value>[GPU Hardware Information - {0}]</value>
-  </data>
-  <data name="PerformancePage_Copy_Model" xml:space="preserve">
-    <value>Model: {0}</value>
-  </data>
-  <data name="PerformancePage_Copy_Specs" xml:space="preserve">
-    <value>Specs: {0}</value>
-  </data>
-  <data name="PerformancePage_CopyAll_Cpu_Tooltip" xml:space="preserve">
-    <value>Copy all CPU information</value>
-  </data>
-  <data name="PerformancePage_CopyAll_Ram_Tooltip" xml:space="preserve">
-    <value>Copy all memory information</value>
-  </data>
-  <data name="PerformancePage_CopyAll_Disk_Tooltip" xml:space="preserve">
-    <value>Copy all disk information</value>
-  </data>
-  <data name="PerformancePage_CopyAll_Gpu_Tooltip" xml:space="preserve">
-    <value>Copy all GPU information</value>
-  </data>
-  <data name="PerformancePage_Cpu_Clock.Text" xml:space="preserve">
-    <value>Current speed</value>
-  </data>
-  <data name="PerformancePage_Cpu_Processes.Text" xml:space="preserve">
-    <value>Processes</value>
-  </data>
-  <data name="PerformancePage_Cpu_Threads.Text" xml:space="preserve">
-    <value>Threads</value>
-  </data>
-  <data name="PerformancePage_Cpu_BaseSpeed.Text" xml:space="preserve">
-    <value>Base speed</value>
-  </data>
-  <data name="PerformancePage_Cpu_Sockets.Text" xml:space="preserve">
-    <value>Sockets</value>
-  </data>
-  <data name="PerformancePage_Cpu_Cores.Text" xml:space="preserve">
-    <value>Cores</value>
-  </data>
-  <data name="PerformancePage_Cpu_LogicalCores.Text" xml:space="preserve">
-    <value>Logical processors</value>
-  </data>
-  <data name="PerformancePage_Cpu_Virtualization.Text" xml:space="preserve">
-    <value>Virtualization</value>
-  </data>
-  <data name="PerformancePage_Cpu_L1.Text" xml:space="preserve">
-    <value>L1 cache</value>
-  </data>
-  <data name="PerformancePage_Cpu_L2.Text" xml:space="preserve">
-    <value>L2 cache</value>
-  </data>
-  <data name="PerformancePage_Cpu_L3.Text" xml:space="preserve">
-    <value>L3 cache</value>
-  </data>
-  <data name="PerformancePage_Ram_InUse.Text" xml:space="preserve">
-    <value>In use</value>
-  </data>
-  <data name="PerformancePage_Ram_Available.Text" xml:space="preserve">
-    <value>Available</value>
-  </data>
-  <data name="PerformancePage_Ram_Committed.Text" xml:space="preserve">
-    <value>Committed</value>
-  </data>
-  <data name="PerformancePage_Ram_Cached.Text" xml:space="preserve">
-    <value>Cached</value>
-  </data>
-  <data name="PerformancePage_Ram_PagedPool.Text" xml:space="preserve">
-    <value>Paged pool</value>
-  </data>
-  <data name="PerformancePage_Ram_NonPagedPool.Text" xml:space="preserve">
-    <value>Non-paged pool</value>
-  </data>
-  <data name="PerformancePage_Ram_Compressed.Text" xml:space="preserve">
-    <value>Compressed</value>
-  </data>
-  <data name="PerformancePage_Ram_HardwareReserved.Text" xml:space="preserve">
-    <value>Hardware reserved</value>
-  </data>
-  <data name="PerformancePage_Ram_Speed.Text" xml:space="preserve">
-    <value>Speed</value>
-  </data>
-  <data name="PerformancePage_Ram_Slots.Text" xml:space="preserve">
-    <value>Slots used</value>
-  </data>
-  <data name="PerformancePage_Ram_FormFactor.Text" xml:space="preserve">
-    <value>Form factor</value>
-  </data>
-  <data name="PerformancePage_Disk_ReadSpeed.Text" xml:space="preserve">
-    <value>Read speed</value>
-  </data>
-  <data name="PerformancePage_Disk_WriteSpeed.Text" xml:space="preserve">
-    <value>Write speed</value>
-  </data>
-  <data name="PerformancePage_Disk_ResponseTime.Text" xml:space="preserve">
-    <value>Avg response time</value>
-  </data>
-  <data name="PerformancePage_Disk_ActiveTime.Text" xml:space="preserve">
-    <value>Active time</value>
-  </data>
-  <data name="PerformancePage_Disk_UsedSpace.Text" xml:space="preserve">
-    <value>Used space</value>
-  </data>
-  <data name="PerformancePage_Disk_FreeSpace.Text" xml:space="preserve">
-    <value>Free space</value>
-  </data>
-  <data name="PerformancePage_Disk_TotalCapacity.Text" xml:space="preserve">
-    <value>Total capacity</value>
-  </data>
-  <data name="PerformancePage_Disk_UsagePercent.Text" xml:space="preserve">
-    <value>Capacity utilization</value>
-  </data>
-  <data name="PerformancePage_Disk_DriveLetter.Text" xml:space="preserve">
-    <value>Drive letter</value>
-  </data>
-  <data name="PerformancePage_Disk_VolumeLabel.Text" xml:space="preserve">
-    <value>Volume label</value>
-  </data>
-  <data name="PerformancePage_Disk_FileSystem.Text" xml:space="preserve">
-    <value>File system</value>
-  </data>
-  <data name="PerformancePage_Disk_DriveType.Text" xml:space="preserve">
-    <value>Drive type</value>
-  </data>
-  <data name="PerformancePage_Gpu_CoreClock.Text" xml:space="preserve">
-    <value>Core clock</value>
-  </data>
-  <data name="PerformancePage_Gpu_MemoryClock.Text" xml:space="preserve">
-    <value>Memory clock</value>
-  </data>
-  <data name="PerformancePage_Gpu_Temp.Text" xml:space="preserve">
-    <value>Temperature</value>
-  </data>
-  <data name="PerformancePage_Gpu_DedicatedMem.Text" xml:space="preserve">
-    <value>Dedicated GPU memory</value>
-  </data>
-  <data name="PerformancePage_Gpu_SharedMem.Text" xml:space="preserve">
-    <value>Shared GPU memory</value>
-  </data>
-  <data name="PerformancePage_Gpu_TotalMem.Text" xml:space="preserve">
-    <value>GPU memory total</value>
-  </data>
-  <data name="PerformancePage_Gpu_ReservedMem.Text" xml:space="preserve">
-    <value>Hardware reserved memory</value>
-  </data>
-  <data name="PerformancePage_Gpu_DriverVersion.Text" xml:space="preserve">
-    <value>Driver version</value>
-  </data>
-  <data name="PerformancePage_Gpu_DriverDate.Text" xml:space="preserve">
-    <value>Driver date</value>
-  </data>
-  <data name="PerformancePage_Gpu_DirectX.Text" xml:space="preserve">
-    <value>DirectX version</value>
-  </data>
-  <data name="PerformancePage_Gpu_Location.Text" xml:space="preserve">
-    <value>Physical location</value>
-  </data>
   <data name="Common_Colon" xml:space="preserve">
     <value>: </value>
-  </data>
-  <data name="PerformancePage_CopyAllMenu.Text" xml:space="preserve">
-    <value>Copy</value>
   </data>
   <data name="SystemRepairPage_Hero_ElapsedTimeFormat" xml:space="preserve">
     <value>Elapsed {0}</value>
@@ -1576,7 +1262,7 @@
     <value>Completed</value>
   </data>
   <data name="Nav_SearchBox.PlaceholderText" xml:space="preserve">
-    <value>Search tools or features...</value>
+    <value>Search tools or features</value>
   </data>
   <data name="FileHashPage_CancelButton.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -1643,15 +1329,6 @@
   </data>
   <data name="FileAssociationPage_Error_DeleteFailed" xml:space="preserve">
     <value>Failed to delete association key: {0}</value>
-  </data>
-  <data name="PerformancePage_Cpu_Title.Text" xml:space="preserve">
-    <value>CPU</value>
-  </data>
-  <data name="PerformancePage_Gpu_Title.Text" xml:space="preserve">
-    <value>GPU</value>
-  </data>
-  <data name="PerformancePage_Disk_DefaultTitle.Text" xml:space="preserve">
-    <value>Disk (C:)</value>
   </data>
   <data name="SystemRepairPage_CheckHealth_Cmd.Text" xml:space="preserve">
     <value>CheckHealth</value>
@@ -1768,5 +1445,20 @@ You can also keep the existing window; the target path has already been copied t
   </data>
   <data name="FileHashPage_Error_FileModified" xml:space="preserve">
     <value>The file was modified during hash calculation. The result has been invalidated.</value>
+  </data>
+  <data name="FileHashPage_CopySha256_Tooltip" xml:space="preserve">
+    <value>Copy SHA-256</value>
+  </data>
+  <data name="FileHashPage_CopySha1_Tooltip" xml:space="preserve">
+    <value>Copy SHA-1</value>
+  </data>
+  <data name="FileHashPage_CopyMd5_Tooltip" xml:space="preserve">
+    <value>Copy MD5</value>
+  </data>
+  <data name="FileHashPage_CopySha512_Tooltip" xml:space="preserve">
+    <value>Copy SHA-512</value>
+  </data>
+  <data name="SystemRepairPage_RunButton.Text" xml:space="preserve">
+    <value>Run</value>
   </data>
 </root>
