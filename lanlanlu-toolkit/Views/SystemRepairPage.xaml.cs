@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
@@ -292,12 +292,12 @@ namespace lanlanlu_toolkit.Views
             UpdateTimerDisplay(isCompleted: false);
             HeroTimerContainer.Visibility = Visibility.Visible;
 
-            _timer?.Stop();
-            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            _timer.Tick += (s, e) =>
+            if (_timer == null)
             {
-                UpdateTimerDisplay(isCompleted: false);
-            };
+                _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+                _timer.Tick += (s, e) => UpdateTimerDisplay(isCompleted: false);
+            }
+            _timer.Stop();
             _timer.Start();
         }
 

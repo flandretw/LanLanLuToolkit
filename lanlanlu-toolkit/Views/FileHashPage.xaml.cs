@@ -427,16 +427,7 @@ namespace lanlanlu_toolkit.Views
                         hashers[i].TransformFinalBlock(buffer, 0, 0);
                     }
 
-                    static string ToHexString(byte[]? bytes)
-                    {
-                        if (bytes == null) return string.Empty;
-                        var sb = new StringBuilder(bytes.Length * 2);
-                        foreach (byte b in bytes)
-                        {
-                            sb.Append(b.ToString("x2"));
-                        }
-                        return sb.ToString();
-                    }
+                    static string ToHexString(byte[]? bytes) => bytes != null ? Convert.ToHexString(bytes).ToLowerInvariant() : string.Empty;
 
                     return new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     {

@@ -1,5 +1,6 @@
 using Microsoft.Windows.ApplicationModel.Resources;
 using System;
+using System.Collections.Concurrent;
 
 namespace lanlanlu_toolkit.Services
 {
@@ -10,12 +11,18 @@ namespace lanlanlu_toolkit.Services
     public static class LocalizationHelper
     {
         private static readonly Lazy<ResourceLoader> _loader = new(() => new ResourceLoader());
+        private static readonly ConcurrentDictionary<string, string> _stringCache = new();
 
         public static ResourceLoader Loader => _loader.Value;
 
         public static string GetString(string key)
         {
             if (string.IsNullOrEmpty(key)) return string.Empty;
+            return _stringCache.GetOrAdd(key, ResolveStringInternal);
+        }
+
+        private static string ResolveStringInternal(string key)
+        {
 
             // 1. Direct query
             try

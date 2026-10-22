@@ -6,7 +6,7 @@
 
 ## 一、 架構與階段對照表
 
-專案定義了 9 個專屬開發與審查技能：
+專案定義了 11 個專屬開發、優化、瘦身與審查技能：
 
 | 階段 | 技能名稱 | 職責定義 | Antigravity 呼叫 | Codex 呼叫 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -15,9 +15,11 @@
 | **階段 2：開發** | `logic-engineer` | 撰寫 Services/ 服務層 C# 邏輯、Win32 API/PInvoke 與非同步處理 | `/logic-engineer` | `$logic-engineer` |
 | **階段 2：開發** | `ux-copywriter` | 依 Microsoft 風格撰寫文案，並同步產出 `zh-TW` 與 `en-US` 鍵值 | `/ux-copywriter` | `$ux-copywriter` |
 | **階段 3：自檢** | `pre-flight-check` | 整合 XAML、C# 服務與資源檔，進行跨模組編譯與穩定性自檢 | `/pre-flight-check` | `$pre-flight-check` |
-| **階段 4：審查** | `code-quality-reviewer` | 檢查寫死常數、未使用的程式碼與潛在資源洩漏，提供精簡改進建議 | `/code-quality-reviewer` | `$code-quality-reviewer` |
-| **階段 4：審查** | `tone-reviewer` | 審查介面文字一致性、微軟品牌語氣與雙語系對照品質 | `/tone-reviewer` | `$tone-reviewer` |
-| **階段 4：審查** | `winui-inspector` | 審查 XAML 佈局、間距與控制項階層是否符合 Fluent Design 規範 | `/winui-inspector` | `$winui-inspector` |
+| **階段 4：審查與體檢** | `perf-optimizer` | 排查記憶體洩漏、GC 壓力、WinUI 3 視覺樹生命週期、高頻監控效能與非受控資源管理（限 1~3 行建議） | `/perf-optimizer` | `$perf-optimizer` |
+| **階段 4：審查與體檢** | `size-slimmer` | 專注發布體積瘦身、Windows App SDK 肥大組件精簡、打包腳本優化與資產壓縮（限 1~3 行建議） | `/size-slimmer` | `$size-slimmer` |
+| **階段 4：審查與體檢** | `code-quality-reviewer` | 檢查寫死常數、未使用的程式碼與潛在資源洩漏，提供精簡改進建議（限 1~3 行建議） | `/code-quality-reviewer` | `$code-quality-reviewer` |
+| **階段 4：審查與體檢** | `tone-reviewer` | 審查介面文字一致性、微軟品牌語氣與雙語系對照品質（限 1~2 行建議） | `/tone-reviewer` | `$tone-reviewer` |
+| **階段 4：審查與體檢** | `winui-inspector` | 審查 XAML 佈局、間距與控制項階層是否符合 Fluent Design 規範（限 1~3 行建議） | `/winui-inspector` | `$winui-inspector` |
 | **階段 5：發布** | `git-specialist` | 依 Conventional Commits 撰寫英文 Commit 訊息、條列變更重點並提供精準提交指令 | `/git-specialist` | `$git-specialist` |
 
 ---
@@ -41,6 +43,12 @@ lanlanlu-toolkit/ (專案根目錄)
 │       │   ├── SKILL.md
 │       │   └── agents/openai.yaml
 │       ├── pre-flight-check/
+│       │   ├── SKILL.md
+│       │   └── agents/openai.yaml
+│       ├── perf-optimizer/
+│       │   ├── SKILL.md
+│       │   └── agents/openai.yaml
+│       ├── size-slimmer/
 │       │   ├── SKILL.md
 │       │   └── agents/openai.yaml
 │       ├── code-quality-reviewer/
@@ -69,6 +77,7 @@ lanlanlu-toolkit/ (專案根目錄)
 │   ├── MainWindow.xaml / MainWindow.xaml.cs
 │   └── lanlanlu-toolkit.csproj
 └── scripts/
+    └── Build-Portable.ps1
 ```
 
 ### Codex 權杖額度保護機制
@@ -93,7 +102,9 @@ policy:
    > `/ux-copywriter 請幫我撰寫繁中與英文提示訊息，並給予 Resources.resw 鍵值。`
 3. **【組裝與第一輪自檢】** 在 Antigravity 輸入：
    > `/pre-flight-check 請幫我把上面的 XAML、C# 服務與資源字串整合起來，並進行第一輪自檢除錯。`
-4. **【最終嚴格審查】** 在 Codex 或 Antigravity 中執行：
-   > `$code-quality-reviewer`、`$tone-reviewer` 或 `$winui-inspector` 進行最終品質掃描。
+4. **【最終審查、效能體檢與體積瘦身】** 在 Codex 或 Antigravity 中執行：
+   > `$size-slimmer 檢查當前打包產出是否有沒用到的 WinAppSDK 組件、R2R 膨脹或可清理的語言資源。`  
+   > `$perf-optimizer 幫我檢查此服務在高頻輪詢時是否有記憶體洩漏與過度配置物件的問題。`  
+   > `$code-quality-reviewer`、`$tone-reviewer` 或 `$winui-inspector` 進行品質與規範掃描。
 5. **【提交與發布】** 完成所有修改並通過審查後，呼叫：
    > `/git-specialist 我剛剛完成了暫存清理功能與多語系對照，請幫我寫 Conventional Commit 訊息與提交指令。`

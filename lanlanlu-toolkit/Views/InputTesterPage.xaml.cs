@@ -70,6 +70,7 @@ namespace lanlanlu_toolkit.Views
         // Canvas Trajectory Drawing
         private bool _isDrawing = false;
         private Point _lastPoint;
+        private Brush? _cachedAccentBrush;
 
         private DispatcherTimer? _wheelVisualResetTimer;
 
@@ -1318,6 +1319,7 @@ namespace lanlanlu_toolkit.Views
         private void UpdateMouseThemeVisuals()
         {
             ReleaseAllMouseButtonVisuals();
+            _cachedAccentBrush = null;
             if (WheelUpArrow != null) WheelUpArrow.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
             if (WheelDownArrow != null) WheelDownArrow.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
         }
@@ -1348,13 +1350,17 @@ namespace lanlanlu_toolkit.Views
             if (!_isDrawing) return;
 
             var currentPoint = e.GetCurrentPoint(TrajectoryCanvas).Position;
+            if (TrajectoryCanvas.Children.Count > 400)
+            {
+                TrajectoryCanvas.Children.RemoveAt(0);
+            }
             var line = new Line
             {
                 X1 = _lastPoint.X,
                 Y1 = _lastPoint.Y,
                 X2 = currentPoint.X,
                 Y2 = currentPoint.Y,
-                Stroke = GetThemeBrush("AccentFillColorDefaultBrush"),
+                Stroke = _cachedAccentBrush ??= GetThemeBrush("AccentFillColorDefaultBrush"),
                 StrokeThickness = 2.5,
                 StrokeStartLineCap = PenLineCap.Round,
                 StrokeEndLineCap = PenLineCap.Round

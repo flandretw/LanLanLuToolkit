@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
@@ -264,9 +264,11 @@ namespace lanlanlu_toolkit.Views
 
                 // 2. Check if regedit is already running
                 Process[] existing = Process.GetProcessesByName("regedit");
+                bool isRunning = existing.Length > 0;
+                foreach (var p in existing) { p.Dispose(); }
                 bool shouldRestart = false;
 
-                if (existing.Length > 0)
+                if (isRunning)
                 {
                     if (this.XamlRoot != null)
                     {
@@ -347,6 +349,10 @@ namespace lanlanlu_toolkit.Views
                                 p.WaitForExit(1000);
                             }
                             catch { }
+                            finally
+                            {
+                                p.Dispose();
+                            }
                         }
                     }
 

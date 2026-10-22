@@ -122,11 +122,8 @@ namespace lanlanlu_toolkit
                         UpdateTitleBarPassthroughRegions();
                         if (rootElement.XamlRoot != null)
                         {
-                            rootElement.XamlRoot.Changed += (sender, args) =>
-                            {
-                                UpdateTitleBarInsets();
-                                UpdateTitleBarPassthroughRegions();
-                            };
+                            rootElement.XamlRoot.Changed -= OnXamlRootChanged;
+                            rootElement.XamlRoot.Changed += OnXamlRootChanged;
                         }
                     };
                 }
@@ -158,11 +155,8 @@ namespace lanlanlu_toolkit
                 UpdateTitleBarPassthroughRegions();
                 if (NavSearchBox.XamlRoot != null)
                 {
-                    NavSearchBox.XamlRoot.Changed += (sender, args) =>
-                    {
-                        UpdateTitleBarInsets();
-                        UpdateTitleBarPassthroughRegions();
-                    };
+                    NavSearchBox.XamlRoot.Changed -= OnXamlRootChanged;
+                    NavSearchBox.XamlRoot.Changed += OnXamlRootChanged;
                 }
             };
         }
@@ -189,6 +183,12 @@ namespace lanlanlu_toolkit
             }
 
             return DefSubclassProc(hWnd, uMsg, wParam, lParam);
+        }
+
+        private void OnXamlRootChanged(XamlRoot sender, XamlRootChangedEventArgs args)
+        {
+            UpdateTitleBarInsets();
+            UpdateTitleBarPassthroughRegions();
         }
 
         private void UpdateTitleBarInsets()

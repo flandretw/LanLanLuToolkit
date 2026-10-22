@@ -51,7 +51,8 @@ namespace lanlanlu_toolkit.Services
                         using var searcher = new ManagementObjectSearcher("SELECT Name, NumberOfCores, NumberOfLogicalProcessors FROM Win32_Processor");
                         using var collection = searcher.Get();
                         var cpuList = new List<string>();
-                        foreach (var obj in collection)
+                        foreach (ManagementObject obj in collection)
+                        using (obj)
                         {
                             string name = CleanCpuName(obj["Name"]?.ToString() ?? "");
                             if (!string.IsNullOrEmpty(name))
@@ -77,7 +78,8 @@ namespace lanlanlu_toolkit.Services
                         uint speed = 0;
                         uint smbiosType = 0;
                         int count = 0;
-                        foreach (var obj in collection)
+                        foreach (ManagementObject obj in collection)
+                        using (obj)
                         {
                             totalBytes += Convert.ToUInt64(obj["Capacity"]);
                             if (speed == 0) speed = Convert.ToUInt32(obj["Speed"]);
@@ -94,7 +96,8 @@ namespace lanlanlu_toolkit.Services
                             using var arraySearcher = new ManagementObjectSearcher("SELECT MemoryDevices FROM Win32_PhysicalMemoryArray");
                             using var arrayCol = arraySearcher.Get();
                             int slotsSum = 0;
-                            foreach (var arr in arrayCol)
+                            foreach (ManagementObject arr in arrayCol)
+                            using (arr)
                             {
                                 slotsSum += Convert.ToInt32(arr["MemoryDevices"]);
                             }
@@ -125,7 +128,8 @@ namespace lanlanlu_toolkit.Services
                         using var searcher = new ManagementObjectSearcher("SELECT Name FROM Win32_VideoController");
                         using var collection = searcher.Get();
                         var gpuList = new List<string>();
-                        foreach (var obj in collection)
+                        foreach (ManagementObject obj in collection)
+                        using (obj)
                         {
                             string name = CleanGpuName(obj["Name"]?.ToString() ?? "");
                             if (!string.IsNullOrEmpty(name) && !gpuList.Contains(name)) gpuList.Add(name);
@@ -141,7 +145,8 @@ namespace lanlanlu_toolkit.Services
                     {
                         using var searcher = new ManagementObjectSearcher("SELECT Caption, Version FROM Win32_OperatingSystem");
                         using var collection = searcher.Get();
-                        foreach (var obj in collection)
+                        foreach (ManagementObject obj in collection)
+                        using (obj)
                         {
                             string caption = obj["Caption"]?.ToString() ?? "Windows";
                             caption = caption.Replace("Microsoft ", "");
@@ -172,7 +177,8 @@ namespace lanlanlu_toolkit.Services
                     {
                         using var searcher = new ManagementObjectSearcher("SELECT Manufacturer, Product FROM Win32_BaseBoard");
                         using var collection = searcher.Get();
-                        foreach (var obj in collection)
+                        foreach (ManagementObject obj in collection)
+                        using (obj)
                         {
                             string manufacturer = obj["Manufacturer"]?.ToString() ?? "";
                             string product = obj["Product"]?.ToString() ?? "";
@@ -186,7 +192,8 @@ namespace lanlanlu_toolkit.Services
                     {
                         using var biosSearcher = new ManagementObjectSearcher("SELECT SMBIOSBIOSVersion FROM Win32_BIOS");
                         using var biosCol = biosSearcher.Get();
-                        foreach (var b in biosCol)
+                        foreach (ManagementObject b in biosCol)
+                        using (b)
                         {
                             string biosVer = b["SMBIOSBIOSVersion"]?.ToString()?.Trim() ?? "";
                             if (!string.IsNullOrEmpty(biosVer))
@@ -205,7 +212,8 @@ namespace lanlanlu_toolkit.Services
                         using var searcher = new ManagementObjectSearcher("SELECT Model, Size FROM Win32_DiskDrive");
                         using var collection = searcher.Get();
                         var storageList = new List<string>();
-                        foreach (var obj in collection)
+                        foreach (ManagementObject obj in collection)
+                        using (obj)
                         {
                             string? model = obj["Model"]?.ToString();
                             ulong sizeBytes = Convert.ToUInt64(obj["Size"]);
