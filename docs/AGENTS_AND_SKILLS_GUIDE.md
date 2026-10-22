@@ -20,7 +20,7 @@
 | **階段 4：審查與體檢** | `code-quality-reviewer` | 檢查寫死常數、未使用的程式碼與潛在資源洩漏，提供精簡改進建議（限 1~3 行建議） | `/code-quality-reviewer` | `$code-quality-reviewer` |
 | **階段 4：審查與體檢** | `tone-reviewer` | 審查介面文字一致性、微軟品牌語氣與雙語系對照品質（限 1~2 行建議） | `/tone-reviewer` | `$tone-reviewer` |
 | **階段 4：審查與體檢** | `winui-inspector` | 審查 XAML 佈局、間距與控制項階層是否符合 Fluent Design 規範（限 1~3 行建議） | `/winui-inspector` | `$winui-inspector` |
-| **階段 5：發布** | `git-specialist` | 依 Conventional Commits 撰寫英文 Commit 訊息、條列變更重點並提供精準提交指令 | `/git-specialist` | `$git-specialist` |
+| **階段 5：發布** | `git-specialist` | 依 Conventional Commits 撰寫聚焦「與前一版推送淨差異」之英文 Commit 訊息，非經授權絕不主動 push | `/git-specialist` | `$git-specialist` |
 
 ---
 
@@ -107,4 +107,7 @@ policy:
    > `$perf-optimizer 幫我檢查此服務在高頻輪詢時是否有記憶體洩漏與過度配置物件的問題。`  
    > `$code-quality-reviewer`、`$tone-reviewer` 或 `$winui-inspector` 進行品質與規範掃描。
 5. **【提交與發布】** 完成所有修改並通過審查後，呼叫：
-   > `/git-specialist 我剛剛完成了暫存清理功能與多語系對照，請幫我寫 Conventional Commit 訊息與提交指令。`
+   > `/git-specialist 我剛剛完成了暫存清理功能與多語系對照，請幫我寫 Conventional Commit 訊息與提交指令。`  
+   > *（注意：該技能僅會完成本地暫存與提交，嚴格禁止未經指示主動 `git push`；內容只專注於與上一版的實質淨差異，不記錄開發過程流水帳。）*
+6. **【遠端推送】** 使用者審視本地 commit 無誤後，明確指示：
+   > `「請幫我推送」或「請 push 到遠端」`（代理人才會執行遠端 push 操作）。

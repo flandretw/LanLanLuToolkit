@@ -95,8 +95,8 @@
   <data name="Notification_Error" xml:space="preserve">
     <value>錯誤</value>
   </data>
-  <data name="Nav_FileAssociationPage.Content" xml:space="preserve">
-    <value>檔案關聯管理</value>
+  <data name="Nav_ResetFileTypeDefaultsPage.Content" xml:space="preserve">
+    <value>預設應用程式重設</value>
   </data>
   <data name="Nav_CrashReportPage.Content" xml:space="preserve">
     <value>系統當機分析</value>
@@ -171,10 +171,10 @@
     <value>SHA-256、MD5 快速校驗與檔案指紋比對。</value>
   </data>
   <data name="HomePage_Feature_Assoc_Title.Text" xml:space="preserve">
-    <value>檔案關聯管理</value>
+    <value>預設應用程式重設</value>
   </data>
   <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
-    <value>清除副檔名自訂關聯，還原為系統預設開啟方式。</value>
+    <value>解除副檔名誤設的自訂開啟程式，還原為未指定狀態。</value>
   </data>
   <data name="HomePage_Refresh_Title" xml:space="preserve">
     <value>硬體資訊</value>
@@ -893,8 +893,8 @@
   <data name="FileHashPage_SelectFile.Text" xml:space="preserve">
     <value>瀏覽檔案</value>
   </data>
-  <data name="FileHashPage_DragDropPrompt.Text" xml:space="preserve">
-    <value>拖放檔案至這裡，或點擊瀏覽選取</value>
+  <data name="FileHashPage_SelectFilePrompt.Text" xml:space="preserve">
+    <value>選取檔案進行雜湊驗證</value>
   </data>
   <data name="FileHashPage_SelectFileCardDesc.Text" xml:space="preserve">
     <value>支援任意格式檔案，將自動計算 SHA-256、SHA-1、MD5 與 SHA-512 雜湊值。</value>
@@ -965,89 +965,143 @@
   <data name="FileHashPage_CalculationCancelled" xml:space="preserve">
     <value>已取消計算。</value>
   </data>
-  <data name="FileAssociationPage_Desc.Text" xml:space="preserve">
-    <value>清除副檔名的自訂開啟方式，還原至系統預設或未關聯狀態。</value>
+  <data name="ResetFileTypeDefaultsPage_Desc.Text" xml:space="preserve">
+    <value>清除副檔名的自訂預設開啟程式，解除誤操作綁定並還原為未指定開啟方式。</value>
   </data>
-  <data name="FileAssociationPage_ConfigTitle.Text" xml:space="preserve">
-    <value>目標副檔名</value>
+  <data name="ResetFileTypeDefaultsPage_Title.Text" xml:space="preserve">
+    <value>預設應用程式重設</value>
   </data>
-  <data name="FileAssociationPage_TargetExtTitle.Text" xml:space="preserve">
-    <value>副檔名</value>
+  <data name="ResetFileTypeDefaultsPage_OpenSettingsBtn.Text" xml:space="preserve">
+    <value>Windows 預設應用程式設定</value>
   </data>
-  <data name="FileAssociationPage_TargetExtDesc.Text" xml:space="preserve">
-    <value>輸入欲重設的副檔名，如 pdf、dat 或 log。系統會自動略過開頭小數點並不分大小寫。</value>
+  <data name="ResetFileTypeDefaultsPage_Section_SelectExt.Text" xml:space="preserve">
+    <value>選擇檔案或指定副檔名</value>
   </data>
-  <data name="FileAssociationPage_TargetExtBox.PlaceholderText" xml:space="preserve">
-    <value>例如：pdf</value>
+  <data name="ResetFileTypeDefaultsPage_SelectFilePrompt.Text" xml:space="preserve">
+    <value>選取檔案自動解析副檔名</value>
   </data>
-  <data name="FileAssociationPage_SelectMethodTitle.Text" xml:space="preserve">
-    <value>還原與重設操作</value>
+  <data name="ResetFileTypeDefaultsPage_SelectFileDesc.Text" xml:space="preserve">
+    <value>選取圖示異常或誤設開啟程式的檔案，系統將自動解析其副檔名並查詢狀態。</value>
   </data>
-  <data name="FileAssociationPage_ResetTitle.Text" xml:space="preserve">
-    <value>一鍵清除自訂關聯</value>
+  <data name="ResetFileTypeDefaultsPage_SelectFileBtn.Text" xml:space="preserve">
+    <value>瀏覽檔案</value>
   </data>
-  <data name="FileAssociationPage_ResetDesc.Text" xml:space="preserve">
-    <value>清除登錄檔中的自訂開啟方式，讓副檔名還原至系統初始設定。按兩下開啟檔案時 Windows 將重新詢問欲使用的應用程式。</value>
+  <data name="ResetFileTypeDefaultsPage_ManualTitle.Text" xml:space="preserve">
+    <value>手動指定副檔名</value>
   </data>
-  <data name="FileAssociationPage_ResetButton.Content" xml:space="preserve">
-    <value>還原為預設狀態</value>
+  <data name="ResetFileTypeDefaultsPage_ManualDesc.Text" xml:space="preserve">
+    <value>輸入欲查詢或重設的副檔名，不需包含開頭點號。</value>
   </data>
-  <data name="FileAssociationPage_Method2Title.Text" xml:space="preserve">
-    <value>使用登錄編輯程式手動檢查</value>
+  <data name="ResetFileTypeDefaultsPage_TargetExtBox.PlaceholderText" xml:space="preserve">
+    <value>例如：dat</value>
   </data>
-  <data name="FileAssociationPage_Method2Desc.Text" xml:space="preserve">
-    <value>開啟登錄編輯程式手動定位。</value>
+  <data name="ResetFileTypeDefaultsPage_QuickTagsTitle.Text" xml:space="preserve">
+    <value>常見容易誤綁的格式：</value>
   </data>
-  <data name="FileAssociationPage_Method2Content.Text" xml:space="preserve">
-    <value>開啟 Windows 內建的登錄編輯程式並自動巡覽至目標副檔名路徑，方便進行進階檢視與手動疑難排解。</value>
+  <data name="ResetFileTypeDefaultsPage_Section_Status.Text" xml:space="preserve">
+    <value>目前預設狀態與操作</value>
   </data>
-  <data name="FileAssociationPage_Method2Button.Content" xml:space="preserve">
-    <value>定位登錄檔</value>
+  <data name="ResetFileTypeDefaultsPage_EmptyPrompt.Text" xml:space="preserve">
+    <value>請選取檔案或輸入目標副檔名，系統將即時查詢目前預設開啟狀態。</value>
   </data>
-  <data name="FileAssociationPage_GuideTitle.Text" xml:space="preserve">
-    <value>登錄編輯程式手動檢查步驟</value>
+  <data name="ResetFileTypeDefaultsPage_ResetButton.Text" xml:space="preserve">
+    <value>解除預設開啟方式</value>
   </data>
-  <data name="FileAssociationPage_GuideStep1.Text" xml:space="preserve">
-    <value>啟動登錄編輯程式後，工具會自動展開並定位至目標副檔名目錄。</value>
+  <data name="ResetFileTypeDefaultsPage_ResetNotice.Text" xml:space="preserve">
+    <value>提示：解除後，該檔案在檔案總管中將恢復為未指定程式的空白圖示；按兩下開啟時，Windows 將重新跳出「您要如何開啟這個檔案？」的應用程式選單。</value>
   </data>
-  <data name="FileAssociationPage_GuideStep2.Text" xml:space="preserve">
-    <value>在左側樹狀目錄中，檢視該副檔名目錄底下的「UserChoice」子機碼。</value>
+  <data name="ResetFileTypeDefaultsPage_HelpExpander_Title.Text" xml:space="preserve">
+    <value>關於預設開啟方式與 Windows 設定限制</value>
   </data>
-  <data name="FileAssociationPage_GuideStep3.Text" xml:space="preserve">
-    <value>「UserChoice」為 Windows 記錄的使用者自訂開啟方式鎖定項，刪除即可復原預設。</value>
+  <data name="ResetFileTypeDefaultsPage_HelpExpander_Desc.Text" xml:space="preserve">
+    <value>瞭解為什麼 Windows「設定」無法取消檔案關聯，以及本工具的運作原理</value>
   </data>
-  <data name="FileAssociationPage_GuideStep4.Text" xml:space="preserve">
-    <value>清除完成後關閉登錄編輯程式即可，亦可直接使用上方的一鍵清除功能全自動完成。</value>
+  <data name="ResetFileTypeDefaultsPage_HelpQ1_Title.Text" xml:space="preserve">
+    <value>為什麼 Windows 設定無法解除關聯？</value>
   </data>
-  <data name="FileAssociationPage_Warning_CriticalExt" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_HelpQ1_Desc.Text" xml:space="preserve">
+    <value>Windows 10 與 11 的「設定 > 預設應用程式」僅提供將檔案更換為另一款程式的介面，並未提供「取消關聯 / 還原為未指定」的選項。當您不小心將特定資料檔（如 .dat、.bin）勾選了「永遠以此開啟」時，系統就會一直鎖定該程式。</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_HelpQ2_Title.Text" xml:space="preserve">
+    <value>本工具的還原原理</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_HelpQ2_Desc.Text" xml:space="preserve">
+    <value>本工具透過安全清除目前使用者在登錄檔中的自訂關聯覆寫機碼 UserChoice，並即時通知 Windows 檔案總管重新整理快取。解除後檔案不會被刪除或損壞，僅是重設開啟習慣。</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_HelpQ3_Title.Text" xml:space="preserve">
+    <value>在登錄編輯程式中檢視</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_HelpQ3_Desc.Text" xml:space="preserve">
+    <value>若欲自行檢查目前副檔名在登錄檔中的機碼，可按一下右側按鈕自動巡覽至目標路徑。</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_OpenRegBtn.Content" xml:space="preserve">
+    <value>開啟登錄編輯程式</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_CustomSet" xml:space="preserve">
+    <value>已設定自訂預設值</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_Unassociated" xml:space="preserve">
+    <value>未指定</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_SystemDefault" xml:space="preserve">
+    <value>系統全域預設</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_Protected" xml:space="preserve">
+    <value>系統核心保護</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_AppFormat" xml:space="preserve">
+    <value>預設開啟程式：{0}</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_NoApp" xml:space="preserve">
+    <value>未指定開啟程式</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_Detail_HasChoice" xml:space="preserve">
+    <value>偵測到已設定此副檔名的個人預設開啟程式。按一下右側按鈕即可解除覆寫設定。</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_Detail_NoChoice" xml:space="preserve">
+    <value>此副檔名尚未指定自訂預設應用程式。開啟時 Windows 將提示選擇應用程式。</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_Detail_System" xml:space="preserve">
+    <value>目前由 Windows 系統全域定義預設程式，未偵測到使用者個人自訂鎖定機碼。</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_Detail_Protected" xml:space="preserve">
+    <value>此副檔名屬於 Windows 核心元件，已受到系統安全保護，禁止修改。</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_SelectFileDialogTitle" xml:space="preserve">
+    <value>選取欲重設預設開啟方式的檔案</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_NoExtTitle" xml:space="preserve">
+    <value>無法識別副檔名</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_NoExtDesc" xml:space="preserve">
+    <value>所選檔案沒有副檔名，無法進行預設關聯處理。</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Warning_CriticalExt" xml:space="preserve">
     <value>副檔名 .{0} 屬於 Windows 核心可執行檔或關鍵系統元件。為維護系統安全已全面鎖定保護，禁止清除或修改關聯。</value>
   </data>
-  <data name="FileAssociationPage_Warning_CriticalExtTitle" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Warning_CriticalExtTitle" xml:space="preserve">
     <value>系統核心保護中</value>
   </data>
-  <data name="FileAssociationPage_Success_ResetCompleted" xml:space="preserve">
-    <value>已成功清除副檔名 .{0} 的自訂關聯並重新整理系統快取，已順利還原為初始狀態。</value>
+  <data name="ResetFileTypeDefaultsPage_Success_ResetCompleted" xml:space="preserve">
+    <value>已解除副檔名 .{0} 的自訂預設應用程式，並還原為未指定狀態。</value>
   </data>
-  <data name="FileAssociationPage_Success_ResetTitle" xml:space="preserve">
-    <value>還原成功</value>
+  <data name="ResetFileTypeDefaultsPage_Success_ResetTitle" xml:space="preserve">
+    <value>解除成功</value>
   </data>
-  <data name="FileAssociationPage_Success_RegNavigated" xml:space="preserve">
-    <value>登錄編輯程式已成功巡覽至 .{0}，請參閱下方說明進行檢查。</value>
+  <data name="ResetFileTypeDefaultsPage_Success_RegNavigated" xml:space="preserve">
+    <value>登錄編輯程式已成功巡覽至 .{0}。</value>
   </data>
-  <data name="FileAssociationPage_Success_RegNavigatedTitle" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Success_RegNavigatedTitle" xml:space="preserve">
     <value>定位成功</value>
   </data>
-  <data name="FileAssociationPage_Warning_FallbackCopy" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Warning_FallbackCopy" xml:space="preserve">
     <value>目標路徑已複製到剪貼簿，請在登錄編輯程式網址列貼上並按 Enter 即可定位。</value>
   </data>
-  <data name="FileAssociationPage_Warning_FallbackCopyTitle" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Warning_FallbackCopyTitle" xml:space="preserve">
     <value>已複製路徑</value>
   </data>
-  <data name="FileAssociationPage_Error_Title" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Error_Title" xml:space="preserve">
     <value>錯誤</value>
-  </data>
-  <data name="FileAssociationPage_Title.Text" xml:space="preserve">
-    <value>檔案關聯管理</value>
   </data>
   <data name="SettingsPage_Title.Text" xml:space="preserve">
     <value>設定</value>
@@ -1232,9 +1286,6 @@
   <data name="FileHashPage_MatchPending" xml:space="preserve">
     <value>請輸入或貼上雜湊值以進行即時比對。</value>
   </data>
-  <data name="FileHashPage_DragDrop_Caption" xml:space="preserve">
-    <value>放置以計算雜湊值</value>
-  </data>
   <data name="FileHashPage_Algorithm_Sha256_Desc.Text" xml:space="preserve">
     <value>業界標準高安全演算法，具備極高碰撞抵抗力，廣泛用於現代軟體發行與數位簽章驗證。</value>
   </data>
@@ -1319,13 +1370,13 @@
   <data name="Common_Close" xml:space="preserve">
     <value>關閉</value>
   </data>
-  <data name="FileAssociationPage_Error_Timeout" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Error_Timeout" xml:space="preserve">
     <value>登錄機碼操作逾時。</value>
   </data>
-  <data name="FileAssociationPage_Error_KeyStillExists" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Error_KeyStillExists" xml:space="preserve">
     <value>機碼仍存在，無法完全刪除使用者關聯設定。</value>
   </data>
-  <data name="FileAssociationPage_Error_DeleteFailed" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Error_DeleteFailed" xml:space="preserve">
     <value>刪除檔案關聯失敗：{0}</value>
   </data>
   <data name="SystemRepairPage_CheckHealth_Cmd.Text" xml:space="preserve">
@@ -1352,24 +1403,24 @@
   <data name="FileHashPage_Algorithm_Sha512_Title.Text" xml:space="preserve">
     <value>SHA-512</value>
   </data>
-  <data name="FileAssociationPage_Warning_InvalidExt" xml:space="preserve">
-    <value>請輸入有效的副檔名 (僅限英數字與連字號，請勿包含引號、反斜線或路徑符號)。</value>
+  <data name="ResetFileTypeDefaultsPage_Warning_InvalidExt" xml:space="preserve">
+    <value>請輸入有效的副檔名，僅限英數字與連字號，且不含引號或路徑符號。</value>
   </data>
-  <data name="FileAssociationPage_Warning_InvalidExtTitle" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Warning_InvalidExtTitle" xml:space="preserve">
     <value>副檔名格式無效</value>
   </data>
-  <data name="FileAssociationPage_RegRunning_Title" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_RegRunning_Title" xml:space="preserve">
     <value>登錄編輯程式正在執行</value>
   </data>
-  <data name="FileAssociationPage_RegRunning_Content" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_RegRunning_Content" xml:space="preserve">
     <value>偵測到登錄編輯程式已開啟。若要由本工具自動定位至 .{0} 機碼，需要重新啟動登錄編輯程式。
 
 您也可以保留目前視窗，目標路徑已複製到您的剪貼簿，可直接貼至網址列。</value>
   </data>
-  <data name="FileAssociationPage_RegRunning_Restart" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_RegRunning_Restart" xml:space="preserve">
     <value>重新啟動並定位</value>
   </data>
-  <data name="FileAssociationPage_RegRunning_Keep" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_RegRunning_Keep" xml:space="preserve">
     <value>保留目前視窗</value>
   </data>
   <data name="SystemRepairPage_Status_AllRepaired" xml:space="preserve">

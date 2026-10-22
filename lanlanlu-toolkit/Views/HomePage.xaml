@@ -480,7 +480,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE7B5;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                            <FontIcon Glyph="&#xE7AC;" FontSize="24" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
                             <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
                                 <TextBlock x:Uid="HomePage_Feature_Assoc_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" FontWeight="SemiBold" />
                                 <TextBlock x:Uid="HomePage_Feature_Assoc_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />

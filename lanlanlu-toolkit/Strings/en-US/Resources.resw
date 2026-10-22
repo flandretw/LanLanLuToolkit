@@ -91,8 +91,8 @@
   <data name="Notification_Error" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="Nav_FileAssociationPage.Content" xml:space="preserve">
-    <value>File Association Management</value>
+  <data name="Nav_ResetFileTypeDefaultsPage.Content" xml:space="preserve">
+    <value>Reset File Type Defaults</value>
   </data>
   <data name="Nav_CrashReportPage.Content" xml:space="preserve">
     <value>System Crash Analysis</value>
@@ -167,10 +167,10 @@
     <value>Fast SHA-256, MD5 checksum calculation &amp; verification.</value>
   </data>
   <data name="HomePage_Feature_Assoc_Title.Text" xml:space="preserve">
-    <value>File Association Management</value>
+    <value>Reset File Type Defaults</value>
   </data>
   <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
-    <value>Clear custom associations and reset default apps.</value>
+    <value>Reset mistakenly associated file types to unassigned default state.</value>
   </data>
   <data name="HomePage_Refresh_Title" xml:space="preserve">
     <value>Hardware Specs</value>
@@ -889,8 +889,8 @@
   <data name="FileHashPage_SelectFile.Text" xml:space="preserve">
     <value>Browse File</value>
   </data>
-  <data name="FileHashPage_DragDropPrompt.Text" xml:space="preserve">
-    <value>Drag and drop file here, or click to browse</value>
+  <data name="FileHashPage_SelectFilePrompt.Text" xml:space="preserve">
+    <value>Select File for Hash Verification</value>
   </data>
   <data name="FileHashPage_SelectFileCardDesc.Text" xml:space="preserve">
     <value>Supports any file format. Computes SHA-256, SHA-1, MD5, and SHA-512 checksums automatically.</value>
@@ -961,89 +961,143 @@
   <data name="FileHashPage_CalculationCancelled" xml:space="preserve">
     <value>Calculation cancelled.</value>
   </data>
-  <data name="FileAssociationPage_Desc.Text" xml:space="preserve">
-    <value>Clear custom file extension associations and restore system defaults.</value>
+  <data name="ResetFileTypeDefaultsPage_Desc.Text" xml:space="preserve">
+    <value>Clear custom default apps for file extensions and restore them to unassociated state.</value>
   </data>
-  <data name="FileAssociationPage_ConfigTitle.Text" xml:space="preserve">
-    <value>Target File Extension</value>
+  <data name="ResetFileTypeDefaultsPage_Title.Text" xml:space="preserve">
+    <value>Reset File Type Defaults</value>
   </data>
-  <data name="FileAssociationPage_TargetExtTitle.Text" xml:space="preserve">
-    <value>File Extension</value>
+  <data name="ResetFileTypeDefaultsPage_OpenSettingsBtn.Text" xml:space="preserve">
+    <value>Windows Default Apps Settings</value>
   </data>
-  <data name="FileAssociationPage_TargetExtDesc.Text" xml:space="preserve">
-    <value>Enter the file extension you want to reset, such as pdf, dat, or log. Leading dots are automatically ignored and case-insensitive.</value>
+  <data name="ResetFileTypeDefaultsPage_Section_SelectExt.Text" xml:space="preserve">
+    <value>Select File or Specify Extension</value>
   </data>
-  <data name="FileAssociationPage_TargetExtBox.PlaceholderText" xml:space="preserve">
-    <value>e.g., pdf</value>
+  <data name="ResetFileTypeDefaultsPage_SelectFilePrompt.Text" xml:space="preserve">
+    <value>Select File to Resolve Extension</value>
   </data>
-  <data name="FileAssociationPage_SelectMethodTitle.Text" xml:space="preserve">
-    <value>Reset and Recovery Actions</value>
+  <data name="ResetFileTypeDefaultsPage_SelectFileDesc.Text" xml:space="preserve">
+    <value>Select a file with an unwanted default app or broken icon to automatically detect its extension.</value>
   </data>
-  <data name="FileAssociationPage_ResetTitle.Text" xml:space="preserve">
-    <value>Clear Custom Association</value>
+  <data name="ResetFileTypeDefaultsPage_SelectFileBtn.Text" xml:space="preserve">
+    <value>Browse File</value>
   </data>
-  <data name="FileAssociationPage_ResetDesc.Text" xml:space="preserve">
-    <value>Clear custom open-with overrides in the registry to restore clean system defaults. Windows will prompt to choose an app when opened.</value>
+  <data name="ResetFileTypeDefaultsPage_ManualTitle.Text" xml:space="preserve">
+    <value>Manual Extension Input</value>
   </data>
-  <data name="FileAssociationPage_ResetButton.Content" xml:space="preserve">
-    <value>Reset to Default</value>
+  <data name="ResetFileTypeDefaultsPage_ManualDesc.Text" xml:space="preserve">
+    <value>Enter the file extension to inspect or reset (without leading dot).</value>
   </data>
-  <data name="FileAssociationPage_Method2Title.Text" xml:space="preserve">
-    <value>Registry Manual Troubleshooting</value>
+  <data name="ResetFileTypeDefaultsPage_TargetExtBox.PlaceholderText" xml:space="preserve">
+    <value>e.g., dat</value>
   </data>
-  <data name="FileAssociationPage_Method2Desc.Text" xml:space="preserve">
-    <value>Open Registry Editor and navigate to target key.</value>
+  <data name="ResetFileTypeDefaultsPage_QuickTagsTitle.Text" xml:space="preserve">
+    <value>Common accidental formats:</value>
   </data>
-  <data name="FileAssociationPage_Method2Content.Text" xml:space="preserve">
-    <value>Launch the Windows Registry Editor and automatically navigate to the target file extension path for advanced inspection and troubleshooting.</value>
+  <data name="ResetFileTypeDefaultsPage_Section_Status.Text" xml:space="preserve">
+    <value>Current Default App Status &amp; Actions</value>
   </data>
-  <data name="FileAssociationPage_Method2Button.Content" xml:space="preserve">
-    <value>Navigate Registry</value>
+  <data name="ResetFileTypeDefaultsPage_EmptyPrompt.Text" xml:space="preserve">
+    <value>Select a file or enter an extension above to inspect its default app status.</value>
   </data>
-  <data name="FileAssociationPage_GuideTitle.Text" xml:space="preserve">
-    <value>Registry Manual Troubleshooting Guide</value>
+  <data name="ResetFileTypeDefaultsPage_ResetButton.Text" xml:space="preserve">
+    <value>Reset File Type Defaults</value>
   </data>
-  <data name="FileAssociationPage_GuideStep1.Text" xml:space="preserve">
-    <value>When Registry Editor launches, it automatically expands and navigates to the target extension directory.</value>
+  <data name="ResetFileTypeDefaultsPage_ResetNotice.Text" xml:space="preserve">
+    <value>Note: Resetting will restore generic unassigned document icons in File Explorer. When opening the file, Windows will prompt you to choose an application again.</value>
   </data>
-  <data name="FileAssociationPage_GuideStep2.Text" xml:space="preserve">
-    <value>In the left tree view, locate the "UserChoice" subkey under this extension directory.</value>
+  <data name="ResetFileTypeDefaultsPage_HelpExpander_Title.Text" xml:space="preserve">
+    <value>About File Defaults and Windows Settings Limitations</value>
   </data>
-  <data name="FileAssociationPage_GuideStep3.Text" xml:space="preserve">
-    <value>"UserChoice" stores the custom app lock. Deleting it restores the clean default behavior.</value>
+  <data name="ResetFileTypeDefaultsPage_HelpExpander_Desc.Text" xml:space="preserve">
+    <value>Learn why Windows Settings cannot unassociate files and how this tool works</value>
   </data>
-  <data name="FileAssociationPage_GuideStep4.Text" xml:space="preserve">
-    <value>Close Registry Editor when done, or use the direct reset action above to perform this step automatically.</value>
+  <data name="ResetFileTypeDefaultsPage_HelpQ1_Title.Text" xml:space="preserve">
+    <value>Why can't Windows Settings remove associations?</value>
   </data>
-  <data name="FileAssociationPage_Warning_CriticalExt" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_HelpQ1_Desc.Text" xml:space="preserve">
+    <value>In Windows 10 and 11, Settings &gt; Default apps only allows changing the handler to another app; it provides no option to dissociate or make a file unassigned. Once an unknown file (like .dat or .bin) is set to 'Always open with', it remains locked.</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_HelpQ2_Title.Text" xml:space="preserve">
+    <value>How this tool restores default state</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_HelpQ2_Desc.Text" xml:space="preserve">
+    <value>This tool safely clears the user override key (UserChoice) in the Current User registry and immediately notifies Windows Explorer to refresh its cache. Your files remain untouched and intact.</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_HelpQ3_Title.Text" xml:space="preserve">
+    <value>Inspect in Registry Editor</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_HelpQ3_Desc.Text" xml:space="preserve">
+    <value>Power users who wish to inspect the underlying registry keys directly can launch Registry Editor navigated to this extension.</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_OpenRegBtn.Content" xml:space="preserve">
+    <value>Open Registry Editor</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_CustomSet" xml:space="preserve">
+    <value>Custom Default App Set</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_Unassociated" xml:space="preserve">
+    <value>Unassociated</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_SystemDefault" xml:space="preserve">
+    <value>System Default</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_Protected" xml:space="preserve">
+    <value>Protected System Core</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_AppFormat" xml:space="preserve">
+    <value>Default application: {0}</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_NoApp" xml:space="preserve">
+    <value>No default application assigned</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_Detail_HasChoice" xml:space="preserve">
+    <value>A custom user default app is currently assigned. Click the button to reset.</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_Detail_NoChoice" xml:space="preserve">
+    <value>No custom default app is assigned. Windows will prompt for an app when opened.</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_Detail_System" xml:space="preserve">
+    <value>Handled by Windows system defaults. No user custom override detected.</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Status_Detail_Protected" xml:space="preserve">
+    <value>This extension is a core Windows component and is protected against modification.</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_SelectFileDialogTitle" xml:space="preserve">
+    <value>Select file to reset default app</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_NoExtTitle" xml:space="preserve">
+    <value>No Extension Found</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_NoExtDesc" xml:space="preserve">
+    <value>The selected file has no extension and cannot be processed.</value>
+  </data>
+  <data name="ResetFileTypeDefaultsPage_Warning_CriticalExt" xml:space="preserve">
     <value>The extension .{0} is a critical Windows executable or core component. It is strictly protected to prevent system failure.</value>
   </data>
-  <data name="FileAssociationPage_Warning_CriticalExtTitle" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Warning_CriticalExtTitle" xml:space="preserve">
     <value>System Core Protection</value>
   </data>
-  <data name="FileAssociationPage_Success_ResetCompleted" xml:space="preserve">
-    <value>Successfully cleared custom association for .{0} and refreshed shell cache. Restored to initial state.</value>
+  <data name="ResetFileTypeDefaultsPage_Success_ResetCompleted" xml:space="preserve">
+    <value>Cleared custom default app for .{0} and restored to unassigned state.</value>
   </data>
-  <data name="FileAssociationPage_Success_ResetTitle" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Success_ResetTitle" xml:space="preserve">
     <value>Reset Successful</value>
   </data>
-  <data name="FileAssociationPage_Success_RegNavigated" xml:space="preserve">
-    <value>Registry Editor successfully navigated to .{0}. Please refer to the guide below.</value>
+  <data name="ResetFileTypeDefaultsPage_Success_RegNavigated" xml:space="preserve">
+    <value>Registry Editor successfully navigated to .{0}.</value>
   </data>
-  <data name="FileAssociationPage_Success_RegNavigatedTitle" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Success_RegNavigatedTitle" xml:space="preserve">
     <value>Navigation Successful</value>
   </data>
-  <data name="FileAssociationPage_Warning_FallbackCopy" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Warning_FallbackCopy" xml:space="preserve">
     <value>The target path has been copied to your clipboard. Paste it into Registry Editor's address bar and press Enter to navigate.</value>
   </data>
-  <data name="FileAssociationPage_Warning_FallbackCopyTitle" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Warning_FallbackCopyTitle" xml:space="preserve">
     <value>Path Copied</value>
   </data>
-  <data name="FileAssociationPage_Error_Title" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Error_Title" xml:space="preserve">
     <value>Error</value>
-  </data>
-  <data name="FileAssociationPage_Title.Text" xml:space="preserve">
-    <value>File Association Management</value>
   </data>
   <data name="SettingsPage_Title.Text" xml:space="preserve">
     <value>Settings</value>
@@ -1228,9 +1282,6 @@
   <data name="FileHashPage_MatchPending" xml:space="preserve">
     <value>Enter or paste a hash value for real-time comparison.</value>
   </data>
-  <data name="FileHashPage_DragDrop_Caption" xml:space="preserve">
-    <value>Drop to calculate hash</value>
-  </data>
   <data name="FileHashPage_Algorithm_Sha256_Desc.Text" xml:space="preserve">
     <value>Industry-standard secure hash with high collision resistance, widely used for modern software release verification.</value>
   </data>
@@ -1315,13 +1366,13 @@
   <data name="Common_Close" xml:space="preserve">
     <value>Close</value>
   </data>
-  <data name="FileAssociationPage_Error_Timeout" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Error_Timeout" xml:space="preserve">
     <value>The registry operation timed out.</value>
   </data>
-  <data name="FileAssociationPage_Error_KeyStillExists" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Error_KeyStillExists" xml:space="preserve">
     <value>The registry key still exists and could not be removed.</value>
   </data>
-  <data name="FileAssociationPage_Error_DeleteFailed" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Error_DeleteFailed" xml:space="preserve">
     <value>Failed to delete association key: {0}</value>
   </data>
   <data name="SystemRepairPage_CheckHealth_Cmd.Text" xml:space="preserve">
@@ -1348,24 +1399,24 @@
   <data name="FileHashPage_Algorithm_Sha512_Title.Text" xml:space="preserve">
     <value>SHA-512</value>
   </data>
-  <data name="FileAssociationPage_Warning_InvalidExt" xml:space="preserve">
-    <value>Please enter a valid file extension (alphanumeric characters, hyphens or periods without quotes or slashes).</value>
+  <data name="ResetFileTypeDefaultsPage_Warning_InvalidExt" xml:space="preserve">
+    <value>Please enter a valid file extension containing only alphanumeric characters or hyphens.</value>
   </data>
-  <data name="FileAssociationPage_Warning_InvalidExtTitle" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_Warning_InvalidExtTitle" xml:space="preserve">
     <value>Invalid Extension Format</value>
   </data>
-  <data name="FileAssociationPage_RegRunning_Title" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_RegRunning_Title" xml:space="preserve">
     <value>Registry Editor is Already Running</value>
   </data>
-  <data name="FileAssociationPage_RegRunning_Content" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_RegRunning_Content" xml:space="preserve">
     <value>Registry Editor is currently open. To automatically navigate to .{0}, Registry Editor needs to be restarted.
 
 You can also keep the existing window; the target path has already been copied to your clipboard to paste into the address bar.</value>
   </data>
-  <data name="FileAssociationPage_RegRunning_Restart" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_RegRunning_Restart" xml:space="preserve">
     <value>Restart &amp; Navigate</value>
   </data>
-  <data name="FileAssociationPage_RegRunning_Keep" xml:space="preserve">
+  <data name="ResetFileTypeDefaultsPage_RegRunning_Keep" xml:space="preserve">
     <value>Keep Existing Window</value>
   </data>
   <data name="SystemRepairPage_Status_AllRepaired" xml:space="preserve">

@@ -106,7 +106,7 @@ namespace lanlanlu_toolkit.Views
         private void FeatureRepair_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(SystemRepairPage));
         private void FeatureCrash_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(CrashReportPage));
         private void FeatureHash_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(FileHashPage));
-        private void FeatureAssoc_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(FileAssociationPage));
+        private void FeatureAssoc_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(ResetFileTypeDefaultsPage));
         private void GoToSettings_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(SettingsPage));
 
         private void Card_PointerEntered(object sender, PointerRoutedEventArgs e)

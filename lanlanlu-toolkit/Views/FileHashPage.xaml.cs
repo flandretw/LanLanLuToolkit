@@ -49,6 +49,12 @@ namespace lanlanlu_toolkit.Views
             Md5TextBox.Text = string.Empty;
             Sha512TextBox.Text = string.Empty;
 
+            // Show description text, hide hash textboxes
+            Sha256DescText.Visibility = Visibility.Visible;
+            Sha1DescText.Visibility = Visibility.Visible;
+            Md5DescText.Visibility = Visibility.Visible;
+            Sha512DescText.Visibility = Visibility.Visible;
+
             Sha256TextBox.Visibility = Visibility.Collapsed;
             Sha1TextBox.Visibility = Visibility.Collapsed;
             Md5TextBox.Visibility = Visibility.Collapsed;
@@ -63,6 +69,11 @@ namespace lanlanlu_toolkit.Views
             CopySha1Btn.Visibility = Visibility.Collapsed;
             CopyMd5Btn.Visibility = Visibility.Collapsed;
             CopySha512Btn.Visibility = Visibility.Collapsed;
+
+            CopySha256Btn.IsEnabled = false;
+            CopySha1Btn.IsEnabled = false;
+            CopyMd5Btn.IsEnabled = false;
+            CopySha512Btn.IsEnabled = false;
 
             RecalculateBtn.IsEnabled = false;
             CopyAllBtn.IsEnabled = false;
@@ -131,15 +142,7 @@ namespace lanlanlu_toolkit.Views
             FileDropZoneCard.Visibility = Visibility.Visible;
 
             ResetHashTextBoxPlaceholders();
-            RecalculateBtn.IsEnabled = false;
-            CopyAllBtn.IsEnabled = false;
-            CopySha256Btn.IsEnabled = false;
-            CopySha1Btn.IsEnabled = false;
-            CopyMd5Btn.IsEnabled = false;
-            CopySha512Btn.IsEnabled = false;
-
-            CompareTextBox.Text = string.Empty;
-            VerifyStatusCard.Visibility = Visibility.Collapsed;
+            PerformHashVerification();
         }
 
         private async Task ProcessSelectedFilePath(string filePath)
@@ -156,17 +159,19 @@ namespace lanlanlu_toolkit.Views
             _selectedFilePath = filePath;
             _calculatedHashes.Clear();
 
-            // Populate File Metadata Card
+            // Populate File Metadata Card (Predictable Compact 2-Line Layout)
             var fileInfo = new FileInfo(filePath);
             FileNameText.Text = fileInfo.Name;
             FilePathText.Text = fileInfo.FullName;
-            FileSizeText.Text = $"{LocalizationHelper.GetString("FileHashPage_FileSize")} {FormatFileSize((ulong)fileInfo.Length)} ({fileInfo.Length:N0} bytes)";
+            FileSizeText.Text = $"({FormatFileSize((ulong)fileInfo.Length)})";
+            ToolTipService.SetToolTip(FileNameText, fileInfo.Name);
+            ToolTipService.SetToolTip(FilePathText, fileInfo.FullName);
 
             FileDropZoneCard.Visibility = Visibility.Collapsed;
             FileDetailsCard.Visibility = Visibility.Visible;
 
             ResetHashTextBoxPlaceholders();
-            VerifyStatusCard.Visibility = Visibility.Collapsed;
+            PerformHashVerification();
 
             // Trigger parallel multi-algorithm hash calculation
             await RunHashCalculation();
@@ -219,6 +224,12 @@ namespace lanlanlu_toolkit.Views
             CopySha1Btn.IsEnabled = false;
             CopyMd5Btn.IsEnabled = false;
             CopySha512Btn.IsEnabled = false;
+
+            // Switch from description to calculating indicator
+            Sha256DescText.Visibility = Visibility.Collapsed;
+            Sha1DescText.Visibility = Visibility.Collapsed;
+            Md5DescText.Visibility = Visibility.Collapsed;
+            Sha512DescText.Visibility = Visibility.Collapsed;
 
             string calcText = LocalizationHelper.GetString("FileHashPage_Status_Calculating") ?? "計算中...";
             Sha256TextBox.Text = calcText;
@@ -524,9 +535,31 @@ namespace lanlanlu_toolkit.Views
                 return;
             }
 
+            if (string.IsNullOrEmpty(_selectedFilePath))
+            {
+                // Hash entered, but no file selected yet
+                VerifyStatusCard.Visibility = Visibility.Visible;
+                VerifyStatusCard.Background = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"];
+                VerifyStatusCard.BorderBrush = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["CardStrokeColorDefaultBrush"];
+                VerifyStatusIcon.Glyph = "\uE897"; // Info question mark
+                VerifyStatusIcon.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+
+                VerifyStatusMessage.Text = LocalizationHelper.GetString("FileHashPage_MatchPending") ?? "請輸入或貼上雜湊值以進行即時比對。";
+                VerifyStatusMessage.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+                return;
+            }
+
             if (_calculatedHashes.Count == 0)
             {
-                VerifyStatusCard.Visibility = Visibility.Collapsed;
+                // File selected, but calculation is still pending or ongoing
+                VerifyStatusCard.Visibility = Visibility.Visible;
+                VerifyStatusCard.Background = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"];
+                VerifyStatusCard.BorderBrush = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["CardStrokeColorDefaultBrush"];
+                VerifyStatusIcon.Glyph = "\uE895"; // Sync
+                VerifyStatusIcon.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+
+                VerifyStatusMessage.Text = LocalizationHelper.GetString("FileHashPage_Calculating") ?? "正在計算雜湊值，請稍候……";
+                VerifyStatusMessage.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
                 return;
             }
 

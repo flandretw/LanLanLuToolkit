@@ -152,9 +152,9 @@
                                 <FontIcon Glyph="&#xEC19;" />
                             </NavigationViewItem.Icon>
                         </NavigationViewItem>
-                        <NavigationViewItem Tag="FileAssociationPage" x:Uid="Nav_FileAssociationPage">
+                        <NavigationViewItem Tag="ResetFileTypeDefaultsPage" x:Uid="Nav_ResetFileTypeDefaultsPage">
                             <NavigationViewItem.Icon>
-                                <FontIcon Glyph="&#xE7B5;" />
+                                <FontIcon Glyph="&#xE7AC;" />
                             </NavigationViewItem.Icon>
                         </NavigationViewItem>
                     </NavigationViewItem.MenuItems>

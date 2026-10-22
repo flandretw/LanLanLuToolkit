@@ -37,10 +37,10 @@ We hate bloated installers, heavy background services, and leftover registry jun
   * Component Store Cleanup: Automate cleanup of superseded update caches and the WinSxS store.
 
 * **File Hash Verification: SHA-3 Support & Fast Comparison**  
-  Multi-threaded high-speed file checksum generation supporting MD5, SHA-1, SHA-256, SHA-384, SHA-512, and SHA-3. Features drag-and-drop support and instant comparison fields with color feedback to verify download integrity.
+  Multi-threaded high-speed file checksum generation supporting MD5, SHA-1, SHA-256, SHA-384, SHA-512, and SHA-3. Features fast file inspection and instant comparison fields with color feedback to verify download integrity.
 
-* **File Association Fixer: Default App Inspection & Recovery**  
-  Inspect registered default handler applications for common text, archive, media, and code formats, allowing quick recovery when default file associations or icons are hijacked.
+* **Reset File Type Defaults: Dissociate & Restore Unassigned File Types**  
+  Solves the classic Windows limitation where accidentally associated file types (e.g., `.dat`, `.bak`, `.bin`) cannot be unassociated via Windows Settings. Features instant file inspection and one-click removal of custom user overrides, safely restoring generic document icons and open-with prompts.
 
 * **Modern Fluent Interface**  
   Built on WinUI 3 with Mica backdrop effects, featuring smooth animations and dynamic cards that scale seamlessly with your window.

@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="lanlanlu_toolkit.Views.FileHashPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,8 +10,6 @@
     Background="Transparent">
 
     <Page.Resources>
-
-
         <!-- Seamless Borderless ReadOnly Hash TextBox Style -->
         <Style x:Key="HashResultTextBoxStyle" TargetType="TextBox">
             <Setter Property="IsReadOnly" Value="True" />
@@ -30,8 +28,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" /> <!-- 0: Header -->
                 <RowDefinition Height="Auto" /> <!-- 1: File Card -->
-                <RowDefinition Height="Auto" /> <!-- 2: Multi-Algorithm Hash Results -->
-                <RowDefinition Height="Auto" /> <!-- 3: Verification Card -->
+                <RowDefinition Height="Auto" /> <!-- 2: Verification Section (First-Class Card) -->
+                <RowDefinition Height="Auto" /> <!-- 3: Multi-Algorithm Hash Results -->
             </Grid.RowDefinitions>
 
             <!-- 0: Page Header -->
@@ -46,88 +44,149 @@
                 </StackPanel>
             </Grid>
 
-            <!-- 1: File Selection & Info Section -->
+            <!-- 1: File Selection & Info Section (Unified Invariant 72px Card Container) -->
             <StackPanel Grid.Row="1" Spacing="8">
                 <TextBlock x:Uid="FileHashPage_Section_SelectFile" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
 
-                <!-- Empty State: Drag & Drop Zone Card -->
-                <Border x:Name="FileDropZoneCard"
-                        Style="{StaticResource FluentCardBorderStyle}"
+                <!-- Single Unified Card: Locked Height="72" (Zero Pixel Shift Guaranteed) -->
+                <Border Style="{StaticResource FluentCardBorderStyle}"
+                        Height="72"
+                        Padding="20,0"
                         AllowDrop="True"
                         DragOver="FileCard_DragOver"
                         Drop="FileCard_Drop">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                        <!-- Empty State: File Selection Prompt Content -->
+                        <Grid x:Name="FileDropZoneCard">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                        <!-- Icon (Standard 24x24 Container for 60px text axis alignment) -->
-                        <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
-                            <FontIcon Glyph="&#xE8E5;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Grid>
+                            <!-- Icon (Standard 24x24 Container for text axis alignment) -->
+                            <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                <FontIcon Glyph="&#xE8A5;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
 
-                        <!-- Prompt info -->
-                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="4" Margin="0,0,16,0">
-                            <TextBlock x:Uid="FileHashPage_DragDropPrompt" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                            <TextBlock x:Uid="FileHashPage_SelectFileCardDesc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                        </StackPanel>
-
-                        <!-- Browse Action Button -->
-                        <Button x:Name="SelectFileBtn" Grid.Column="2" Click="SelectFileBtn_Click" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center">
-                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xF12B;" FontSize="14" VerticalAlignment="Center" />
-                                <TextBlock x:Uid="FileHashPage_SelectFile" VerticalAlignment="Center" />
+                            <!-- Prompt info (Strict 2-Line Ellipsis with Spacing="2") -->
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2" Margin="0,0,16,0">
+                                <TextBlock x:Uid="FileHashPage_SelectFilePrompt" Style="{ThemeResource BodyStrongTextBlockStyle}" TextTrimming="CharacterEllipsis" MaxLines="1" />
+                                <TextBlock x:Uid="FileHashPage_SelectFileCardDesc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
                             </StackPanel>
-                        </Button>
-                    </Grid>
-                </Border>
 
-                <!-- Active State: Selected File Details Card -->
-                <Border x:Name="FileDetailsCard"
-                        Style="{StaticResource FluentCardBorderStyle}"
-                        Visibility="Collapsed"
-                        AllowDrop="True"
-                        DragOver="FileCard_DragOver"
-                        Drop="FileCard_Drop">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <!-- File Icon (Standard 24x24 Container for 60px text axis alignment) -->
-                        <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
-                            <FontIcon Glyph="&#xE8A5;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Grid>
-
-                        <!-- File Metadata -->
-                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3" Margin="0,0,16,0">
-                            <TextBlock x:Name="FileNameText" Style="{ThemeResource BodyStrongTextBlockStyle}" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
-                            <TextBlock x:Name="FilePathText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
-                            <TextBlock x:Name="FileSizeText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                        </StackPanel>
-
-                        <!-- Actions -->
-                        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                            <Button Click="SelectFileBtn_Click" Style="{StaticResource StandardActionButtonStyle}" VerticalAlignment="Center">
-                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                    <FontIcon Glyph="&#xE8E5;" FontSize="13" VerticalAlignment="Center" />
-                                    <TextBlock x:Uid="FileHashPage_ChangeFile" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
+                            <!-- Browse Action Button (Height=32) -->
+                            <Button x:Name="SelectFileBtn" Grid.Column="2" Click="SelectFileBtn_Click" Style="{ThemeResource AccentButtonStyle}" Height="32" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                    <FontIcon Glyph="&#xF12B;" FontSize="14" VerticalAlignment="Center" />
+                                    <TextBlock x:Uid="FileHashPage_SelectFile" VerticalAlignment="Center" />
                                 </StackPanel>
                             </Button>
-                            <Button x:Name="ClearFileBtn" Click="ClearFileBtn_Click" Style="{StaticResource SubtleCopyButtonStyle}" VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xE74D;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                            </Button>
-                        </StackPanel>
+                        </Grid>
+
+                        <!-- Active State: Selected File Details Content -->
+                        <Grid x:Name="FileDetailsCard" Visibility="Collapsed">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- File Icon (Standard 24x24 Container for text axis alignment) -->
+                            <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                <FontIcon Glyph="&#xE8A5;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+
+                            <!-- File Metadata (Strict 2-Line Ellipsis with Spacing="2") -->
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2" Margin="0,0,16,0">
+                                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                    <TextBlock x:Name="FileNameText" Style="{ThemeResource BodyStrongTextBlockStyle}" TextTrimming="CharacterEllipsis" MaxLines="1" />
+                                    <TextBlock x:Name="FileSizeText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                </StackPanel>
+                                <TextBlock x:Name="FilePathText" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" />
+                            </StackPanel>
+
+                            <!-- Actions (Height=32) -->
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <Button Click="SelectFileBtn_Click" Style="{StaticResource StandardActionButtonStyle}" Height="32" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                        <FontIcon Glyph="&#xE8E5;" FontSize="14" VerticalAlignment="Center" />
+                                        <TextBlock x:Uid="FileHashPage_ChangeFile" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Button>
+                                <Button x:Name="ClearFileBtn" Click="ClearFileBtn_Click" Style="{StaticResource SubtleCopyButtonStyle}" VerticalAlignment="Center">
+                                    <FontIcon Glyph="&#xE74D;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
                 </Border>
             </StackPanel>
 
-            <!-- 2: Multi-Algorithm Hash Results Section -->
+            <!-- 2: Hash Comparison & Verification Section (First-Class Card) -->
             <StackPanel Grid.Row="2" Spacing="8">
+                <TextBlock x:Uid="FileHashPage_Compare" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,4" />
+
+                <Border Style="{StaticResource FluentCardBorderStyle}">
+                    <StackPanel Spacing="12">
+                        <!-- Main Input Row -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Verification Icon (Standard 24x24 Container) -->
+                            <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                <FontIcon Glyph="&#xEC7A;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+
+                            <!-- Input and Action Bar -->
+                            <Grid Grid.Column="1" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox x:Name="CompareTextBox"
+                                         x:Uid="FileHashPage_CompareInput"
+                                         FontFamily="Cascadia Code, Consolas"
+                                         FontSize="13"
+                                         VerticalAlignment="Center"
+                                         TextChanged="CompareTextBox_TextChanged" />
+
+                                <Button x:Name="PasteCompareBtn" Grid.Column="1" Click="PasteCompareBtn_Click" Style="{StaticResource StandardActionButtonStyle}" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                        <FontIcon Glyph="&#xE77F;" FontSize="14" VerticalAlignment="Center" />
+                                        <TextBlock x:Uid="FileHashPage_CompareButton" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="ClearCompareBtn" Grid.Column="2" Click="ClearCompareBtn_Click" Style="{StaticResource SubtleCopyButtonStyle}" VerticalAlignment="Center">
+                                    <FontIcon Glyph="&#xE894;" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                </Button>
+                            </Grid>
+                        </Grid>
+
+                        <!-- Inline Verification Result Banner -->
+                        <Border x:Name="VerifyStatusCard" Visibility="Collapsed" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="14,10" BorderThickness="1">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <FontIcon x:Name="VerifyStatusIcon" Glyph="&#xE73E;" FontSize="16" VerticalAlignment="Center" />
+                                <TextBlock x:Name="VerifyStatusMessage" Grid.Column="1" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- 3: Multi-Algorithm Hash Results Section -->
+            <StackPanel Grid.Row="3" Spacing="8">
                 <Grid Margin="0,0,0,4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -145,26 +204,26 @@
                                 Visibility="Collapsed"
                                 VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xE711;" FontSize="13" Foreground="{ThemeResource SystemFillColorCriticalBrush}" VerticalAlignment="Center" />
-                                <TextBlock x:Uid="FileHashPage_CancelButton" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorCriticalBrush}" VerticalAlignment="Center" />
+                                <FontIcon Glyph="&#xE711;" FontSize="14" Foreground="{ThemeResource SystemFillColorCriticalBrush}" VerticalAlignment="Center" />
+                                <TextBlock x:Uid="FileHashPage_CancelButton" Foreground="{ThemeResource SystemFillColorCriticalBrush}" VerticalAlignment="Center" />
                             </StackPanel>
                         </Button>
                         <Button x:Name="RecalculateBtn" Click="RecalculateBtn_Click" IsEnabled="False" Style="{StaticResource StandardActionButtonStyle}" VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                <FontIcon x:Name="RecalculateIcon" Glyph="&#xE72C;" FontSize="13" VerticalAlignment="Center" />
-                                <TextBlock x:Name="RecalculateBtnText" x:Uid="FileHashPage_CalculateButton" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
+                                <FontIcon x:Name="RecalculateIcon" Glyph="&#xE72C;" FontSize="14" VerticalAlignment="Center" />
+                                <TextBlock x:Name="RecalculateBtnText" x:Uid="FileHashPage_CalculateButton" VerticalAlignment="Center" />
                             </StackPanel>
                         </Button>
                         <Button x:Name="CopyAllBtn" Click="CopyAllBtn_Click" IsEnabled="False" Style="{StaticResource StandardActionButtonStyle}" VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xE8C8;" FontSize="13" VerticalAlignment="Center" />
-                                <TextBlock x:Uid="FileHashPage_CopyAll" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
+                                <FontIcon Glyph="&#xE8C8;" FontSize="14" VerticalAlignment="Center" />
+                                <TextBlock x:Uid="FileHashPage_CopyAll" VerticalAlignment="Center" />
                             </StackPanel>
                         </Button>
                     </StackPanel>
                 </Grid>
 
-                <!-- Results Grouped Card -->
+                <!-- Results Grouped Card (Zero-Layout-Shift Fixed Row Layout with Overlay Progress Bar) -->
                 <Border Style="{StaticResource FluentWorkspaceBorderStyle}">
                     <Border.Resources>
                         <SolidColorBrush x:Key="TextControlBackground" Color="Transparent" />
@@ -174,214 +233,168 @@
                         <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent" />
                         <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="Transparent" />
                     </Border.Resources>
-                    <StackPanel Spacing="0">
-                        <!-- Progress Bar (Active on large file hashing) -->
-                        <ProgressBar x:Name="HashProgressBar" Minimum="0" Maximum="100" Value="0" Height="2" Visibility="Collapsed" />
-
-                        <!-- 1. SHA-256 Row -->
-                        <Grid Padding="20,16">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xEA18;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                            </Grid>
-
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
-                                <TextBlock x:Uid="FileHashPage_Algorithm_Sha256_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                <TextBlock x:Uid="FileHashPage_Algorithm_Sha256_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                                <TextBox x:Name="Sha256TextBox" Style="{StaticResource HashResultTextBoxStyle}" Visibility="Collapsed" Margin="0,2,0,0" />
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                <Border x:Name="Sha256MatchBadge" Visibility="Collapsed" Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}" BorderBrush="{ThemeResource SystemFillColorSuccessBrush}" BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,4" VerticalAlignment="Center">
-                                    <StackPanel Orientation="Horizontal" Spacing="4">
-                                        <FontIcon Glyph="&#xE73E;" FontSize="11" Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
-                                        <TextBlock x:Uid="FileHashPage_MatchTag" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorSuccessBrush}" FontWeight="SemiBold" />
-                                    </StackPanel>
-                                </Border>
-
-                                <Button x:Name="CopySha256Btn" Click="CopySha256Btn_Click" Style="{StaticResource SubtleCopyButtonStyle}" Visibility="Collapsed">
-                                    <FontIcon x:Name="CopySha256Icon" Glyph="&#xE8C8;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-
-                        <Border Style="{StaticResource FluentHorizontalDividerStyle}" />
-
-                        <!-- 2. SHA-1 Row -->
-                        <Grid Padding="20,16">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xE8A5;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                            </Grid>
-
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
-                                <TextBlock x:Uid="FileHashPage_Algorithm_Sha1_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                <TextBlock x:Uid="FileHashPage_Algorithm_Sha1_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                                <TextBox x:Name="Sha1TextBox" Style="{StaticResource HashResultTextBoxStyle}" Visibility="Collapsed" Margin="0,2,0,0" />
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                <Border x:Name="Sha1MatchBadge" Visibility="Collapsed" Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}" BorderBrush="{ThemeResource SystemFillColorSuccessBrush}" BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,4" VerticalAlignment="Center">
-                                    <StackPanel Orientation="Horizontal" Spacing="4">
-                                        <FontIcon Glyph="&#xE73E;" FontSize="11" Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
-                                        <TextBlock x:Uid="FileHashPage_MatchTag" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorSuccessBrush}" FontWeight="SemiBold" />
-                                    </StackPanel>
-                                </Border>
-
-                                <Button x:Name="CopySha1Btn" Click="CopySha1Btn_Click" Style="{StaticResource SubtleCopyButtonStyle}" Visibility="Collapsed">
-                                    <FontIcon x:Name="CopySha1Icon" Glyph="&#xE8C8;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-
-                        <Border Style="{StaticResource FluentHorizontalDividerStyle}" />
-
-                        <!-- 3. MD5 Row -->
-                        <Grid Padding="20,16">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xE945;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                            </Grid>
-
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
-                                <TextBlock x:Uid="FileHashPage_Algorithm_Md5_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                <TextBlock x:Uid="FileHashPage_Algorithm_Md5_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                                <TextBox x:Name="Md5TextBox" Style="{StaticResource HashResultTextBoxStyle}" Visibility="Collapsed" Margin="0,2,0,0" />
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                <Border x:Name="Md5MatchBadge" Visibility="Collapsed" Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}" BorderBrush="{ThemeResource SystemFillColorSuccessBrush}" BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,4" VerticalAlignment="Center">
-                                    <StackPanel Orientation="Horizontal" Spacing="4">
-                                        <FontIcon Glyph="&#xE73E;" FontSize="11" Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
-                                        <TextBlock x:Uid="FileHashPage_MatchTag" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorSuccessBrush}" FontWeight="SemiBold" />
-                                    </StackPanel>
-                                </Border>
-
-                                <Button x:Name="CopyMd5Btn" Click="CopyMd5Btn_Click" Style="{StaticResource SubtleCopyButtonStyle}" Visibility="Collapsed">
-                                    <FontIcon x:Name="CopyMd5Icon" Glyph="&#xE8C8;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-
-                        <Border Style="{StaticResource FluentHorizontalDividerStyle}" />
-
-                        <!-- 4. SHA-512 Row -->
-                        <Grid Padding="20,16">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xEA18;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                            </Grid>
-
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
-                                <TextBlock x:Uid="FileHashPage_Algorithm_Sha512_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                <TextBlock x:Uid="FileHashPage_Algorithm_Sha512_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                                <TextBox x:Name="Sha512TextBox" Style="{StaticResource HashResultTextBoxStyle}" Visibility="Collapsed" Margin="0,2,0,0" />
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                <Border x:Name="Sha512MatchBadge" Visibility="Collapsed" Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}" BorderBrush="{ThemeResource SystemFillColorSuccessBrush}" BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,4" VerticalAlignment="Center">
-                                    <StackPanel Orientation="Horizontal" Spacing="4">
-                                        <FontIcon Glyph="&#xE73E;" FontSize="11" Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
-                                        <TextBlock x:Uid="FileHashPage_MatchTag" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorSuccessBrush}" FontWeight="SemiBold" />
-                                    </StackPanel>
-                                </Border>
-
-                                <Button x:Name="CopySha512Btn" Click="CopySha512Btn_Click" Style="{StaticResource SubtleCopyButtonStyle}" Visibility="Collapsed">
-                                    <FontIcon x:Name="CopySha512Icon" Glyph="&#xE8C8;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                    </StackPanel>
-                </Border>
-            </StackPanel>
-
-            <!-- 3: Hash Comparison / Advanced Verification Expander -->
-            <Expander Grid.Row="3"
-                      x:Name="VerifyExpander"
-                      HorizontalAlignment="Stretch"
-                      HorizontalContentAlignment="Stretch"
-                      IsExpanded="False"
-                      CornerRadius="{ThemeResource OverlayCornerRadius}">
-                <Expander.Header>
-                    <Grid Margin="4,0,0,0" Padding="0,12">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <!-- Standard 24x24 Container (aligned with cards above at 20px left margin) -->
-                        <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
-                            <FontIcon Glyph="&#xEC7A;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Grid>
-                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                            <TextBlock x:Uid="FileHashPage_Compare" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                            <TextBlock x:Uid="FileHashPage_Compare_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                        </StackPanel>
-                    </Grid>
-                </Expander.Header>
-                <Expander.Content>
-                    <StackPanel Spacing="12" Padding="0,8,0,8">
-                        <!-- Input and Action Bar -->
-                        <Grid ColumnSpacing="8">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <TextBox x:Name="CompareTextBox"
-                                     x:Uid="FileHashPage_CompareInput"
-                                     FontFamily="Cascadia Code, Consolas"
-                                     FontSize="13"
-                                     VerticalAlignment="Center"
-                                     TextChanged="CompareTextBox_TextChanged" />
-
-                            <Button x:Name="PasteCompareBtn" Grid.Column="1" Click="PasteCompareBtn_Click" Style="{StaticResource StandardActionCopyButtonStyle}">
-                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                    <FontIcon Glyph="&#xE77F;" FontSize="13" VerticalAlignment="Center" />
-                                    <TextBlock x:Uid="FileHashPage_CompareButton" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
-                                </StackPanel>
-                            </Button>
-
-                            <Button x:Name="ClearCompareBtn" Grid.Column="2" Click="ClearCompareBtn_Click" Style="{StaticResource SubtleCopyButtonStyle}" VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xE894;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                            </Button>
-                        </Grid>
-
-                        <!-- Inline Verification Result Banner -->
-                        <Border x:Name="VerifyStatusCard" Visibility="Collapsed" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="14,10" BorderThickness="1">
-                            <Grid ColumnSpacing="12">
+                    <Grid>
+                        <StackPanel Spacing="0">
+                            <!-- 1. SHA-256 Row -->
+                            <Grid Padding="20,14">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <FontIcon x:Name="VerifyStatusIcon" Glyph="&#xE73E;" FontSize="16" VerticalAlignment="Center" />
-                                <TextBlock x:Name="VerifyStatusMessage" Grid.Column="1" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                                <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                    <FontIcon Glyph="&#xEA18;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </Grid>
+
+                                <Grid Grid.Column="1" VerticalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="20" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock x:Uid="FileHashPage_Algorithm_Sha256_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,2" />
+                                    <TextBlock x:Name="Sha256DescText" Grid.Row="1" x:Uid="FileHashPage_Algorithm_Sha256_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" VerticalAlignment="Center" />
+                                    <TextBox x:Name="Sha256TextBox" Grid.Row="1" Style="{StaticResource HashResultTextBoxStyle}" Visibility="Collapsed" VerticalAlignment="Center" />
+                                </Grid>
+
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                    <Border x:Name="Sha256MatchBadge" Visibility="Collapsed" Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}" BorderBrush="{ThemeResource SystemFillColorSuccessBrush}" BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,4" VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <FontIcon Glyph="&#xE73E;" FontSize="11" Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
+                                            <TextBlock x:Uid="FileHashPage_MatchTag" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorSuccessBrush}" FontWeight="SemiBold" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Button x:Name="CopySha256Btn" Click="CopySha256Btn_Click" Style="{StaticResource SubtleCopyButtonStyle}" Visibility="Collapsed" IsEnabled="False">
+                                        <FontIcon x:Name="CopySha256Icon" Glyph="&#xE8C8;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    </Button>
+                                </StackPanel>
                             </Grid>
-                        </Border>
-                    </StackPanel>
-                </Expander.Content>
-            </Expander>
+
+                            <Border Style="{StaticResource FluentHorizontalDividerStyle}" />
+
+                            <!-- 2. SHA-1 Row -->
+                            <Grid Padding="20,14">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                    <FontIcon Glyph="&#xE8EC;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </Grid>
+
+                                <Grid Grid.Column="1" VerticalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="20" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock x:Uid="FileHashPage_Algorithm_Sha1_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,2" />
+                                    <TextBlock x:Name="Sha1DescText" Grid.Row="1" x:Uid="FileHashPage_Algorithm_Sha1_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" VerticalAlignment="Center" />
+                                    <TextBox x:Name="Sha1TextBox" Grid.Row="1" Style="{StaticResource HashResultTextBoxStyle}" Visibility="Collapsed" VerticalAlignment="Center" />
+                                </Grid>
+
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                    <Border x:Name="Sha1MatchBadge" Visibility="Collapsed" Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}" BorderBrush="{ThemeResource SystemFillColorSuccessBrush}" BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,4" VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <FontIcon Glyph="&#xE73E;" FontSize="11" Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
+                                            <TextBlock x:Uid="FileHashPage_MatchTag" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorSuccessBrush}" FontWeight="SemiBold" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Button x:Name="CopySha1Btn" Click="CopySha1Btn_Click" Style="{StaticResource SubtleCopyButtonStyle}" Visibility="Collapsed" IsEnabled="False">
+                                        <FontIcon x:Name="CopySha1Icon" Glyph="&#xE8C8;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+
+                            <Border Style="{StaticResource FluentHorizontalDividerStyle}" />
+
+                            <!-- 3. MD5 Row -->
+                            <Grid Padding="20,14">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                    <FontIcon Glyph="&#xE945;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </Grid>
+
+                                <Grid Grid.Column="1" VerticalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="20" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock x:Uid="FileHashPage_Algorithm_Md5_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,2" />
+                                    <TextBlock x:Name="Md5DescText" Grid.Row="1" x:Uid="FileHashPage_Algorithm_Md5_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" VerticalAlignment="Center" />
+                                    <TextBox x:Name="Md5TextBox" Grid.Row="1" Style="{StaticResource HashResultTextBoxStyle}" Visibility="Collapsed" VerticalAlignment="Center" />
+                                </Grid>
+
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                    <Border x:Name="Md5MatchBadge" Visibility="Collapsed" Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}" BorderBrush="{ThemeResource SystemFillColorSuccessBrush}" BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,4" VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <FontIcon Glyph="&#xE73E;" FontSize="11" Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
+                                            <TextBlock x:Uid="FileHashPage_MatchTag" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorSuccessBrush}" FontWeight="SemiBold" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Button x:Name="CopyMd5Btn" Click="CopyMd5Btn_Click" Style="{StaticResource SubtleCopyButtonStyle}" Visibility="Collapsed" IsEnabled="False">
+                                        <FontIcon x:Name="CopyMd5Icon" Glyph="&#xE8C8;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+
+                            <Border Style="{StaticResource FluentHorizontalDividerStyle}" />
+
+                            <!-- 4. SHA-512 Row -->
+                            <Grid Padding="20,14">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Width="24" Height="24" Margin="0,0,16,0" VerticalAlignment="Center">
+                                    <FontIcon Glyph="&#xE72E;" FontSize="18" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </Grid>
+
+                                <Grid Grid.Column="1" VerticalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="20" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock x:Uid="FileHashPage_Algorithm_Sha512_Title" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,2" />
+                                    <TextBlock x:Name="Sha512DescText" Grid.Row="1" x:Uid="FileHashPage_Algorithm_Sha512_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxLines="1" VerticalAlignment="Center" />
+                                    <TextBox x:Name="Sha512TextBox" Grid.Row="1" Style="{StaticResource HashResultTextBoxStyle}" Visibility="Collapsed" VerticalAlignment="Center" />
+                                </Grid>
+
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                    <Border x:Name="Sha512MatchBadge" Visibility="Collapsed" Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}" BorderBrush="{ThemeResource SystemFillColorSuccessBrush}" BorderThickness="1" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="10,4" VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <FontIcon Glyph="&#xE73E;" FontSize="11" Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
+                                            <TextBlock x:Uid="FileHashPage_MatchTag" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorSuccessBrush}" FontWeight="SemiBold" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Button x:Name="CopySha512Btn" Click="CopySha512Btn_Click" Style="{StaticResource SubtleCopyButtonStyle}" Visibility="Collapsed" IsEnabled="False">
+                                        <FontIcon x:Name="CopySha512Icon" Glyph="&#xE8C8;" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+
+                        <!-- Overlay Progress Bar: Anchored to the top, zero layout push! -->
+                        <ProgressBar x:Name="HashProgressBar" Minimum="0" Maximum="100" Value="0" Height="2" MinHeight="2" VerticalAlignment="Top" Visibility="Collapsed" />
+                    </Grid>
+                </Border>
+            </StackPanel>
         </Grid>
     </ScrollViewer>
 </Page>

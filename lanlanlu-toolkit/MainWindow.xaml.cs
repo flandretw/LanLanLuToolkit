@@ -350,12 +350,12 @@ namespace lanlanlu_toolkit
 
             _searchableTools.Add(new ToolItem
             {
-                Title = LocalizationHelper.GetString("Nav_FileAssociationPage/Content"),
-                Description = LocalizationHelper.GetString("FileAssociationPage_Desc/Text"),
-                Icon = "\uE7B5",
-                Tag = "FileAssociationPage",
+                Title = LocalizationHelper.GetString("Nav_ResetFileTypeDefaultsPage/Content"),
+                Description = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Desc/Text"),
+                Icon = "\uE7AC",
+                Tag = "ResetFileTypeDefaultsPage",
                 Category = LocalizationHelper.GetString("Nav_UtilityPage/Content"),
-                Keywords = new() { "關聯", "檔案關聯", "副檔名", "開啟程式", "預設程式", "extension", "association", "登錄檔", "開啟方式", "還原關聯" }
+                Keywords = new() { "預設應用程式", "副檔名", "開啟程式", "預設值", "重設", "解除關聯", "default apps", "file type", "extension", "reset", "association", "開啟方式" }
             });
 
             _searchableTools.Add(new ToolItem
@@ -470,7 +470,7 @@ namespace lanlanlu_toolkit
                 "CrashReportPage" => typeof(CrashReportPage),
                 "SystemRepairPage" => typeof(SystemRepairPage),
                 "FileHashPage" => typeof(FileHashPage),
-                "FileAssociationPage" => typeof(FileAssociationPage),
+                "ResetFileTypeDefaultsPage" => typeof(ResetFileTypeDefaultsPage),
                 _ => null
             };
 
