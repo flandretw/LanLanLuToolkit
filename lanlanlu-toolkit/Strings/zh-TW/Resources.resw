@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <root 
   
   
@@ -145,12 +145,6 @@
   </data>
   <data name="HomePage_QuickActions_Title.Text" xml:space="preserve">
     <value>快速功能總覽</value>
-  </data>
-  <data name="HomePage_Feature_TaskMgr_Title.Text" xml:space="preserve">
-    <value>Windows 工作管理員</value>
-  </data>
-  <data name="HomePage_Feature_TaskMgr_Desc.Text" xml:space="preserve">
-    <value>啟動系統內建工作管理員以檢視即時效能與處理程序。</value>
   </data>
   <data name="HomePage_Feature_Input_Title.Text" xml:space="preserve">
     <value>鍵盤滑鼠診斷</value>
@@ -1464,5 +1458,20 @@
   </data>
   <data name="SystemRepairPage_RunButton.Text" xml:space="preserve">
     <value>執行</value>
+  </data>
+  <data name="HomePage_CopyAllSpecs.Text" xml:space="preserve">
+    <value>複製完整規格</value>
+  </data>
+  <data name="HomePage_RefreshSpecs.Text" xml:space="preserve">
+    <value>重新整理</value>
+  </data>
+  <data name="HomePage_Specs_Report_Header" xml:space="preserve">
+    <value>蘭蘭露工具箱 - 系統規格摘要</value>
+  </data>
+  <data name="Notification_Refreshed_Title" xml:space="preserve">
+    <value>重新整理完成</value>
+  </data>
+  <data name="Notification_Refreshed_Msg" xml:space="preserve">
+    <value>已更新硬體規格資訊。</value>
   </data>
 </root>

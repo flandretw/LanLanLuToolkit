@@ -41,7 +41,7 @@
 - **命名空間**：`lanlanlu_toolkit.Services`
 - **類別屬性**：`public static class HardwareProvider` / `public class HardwareInfoCache`
 - **職責說明**：  
-  作為系統全域硬體規格資訊的快取中樞。WMI 查詢通常需耗費數百毫秒至數秒時間，本服務透過背景非同步執行緒整合查詢處理器型號、實體記憶體容量與插槽配置、顯示卡名稱、主機板型號、磁碟型號容量以及 Windows 組建版本，避免各頁面重複發起 WMI 查詢造成介面凍結。
+  作為系統全域硬體規格資訊的快取中樞。WMI 查詢通常需耗費數百毫秒至數秒時間，本服務透過背景非同步執行緒整合查詢處理器型號與核心/執行緒數、實體記憶體容量/插槽與 DDR 世代、顯示卡名稱（優先排序獨顯並清理商標贅字）、主機板型號與 BIOS 版本、磁碟型號容量以及 Windows 組建版本，避免各頁面重複發起 WMI 查詢造成介面凍結。
 - **核心公開介面**：
   - `public static HardwareInfoCache Cache { get; }`：取得目前記憶體中的全域硬體資訊快取。
   - `public static event Action? HardwareInfoUpdated`：當硬體規格掃描完成並更新快取時觸發。

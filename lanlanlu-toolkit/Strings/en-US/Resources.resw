@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <root 
   
   xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" 
@@ -141,12 +141,6 @@
   </data>
   <data name="HomePage_QuickActions_Title.Text" xml:space="preserve">
     <value>Quick Actions</value>
-  </data>
-  <data name="HomePage_Feature_TaskMgr_Title.Text" xml:space="preserve">
-    <value>Windows Task Manager</value>
-  </data>
-  <data name="HomePage_Feature_TaskMgr_Desc.Text" xml:space="preserve">
-    <value>Launch built-in Task Manager to monitor real-time performance and processes.</value>
   </data>
   <data name="HomePage_Feature_Input_Title.Text" xml:space="preserve">
     <value>Keyboard &amp; Mouse Diagnostics</value>
@@ -1460,5 +1454,20 @@ You can also keep the existing window; the target path has already been copied t
   </data>
   <data name="SystemRepairPage_RunButton.Text" xml:space="preserve">
     <value>Run</value>
+  </data>
+  <data name="HomePage_CopyAllSpecs.Text" xml:space="preserve">
+    <value>Copy All Specs</value>
+  </data>
+  <data name="HomePage_RefreshSpecs.Text" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="HomePage_Specs_Report_Header" xml:space="preserve">
+    <value>LanLanLu Toolkit - System Specifications Summary</value>
+  </data>
+  <data name="Notification_Refreshed_Title" xml:space="preserve">
+    <value>Refresh Complete</value>
+  </data>
+  <data name="Notification_Refreshed_Msg" xml:space="preserve">
+    <value>Hardware specifications updated.</value>
   </data>
 </root>

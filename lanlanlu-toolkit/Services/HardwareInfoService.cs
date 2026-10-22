@@ -1,3 +1,4 @@
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Management;
@@ -47,13 +48,21 @@ namespace lanlanlu_toolkit.Services
                     // CPU
                     try
                     {
-                        using var searcher = new ManagementObjectSearcher("SELECT Name FROM Win32_Processor");
+                        using var searcher = new ManagementObjectSearcher("SELECT Name, NumberOfCores, NumberOfLogicalProcessors FROM Win32_Processor");
                         using var collection = searcher.Get();
                         var cpuList = new List<string>();
                         foreach (var obj in collection)
                         {
-                            string? name = obj["Name"]?.ToString()?.Split('@')[0].Trim();
-                            if (!string.IsNullOrEmpty(name) && !cpuList.Contains(name)) cpuList.Add(name);
+                            string name = CleanCpuName(obj["Name"]?.ToString() ?? "");
+                            if (!string.IsNullOrEmpty(name))
+                            {
+                                uint cores = 0, threads = 0;
+                                try { cores = Convert.ToUInt32(obj["NumberOfCores"]); } catch { }
+                                try { threads = Convert.ToUInt32(obj["NumberOfLogicalProcessors"]); } catch { }
+
+                                string spec = (cores > 0 && threads > 0) ? $"{name} ({cores}C / {threads}T)" : name;
+                                if (!cpuList.Contains(spec)) cpuList.Add(spec);
+                            }
                         }
                         cpu = cpuList.Count > 0 ? string.Join("\n", cpuList) : cpu;
                     }
@@ -62,15 +71,20 @@ namespace lanlanlu_toolkit.Services
                     // RAM
                     try
                     {
-                        using var searcher = new ManagementObjectSearcher("SELECT Capacity, Speed FROM Win32_PhysicalMemory");
+                        using var searcher = new ManagementObjectSearcher("SELECT Capacity, Speed, SMBIOSMemoryType FROM Win32_PhysicalMemory");
                         using var collection = searcher.Get();
                         ulong totalBytes = 0;
                         uint speed = 0;
+                        uint smbiosType = 0;
                         int count = 0;
                         foreach (var obj in collection)
                         {
                             totalBytes += Convert.ToUInt64(obj["Capacity"]);
                             if (speed == 0) speed = Convert.ToUInt32(obj["Speed"]);
+                            if (smbiosType == 0)
+                            {
+                                try { smbiosType = Convert.ToUInt32(obj["SMBIOSMemoryType"]); } catch { }
+                            }
                             count++;
                         }
 
@@ -88,8 +102,20 @@ namespace lanlanlu_toolkit.Services
                         }
                         catch { }
 
+                        string memTypeStr = smbiosType switch
+                        {
+                            24 => "DDR3",
+                            26 => "DDR4",
+                            34 => "DDR5",
+                            30 => "LPDDR4",
+                            35 => "LPDDR5",
+                            _ => ""
+                        };
+
                         double gb = totalBytes / (1024.0 * 1024.0 * 1024.0);
-                        ram = $"{gb:F0} GB ({count}/{Math.Max(count, totalSlots)}) @ {speed} MHz";
+                        string speedStr = speed > 0 ? $" @ {speed} MHz" : "";
+                        string memPart = !string.IsNullOrEmpty(memTypeStr) ? $" {memTypeStr}" : "";
+                        ram = $"{gb:F0} GB ({count}/{Math.Max(count, totalSlots)}){memPart}{speedStr}".Trim();
                     }
                     catch { }
 
@@ -101,9 +127,11 @@ namespace lanlanlu_toolkit.Services
                         var gpuList = new List<string>();
                         foreach (var obj in collection)
                         {
-                            string? name = obj["Name"]?.ToString()?.Trim();
+                            string name = CleanGpuName(obj["Name"]?.ToString() ?? "");
                             if (!string.IsNullOrEmpty(name) && !gpuList.Contains(name)) gpuList.Add(name);
                         }
+                        // Order discrete GPUs first (e.g. NVIDIA, AMD RX, Intel Arc) before integrated graphics
+                        gpuList = gpuList.OrderBy(g => IsIntegratedGpu(g) ? 1 : 0).ToList();
                         gpu = gpuList.Count > 0 ? string.Join("\n", gpuList) : gpu;
                     }
                     catch { }
@@ -138,7 +166,7 @@ namespace lanlanlu_toolkit.Services
                     }
                     catch { }
 
-                    // Motherboard
+                    // Motherboard & BIOS
                     string mb = "Unknown Motherboard";
                     try
                     {
@@ -149,6 +177,22 @@ namespace lanlanlu_toolkit.Services
                             string manufacturer = obj["Manufacturer"]?.ToString() ?? "";
                             string product = obj["Product"]?.ToString() ?? "";
                             mb = $"{manufacturer} {product}".Trim();
+                            break;
+                        }
+                    }
+                    catch { }
+
+                    try
+                    {
+                        using var biosSearcher = new ManagementObjectSearcher("SELECT SMBIOSBIOSVersion FROM Win32_BIOS");
+                        using var biosCol = biosSearcher.Get();
+                        foreach (var b in biosCol)
+                        {
+                            string biosVer = b["SMBIOSBIOSVersion"]?.ToString()?.Trim() ?? "";
+                            if (!string.IsNullOrEmpty(biosVer))
+                            {
+                                mb = $"{mb} (BIOS: {biosVer})".Trim();
+                            }
                             break;
                         }
                     }
@@ -185,6 +229,33 @@ namespace lanlanlu_toolkit.Services
 
             HardwareInfoUpdated?.Invoke();
             return Cache;
+        }
+
+        private static string CleanCpuName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return name;
+            string cleaned = name.Split('@')[0].Trim();
+            cleaned = cleaned.Replace("(R)", "").Replace("(TM)", "").Replace("CPU", "").Trim();
+            cleaned = System.Text.RegularExpressions.Regex.Replace(cleaned, @"\s+with\s+Radeon(?:\s+Vega)?\s+Graphics", "", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            cleaned = System.Text.RegularExpressions.Regex.Replace(cleaned, @"\s{2,}", " ").Trim();
+            return cleaned;
+        }
+
+        private static string CleanGpuName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return name;
+            string cleaned = name.Replace("(R)", "").Replace("(TM)", "").Trim();
+            cleaned = System.Text.RegularExpressions.Regex.Replace(cleaned, @"\s{2,}", " ").Trim();
+            return cleaned;
+        }
+
+        private static bool IsIntegratedGpu(string name)
+        {
+            if (string.IsNullOrEmpty(name)) return false;
+            return name.Contains("Radeon Graphics", StringComparison.OrdinalIgnoreCase) ||
+                   name.Contains("UHD Graphics", StringComparison.OrdinalIgnoreCase) ||
+                   name.Contains("HD Graphics", StringComparison.OrdinalIgnoreCase) ||
+                   name.Contains("Iris", StringComparison.OrdinalIgnoreCase);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Text;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -101,14 +102,6 @@ namespace lanlanlu_toolkit.Views
             GreetingIcon.Glyph = iconGlyph;
         }
 
-        private void FeatureTaskMgr_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("taskmgr.exe") { UseShellExecute = true });
-            }
-            catch { }
-        }
         private void FeatureInput_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(InputTesterPage));
         private void FeatureRepair_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(SystemRepairPage));
         private void FeatureCrash_Click(object sender, RoutedEventArgs e) => Frame.Navigate(typeof(CrashReportPage));
@@ -138,6 +131,63 @@ namespace lanlanlu_toolkit.Views
         private async void GpuCard_Tapped(object sender, RoutedEventArgs e) => await CopyToClipboardAsync(GpuName, GpuCopyIcon);
         private async void RamCard_Tapped(object sender, RoutedEventArgs e) => await CopyToClipboardAsync(RamSize, RamCopyIcon);
         private async void OsCard_Tapped(object sender, RoutedEventArgs e) => await CopyToClipboardAsync(OsVersion, OsCopyIcon);
+        private async void RefreshSpecs_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                RefreshSpecsBtn.IsEnabled = false;
+
+                string detecting = LocalizationHelper.GetString("HomePage_Detecting");
+                CpuName = detecting;
+                GpuName = detecting;
+                RamSize = detecting;
+                MotherboardModel = detecting;
+                OsVersion = detecting;
+                StorageInfo = detecting;
+
+                await HardwareProvider.ScanSystemInfoAsync(forceRefresh: true);
+                LoadFromCache();
+
+                NotificationService.Show(
+                    LocalizationHelper.GetString("Notification_Refreshed_Title"),
+                    LocalizationHelper.GetString("Notification_Refreshed_Msg"),
+                    InfoBarSeverity.Success);
+            }
+            catch { }
+            finally
+            {
+                RefreshSpecsBtn.IsEnabled = true;
+            }
+        }
+
+        private static string FormatForReport(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return text;
+            var lines = text.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            if (lines.Length <= 1) return text;
+            return string.Join(" / ", lines);
+        }
+
+        private async void CopyAllSpecs_Click(object sender, RoutedEventArgs e)
+        {
+            var sb = new StringBuilder();
+            string header = LocalizationHelper.GetString("HomePage_Specs_Report_Header");
+            if (!string.IsNullOrEmpty(header))
+            {
+                sb.AppendLine(header);
+            }
+
+            sb.AppendLine($"- {LocalizationHelper.GetString("HomePage_OS.Text")}: {FormatForReport(OsVersion)}");
+            sb.AppendLine($"- {LocalizationHelper.GetString("HomePage_CPU.Text")}: {FormatForReport(CpuName)}");
+            sb.AppendLine($"- {LocalizationHelper.GetString("HomePage_Motherboard.Text")}: {FormatForReport(MotherboardModel)}");
+            sb.AppendLine($"- {LocalizationHelper.GetString("HomePage_RAM.Text")}: {FormatForReport(RamSize)}");
+            sb.AppendLine($"- {LocalizationHelper.GetString("HomePage_GPU.Text")}: {FormatForReport(GpuName)}");
+            sb.AppendLine($"- {LocalizationHelper.GetString("HomePage_Storage.Text")}: {FormatForReport(StorageInfo)}");
+
+            string text = sb.ToString().TrimEnd();
+            await ClipboardService.CopyTextAsync(text, CopyAllSpecsIcon, showNotification: false);
+        }
+
         private async void StorageCard_Tapped(object sender, RoutedEventArgs e) => await CopyToClipboardAsync(StorageInfo, StorageCopyIcon);
         private async void MotherboardCard_Tapped(object sender, RoutedEventArgs e) => await CopyToClipboardAsync(MotherboardModel, MotherboardCopyIcon);
 

@@ -310,16 +310,6 @@ namespace lanlanlu_toolkit
 
             _searchableTools.Add(new ToolItem
             {
-                Title = LocalizationHelper.GetString("HomePage_Feature_TaskMgr_Title/Text"),
-                Description = LocalizationHelper.GetString("HomePage_Feature_TaskMgr_Desc/Text"),
-                Icon = "\uE9D9",
-                Tag = "TaskMgr",
-                Category = LocalizationHelper.GetString("Category_System"),
-                Keywords = new() { "工作管理員", "效能", "taskmgr", "task manager", "cpu", "gpu", "ram", "記憶體", "顯卡", "處理器", "行程", "處理程序", "結束工作", "效能監控", "performance" }
-            });
-
-            _searchableTools.Add(new ToolItem
-            {
                 Title = LocalizationHelper.GetString("Nav_InputTesterPage/Content"),
                 Description = LocalizationHelper.GetString("InputTesterPage_Subtitle/Text"),
                 Icon = "\uE765",
@@ -462,16 +452,6 @@ namespace lanlanlu_toolkit
 
         public void NavigateToTool(string tag)
         {
-            if (tag == "TaskMgr")
-            {
-                try
-                {
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("taskmgr.exe") { UseShellExecute = true });
-                }
-                catch { }
-                return;
-            }
-
             if (tag == "SettingsPage")
             {
                 if (ContentFrame.SourcePageType != typeof(SettingsPage))
