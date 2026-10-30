@@ -36,7 +36,7 @@
                         <TextBlock x:Name="PageHeaderTitleTextBlock" x:Uid="ResetFileTypeDefaultsPage_Title" Style="{ThemeResource TitleTextBlockStyle}" />
                         <TextBlock x:Name="PageHeaderDescTextBlock" x:Uid="ResetFileTypeDefaultsPage_Desc" Style="{StaticResource PageHeaderSubtitleStyle}" />
                     </StackPanel>
-                    <Button x:Name="OpenSettingsBtn"
+                    <Button x:Name="OpenSettingsBtn" Style="{StaticResource StandardActionButtonStyle}"
                             Grid.Column="1"
                             Click="OpenSettingsBtn_Click"
                             VerticalAlignment="Center">
@@ -171,7 +171,7 @@
 
                                 <!-- Left Badge: Extension Display -->
                                 <Border Width="56" Height="56"
-                                        CornerRadius="8"
+                                        CornerRadius="{ThemeResource OverlayCornerRadius}"
                                         Background="{ThemeResource SubtleFillColorSecondaryBrush}"
                                         VerticalAlignment="Center">
                                     <TextBlock x:Name="TargetExtBadgeTextBlock"
@@ -190,7 +190,7 @@
                                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                                    VerticalAlignment="Center" />
                                         <Border x:Name="StatusBadgeBorder"
-                                                CornerRadius="4"
+                                                CornerRadius="{ThemeResource ControlCornerRadius}"
                                                 Padding="8,2"
                                                 Background="{ThemeResource SubtleFillColorSecondaryBrush}"
                                                 VerticalAlignment="Center">
@@ -297,6 +297,7 @@
                                         <TextBlock x:Uid="ResetFileTypeDefaultsPage_HelpQ3_Desc" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                                     </StackPanel>
                                     <Button x:Name="RegistryNavBtn"
+                                            Style="{StaticResource StandardActionButtonStyle}"
                                             Grid.Column="1"
                                             Click="RegistryNavBtn_Click"
                                             x:Uid="ResetFileTypeDefaultsPage_OpenRegBtn"

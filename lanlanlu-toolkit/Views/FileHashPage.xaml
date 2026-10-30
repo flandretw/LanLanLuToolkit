@@ -13,6 +13,7 @@
         <!-- Seamless Borderless ReadOnly Hash TextBox Style -->
         <Style x:Key="HashResultTextBoxStyle" TargetType="TextBox">
             <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="IsTabStop" Value="False" />
             <Setter Property="FontFamily" Value="Cascadia Code, Consolas" />
             <Setter Property="FontSize" Value="13" />
             <Setter Property="VerticalAlignment" Value="Center" />

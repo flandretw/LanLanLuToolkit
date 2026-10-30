@@ -225,7 +225,7 @@
     <value>按鍵音效</value>
   </data>
   <data name="InputTesterPage_Setting_SoundDesc.Text" xml:space="preserve">
-    <value>在按下按鍵或點擊滑鼠時播放聲音回饋。</value>
+    <value>在按下鍵盤按鍵或按一下滑鼠時播放聲音回饋。</value>
   </data>
   <data name="InputTesterPage_ResetBtn.Text" xml:space="preserve">
     <value>重設紀錄</value>
@@ -249,10 +249,10 @@
     <value>{0:F1} ms</value>
   </data>
   <data name="InputTesterPage_Key_CodeFormat" xml:space="preserve">
-    <value>鍵碼: 0x{1:X2}</value>
+    <value>鍵碼：0x{1:X2}</value>
   </data>
   <data name="InputTesterPage_Key_CodeEmpty.Text" xml:space="preserve">
-    <value>鍵碼: -</value>
+    <value>鍵碼：-</value>
   </data>
   <data name="InputTesterPage_Key_None" xml:space="preserve">
     <value>無</value>
@@ -294,7 +294,7 @@
     <value>微動開關連點測試</value>
   </data>
   <data name="InputTesterPage_Mouse_ChatterTest_Desc.Text" xml:space="preserve">
-    <value>在下方區域快速按一下滑鼠按鍵，測試微動開關是否有異常連點現象。</value>
+    <value>在下方區域快速連續按下滑鼠按鍵，測試微動開關是否有異常連點現象。</value>
   </data>
   <data name="InputTesterPage_Mouse_Threshold.Text" xml:space="preserve">
     <value>連點判定臨界值</value>
@@ -600,7 +600,7 @@
     <value>重新掃描</value>
   </data>
   <data name="CrashReportPage_OpenDumpFolderBtn.Text" xml:space="preserve">
-    <value>開啟 Dump 資料夾</value>
+    <value>開啟傾印資料夾</value>
   </data>
   <data name="CrashReportPage_ExportBtn.Text" xml:space="preserve">
     <value>匯出診斷報告</value>
@@ -672,13 +672,13 @@
     <value>當機診斷報告已成功儲存至檔案。</value>
   </data>
   <data name="CrashReportPage_DumpFolder_NotFound" xml:space="preserve">
-    <value>Minidump 資料夾不存在或尚未產生任何傾印檔案。</value>
+    <value>找不到傾印資料夾，目前尚未產生核心傾印檔案。</value>
   </data>
   <data name="CrashReportPage_None" xml:space="preserve">
     <value>無紀錄</value>
   </data>
   <data name="CrashReportPage_Scanning.Text" xml:space="preserve">
-    <value>正在掃描事件記錄與核心傾印檔案...</value>
+    <value>正在掃描事件記錄與核心傾印檔案……</value>
   </data>
   <data name="CrashReportPage_Badge_KernelCrash" xml:space="preserve">
     <value>核心當機</value>
@@ -700,6 +700,66 @@
   </data>
   <data name="CrashReportPage_RawLog_None" xml:space="preserve">
     <value>無其他詳細紀錄。</value>
+  </data>
+  <data name="CrashReportPage_LearnMore.Text" xml:space="preserve">
+    <value>深入了解</value>
+  </data>
+  <data name="CrashReportPage_Collapse.Text" xml:space="preserve">
+    <value>收合資訊</value>
+  </data>
+  <data name="CrashReportPage_SearchOnline.Text" xml:space="preserve">
+    <value>線上搜尋代碼</value>
+  </data>
+  <data name="CrashReportPage_Category_BSOD" xml:space="preserve">
+    <value>系統核心當機</value>
+  </data>
+  <data name="CrashReportPage_Category_AppCrash" xml:space="preserve">
+    <value>應用程式錯誤</value>
+  </data>
+  <data name="CrashReportPage_Category_AppHang" xml:space="preserve">
+    <value>應用程式停止回應</value>
+  </data>
+  <data name="CrashReportPage_Healthy_BSOD_Title.Text" xml:space="preserve">
+    <value>未偵測到核心當機記錄</value>
+  </data>
+  <data name="CrashReportPage_Healthy_BSOD_Desc.Text" xml:space="preserve">
+    <value>近期未偵測到系統核心當機傾印記錄。</value>
+  </data>
+  <data name="CrashReportPage_Healthy_AppCrash_Title.Text" xml:space="preserve">
+    <value>無應用程式錯誤</value>
+  </data>
+  <data name="CrashReportPage_Healthy_AppCrash_Desc.Text" xml:space="preserve">
+    <value>近期未發現應用程式當機或例外終止事件。</value>
+  </data>
+  <data name="CrashReportPage_Healthy_AppHang_Title.Text" xml:space="preserve">
+    <value>無應用程式凍結記錄</value>
+  </data>
+  <data name="CrashReportPage_Healthy_AppHang_Desc.Text" xml:space="preserve">
+    <value>近期未發現應用程式停止回應事件。</value>
+  </data>
+  <data name="CrashReportPage_Status_Normal.Text" xml:space="preserve">
+    <value>狀態正常</value>
+  </data>
+  <data name="CrashReportPage_ShowMore" xml:space="preserve">
+    <value>顯示其餘 {0} 筆記錄……</value>
+  </data>
+  <data name="CrashReportPage_Subtitle_SummaryFormat" xml:space="preserve">
+    <value>共 {0} 筆記錄 · 最近一筆：{1}</value>
+  </data>
+  <data name="CrashReportPage_Count_Total" xml:space="preserve">
+    <value>共 {0} 筆記錄</value>
+  </data>
+  <data name="CrashReportPage_Count_Filtered" xml:space="preserve">
+    <value>已篩選 {0} / {1} 筆記錄</value>
+  </data>
+  <data name="CrashReportPage_NoSearchMatch_Title" xml:space="preserve">
+    <value>找不到相符項目</value>
+  </data>
+  <data name="CrashReportPage_NoSearchMatch_Desc" xml:space="preserve">
+    <value>沒有符合搜尋關鍵字的事件記錄。</value>
+  </data>
+  <data name="CrashReportPage_NoSearchMatch_Subtitle" xml:space="preserve">
+    <value>找不到符合「{0}」的記錄</value>
   </data>
   <data name="CrashReport_Export_Title" xml:space="preserve">
     <value># Windows 系統當機診斷報告</value>
@@ -744,7 +804,7 @@
     <value>系統核心嘗試在過高的插斷要求層級存取可分頁記憶體。</value>
   </data>
   <data name="BugCheck_0x0000000A_Rec" xml:space="preserve">
-    <value>通常是由損壞或不相容的硬體驅動程式 (例如網路卡、音效卡或防毒軟體驅動程式) 引起，亦可能為記憶體損壞。建議更新相關驅動程式或執行 Windows 記憶體診斷。</value>
+    <value>通常是由損壞或不相容的硬體驅動程式（例如網路卡、音效卡或防毒軟體）引起，亦可能為記憶體損壞。建議更新相關驅動程式或執行 Windows 記憶體診斷。</value>
   </data>
   <data name="BugCheck_0x0000001E_Desc" xml:space="preserve">
     <value>核心模式程式產生的例外狀況未被錯誤處理常式攔截。</value>
@@ -756,7 +816,7 @@
     <value>在執行系統服務常式時發生了未處理的例外狀況。</value>
   </data>
   <data name="BugCheck_0x0000003B_Rec" xml:space="preserve">
-    <value>極高機率由顯示卡驅動程式 (如 nvlddmkm.sys、amdkmdag.sys)、系統核心檔案損毀或分頁集區損壞所引起。建議重新安裝顯示卡驅動程式，並執行系統修復工具。</value>
+    <value>極高機率由顯示卡驅動程式（例如 nvlddmkm.sys 或 amdkmdag.sys）、系統核心檔案損毀或分頁集區損壞所引起。建議重新安裝顯示卡驅動程式，並執行系統修復工具。</value>
   </data>
   <data name="BugCheck_0x00000050_Desc" xml:space="preserve">
     <value>系統參照了非分頁集區中的無效記憶體位址。</value>
@@ -786,10 +846,10 @@
     <value>驅動程式在過高的 IRQL 下嘗試存取無效的記憶體位址。</value>
   </data>
   <data name="BugCheck_0x000000D1_Rec" xml:space="preserve">
-    <value>最常見的系統當機代碼之一。請查看導致當機的驅動程式名稱 (如網路卡、音效卡、防毒核心模組等)，並下載安裝最新版本的驅動程式。</value>
+    <value>最常見的系統當機代碼之一。請查看導致當機的驅動程式名稱（例如網路卡、音效卡或防毒軟體），並下載安裝最新版本的驅動程式。</value>
   </data>
   <data name="BugCheck_0x000000EF_Desc" xml:space="preserve">
-    <value>關鍵系統處理程序意外終止 (例如 csrss.exe 或 wininit.exe)。</value>
+    <value>關鍵系統處理程序意外終止（例如 csrss.exe 或 wininit.exe）。</value>
   </data>
   <data name="BugCheck_0x000000EF_Rec" xml:space="preserve">
     <value>可能為系統核心損毀、惡意軟體感染或硬碟壞軌導致系統重要元件當機。建議執行 DISM 與 SFC 系統修復指令。</value>
@@ -1215,7 +1275,7 @@
     <value>診斷與意見反映</value>
   </data>
   <data name="SettingsPage_RescanHardware_Title.Text" xml:space="preserve">
-    <value>重新掃描硬體變更</value>
+    <value>掃描硬體變更</value>
   </data>
   <data name="SettingsPage_RescanHardware_Desc.Text" xml:space="preserve">
     <value>清除硬體快取並重新偵測 CPU、GPU、記憶體、主機板與磁碟等系統規格。</value>
@@ -1305,7 +1365,7 @@
     <value>清除比對文字</value>
   </data>
   <data name="FileHashPage_Status_Calculating" xml:space="preserve">
-    <value>計算中...</value>
+    <value>計算中……</value>
   </data>
   <data name="FileHashPage_Status_Completed" xml:space="preserve">
     <value>已完成</value>

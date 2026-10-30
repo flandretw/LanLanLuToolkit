@@ -211,9 +211,9 @@ namespace lanlanlu_toolkit.Views
             // UI State: Starting calculation
             HashProgressRing.IsActive = true;
             HashProgressRing.Visibility = Visibility.Visible;
-            HashProgressBar.Visibility = Visibility.Visible;
+            HashProgressBar.Visibility = Visibility.Collapsed;
             HashProgressBar.Value = 0;
-            HashProgressPercentText.Visibility = Visibility.Visible;
+            HashProgressPercentText.Visibility = Visibility.Collapsed;
             HashProgressPercentText.Text = "0%";
 
             CancelHashBtn.Visibility = Visibility.Visible;
@@ -225,27 +225,38 @@ namespace lanlanlu_toolkit.Views
             CopyMd5Btn.IsEnabled = false;
             CopySha512Btn.IsEnabled = false;
 
-            // Switch from description to calculating indicator
-            Sha256DescText.Visibility = Visibility.Collapsed;
-            Sha1DescText.Visibility = Visibility.Collapsed;
-            Md5DescText.Visibility = Visibility.Collapsed;
-            Sha512DescText.Visibility = Visibility.Collapsed;
+            bool isRecalculation = _calculatedHashes.Count > 0;
 
-            string calcText = LocalizationHelper.GetString("FileHashPage_Status_Calculating") ?? "計算中...";
-            Sha256TextBox.Text = calcText;
-            Sha1TextBox.Text = calcText;
-            Md5TextBox.Text = calcText;
-            Sha512TextBox.Text = calcText;
+            // Only switch from description to calculating indicator on initial run;
+            // when recalculating an existing file, keep values displayed to prevent 1-frame flickering
+            if (!isRecalculation)
+            {
+                Sha256DescText.Visibility = Visibility.Collapsed;
+                Sha1DescText.Visibility = Visibility.Collapsed;
+                Md5DescText.Visibility = Visibility.Collapsed;
+                Sha512DescText.Visibility = Visibility.Collapsed;
 
-            Sha256TextBox.Visibility = Visibility.Visible;
-            Sha1TextBox.Visibility = Visibility.Visible;
-            Md5TextBox.Visibility = Visibility.Visible;
-            Sha512TextBox.Visibility = Visibility.Visible;
+                string calcText = LocalizationHelper.GetString("FileHashPage_Status_Calculating") ?? "計算中...";
+                Sha256TextBox.Text = calcText;
+                Sha1TextBox.Text = calcText;
+                Md5TextBox.Text = calcText;
+                Sha512TextBox.Text = calcText;
+
+                Sha256TextBox.Visibility = Visibility.Visible;
+                Sha1TextBox.Visibility = Visibility.Visible;
+                Md5TextBox.Visibility = Visibility.Visible;
+                Sha512TextBox.Visibility = Visibility.Visible;
+            }
 
             var progress = new Progress<int>(percent =>
             {
                 if (ReferenceEquals(_hashCts, currentCts))
                 {
+                    if (HashProgressBar.Visibility != Visibility.Visible)
+                    {
+                        HashProgressBar.Visibility = Visibility.Visible;
+                        HashProgressPercentText.Visibility = Visibility.Visible;
+                    }
                     HashProgressBar.Value = percent;
                     HashProgressPercentText.Text = $"{percent}%";
                 }
@@ -361,6 +372,7 @@ namespace lanlanlu_toolkit.Views
                     RecalculateIcon.Glyph = "\uE72C"; // Recalculate icon
                     RecalculateBtnText.Text = LocalizationHelper.GetString("FileHashPage_CalculateButton.Text") ?? "重新計算";
                     RecalculateBtn.IsEnabled = !string.IsNullOrEmpty(_selectedFilePath);
+                    RecalculateBtn.Focus(FocusState.Programmatic);
                 }
             }
         }

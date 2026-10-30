@@ -87,6 +87,15 @@
             </Style>
 
             <!-- 4. Micro Components & Utilities (Copy, Paste & Selection Standards) -->
+            <!-- Subtle Transparent Action Button (Text or Icon + Text, transparent background) -->
+            <Style x:Key="SubtleButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
+                <Setter Property="Padding" Value="8,4" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+
             <!-- Inline Micro Copy Button (Icon-only, 28x28) -->
             <Style x:Key="SubtleCopyButtonStyle" TargetType="Button">
                 <Setter Property="Padding" Value="4" />

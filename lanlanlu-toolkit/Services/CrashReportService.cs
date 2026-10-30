@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.UI.Xaml;
+using Microsoft.Win32;
 
 namespace lanlanlu_toolkit.Services
 {
@@ -18,8 +22,14 @@ namespace lanlanlu_toolkit.Services
         DotNetCrash
     }
 
-    public class CrashReportItem
+    public class CrashReportItem : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public CrashType Type { get; set; }
         public DateTime Timestamp { get; set; }
@@ -40,6 +50,46 @@ namespace lanlanlu_toolkit.Services
         public string RawDetails { get; set; } = string.Empty;
         public string Recommendation { get; set; } = string.Empty;
         public bool HasDumpFile => !string.IsNullOrEmpty(FilePathOrDump) && File.Exists(FilePathOrDump);
+
+        private bool _isExpanded;
+        public bool IsExpanded
+        {
+            get => _isExpanded;
+            set
+            {
+                if (_isExpanded != value)
+                {
+                    _isExpanded = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(ExpandedVisibility));
+                    OnPropertyChanged(nameof(LearnMoreText));
+                    OnPropertyChanged(nameof(ChevronGlyph));
+                }
+            }
+        }
+
+        public Visibility ExpandedVisibility => IsExpanded ? Visibility.Visible : Visibility.Collapsed;
+        public string LearnMoreText => IsExpanded
+            ? (LocalizationHelper.GetString("CrashReportPage_Collapse.Text") ?? "收合資訊")
+            : (LocalizationHelper.GetString("CrashReportPage_LearnMore.Text") ?? "深入了解");
+        public string ChevronGlyph => IsExpanded ? "\uE70E" : "\uE70D";
+
+        public string FormattedSubtitle
+        {
+            get
+            {
+                string timeStr = Timestamp.ToString("yyyy/MM/dd HH:mm:ss");
+                if (!string.IsNullOrEmpty(FaultingModule) &&
+                    !Title.StartsWith(FaultingModule, StringComparison.OrdinalIgnoreCase) &&
+                    !string.Equals(SourceOrApp, FaultingModule, StringComparison.OrdinalIgnoreCase))
+                {
+                    return $"{FaultingModule} · {timeStr}";
+                }
+                return timeStr;
+            }
+        }
+
+        public string SearchQuery => $"{SourceOrApp} {ErrorCode} {FaultingModule}".Trim();
 
         public string DisplayIcon => Type switch
         {
@@ -124,6 +174,36 @@ namespace lanlanlu_toolkit.Services
             [0xC00000FD] = "STATUS_STACK_OVERFLOW",
             [0xE0434352] = "CLR_EXCEPTION"
         };
+
+        /// <summary>
+        /// Retrieves the configured dump directory from Windows registry (HKLM\SYSTEM\CurrentControlSet\Control\CrashControl\MinidumpDir),
+        /// expanding any environment variables and falling back to %WINDIR%\Minidump if unset or inaccessible.
+        /// </summary>
+        public static string GetConfiguredDumpDirectory()
+        {
+            try
+            {
+                using var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\CrashControl");
+                if (key != null)
+                {
+                    var val = key.GetValue("MinidumpDir") as string;
+                    if (!string.IsNullOrWhiteSpace(val))
+                    {
+                        string expanded = Environment.ExpandEnvironmentVariables(val);
+                        if (!string.IsNullOrWhiteSpace(expanded))
+                        {
+                            return expanded;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggingService.Log($"[CrashReportService] Failed to read CrashControl MinidumpDir: {ex.Message}");
+            }
+
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Minidump");
+        }
 
         /// <summary>
         /// Asynchronously scans both System and Application Event Logs as well as Minidump directory.
@@ -263,12 +343,22 @@ namespace lanlanlu_toolkit.Services
                     LoggingService.Log($"[CrashReportService] Failed to read Application Event Log: {ex.Message}");
                 }
 
-                // 3. Scan Minidump files from C:\Windows\Minidump and enhance items
+                // 3. Scan Minidump files from configured directory and default %WINDIR%\Minidump
                 try
                 {
-                    string minidumpDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Minidump");
-                    if (Directory.Exists(minidumpDir))
+                    var dumpDirectories = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    string configuredDir = GetConfiguredDumpDirectory();
+                    if (!string.IsNullOrWhiteSpace(configuredDir))
                     {
+                        dumpDirectories.Add(configuredDir);
+                    }
+                    string defaultDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Minidump");
+                    dumpDirectories.Add(defaultDir);
+
+                    foreach (var minidumpDir in dumpDirectories)
+                    {
+                        if (!Directory.Exists(minidumpDir)) continue;
+
                         var dumpFiles = Directory.GetFiles(minidumpDir, "*.dmp");
                         foreach (var dumpPath in dumpFiles)
                         {

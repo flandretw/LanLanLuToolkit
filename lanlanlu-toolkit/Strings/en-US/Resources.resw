@@ -697,6 +697,66 @@
   <data name="CrashReportPage_RawLog_None" xml:space="preserve">
     <value>No additional raw details available.</value>
   </data>
+  <data name="CrashReportPage_LearnMore.Text" xml:space="preserve">
+    <value>Learn more</value>
+  </data>
+  <data name="CrashReportPage_Collapse.Text" xml:space="preserve">
+    <value>Collapse</value>
+  </data>
+  <data name="CrashReportPage_SearchOnline.Text" xml:space="preserve">
+    <value>Search online</value>
+  </data>
+  <data name="CrashReportPage_Category_BSOD" xml:space="preserve">
+    <value>Kernel Crashes</value>
+  </data>
+  <data name="CrashReportPage_Category_AppCrash" xml:space="preserve">
+    <value>Application Errors</value>
+  </data>
+  <data name="CrashReportPage_Category_AppHang" xml:space="preserve">
+    <value>Application Hangs</value>
+  </data>
+  <data name="CrashReportPage_Healthy_BSOD_Title.Text" xml:space="preserve">
+    <value>No Kernel Crash Records Detected</value>
+  </data>
+  <data name="CrashReportPage_Healthy_BSOD_Desc.Text" xml:space="preserve">
+    <value>No kernel crash dump records were detected in recent logs.</value>
+  </data>
+  <data name="CrashReportPage_Healthy_AppCrash_Title.Text" xml:space="preserve">
+    <value>No Application Errors</value>
+  </data>
+  <data name="CrashReportPage_Healthy_AppCrash_Desc.Text" xml:space="preserve">
+    <value>No application crashes or abnormal termination events detected recently.</value>
+  </data>
+  <data name="CrashReportPage_Healthy_AppHang_Title.Text" xml:space="preserve">
+    <value>No Application Hangs</value>
+  </data>
+  <data name="CrashReportPage_Healthy_AppHang_Desc.Text" xml:space="preserve">
+    <value>No unresponsive application events detected recently.</value>
+  </data>
+  <data name="CrashReportPage_Status_Normal.Text" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="CrashReportPage_ShowMore" xml:space="preserve">
+    <value>Show remaining {0} records...</value>
+  </data>
+  <data name="CrashReportPage_Subtitle_SummaryFormat" xml:space="preserve">
+    <value>{0} records · Latest: {1}</value>
+  </data>
+  <data name="CrashReportPage_Count_Total" xml:space="preserve">
+    <value>Total {0} records</value>
+  </data>
+  <data name="CrashReportPage_Count_Filtered" xml:space="preserve">
+    <value>Filtered {0} / {1} records</value>
+  </data>
+  <data name="CrashReportPage_NoSearchMatch_Title" xml:space="preserve">
+    <value>No Matching Results Found</value>
+  </data>
+  <data name="CrashReportPage_NoSearchMatch_Desc" xml:space="preserve">
+    <value>No crash events match your search query.</value>
+  </data>
+  <data name="CrashReportPage_NoSearchMatch_Subtitle" xml:space="preserve">
+    <value>No records matching "{0}"</value>
+  </data>
   <data name="CrashReport_Export_Title" xml:space="preserve">
     <value># Windows Crash &amp; Diagnostic Report</value>
   </data>
@@ -1211,7 +1271,7 @@
     <value>Diagnostics &amp; feedback</value>
   </data>
   <data name="SettingsPage_RescanHardware_Title.Text" xml:space="preserve">
-    <value>Rescan Hardware Changes</value>
+    <value>Scan for Hardware Changes</value>
   </data>
   <data name="SettingsPage_RescanHardware_Desc.Text" xml:space="preserve">
     <value>Clear hardware cache and re-detect CPU, GPU, RAM, motherboard, and disk specs.</value>
@@ -1313,7 +1373,7 @@
     <value>Cancel</value>
   </data>
   <data name="CrashReportPage_CheckDumpConfigBtn.Text" xml:space="preserve">
-    <value>Check System Minidump Settings</value>
+    <value>Check Memory Dump Settings</value>
   </data>
   <data name="CrashDump_Disabled" xml:space="preserve">
     <value>Disabled (No crash dump files will be created)</value>
