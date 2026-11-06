@@ -5,13 +5,13 @@ using System.Diagnostics;
 using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using Windows.ApplicationModel.DataTransfer;
 using Windows.UI;
 using lanlanlu_toolkit.Services;
 
@@ -19,14 +19,58 @@ namespace lanlanlu_toolkit.Views
 {
     public sealed partial class SystemRepairPage : Page
     {
+        private static SystemRepairPage? _currentInstance;
         private bool _isProcessRunning = false;
         private bool _allowNavigation = false;
         private DispatcherTimer? _timer;
         private readonly Stopwatch _stopwatch = new();
         private readonly StepStatus[] _stepStatuses = new StepStatus[5];
         private readonly StringBuilder _logBuilder = new();
+        private CancellationTokenSource? _repairCts;
+        private Process? _activeProcess;
+        private readonly object _processLock = new();
 
         public static bool IsAnyProcessRunning { get; private set; } = false;
+
+        /// <summary>
+        /// Cancels any active repair pipeline and terminates spawned DISM / SFC child processes.
+        /// </summary>
+        public static void CancelActiveRepair()
+        {
+            _currentInstance?.CancelCurrentRepair();
+        }
+
+        private void CancelCurrentRepair()
+        {
+            try
+            {
+                _repairCts?.Cancel();
+            }
+            catch (ObjectDisposedException) { }
+
+            lock (_processLock)
+            {
+                if (_activeProcess != null)
+                {
+                    try
+                    {
+                        if (!_activeProcess.HasExited)
+                        {
+                            _activeProcess.Kill(entireProcessTree: true);
+                            LoggingService.Log("RepairTool: Terminated active child process upon user exit.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LoggingService.Log($"RepairTool process kill error: {ex.Message}");
+                    }
+                }
+            }
+
+            _isProcessRunning = false;
+            IsAnyProcessRunning = false;
+            StopTimer(isCompleted: false);
+        }
 
         private enum StepStatus
         {
@@ -51,6 +95,7 @@ namespace lanlanlu_toolkit.Views
 
         public SystemRepairPage()
         {
+            _currentInstance = this;
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -93,6 +138,7 @@ namespace lanlanlu_toolkit.Views
                 if (result == ContentDialogResult.Primary)
                 {
                     _allowNavigation = true;
+                    CancelCurrentRepair();
                     if (e.NavigationMode == NavigationMode.Back)
                         this.Frame.GoBack();
                     else
@@ -371,6 +417,9 @@ namespace lanlanlu_toolkit.Views
             StartTimer();
 
             var stepResults = new List<(string Title, CommandResult Result)>();
+            _repairCts?.Dispose();
+            _repairCts = new CancellationTokenSource();
+            var token = _repairCts.Token;
 
             try
             {
@@ -387,7 +436,8 @@ namespace lanlanlu_toolkit.Views
                     string t1 = LocalizationHelper.GetString("SystemRepairPage_CheckHealth_Title.Text") ?? "CheckHealth";
                     UpdateStepVisual(1, StepStatus.Running);
                     HeroStepStatusText.Text = FormatStepStatus(1, 4, t1);
-                    var res1 = await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /CheckHealth", currentStep: 1, totalSteps: 4);
+                    var res1 = await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /CheckHealth", currentStep: 1, totalSteps: 4, cancellationToken: token);
+                    if (token.IsCancellationRequested) { ResetToIdleState(); return; }
                     UpdateStepVisual(1, DetermineStepStatus(1, res1));
                     stepResults.Add((t1, res1));
 
@@ -395,7 +445,8 @@ namespace lanlanlu_toolkit.Views
                     string t2 = LocalizationHelper.GetString("SystemRepairPage_ScanHealth_Title.Text") ?? "ScanHealth";
                     UpdateStepVisual(2, StepStatus.Running);
                     HeroStepStatusText.Text = FormatStepStatus(2, 4, t2);
-                    var res2 = await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /ScanHealth", currentStep: 2, totalSteps: 4);
+                    var res2 = await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /ScanHealth", currentStep: 2, totalSteps: 4, cancellationToken: token);
+                    if (token.IsCancellationRequested) { ResetToIdleState(); return; }
                     UpdateStepVisual(2, DetermineStepStatus(2, res2));
                     stepResults.Add((t2, res2));
 
@@ -403,7 +454,8 @@ namespace lanlanlu_toolkit.Views
                     string t3 = LocalizationHelper.GetString("SystemRepairPage_RestoreHealth_Title.Text") ?? "RestoreHealth";
                     UpdateStepVisual(3, StepStatus.Running);
                     HeroStepStatusText.Text = FormatStepStatus(3, 4, t3);
-                    var res3 = await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /RestoreHealth", currentStep: 3, totalSteps: 4);
+                    var res3 = await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /RestoreHealth", currentStep: 3, totalSteps: 4, cancellationToken: token);
+                    if (token.IsCancellationRequested) { ResetToIdleState(); return; }
                     UpdateStepVisual(3, DetermineStepStatus(3, res3));
                     stepResults.Add((t3, res3));
 
@@ -411,7 +463,8 @@ namespace lanlanlu_toolkit.Views
                     string t4 = LocalizationHelper.GetString("SystemRepairPage_SfcScannow_Title.Text") ?? "sfc /scannow";
                     UpdateStepVisual(4, StepStatus.Running);
                     HeroStepStatusText.Text = FormatStepStatus(4, 4, t4);
-                    var res4 = await RunCommandInternalAsync("sfc", "/scannow", currentStep: 4, totalSteps: 4);
+                    var res4 = await RunCommandInternalAsync("sfc", "/scannow", currentStep: 4, totalSteps: 4, cancellationToken: token);
+                    if (token.IsCancellationRequested) { ResetToIdleState(); return; }
                     UpdateStepVisual(4, DetermineStepStatus(4, res4));
                     stepResults.Add((t4, res4));
 
@@ -424,7 +477,8 @@ namespace lanlanlu_toolkit.Views
                     string tSfc = LocalizationHelper.GetString("SystemRepairPage_SfcScannow_Title.Text") ?? "sfc /scannow";
                     UpdateStepVisual(4, StepStatus.Running);
                     HeroStepStatusText.Text = FormatStepStatus(1, 1, tSfc);
-                    var res = await RunCommandInternalAsync("sfc", "/scannow", currentStep: 1, totalSteps: 1);
+                    var res = await RunCommandInternalAsync("sfc", "/scannow", currentStep: 1, totalSteps: 1, cancellationToken: token);
+                    if (token.IsCancellationRequested) { ResetToIdleState(); return; }
                     UpdateStepVisual(4, DetermineStepStatus(4, res));
                     stepResults.Add((tSfc, res));
 
@@ -482,10 +536,18 @@ namespace lanlanlu_toolkit.Views
             StartTimer();
 
             UpdateStepVisual(step, StepStatus.Running);
+            _repairCts?.Dispose();
+            _repairCts = new CancellationTokenSource();
+            var token = _repairCts.Token;
 
             try
             {
-                var res = await RunCommandInternalAsync(fileName, arguments, currentStep: 1, totalSteps: 1, targetStepIndex: step);
+                var res = await RunCommandInternalAsync(fileName, arguments, currentStep: 1, totalSteps: 1, targetStepIndex: step, cancellationToken: token);
+                if (token.IsCancellationRequested)
+                {
+                    ResetToIdleState();
+                    return;
+                }
                 var finalStatus = DetermineStepStatus(step, res);
                 UpdateStepVisual(step, finalStatus);
 
@@ -577,8 +639,13 @@ namespace lanlanlu_toolkit.Views
             public bool HasRepaired { get; set; } = false;
         }
 
-        private async Task<CommandResult> RunCommandInternalAsync(string fileName, string arguments, int currentStep, int totalSteps, int? targetStepIndex = null)
+        private async Task<CommandResult> RunCommandInternalAsync(string fileName, string arguments, int currentStep, int totalSteps, int? targetStepIndex = null, CancellationToken cancellationToken = default)
         {
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return new CommandResult { IsSuccess = false };
+            }
+
             _isProcessRunning = true;
             IsAnyProcessRunning = true;
             _allowNavigation = false;
@@ -636,6 +703,10 @@ namespace lanlanlu_toolkit.Views
                 };
 
                 using var process = new Process { StartInfo = startInfo };
+                lock (_processLock)
+                {
+                    _activeProcess = process;
+                }
 
                 void ParseLineStatus(string line)
                 {
@@ -822,6 +893,10 @@ namespace lanlanlu_toolkit.Views
             }
             finally
             {
+                lock (_processLock)
+                {
+                    _activeProcess = null;
+                }
                 _isProcessRunning = false;
                 IsAnyProcessRunning = false;
             }

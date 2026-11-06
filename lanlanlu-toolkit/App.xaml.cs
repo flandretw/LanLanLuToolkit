@@ -32,6 +32,29 @@ namespace lanlanlu_toolkit
             }
 
             InitializeComponent();
+
+            this.UnhandledException += App_UnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            System.Threading.Tasks.TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+        }
+
+        private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            Services.LoggingService.Log($"[CRITICAL] Unhandled UI Exception: {e.Exception?.GetType().FullName}: {e.Message}\n{e.Exception?.StackTrace}");
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e)
+        {
+            if (e.ExceptionObject is Exception ex)
+            {
+                Services.LoggingService.Log($"[CRITICAL] AppDomain Unhandled Exception (Terminating={e.IsTerminating}): {ex.GetType().FullName}: {ex.Message}\n{ex.StackTrace}");
+            }
+        }
+
+        private void TaskScheduler_UnobservedTaskException(object? sender, System.Threading.Tasks.UnobservedTaskExceptionEventArgs e)
+        {
+            Services.LoggingService.Log($"[ERROR] Unobserved Task Exception: {e.Exception?.GetType().FullName}: {e.Exception?.Message}\n{e.Exception?.StackTrace}");
+            e.SetObserved();
         }
 
         /// <summary>

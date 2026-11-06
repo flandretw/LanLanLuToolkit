@@ -52,13 +52,10 @@
                 <!-- Single Unified Card: Locked Height="72" (Zero Pixel Shift Guaranteed) -->
                 <Border Style="{StaticResource FluentCardBorderStyle}"
                         Height="72"
-                        Padding="20,0"
-                        AllowDrop="True"
-                        DragOver="FileCard_DragOver"
-                        Drop="FileCard_Drop">
+                        Padding="20,0">
                     <Grid>
                         <!-- Empty State: File Selection Prompt Content -->
-                        <Grid x:Name="FileDropZoneCard">
+                        <Grid x:Name="FileSelectPromptCard">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />

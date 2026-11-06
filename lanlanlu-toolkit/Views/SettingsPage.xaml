@@ -92,37 +92,6 @@
                         </Grid>
                     </Border>
 
-                    <!-- Temperature Unit Card -->
-                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                            BorderThickness="1"
-                            CornerRadius="{ThemeResource OverlayCornerRadius}">
-                        <Grid MinHeight="64" Padding="16,12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE9CA;" 
-                                      FontSize="20" 
-                                      Margin="0,0,16,0" 
-                                      VerticalAlignment="Center" 
-                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
-                                <TextBlock x:Uid="SettingsPage_TempUnitTitle" Style="{ThemeResource BodyStrongTextBlockStyle}" />
-                                <TextBlock x:Uid="SettingsPage_TempUnitDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                            </StackPanel>
-                            <ComboBox x:Name="TemperatureUnitComboBox" 
-                                      Grid.Column="2"
-                                      Width="200"
-                                      VerticalAlignment="Center"
-                                      SelectionChanged="TemperatureUnitComboBox_SelectionChanged">
-                                <ComboBoxItem Tag="Celsius" x:Uid="TempUnit_Celsius" />
-                                <ComboBoxItem Tag="Fahrenheit" x:Uid="TempUnit_Fahrenheit" />
-                            </ComboBox>
-                        </Grid>
-                    </Border>
-
                     <!-- Notifications Card -->
                     <Expander HorizontalAlignment="Stretch" 
                               HorizontalContentAlignment="Stretch"
@@ -350,7 +319,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Image x:Name="AppIconImage" Source="ms-appx:///Assets/Square150x150Logo.png" Width="40" Height="40" Margin="0,0,16,0" VerticalAlignment="Center" Stretch="Uniform" />
+                                <Image x:Name="AppIconImage" Source="ms-appx:///Assets/Square44x44Logo.png" Width="40" Height="40" Margin="0,0,16,0" VerticalAlignment="Center" Stretch="Uniform" />
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
                                     <TextBlock x:Name="AppNameTextBlock" Style="{ThemeResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
                                     <TextBlock x:Name="AppCopyrightTextBlock" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />

@@ -9,7 +9,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.DataTransfer;
 using lanlanlu_toolkit.Services;
 
 namespace lanlanlu_toolkit.Views
@@ -80,34 +79,6 @@ namespace lanlanlu_toolkit.Views
             CancelHashBtn.Visibility = Visibility.Collapsed;
         }
 
-        private void FileCard_DragOver(object sender, DragEventArgs e)
-        {
-            e.AcceptedOperation = DataPackageOperation.Copy;
-            e.DragUIOverride.Caption = LocalizationHelper.GetString("FileHashPage_DragDrop_Caption") ?? "Drop to calculate hash";
-            e.DragUIOverride.IsCaptionVisible = true;
-            e.DragUIOverride.IsContentVisible = true;
-        }
-
-        private async void FileCard_Drop(object sender, DragEventArgs e)
-        {
-            if (e.DataView.Contains(StandardDataFormats.StorageItems))
-            {
-                try
-                {
-                    var items = await e.DataView.GetStorageItemsAsync();
-                    if (items.Count > 0 && items[0] is Windows.Storage.StorageFile file)
-                    {
-                        await ProcessSelectedFilePath(file.Path);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"File drop error: {ex.Message}");
-                    ShowErrorNotification(ex.Message);
-                }
-            }
-        }
-
         private async void SelectFileBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -139,7 +110,7 @@ namespace lanlanlu_toolkit.Views
             _calculatedHashes.Clear();
 
             FileDetailsCard.Visibility = Visibility.Collapsed;
-            FileDropZoneCard.Visibility = Visibility.Visible;
+            FileSelectPromptCard.Visibility = Visibility.Visible;
 
             ResetHashTextBoxPlaceholders();
             PerformHashVerification();
@@ -167,7 +138,7 @@ namespace lanlanlu_toolkit.Views
             ToolTipService.SetToolTip(FileNameText, fileInfo.Name);
             ToolTipService.SetToolTip(FilePathText, fileInfo.FullName);
 
-            FileDropZoneCard.Visibility = Visibility.Collapsed;
+            FileSelectPromptCard.Visibility = Visibility.Collapsed;
             FileDetailsCard.Visibility = Visibility.Visible;
 
             ResetHashTextBoxPlaceholders();

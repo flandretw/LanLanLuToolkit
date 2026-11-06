@@ -36,9 +36,9 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "Cleaning up diagnostic/debugging DLLs and symbols..." -ForegroundColor Cyan
     Get-ChildItem -Path $OutputPath -Include "Microsoft.DiaSymReader.Native.*.dll", "mscordaccore*.dll", "mscordbi.dll", "*.pdb", "*.xml" -File -Recurse | Remove-Item -Force
 
-    # Clean up unused Windows App SDK modules (Widgets, Push Notifications)
-    Write-Host "Cleaning up unused Windows App SDK modules..." -ForegroundColor Cyan
-    Get-ChildItem -Path $OutputPath -Include "Microsoft.Windows.Widgets.dll", "*PushNotifications*", "PushNotificationsLongRunningTask.ProxyStub.dll" -File -Recurse | Remove-Item -Force
+    # Clean up unused Windows App SDK modules (Widgets, Push Notifications, RichEditBox) and repo-only assets
+    Write-Host "Cleaning up unused Windows App SDK modules and residual assets..." -ForegroundColor Cyan
+    Get-ChildItem -Path $OutputPath -Include "Microsoft.Windows.Widgets.dll", "*PushNotifications*", "PushNotificationsLongRunningTask.ProxyStub.dll", "Microsoft.Windows.AppNotifications*.dll", "WinUIEdit.dll", "AppIcon.png" -File -Recurse | Remove-Item -Force
 
 
     Write-Host ""

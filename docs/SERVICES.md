@@ -25,7 +25,7 @@
 | `CrashReportService` | [`CrashReportService.cs`](file:///d:/GitHub/lanlanlu-toolkit/lanlanlu-toolkit/Services/CrashReportService.cs) | 解析系統 Minidump 記憶體傾印檔案與事件檢視器重大當機記錄 | 檔案二進位讀取、Windows 事件記錄讀取器 | `CrashReportPage.xaml.cs` |
 | `InputTesterService` | [`InputTesterService.cs`](file:///d:/GitHub/lanlanlu-toolkit/lanlanlu-toolkit/Services/InputTesterService.cs) | 定義外接輸入診斷資料模型與動態生成三種尺寸鍵盤配置佈局 | 資料模型與佈局座標計算 | `InputTesterPage.xaml.cs` |
 | `SettingsService` | [`SettingsService.cs`](file:///d:/GitHub/lanlanlu-toolkit/lanlanlu-toolkit/Services/SettingsService.cs) | 本機組態儲存與雙路徑容錯持久化，支援免安裝模式與本機資料夾自動切換 | `System.Text.Json` 來源產生器、檔案讀寫 | 全域設定與各視圖 |
-| `Win32FilePicker` | [`Win32FilePicker.cs`](file:///d:/GitHub/lanlanlu-toolkit/lanlanlu-toolkit/Services/Win32FilePicker.cs) | 提供未封裝 WinUI 3 應用程式穩定可靠的檔案開啟與儲存對話方塊 | Win32 COM `comdlg32.dll` | `FileHashPage.xaml.cs`、`CrashReportPage.xaml.cs` |
+| `Win32FilePicker` | [`Win32FilePicker.cs`](file:///d:/GitHub/lanlanlu-toolkit/lanlanlu-toolkit/Services/Win32FilePicker.cs) | 提供未封裝 WinUI 3 應用程式穩定可靠的檔案開啟、儲存與資料夾選取對話方塊 | Win32 COM `comdlg32.dll`、`shell32.dll` | `FileHashPage.xaml.cs`、`CrashReportPage.xaml.cs`、`SettingsPage.xaml.cs` |
 | `LoggingService` | [`LoggingService.cs`](file:///d:/GitHub/lanlanlu-toolkit/lanlanlu-toolkit/Services/LoggingService.cs) | 執行緒安全之本機診斷記錄檔寫入器 | 檔案資料流鎖定寫入 | 全域例外處理 |
 | `NotificationService` | [`NotificationService.cs`](file:///d:/GitHub/lanlanlu-toolkit/lanlanlu-toolkit/Services/NotificationService.cs) | 集中管理主視窗資訊列訊息呈現、定時關閉與音效提示 | WinUI 3 `InfoBar`、Win32 `MessageBeep` | 全域通知 |
 | `ClipboardService` | [`ClipboardService.cs`](file:///d:/GitHub/lanlanlu-toolkit/lanlanlu-toolkit/Services/ClipboardService.cs) | 安全存取系統剪貼簿，提供控制項圖示切換動畫與訊息聯動 | WinUI 3 資料傳輸 API、`ConditionalWeakTable` | 各功能視圖 |
@@ -119,7 +119,6 @@
   - `public static bool GetNotificationsEnabled()` / `public static void SaveNotificationsEnabled(bool enabled)`
   - `public static bool GetNotificationSound()` / `public static void SaveNotificationSound(bool enabled)`
   - `public static bool GetSoundEffectsEnabled()` / `public static void SaveSoundEffectsEnabled(bool enabled)`
-  - `public static string GetTemperatureUnit()` / `public static void SaveTemperatureUnit(string unit)`
   - `public static bool GetDebugReportEnabled()` / `public static void SaveDebugReportEnabled(bool enabled)`
   - `public static string GetDebugReportPath()` / `public static void SaveDebugReportPath(string path)`
 - **呼叫範例**：
@@ -138,10 +137,11 @@
 - **命名空間**：`lanlanlu_toolkit.Services`
 - **類別屬性**：`public static class Win32FilePicker`
 - **職責說明**：  
-  封裝 Win32 原生檔案對話方塊（`comdlg32.dll`）。WinUI 3 在未封裝獨立發布模式下，若使用 UWP 的 `FileOpenPicker`，需要繁瑣且易出錯的視窗控制代碼 (HWND) 介面初始化（`IInitializeWithWindow`），甚至在特定版本會出現停止運作或無法顯示的狀況。本服務提供穩定且跨 Windows 版本相容的原生對話方塊。
+  封裝 Win32 原生檔案與資料夾對話方塊（`comdlg32.dll` 與 COM `IFileOpenDialog`）。WinUI 3 在未封裝獨立發布模式或系統管理員權限下，若使用 UWP 的 `FileOpenPicker` 或 `FolderPicker`，需要繁瑣且易出錯的視窗控制代碼 (HWND) 介面初始化（`IInitializeWithWindow`），甚至在特定版本會出現停止運作或無法顯示的狀況。本服務提供穩定且跨 Windows 版本相容的原生對話方塊。
 - **核心公開介面**：
   - `public static string? ShowOpenDialog(IntPtr hwnd, string title, string? filter = null)`：彈出檔案開啟視窗，回傳選取之完整路徑；若取消則回傳 `null`。
   - `public static string? ShowSaveDialog(IntPtr hwnd, string title, string defaultFileName, string filter, string defaultExt)`：彈出檔案儲存視窗，回傳欲儲存之完整路徑。
+  - `public static string? ShowFolderDialog(IntPtr hwnd, string? initialPath = null, string? title = null)`：彈出資料夾選取視窗（透過 COM `IFileOpenDialog` + `FOS_PICKFOLDERS`），回傳選取之資料夾完整路徑。
 - **呼叫範例**：
   ```csharp
   IntPtr hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);

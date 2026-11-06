@@ -23,7 +23,7 @@ We hate bloated installers, heavy background services, and leftover registry jun
 * **Peripheral Diagnostics: Keyboard NKRO & Mouse Chatter Detection**  
   Tailored for gamers and hardware enthusiasts with 60 fps responsive vector layouts and acoustic key feedback.
   * Keyboard Testing: Live switching between 104 full-size, 87-key TKL, and 61-key compact layouts with NKRO simultaneous key tracking, Virtual Key (VK) inspection, and key chatter warnings to verify rollover on new or secondhand gear.
-  * Mouse Diagnostics: Microswitch click counters, real-time polling rate (Hz) calculation, scroll wheel delta measurement, trajectory canvas, and customizable switch chatter debounce thresholds to detect double-click degradation on gaming mice up to 1000 Hz+.
+  * Mouse Diagnostics: Microswitch click counters, real-time polling rate (Hz) calculation, scroll wheel delta measurement, trajectory canvas, and switch chatter detection to identify double-click degradation on gaming mice up to 1000 Hz+.
 
 * **Crash Analysis: Minidump & BugCheck Parsing**  
   Investigate system crashes directly in a clean UI without installing gigabytes of debugging toolkits.
@@ -34,10 +34,9 @@ We hate bloated installers, heavy background services, and leftover registry jun
   One-click access to DISM and SFC repair tools without opening the command prompt, helping resolve stuck Windows updates or corrupted system files.
   * DISM Image Repair: Execute CheckHealth, ScanHealth, and online RestoreHealth.
   * SFC System File Repair: Run `SFC /scannow` to verify and repair core system integrity.
-  * Component Store Cleanup: Automate cleanup of superseded update caches and the WinSxS store.
 
-* **File Hash Verification: SHA-3 Support & Fast Comparison**  
-  Multi-threaded high-speed file checksum generation supporting MD5, SHA-1, SHA-256, SHA-384, SHA-512, and SHA-3. Features fast file inspection and instant comparison fields with color feedback to verify download integrity.
+* **File Hash Verification: Multi-Algorithm Checksum & Fast Comparison**  
+  Multi-threaded high-speed file checksum generation supporting SHA-256, SHA-1, MD5, and SHA-512. Features fast file inspection and instant comparison fields with color feedback to verify download integrity.
 
 * **Reset File Type Defaults: Dissociate & Restore Unassigned File Types**  
   Solves the classic Windows limitation where accidentally associated file types (e.g., `.dat`, `.bak`, `.bin`) cannot be unassociated via Windows Settings. Features instant file inspection and one-click removal of custom user overrides, safely restoring generic document icons and open-with prompts.
@@ -56,7 +55,7 @@ We hate bloated installers, heavy background services, and leftover registry jun
 
 ## Setup & Usage
 
-1. Go to the [Releases](https://github.com/flandretw/lanlanlu-toolkit/releases) page and grab the latest `.zip`.
+1. Go to the [Releases](https://github.com/flandretw/LanLanLuToolkit/releases) page and grab the latest `.zip`.
 2. Extract it to wherever you want—Desktop, USB, or your folder.
 3. Run `lanlanlu-toolkit.exe` and let the magic begin!
 
@@ -78,4 +77,4 @@ If you have **Visual Studio 2026** (with Windows SDK 10.0.19041.0) and the spiri
 A: Safer than a Masala burger made by a Microsoft employee! It is open-source, portable, and respects your system boundaries.
 
 **License & Copyright**  
-Copyright © 2026 flandretw | This project is licensed under the [MIT License](LICENSE).
+Copyright © 2026 flandretw | This project is licensed under the [MIT License](LICENSE.txt).

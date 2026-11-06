@@ -136,9 +136,6 @@
   <data name="HomePage_GitHubProject.Text" xml:space="preserve">
     <value>GitHub Project Page</value>
   </data>
-  <data name="HomePage_Refresh_Success" xml:space="preserve">
-    <value>Hardware specs and system info refreshed.</value>
-  </data>
   <data name="HomePage_QuickActions_Title.Text" xml:space="preserve">
     <value>Quick Actions</value>
   </data>
@@ -172,23 +169,8 @@
   <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
     <value>Reset mistakenly associated file types to unassigned default state.</value>
   </data>
-  <data name="HomePage_Refresh_Title" xml:space="preserve">
-    <value>Hardware Specs</value>
-  </data>
   <data name="HomePage_HardwareSpecs_Title.Text" xml:space="preserve">
     <value>Hardware Specifications</value>
-  </data>
-  <data name="TempUnit_Celsius.Content" xml:space="preserve">
-    <value>Celsius (°C)</value>
-  </data>
-  <data name="TempUnit_Fahrenheit.Content" xml:space="preserve">
-    <value>Fahrenheit (°F)</value>
-  </data>
-  <data name="Temperature_Celsius_Format" xml:space="preserve">
-    <value>{0:F1}°C</value>
-  </data>
-  <data name="Temperature_Fahrenheit_Format" xml:space="preserve">
-    <value>{0:F1}°F</value>
   </data>
   <data name="InputTesterPage_Title.Text" xml:space="preserve">
     <value>Keyboard &amp; Mouse Diagnostics</value>
@@ -561,33 +543,6 @@
   </data>
   <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
     <value>Scan and analyze system kernel minidumps and application crash event logs.</value>
-  </data>
-  <data name="CrashReportPage_Section_Overview.Text" xml:space="preserve">
-    <value>Overview</value>
-  </data>
-  <data name="CrashReportPage_Section_Events.Text" xml:space="preserve">
-    <value>Crash Events</value>
-  </data>
-  <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
-    <value>Total Crashes</value>
-  </data>
-  <data name="CrashReportPage_Card_BSOD.Text" xml:space="preserve">
-    <value>Kernel Crashes</value>
-  </data>
-  <data name="CrashReportPage_Card_AppCrash.Text" xml:space="preserve">
-    <value>Application Errors</value>
-  </data>
-  <data name="CrashReportPage_Card_LastCrash.Text" xml:space="preserve">
-    <value>Last Crash Time</value>
-  </data>
-  <data name="CrashReportPage_Filter_All.Text" xml:space="preserve">
-    <value>All Events</value>
-  </data>
-  <data name="CrashReportPage_Filter_BSOD.Text" xml:space="preserve">
-    <value>System BSOD</value>
-  </data>
-  <data name="CrashReportPage_Filter_App.Text" xml:space="preserve">
-    <value>App Crashes</value>
   </data>
   <data name="CrashReportPage_SearchBox.PlaceholderText" xml:space="preserve">
     <value>Search app name, error code, driver or module</value>
@@ -1237,12 +1192,6 @@
   <data name="SettingsPage_NotificationsDescription.Text" xml:space="preserve">
     <value>Manage how the application notifies you about task completions.</value>
   </data>
-  <data name="SettingsPage_TempUnitTitle.Text" xml:space="preserve">
-    <value>Temperature Unit</value>
-  </data>
-  <data name="SettingsPage_TempUnitDescription.Text" xml:space="preserve">
-    <value>Select the temperature unit used throughout the application.</value>
-  </data>
   <data name="SettingsPage_DebugReportTitle.Text" xml:space="preserve">
     <value>Debug Report</value>
   </data>
@@ -1371,57 +1320,6 @@
   </data>
   <data name="FileHashPage_CancelButton.Text" xml:space="preserve">
     <value>Cancel</value>
-  </data>
-  <data name="CrashReportPage_CheckDumpConfigBtn.Text" xml:space="preserve">
-    <value>Check Memory Dump Settings</value>
-  </data>
-  <data name="CrashDump_Disabled" xml:space="preserve">
-    <value>Disabled (No crash dump files will be created)</value>
-  </data>
-  <data name="CrashDump_Complete" xml:space="preserve">
-    <value>Complete memory dump</value>
-  </data>
-  <data name="CrashDump_Kernel" xml:space="preserve">
-    <value>Kernel memory dump</value>
-  </data>
-  <data name="CrashDump_Small" xml:space="preserve">
-    <value>Small memory dump (Minidump 256KB, Recommended)</value>
-  </data>
-  <data name="CrashDump_Automatic" xml:space="preserve">
-    <value>Automatic memory dump</value>
-  </data>
-  <data name="CrashDump_Unknown" xml:space="preserve">
-    <value>Not configured or system managed</value>
-  </data>
-  <data name="CrashReport_DumpConfigTitle" xml:space="preserve">
-    <value>System Crash Dump (Minidump) Diagnostic</value>
-  </data>
-  <data name="CrashReport_DumpTypeLabel" xml:space="preserve">
-    <value>Crash dump type</value>
-  </data>
-  <data name="CrashReport_DumpFolderLabel" xml:space="preserve">
-    <value>Dump storage path</value>
-  </data>
-  <data name="CrashReport_AutoRebootLabel" xml:space="preserve">
-    <value>Automatically restart on crash</value>
-  </data>
-  <data name="CrashReport_DumpHint" xml:space="preserve">
-    <value>If your PC experiences BSODs but generates no minidump files, verify that the dump type is set to 'Small memory dump (256KB)' and the paging file (pagefile.sys) is active on the system drive C:.</value>
-  </data>
-  <data name="CrashReport_OpenSystemSettings" xml:space="preserve">
-    <value>Open Windows Startup &amp; Recovery Settings</value>
-  </data>
-  <data name="Folder_Exists" xml:space="preserve">
-    <value>Directory exists</value>
-  </data>
-  <data name="Folder_NotExists" xml:space="preserve">
-    <value>Directory not created yet</value>
-  </data>
-  <data name="Common_Enabled" xml:space="preserve">
-    <value>Enabled</value>
-  </data>
-  <data name="Common_Disabled" xml:space="preserve">
-    <value>Disabled</value>
   </data>
   <data name="Common_Close" xml:space="preserve">
     <value>Close</value>

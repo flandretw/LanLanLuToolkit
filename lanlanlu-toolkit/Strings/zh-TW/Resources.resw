@@ -140,9 +140,6 @@
   <data name="HomePage_GitHubProject.Text" xml:space="preserve">
     <value>GitHub 專案頁面</value>
   </data>
-  <data name="HomePage_Refresh_Success" xml:space="preserve">
-    <value>已重新整理硬體規格與系統資訊。</value>
-  </data>
   <data name="HomePage_QuickActions_Title.Text" xml:space="preserve">
     <value>快速功能總覽</value>
   </data>
@@ -176,23 +173,8 @@
   <data name="HomePage_Feature_Assoc_Desc.Text" xml:space="preserve">
     <value>解除副檔名誤設的自訂開啟程式，還原為未指定狀態。</value>
   </data>
-  <data name="HomePage_Refresh_Title" xml:space="preserve">
-    <value>硬體資訊</value>
-  </data>
   <data name="HomePage_HardwareSpecs_Title.Text" xml:space="preserve">
     <value>硬體規格</value>
-  </data>
-  <data name="TempUnit_Celsius.Content" xml:space="preserve">
-    <value>攝氏 (°C)</value>
-  </data>
-  <data name="TempUnit_Fahrenheit.Content" xml:space="preserve">
-    <value>華氏 (°F)</value>
-  </data>
-  <data name="Temperature_Celsius_Format" xml:space="preserve">
-    <value>{0:F1}°C</value>
-  </data>
-  <data name="Temperature_Fahrenheit_Format" xml:space="preserve">
-    <value>{0:F1}°F</value>
   </data>
   <data name="InputTesterPage_Title.Text" xml:space="preserve">
     <value>鍵盤滑鼠診斷</value>
@@ -565,33 +547,6 @@
   </data>
   <data name="CrashReportPage_Subtitle.Text" xml:space="preserve">
     <value>自動掃描並分析系統核心傾印與應用程式當機事件記錄檔。</value>
-  </data>
-  <data name="CrashReportPage_Section_Overview.Text" xml:space="preserve">
-    <value>狀態概覽</value>
-  </data>
-  <data name="CrashReportPage_Section_Events.Text" xml:space="preserve">
-    <value>事件記錄</value>
-  </data>
-  <data name="CrashReportPage_Card_Total.Text" xml:space="preserve">
-    <value>總當機事件</value>
-  </data>
-  <data name="CrashReportPage_Card_BSOD.Text" xml:space="preserve">
-    <value>系統核心當機</value>
-  </data>
-  <data name="CrashReportPage_Card_AppCrash.Text" xml:space="preserve">
-    <value>應用程式錯誤</value>
-  </data>
-  <data name="CrashReportPage_Card_LastCrash.Text" xml:space="preserve">
-    <value>最近當機時間</value>
-  </data>
-  <data name="CrashReportPage_Filter_All.Text" xml:space="preserve">
-    <value>全部事件</value>
-  </data>
-  <data name="CrashReportPage_Filter_BSOD.Text" xml:space="preserve">
-    <value>藍色當機畫面</value>
-  </data>
-  <data name="CrashReportPage_Filter_App.Text" xml:space="preserve">
-    <value>應用程式</value>
   </data>
   <data name="CrashReportPage_SearchBox.PlaceholderText" xml:space="preserve">
     <value>搜尋程式名稱、錯誤碼、驅動程式或模組</value>
@@ -1241,12 +1196,6 @@
   <data name="SettingsPage_NotificationsDescription.Text" xml:space="preserve">
     <value>管理應用程式的通知行為與提示方式。</value>
   </data>
-  <data name="SettingsPage_TempUnitTitle.Text" xml:space="preserve">
-    <value>溫度單位</value>
-  </data>
-  <data name="SettingsPage_TempUnitDescription.Text" xml:space="preserve">
-    <value>選擇應用程式中顯示溫度的單位。</value>
-  </data>
   <data name="SettingsPage_DebugReportTitle.Text" xml:space="preserve">
     <value>偵錯報告</value>
   </data>
@@ -1375,57 +1324,6 @@
   </data>
   <data name="FileHashPage_CancelButton.Text" xml:space="preserve">
     <value>取消</value>
-  </data>
-  <data name="CrashReportPage_CheckDumpConfigBtn.Text" xml:space="preserve">
-    <value>檢查記憶體傾印設定</value>
-  </data>
-  <data name="CrashDump_Disabled" xml:space="preserve">
-    <value>已停用</value>
-  </data>
-  <data name="CrashDump_Complete" xml:space="preserve">
-    <value>完整記憶體傾印</value>
-  </data>
-  <data name="CrashDump_Kernel" xml:space="preserve">
-    <value>核心記憶體傾印</value>
-  </data>
-  <data name="CrashDump_Small" xml:space="preserve">
-    <value>小型記憶體傾印 (256 KB)</value>
-  </data>
-  <data name="CrashDump_Automatic" xml:space="preserve">
-    <value>自動記憶體傾印</value>
-  </data>
-  <data name="CrashDump_Unknown" xml:space="preserve">
-    <value>未設定或由系統管理</value>
-  </data>
-  <data name="CrashReport_DumpConfigTitle" xml:space="preserve">
-    <value>系統記憶體傾印設定檢查</value>
-  </data>
-  <data name="CrashReport_DumpTypeLabel" xml:space="preserve">
-    <value>記憶體傾印類型</value>
-  </data>
-  <data name="CrashReport_DumpFolderLabel" xml:space="preserve">
-    <value>傾印檔案路徑</value>
-  </data>
-  <data name="CrashReport_AutoRebootLabel" xml:space="preserve">
-    <value>當機自動重新啟動</value>
-  </data>
-  <data name="CrashReport_DumpHint" xml:space="preserve">
-    <value>若系統發生停止錯誤卻未產生傾印檔案，請確認此處設為「小型記憶體傾印 (256 KB)」，且分頁檔 pagefile.sys 位於系統磁碟 C: 上。</value>
-  </data>
-  <data name="CrashReport_OpenSystemSettings" xml:space="preserve">
-    <value>開啟 Windows 啟動及修復設定</value>
-  </data>
-  <data name="Folder_Exists" xml:space="preserve">
-    <value>目錄存在</value>
-  </data>
-  <data name="Folder_NotExists" xml:space="preserve">
-    <value>目錄尚未建立</value>
-  </data>
-  <data name="Common_Enabled" xml:space="preserve">
-    <value>已啟用</value>
-  </data>
-  <data name="Common_Disabled" xml:space="preserve">
-    <value>已停用</value>
   </data>
   <data name="Common_Close" xml:space="preserve">
     <value>關閉</value>

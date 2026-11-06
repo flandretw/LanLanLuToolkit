@@ -288,6 +288,7 @@ namespace lanlanlu_toolkit
                 if (result == ContentDialogResult.Primary)
                 {
                     _isClosingConfirmed = true;
+                    SystemRepairPage.CancelActiveRepair();
                     this.Close();
                 }
             }
@@ -365,7 +366,7 @@ namespace lanlanlu_toolkit
                 Icon = "\uE713",
                 Tag = "SettingsPage",
                 Category = LocalizationHelper.GetString("Category_Settings"),
-                Keywords = new() { "設定", "主題", "深色", "淺色", "語言", "開機", "系統匣", "托盤", "settings", "theme", "language" }
+                Keywords = new() { "設定", "主題", "深色", "淺色", "語言", "音效", "通知", "偵錯", "日誌", "重新掃描", "settings", "theme", "language", "sound", "notification", "debug", "log" }
             });
         }
 

@@ -14,7 +14,6 @@
     <SatelliteResourceLanguages>zh-TW;en-US</SatelliteResourceLanguages>
     <Nullable>enable</Nullable>
     <WindowsPackageType>None</WindowsPackageType>
-    <!-- None, MSIX, Sparse -->
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <AppxPackage>false</AppxPackage>
     <PublishReadyToRun>false</PublishReadyToRun>
@@ -24,25 +23,30 @@
     <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
     <NoWarn>$(NoWarn);IL2059;IL2104;IL2026</NoWarn>
   </PropertyGroup>
+
   <PropertyGroup>
     <Version>1.0.0</Version>
     <Authors>flandretw</Authors>
     <Description>LanLanLu Toolkit - A portable WinUI 3 utility box</Description>
   </PropertyGroup>
+
   <ItemGroup>
     <Content Update="Assets\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.241114003" />
     <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.0" />
     <PackageReference Include="System.Management" Version="8.0.0" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
   </ItemGroup>
+
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
+
   <!-- Override Windows App SDK's target to allow PublishSingleFile with native libraries outside -->
   <Target Name="WindowsAppSDKSingleFileVerifyConfiguration" />
 </Project>

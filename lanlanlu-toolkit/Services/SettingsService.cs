@@ -14,7 +14,6 @@ namespace lanlanlu_toolkit.Services
         public bool NotificationsEnabled { get; set; } = true;
         public bool NotificationSoundEnabled { get; set; } = true;
         public bool SoundEffectsEnabled { get; set; } = true;
-        public string TemperatureUnit { get; set; } = "Celsius";
         public bool DebugReportEnabled { get; set; } = false;
         public string? DebugReportPath { get; set; } = null;
     }
@@ -315,22 +314,6 @@ namespace lanlanlu_toolkit.Services
             if (_currentSettings != null)
             {
                 _currentSettings.SoundEffectsEnabled = enabled;
-                SaveSettings();
-            }
-        }
-
-        public static string GetTemperatureUnit()
-        {
-            LoadSettings();
-            return _currentSettings?.TemperatureUnit ?? "Celsius";
-        }
-
-        public static void SaveTemperatureUnit(string unit)
-        {
-            LoadSettings();
-            if (_currentSettings != null)
-            {
-                _currentSettings.TemperatureUnit = unit;
                 SaveSettings();
             }
         }
