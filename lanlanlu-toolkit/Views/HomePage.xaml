@@ -63,57 +63,7 @@
         </Style>
 
         <!-- Feature Action Card Button Style -->
-        <Style x:Key="FeatureCardButtonStyle" TargetType="Button">
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="VerticalContentAlignment" Value="Stretch" />
-            <Setter Property="Padding" Value="20,16" />
-            <Setter Property="MinHeight" Value="72" />
-            <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
-            <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid x:Name="RootGrid" 
-                              Background="{TemplateBinding Background}" 
-                              BorderBrush="{TemplateBinding BorderBrush}" 
-                              BorderThickness="{TemplateBinding BorderThickness}" 
-                              CornerRadius="{TemplateBinding CornerRadius}">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal" />
-                                    <VisualState x:Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ControlFillColorSecondaryBrush}" />
-                                            <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ControlFillColorTertiaryBrush}" />
-                                            <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Disabled">
-                                        <VisualState.Setters>
-                                            <Setter Target="RootGrid.Opacity" Value="0.6" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <ContentPresenter Content="{TemplateBinding Content}" 
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              Padding="{TemplateBinding Padding}"
-                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <Style x:Key="FeatureCardButtonStyle" TargetType="Button" BasedOn="{StaticResource HardwareCardButtonStyle}" />
     </Page.Resources>
 
     <ScrollViewer x:Name="MainScrollViewer" 

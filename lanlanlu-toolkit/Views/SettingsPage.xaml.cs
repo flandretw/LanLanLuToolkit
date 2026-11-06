@@ -62,10 +62,10 @@ namespace lanlanlu_toolkit.Views
 
                 ContentDialog dialog = new ContentDialog
                 {
-                    Title             = LocalizationHelper.GetString("LanguageChangeDialog_Title")   ?? "Restart Required",
-                    Content           = LocalizationHelper.GetString("LanguageChangeDialog_Content") ?? "Changing the language requires a restart to take effect. Save changes and exit?",
-                    PrimaryButtonText = LocalizationHelper.GetString("LanguageChangeDialog_Confirm") ?? "Confirm",
-                    CloseButtonText   = LocalizationHelper.GetString("LanguageChangeDialog_Cancel")  ?? "Cancel",
+                    Title             = LocalizationHelper.GetString("LanguageChangeDialog_Title"),
+                    Content           = LocalizationHelper.GetString("LanguageChangeDialog_Content"),
+                    PrimaryButtonText = LocalizationHelper.GetString("LanguageChangeDialog_Confirm"),
+                    CloseButtonText   = LocalizationHelper.GetString("LanguageChangeDialog_Cancel"),
                     XamlRoot          = this.XamlRoot
                 };
 
@@ -73,6 +73,7 @@ namespace lanlanlu_toolkit.Views
                 dialog.PrimaryButtonClick += (_, _) =>
                 {
                     SettingsService.SaveLanguage(selectedLang);
+                    SystemRepairPage.CancelActiveRepair();
                     Microsoft.UI.Xaml.Application.Current.Exit();
                 };
 
@@ -201,7 +202,7 @@ namespace lanlanlu_toolkit.Views
         private void UpdateDebugReportPathDisplay()
         {
             string path = SettingsService.GetDebugReportPath();
-            string prefix = LocalizationHelper.GetString("SettingsPage_DebugReport_StoragePathPrefix/Text") ?? "Currently saved at: ";
+            string prefix = LocalizationHelper.GetString("SettingsPage_DebugReport_StoragePathPrefix/Text");
             DebugReportPathTextBlock.Text = $"{prefix}{path}";
         }
 

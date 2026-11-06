@@ -25,12 +25,7 @@ namespace lanlanlu_toolkit.Views
         [DllImport("user32.dll")]
         private static extern bool MessageBeep(uint uType);
 
-        private const int VK_LSHIFT = 0xA0;
         private const int VK_RSHIFT = 0xA1;
-        private const int VK_LCONTROL = 0xA2;
-        private const int VK_RCONTROL = 0xA3;
-        private const int VK_LMENU = 0xA4;
-        private const int VK_RMENU = 0xA5;
 
         // Visual Key Mapping dictionaries for O(1) fast lookup
         private readonly Dictionary<string, Border> _keyVisualMap = new(StringComparer.OrdinalIgnoreCase);
@@ -51,8 +46,6 @@ namespace lanlanlu_toolkit.Views
         private int _mouseMiddleCount = 0;
         private int _mouseSide1Count = 0;
         private int _mouseSide2Count = 0;
-        private int _wheelUpCount = 0;
-        private int _wheelDownCount = 0;
         private int _normalClicks = 0;
         private int _chatterClicks = 0;
         private readonly Dictionary<int, long> _lastClickTimestampByButton = new();
@@ -80,6 +73,7 @@ namespace lanlanlu_toolkit.Views
         private readonly PointerEventHandler _pointerCanceledHandler;
         private readonly PointerEventHandler _pointerCaptureLostHandler;
         private bool _isLoaded = false;
+        private bool _isInitialized = false;
         private int SelectedModeIndex => (InputModeSelectorBar?.SelectedItem == MouseSelectorItem) ? 1 : 0;
 
         public InputTesterPage()
@@ -119,11 +113,11 @@ namespace lanlanlu_toolkit.Views
             _isLoaded = true;
             if (KeyboardSelectorItem != null && string.IsNullOrEmpty(KeyboardSelectorItem.Text))
             {
-                KeyboardSelectorItem.Text = LocalizationHelper.GetString("InputTesterPage_Tab_Keyboard.Text") ?? "鍵盤測試";
+                KeyboardSelectorItem.Text = LocalizationHelper.GetString("InputTesterPage_Tab_Keyboard.Text");
             }
             if (MouseSelectorItem != null && string.IsNullOrEmpty(MouseSelectorItem.Text))
             {
-                MouseSelectorItem.Text = LocalizationHelper.GetString("InputTesterPage_Tab_Mouse.Text") ?? "滑鼠測試";
+                MouseSelectorItem.Text = LocalizationHelper.GetString("InputTesterPage_Tab_Mouse.Text");
             }
             if (InputModeSelectorBar != null && InputModeSelectorBar.SelectedItem == null)
             {
@@ -135,10 +129,25 @@ namespace lanlanlu_toolkit.Views
                 BuildKeyboardLayout();
             }
             _hzUpdateTimer.Start();
-            KeyboardFocusArea?.Focus(FocusState.Programmatic);
-            UpdateFocusVisual(true);
-            ResetKeyboardVisualsAndStats();
-            ResetMouseVisualsAndStats();
+
+            if (!_isInitialized)
+            {
+                _isInitialized = true;
+                ResetKeyboardVisualsAndStats();
+                ResetMouseVisualsAndStats();
+            }
+
+            if (SelectedModeIndex == 0)
+            {
+                KeyboardFocusArea?.Focus(FocusState.Programmatic);
+                UpdateFocusVisual(true);
+            }
+
+            this.RemoveHandler(UIElement.PointerPressedEvent, _pointerPressedHandler);
+            this.RemoveHandler(UIElement.PointerReleasedEvent, _pointerReleasedHandler);
+            this.RemoveHandler(UIElement.PointerMovedEvent, _pointerMovedHandler);
+            this.RemoveHandler(UIElement.PointerCanceledEvent, _pointerCanceledHandler);
+            this.RemoveHandler(UIElement.PointerCaptureLostEvent, _pointerCaptureLostHandler);
 
             this.AddHandler(UIElement.PointerPressedEvent, _pointerPressedHandler, true);
             this.AddHandler(UIElement.PointerReleasedEvent, _pointerReleasedHandler, true);
@@ -1067,16 +1076,6 @@ namespace lanlanlu_toolkit.Views
             return false;
         }
 
-        private void MouseBtnVisual_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            // Global handler takes care of press
-        }
-
-        private void MouseBtnVisual_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            // Global handler takes care of release
-        }
-
         private void ProcessMouseClickChatterCheck(int buttonId)
         {
             long now = Stopwatch.GetTimestamp();
@@ -1159,24 +1158,17 @@ namespace lanlanlu_toolkit.Views
             MouseVisualCard_PointerWheelChanged(sender, e);
         }
 
-        private void MouseMiddleBtnVisual_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
-        {
-            MouseVisualCard_PointerWheelChanged(sender, e);
-        }
-
         private void HandleWheelScroll(int delta)
         {
             int currentDir = delta > 0 ? 1 : -1;
 
             if (currentDir > 0)
             {
-                _wheelUpCount++;
                 WheelUpArrow.Foreground = GetThemeBrush("AccentFillColorDefaultBrush");
                 WheelDownArrow.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
             }
             else
             {
-                _wheelDownCount++;
                 WheelDownArrow.Foreground = GetThemeBrush("AccentFillColorDefaultBrush");
                 WheelUpArrow.Foreground = GetThemeBrush("TextFillColorTertiaryBrush");
             }
@@ -1334,7 +1326,10 @@ namespace lanlanlu_toolkit.Views
             if (props.IsLeftButtonPressed)
             {
                 _isDrawing = true;
-                _lastPoint = e.GetCurrentPoint(TrajectoryCanvas).Position;
+                var rawPoint = e.GetCurrentPoint(TrajectoryCanvas).Position;
+                _lastPoint = new Point(
+                    Math.Clamp(rawPoint.X, 2, Math.Max(2, TrajectoryCanvas.ActualWidth - 2)),
+                    Math.Clamp(rawPoint.Y, 2, Math.Max(2, TrajectoryCanvas.ActualHeight - 2)));
                 TrajectoryCanvas.CapturePointer(e.Pointer);
             }
         }
@@ -1349,7 +1344,10 @@ namespace lanlanlu_toolkit.Views
 
             if (!_isDrawing) return;
 
-            var currentPoint = e.GetCurrentPoint(TrajectoryCanvas).Position;
+            var rawPoint = e.GetCurrentPoint(TrajectoryCanvas).Position;
+            var currentPoint = new Point(
+                Math.Clamp(rawPoint.X, 2, Math.Max(2, TrajectoryCanvas.ActualWidth - 2)),
+                Math.Clamp(rawPoint.Y, 2, Math.Max(2, TrajectoryCanvas.ActualHeight - 2)));
             if (TrajectoryCanvas.Children.Count > 400)
             {
                 TrajectoryCanvas.Children.RemoveAt(0);
@@ -1464,8 +1462,6 @@ namespace lanlanlu_toolkit.Views
             _mouseMiddleCount = 0;
             _mouseSide1Count = 0;
             _mouseSide2Count = 0;
-            _wheelUpCount = 0;
-            _wheelDownCount = 0;
             _normalClicks = 0;
             _chatterClicks = 0;
             _lastClickTimestampByButton.Clear();

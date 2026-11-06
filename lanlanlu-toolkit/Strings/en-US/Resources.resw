@@ -121,9 +121,6 @@
   <data name="HomePage_Storage.Text" xml:space="preserve">
     <value>Storage</value>
   </data>
-  <data name="HomePage_Detecting.Text" xml:space="preserve">
-    <value>Detecting...</value>
-  </data>
   <data name="HomePage_Intro.Text" xml:space="preserve">
     <value>A modern Windows 11 system diagnostic and repair toolkit. Launch frequently used tools below or use the navigation pane to browse all features.</value>
   </data>
@@ -178,32 +175,11 @@
   <data name="InputTesterPage_Subtitle.Text" xml:space="preserve">
     <value>Test keyboard key response, N-Key Rollover (NKRO), mouse switch chatter, polling rate (Hz), and scroll wheel jitter.</value>
   </data>
-  <data name="InputTesterPage_Section_Options.Text" xml:space="preserve">
-    <value>Testing Options</value>
-  </data>
-  <data name="InputTesterPage_Section_Keyboard.Text" xml:space="preserve">
-    <value>Keyboard Diagnostics</value>
-  </data>
-  <data name="InputTesterPage_Section_Mouse.Text" xml:space="preserve">
-    <value>Mouse Diagnostics</value>
-  </data>
   <data name="InputTesterPage_Tab_Keyboard.Text" xml:space="preserve">
     <value>Keyboard Test</value>
   </data>
   <data name="InputTesterPage_Tab_Mouse.Text" xml:space="preserve">
     <value>Mouse Test</value>
-  </data>
-  <data name="InputTesterPage_Setting_ModeTitle.Text" xml:space="preserve">
-    <value>Testing Mode</value>
-  </data>
-  <data name="InputTesterPage_Setting_ModeDesc.Text" xml:space="preserve">
-    <value>Select the input device to diagnose and test (Keyboard or Mouse).</value>
-  </data>
-  <data name="InputTesterPage_Setting_SoundTitle.Text" xml:space="preserve">
-    <value>Key Press Sound</value>
-  </data>
-  <data name="InputTesterPage_Setting_SoundDesc.Text" xml:space="preserve">
-    <value>Play sound feedback when pressing keys or clicking mouse buttons.</value>
   </data>
   <data name="InputTesterPage_ResetBtn.Text" xml:space="preserve">
     <value>Reset Test</value>
@@ -220,12 +196,6 @@
   <data name="InputTesterPage_Card_TotalPresses.Text" xml:space="preserve">
     <value>Total Keystrokes</value>
   </data>
-  <data name="InputTesterPage_Card_KeyInterval.Text" xml:space="preserve">
-    <value>Trigger Interval</value>
-  </data>
-  <data name="InputTesterPage_Key_IntervalFormat" xml:space="preserve">
-    <value>{0:F1} ms</value>
-  </data>
   <data name="InputTesterPage_Key_CodeFormat" xml:space="preserve">
     <value>Code: 0x{1:X2}</value>
   </data>
@@ -234,9 +204,6 @@
   </data>
   <data name="InputTesterPage_Key_None" xml:space="preserve">
     <value>None</value>
-  </data>
-  <data name="InputTesterPage_Key_ChatterNormal" xml:space="preserve">
-    <value>Normal</value>
   </data>
   <data name="InputTesterPage_Key_ChatterWarning" xml:space="preserve">
     <value>Suspected Chatter ({0} ms)</value>
@@ -268,38 +235,8 @@
   <data name="InputTesterPage_Mouse_WheelDown" xml:space="preserve">
     <value>Wheel Down</value>
   </data>
-  <data name="InputTesterPage_Mouse_ChatterTest_Title.Text" xml:space="preserve">
-    <value>Switch Chatter &amp; Double-Click Test</value>
-  </data>
-  <data name="InputTesterPage_Mouse_ChatterTest_Desc.Text" xml:space="preserve">
-    <value>Click rapidly in the zone below to test for mechanical switch chatter or double-clicking faults.</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Threshold.Text" xml:space="preserve">
-    <value>Chatter Threshold:</value>
-  </data>
-  <data name="InputTesterPage_Mouse_WheelStatus_OK" xml:space="preserve">
-    <value>Normal</value>
-  </data>
   <data name="InputTesterPage_Mouse_WheelStatus_Jitter" xml:space="preserve">
     <value>Reverse Jitter</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Canvas_Title.Text" xml:space="preserve">
-    <value>Sensor Polling Rate Canvas</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Canvas_Clear.Text" xml:space="preserve">
-    <value>Clear Canvas</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Canvas_Desc.Text" xml:space="preserve">
-    <value>Move or draw inside this canvas to test polling rate (Hz) and observe any angle snapping, jitter, or frame drops.</value>
-  </data>
-  <data name="InputTesterPage_Mouse_VisualTitle.Text" xml:space="preserve">
-    <value>Mouse Button Visualizer</value>
-  </data>
-  <data name="InputTesterPage_Mouse_VisualDesc.Text" xml:space="preserve">
-    <value>Press any physical mouse button or scroll wheel; the visualizer reacts in real time.</value>
-  </data>
-  <data name="InputTesterPage_Mouse_WheelHint.Text" xml:space="preserve">
-    <value>Interact within the canvas to measure trajectory, polling rate, wheel scroll, and chatter simultaneously.</value>
   </data>
   <data name="InputTesterPage_Mouse_StageTitle.Text" xml:space="preserve">
     <value>Standard 3-Button Virtual Mouse</value>
@@ -343,23 +280,11 @@
   <data name="InputTesterPage_MouseCard_PollingRate.Text" xml:space="preserve">
     <value>Sensor Polling Rate</value>
   </data>
-  <data name="InputTesterPage_MouseCard_WheelDelta.Text" xml:space="preserve">
-    <value>Scroll Wheel Steps</value>
-  </data>
   <data name="InputTesterPage_MouseCard_Chatter.Text" xml:space="preserve">
     <value>Switch Chatter Status</value>
   </data>
-  <data name="InputTesterPage_MouseTile_Side1.Text" xml:space="preserve">
-    <value>Side 1 (Back)</value>
-  </data>
-  <data name="InputTesterPage_MouseTile_Side2.Text" xml:space="preserve">
-    <value>Side 2 (Forward)</value>
-  </data>
   <data name="InputTesterPage_Mouse_NoAction" xml:space="preserve">
     <value>No action</value>
-  </data>
-  <data name="InputTesterPage_Mouse_CumulativeClicks" xml:space="preserve">
-    <value>Total {0} clicks</value>
   </data>
   <data name="InputTesterPage_Mouse_WheelScrollAction" xml:space="preserve">
     <value>Delta: {0}</value>
@@ -373,9 +298,6 @@
   <data name="InputTesterPage_Mouse_HzSummary" xml:space="preserve">
     <value>Avg {0} Hz / Peak {1} Hz</value>
   </data>
-  <data name="InputTesterPage_Mouse_StepsUnit" xml:space="preserve">
-    <value>{0} Steps</value>
-  </data>
   <data name="InputTesterPage_Mouse_ChatterStatus_OK" xml:space="preserve">
     <value>Normal</value>
   </data>
@@ -385,35 +307,11 @@
   <data name="InputTesterPage_Mouse_ChatterCounts" xml:space="preserve">
     <value>Normal {0} / Chatter {1}</value>
   </data>
-  <data name="InputTesterPage_Mouse_ClickCountUnit" xml:space="preserve">
-    <value>{0} Clicks</value>
-  </data>
-  <data name="InputTesterPage_Mouse_ChatterBanner.Text" xml:space="preserve">
-    <value>Suspected switch chatter detected.</value>
-  </data>
-  <data name="InputTesterPage_Mouse_ChatterHint.Text" xml:space="preserve">
-    <value>Interval below threshold is flagged as chatter.</value>
-  </data>
-  <data name="InputTesterPage_Mouse_LastIntervalFormat" xml:space="preserve">
-    <value>Last interval: {0} ms</value>
-  </data>
-  <data name="InputTesterPage_Mouse_LastIntervalNone" xml:space="preserve">
-    <value>Last interval: - ms</value>
-  </data>
   <data name="InputTesterPage_Card_NKRO.Text" xml:space="preserve">
     <value>N-Key Rollover</value>
   </data>
   <data name="InputTesterPage_Key_TestedCountFormat" xml:space="preserve">
     <value>{0} / {1} Keys</value>
-  </data>
-  <data name="InputTesterPage_Mouse_RealtimeChip.Text" xml:space="preserve">
-    <value>Realtime</value>
-  </data>
-  <data name="InputTesterPage_Mouse_AvgChip.Text" xml:space="preserve">
-    <value>Avg</value>
-  </data>
-  <data name="InputTesterPage_Mouse_PeakChip.Text" xml:space="preserve">
-    <value>Peak</value>
   </data>
   <data name="SystemRepairPage_Title.Text" xml:space="preserve">
     <value>System Integrity Repair</value>
@@ -487,9 +385,6 @@
   <data name="SystemRepairPage_CompletionInfoBar.Title" xml:space="preserve">
     <value>Repair Task Completed</value>
   </data>
-  <data name="SystemRepairPage_CompletionInfoBar.Message" xml:space="preserve">
-    <value>All repair processes have ended successfully. You can check the log for details.</value>
-  </data>
   <data name="SystemRepairPage_HistoryHeader.Text" xml:space="preserve">
     <value>History Log</value>
   </data>
@@ -520,21 +415,6 @@
   <data name="SystemRepairPage_Log_ErrorPrefix" xml:space="preserve">
     <value>[Error]</value>
   </data>
-  <data name="SystemRepairPage_Copied" xml:space="preserve">
-    <value>Copied to clipboard</value>
-  </data>
-  <data name="System_Cut" xml:space="preserve">
-    <value>Cut</value>
-  </data>
-  <data name="System_Copy" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="System_Paste" xml:space="preserve">
-    <value>Paste</value>
-  </data>
-  <data name="System_Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
   <data name="System_AllFiles" xml:space="preserve">
     <value>All Files</value>
   </data>
@@ -556,26 +436,11 @@
   <data name="CrashReportPage_ExportBtn.Text" xml:space="preserve">
     <value>Export Report</value>
   </data>
-  <data name="CrashReportPage_NoCrashes_Title.Text" xml:space="preserve">
-    <value>No crash events found</value>
-  </data>
-  <data name="CrashReportPage_NoCrashes_Desc.Text" xml:space="preserve">
-    <value>No kernel crash dumps (BSOD) or recent application crash events were found in system event logs.</value>
-  </data>
-  <data name="CrashReportPage_SelectPrompt_Title.Text" xml:space="preserve">
-    <value>Select an Event</value>
-  </data>
-  <data name="CrashReportPage_SelectPrompt_Desc.Text" xml:space="preserve">
-    <value>Select any crash event from the list on the left to view detailed diagnostic information and recommendations.</value>
-  </data>
   <data name="CrashReportPage_Detail_DiagnosisHeader.Text" xml:space="preserve">
     <value>Smart Diagnosis &amp; Root Cause</value>
   </data>
   <data name="CrashReportPage_Detail_RecommendationHeader.Text" xml:space="preserve">
     <value>Troubleshooting &amp; Advice</value>
-  </data>
-  <data name="CrashReportPage_Detail_TechDetailsHeader.Text" xml:space="preserve">
-    <value>Technical Parameters</value>
   </data>
   <data name="CrashReportPage_Detail_ErrorCode.Text" xml:space="preserve">
     <value>Error Code</value>
@@ -598,23 +463,11 @@
   <data name="CrashReportPage_Detail_RawLogHeader.Text" xml:space="preserve">
     <value>Raw Event Record</value>
   </data>
-  <data name="CrashReportPage_Detail_RawLogSubheader.Text" xml:space="preserve">
-    <value>Windows Event Viewer Raw Record (XML / Text)</value>
-  </data>
   <data name="CrashReportPage_Detail_CopyBtn.Text" xml:space="preserve">
     <value>Copy All</value>
   </data>
   <data name="CrashReportPage_Detail_Copied" xml:space="preserve">
     <value>Copied to clipboard</value>
-  </data>
-  <data name="CrashReportPage_Detail_CopyField.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
-    <value>Copy this field</value>
-  </data>
-  <data name="CrashReportPage_Detail_CopyDiagnosis.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
-    <value>Copy diagnosis</value>
-  </data>
-  <data name="CrashReportPage_Detail_CopyRawLog.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
-    <value>Copy raw log</value>
   </data>
   <data name="CrashReportPage_ExportSuccess_Title" xml:space="preserve">
     <value>Export Successful</value>
@@ -624,9 +477,6 @@
   </data>
   <data name="CrashReportPage_DumpFolder_NotFound" xml:space="preserve">
     <value>Minidump folder does not exist or contains no dump files.</value>
-  </data>
-  <data name="CrashReportPage_None" xml:space="preserve">
-    <value>None</value>
   </data>
   <data name="CrashReportPage_Scanning.Text" xml:space="preserve">
     <value>Scanning event logs and minidump files...</value>
@@ -687,9 +537,6 @@
   </data>
   <data name="CrashReportPage_Healthy_AppHang_Desc.Text" xml:space="preserve">
     <value>No unresponsive application events detected recently.</value>
-  </data>
-  <data name="CrashReportPage_Status_Normal.Text" xml:space="preserve">
-    <value>Normal</value>
   </data>
   <data name="CrashReportPage_ShowMore" xml:space="preserve">
     <value>Show remaining {0} records...</value>
@@ -910,44 +757,17 @@
   <data name="FileHashPage_SelectFileCardDesc.Text" xml:space="preserve">
     <value>Supports any file format. Computes SHA-256, SHA-1, MD5, and SHA-512 checksums automatically.</value>
   </data>
-  <data name="FileHashPage_Algorithm.Text" xml:space="preserve">
-    <value>Hash Algorithm</value>
-  </data>
-  <data name="FileHashPage_Result.Header" xml:space="preserve">
-    <value>Hash Result</value>
-  </data>
   <data name="FileHashPage_Compare.Text" xml:space="preserve">
     <value>Hash Comparison &amp; Verification</value>
   </data>
   <data name="FileHashPage_CompareButton.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
-  <data name="FileHashPage_CopyButton.Text" xml:space="preserve">
-    <value>Copy</value>
-  </data>
   <data name="FileHashPage_CalculateButton.Text" xml:space="preserve">
     <value>Recalculate</value>
   </data>
-  <data name="FileHashPage_VerifySuccess" xml:space="preserve">
-    <value>Hash verification succeeded, exact match.</value>
-  </data>
-  <data name="FileHashPage_VerifyFail" xml:space="preserve">
-    <value>Hash verification failed: File content may be modified or algorithm mismatch.</value>
-  </data>
   <data name="FileHashPage_Calculating" xml:space="preserve">
     <value>Calculating hash, please wait...</value>
-  </data>
-  <data name="FileHashPage_FileSize" xml:space="preserve">
-    <value>File size:</value>
-  </data>
-  <data name="FileHashPage_Algorithm_Desc.Text" xml:space="preserve">
-    <value>SHA-256 (Highly secure, recommended), SHA-1 (Legacy compatibility), MD5 (Quick verification), SHA-512 (Ultra secure).</value>
-  </data>
-  <data name="FileHashPage_Result.PlaceholderText" xml:space="preserve">
-    <value>After selecting a file and calculating, the hash result will be displayed here...</value>
-  </data>
-  <data name="FileHashPage_Compare_Desc.Text" xml:space="preserve">
-    <value>Hash value comparison and integrity verification.</value>
   </data>
   <data name="FileHashPage_CompareInput.PlaceholderText" xml:space="preserve">
     <value>Enter or paste expected hash here...</value>
@@ -958,20 +778,11 @@
   <data name="FileHashPage_Error_FileNotFound" xml:space="preserve">
     <value>File does not exist or is inaccessible.</value>
   </data>
-  <data name="FileHashPage_VerifySuccess_Title" xml:space="preserve">
-    <value>Verification Succeeded</value>
-  </data>
-  <data name="FileHashPage_VerifyFail_Title" xml:space="preserve">
-    <value>Verification Failed</value>
-  </data>
   <data name="FileHashPage_Section_SelectFile.Text" xml:space="preserve">
     <value>Select File</value>
   </data>
   <data name="FileHashPage_Section_Calculate.Text" xml:space="preserve">
     <value>Calculation Results</value>
-  </data>
-  <data name="FileHashPage_Section_Verify.Text" xml:space="preserve">
-    <value>Verify &amp; Compare</value>
   </data>
   <data name="FileHashPage_CalculationCancelled" xml:space="preserve">
     <value>Calculation cancelled.</value>
@@ -1228,9 +1039,6 @@
   <data name="SettingsPage_RescanHardware_ButtonText.Text" xml:space="preserve">
     <value>Scan Now</value>
   </data>
-  <data name="Common_Colon" xml:space="preserve">
-    <value>: </value>
-  </data>
   <data name="SystemRepairPage_Hero_ElapsedTimeFormat" xml:space="preserve">
     <value>Elapsed {0}</value>
   </data>
@@ -1303,17 +1111,11 @@
   <data name="FileHashPage_Algorithm_Sha512_Desc.Text" xml:space="preserve">
     <value>512-bit high-security algorithm offering maximum cryptographic margin, suitable for sensitive data verification.</value>
   </data>
-  <data name="FileHashPage_Algorithm_Pending" xml:space="preserve">
-    <value>Pending calculation...</value>
-  </data>
   <data name="FileHashPage_ClearInput" xml:space="preserve">
     <value>Clear text</value>
   </data>
   <data name="FileHashPage_Status_Calculating" xml:space="preserve">
     <value>Calculating...</value>
-  </data>
-  <data name="FileHashPage_Status_Completed" xml:space="preserve">
-    <value>Completed</value>
   </data>
   <data name="Nav_SearchBox.PlaceholderText" xml:space="preserve">
     <value>Search tools or features</value>
@@ -1329,9 +1131,6 @@
   </data>
   <data name="ResetFileTypeDefaultsPage_Error_KeyStillExists" xml:space="preserve">
     <value>The registry key still exists and could not be removed.</value>
-  </data>
-  <data name="ResetFileTypeDefaultsPage_Error_DeleteFailed" xml:space="preserve">
-    <value>Failed to delete association key: {0}</value>
   </data>
   <data name="SystemRepairPage_CheckHealth_Cmd.Text" xml:space="preserve">
     <value>CheckHealth</value>
@@ -1479,4 +1278,13 @@ You can also keep the existing window; the target path has already been copied t
   <data name="Notification_Refreshed_Msg" xml:space="preserve">
     <value>Hardware specifications updated.</value>
   </data>
+  <data name="FileHashPage_Export_File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="FileHashPage_Export_Path" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="FileHashPage_Export_Size" xml:space="preserve">
+    <value>Size</value>
+  </data>
 </root>

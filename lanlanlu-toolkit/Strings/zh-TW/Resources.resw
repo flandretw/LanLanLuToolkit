@@ -125,9 +125,6 @@
   <data name="HomePage_Storage.Text" xml:space="preserve">
     <value>儲存裝置</value>
   </data>
-  <data name="HomePage_Detecting.Text" xml:space="preserve">
-    <value>偵測中……</value>
-  </data>
   <data name="HomePage_Intro.Text" xml:space="preserve">
     <value>專為 Windows 11 打造的系統診斷與修復工具箱。從下方快速啟動常用工具，或使用側邊導覽列瀏覽完整功能。</value>
   </data>
@@ -182,32 +179,11 @@
   <data name="InputTesterPage_Subtitle.Text" xml:space="preserve">
     <value>測試鍵盤按鍵觸發、全鍵無衝、滑鼠按鍵連點、輪詢率與滾輪跳幀。</value>
   </data>
-  <data name="InputTesterPage_Section_Options.Text" xml:space="preserve">
-    <value>測試選項</value>
-  </data>
-  <data name="InputTesterPage_Section_Keyboard.Text" xml:space="preserve">
-    <value>鍵盤診斷</value>
-  </data>
-  <data name="InputTesterPage_Section_Mouse.Text" xml:space="preserve">
-    <value>滑鼠診斷</value>
-  </data>
   <data name="InputTesterPage_Tab_Keyboard.Text" xml:space="preserve">
     <value>鍵盤測試</value>
   </data>
   <data name="InputTesterPage_Tab_Mouse.Text" xml:space="preserve">
     <value>滑鼠測試</value>
-  </data>
-  <data name="InputTesterPage_Setting_ModeTitle.Text" xml:space="preserve">
-    <value>測試模式</value>
-  </data>
-  <data name="InputTesterPage_Setting_ModeDesc.Text" xml:space="preserve">
-    <value>選擇要進行診斷與測試的輸入裝置。</value>
-  </data>
-  <data name="InputTesterPage_Setting_SoundTitle.Text" xml:space="preserve">
-    <value>按鍵音效</value>
-  </data>
-  <data name="InputTesterPage_Setting_SoundDesc.Text" xml:space="preserve">
-    <value>在按下鍵盤按鍵或按一下滑鼠時播放聲音回饋。</value>
   </data>
   <data name="InputTesterPage_ResetBtn.Text" xml:space="preserve">
     <value>重設紀錄</value>
@@ -224,12 +200,6 @@
   <data name="InputTesterPage_Card_TotalPresses.Text" xml:space="preserve">
     <value>總敲擊次數</value>
   </data>
-  <data name="InputTesterPage_Card_KeyInterval.Text" xml:space="preserve">
-    <value>觸發間隔</value>
-  </data>
-  <data name="InputTesterPage_Key_IntervalFormat" xml:space="preserve">
-    <value>{0:F1} ms</value>
-  </data>
   <data name="InputTesterPage_Key_CodeFormat" xml:space="preserve">
     <value>鍵碼：0x{1:X2}</value>
   </data>
@@ -238,9 +208,6 @@
   </data>
   <data name="InputTesterPage_Key_None" xml:space="preserve">
     <value>無</value>
-  </data>
-  <data name="InputTesterPage_Key_ChatterNormal" xml:space="preserve">
-    <value>正常</value>
   </data>
   <data name="InputTesterPage_Key_ChatterWarning" xml:space="preserve">
     <value>疑似連點 ({0} ms)</value>
@@ -272,38 +239,8 @@
   <data name="InputTesterPage_Mouse_WheelDown" xml:space="preserve">
     <value>滾輪向下</value>
   </data>
-  <data name="InputTesterPage_Mouse_ChatterTest_Title.Text" xml:space="preserve">
-    <value>微動開關連點測試</value>
-  </data>
-  <data name="InputTesterPage_Mouse_ChatterTest_Desc.Text" xml:space="preserve">
-    <value>在下方區域快速連續按下滑鼠按鍵，測試微動開關是否有異常連點現象。</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Threshold.Text" xml:space="preserve">
-    <value>連點判定臨界值</value>
-  </data>
-  <data name="InputTesterPage_Mouse_WheelStatus_OK" xml:space="preserve">
-    <value>正常</value>
-  </data>
   <data name="InputTesterPage_Mouse_WheelStatus_Jitter" xml:space="preserve">
     <value>反向跳幀</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Canvas_Title.Text" xml:space="preserve">
-    <value>感應器回報率畫布</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Canvas_Clear.Text" xml:space="preserve">
-    <value>清除畫布</value>
-  </data>
-  <data name="InputTesterPage_Mouse_Canvas_Desc.Text" xml:space="preserve">
-    <value>在此畫布內移動或劃線以即時量測感應器每秒回報率，並觀察是否有角度修正或抖動現象。</value>
-  </data>
-  <data name="InputTesterPage_Mouse_VisualTitle.Text" xml:space="preserve">
-    <value>滑鼠按鍵視覺儀表</value>
-  </data>
-  <data name="InputTesterPage_Mouse_VisualDesc.Text" xml:space="preserve">
-    <value>按下任何實體滑鼠按鍵或滾動滾輪，儀表將即時連動回饋。</value>
-  </data>
-  <data name="InputTesterPage_Mouse_WheelHint.Text" xml:space="preserve">
-    <value>在右側畫布中操作即可同時量測軌跡、回報率、滾輪與微動連點。</value>
   </data>
   <data name="InputTesterPage_Mouse_StageTitle.Text" xml:space="preserve">
     <value>標準 3 鍵配置虛擬滑鼠</value>
@@ -347,23 +284,11 @@
   <data name="InputTesterPage_MouseCard_PollingRate.Text" xml:space="preserve">
     <value>感應器回報率</value>
   </data>
-  <data name="InputTesterPage_MouseCard_WheelDelta.Text" xml:space="preserve">
-    <value>滾輪總步進</value>
-  </data>
   <data name="InputTesterPage_MouseCard_Chatter.Text" xml:space="preserve">
     <value>微動開關狀態</value>
   </data>
-  <data name="InputTesterPage_MouseTile_Side1.Text" xml:space="preserve">
-    <value>側鍵 1</value>
-  </data>
-  <data name="InputTesterPage_MouseTile_Side2.Text" xml:space="preserve">
-    <value>側鍵 2</value>
-  </data>
   <data name="InputTesterPage_Mouse_NoAction" xml:space="preserve">
     <value>無操作</value>
-  </data>
-  <data name="InputTesterPage_Mouse_CumulativeClicks" xml:space="preserve">
-    <value>累計 {0} 次點擊</value>
   </data>
   <data name="InputTesterPage_Mouse_WheelScrollAction" xml:space="preserve">
     <value>Delta: {0}</value>
@@ -377,9 +302,6 @@
   <data name="InputTesterPage_Mouse_HzSummary" xml:space="preserve">
     <value>平均 {0} Hz / 最高 {1} Hz</value>
   </data>
-  <data name="InputTesterPage_Mouse_StepsUnit" xml:space="preserve">
-    <value>{0} 格</value>
-  </data>
   <data name="InputTesterPage_Mouse_ChatterStatus_OK" xml:space="preserve">
     <value>正常</value>
   </data>
@@ -389,35 +311,11 @@
   <data name="InputTesterPage_Mouse_ChatterCounts" xml:space="preserve">
     <value>正常 {0} / 異常 {1}</value>
   </data>
-  <data name="InputTesterPage_Mouse_ClickCountUnit" xml:space="preserve">
-    <value>{0} 次</value>
-  </data>
-  <data name="InputTesterPage_Mouse_ChatterBanner.Text" xml:space="preserve">
-    <value>偵測到疑似微動連點。</value>
-  </data>
-  <data name="InputTesterPage_Mouse_ChatterHint.Text" xml:space="preserve">
-    <value>點擊間隔低於設定臨界值即判定為連點。</value>
-  </data>
-  <data name="InputTesterPage_Mouse_LastIntervalFormat" xml:space="preserve">
-    <value>最後間隔：{0} ms</value>
-  </data>
-  <data name="InputTesterPage_Mouse_LastIntervalNone" xml:space="preserve">
-    <value>最後間隔：- ms</value>
-  </data>
   <data name="InputTesterPage_Card_NKRO.Text" xml:space="preserve">
     <value>N-Key Rollover</value>
   </data>
   <data name="InputTesterPage_Key_TestedCountFormat" xml:space="preserve">
     <value>{0} / {1} 鍵</value>
-  </data>
-  <data name="InputTesterPage_Mouse_RealtimeChip.Text" xml:space="preserve">
-    <value>即時</value>
-  </data>
-  <data name="InputTesterPage_Mouse_AvgChip.Text" xml:space="preserve">
-    <value>平均</value>
-  </data>
-  <data name="InputTesterPage_Mouse_PeakChip.Text" xml:space="preserve">
-    <value>最高</value>
   </data>
   <data name="SystemRepairPage_Title.Text" xml:space="preserve">
     <value>系統完整性修復</value>
@@ -491,9 +389,6 @@
   <data name="SystemRepairPage_CompletionInfoBar.Title" xml:space="preserve">
     <value>修復任務已完成</value>
   </data>
-  <data name="SystemRepairPage_CompletionInfoBar.Message" xml:space="preserve">
-    <value>所有的修復流程已順利結束，你可以查看歷程紀錄了解詳情。</value>
-  </data>
   <data name="SystemRepairPage_HistoryHeader.Text" xml:space="preserve">
     <value>歷程紀錄</value>
   </data>
@@ -524,21 +419,6 @@
   <data name="SystemRepairPage_Log_ErrorPrefix" xml:space="preserve">
     <value>[錯誤]</value>
   </data>
-  <data name="SystemRepairPage_Copied" xml:space="preserve">
-    <value>已複製到剪貼簿</value>
-  </data>
-  <data name="System_Cut" xml:space="preserve">
-    <value>剪下</value>
-  </data>
-  <data name="System_Copy" xml:space="preserve">
-    <value>複製</value>
-  </data>
-  <data name="System_Paste" xml:space="preserve">
-    <value>貼上</value>
-  </data>
-  <data name="System_Cancel" xml:space="preserve">
-    <value>取消</value>
-  </data>
   <data name="System_AllFiles" xml:space="preserve">
     <value>所有檔案</value>
   </data>
@@ -560,26 +440,11 @@
   <data name="CrashReportPage_ExportBtn.Text" xml:space="preserve">
     <value>匯出診斷報告</value>
   </data>
-  <data name="CrashReportPage_NoCrashes_Title.Text" xml:space="preserve">
-    <value>未發現當機事件</value>
-  </data>
-  <data name="CrashReportPage_NoCrashes_Desc.Text" xml:space="preserve">
-    <value>在系統記錄中未發現任何系統停止錯誤或近期應用程式當機事件。</value>
-  </data>
-  <data name="CrashReportPage_SelectPrompt_Title.Text" xml:space="preserve">
-    <value>請選擇左側事件</value>
-  </data>
-  <data name="CrashReportPage_SelectPrompt_Desc.Text" xml:space="preserve">
-    <value>選取左側清單中的事件以檢視詳細診斷資訊與排錯建議。</value>
-  </data>
   <data name="CrashReportPage_Detail_DiagnosisHeader.Text" xml:space="preserve">
     <value>智慧診斷與成因分析</value>
   </data>
   <data name="CrashReportPage_Detail_RecommendationHeader.Text" xml:space="preserve">
     <value>排錯與改善建議</value>
-  </data>
-  <data name="CrashReportPage_Detail_TechDetailsHeader.Text" xml:space="preserve">
-    <value>技術參數資訊</value>
   </data>
   <data name="CrashReportPage_Detail_ErrorCode.Text" xml:space="preserve">
     <value>錯誤代碼</value>
@@ -602,23 +467,11 @@
   <data name="CrashReportPage_Detail_RawLogHeader.Text" xml:space="preserve">
     <value>原始事件紀錄</value>
   </data>
-  <data name="CrashReportPage_Detail_RawLogSubheader.Text" xml:space="preserve">
-    <value>Windows 事件檢視器原始記錄</value>
-  </data>
   <data name="CrashReportPage_Detail_CopyBtn.Text" xml:space="preserve">
     <value>複製全部</value>
   </data>
   <data name="CrashReportPage_Detail_Copied" xml:space="preserve">
     <value>已複製到剪貼簿</value>
-  </data>
-  <data name="CrashReportPage_Detail_CopyField.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
-    <value>複製此欄位</value>
-  </data>
-  <data name="CrashReportPage_Detail_CopyDiagnosis.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
-    <value>複製診斷分析</value>
-  </data>
-  <data name="CrashReportPage_Detail_CopyRawLog.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
-    <value>複製原始紀錄</value>
   </data>
   <data name="CrashReportPage_ExportSuccess_Title" xml:space="preserve">
     <value>匯出成功</value>
@@ -628,9 +481,6 @@
   </data>
   <data name="CrashReportPage_DumpFolder_NotFound" xml:space="preserve">
     <value>找不到傾印資料夾，目前尚未產生核心傾印檔案。</value>
-  </data>
-  <data name="CrashReportPage_None" xml:space="preserve">
-    <value>無紀錄</value>
   </data>
   <data name="CrashReportPage_Scanning.Text" xml:space="preserve">
     <value>正在掃描事件記錄與核心傾印檔案……</value>
@@ -691,9 +541,6 @@
   </data>
   <data name="CrashReportPage_Healthy_AppHang_Desc.Text" xml:space="preserve">
     <value>近期未發現應用程式停止回應事件。</value>
-  </data>
-  <data name="CrashReportPage_Status_Normal.Text" xml:space="preserve">
-    <value>狀態正常</value>
   </data>
   <data name="CrashReportPage_ShowMore" xml:space="preserve">
     <value>顯示其餘 {0} 筆記錄……</value>
@@ -914,44 +761,17 @@
   <data name="FileHashPage_SelectFileCardDesc.Text" xml:space="preserve">
     <value>支援任意格式檔案，將自動計算 SHA-256、SHA-1、MD5 與 SHA-512 雜湊值。</value>
   </data>
-  <data name="FileHashPage_Algorithm.Text" xml:space="preserve">
-    <value>雜湊演算法</value>
-  </data>
-  <data name="FileHashPage_Result.Header" xml:space="preserve">
-    <value>雜湊結果</value>
-  </data>
   <data name="FileHashPage_Compare.Text" xml:space="preserve">
     <value>雜湊值比對驗證</value>
   </data>
   <data name="FileHashPage_CompareButton.Text" xml:space="preserve">
     <value>貼上</value>
   </data>
-  <data name="FileHashPage_CopyButton.Text" xml:space="preserve">
-    <value>複製</value>
-  </data>
   <data name="FileHashPage_CalculateButton.Text" xml:space="preserve">
     <value>重新計算</value>
   </data>
-  <data name="FileHashPage_VerifySuccess" xml:space="preserve">
-    <value>雜湊值比對成功，完全一致。</value>
-  </data>
-  <data name="FileHashPage_VerifyFail" xml:space="preserve">
-    <value>比對不相符：檔案內容可能已被修改或演算法不符。</value>
-  </data>
   <data name="FileHashPage_Calculating" xml:space="preserve">
     <value>正在計算雜湊值，請稍候……</value>
-  </data>
-  <data name="FileHashPage_FileSize" xml:space="preserve">
-    <value>檔案大小：</value>
-  </data>
-  <data name="FileHashPage_Algorithm_Desc.Text" xml:space="preserve">
-    <value>支援 SHA-256、SHA-1、MD5、SHA-512 等多種雜湊演算法。</value>
-  </data>
-  <data name="FileHashPage_Result.PlaceholderText" xml:space="preserve">
-    <value>選擇檔案並計算後，雜湊結果會在這裡顯示……</value>
-  </data>
-  <data name="FileHashPage_Compare_Desc.Text" xml:space="preserve">
-    <value>雜湊值比對與完整性驗證。</value>
   </data>
   <data name="FileHashPage_CompareInput.PlaceholderText" xml:space="preserve">
     <value>在此輸入或貼上預期的雜湊值……</value>
@@ -962,20 +782,11 @@
   <data name="FileHashPage_Error_FileNotFound" xml:space="preserve">
     <value>檔案不存在或無法存取。</value>
   </data>
-  <data name="FileHashPage_VerifySuccess_Title" xml:space="preserve">
-    <value>驗證成功</value>
-  </data>
-  <data name="FileHashPage_VerifyFail_Title" xml:space="preserve">
-    <value>驗證失敗</value>
-  </data>
   <data name="FileHashPage_Section_SelectFile.Text" xml:space="preserve">
     <value>選擇檔案</value>
   </data>
   <data name="FileHashPage_Section_Calculate.Text" xml:space="preserve">
     <value>計算結果</value>
-  </data>
-  <data name="FileHashPage_Section_Verify.Text" xml:space="preserve">
-    <value>比對驗證</value>
   </data>
   <data name="FileHashPage_CalculationCancelled" xml:space="preserve">
     <value>已取消計算。</value>
@@ -1232,9 +1043,6 @@
   <data name="SettingsPage_RescanHardware_ButtonText.Text" xml:space="preserve">
     <value>立即掃描</value>
   </data>
-  <data name="Common_Colon" xml:space="preserve">
-    <value>：</value>
-  </data>
   <data name="SystemRepairPage_Hero_ElapsedTimeFormat" xml:space="preserve">
     <value>已耗時 {0}</value>
   </data>
@@ -1307,17 +1115,11 @@
   <data name="FileHashPage_Algorithm_Sha512_Desc.Text" xml:space="preserve">
     <value>512 位元超高強度演算法，提供頂級碰撞抵抗力與安全裕度，適合機密與高規格檔案驗證。</value>
   </data>
-  <data name="FileHashPage_Algorithm_Pending" xml:space="preserve">
-    <value>等待計算……</value>
-  </data>
   <data name="FileHashPage_ClearInput" xml:space="preserve">
     <value>清除比對文字</value>
   </data>
   <data name="FileHashPage_Status_Calculating" xml:space="preserve">
     <value>計算中……</value>
-  </data>
-  <data name="FileHashPage_Status_Completed" xml:space="preserve">
-    <value>已完成</value>
   </data>
   <data name="Nav_SearchBox.PlaceholderText" xml:space="preserve">
     <value>搜尋工具或功能</value>
@@ -1333,9 +1135,6 @@
   </data>
   <data name="ResetFileTypeDefaultsPage_Error_KeyStillExists" xml:space="preserve">
     <value>機碼仍存在，無法完全刪除使用者關聯設定。</value>
-  </data>
-  <data name="ResetFileTypeDefaultsPage_Error_DeleteFailed" xml:space="preserve">
-    <value>刪除檔案關聯失敗：{0}</value>
   </data>
   <data name="SystemRepairPage_CheckHealth_Cmd.Text" xml:space="preserve">
     <value>CheckHealth</value>
@@ -1483,4 +1282,13 @@
   <data name="Notification_Refreshed_Msg" xml:space="preserve">
     <value>已更新硬體規格資訊。</value>
   </data>
+  <data name="FileHashPage_Export_File" xml:space="preserve">
+    <value>檔案</value>
+  </data>
+  <data name="FileHashPage_Export_Path" xml:space="preserve">
+    <value>路徑</value>
+  </data>
+  <data name="FileHashPage_Export_Size" xml:space="preserve">
+    <value>大小</value>
+  </data>
 </root>

@@ -68,11 +68,9 @@ namespace lanlanlu_toolkit.Services
                 if (showNotification)
                 {
                     string title = customNotificationTitle 
-                        ?? LocalizationHelper.GetString("Notification_Success") 
-                        ?? "Success";
+                        ?? LocalizationHelper.GetString("Notification_Success");
                     string message = customNotificationMessage 
-                        ?? LocalizationHelper.GetString("Notification_Copied") 
-                        ?? "Copied to clipboard";
+                        ?? LocalizationHelper.GetString("Notification_Copied");
 
                     NotificationService.Show(title, message, InfoBarSeverity.Success);
                 }

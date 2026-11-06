@@ -105,7 +105,7 @@ namespace lanlanlu_toolkit.Views
 
         private void SystemRepairPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!_isProcessRunning)
+            if (!_isProcessRunning && _logBuilder.Length == 0)
             {
                 ResetToIdleState();
             }
@@ -245,7 +245,7 @@ namespace lanlanlu_toolkit.Views
                     ring.Visibility = Visibility.Collapsed;
                     ring.IsActive = false;
                     badge.Visibility = Visibility.Visible;
-                    statusText.Text = LocalizationHelper.GetString("SystemRepairPage_Step_Corrupted") ?? "發現損毀";
+                    statusText.Text = LocalizationHelper.GetString("SystemRepairPage_Step_Corrupted");
                     statusText.Foreground = icon.Foreground;
                     badge.ClearValue(Border.BackgroundProperty);
                     if (pbar != null) pbar.Visibility = Visibility.Collapsed;
@@ -271,7 +271,7 @@ namespace lanlanlu_toolkit.Views
                     ring.Visibility = Visibility.Collapsed;
                     ring.IsActive = false;
                     badge.Visibility = Visibility.Visible;
-                    statusText.Text = LocalizationHelper.GetString("SystemRepairPage_Step_Unknown") ?? "狀態不明";
+                    statusText.Text = LocalizationHelper.GetString("SystemRepairPage_Step_Unknown");
                     statusText.Foreground = icon.Foreground;
                     badge.ClearValue(Border.BackgroundProperty);
                     if (pbar != null) pbar.Visibility = Visibility.Collapsed;
@@ -367,7 +367,7 @@ namespace lanlanlu_toolkit.Views
 
         private static string FormatStepStatus(int currentStep, int totalSteps, string stepTitle)
         {
-            var format = LocalizationHelper.GetString("SystemRepairPage_Step_Format") ?? "步驟 {0}/{1}：正在{2}";
+            var format = LocalizationHelper.GetString("SystemRepairPage_Step_Format");
             return string.Format(format, currentStep, totalSteps, stepTitle);
         }
 
@@ -433,7 +433,7 @@ namespace lanlanlu_toolkit.Views
                     UpdateStepVisual(4, StepStatus.Pending);
 
                     // Step 1: CheckHealth
-                    string t1 = LocalizationHelper.GetString("SystemRepairPage_CheckHealth_Title.Text") ?? "CheckHealth";
+                    string t1 = LocalizationHelper.GetString("SystemRepairPage_CheckHealth_Title.Text");
                     UpdateStepVisual(1, StepStatus.Running);
                     HeroStepStatusText.Text = FormatStepStatus(1, 4, t1);
                     var res1 = await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /CheckHealth", currentStep: 1, totalSteps: 4, cancellationToken: token);
@@ -442,7 +442,7 @@ namespace lanlanlu_toolkit.Views
                     stepResults.Add((t1, res1));
 
                     // Step 2: ScanHealth
-                    string t2 = LocalizationHelper.GetString("SystemRepairPage_ScanHealth_Title.Text") ?? "ScanHealth";
+                    string t2 = LocalizationHelper.GetString("SystemRepairPage_ScanHealth_Title.Text");
                     UpdateStepVisual(2, StepStatus.Running);
                     HeroStepStatusText.Text = FormatStepStatus(2, 4, t2);
                     var res2 = await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /ScanHealth", currentStep: 2, totalSteps: 4, cancellationToken: token);
@@ -451,7 +451,7 @@ namespace lanlanlu_toolkit.Views
                     stepResults.Add((t2, res2));
 
                     // Step 3: RestoreHealth
-                    string t3 = LocalizationHelper.GetString("SystemRepairPage_RestoreHealth_Title.Text") ?? "RestoreHealth";
+                    string t3 = LocalizationHelper.GetString("SystemRepairPage_RestoreHealth_Title.Text");
                     UpdateStepVisual(3, StepStatus.Running);
                     HeroStepStatusText.Text = FormatStepStatus(3, 4, t3);
                     var res3 = await RunCommandInternalAsync("Dism", "/Online /Cleanup-Image /RestoreHealth", currentStep: 3, totalSteps: 4, cancellationToken: token);
@@ -460,7 +460,7 @@ namespace lanlanlu_toolkit.Views
                     stepResults.Add((t3, res3));
 
                     // Step 4: Sfc Scannow
-                    string t4 = LocalizationHelper.GetString("SystemRepairPage_SfcScannow_Title.Text") ?? "sfc /scannow";
+                    string t4 = LocalizationHelper.GetString("SystemRepairPage_SfcScannow_Title.Text");
                     UpdateStepVisual(4, StepStatus.Running);
                     HeroStepStatusText.Text = FormatStepStatus(4, 4, t4);
                     var res4 = await RunCommandInternalAsync("sfc", "/scannow", currentStep: 4, totalSteps: 4, cancellationToken: token);
@@ -474,7 +474,7 @@ namespace lanlanlu_toolkit.Views
                 {
                     AppendLog("\n" + LocalizationHelper.GetString("SystemRepairPage_Log_SfcStart"));
 
-                    string tSfc = LocalizationHelper.GetString("SystemRepairPage_SfcScannow_Title.Text") ?? "sfc /scannow";
+                    string tSfc = LocalizationHelper.GetString("SystemRepairPage_SfcScannow_Title.Text");
                     UpdateStepVisual(4, StepStatus.Running);
                     HeroStepStatusText.Text = FormatStepStatus(1, 1, tSfc);
                     var res = await RunCommandInternalAsync("sfc", "/scannow", currentStep: 1, totalSteps: 1, cancellationToken: token);
@@ -877,7 +877,7 @@ namespace lanlanlu_toolkit.Views
                 }
                 else
                 {
-                    AppendLog(LocalizationHelper.GetString("SystemRepairPage_Step_Failed") ?? "執行失敗");
+                    AppendLog(LocalizationHelper.GetString("SystemRepairPage_Step_Failed"));
                 }
             }
             catch (Exception ex)
@@ -1019,13 +1019,17 @@ namespace lanlanlu_toolkit.Views
             LogOutput.Text = string.Empty;
             ClearLogBtn.IsEnabled = false;
             CopyLogBtn.IsEnabled = false;
+            if (!_isProcessRunning)
+            {
+                ResetToIdleState();
+            }
         }
 
         private async void CopyLogBtn_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(LogOutput.Text)) return;
 
-            string successMsg = LocalizationHelper.GetString("Notification_Copied") ?? "Copied to clipboard.";
+            string successMsg = LocalizationHelper.GetString("Notification_Copied");
             await ClipboardService.CopyTextAsync(LogOutput.Text, CopyLogBtn, showNotification: true, successMsg);
         }
 

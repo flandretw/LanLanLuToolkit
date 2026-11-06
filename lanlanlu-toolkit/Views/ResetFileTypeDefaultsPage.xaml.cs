@@ -113,7 +113,7 @@ namespace lanlanlu_toolkit.Views
 
                 string? result = Win32FilePicker.ShowOpenDialog(
                     hwnd,
-                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_SelectFileDialogTitle") ?? "選取欲重設預設開啟方式的檔案");
+                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_SelectFileDialogTitle"));
 
                 if (!string.IsNullOrEmpty(result))
                 {
@@ -125,8 +125,8 @@ namespace lanlanlu_toolkit.Views
                     else
                     {
                         NotificationService.Show(
-                            LocalizationHelper.GetString("ResetFileTypeDefaultsPage_NoExtTitle") ?? "無法識別副檔名",
-                            LocalizationHelper.GetString("ResetFileTypeDefaultsPage_NoExtDesc") ?? "所選檔案沒有副檔名，無法進行預設關聯處理。",
+                            LocalizationHelper.GetString("ResetFileTypeDefaultsPage_NoExtTitle"),
+                            LocalizationHelper.GetString("ResetFileTypeDefaultsPage_NoExtDesc"),
                             InfoBarSeverity.Warning);
                     }
                 }
@@ -184,10 +184,10 @@ namespace lanlanlu_toolkit.Views
             bool isBlacklisted = Array.Exists(CriticalSystemExtensions, s => s.Equals(ext, StringComparison.OrdinalIgnoreCase));
             if (isBlacklisted)
             {
-                StatusHeaderTextBlock.Text = $".{ext} " + (LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Title") ?? "預設應用程式重設");
-                StatusBadgeTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_Protected") ?? "系統核心保護";
-                StatusAppNameTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_CriticalExtTitle") ?? "系統核心保護中";
-                StatusDetailTextBlock.Text = string.Format(LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_CriticalExt") ?? "副檔名 .{0} 屬於關鍵系統元件，已鎖定保護。", ext);
+                StatusHeaderTextBlock.Text = $".{ext} " + LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Title");
+                StatusBadgeTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_Protected");
+                StatusAppNameTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_CriticalExtTitle");
+                StatusDetailTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_Detail_Protected");
 
                 ResetAssociationBtn.IsEnabled = false;
                 RegistryNavBtn.IsEnabled = false;
@@ -227,37 +227,36 @@ namespace lanlanlu_toolkit.Views
             string exe = GetAssocString(dotExt, ASSOCSTR_EXECUTABLE);
             bool isGenericOpenWith = !string.IsNullOrEmpty(exe) && exe.EndsWith("openwith.exe", StringComparison.OrdinalIgnoreCase);
 
-            StatusHeaderTextBlock.Text = $".{ext} " + (LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Title") ?? "預設應用程式重設");
+            StatusHeaderTextBlock.Text = $".{ext} " + LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Title");
 
             if (hasUserChoice)
             {
                 // Explicit user choice override present - prime target for resetting
-                StatusBadgeTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_CustomSet") ?? "已設定自訂預設值";
+                StatusBadgeTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_CustomSet");
+                string unknownApp = LocalizationHelper.GetString("CrashReportPage_Source_Unknown");
                 string appDisplay = !string.IsNullOrWhiteSpace(friendly)
                     ? friendly
-                    : (!string.IsNullOrWhiteSpace(exe) ? Path.GetFileName(exe) : (!string.IsNullOrWhiteSpace(progId) ? progId : "未知應用程式"));
+                    : (!string.IsNullOrWhiteSpace(exe) ? Path.GetFileName(exe) : (!string.IsNullOrWhiteSpace(progId) ? progId : unknownApp));
 
                 StatusAppNameTextBlock.Text = string.Format(
-                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_AppFormat") ?? "預設開啟程式：{0}",
+                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_AppFormat"),
                     appDisplay);
 
-                StatusDetailTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_Detail_HasChoice")
-                    ?? "偵測到已設定此副檔名的個人預設開啟程式。按一下右側按鈕即可解除覆寫設定。";
+                StatusDetailTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_Detail_HasChoice");
 
                 ResetAssociationBtn.IsEnabled = true;
             }
             else if (!isGenericOpenWith && !string.IsNullOrEmpty(exe))
             {
                 // System or global default
-                StatusBadgeTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_SystemDefault") ?? "系統全域預設";
+                StatusBadgeTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_SystemDefault");
                 string appDisplay = !string.IsNullOrWhiteSpace(friendly) ? friendly : Path.GetFileName(exe);
 
                 StatusAppNameTextBlock.Text = string.Format(
-                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_AppFormat") ?? "預設開啟程式：{0}",
+                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_AppFormat"),
                     appDisplay);
 
-                StatusDetailTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_Detail_System")
-                    ?? "目前由 Windows 系統全域定義預設程式，未偵測到使用者個人自訂鎖定機碼。";
+                StatusDetailTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_Detail_System");
 
                 // Allow reset if HKCU key exists, else keep disabled since nothing to clean in HKCU
                 ResetAssociationBtn.IsEnabled = hasCustomOverride;
@@ -265,10 +264,9 @@ namespace lanlanlu_toolkit.Views
             else
             {
                 // Completely unassociated / clean state
-                StatusBadgeTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_Unassociated") ?? "未指定";
-                StatusAppNameTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_NoApp") ?? "未指定開啟程式";
-                StatusDetailTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_Detail_NoChoice")
-                    ?? "此副檔名尚未指定自訂預設應用程式。開啟時 Windows 將提示選擇應用程式。";
+                StatusBadgeTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_Unassociated");
+                StatusAppNameTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_NoApp");
+                StatusDetailTextBlock.Text = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Status_Detail_NoChoice");
 
                 ResetAssociationBtn.IsEnabled = hasCustomOverride;
             }
@@ -286,8 +284,8 @@ namespace lanlanlu_toolkit.Views
             if (!IsValidExtension(ext))
             {
                 NotificationService.Show(
-                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_InvalidExtTitle") ?? "副檔名格式無效",
-                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_InvalidExt") ?? "請輸入有效的副檔名。",
+                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_InvalidExtTitle"),
+                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_InvalidExt"),
                     InfoBarSeverity.Warning);
                 return;
             }
@@ -295,8 +293,8 @@ namespace lanlanlu_toolkit.Views
             if (Array.Exists(CriticalSystemExtensions, s => s.Equals(ext, StringComparison.OrdinalIgnoreCase)))
             {
                 NotificationService.Show(
-                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_CriticalExtTitle") ?? "系統核心保護中",
-                    string.Format(LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_CriticalExt") ?? "副檔名 .{0} 屬於關鍵系統元件，禁止清除。", ext),
+                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_CriticalExtTitle"),
+                    string.Format(LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_CriticalExt"), ext),
                     InfoBarSeverity.Warning);
                 return;
             }
@@ -308,14 +306,49 @@ namespace lanlanlu_toolkit.Views
                 await Task.Run(() =>
                 {
                     string subKeyPath = $@"Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.{ext}";
+                    string userChoicePath = $@"{subKeyPath}\UserChoice";
 
-                    // 1. Delete user override subkey tree via reg.exe (handles subtree permissions smoothly)
+                    // 1. Strip Windows Shell's Deny SetValue ACL on UserChoice so deletion is permitted
+                    try
+                    {
+                        using var ucKey = Registry.CurrentUser.OpenSubKey(
+                            userChoicePath,
+                            RegistryKeyPermissionCheck.ReadWriteSubTree,
+                            System.Security.AccessControl.RegistryRights.ChangePermissions);
+                        if (ucKey != null)
+                        {
+                            var security = ucKey.GetAccessControl();
+                            var rules = security.GetAccessRules(true, true, typeof(System.Security.Principal.SecurityIdentifier));
+                            bool modified = false;
+                            foreach (System.Security.AccessControl.RegistryAccessRule rule in rules)
+                            {
+                                if (rule.AccessControlType == System.Security.AccessControl.AccessControlType.Deny)
+                                {
+                                    security.RemoveAccessRuleSpecific(rule);
+                                    modified = true;
+                                }
+                            }
+                            if (modified)
+                            {
+                                ucKey.SetAccessControl(security);
+                            }
+                        }
+                    }
+                    catch { }
+
+                    try
+                    {
+                        using var extKey = Registry.CurrentUser.OpenSubKey(subKeyPath, writable: true);
+                        extKey?.DeleteSubKey("UserChoice", throwOnMissingSubKey: false);
+                    }
+                    catch { }
+
+                    // 2. Delete user override subkey tree via reg.exe
                     ProcessStartInfo psi = new ProcessStartInfo
                     {
                         FileName = "reg.exe",
                         CreateNoWindow = true,
-                        UseShellExecute = false,
-                        RedirectStandardError = true
+                        UseShellExecute = false
                     };
                     psi.ArgumentList.Add("delete");
                     psi.ArgumentList.Add($@"HKCU\{subKeyPath}");
@@ -329,13 +362,13 @@ namespace lanlanlu_toolkit.Views
                             if (!exited)
                             {
                                 try { proc.Kill(); } catch { }
-                                string timeoutMsg = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Error_Timeout") ?? "登錄機碼操作逾時。";
+                                string timeoutMsg = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Error_Timeout");
                                 throw new TimeoutException(timeoutMsg);
                             }
                         }
                     }
 
-                    // 2. Also ensure C# registry cleanup in case of any edge cases
+                    // 3. Also ensure C# registry cleanup in case of any edge cases
                     try
                     {
                         Registry.CurrentUser.DeleteSubKeyTree(subKeyPath, false);
@@ -345,14 +378,23 @@ namespace lanlanlu_toolkit.Views
                         // Subkey already does not exist (success)
                     }
 
-                    // 3. Clean up any user classes override in HKCU\Software\Classes\.ext if present
+                    // 4. Clean up any user classes override in HKCU\Software\Classes\.ext if present
                     try
                     {
                         Registry.CurrentUser.DeleteSubKeyTree($@"Software\Classes\.{ext}", false);
                     }
                     catch { }
 
-                    // 4. Notify Windows Explorer immediately to refresh icons and association cache
+                    // 5. Verify UserChoice no longer exists (in case protected by kernel filter driver)
+                    using (var remainingUc = Registry.CurrentUser.OpenSubKey(userChoicePath))
+                    {
+                        if (remainingUc != null)
+                        {
+                            throw new InvalidOperationException(LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Error_KeyStillExists"));
+                        }
+                    }
+
+                    // 6. Notify Windows Explorer immediately to refresh icons and association cache
                     SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
                 });
 
@@ -361,8 +403,8 @@ namespace lanlanlu_toolkit.Views
 
                 // 6. Show success feedback
                 NotificationService.Show(
-                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Success_ResetTitle") ?? "解除成功",
-                    string.Format(LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Success_ResetCompleted") ?? "已解除副檔名 .{0} 的自訂預設應用程式，並還原為未指定狀態。", ext),
+                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Success_ResetTitle"),
+                    string.Format(LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Success_ResetCompleted"), ext),
                     InfoBarSeverity.Success);
 
                 LoggingService.Log($"Successfully cleared user association override for: .{ext}");
@@ -370,7 +412,7 @@ namespace lanlanlu_toolkit.Views
             catch (Exception ex)
             {
                 NotificationService.Show(
-                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Error_Title") ?? "錯誤",
+                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Error_Title"),
                     ex.Message,
                     InfoBarSeverity.Error);
                 LoggingService.Log($"Error resetting association for .{ext}: {ex.Message}");
@@ -394,7 +436,7 @@ namespace lanlanlu_toolkit.Views
             catch (Exception ex)
             {
                 NotificationService.Show(
-                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Error_Title") ?? "錯誤",
+                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Error_Title"),
                     ex.Message,
                     InfoBarSeverity.Error);
             }
@@ -408,8 +450,8 @@ namespace lanlanlu_toolkit.Views
             if (!IsValidExtension(ext))
             {
                 NotificationService.Show(
-                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_InvalidExtTitle") ?? "副檔名格式無效",
-                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_InvalidExt") ?? "請輸入有效的副檔名。",
+                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_InvalidExtTitle"),
+                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_InvalidExt"),
                     InfoBarSeverity.Warning);
                 return;
             }
@@ -417,8 +459,8 @@ namespace lanlanlu_toolkit.Views
             if (Array.Exists(CriticalSystemExtensions, s => s.Equals(ext, StringComparison.OrdinalIgnoreCase)))
             {
                 NotificationService.Show(
-                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_CriticalExtTitle") ?? "系統核心保護中",
-                    string.Format(LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_CriticalExt") ?? "副檔名 .{0} 屬於關鍵系統元件，禁止操作。", ext),
+                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_CriticalExtTitle"),
+                    string.Format(LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_CriticalExt"), ext),
                     InfoBarSeverity.Warning);
                 return;
             }
@@ -443,12 +485,12 @@ namespace lanlanlu_toolkit.Views
                     {
                         var dialog = new ContentDialog
                         {
-                            Title = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_RegRunning_Title") ?? "登錄編輯程式正在執行",
+                            Title = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_RegRunning_Title"),
                             Content = string.Format(
-                                LocalizationHelper.GetString("ResetFileTypeDefaultsPage_RegRunning_Content") ?? "偵測到登錄編輯程式已開啟。若要由本工具自動定位至 .{0} 機碼，需要重新啟動登錄編輯程式。\n\n您也可以保留目前視窗，目標路徑已複製到您的剪貼簿，可直接貼上至網址列。",
+                                LocalizationHelper.GetString("ResetFileTypeDefaultsPage_RegRunning_Content"),
                                 ext),
-                            PrimaryButtonText = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_RegRunning_Restart") ?? "重新啟動並定位",
-                            CloseButtonText = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_RegRunning_Keep") ?? "保留目前視窗",
+                            PrimaryButtonText = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_RegRunning_Restart"),
+                            CloseButtonText = LocalizationHelper.GetString("ResetFileTypeDefaultsPage_RegRunning_Keep"),
                             XamlRoot = this.XamlRoot,
                             DefaultButton = ContentDialogButton.Close
                         };
@@ -461,8 +503,8 @@ namespace lanlanlu_toolkit.Views
                         else
                         {
                             NotificationService.Show(
-                                LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_FallbackCopyTitle") ?? "已複製路徑",
-                                LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_FallbackCopy") ?? "目標路徑已複製到剪貼簿，可在登錄編輯程式網址列貼上並按 Enter 即可定位。",
+                                LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_FallbackCopyTitle"),
+                                LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_FallbackCopy"),
                                 InfoBarSeverity.Informational);
                             return;
                         }
@@ -470,8 +512,8 @@ namespace lanlanlu_toolkit.Views
                     else
                     {
                         NotificationService.Show(
-                            LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_FallbackCopyTitle") ?? "已複製路徑",
-                            LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_FallbackCopy") ?? "目標路徑已複製到剪貼簿，可在登錄編輯程式網址列貼上並按 Enter 即可定位。",
+                            LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_FallbackCopyTitle"),
+                            LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Warning_FallbackCopy"),
                             InfoBarSeverity.Informational);
                         return;
                     }
@@ -527,8 +569,8 @@ namespace lanlanlu_toolkit.Views
                 });
 
                 NotificationService.Show(
-                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Success_RegNavigatedTitle") ?? "定位成功",
-                    string.Format(LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Success_RegNavigated") ?? "登錄編輯程式已成功巡覽至 .{0}。", ext),
+                    LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Success_RegNavigatedTitle"),
+                    string.Format(LocalizationHelper.GetString("ResetFileTypeDefaultsPage_Success_RegNavigated"), ext),
                     InfoBarSeverity.Success);
 
                 LoggingService.Log($"Launched Registry Editor with LastKey: {regeditFullPath}");

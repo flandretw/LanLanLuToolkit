@@ -86,9 +86,7 @@ namespace lanlanlu_toolkit.Views
             TextBlock descText,
             bool isSearchEmpty,
             string healthyTitleKey,
-            string healthyDescKey,
-            string healthyDefaultTitle,
-            string healthyDefaultDesc)
+            string healthyDescKey)
         {
             panel.Visibility = Visibility.Visible;
             if (isSearchEmpty)
@@ -96,16 +94,16 @@ namespace lanlanlu_toolkit.Views
                 icon.Glyph = "\uE721"; // Search glyph
                 var brush = GetThemeBrush("TextFillColorSecondaryBrush");
                 if (brush != null) icon.Foreground = brush;
-                titleText.Text = LocalizationHelper.GetString("CrashReportPage_NoSearchMatch_Title") ?? "找不到相符項目";
-                descText.Text = LocalizationHelper.GetString("CrashReportPage_NoSearchMatch_Desc") ?? "沒有符合搜尋關鍵字的事件記錄。";
+                titleText.Text = LocalizationHelper.GetString("CrashReportPage_NoSearchMatch_Title");
+                descText.Text = LocalizationHelper.GetString("CrashReportPage_NoSearchMatch_Desc");
             }
             else
             {
                 icon.Glyph = "\uE73E"; // Checkmark glyph
                 var brush = GetThemeBrush("SystemFillColorSuccessBrush");
                 if (brush != null) icon.Foreground = brush;
-                titleText.Text = LocalizationHelper.GetString(healthyTitleKey) ?? healthyDefaultTitle;
-                descText.Text = LocalizationHelper.GetString(healthyDescKey) ?? healthyDefaultDesc;
+                titleText.Text = LocalizationHelper.GetString(healthyTitleKey);
+                descText.Text = LocalizationHelper.GetString(healthyDescKey);
             }
         }
 
@@ -140,11 +138,11 @@ namespace lanlanlu_toolkit.Views
                 .Where(MatchSearch)
                 .ToList();
 
-            string summaryFormat = LocalizationHelper.GetString("CrashReportPage_Subtitle_SummaryFormat") ?? "共 {0} 筆記錄 · 最近一筆：{1}";
-            string searchEmptyFormat = LocalizationHelper.GetString("CrashReportPage_NoSearchMatch_Subtitle") ?? "找不到符合「{0}」的記錄";
+            string summaryFormat = LocalizationHelper.GetString("CrashReportPage_Subtitle_SummaryFormat");
+            string searchEmptyFormat = LocalizationHelper.GetString("CrashReportPage_NoSearchMatch_Subtitle");
 
             // 1. Kernel Crashes (BSOD) Category
-            string bsodCatTitle = LocalizationHelper.GetString("CrashReportPage_Category_BSOD") ?? "系統核心當機";
+            string bsodCatTitle = LocalizationHelper.GetString("CrashReportPage_Category_BSOD");
             BsodExpanderTitle.Text = $"{bsodCatTitle} ({_filteredBsod.Count})";
 
             if (_filteredBsod.Count == 0)
@@ -157,9 +155,7 @@ namespace lanlanlu_toolkit.Views
                     BsodEmptyDescText,
                     isSearchEmpty,
                     "CrashReportPage_Healthy_BSOD_Title",
-                    "CrashReportPage_Healthy_BSOD_Desc",
-                    "未偵測到核心當機記錄",
-                    "近期未偵測到系統核心當機傾印記錄。");
+                    "CrashReportPage_Healthy_BSOD_Desc");
 
                 BsodItemsControl.Visibility = Visibility.Collapsed;
 
@@ -175,7 +171,7 @@ namespace lanlanlu_toolkit.Views
                     BsodSuccessIcon.Visibility = Visibility.Visible;
                     BsodWarningIcon.Visibility = Visibility.Collapsed;
                     BsodNeutralIcon.Visibility = Visibility.Collapsed;
-                    BsodSubtitleText.Text = LocalizationHelper.GetString("CrashReportPage_Healthy_BSOD_Desc") ?? "近期未偵測到系統核心當機傾印記錄。";
+                    BsodSubtitleText.Text = LocalizationHelper.GetString("CrashReportPage_Healthy_BSOD_Desc");
                 }
                 BsodExpander.IsExpanded = false; // Quietly collapsed when empty
             }
@@ -193,7 +189,7 @@ namespace lanlanlu_toolkit.Views
             }
 
             // 2. Application Crashes Category (Smart expanded)
-            string appCrashCatTitle = LocalizationHelper.GetString("CrashReportPage_Category_AppCrash") ?? "應用程式錯誤";
+            string appCrashCatTitle = LocalizationHelper.GetString("CrashReportPage_Category_AppCrash");
             AppCrashExpanderTitle.Text = $"{appCrashCatTitle} ({_filteredAppCrash.Count})";
 
             if (_filteredAppCrash.Count == 0)
@@ -206,9 +202,7 @@ namespace lanlanlu_toolkit.Views
                     AppCrashEmptyDescText,
                     isSearchEmpty,
                     "CrashReportPage_Healthy_AppCrash_Title",
-                    "CrashReportPage_Healthy_AppCrash_Desc",
-                    "無應用程式錯誤",
-                    "近期未發現應用程式當機或例外終止事件。");
+                    "CrashReportPage_Healthy_AppCrash_Desc");
 
                 AppCrashItemsControl.Visibility = Visibility.Collapsed;
                 AppCrashShowMoreBtn.Visibility = Visibility.Collapsed;
@@ -225,7 +219,7 @@ namespace lanlanlu_toolkit.Views
                     AppCrashWarningIcon.Visibility = Visibility.Collapsed;
                     AppCrashSuccessIcon.Visibility = Visibility.Visible;
                     AppCrashNeutralIcon.Visibility = Visibility.Collapsed;
-                    AppCrashSubtitleText.Text = LocalizationHelper.GetString("CrashReportPage_Healthy_AppCrash_Desc") ?? "近期未發現應用程式當機或例外終止事件。";
+                    AppCrashSubtitleText.Text = LocalizationHelper.GetString("CrashReportPage_Healthy_AppCrash_Desc");
                 }
                 AppCrashExpander.IsExpanded = false;
             }
@@ -246,7 +240,7 @@ namespace lanlanlu_toolkit.Views
                 {
                     AppCrashItemsControl.ItemsSource = _filteredAppCrash.Take(DefaultDisplayLimit).ToList();
                     int remaining = _filteredAppCrash.Count - DefaultDisplayLimit;
-                    string showMoreFormat = LocalizationHelper.GetString("CrashReportPage_ShowMore") ?? "顯示其餘 {0} 筆記錄……";
+                    string showMoreFormat = LocalizationHelper.GetString("CrashReportPage_ShowMore");
                     AppCrashShowMoreText.Text = string.Format(showMoreFormat, remaining);
                     AppCrashShowMoreBtn.Visibility = Visibility.Visible;
                 }
@@ -260,7 +254,7 @@ namespace lanlanlu_toolkit.Views
             }
 
             // 3. Application Hangs Category
-            string appHangCatTitle = LocalizationHelper.GetString("CrashReportPage_Category_AppHang") ?? "應用程式停止回應";
+            string appHangCatTitle = LocalizationHelper.GetString("CrashReportPage_Category_AppHang");
             AppHangExpanderTitle.Text = $"{appHangCatTitle} ({_filteredAppHang.Count})";
 
             if (_filteredAppHang.Count == 0)
@@ -273,9 +267,7 @@ namespace lanlanlu_toolkit.Views
                     AppHangEmptyDescText,
                     isSearchEmpty,
                     "CrashReportPage_Healthy_AppHang_Title",
-                    "CrashReportPage_Healthy_AppHang_Desc",
-                    "無應用程式凍結記錄",
-                    "近期未發現應用程式停止回應事件。");
+                    "CrashReportPage_Healthy_AppHang_Desc");
 
                 AppHangItemsControl.Visibility = Visibility.Collapsed;
 
@@ -291,7 +283,7 @@ namespace lanlanlu_toolkit.Views
                     AppHangWarningIcon.Visibility = Visibility.Collapsed;
                     AppHangSuccessIcon.Visibility = Visibility.Visible;
                     AppHangNeutralIcon.Visibility = Visibility.Collapsed;
-                    AppHangSubtitleText.Text = LocalizationHelper.GetString("CrashReportPage_Healthy_AppHang_Desc") ?? "近期未發現應用程式停止回應事件。";
+                    AppHangSubtitleText.Text = LocalizationHelper.GetString("CrashReportPage_Healthy_AppHang_Desc");
                 }
                 AppHangExpander.IsExpanded = false;
             }
@@ -313,8 +305,8 @@ namespace lanlanlu_toolkit.Views
             // Update Total Count indicator in search toolbar
             int totalShown = _filteredBsod.Count + _filteredAppCrash.Count + _filteredAppHang.Count;
             ShowingCountText.Text = string.IsNullOrEmpty(search)
-                ? string.Format(LocalizationHelper.GetString("CrashReportPage_Count_Total") ?? "共 {0} 筆記錄", totalShown)
-                : string.Format(LocalizationHelper.GetString("CrashReportPage_Count_Filtered") ?? "已篩選 {0} / {1} 筆記錄", totalShown, _allReports.Count);
+                ? string.Format(LocalizationHelper.GetString("CrashReportPage_Count_Total"), totalShown)
+                : string.Format(LocalizationHelper.GetString("CrashReportPage_Count_Filtered"), totalShown, _allReports.Count);
         }
 
         private void AppCrashShowMoreBtn_Click(object sender, RoutedEventArgs e)
@@ -349,7 +341,7 @@ namespace lanlanlu_toolkit.Views
             {
                 try
                 {
-                    string query = $"{item.SourceOrApp} {item.ErrorCode} {item.FaultingModule}".Trim();
+                    string query = item.SearchQuery;
                     if (string.IsNullOrEmpty(query)) query = item.Title;
 
                     string url = $"https://www.bing.com/search?q={Uri.EscapeDataString(query)}";
@@ -389,8 +381,8 @@ namespace lanlanlu_toolkit.Views
                 else
                 {
                     NotificationService.Show(
-                        LocalizationHelper.GetString("CrashReportPage_Detail_LocateBtn/Text") ?? "定位檔案",
-                        LocalizationHelper.GetString("CrashReportPage_DumpFolder_NotFound") ?? "檔案不存在或已被系統清除。",
+                        LocalizationHelper.GetString("CrashReportPage_Detail_LocateBtn/Text"),
+                        LocalizationHelper.GetString("CrashReportPage_DumpFolder_NotFound"),
                         InfoBarSeverity.Informational);
                 }
             }
@@ -400,15 +392,15 @@ namespace lanlanlu_toolkit.Views
         {
             if (sender is Button btn && btn.Tag is CrashReportItem item)
             {
-                string lblTime = LocalizationHelper.GetString("CrashReport_Export_Field_Timestamp") ?? "時間";
-                string lblCode = LocalizationHelper.GetString("CrashReportPage_Detail_ErrorCode/Text") ?? "錯誤代碼";
-                string lblModule = LocalizationHelper.GetString("CrashReportPage_Detail_FaultModule/Text") ?? "可疑模組";
-                string lblSource = LocalizationHelper.GetString("CrashReportPage_Detail_SourceApp/Text") ?? "來源程式";
-                string lblParams = LocalizationHelper.GetString("CrashReportPage_Detail_Params/Text") ?? "參數";
-                string lblDump = LocalizationHelper.GetString("CrashReportPage_Detail_DumpPath/Text") ?? "路徑";
-                string lblDiag = LocalizationHelper.GetString("CrashReportPage_Detail_DiagnosisHeader/Text") ?? "診斷分析";
-                string lblRec = LocalizationHelper.GetString("CrashReportPage_Detail_RecommendationHeader/Text") ?? "建議處置";
-                string lblRaw = LocalizationHelper.GetString("CrashReportPage_Detail_RawLogHeader/Text") ?? "原始事件記錄";
+                string lblTime = LocalizationHelper.GetString("CrashReport_Export_Field_Timestamp");
+                string lblCode = LocalizationHelper.GetString("CrashReportPage_Detail_ErrorCode/Text");
+                string lblModule = LocalizationHelper.GetString("CrashReportPage_Detail_FaultModule/Text");
+                string lblSource = LocalizationHelper.GetString("CrashReportPage_Detail_SourceApp/Text");
+                string lblParams = LocalizationHelper.GetString("CrashReportPage_Detail_Params/Text");
+                string lblDump = LocalizationHelper.GetString("CrashReportPage_Detail_DumpPath/Text");
+                string lblDiag = LocalizationHelper.GetString("CrashReportPage_Detail_DiagnosisHeader/Text");
+                string lblRec = LocalizationHelper.GetString("CrashReportPage_Detail_RecommendationHeader/Text");
+                string lblRaw = LocalizationHelper.GetString("CrashReportPage_Detail_RawLogHeader/Text");
 
                 string reportText = $"[{item.DisplayBadge}] {item.Title}\n" +
                                     $"{lblTime}: {item.Timestamp:yyyy-MM-dd HH:mm:ss}\n" +
@@ -421,7 +413,7 @@ namespace lanlanlu_toolkit.Views
                                     $"\n{lblRec}:\n{item.Recommendation}\n" +
                                     (!string.IsNullOrEmpty(item.RawDetails) ? $"\n--- {lblRaw} ---\n{item.RawDetails}" : "");
 
-                string successMsg = LocalizationHelper.GetString("CrashReportPage_Detail_Copied") ?? "已複製到剪貼簿。";
+                string successMsg = LocalizationHelper.GetString("CrashReportPage_Detail_Copied");
                 await ClipboardService.CopyTextAsync(reportText, btn, showNotification: true, successMsg);
             }
         }
@@ -431,7 +423,7 @@ namespace lanlanlu_toolkit.Views
             if (sender is Button btn && btn.Tag is CrashReportItem item)
             {
                 string rawText = string.IsNullOrEmpty(item.RawDetails)
-                    ? (LocalizationHelper.GetString("CrashReportPage_RawLog_None") ?? "無其他詳細紀錄。")
+                    ? LocalizationHelper.GetString("CrashReportPage_RawLog_None")
                     : item.RawDetails;
 
                 var textBlock = new TextBlock
@@ -453,10 +445,10 @@ namespace lanlanlu_toolkit.Views
 
                 var dialog = new ContentDialog
                 {
-                    Title = $"{item.Title} - {LocalizationHelper.GetString("CrashReportPage_Detail_RawLogHeader/Text") ?? "原始事件記錄"}",
+                    Title = $"{item.Title} - {LocalizationHelper.GetString("CrashReportPage_Detail_RawLogHeader/Text")}",
                     Content = scrollViewer,
-                    CloseButtonText = LocalizationHelper.GetString("Common_Close") ?? "關閉",
-                    PrimaryButtonText = LocalizationHelper.GetString("CrashReportPage_Detail_CopyBtn/Text") ?? "複製紀錄",
+                    CloseButtonText = LocalizationHelper.GetString("Common_Close"),
+                    PrimaryButtonText = LocalizationHelper.GetString("CrashReportPage_Detail_CopyBtn/Text"),
                     XamlRoot = this.XamlRoot
                 };
 
@@ -527,8 +519,8 @@ namespace lanlanlu_toolkit.Views
                 else
                 {
                     NotificationService.Show(
-                        LocalizationHelper.GetString("CrashReportPage_OpenDumpFolderBtn/Text") ?? "開啟傾印資料夾",
-                        LocalizationHelper.GetString("CrashReportPage_DumpFolder_NotFound") ?? "找不到傾印資料夾，目前尚未產生核心傾印檔案。",
+                        LocalizationHelper.GetString("CrashReportPage_OpenDumpFolderBtn/Text"),
+                        LocalizationHelper.GetString("CrashReportPage_DumpFolder_NotFound"),
                         InfoBarSeverity.Warning);
                 }
             }
@@ -547,7 +539,7 @@ namespace lanlanlu_toolkit.Views
                 string defaultFileName = $"Crash_Report_{DateTime.Now:yyyyMMdd_HHmmss}.md";
                 IntPtr hwnd = App.MainWindow != null ? WindowNative.GetWindowHandle(App.MainWindow) : IntPtr.Zero;
                 string filter = "Markdown File (*.md)\0*.md\0Text File (*.txt)\0*.txt\0All Files (*.*)\0*.*\0\0";
-                string title = LocalizationHelper.GetString("CrashReportPage_ExportBtn/Text") ?? "匯出診斷報告";
+                string title = LocalizationHelper.GetString("CrashReportPage_ExportBtn/Text");
 
                 string? targetFilePath = Win32FilePicker.ShowSaveDialog(hwnd, title, defaultFileName, filter, "md");
 
@@ -557,8 +549,8 @@ namespace lanlanlu_toolkit.Views
                     await File.WriteAllTextAsync(targetFilePath, content, System.Text.Encoding.UTF8);
 
                     NotificationService.Show(
-                        LocalizationHelper.GetString("CrashReportPage_ExportSuccess_Title") ?? "匯出成功",
-                        $"{LocalizationHelper.GetString("CrashReportPage_ExportSuccess_Msg") ?? "報告已成功儲存至"} ({targetFilePath})",
+                        LocalizationHelper.GetString("CrashReportPage_ExportSuccess_Title"),
+                        $"{LocalizationHelper.GetString("CrashReportPage_ExportSuccess_Msg")} ({targetFilePath})",
                         InfoBarSeverity.Success);
                 }
             }

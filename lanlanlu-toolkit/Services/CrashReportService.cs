@@ -70,8 +70,8 @@ namespace lanlanlu_toolkit.Services
 
         public Visibility ExpandedVisibility => IsExpanded ? Visibility.Visible : Visibility.Collapsed;
         public string LearnMoreText => IsExpanded
-            ? (LocalizationHelper.GetString("CrashReportPage_Collapse.Text") ?? "收合資訊")
-            : (LocalizationHelper.GetString("CrashReportPage_LearnMore.Text") ?? "深入了解");
+            ? LocalizationHelper.GetString("CrashReportPage_Collapse.Text")
+            : LocalizationHelper.GetString("CrashReportPage_LearnMore.Text");
         public string ChevronGlyph => IsExpanded ? "\uE70E" : "\uE70D";
 
         public string FormattedSubtitle
@@ -91,15 +91,6 @@ namespace lanlanlu_toolkit.Services
 
         public string SearchQuery => $"{SourceOrApp} {ErrorCode} {FaultingModule}".Trim();
 
-        public string DisplayIcon => Type switch
-        {
-            CrashType.Bsod => "\uE7BA", // Warning Triangle for Kernel Crash / BSOD
-            CrashType.AppCrash => "\uE783", // Circle Exclamation for Application Crash
-            CrashType.AppHang => "\uE823", // Clock / History for Application Hang / Frozen UI
-            CrashType.DotNetCrash => "\uE774", // Globe / Web for .NET Runtime Exceptions
-            _ => "\uE783"
-        };
-
         public string DisplayBadge => Type switch
         {
             CrashType.Bsod => LocalizationHelper.GetString("CrashReportPage_Badge_KernelCrash"),
@@ -111,15 +102,6 @@ namespace lanlanlu_toolkit.Services
 
         public string FormattedTime => Timestamp.ToString("MM/dd HH:mm");
 
-        public string BadgeBackgroundKey => Type switch
-        {
-            CrashType.Bsod => "#D13438", // Critical Red
-            CrashType.AppCrash => "#EA385B", // Red-Orange
-            CrashType.AppHang => "#D83B01", // Orange
-            CrashType.DotNetCrash => "#881798", // Purple
-            _ => "#605E5C"
-        };
-
         private static string CleanTitle(string? input)
         {
             if (string.IsNullOrWhiteSpace(input)) return string.Empty;
@@ -130,14 +112,6 @@ namespace lanlanlu_toolkit.Services
             }
             return trimmed;
         }
-    }
-
-    public class CrashReportSummary
-    {
-        public int TotalCrashes { get; set; }
-        public int BsodCount { get; set; }
-        public int AppCrashCount { get; set; }
-        public DateTime? LastCrashTime { get; set; }
     }
 
     /// <summary>
@@ -664,11 +638,18 @@ namespace lanlanlu_toolkit.Services
                     Timestamp = fileInfo.LastWriteTime,
                     Title = Path.GetFileName(dumpPath),
                     SourceOrApp = LocalizationHelper.GetString("CrashReportPage_Source_Kernel"),
+                    FaultingModule = "ntoskrnl.exe",
+                    ErrorDescription = LocalizationHelper.GetString("BugCheck_Unknown_Desc"),
+                    Recommendation = LocalizationHelper.GetString("BugCheck_Unknown_Rec"),
                     FilePathOrDump = dumpPath,
                     RawDetails = $"Minidump File: {dumpPath}\nSize: {fileInfo.Length / 1024.0:F1} KB\nCreated: {fileInfo.CreationTime}"
                 };
 
                 EnrichFromMinidumpBinary(item, dumpPath);
+                if (string.IsNullOrEmpty(item.ErrorCode))
+                {
+                    item.ErrorCode = "N/A";
+                }
                 return item;
             }
             catch
@@ -834,17 +815,6 @@ namespace lanlanlu_toolkit.Services
             }
 
             return (name, desc, rec);
-        }
-
-        public static CrashReportSummary GenerateSummary(List<CrashReportItem> items)
-        {
-            return new CrashReportSummary
-            {
-                TotalCrashes = items.Count,
-                BsodCount = items.Count(x => x.Type == CrashType.Bsod),
-                AppCrashCount = items.Count(x => x.Type != CrashType.Bsod),
-                LastCrashTime = items.Count > 0 ? items.Max(x => (DateTime?)x.Timestamp) : null
-            };
         }
 
         public static string ExportToMarkdown(List<CrashReportItem> items)

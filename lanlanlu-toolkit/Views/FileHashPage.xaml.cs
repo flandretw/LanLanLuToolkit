@@ -28,10 +28,10 @@ namespace lanlanlu_toolkit.Views
             this.NavigationCacheMode = NavigationCacheMode.Required;
             ToolTipService.SetToolTip(ClearFileBtn, LocalizationHelper.GetString("FileHashPage_ClearFile"));
             ToolTipService.SetToolTip(ClearCompareBtn, LocalizationHelper.GetString("FileHashPage_ClearInput"));
-            ToolTipService.SetToolTip(CopySha256Btn, LocalizationHelper.GetString("FileHashPage_CopySha256_Tooltip") ?? "Copy SHA-256");
-            ToolTipService.SetToolTip(CopySha1Btn, LocalizationHelper.GetString("FileHashPage_CopySha1_Tooltip") ?? "Copy SHA-1");
-            ToolTipService.SetToolTip(CopyMd5Btn, LocalizationHelper.GetString("FileHashPage_CopyMd5_Tooltip") ?? "Copy MD5");
-            ToolTipService.SetToolTip(CopySha512Btn, LocalizationHelper.GetString("FileHashPage_CopySha512_Tooltip") ?? "Copy SHA-512");
+            ToolTipService.SetToolTip(CopySha256Btn, LocalizationHelper.GetString("FileHashPage_CopySha256_Tooltip"));
+            ToolTipService.SetToolTip(CopySha1Btn, LocalizationHelper.GetString("FileHashPage_CopySha1_Tooltip"));
+            ToolTipService.SetToolTip(CopyMd5Btn, LocalizationHelper.GetString("FileHashPage_CopyMd5_Tooltip"));
+            ToolTipService.SetToolTip(CopySha512Btn, LocalizationHelper.GetString("FileHashPage_CopySha512_Tooltip"));
             ResetHashTextBoxPlaceholders();
         }
 
@@ -207,7 +207,7 @@ namespace lanlanlu_toolkit.Views
                 Md5DescText.Visibility = Visibility.Collapsed;
                 Sha512DescText.Visibility = Visibility.Collapsed;
 
-                string calcText = LocalizationHelper.GetString("FileHashPage_Status_Calculating") ?? "計算中...";
+                string calcText = LocalizationHelper.GetString("FileHashPage_Status_Calculating");
                 Sha256TextBox.Text = calcText;
                 Sha1TextBox.Text = calcText;
                 Md5TextBox.Text = calcText;
@@ -246,7 +246,7 @@ namespace lanlanlu_toolkit.Views
                 if (results == null || token.IsCancellationRequested)
                 {
                     // Calculation was cancelled
-                    string cancelledText = LocalizationHelper.GetString("FileHashPage_CalculationCancelled") ?? "Calculation cancelled.";
+                    string cancelledText = LocalizationHelper.GetString("FileHashPage_CalculationCancelled");
                     Sha256TextBox.Text = cancelledText;
                     Sha1TextBox.Text = cancelledText;
                     Md5TextBox.Text = cancelledText;
@@ -256,6 +256,7 @@ namespace lanlanlu_toolkit.Views
                     Sha1TextBox.Visibility = Visibility.Visible;
                     Md5TextBox.Visibility = Visibility.Visible;
                     Sha512TextBox.Visibility = Visibility.Visible;
+                    PerformHashVerification();
                     return;
                 }
 
@@ -292,11 +293,12 @@ namespace lanlanlu_toolkit.Views
             {
                 if (ReferenceEquals(_hashCts, currentCts))
                 {
-                    string cancelledText = LocalizationHelper.GetString("FileHashPage_CalculationCancelled") ?? "Calculation cancelled.";
+                    string cancelledText = LocalizationHelper.GetString("FileHashPage_CalculationCancelled");
                     Sha256TextBox.Text = cancelledText;
                     Sha1TextBox.Text = cancelledText;
                     Md5TextBox.Text = cancelledText;
                     Sha512TextBox.Text = cancelledText;
+                    PerformHashVerification();
                 }
             }
             catch (IOException ex)
@@ -306,7 +308,7 @@ namespace lanlanlu_toolkit.Views
                     string msgKey = ex.Message.Contains("modified", StringComparison.OrdinalIgnoreCase)
                         ? "FileHashPage_Error_FileModified"
                         : "FileHashPage_Error_FileInUse";
-                    string msg = LocalizationHelper.GetString(msgKey) ?? ex.Message;
+                    string msg = LocalizationHelper.GetString(msgKey);
                     ShowErrorNotification(msg);
                     ResetHashTextBoxPlaceholders();
                 }
@@ -341,7 +343,7 @@ namespace lanlanlu_toolkit.Views
                     HashProgressPercentText.Visibility = Visibility.Collapsed;
 
                     RecalculateIcon.Glyph = "\uE72C"; // Recalculate icon
-                    RecalculateBtnText.Text = LocalizationHelper.GetString("FileHashPage_CalculateButton.Text") ?? "重新計算";
+                    RecalculateBtnText.Text = LocalizationHelper.GetString("FileHashPage_CalculateButton.Text");
                     RecalculateBtn.IsEnabled = !string.IsNullOrEmpty(_selectedFilePath);
                     RecalculateBtn.Focus(FocusState.Programmatic);
                 }
@@ -358,7 +360,7 @@ namespace lanlanlu_toolkit.Views
                 var fileInfo = new FileInfo(filePath);
                 if (!fileInfo.Exists)
                 {
-                    throw new FileNotFoundException(LocalizationHelper.GetString("FileHashPage_Error_FileNotFound") ?? "File not found.", filePath);
+                    throw new FileNotFoundException(LocalizationHelper.GetString("FileHashPage_Error_FileNotFound"), filePath);
                 }
 
                 long initialLength = fileInfo.Length;
@@ -413,7 +415,7 @@ namespace lanlanlu_toolkit.Views
                     fileInfo.Refresh();
                     if (fileInfo.Length != initialLength || fileInfo.LastWriteTimeUtc != initialWriteTime)
                     {
-                        throw new IOException(LocalizationHelper.GetString("FileHashPage_Error_FileModified") ?? "The file was modified during hash calculation.");
+                        throw new IOException(LocalizationHelper.GetString("FileHashPage_Error_FileModified"));
                     }
 
                     for (int i = 0; i < hashers.Length; i++)
@@ -469,16 +471,19 @@ namespace lanlanlu_toolkit.Views
             if (_calculatedHashes.Count == 0) return;
 
             var sb = new StringBuilder();
-            sb.AppendLine($"File: {FileNameText.Text}");
-            sb.AppendLine($"Path: {FilePathText.Text}");
-            sb.AppendLine($"Size: {FileSizeText.Text}");
+            string lblFile = LocalizationHelper.GetString("FileHashPage_Export_File");
+            string lblPath = LocalizationHelper.GetString("FileHashPage_Export_Path");
+            string lblSize = LocalizationHelper.GetString("FileHashPage_Export_Size");
+            sb.AppendLine($"{lblFile}: {FileNameText.Text}");
+            sb.AppendLine($"{lblPath}: {FilePathText.Text}");
+            sb.AppendLine($"{lblSize}: {FileSizeText.Text}");
             sb.AppendLine();
             sb.AppendLine($"SHA-256: {_calculatedHashes.GetValueOrDefault("SHA256", string.Empty)}");
             sb.AppendLine($"SHA-1:   {_calculatedHashes.GetValueOrDefault("SHA1", string.Empty)}");
             sb.AppendLine($"MD5:     {_calculatedHashes.GetValueOrDefault("MD5", string.Empty)}");
             sb.AppendLine($"SHA-512: {_calculatedHashes.GetValueOrDefault("SHA512", string.Empty)}");
 
-            string successMsg = LocalizationHelper.GetString("FileHashPage_CopyAll_Success") ?? "All hashes copied to clipboard.";
+            string successMsg = LocalizationHelper.GetString("FileHashPage_CopyAll_Success");
             await ClipboardService.CopyTextAsync(sb.ToString(), CopyAllBtn, showNotification: true, successMsg);
         }
 
@@ -527,7 +532,7 @@ namespace lanlanlu_toolkit.Views
                 VerifyStatusIcon.Glyph = "\uE897"; // Info question mark
                 VerifyStatusIcon.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
 
-                VerifyStatusMessage.Text = LocalizationHelper.GetString("FileHashPage_MatchPending") ?? "請輸入或貼上雜湊值以進行即時比對。";
+                VerifyStatusMessage.Text = LocalizationHelper.GetString("FileHashPage_MatchPending");
                 VerifyStatusMessage.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
                 return;
             }
@@ -541,7 +546,7 @@ namespace lanlanlu_toolkit.Views
                 VerifyStatusIcon.Glyph = "\uE895"; // Sync
                 VerifyStatusIcon.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
 
-                VerifyStatusMessage.Text = LocalizationHelper.GetString("FileHashPage_Calculating") ?? "正在計算雜湊值，請稍候……";
+                VerifyStatusMessage.Text = LocalizationHelper.GetString("FileHashPage_Calculating");
                 VerifyStatusMessage.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
                 return;
             }
@@ -577,7 +582,7 @@ namespace lanlanlu_toolkit.Views
                 VerifyStatusIcon.Glyph = "\uE73E"; // Checkmark
                 VerifyStatusIcon.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorSuccessBrush"];
 
-                string format = LocalizationHelper.GetString("FileHashPage_MatchSuccess_Format") ?? "Verification successful: Exact match with {0}.";
+                string format = LocalizationHelper.GetString("FileHashPage_MatchSuccess_Format");
                 VerifyStatusMessage.Text = string.Format(format, matchedAlgorithm);
                 VerifyStatusMessage.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorSuccessBrush"];
             }
@@ -588,7 +593,7 @@ namespace lanlanlu_toolkit.Views
                 VerifyStatusIcon.Glyph = "\uE711"; // Cancel/Error cross
                 VerifyStatusIcon.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorCriticalBrush"];
 
-                VerifyStatusMessage.Text = LocalizationHelper.GetString("FileHashPage_MatchFail") ?? "No match: Does not match any calculated algorithm hash.";
+                VerifyStatusMessage.Text = LocalizationHelper.GetString("FileHashPage_MatchFail");
                 VerifyStatusMessage.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorCriticalBrush"];
             }
         }
@@ -608,7 +613,7 @@ namespace lanlanlu_toolkit.Views
 
         private static void ShowErrorNotification(string message)
         {
-            NotificationService.Show(LocalizationHelper.GetString("Notification_Error") ?? "Error", message, InfoBarSeverity.Error);
+            NotificationService.Show(LocalizationHelper.GetString("Notification_Error"), message, InfoBarSeverity.Error);
         }
     }
 }

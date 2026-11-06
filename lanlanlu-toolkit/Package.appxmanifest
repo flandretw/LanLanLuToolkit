@@ -1,12 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  xmlns:systemai="http://schemas.microsoft.com/appx/manifest/systemai/windows10"
-  IgnorableNamespaces="uap rescap systemai">
+  IgnorableNamespaces="uap rescap">
 
   <Identity
     Name="0e7b4a80-d371-4026-853d-0dbb44200a93"
@@ -18,7 +17,7 @@
   <Properties>
     <DisplayName>lanlanlu-toolkit</DisplayName>
     <PublisherDisplayName>flandretw</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <Logo>Assets\Square44x44Logo.png</Logo>
   </Properties>
 
   <Dependencies>
@@ -38,16 +37,12 @@
         DisplayName="lanlanlu-toolkit"
         Description="lanlanlu-toolkit"
         BackgroundColor="transparent"
-        Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Assets\Square44x44Logo.png">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"  Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
-      </uap:VisualElements>
+        Square150x150Logo="Assets\Square44x44Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png" />
     </Application>
   </Applications>
 
   <Capabilities>
     <rescap:Capability Name="runFullTrust" />
-    <systemai:Capability Name="systemAIModels"/>
   </Capabilities>
 </Package>
